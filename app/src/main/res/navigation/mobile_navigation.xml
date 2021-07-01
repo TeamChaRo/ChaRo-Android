@@ -5,21 +5,24 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+    <!--구경하기-->
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.charo_android.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_home_eng"
         tools:layout="@layout/fragment_home" />
 
+    <!--작성하기-->
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.charo_android.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_write"
+        android:name="com.example.charo_android.ui.write.WriteFragment"
+        android:label="@string/title_write_eng"
+        tools:layout="@layout/fragment_write" />
 
+    <!--나의차로-->
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.charo_android.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_charo"
+        android:name="com.example.charo_android.ui.charo.CharoFragment"
+        android:label="@string/title_charo_eng"
+        tools:layout="@layout/fragment_charo" />
 </navigation>

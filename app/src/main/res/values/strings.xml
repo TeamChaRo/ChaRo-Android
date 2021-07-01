@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ChaRo-Android</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home_eng">Home</string>
+    <string name="title_home_kor">구경하기</string>
+    <string name="title_write_eng">Write</string>
+    <string name="title_write_kor">작성하기</string>
+    <string name="title_charo_eng">Charo</string>
+    <string name="title_charo_kor">나의 차로</string>
 </resources>

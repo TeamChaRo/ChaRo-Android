@@ -1,4 +1,4 @@
-package com.example.charo_android.ui.dashboard
+package com.example.charo_android.ui.charo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentDashboardBinding
+import com.example.charo_android.databinding.FragmentCharoBinding
 
-class DashboardFragment : Fragment() {
+class CharoFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private lateinit var charoViewModel: CharoViewModel
+    private var _binding: FragmentCharoBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,14 +24,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        charoViewModel =
+            ViewModelProvider(this).get(CharoViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentCharoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textCharo
+        charoViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

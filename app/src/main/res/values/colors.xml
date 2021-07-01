@@ -7,4 +7,27 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--Charo color-->
+    <color name="blue_main">#0F6FFF</color>
+    <color name="blue_37">#3787FF</color>
+    <color name="blue_52">#5297FF</color>
+    <color name="deep_blue_main">#1721BC</color>
+    <color name="gray4_sub">#889098</color>
+    <color name="gray1_sub">#F8F9FA</color>
+    <color name="gray2_sub">#DDE2E5</color>
+    <color name="gray3_sub">#ACB5BD</color>
+    <color name="gray5_sub">#495057</color>
+    <color name="black_sub">#212429</color>
+    <color name="orange_main">#FF826E</color>
+    <color name="mint_main">#4ADEDE</color>
+    <color name="blue_select">#F3F8FF</color>
+    <color name="neomorfism_lightgray">#FBFBFB</color>
+    <color name="neomorfism_blue_line">#9DC3FD</color>
+    <color name="fuschia_100">#EF5DA8</color>
+    <color name="fuschia_80">#F178B6</color>
+    <color name="fuschia_60">#FCDDEC</color>
+    <color name="iris_100">#5D5FEF</color>
+    <color name="iris_80">#7879F1</color>
+    <color name="iris_60">#A5A6F6</color>
 </resources>
