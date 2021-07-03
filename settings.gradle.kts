@@ -1,2 +1,2 @@
 rootProject.name = "ChaRo-Android"
-include ':app'
+include(":app")
