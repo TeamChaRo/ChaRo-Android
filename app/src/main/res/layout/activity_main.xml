@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_write"
+        android:src="@drawable/ic_tabbar_ic_write"
         android:layout_margin="50dp"
         android:scaleType="fitXY"
         android:clickable="true"
