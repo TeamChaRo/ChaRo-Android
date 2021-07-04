@@ -1,0 +1,297 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+MERGED from [androidx.databinding:databinding-adapters:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/671185b30f3ad388937d6d9f41c4d0d6/databinding-adapters-4.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.databinding:databinding-runtime:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/6a31e2cff20324538132e15e79c0b533/databinding-runtime-4.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.databinding:viewbinding:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8d9495f22253316511eecbe35647bc32/viewbinding-4.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c7dac8c50053e755155c79d56b3a9635/navigation-fragment-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment-ktx:1.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4ce98f2f235a08d3e9d2e53cb0aaf528/fragment-ktx-1.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9d0a25a3608a748f5b5ea1d9c0b12ea4/navigation-ui-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/f188cc5e1f098d39e24faa33deeed74e/navigation-runtime-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.2.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a7fcc297b9f3bad2f816c69e0e23baa2/activity-ktx-1.2.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/7a03e81da45935bddaec104089c140c3/navigation-common-ktx-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1fef027d2530b93fd73a5ebda5644284/core-ktx-1.3.2/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.datastore:datastore-preferences:1.0.0-beta01] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/bc05f53bb0cb90123bc298ef7ce760fc/datastore-preferences-1.0.0-beta01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.datastore:datastore:1.0.0-beta01] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/42b9c2d3b5b19987c9670c046f71f6b4/datastore-1.0.0-beta01/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9a2f6fdff109322315b1b0fd7b5f8548/lifecycle-viewmodel-ktx-2.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c37a1da06bb13ea4c782fc53ab1b2b57/lifecycle-livedata-core-ktx-2.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ca179ea7c89b3931b7b985f26ee52ede/savedstate-ktx-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5ed4b5daca3a027d941d6419d97b8c23/lifecycle-runtime-ktx-2.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c28110b862c62140c4094c666d9fb076/navigation-ui-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e8c0aa421216eb91b6d319cec60a3341/material-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8413598ff05307f66f2e612f50841fe2/constraintlayout-2.0.4/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/693b2651bd546129a6bc0bf801f90d61/appcompat-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/aa316bc72c5c2580a3dc533785b75ea1/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.dagger:hilt-android:2.35] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c0887fffbe1c5f838632eec5b9554024/hilt-android-2.35/AndroidManifest.xml:16:1-19:12
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ebb1d8464f3ecbfe96593e9cc1c8dfc6/glide-4.12.0/AndroidManifest.xml:2:1-12:12
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/43f3d5182891800f8635f0fb7b0bea6f/rxandroid-2.1.1/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.security:security-crypto:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/96dcb01f4ce7c15622c68c1eb695b7ce/security-crypto-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8bd04eb7eded01497478cd8004bfb896/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e6f54591e5bd6b95025df161b2c6aed3/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4e5cf1191bdcc1eb37a348bff5d3bc7a/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/38dc4d7e3dfc734158cf09c8447422e2/appcompat-resources-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a5dfbbd7829b9728e4cfc2c64f22b284/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/bcd51129da76d23a748ae4add5697cc8/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/75344455d70a087f3711f7fa954fd250/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/b35254c24a950e1cd67b89e5731daa1d/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c2ecc60c57b2c2ee499966b8cb4f915a/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/dbff06c2fbd6d9242e174663eff0b5de/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e336b87a014120662bfadd7d83fb56eb/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/704d5f52ddcf1e4c88c14bbf93b310ad/navigation-fragment-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4ca76366870d217ccff4371cc8c1a83e/fragment-1.3.2/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/578b1d0c65db54212a21f74f23660733/navigation-runtime-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/289a1ce4c7a92d00674718a4e13a29aa/activity-1.2.2/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ae67e503c776ae78567e382202f2edc7/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ee90a09437350d33be7a02db4d215eb7/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/2159cd8698c13ad508cb1ba00a34272a/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a828ff5d717f026ba0a85abbaeeac91d/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/98ea509400690f4fb1f3e20280222da8/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1329cac0bae6a2f117e234d04db95d95/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c02d3fa4db772abfe33a1daab37d509e/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/75fac1861de87e54a15ca8d51dc6958d/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/cc5fc8c9bce054fc5f042b17091749cf/transition-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/117e684346ec85a2e39b242bb54a05a3/navigation-common-2.3.5/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/455e50931a488dacdf5f1fa94a99cd6d/core-1.3.2/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/93e7f58b6de2943ec6db7137946c2a1a/lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/79d0fc3d3887e901ef2744a4a47e4aa0/savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/34fe2cefb2f68765b50d38a319434701/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4b60aa6dd92ef3e391476d70af745cfb/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/880324ec890208c880a170f5a65b1d42/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5d39c9c26ed3b94419fd988f388bd80a/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1d865798b2f878f1074e6f29084bfaad/gifdecoder-4.12.0/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d41f641db988db8f38d80eb07b7ae955/exifinterface-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d37c2669426651caf44c28e9a35f847d/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5dbbd7b89a3154ae1e78c75772846058/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e9d86d1277ff18762b7a8b4d143326d6/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/cc848248ac1a0e8bc252455590236d90/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1e56764966dba1ef06d7a1b03f5c59f6/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/b5725ee4f99ad8b254bc66be5d2e53bb/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/67573bdbb85e5cbe25832c5d8c557982/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/f18b08f2288f59ad0ca5a5614712e21d/annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.35] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9b3c07bda465579bf0a3e2ad98041aed/dagger-lint-aar-2.35/AndroidManifest.xml:16:1-19:12
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+	package
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:3:5-40
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:1-27:12
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:6:22-76
+application
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:8:5-25:19
+MERGED from [com.google.android.material:material:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e8c0aa421216eb91b6d319cec60a3341/material-1.3.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e8c0aa421216eb91b6d319cec60a3341/material-1.3.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8413598ff05307f66f2e612f50841fe2/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8413598ff05307f66f2e612f50841fe2/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ebb1d8464f3ecbfe96593e9cc1c8dfc6/glide-4.12.0/AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ebb1d8464f3ecbfe96593e9cc1c8dfc6/glide-4.12.0/AndroidManifest.xml:10:5-20
+MERGED from [androidx.core:core:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/455e50931a488dacdf5f1fa94a99cd6d/core-1.3.2/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/455e50931a488dacdf5f1fa94a99cd6d/core-1.3.2/AndroidManifest.xml:24:5-89
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1d865798b2f878f1074e6f29084bfaad/gifdecoder-4.12.0/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1d865798b2f878f1074e6f29084bfaad/gifdecoder-4.12.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d37c2669426651caf44c28e9a35f847d/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d37c2669426651caf44c28e9a35f847d/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/455e50931a488dacdf5f1fa94a99cd6d/core-1.3.2/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:13:9-35
+	android:label
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:11:9-41
+	android:roundIcon
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:12:9-54
+	android:icon
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:10:9-43
+	android:allowBackup
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:9:9-35
+	android:theme
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:14:9-50
+activity#com.example.charo_android.ui.write.WriteActivity
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:15:9-69
+	android:name
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:15:19-57
+activity#com.example.charo_android.MainActivity
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:16:9-24:20
+	android:label
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:18:13-45
+	android:name
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:17:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:19:13-23:29
+action#android.intent.action.MAIN
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:20:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:22:17-77
+	android:name
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml:22:27-74
+uses-sdk
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+MERGED from [androidx.databinding:databinding-adapters:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/671185b30f3ad388937d6d9f41c4d0d6/databinding-adapters-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:databinding-adapters:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/671185b30f3ad388937d6d9f41c4d0d6/databinding-adapters-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:databinding-runtime:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/6a31e2cff20324538132e15e79c0b533/databinding-runtime-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:databinding-runtime:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/6a31e2cff20324538132e15e79c0b533/databinding-runtime-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:viewbinding:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8d9495f22253316511eecbe35647bc32/viewbinding-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:viewbinding:4.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8d9495f22253316511eecbe35647bc32/viewbinding-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c7dac8c50053e755155c79d56b3a9635/navigation-fragment-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c7dac8c50053e755155c79d56b3a9635/navigation-fragment-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4ce98f2f235a08d3e9d2e53cb0aaf528/fragment-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4ce98f2f235a08d3e9d2e53cb0aaf528/fragment-ktx-1.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9d0a25a3608a748f5b5ea1d9c0b12ea4/navigation-ui-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9d0a25a3608a748f5b5ea1d9c0b12ea4/navigation-ui-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/f188cc5e1f098d39e24faa33deeed74e/navigation-runtime-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/f188cc5e1f098d39e24faa33deeed74e/navigation-runtime-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.2.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a7fcc297b9f3bad2f816c69e0e23baa2/activity-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.2.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a7fcc297b9f3bad2f816c69e0e23baa2/activity-ktx-1.2.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/7a03e81da45935bddaec104089c140c3/navigation-common-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common-ktx:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/7a03e81da45935bddaec104089c140c3/navigation-common-ktx-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1fef027d2530b93fd73a5ebda5644284/core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1fef027d2530b93fd73a5ebda5644284/core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0-beta01] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/bc05f53bb0cb90123bc298ef7ce760fc/datastore-preferences-1.0.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore-preferences:1.0.0-beta01] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/bc05f53bb0cb90123bc298ef7ce760fc/datastore-preferences-1.0.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0-beta01] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/42b9c2d3b5b19987c9670c046f71f6b4/datastore-1.0.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore:1.0.0-beta01] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/42b9c2d3b5b19987c9670c046f71f6b4/datastore-1.0.0-beta01/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9a2f6fdff109322315b1b0fd7b5f8548/lifecycle-viewmodel-ktx-2.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9a2f6fdff109322315b1b0fd7b5f8548/lifecycle-viewmodel-ktx-2.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c37a1da06bb13ea4c782fc53ab1b2b57/lifecycle-livedata-core-ktx-2.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c37a1da06bb13ea4c782fc53ab1b2b57/lifecycle-livedata-core-ktx-2.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ca179ea7c89b3931b7b985f26ee52ede/savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate-ktx:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ca179ea7c89b3931b7b985f26ee52ede/savedstate-ktx-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5ed4b5daca3a027d941d6419d97b8c23/lifecycle-runtime-ktx-2.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5ed4b5daca3a027d941d6419d97b8c23/lifecycle-runtime-ktx-2.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c28110b862c62140c4094c666d9fb076/navigation-ui-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-ui:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c28110b862c62140c4094c666d9fb076/navigation-ui-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e8c0aa421216eb91b6d319cec60a3341/material-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e8c0aa421216eb91b6d319cec60a3341/material-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8413598ff05307f66f2e612f50841fe2/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8413598ff05307f66f2e612f50841fe2/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/693b2651bd546129a6bc0bf801f90d61/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/693b2651bd546129a6bc0bf801f90d61/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/aa316bc72c5c2580a3dc533785b75ea1/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/aa316bc72c5c2580a3dc533785b75ea1/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.dagger:hilt-android:2.35] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c0887fffbe1c5f838632eec5b9554024/hilt-android-2.35/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:hilt-android:2.35] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c0887fffbe1c5f838632eec5b9554024/hilt-android-2.35/AndroidManifest.xml:18:3-42
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ebb1d8464f3ecbfe96593e9cc1c8dfc6/glide-4.12.0/AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ebb1d8464f3ecbfe96593e9cc1c8dfc6/glide-4.12.0/AndroidManifest.xml:6:5-8:41
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/43f3d5182891800f8635f0fb7b0bea6f/rxandroid-2.1.1/AndroidManifest.xml:18:5-43
+MERGED from [io.reactivex.rxjava2:rxandroid:2.1.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/43f3d5182891800f8635f0fb7b0bea6f/rxandroid-2.1.1/AndroidManifest.xml:18:5-43
+MERGED from [androidx.security:security-crypto:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/96dcb01f4ce7c15622c68c1eb695b7ce/security-crypto-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.security:security-crypto:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/96dcb01f4ce7c15622c68c1eb695b7ce/security-crypto-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8bd04eb7eded01497478cd8004bfb896/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/8bd04eb7eded01497478cd8004bfb896/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e6f54591e5bd6b95025df161b2c6aed3/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e6f54591e5bd6b95025df161b2c6aed3/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4e5cf1191bdcc1eb37a348bff5d3bc7a/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4e5cf1191bdcc1eb37a348bff5d3bc7a/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/38dc4d7e3dfc734158cf09c8447422e2/appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/38dc4d7e3dfc734158cf09c8447422e2/appcompat-resources-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a5dfbbd7829b9728e4cfc2c64f22b284/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a5dfbbd7829b9728e4cfc2c64f22b284/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/bcd51129da76d23a748ae4add5697cc8/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/bcd51129da76d23a748ae4add5697cc8/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/75344455d70a087f3711f7fa954fd250/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/75344455d70a087f3711f7fa954fd250/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/b35254c24a950e1cd67b89e5731daa1d/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/b35254c24a950e1cd67b89e5731daa1d/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c2ecc60c57b2c2ee499966b8cb4f915a/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c2ecc60c57b2c2ee499966b8cb4f915a/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/dbff06c2fbd6d9242e174663eff0b5de/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/dbff06c2fbd6d9242e174663eff0b5de/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e336b87a014120662bfadd7d83fb56eb/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e336b87a014120662bfadd7d83fb56eb/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/704d5f52ddcf1e4c88c14bbf93b310ad/navigation-fragment-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-fragment:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/704d5f52ddcf1e4c88c14bbf93b310ad/navigation-fragment-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4ca76366870d217ccff4371cc8c1a83e/fragment-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4ca76366870d217ccff4371cc8c1a83e/fragment-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/578b1d0c65db54212a21f74f23660733/navigation-runtime-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-runtime:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/578b1d0c65db54212a21f74f23660733/navigation-runtime-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/289a1ce4c7a92d00674718a4e13a29aa/activity-1.2.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/289a1ce4c7a92d00674718a4e13a29aa/activity-1.2.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ae67e503c776ae78567e382202f2edc7/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ae67e503c776ae78567e382202f2edc7/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ee90a09437350d33be7a02db4d215eb7/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/ee90a09437350d33be7a02db4d215eb7/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/2159cd8698c13ad508cb1ba00a34272a/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/2159cd8698c13ad508cb1ba00a34272a/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a828ff5d717f026ba0a85abbaeeac91d/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/a828ff5d717f026ba0a85abbaeeac91d/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/98ea509400690f4fb1f3e20280222da8/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/98ea509400690f4fb1f3e20280222da8/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1329cac0bae6a2f117e234d04db95d95/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1329cac0bae6a2f117e234d04db95d95/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c02d3fa4db772abfe33a1daab37d509e/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/c02d3fa4db772abfe33a1daab37d509e/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/75fac1861de87e54a15ca8d51dc6958d/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/75fac1861de87e54a15ca8d51dc6958d/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/cc5fc8c9bce054fc5f042b17091749cf/transition-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.3.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/cc5fc8c9bce054fc5f042b17091749cf/transition-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/117e684346ec85a2e39b242bb54a05a3/navigation-common-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.navigation:navigation-common:2.3.5] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/117e684346ec85a2e39b242bb54a05a3/navigation-common-2.3.5/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/455e50931a488dacdf5f1fa94a99cd6d/core-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.3.2] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/455e50931a488dacdf5f1fa94a99cd6d/core-1.3.2/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/93e7f58b6de2943ec6db7137946c2a1a/lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/93e7f58b6de2943ec6db7137946c2a1a/lifecycle-viewmodel-savedstate-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/79d0fc3d3887e901ef2744a4a47e4aa0/savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/79d0fc3d3887e901ef2744a4a47e4aa0/savedstate-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/34fe2cefb2f68765b50d38a319434701/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/34fe2cefb2f68765b50d38a319434701/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4b60aa6dd92ef3e391476d70af745cfb/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/4b60aa6dd92ef3e391476d70af745cfb/lifecycle-livedata-core-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/880324ec890208c880a170f5a65b1d42/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/880324ec890208c880a170f5a65b1d42/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5d39c9c26ed3b94419fd988f388bd80a/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5d39c9c26ed3b94419fd988f388bd80a/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1d865798b2f878f1074e6f29084bfaad/gifdecoder-4.12.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1d865798b2f878f1074e6f29084bfaad/gifdecoder-4.12.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d41f641db988db8f38d80eb07b7ae955/exifinterface-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d41f641db988db8f38d80eb07b7ae955/exifinterface-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d37c2669426651caf44c28e9a35f847d/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/d37c2669426651caf44c28e9a35f847d/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5dbbd7b89a3154ae1e78c75772846058/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/5dbbd7b89a3154ae1e78c75772846058/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e9d86d1277ff18762b7a8b4d143326d6/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/e9d86d1277ff18762b7a8b4d143326d6/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/cc848248ac1a0e8bc252455590236d90/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/cc848248ac1a0e8bc252455590236d90/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1e56764966dba1ef06d7a1b03f5c59f6/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/1e56764966dba1ef06d7a1b03f5c59f6/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/b5725ee4f99ad8b254bc66be5d2e53bb/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/b5725ee4f99ad8b254bc66be5d2e53bb/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/67573bdbb85e5cbe25832c5d8c557982/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/67573bdbb85e5cbe25832c5d8c557982/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/f18b08f2288f59ad0ca5a5614712e21d/annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/f18b08f2288f59ad0ca5a5614712e21d/annotation-experimental-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.dagger:dagger-lint-aar:2.35] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9b3c07bda465579bf0a3e2ad98041aed/dagger-lint-aar-2.35/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.35] /Users/hanjinhee/.gradle/caches/transforms-2/files-2.1/9b3c07bda465579bf0a3e2ad98041aed/dagger-lint-aar-2.35/AndroidManifest.xml:18:3-42
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/AndroidManifest.xml

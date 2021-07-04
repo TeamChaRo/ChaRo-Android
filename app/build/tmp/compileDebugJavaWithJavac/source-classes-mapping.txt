@@ -1,0 +1,24 @@
+com/example/charo_android/databinding/ActivityMainBinding.java
+ com.example.charo_android.databinding.ActivityMainBinding
+com/example/charo_android/databinding/FragmentCharoBinding.java
+ com.example.charo_android.databinding.FragmentCharoBinding
+com/example/charo_android/databinding/FragmentWriteBinding.java
+ com.example.charo_android.databinding.FragmentWriteBinding
+androidx/databinding/DataBinderMapperImpl.java
+ androidx.databinding.DataBinderMapperImpl
+com/example/charo_android/BR.java
+ com.example.charo_android.BR
+com/example/charo_android/databinding/FragmentHomeBinding.java
+ com.example.charo_android.databinding.FragmentHomeBinding
+com/example/charo_android/DataBindingTriggerClass.java
+ com.example.charo_android.DataBindingTriggerClass
+com/example/charo_android/DataBinderMapperImpl.java
+ com.example.charo_android.DataBinderMapperImpl
+ com.example.charo_android.DataBinderMapperImpl$InnerBrLookup
+ com.example.charo_android.DataBinderMapperImpl$InnerLayoutIdLookup
+com/example/charo_android/BuildConfig.java
+ com.example.charo_android.BuildConfig
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent

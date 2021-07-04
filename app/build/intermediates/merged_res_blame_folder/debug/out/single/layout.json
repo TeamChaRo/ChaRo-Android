@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_charo.xml",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/fragment_charo.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_write.xml",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/activity_write.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_home.xml",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_write.xml",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/fragment_write.xml"
+    }
+]

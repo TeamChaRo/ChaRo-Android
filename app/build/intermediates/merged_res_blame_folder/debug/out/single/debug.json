@@ -1,0 +1,742 @@
+[
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_img_small.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_img_small.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_tabbar_ic_write.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/tabbar_ic_write.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_selectbox_no_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_selectbox_no_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_icon_back_1.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/icon_back_1.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_btn_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_btn_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_icon_down_36_px_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/icon_down_36_px_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_img_small.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_img_small.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_icon_down_36_px_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/icon_down_36_px_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_selectbox_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_selectbox_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ic_close_36_px_black.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ic_close_36_px_black.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_home_active.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_home_active.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_btn_parking_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_btn_parking_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_tabbar_ic_mypage_active.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_tabbar_ic_mypage_active.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_heart_count.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_heart_count.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_hashtag.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_hashtag.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_selectbox_no_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_selectbox_no_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_icon_down_36_px.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/icon_down_36_px.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_btn_warning_unselect_android_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_btn_warning_unselect_android_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_icon_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/icon_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_textfield_location_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_textfield_location_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_selectbox_warning_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_selectbox_warning_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_btn_parking_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_btn_parking_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_icon_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/icon_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_heart_count.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_heart_count.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_btn_parking_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_btn_parking_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_selectbox_warning_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_selectbox_warning_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_btn_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_btn_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_icon_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/icon_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_btn_parking_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_btn_parking_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_textfield_parking_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_textfield_parking_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_btn_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_btn_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_selectbox_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_selectbox_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_btn_parking_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_btn_parking_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_textfield_parking_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_textfield_parking_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_textfield_parking_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_textfield_parking_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_rectangle_62.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/rectangle_62.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_textfield_parking_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_textfield_parking_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_tabbar_ic_home_unactive.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_tabbar_ic_home_unactive.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_textfield_parking_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_textfield_parking_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_write.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_write.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_icon_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/icon_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_more.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_more.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_textfield_location_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_textfield_location_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ic_close_36_px_black.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ic_close_36_px_black.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_btn_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_btn_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_selectbox_no_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_selectbox_no_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_btn_parking_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_btn_parking_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_down_42_px.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_down_42_px.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_selectbox_yes_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_selectbox_yes_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_btn_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_btn_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_rectangle_62.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_rectangle_62.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_img_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_img_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_heart_count_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_heart_count_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_hashtag.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_hashtag.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_close.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_close.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_selectbox_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_selectbox_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_selectbox_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_selectbox_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_textfield_location_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_textfield_location_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_icon_back_1.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/icon_back_1.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_rectangle_62.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/rectangle_62.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_mypage_unactive.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_mypage_unactive.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_selectbox_no_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_selectbox_no_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_img_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_img_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_btn_warning_unselect_android_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_btn_warning_unselect_android_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_textfield_location_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_textfield_location_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_btn_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_btn_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_img_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_img_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_textfield_location_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_textfield_location_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_frame_122.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/frame_122.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_tabbar_ic_write.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/tabbar_ic_write.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_btn_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_btn_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_btn_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_btn_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_selectbox_warning_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_selectbox_warning_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_textfield_parking_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_textfield_parking_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_frame_122.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/frame_122.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_icon_down_36_px.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/icon_down_36_px.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_car_main_animation.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_car_main_animation.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_heart_count.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_heart_count.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_btn_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_btn_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_heart_count.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_heart_count.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_home_black_24dp.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_rectangle_62.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/rectangle_62.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_selectbox_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_selectbox_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_icon_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/icon_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_textfield_parking_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_textfield_parking_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_close_36_px_black.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ic_close_36_px_black.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_tabbar_ic_write.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/tabbar_ic_write.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_selectbox_no_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_selectbox_no_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_selectbox_warning_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_selectbox_warning_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_btn_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_btn_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_selectbox_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_selectbox_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/layout_fragment_home.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/fragment_home.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_selectbox_warning_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_selectbox_warning_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_alarm_4_44_px_white.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_alarm_4_44_px_white.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_search_44_px_white.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_search_44_px_white.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_img_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_img_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_hashtag.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_hashtag.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_heart_white_line.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_heart_white_line.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_img_small.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_img_small.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_close_36_px_black.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_close_36_px_black.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_icon_down_36_px.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/icon_down_36_px.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_copy_1_light_ver.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_copy_1_light_ver.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_frame_122.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/frame_122.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_hashtag.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_hashtag.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_rectangle_62.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/rectangle_62.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_icon_down_36_px_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/icon_down_36_px_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_img_plus.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_img_plus.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_heart_count_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_heart_count_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_icon_back_1.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/icon_back_1.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_icon_down_36_px.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/icon_down_36_px.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/layout_fragment_charo.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/fragment_charo.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_selectbox_yes_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_selectbox_yes_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_tabbar_ic_write.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_tabbar_ic_write.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_btn_parking_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_btn_parking_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_textfield_parking_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_textfield_parking_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_hashtag.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_hashtag.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_icon_down_36_px_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/icon_down_36_px_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_home_icon.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/home_icon.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_tabbar_ic_write.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/tabbar_ic_write.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_background_bottom_navigation.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_background_bottom_navigation.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_btn_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_btn_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_btn_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_btn_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_textfield_location_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_textfield_location_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_btn_warning_unselect_android_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_btn_warning_unselect_android_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_textfield_location_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_textfield_location_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_btn_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_btn_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_write_textfield_parking_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_write_textfield_parking_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_icon_down_36_px_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/icon_down_36_px_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_btn_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_btn_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/navigation_mobile_navigation.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/navigation/mobile_navigation.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_btn_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_btn_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_selectbox_warning_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_selectbox_warning_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_heart_count.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_heart_count.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_img_small.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_img_small.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_view_selectbox_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_view_selectbox_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_btn_parking_select_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_btn_parking_select_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_selectbox_yes_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_selectbox_yes_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_heart_count_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_heart_count_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ic_close_36_px_black.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ic_close_36_px_black.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_textfield_location_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_textfield_location_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_write_textfield_location_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_write_textfield_location_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_tabbar_ic_write.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/tabbar_ic_write.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_frame_122.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/frame_122.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_btn_warning_unselect_android_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_btn_warning_unselect_android_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_tabbar_ic_write.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/tabbar_ic_write.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_write_textfield_parking_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_write_textfield_parking_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_icon_back_1.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/icon_back_1.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_view_selectbox_yes_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_view_selectbox_yes_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_frame_122.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/frame_122.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_btn_parking_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_btn_parking_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_textfield_location_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_textfield_location_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_rectangle_62.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/rectangle_62.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/layout_fragment_write.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/layout/fragment_write.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_heart_line.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_heart_line.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_charo_icon.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/charo_icon.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxhdpi_ui_view_selectbox_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxhdpi/ui_view_selectbox_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_heart_count_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_heart_count_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_ui_write_img_small.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/ui_write_img_small.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ui_view_selectbox_show_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ui_view_selectbox_show_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xhdpi_ui_view_selectbox_yes_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xhdpi/ui_view_selectbox_yes_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-mdpi_icon_down_36_px.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-mdpi/icon_down_36_px.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_heart_count_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_heart_count_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable_ic_photo_1.xml.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable/ic_photo_1.xml"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_close_36_px_black.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/ic_close_36_px_black.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_btn_warning_unselect_android_2.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_btn_warning_unselect_android_2.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-hdpi_ui_write_btn_parking_unselect_android.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-hdpi/ui_write_btn_parking_unselect_android.png"
+    },
+    {
+        "merged": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_icon_back_1.png.flat",
+        "source": "/Users/hanjinhee/AndroidStudioProjects/ChaRo-Android/app/src/main/res/drawable-xxxhdpi/icon_back_1.png"
+    }
+]
