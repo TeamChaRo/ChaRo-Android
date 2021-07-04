@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ChaRoAndroid" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.ChaRoAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_main</item>
         <item name="colorPrimaryVariant">@color/blue_52</item>

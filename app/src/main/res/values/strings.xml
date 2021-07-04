@@ -6,4 +6,7 @@
     <string name="title_write_kor">작성하기</string>
     <string name="title_charo_eng">Charo</string>
     <string name="title_charo_kor">나의 차로</string>
+    <string name="main_charo_logo">로고</string>
+    <string name="main_charo_search">검색</string>
+    <string name="main_charo_notice">알림</string>
 </resources>
