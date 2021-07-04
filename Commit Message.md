@@ -1,3 +1,16 @@
+## **Git Branch Convention**
+
+1. branch 이름은 snake_case 표기법으로!
+2. "feat/이슈명_이름" 으로 통일
+  ex) feat/1_branch
+  
+default branch는 develop
+-> develop에서 본인 브랜치 생성
+-> 본인 브랜치에서 develop으로 merge
+-> merge 후 다시 develop에서 새로운 브랜치 생성 (새로운 기능 구현할 때)
+-> 반복
+
+
 ## **Git Commit Message Convention**
 
 ### **Base Structure**
