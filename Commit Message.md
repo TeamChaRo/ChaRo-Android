@@ -4,11 +4,14 @@
 2. "feat/이슈명_이름" 으로 통일
   ex) feat/1_branch
   
-default branch는 develop
--> develop에서 본인 브랜치 생성
--> 본인 브랜치에서 develop으로 merge
--> merge 후 다시 develop에서 새로운 브랜치 생성 (새로운 기능 구현할 때)
+default branch는 develop <br>
+-> develop에서 본인 브랜치 생성 <br>
+-> 본인 브랜치에서 develop으로 merge <br>
+-> merge 후 다시 develop에서 새로운 브랜치 생성 (새로운 기능 구현할 때) <br>
 -> 반복
+
+
+
 
 
 ## **Git Commit Message Convention**
