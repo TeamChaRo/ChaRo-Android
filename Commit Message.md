@@ -11,7 +11,7 @@ default branch는 develop <br>
 -> 반복
 
 
-<br><br><br>
+<br><br>
 
 
 ## **Git Commit Message Convention**
