@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         initToolBar()
         initNavView()
 
-
-
     }
 
 
