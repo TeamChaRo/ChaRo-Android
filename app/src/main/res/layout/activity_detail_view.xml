@@ -7,7 +7,7 @@
     tools:context=".DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_top_part"
+        android:id="@+id/cl_detail_top_part"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
