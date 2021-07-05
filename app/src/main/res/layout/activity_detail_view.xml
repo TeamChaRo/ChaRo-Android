@@ -6,65 +6,189 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_detail_top_part"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scv_detail_detail"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="#fbfbfb"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_detail_icon_back_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="9dp"
-            android:src="@drawable/icon_back_1"
-            app:layout_constraintEnd_toStartOf="@id/tv_detail_current_page"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_detail_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_detail_current_page"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="5dp"
-            android:lineHeight="24.1sp"
-            android:text="구경하기"
-            android:textAlignment="center"
-            android:textSize="17sp"
-            android:fontFamily="@font/notosanscjkkrmedium"
-            app:layout_constraintBottom_toBottomOf="@id/img_detail_icon_back_1"
-            app:layout_constraintEnd_toStartOf="@id/img_detail_ic_heart_line"
-            app:layout_constraintStart_toEndOf="@id/img_detail_icon_back_1"
-            app:layout_constraintTop_toTopOf="@id/img_detail_icon_back_1" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_top_part"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_detail_ic_heart_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="2dp"
-            android:src="@drawable/ic_heart_line"
-            app:layout_constraintBottom_toBottomOf="@id/img_detail_icon_back_1"
-            app:layout_constraintEnd_toStartOf="@id/img_detail_ic_save_5_inactive"
-            app:layout_constraintStart_toEndOf="@id/tv_detail_current_page"
-            app:layout_constraintTop_toTopOf="@id/img_detail_icon_back_1" />
+                <ImageView
+                    android:id="@+id/img_detail_icon_back_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="21dp"
+                    android:layout_marginBottom="9dp"
+                    android:src="@drawable/icon_back_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_detail_current_page"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/img_detail_ic_save_5_inactive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_save_5_inactive"
-            app:layout_constraintStart_toEndOf="@id/img_detail_ic_heart_line"
-            app:layout_constraintTop_toTopOf="@id/img_detail_ic_heart_line"
-            app:layout_constraintBottom_toBottomOf="@id/img_detail_ic_heart_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="11dp"/>
+                <TextView
+                    android:id="@+id/tv_detail_current_page"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:lineHeight="24.1sp"
+                    android:text="구경하기"
+                    android:textAlignment="center"
+                    android:textColor="#212429"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_icon_back_1"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_ic_heart_line"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_icon_back_1"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_icon_back_1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/img_detail_ic_heart_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="2dp"
+                    android:src="@drawable/ic_heart_line"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_icon_back_1"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_ic_save_5_inactive"
+                    app:layout_constraintStart_toEndOf="@id/tv_detail_current_page"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_icon_back_1" />
+
+                <ImageView
+                    android:id="@+id/img_detail_ic_save_5_inactive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="11dp"
+                    android:src="@drawable/ic_save_5_inactive"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_ic_heart_line"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_ic_heart_line"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_ic_heart_line" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_title_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_top_part">
+
+                <TextView
+                    android:id="@+id/tv_detail_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="21dp"
+                    android:fontFamily="@font/notosanscjkkrbold"
+                    android:lineHeight="23.4sp"
+                    android:text="글 제목"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@id/tv_detail_writer_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_detail_writer_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="1dp"
+                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:lineHeight="22sp"
+                    android:text="작성자"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_heart_count_2"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_writer_image"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_title" />
+
+                <ImageView
+                    android:id="@+id/img_detail_writer_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/myimage"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_detail_write_date"
+                    app:layout_constraintEnd_toStartOf="@id/tv_detail_writer_name"
+                    app:layout_constraintStart_toStartOf="@id/tv_detail_title"
+                    app:layout_constraintTop_toTopOf="@id/tv_detail_writer_name" />
+
+                <TextView
+                    android:id="@+id/tv_detail_write_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/notosanscjkkrregular"
+                    android:lineHeight="22sp"
+                    android:text="작성일자"
+                    android:textAlignment="textStart"
+                    android:textColor="#acb5bd"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/tv_detail_writer_name"
+                    app:layout_constraintStart_toStartOf="@id/tv_detail_writer_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_writer_name" />
+
+                <ImageView
+                    android:id="@+id/img_detail_heart_count_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ui_heart_count_2"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_detail_write_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_detail_writer_name"
+                    app:layout_constraintTop_toTopOf="@id/tv_detail_writer_name" />
+
+                <TextView
+                    android:id="@+id/tv_detail_heart_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/notosanscjkkrregular"
+                    android:lineHeight="13sp"
+                    android:text="0"
+                    android:textAlignment="textStart"
+                    android:textColor="#acb5bd"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_heart_count_2"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_heart_count_2"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_heart_count_2"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_heart_count_2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
