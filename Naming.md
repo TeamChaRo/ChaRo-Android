@@ -1,5 +1,6 @@
 ## **Android Naming Convention**
-
+- 클래스명, 함수명, 변수명 등 모든 이름은 어떤 역할을 하는지 한눈에 알 수 있도록 하기
+- id명은 겹치지 않게 하기 위해 어떤 액티비티(프래그먼트)에서 쓰고 있는지 명시
 <br>
 
 ### 1. Class file - UpperCamelCase 사용
@@ -34,11 +35,21 @@
 ### 3. Layout file - snake_case
 
 - 레이아웃 파일 이름 또한 마찬가지로 **snake_case**로 작성
-- UserProfileActivity.kt -> *activity_user_profile.xml*
+- [what]_ [where]
+  - UserProfileActivity.kt -> *activity_user_profile.xml*
     SignUpFragment.kt -> *fragment_sign_up.xml*
     ChangePasswordDialog.kt -> *dialog_change_password.xml*
-- **ex) activity_main.xml, fragment_login.xml, dialog_change_password.xml**
+- **ex) activity_main.xml, fragment_login.xml, dialog_change_password.xml, item_**
+- xml파일의 id명은 [what]_ [where]_ []  → home에서 쓰는 TextView라고 치면 text_home_user
 - 
+    TextView : text_ 
+    <br> EditText : et_
+    <br> ImageView : img_
+    <br> Button : btn_
+    <br> LinearLayout : ll_
+    <br> RelativeLayout : rl_
+    <br> ConstraintLayout : cl_
+    <br> Recyclerview : recyclerview_
 
 <br>
 
