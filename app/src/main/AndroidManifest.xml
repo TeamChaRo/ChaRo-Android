@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid">
-        <activity android:name=".ui.home.Map"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

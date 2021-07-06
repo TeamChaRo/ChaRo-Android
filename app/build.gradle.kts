@@ -51,9 +51,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
-    //coordinatorlayout
-
-
+    //viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
 
     // Hilt
     implementation(AndroidXDependencies.hilt)
@@ -74,7 +73,8 @@ dependencies {
     // Glide
     implementation(ThirdPartyDependencies.glide)
     kapt(KaptDependencies.glideCompiler)
-
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
     // Navigation
     implementation(AndroidXDependencies.navigation)
     implementation(AndroidXDependencies.navigationFragment)
@@ -104,4 +104,8 @@ dependencies {
 
     //CardView
     implementation(AndroidXDependencies.cardview)
+
+    //recyclerview
+    implementation("androidx.recyclerview:recyclerview:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 }
