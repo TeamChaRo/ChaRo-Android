@@ -234,8 +234,6 @@
                     android:id="@+id/tv_detail_location_big"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="21sp"
                     android:text="부산광역시"
@@ -262,8 +260,6 @@
                     android:id="@+id/tv_detail_location_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="21sp"
                     android:text="여수시"
@@ -273,7 +269,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_location_small"
                     app:layout_constraintEnd_toEndOf="@id/img_detail_location_small"
                     app:layout_constraintStart_toStartOf="@id/img_detail_location_small"
-                    app:layout_constraintTop_toTopOf="@id/img_detail_location_small"/>
+                    app:layout_constraintTop_toTopOf="@id/img_detail_location_small" />
 
                 <ImageView
                     android:id="@+id/img_detail_location_invisible"
@@ -343,8 +339,6 @@
                     android:id="@+id/tv_detail_theme_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="21sp"
                     android:text="봄"
@@ -360,8 +354,6 @@
                     android:id="@+id/tv_detail_theme_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="21sp"
                     android:text="산"
@@ -374,23 +366,380 @@
                     app:layout_constraintTop_toTopOf="@id/img_detail_theme_2" />
 
                 <TextView
+                    android:id="@+id/tv_detail_theme_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_detail_theme_3"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="21sp"
-                    android:text="산"
+                    android:text="벚꽃"
                     android:textAlignment="center"
                     android:textColor="#0f6fff"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_theme_3"
                     app:layout_constraintEnd_toEndOf="@id/img_detail_theme_3"
                     app:layout_constraintStart_toStartOf="@id/img_detail_theme_3"
-                    app:layout_constraintTop_toTopOf="@id/img_detail_theme_3"/>
+                    app:layout_constraintTop_toTopOf="@id/img_detail_theme_3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_map"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_theme">
+
+                <TextView
+                    android:id="@+id/tv_detail_map_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="23.4sp"
+                    android:text="출발지"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_start_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_start_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_start_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_textfield_location_show_android"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_map_start_copy"
+                    app:layout_constraintStart_toEndOf="@id/tv_detail_map_start"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_start_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="17dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="20.8sp"
+                    android:paddingStart="10dp"
+                    android:text="서울특별시 중구 신당2동 821-3"
+                    android:textAlignment="textStart"
+                    android:textColor="#495057"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_start_address"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_map_start_address"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_map_start_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_start_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_start_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_copy_1_light_ver"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_start_address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_map_start_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_start_address" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_via1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="23.4sp"
+                    android:text="경유지"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_via1_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_via1_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_via1_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_textfield_location_show_android"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_map_via1_copy"
+                    app:layout_constraintStart_toEndOf="@id/tv_detail_map_via1"
+                    app:layout_constraintTop_toBottomOf="@id/img_detail_map_start_address" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_via1_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="17dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="20.8sp"
+                    android:paddingStart="10dp"
+                    android:text="서울특별시 중구 신당2동 821-3"
+                    android:textAlignment="textStart"
+                    android:textColor="#495057"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_via1_address"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_map_via1_address"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_map_via1_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_via1_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_via1_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_copy_1_light_ver"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_via1_address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_map_via1_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_via1_address" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_via2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="23.4sp"
+                    android:text="경유지"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_via2_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_via2_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_via2_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_textfield_location_show_android"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_map_via2_copy"
+                    app:layout_constraintStart_toEndOf="@id/tv_detail_map_via2"
+                    app:layout_constraintTop_toBottomOf="@id/img_detail_map_via1_address" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_via2_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="17dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="20.8sp"
+                    android:paddingStart="10dp"
+                    android:text="서울특별시 중구 신당2동 821-3"
+                    android:textAlignment="textStart"
+                    android:textColor="#495057"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_via2_address"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_map_via2_address"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_map_via2_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_via2_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_via2_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_copy_1_light_ver"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_via2_address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_map_via2_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_via2_address" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="23.4sp"
+                    android:text="도착지"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_end_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_end_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_end_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_textfield_location_show_android"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_map_end_copy"
+                    app:layout_constraintStart_toEndOf="@id/tv_detail_map_end"
+                    app:layout_constraintTop_toBottomOf="@id/img_detail_map_via2_address" />
+
+                <TextView
+                    android:id="@+id/tv_detail_map_end_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="17dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="20.8sp"
+                    android:paddingStart="10dp"
+                    android:text="서울특별시 중구 신당2동 821-3"
+                    android:textAlignment="textStart"
+                    android:textColor="#495057"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_end_address"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_map_end_address"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_map_end_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_end_address" />
+
+                <ImageView
+                    android:id="@+id/img_detail_map_end_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:src="@drawable/ic_copy_1_light_ver"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_map_end_address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_map_end_address"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_map_end_address" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_mapview"
+                android:layout_width="0dp"
+                android:layout_height="395dp"
+                android:paddingHorizontal="21dp"
+                android:paddingTop="31dp"
+                android:paddingBottom="16.5dp"
+                app:layout_constraintBottom_toTopOf="@id/cl_detail_parking"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_map" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_parking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="16.5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_mapview">
+
+                <TextView
+                    android:id="@+id/tv_detail_parking_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="22sp"
+                    android:paddingHorizontal="20dp"
+                    android:text="주차 공간"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_detail_parking_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/ui_view_selectbox_yes_android"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_parking_title" />
+
+                <ImageView
+                    android:id="@+id/img_detail_parking_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ui_view_selectbox_no_android"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_parking_yes" />
+
+                <TextView
+                    android:id="@+id/tv_detail_parking_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="있음"
+                    android:textAlignment="center"
+                    android:textColor="#0f6fff"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_parking_yes"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_parking_yes"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_parking_yes"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_parking_yes" />
+
+                <TextView
+                    android:id="@+id/tv_detail_parking_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="없음"
+                    android:textAlignment="center"
+                    android:textColor="#889098"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_parking_no"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_parking_no"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_parking_no"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_parking_no" />
+
+                <ImageView
+                    android:id="@+id/img_detail_parking_information"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_textfield_parking_show_android"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_detail_parking_yes" />
+
+                <TextView
+                    android:id="@+id/tv_detail_parking_information"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="20.8sp"
+                    android:paddingHorizontal="32dp"
+                    android:text="100m 이내에 주차공간이 있었어요 :)"
+                    android:textAlignment="textStart"
+                    android:textColor="#495057"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_parking_information"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_parking_information"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_parking_information"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_parking_information" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:id="@+id/cl_detail_warning"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/cl_detail_parking"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent">-->
+
+            <!--                <TextView-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:id="@+id/tv_detail_warning"-->
+            <!--                    android:text="주의사항"-->
+            <!--                    android:fontFamily="@font/notosanscjkkr_bold"-->
+            <!--                    android:textSize="16sp"-->
+            <!--                    android:textAlignment="textStart"-->
+            <!--                    android:lineHeight="22sp"-->
+            <!--                    android:textColor="#212429"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    android:layout_marginHorizontal="20dp"-->
+            <!--                    android:layout_marginTop="16dp"/>-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
