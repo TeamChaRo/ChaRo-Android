@@ -19,12 +19,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_detail_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#fbfbfb">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_detail_top_part"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="#ffffff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -47,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="48dp"
                     android:layout_marginEnd="5dp"
-                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="24.1sp"
                     android:text="구경하기"
                     android:textAlignment="center"
@@ -97,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="21dp"
-                    android:fontFamily="@font/notosanscjkkrbold"
+                    android:fontFamily="@font/notosanscjkkr_bold"
                     android:lineHeight="23.4sp"
                     android:text="글 제목"
                     android:textAlignment="textStart"
@@ -116,7 +118,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="1dp"
-                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:fontFamily="@font/notosanscjkkr_medium"
                     android:lineHeight="22sp"
                     android:text="작성자"
                     android:textAlignment="textStart"
@@ -141,7 +143,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="7dp"
-                    android:fontFamily="@font/notosanscjkkrregular"
+                    android:fontFamily="@font/notosanscjkkr_regular"
                     android:lineHeight="22sp"
                     android:text="작성일자"
                     android:textAlignment="textStart"
@@ -170,7 +172,7 @@
                     android:layout_marginVertical="2dp"
                     android:layout_marginStart="22dp"
                     android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/notosanscjkkrregular"
+                    android:fontFamily="@font/notosanscjkkr_regular"
                     android:lineHeight="13sp"
                     android:text="0"
                     android:textAlignment="textStart"
@@ -183,9 +185,108 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <ImageView
+                android:id="@+id/img_detail_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/mask_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_title_info" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_drive_course"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_detail_image">
 
+                <TextView
+                    android:id="@+id/tv_detail_drive_course"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="37dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="22sp"
+                    android:text="드라이브 코스 지역"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/img_detail_location_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_selectbox_show_android"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_drive_course" />
+
+                <TextView
+                    android:id="@+id/tv_detail_location_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="부산광역시"
+                    android:textAlignment="center"
+                    android:textColor="#0f6fff"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_location_big"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_location_big"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_location_big"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_location_big" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_detail_location_small"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_selectbox_show_android"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_location_big"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_location_big"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_location_invisible"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_detail_location_small"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="여수시"
+                    android:textAlignment="center"
+                    android:textColor="#0f6fff"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_location_small"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_location_small"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_location_small"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_location_small"
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_detail_location_invisible"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ui_view_selectbox_show_android"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_location_big"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="invisible"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
