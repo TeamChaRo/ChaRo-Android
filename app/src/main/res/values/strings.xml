@@ -15,4 +15,6 @@
     <string name="main_charo_today_drive_chip">#7번 국도</string>
     <string name="main_charo_today_drive_chip_2">#바다</string>
     <string name="main_charo_today_drive_chip_3">#포항</string>
+    <string name="main_charo_theme">테마</string>
+    <string name="main_charo_theme_name">#벚꽃</string>
 </resources>
