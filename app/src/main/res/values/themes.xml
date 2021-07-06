@@ -13,4 +13,42 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="HeaderH6">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">9sp</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">5.5sp</item>
+        <item name="android:textColor">@color/blue_main</item>
+    </style>
+
+    <style name="HeaderH3">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+    </style>
+
+    <style name="HeaderH5">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">4.9sp</item>
+        <item name="android:textColor">@color/black_sub</item>
+    </style>
+
+    <style name="HeaderH9">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineSpacingExtra">3sp</item>
+        <item name="android:textColor">@color/blue_main</item>
+    </style>
 </resources>

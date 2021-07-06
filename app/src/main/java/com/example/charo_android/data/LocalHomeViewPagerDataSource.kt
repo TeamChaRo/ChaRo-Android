@@ -1,24 +1,24 @@
 package com.example.charo_android.data
 
 import com.example.charo_android.R
-import com.example.charo_android.ui.home.HomeViewPagerImage
+import com.example.charo_android.ui.home.HomeViewPagerInfo
 
 class LocalHomeViewPagerDataSource : HomeViewPagerDataSource {
-    override fun fetchData(): MutableList<HomeViewPagerImage> {
-        return mutableListOf<HomeViewPagerImage>(
-            HomeViewPagerImage(
+    override fun fetchData(): MutableList<HomeViewPagerInfo> {
+        return mutableListOf<HomeViewPagerInfo>(
+            HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image
             ),
-            HomeViewPagerImage(
+            HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image
             ),
-            HomeViewPagerImage(
+            HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image
             ),
-            HomeViewPagerImage(
+            HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image
             ),
-            HomeViewPagerImage(
+            HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image
             )
         )

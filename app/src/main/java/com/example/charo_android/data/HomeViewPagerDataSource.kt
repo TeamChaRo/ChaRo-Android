@@ -1,7 +1,7 @@
 package com.example.charo_android.data
 
-import com.example.charo_android.ui.home.HomeViewPagerImage
+import com.example.charo_android.ui.home.HomeViewPagerInfo
 
 interface HomeViewPagerDataSource {
-    fun fetchData() : MutableList<HomeViewPagerImage>
+    fun fetchData() : MutableList<HomeViewPagerInfo>
 }

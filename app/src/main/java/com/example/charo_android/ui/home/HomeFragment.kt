@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.charo_android.data.LocalHomeTodayDriveDataSource
 import com.example.charo_android.data.LocalHomeViewPagerDataSource
 import com.example.charo_android.databinding.FragmentHomeBinding
 
@@ -14,7 +15,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var homeViewPagerAdapter = HomeViewPagerAdapter()
-
+    private var homeTodayDriveAdapter = HomeTodayDriveAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,6 +25,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
         initToolBar()
         initHomeViewPager()
+        initHomeTodayDrive()
         return root
     }
 
@@ -38,7 +40,11 @@ class HomeFragment : Fragment() {
         homeViewPagerAdapter.notifyDataSetChanged()
     }
 
-
+    private fun initHomeTodayDrive(){
+        binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
+        homeTodayDriveAdapter.driveData.addAll(LocalHomeTodayDriveDataSource().fetchData())
+        homeTodayDriveAdapter.notifyDataSetChanged()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
