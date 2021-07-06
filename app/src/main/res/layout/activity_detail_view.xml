@@ -584,7 +584,7 @@
                     android:textColor="#495057"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_map_end_address"
-                    app:layout_constraintEnd_toEndOf="@id/img_detail_map_end_address"
+                    app:layout_constraintEnd_toStartOf="@+id/img_detail_map_end_copy"
                     app:layout_constraintStart_toStartOf="@id/img_detail_map_end_address"
                     app:layout_constraintTop_toTopOf="@id/img_detail_map_end_address" />
 
@@ -592,7 +592,6 @@
                     android:id="@+id/img_detail_map_end_copy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
                     android:src="@drawable/ic_copy_1_light_ver"
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_map_end_address"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -608,7 +607,6 @@
                 android:paddingHorizontal="21dp"
                 android:paddingTop="31dp"
                 android:paddingBottom="16.5dp"
-                app:layout_constraintBottom_toTopOf="@id/cl_detail_parking"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_detail_map" />
@@ -618,7 +616,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="16.5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_detail_mapview">
@@ -715,31 +712,205 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:id="@+id/cl_detail_warning"-->
-            <!--                app:layout_constraintTop_toBottomOf="@id/cl_detail_parking"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent">-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_warning"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_parking">
 
-            <!--                <TextView-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:id="@+id/tv_detail_warning"-->
-            <!--                    android:text="주의사항"-->
-            <!--                    android:fontFamily="@font/notosanscjkkr_bold"-->
-            <!--                    android:textSize="16sp"-->
-            <!--                    android:textAlignment="textStart"-->
-            <!--                    android:lineHeight="22sp"-->
-            <!--                    android:textColor="#212429"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    android:layout_marginHorizontal="20dp"-->
-            <!--                    android:layout_marginTop="16dp"/>-->
+                <TextView
+                    android:id="@+id/tv_detail_warning"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="22sp"
+                    android:paddingHorizontal="20dp"
+                    android:text="주의사항"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+                <ImageView
+                    android:id="@+id/img_detail_warning_highway"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:src="@drawable/ui_view_selectbox_warning_select_android"
+                    app:layout_constraintBottom_toTopOf="@id/img_detail_warning_beginner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_warning" />
+
+                <ImageView
+                    android:id="@+id/img_detail_warning_mountain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:src="@drawable/ui_view_selectbox_warning_unselect_android"
+                    app:layout_constraintBottom_toTopOf="@id/img_detail_warning_crowded"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_warning" />
+
+                <ImageView
+                    android:id="@+id/img_detail_warning_beginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:src="@drawable/ui_view_selectbox_warning_select_android"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_detail_warning_highway" />
+
+                <ImageView
+                    android:id="@+id/img_detail_warning_crowded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
+                    android:src="@drawable/ui_view_selectbox_warning_unselect_android"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_detail_warning_mountain" />
+
+                <TextView
+                    android:id="@+id/tv_detail_warning_highway"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="고속도로"
+                    android:textAlignment="center"
+                    android:textColor="#0f6fff"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_warning_highway"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_warning_highway"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_warning_highway"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_warning_highway" />
+
+                <TextView
+                    android:id="@+id/tv_detail_warning_mountain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="산길포함"
+                    android:textAlignment="center"
+                    android:textColor="#889098"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_warning_mountain"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_warning_mountain"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_warning_mountain"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_warning_mountain" />
+
+                <TextView
+                    android:id="@+id/tv_detail_warning_beginner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="초보힘듦"
+                    android:textAlignment="center"
+                    android:textColor="#0f6fff"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_warning_beginner"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_warning_beginner"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_warning_beginner"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_warning_beginner" />
+
+                <TextView
+                    android:id="@+id/tv_detail_warning_crowded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_medium"
+                    android:lineHeight="21sp"
+                    android:text="사람많음"
+                    android:textAlignment="center"
+                    android:textColor="#889098"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_warning_crowded"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_warning_crowded"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_warning_crowded"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_warning_crowded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_information"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_warning">
+
+                <TextView
+                    android:id="@+id/tv_detail_information_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="22sp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="16dp"
+                    android:text="제 드라이브 코스는요"
+                    android:textAlignment="textStart"
+                    android:textColor="#212429"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_detail_information"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="12dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/input"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_information_title" />
+
+                <TextView
+                    android:id="@+id/tv_detail_information_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="22.4sp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="21dp"
+                    android:paddingBottom="24dp"
+                    android:text="끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? 끝났나 혹시? "
+                    android:textAlignment="textStart"
+                    android:textColor="#495057"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_information"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_information"
+                    app:layout_constraintStart_toStartOf="@id/img_detail_information"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_information" />
+
+                <TextView
+                    android:id="@+id/tv_detail_information_text_length"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:lineHeight="14.3sp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="5dp"
+                    android:text="0/280자"
+                    android:textAlignment="textEnd"
+                    android:textColor="#acb5bd"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_information"
+                    app:layout_constraintEnd_toEndOf="@id/img_detail_information" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
