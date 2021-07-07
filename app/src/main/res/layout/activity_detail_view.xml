@@ -185,16 +185,35 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/img_detail_image"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/mask_group"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_detail_title_info" />
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_title_info">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewpager_detail_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/img_detail_image"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:adjustViewBounds="true"-->
+                <!--                    android:scaleType="fitXY"-->
+                <!--                    android:src="@drawable/mask_group"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_detail_drive_course"
@@ -202,7 +221,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_detail_image">
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_image">
 
                 <TextView
                     android:id="@+id/tv_detail_drive_course"
@@ -898,6 +917,7 @@
                     android:id="@+id/tv_detail_information_text_length"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:lineHeight="14.3sp"
                     android:paddingEnd="16dp"
@@ -906,7 +926,6 @@
                     android:textAlignment="textEnd"
                     android:textColor="#acb5bd"
                     android:textSize="11sp"
-                    android:layout_marginBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_information"
                     app:layout_constraintEnd_toEndOf="@id/img_detail_information" />
 
