@@ -17,4 +17,11 @@
     <string name="main_charo_today_drive_chip_3">#포항</string>
     <string name="main_charo_theme">테마</string>
     <string name="main_charo_theme_name">#벚꽃</string>
+    <string name="main_charo_hot_drive">요즘 뜨는 드라이브 코스</string>
+    <string name="main_charo_hot_drive_plus">더보기</string>
+    <string name="main_charo_hot_drive_title">해안도로 정복할 수있는 포항 드라이브 코스</string>
+    <string name="main_charo_night_dirve">여름 맞이 야간 드라이브</string>
+    <string name="main_charo_locaion_dirve">경기도 드라이브 코스</string>
+    <string name="main_charo_viewpager_text">차로와 함께 \n즐기는 \n드라이브 코스</string>
+    <string name="main_charo_viewpager_hashtag">#날씨도좋은데#바다와함께라면</string>
 </resources>

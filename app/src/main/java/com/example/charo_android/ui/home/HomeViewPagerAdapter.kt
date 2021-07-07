@@ -33,8 +33,10 @@ class HomeViewPagerAdapter(): RecyclerView.Adapter<HomeViewPagerAdapter.HomeView
     class HomeViewPagerViewHolder(
         private val binding: ItemHomeViewpagerBinding
     ) : RecyclerView.ViewHolder(binding.root){
-        fun onBind(homeViewPagerImage: HomeViewPagerInfo){
-            binding.imgViewpager.setImageResource(homeViewPagerImage.homeViewPagerImage)
+        fun onBind(homeViewPagerinfo: HomeViewPagerInfo){
+            binding.imgViewpager.setImageResource(homeViewPagerinfo.homeViewPagerImage)
+            binding.textViewpagerTitle.text = homeViewPagerinfo.homeViewPagerTitle
+            binding.textViewpagerHashtag.text = homeViewPagerinfo.homeViewPagerHashTag
         }
 
     }

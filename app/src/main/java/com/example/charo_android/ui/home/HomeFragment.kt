@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.charo_android.data.LocalHomeThemeDataSource
-import com.example.charo_android.data.LocalHomeTodayDriveDataSource
-import com.example.charo_android.data.LocalHomeViewPagerDataSource
+import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
 
 
@@ -18,6 +16,9 @@ class HomeFragment : Fragment() {
     private var homeViewPagerAdapter = HomeViewPagerAdapter()
     private var homeTodayDriveAdapter = HomeTodayDriveAdapter()
     private var homeThemeAdapter = HomeThemeAdapter()
+    private var homeHotDriveAdapter = HomeHotDriveAdapter()
+    private var homeNightDriveAdapter = HomeNIghtDriveAdapter()
+    private var homeLocationDriveAdapter = HomeLocationDriveAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +31,9 @@ class HomeFragment : Fragment() {
         initHomeViewPager()
         initHomeTodayDrive()
         initHomeTheme()
+        initHomeHotDrive()
+        initHomeNightDrive()
+        initHomeLocationDrive()
         return root
     }
 
@@ -54,6 +58,24 @@ class HomeFragment : Fragment() {
         binding.recyclerviewHomeTheme.adapter = homeThemeAdapter
         homeThemeAdapter.themeData.addAll(LocalHomeThemeDataSource().fetchData())
         homeThemeAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeHotDrive(){
+        binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
+        homeHotDriveAdapter.hotData.addAll(LocalHomeHotDriveDataSource().fetchData().subList(0,4))
+        homeHotDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeNightDrive(){
+        binding.recyclerviewHomeNightDrive.adapter = homeNightDriveAdapter
+        homeNightDriveAdapter.nightData.addAll(LocalHomeNightDriveDataSource().fetchData().subList(0,4))
+        homeNightDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeLocationDrive(){
+        binding.recyclerviewHomeLocationDrive.adapter = homeLocationDriveAdapter
+        homeLocationDriveAdapter.locationData.addAll(LocalHomeLocationDataSource().fetchData().subList(0,4))
+        homeLocationDriveAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {

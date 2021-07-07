@@ -61,4 +61,34 @@
         <item name="android:lineSpacingExtra">5sp</item>
         <item name="android:textColor">@color/gray5_sub</item>
     </style>
+
+    <style name="HeaderH8">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">10sp</item>
+        <item name="android:textColor">@color/gray4_sub</item>
+    </style>
+
+    <style name="HeaderH11Android">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">4.3sp</item>
+        <item name="android:textColor">@color/black_sub</item>
+    </style>
+    <style name="HeaderH1">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">8.4sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="HeaderH7">
+        <item name="android:fontFamily">@font/noto_sans_cjkkr_regular</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">5.5sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
