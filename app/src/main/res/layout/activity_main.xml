@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     android:background="@color/white"
     android:paddingTop="?attr/actionBarSize">
+
 
     <!--그림자 있는건 png 파일로 다운 받아야 함-->
     <!--BottomNavigation 크기는 430으로 하면 맞지만, 화면 크기 변경 시 이상해질 수 있음-->
@@ -22,11 +25,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_activity_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height=  "match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -36,19 +39,20 @@
 
     <ImageView
         android:id="@+id/btn_write"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/tabbar_ic_write"
-        android:layout_margin="50dp"
         android:elevation="20dp"
         android:scaleType="fitXY"
         android:clickable="true"
         android:focusable="true"
-        android:translationZ="@dimen/activity_horizontal_margin"/>
-
+        android:translationZ="@dimen/activity_horizontal_margin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

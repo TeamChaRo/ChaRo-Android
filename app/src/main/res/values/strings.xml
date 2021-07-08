@@ -6,6 +6,28 @@
     <string name="title_write_kor">작성하기</string>
     <string name="title_charo_eng">Charo</string>
     <string name="title_charo_kor">나의 차로</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="main_charo_logo">로고</string>
+    <string name="main_charo_search">검색</string>
+    <string name="main_charo_notice">알림</string>
+    <string name="main_charo_pick">이번주 차로\'S PICK</string>
+    <string name="main_charo_today_drive">차로의 \'오늘 드라이브\'</string>
+    <string name="main_charo_today_drive_title">해안 도로 정복할 수 있는 포항 드라이브 코스 다같이 지금 바로 출발해요</string>
+    <string name="main_charo_today_drive_chip">#7번 국도</string>
+    <string name="main_charo_today_drive_chip_2">#바다</string>
+    <string name="main_charo_today_drive_chip_3">#포항</string>
+    <string name="main_charo_theme">테마</string>
+    <string name="main_charo_theme_name">#벚꽃</string>
+    <string name="main_charo_hot_drive">요즘 뜨는 드라이브 코스</string>
+    <string name="main_charo_hot_drive_plus">더보기</string>
+    <string name="main_charo_hot_drive_title">해안도로 정복할 수있는 포항 드라이브 코스</string>
+    <string name="main_charo_night_dirve">여름 맞이 야간 드라이브</string>
+    <string name="main_charo_locaion_dirve">경기도 드라이브 코스</string>
+    <string name="main_charo_viewpager_text">차로와 함께 \n즐기는 \n드라이브 코스</string>
+    <string name="main_charo_viewpager_hashtag">#날씨도좋은데#바다와함께라면</string>
+    <string name="main_charo_more_view_title">요즘 뜨는 드라이브 코스</string>
+    <string name="main_charo_more_view_count">전체 6개 게시물</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_charo_more_filter">인기순</string>
+    <string name="main_charo_more_title">해얀도로 정복할 수 있는 포항 드라이브 코스</string>
+
 </resources>

@@ -51,10 +51,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    //viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
     // Hilt
     implementation(AndroidXDependencies.hilt)
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation(files("libs/com.skt.Tmap_1.67.jar"))
     kapt(KaptDependencies.hilt)
@@ -62,6 +65,7 @@ dependencies {
     // DataStore
     implementation(AndroidXDependencies.dataStore)
     implementation(AndroidXDependencies.dataStoreCore)
+
 
     // Android KTX
     implementation(AndroidXDependencies.fragmentKtx)
@@ -71,7 +75,8 @@ dependencies {
     // Glide
     implementation(ThirdPartyDependencies.glide)
     kapt(KaptDependencies.glideCompiler)
-
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
     // Navigation
     implementation(AndroidXDependencies.navigation)
     implementation(AndroidXDependencies.navigationFragment)
@@ -101,4 +106,8 @@ dependencies {
 
     //CardView
     implementation(AndroidXDependencies.cardview)
+
+    //recyclerview
+    implementation("androidx.recyclerview:recyclerview:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 }

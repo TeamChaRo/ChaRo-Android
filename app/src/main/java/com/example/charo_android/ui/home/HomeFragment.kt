@@ -1,41 +1,104 @@
 package com.example.charo_android.ui.home
 
 import android.os.Bundle
+import android.text.TextUtils.replace
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.FragmentManager
+import com.example.charo_android.MainActivity
 import com.example.charo_android.R
+import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
+import com.example.charo_android.replaceFragment
+import com.example.charo_android.ui.home.more.MoreViewFragment
+
 
 class HomeFragment : Fragment() {
-
-    private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private var homeViewPagerAdapter = HomeViewPagerAdapter()
+    private var homeTodayDriveAdapter = HomeTodayDriveAdapter()
+    private var homeThemeAdapter = HomeThemeAdapter()
+    private var homeHotDriveAdapter = HomeHotDriveAdapter()
+    private var homeNightDriveAdapter = HomeNIghtDriveAdapter()
+    private var homeLocationDriveAdapter = HomeLocationDriveAdapter()
+    val context = activity as? AppCompatActivity
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
+        initToolBar()
+        initHomeViewPager()
+        initHomeTodayDrive()
+        initHomeTheme()
+        initHomeHotDrive()
+        initHomeNightDrive()
+        initHomeLocationDrive()
+        replaceMoreViewFragment()
+
+
+
+
         return root
+    }
+
+    private fun initToolBar(){
+        val toolbar = binding.toolbarMain
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+    }
+
+    private fun initHomeViewPager(){
+        binding.vpMain.adapter = homeViewPagerAdapter
+        homeViewPagerAdapter.item.addAll(LocalHomeViewPagerDataSource().fetchData())
+        homeViewPagerAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeTodayDrive(){
+        binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
+        homeTodayDriveAdapter.driveData.addAll(LocalHomeTodayDriveDataSource().fetchData())
+        homeTodayDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeTheme(){
+        binding.recyclerviewHomeTheme.adapter = homeThemeAdapter
+        homeThemeAdapter.themeData.addAll(LocalHomeThemeDataSource().fetchData())
+        homeThemeAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeHotDrive(){
+        binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
+        homeHotDriveAdapter.hotData.addAll(LocalHomeHotDriveDataSource().fetchData().subList(0,4))
+        homeHotDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeNightDrive(){
+        binding.recyclerviewHomeNightDrive.adapter = homeNightDriveAdapter
+        homeNightDriveAdapter.nightData.addAll(LocalHomeNightDriveDataSource().fetchData().subList(0,4))
+        homeNightDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun initHomeLocationDrive(){
+        binding.recyclerviewHomeLocationDrive.adapter = homeLocationDriveAdapter
+        homeLocationDriveAdapter.locationData.addAll(LocalHomeLocationDataSource().fetchData().subList(0,4))
+        homeLocationDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun replaceMoreViewFragment(){
+        binding.textHomeHotDrivePlus.setOnClickListener {
+            context?.replaceFragment(MoreViewFragment())
+            Log.d("name", "name")
+        }
+
     }
 
     override fun onDestroyView() {
