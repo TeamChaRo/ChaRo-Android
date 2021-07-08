@@ -7,42 +7,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/img_home_today_drive"
+            android:id="@+id/img_more_view"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:src="@drawable/image_more_view"
             android:scaleType="fitXY"
-            android:src="@drawable/home_today_drive_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <ImageButton
-            android:id="@+id/img_home_today_drive_heart"
+            android:id="@+id/img_more_view_heart"
             app:layout_constraintCircleRadius="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_home_heart"
-            app:layout_constraintEnd_toEndOf="@id/img_home_today_drive"
-            app:layout_constraintTop_toTopOf="@+id/img_home_today_drive"/>
+            app:layout_constraintEnd_toEndOf="@id/img_more_view"
+            app:layout_constraintTop_toTopOf="@+id/img_more_view"/>
 
         <TextView
-            android:id="@+id/text_home_today_drive_title"
-            style="@style/HeaderH5"
-            android:layout_width="260dp"
+            android:id="@+id/text_more_view_title"
+            style="@style/HeaderH12Android"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main_charo_today_drive_title"
+            android:text="@string/main_charo_more_title"
             android:layout_marginTop="14dp"
-            app:layout_constraintStart_toStartOf="@id/img_home_today_drive"
-            app:layout_constraintTop_toBottomOf="@+id/img_home_today_drive"/>
+            app:layout_constraintStart_toStartOf="@id/img_more_view"
+            app:layout_constraintTop_toBottomOf="@+id/img_more_view"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_home_today_drive_1"
+            android:id="@+id/chip_more_view_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="6dp"
@@ -52,11 +52,11 @@
             app:chipStrokeColor="@color/blue_main"
             app:chipStrokeWidth="1dp"
             app:chipBackgroundColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_more_view_title"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_home_today_drive_2"
+            android:id="@+id/chip_more_view_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_charo_today_drive_chip_2"
@@ -66,11 +66,11 @@
             app:chipStrokeWidth="1dp"
             app:chipBackgroundColor="@color/white"
             android:layout_marginStart="4dp"
-            app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive_title"
-            app:layout_constraintStart_toEndOf="@id/chip_home_today_drive_1"/>
+            app:layout_constraintTop_toBottomOf="@+id/text_more_view_title"
+            app:layout_constraintStart_toEndOf="@id/chip_more_view_1"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_home_today_drive_3"
+            android:id="@+id/chip_more_view_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_charo_today_drive_chip_3"
@@ -80,11 +80,12 @@
             app:chipStrokeWidth="1dp"
             app:chipBackgroundColor="@color/white"
             android:layout_marginStart="4dp"
-            app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive_title"
-            app:layout_constraintStart_toEndOf="@id/chip_home_today_drive_2"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/text_more_view_title"
+            app:layout_constraintStart_toEndOf="@id/chip_more_view_2"/>
 
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

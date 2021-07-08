@@ -1,13 +1,20 @@
 package com.example.charo_android.ui.home
 
 import android.os.Bundle
+import android.text.TextUtils.replace
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.example.charo_android.MainActivity
+import com.example.charo_android.R
 import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
+import com.example.charo_android.replaceFragment
+import com.example.charo_android.ui.home.more.MoreViewFragment
 
 
 class HomeFragment : Fragment() {
@@ -19,6 +26,7 @@ class HomeFragment : Fragment() {
     private var homeHotDriveAdapter = HomeHotDriveAdapter()
     private var homeNightDriveAdapter = HomeNIghtDriveAdapter()
     private var homeLocationDriveAdapter = HomeLocationDriveAdapter()
+    val context = activity as? AppCompatActivity
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +35,8 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+
         initToolBar()
         initHomeViewPager()
         initHomeTodayDrive()
@@ -34,6 +44,11 @@ class HomeFragment : Fragment() {
         initHomeHotDrive()
         initHomeNightDrive()
         initHomeLocationDrive()
+        replaceMoreViewFragment()
+
+
+
+
         return root
     }
 
@@ -76,6 +91,14 @@ class HomeFragment : Fragment() {
         binding.recyclerviewHomeLocationDrive.adapter = homeLocationDriveAdapter
         homeLocationDriveAdapter.locationData.addAll(LocalHomeLocationDataSource().fetchData().subList(0,4))
         homeLocationDriveAdapter.notifyDataSetChanged()
+    }
+
+    private fun replaceMoreViewFragment(){
+        binding.textHomeHotDrivePlus.setOnClickListener {
+            context?.replaceFragment(MoreViewFragment())
+            Log.d("name", "name")
+        }
+
     }
 
     override fun onDestroyView() {
