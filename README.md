@@ -47,7 +47,7 @@
 승현
 ```
 ```
-# Role
+# Rule
 ## <a href="https://github.com/TeamChaRo/ChaRo-Android/blob/convention/Commit%20Message.md" >Git Convention</a>
 
 ## <a href="https://github.com/TeamChaRo/ChaRo-Android/blob/convention/Naming.md" >Android Naming Convention</a>
