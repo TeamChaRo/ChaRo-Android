@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ui_write_btn_parking_select_android" android:state_selected="true" />
+    <item android:drawable="@drawable/ui_write_btn_parking_unselect_android" android:state_selected="false" />
+</selector>

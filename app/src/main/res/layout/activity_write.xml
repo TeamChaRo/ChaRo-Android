@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.write.WriteActivity">
+
+    <ScrollView
+        android:id="@+id/scroll_view_write"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp">
+
+            <EditText
+                android:id="@+id/et_write_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/ui_write_textfield_location_android"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:hint="@string/et_title"
+                android:maxLength="38"
+                android:paddingHorizontal="16dp"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rectangle_244"
+                app:layout_constraintTop_toBottomOf="@id/et_write_title">
+
+                <ImageView
+                    android:id="@+id/img_write_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/group_525"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_write_photo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/how_your_drive"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_write_photo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_photo">
+
+                <TextView
+                    android:id="@+id/text_write_qa_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/which_location"
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_write_select_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/select_location"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_write_qa_location" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_dialog_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/unit_do"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_dialog_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/unit_si"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_location">
+
+                <TextView
+                    android:id="@+id/text_write_qa_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/which_theme"
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_write_select_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/select_theme"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_write_qa_theme" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_theme1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_dialog_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/theme1"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_theme2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_dialog_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/theme2"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_theme3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_dialog_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/theme3"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_park"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_theme">
+
+                <TextView
+                    android:id="@+id/text_write_qa_park"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/how_park"
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_park_yes"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/btn_park_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/park_yes"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_park_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_park_no"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_park_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/park_no"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_park_yes"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park" />
+
+                <EditText
+                    android:id="@+id/et_write_park_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ui_write_btn_parking_unselect_android"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/et_park"
+                    android:maxLength="23"
+                    android:paddingHorizontal="16dp"
+                    android:textSize="13sp"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_park_yes" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_caution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_park">
+
+                <TextView
+                    android:id="@+id/text_write_qa_caution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/what_caution"
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_write_select_caution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/select_caution"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_write_qa_caution" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_highway"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/btn_warning_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/highway"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_moun"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_moun"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btn_warning_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/mountain"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_highway"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_diffi"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/btn_warning_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/difficult"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_people"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_people"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/btn_warning_click"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/people"
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_diffi"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_my_drive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_caution">
+
+                <TextView
+                    android:id="@+id/text_write_my_drive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/what_my_drive"
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_write_my_drive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/rectangle_243"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:gravity="top"
+                    android:hint="@string/hint_my_drive"
+                    android:maxLength="280"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="22dp"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_my_drive" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_write_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_write_bottom_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ui_view_textfield_location_show_android"
+            android:backgroundTint="@color/blue_main"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
