@@ -1,5 +1,6 @@
 package com.example.charo_android
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.ui.home.HomeFragment
 import com.example.charo_android.ui.home.HomeViewPagerAdapter
 
+import com.example.charo_android.ui.write.WriteActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    private fun initNavView(){
+    private fun initNavView() {
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
@@ -39,14 +40,26 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        binding.btnWrite.setOnClickListener {
+            startActivityWrite()
+        }
     }
 
-}
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment){
-    val fragmentManager = supportFragmentManager
-    val transaction = fragmentManager.beginTransaction()
-    transaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-    transaction.addToBackStack(null)
-    transaction.commit()
+    fun AppCompatActivity.replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment_activity_main, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    fun startActivityWrite() {
+        val intent = Intent(this@MainActivity, WriteActivity::class.java)
+        startActivity(intent)
+    }
+
+
 }

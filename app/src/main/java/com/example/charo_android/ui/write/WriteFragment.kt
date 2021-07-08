@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.write
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,10 +31,14 @@ class WriteFragment : Fragment() {
         _binding = FragmentWriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textWrite
-        writeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textWrite
+//        writeViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
+
+        val intent = Intent(context, WriteActivity::class.java)
+        startActivity(intent)
+
         return root
     }
 

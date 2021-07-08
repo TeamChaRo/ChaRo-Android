@@ -6,18 +6,18 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
+    android:background="@color/white"
+    android:paddingTop="?attr/actionBarSize"
+    tools:context=".MainActivity">
 
     <!--그림자 있는건 png 파일로 다운 받아야 함-->
-    <!--BottomNavigation 크기는 430으로 하면 맞지만, 화면 크기 변경 시 이상해질 수 있음-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="88dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@drawable/rectangle_62"
+        android:background="@drawable/background_bottom_navigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,11 +39,12 @@
         android:id="@+id/btn_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/tabbar_ic_write"
+        android:layout_margin="40dp"
+        android:elevation="20dp"
         android:scaleType="fitXY"
         android:clickable="true"
         android:focusable="true"

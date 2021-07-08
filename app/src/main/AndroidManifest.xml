@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid">
-
-
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".DetailActivity"/>
+        <activity android:name=".ui.write.WriteMapActivity"></activity>
+        <activity android:name=".ui.write.WriteActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

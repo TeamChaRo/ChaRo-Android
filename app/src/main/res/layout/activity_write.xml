@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.write.WriteActivity">
+
+    <ScrollView
+        android:id="@+id/scroll_view_write"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp">
+
+            <EditText
+                android:id="@+id/et_write_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/ui_write_textfield_location_android"
+                android:hint="@string/et_title"
+                android:textSize="13sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/et_write_title"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rectangle_244">
+
+                <ImageView
+                    android:id="@+id/img_write_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/group_525" />
+
+                <TextView
+                    android:id="@+id/text_write_photo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_write_photo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="@string/how_your_drive"
+                    android:textSize="14sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_photo">
+
+                <TextView
+                    android:id="@+id/text_write_qa_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/which_location"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text_write_select_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/select_location"
+                    android:textSize="11sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_do"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/btn_dialog_click"
+                    android:text="@string/unit_do"
+                    android:gravity="center" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_si"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/btn_dialog_click"
+                    android:text="@string/unit_si"
+                    android:gravity="center" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_location">
+
+                <TextView
+                    android:id="@+id/text_write_qa_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/which_theme"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text_write_select_theme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_theme"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/select_location"
+                    android:textSize="11sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_theme1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/btn_dialog_click"
+                    android:text="@string/theme1"
+                    android:gravity="center" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_theme2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/btn_dialog_click"
+                    android:text="@string/theme2"
+                    android:gravity="center" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_theme3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingRight="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/btn_dialog_click"
+                    android:text="@string/theme3"
+                    android:gravity="center" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_park"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_theme">
+
+                <TextView
+                    android:id="@+id/text_write_qa_park"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/how_park"
+                    android:textSize="16sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_park_yes"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_park_no"
+                    android:text="@string/park_yes"
+                    android:background="@drawable/btn_park_click"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_park_no"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_park_yes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/park_no"
+                    android:background="@drawable/btn_park_click" />
+
+                <EditText
+                    android:id="@+id/et_write_park_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ui_write_btn_parking_unselect_android"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_park_yes"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/et_park"
+                    android:textSize="13sp"
+                    android:paddingHorizontal="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_caution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_park">
+
+                <TextView
+                    android:id="@+id/text_write_qa_caution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/what_caution"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/text_write_select_caution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_caution"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/select_caution"
+                    android:textSize="11sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_highway"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_moun"
+                    android:text="@string/highway"
+                    android:background="@drawable/btn_warning_click"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_moun"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_highway"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/mountain"
+                    android:background="@drawable/btn_warning_click" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_diffi"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_people"
+                    android:text="@string/difficult"
+                    android:background="@drawable/btn_warning_click"
+
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_write_caution_people"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_diffi"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/people"
+                    android:background="@drawable/btn_warning_click" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_write_my_drive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_write_caution">
+
+                <TextView
+                    android:id="@+id/text_write_my_drive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/what_my_drive"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/et_write_my_drive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_my_drive"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/rectangle_243"
+                    android:hint="@string/hint_my_drive"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="22dp"
+                    android:gravity="top"
+                    android:textSize="13sp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_write_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#FFFFFF">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_write_bottom_next"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue_main"
+            android:background="@drawable/ui_view_textfield_location_show_android" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
