@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.write
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -100,6 +101,11 @@ class WriteActivity : AppCompatActivity() {
         //주차 - 둘 중 하나만 선택 가능하도록 하기
 
 
+        //startActivityForResult() - 화면전환 + 결과값 반환 로 변경 필요
+        binding.btnWriteBottomNext.setOnClickListener {
+            startActivityWriteMap()
+        }
+
     }
 
 
@@ -118,10 +124,10 @@ class WriteActivity : AppCompatActivity() {
         binding.btnWriteCautionMoun.setOnClickListener {
             it.isSelected = !it.isSelected
         }
-        binding.btnWriteDo.setOnClickListener {
+        binding.btnWriteCity.setOnClickListener {
             it.isSelected = !it.isSelected
         }
-        binding.btnWriteSi.setOnClickListener {
+        binding.btnWriteRegion.setOnClickListener {
             it.isSelected = !it.isSelected
         }
         binding.btnWriteParkNo.setOnClickListener {
@@ -141,7 +147,8 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
-
-
-
+    fun startActivityWriteMap() {
+        val intent = Intent(this@WriteActivity, WriteMapActivity::class.java)
+        startActivity(intent)
+    }
 }
