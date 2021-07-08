@@ -10,7 +10,6 @@
     tools:context=".MainActivity">
 
     <!--그림자 있는건 png 파일로 다운 받아야 함-->
-    <!--BottomNavigation 크기는 430으로 하면 맞지만, 화면 크기 변경 시 이상해질 수 있음-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
