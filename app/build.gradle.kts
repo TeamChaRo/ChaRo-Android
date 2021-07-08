@@ -59,6 +59,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation(files("libs/com.skt.Tmap_1.67.jar"))
     kapt(KaptDependencies.hilt)
 
     // DataStore
