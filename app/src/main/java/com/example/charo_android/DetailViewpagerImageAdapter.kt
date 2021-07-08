@@ -20,14 +20,15 @@ class DetailViewpagerImageAdapter: RecyclerView.Adapter<DetailViewpagerImageAdap
     override fun getItemCount(): Int = imageList.size
 
     override fun onBindViewHolder(holder: DetailImageViewHolder, position: Int) {
-        holder.onBind(imageList[position])
+        holder.onBind(imageList[position], position)
     }
 
     class DetailImageViewHolder(
         private val binding : ItemDetailImageBinding
     ): RecyclerView.ViewHolder(binding.root){
-        fun onBind(detailImageInfo: DetailViewpagerImageInfo){
+        fun onBind(detailImageInfo: DetailViewpagerImageInfo, position: Int){
             binding.imgDetailViewpagerImage.setImageResource(detailImageInfo.image)
+            binding.imgDetailViewpagerImage.tag = position
         }
     }
 }

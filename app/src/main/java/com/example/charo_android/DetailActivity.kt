@@ -2,6 +2,8 @@ package com.example.charo_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import com.example.charo_android.databinding.ActivityDetailViewBinding
 import com.skt.Tmap.TMapView
 
@@ -20,12 +22,42 @@ class DetailActivity : AppCompatActivity() {
         tMapView.setSKTMapApiKey("")
         tMapViewContainer.addView(tMapView)
 
-        initDetailImageItem()
+//        initDetailImageItem()
+//        viewpagerDetailImageOnClickEvent()
+//        checkImgDetailViewpagerPrevNext()
+//        imgDetailViewpagerPrevOnClickEvent()
     }
 
-    private fun initDetailImageItem() {
-        binding.viewpagerDetailImage.adapter = detailViewPagerAdapter
-        detailViewPagerAdapter.imageList.addAll(LocalDetailViewpagerImageDataSource().fetchData())
-        detailViewPagerAdapter.notifyDataSetChanged()
-    }
+//    private fun initDetailImageItem() {
+//        binding.viewpagerDetailImage.adapter = detailViewPagerAdapter
+//        detailViewPagerAdapter.imageList.addAll(LocalDetailViewpagerImageDataSource().fetchData())
+//        detailViewPagerAdapter.notifyDataSetChanged()
+//    }
+//
+//    private fun viewpagerDetailImageOnClickEvent() {
+//        binding.viewpagerDetailImage.setOnClickListener() {
+//
+//        }
+//    }
+//
+//    private fun checkImgDetailViewpagerPrevNext() {
+//        val viewpagerDetailImage = binding.viewpagerDetailImage
+//        val currentPageNumber = viewpagerDetailImage.currentItem
+//        Log.d("curPageNum", currentPageNumber.toString())
+//
+//        if(currentPageNumber == 0){
+//            binding.imgDetailViewpagerPrev.visibility = View.GONE
+//        } else if(currentPageNumber == detailViewPagerAdapter.itemCount - 1){
+//            binding.imgDetailViewpagerNext.visibility = View.GONE
+//        } else{
+//            binding.imgDetailViewpagerNext.visibility = View.VISIBLE
+//            binding.imgDetailViewpagerPrev.visibility = View.VISIBLE
+//        }
+//    }
+//
+//    private fun imgDetailViewpagerPrevOnClickEvent() {
+//        binding.imgDetailViewpagerPrev.setOnClickListener() {
+//
+//        }
+//    }
 }
