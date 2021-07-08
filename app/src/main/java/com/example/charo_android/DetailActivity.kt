@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.charo_android.databinding.ActivityDetailViewBinding
@@ -39,23 +40,28 @@ class DetailActivity : AppCompatActivity() {
         imgDetailSaveOnClickEvent()
         // 주소 복사
         imgDetailCopyOnClickEvent()
-
+        // T/F 따라서 속성 바뀌는지 test
         test()
     }
 
     private fun test() {
-        binding.imgDetailParkingYes.isSelected = true
-        setTextColor(binding.tvDetailParkingYes, true)
-        binding.imgDetailParkingNo.isSelected = false
+        setAttributeByFlag(binding.imgDetailParkingYes, binding.tvDetailParkingYes, true)
+        setAttributeByFlag(binding.imgDetailParkingNo, binding.tvDetailParkingNo, false)
 
-        binding.imgDetailWarningHighway.isSelected = true
-        binding.imgDetailWarningMountain.isSelected = false
-        binding.imgDetailWarningBeginner.isSelected = true
-        binding.imgDetailWarningCrowded.isSelected = false
+        setAttributeByFlag(binding.imgDetailWarningHighway, binding.tvDetailWarningHighway, true)
+        setAttributeByFlag(binding.imgDetailWarningMountain, binding.tvDetailWarningMountain, true)
+        setAttributeByFlag(binding.imgDetailWarningBeginner, binding.tvDetailWarningBeginner, false)
+        setAttributeByFlag(binding.imgDetailWarningCrowded, binding.tvDetailWarningCrowded, false)
     }
 
-    private fun setTextColor(textView: TextView, flag: Boolean) {
-        textView.setTextColor(Color.parseColor("#889098"))
+    private fun setAttributeByFlag(imageView: ImageView, textView: TextView, flag: Boolean) {
+        if(flag) {
+            imageView.isSelected = true
+            textView.setTextColor(Color.parseColor("#0f6fff"))
+        } else {
+            imageView.isSelected = false
+            textView.setTextColor(Color.parseColor("#889098"))
+        }
     }
 
     private fun initDetailImageItem() {
@@ -97,32 +103,24 @@ class DetailActivity : AppCompatActivity() {
 
     private fun imgDetailCopyOnClickEvent() {
         binding.imgDetailMapStartCopy.setOnClickListener() {
-            var clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val address:String = binding.tvDetailMapStartAddress.text.toString()
-            val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
-            clipboardManager.setPrimaryClip(clip)
-            Toast.makeText(this, "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+            copyMapAddress(binding.tvDetailMapStartAddress)
         }
         binding.imgDetailMapVia1Copy.setOnClickListener() {
-            var clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val address:String = binding.tvDetailMapVia1Address.text.toString()
-            val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
-            clipboardManager.setPrimaryClip(clip)
-            Toast.makeText(this, "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+            copyMapAddress(binding.tvDetailMapVia1Address)
         }
         binding.imgDetailMapVia2Copy.setOnClickListener() {
-            var clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val address:String = binding.tvDetailMapVia2Address.text.toString()
-            val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
-            clipboardManager.setPrimaryClip(clip)
-            Toast.makeText(this, "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+            copyMapAddress(binding.tvDetailMapVia2Address)
         }
         binding.imgDetailMapEndCopy.setOnClickListener() {
-            var clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val address:String = binding.tvDetailMapEndAddress.text.toString()
-            val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
-            clipboardManager.setPrimaryClip(clip)
-            Toast.makeText(this, "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+            copyMapAddress(binding.tvDetailMapEndAddress)
         }
+    }
+    
+    private fun copyMapAddress(textView: TextView){
+        var clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val address:String = binding.tvDetailMapStartAddress.text.toString()
+        val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
+        clipboardManager.setPrimaryClip(clip)
+        Toast.makeText(this, "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
     }
 }
