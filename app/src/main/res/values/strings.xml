@@ -29,6 +29,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="main_charo_more_filter">인기순</string>
     <string name="main_charo_more_title">해얀도로 정복할 수 있는 포항 드라이브 코스</string>
+    <string name="search">드라이브 맞춤 검색</string>
+    <string name="search_user_id">배희진희진님의</string>
+    <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
+    <string name="search_start">찾아보기</string>
     <string name="et_title">제목을 입력해주세요</string>
     <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요? 사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
     <string name="which_location">어느 지역으로 다녀오셨나요?</string>
@@ -60,4 +64,10 @@
     <string name="end_adress">목적지 주소</string>
     <string name="text_map">주소 입력 완료시 경로가 표현됩니다</string>
     <string name="select_theme">드라이브 테마를 한개 이상 설정해주세요</string>
+    <string name="search">드라이브 맞춤 검색</string>
+    <string name="search_user_id">배희진희진님의</string>
+    <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
+    <string name="search_start">찾아보기</string>
+
+
 </resources>

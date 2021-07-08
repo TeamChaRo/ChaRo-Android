@@ -14,6 +14,5 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setContentView(R.layout.activity_search)
     }
 }
