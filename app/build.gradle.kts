@@ -1,9 +1,10 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("kotlin-parcelize")
+  //  id("kotlin-parcelize")
 }
 
 android {
