@@ -118,10 +118,10 @@ class WriteActivity : AppCompatActivity() {
         binding.btnWriteCautionMoun.setOnClickListener {
             it.isSelected = !it.isSelected
         }
-        binding.btnWriteDo.setOnClickListener {
+        binding.btnWriteCity.setOnClickListener {
             it.isSelected = !it.isSelected
         }
-        binding.btnWriteSi.setOnClickListener {
+        binding.btnWriteRegion.setOnClickListener {
             it.isSelected = !it.isSelected
         }
         binding.btnWriteParkNo.setOnClickListener {
