@@ -22,48 +22,49 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:paddingHorizontal="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/ui_write_textfield_location_android"
-                android:hint="@string/et_title"
                 android:fontFamily="@font/notosanscjkkr_regular"
-                android:textSize="13sp" />
+                android:hint="@string/et_title"
+                android:maxLength="38"
+                android:paddingHorizontal="16dp"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_write_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/et_write_title"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/rectangle_244">
+                android:background="@drawable/rectangle_244"
+                app:layout_constraintTop_toBottomOf="@id/et_write_title">
 
                 <ImageView
                     android:id="@+id/img_write_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/group_525"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/group_525" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_write_photo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="40dp"
-                    android:layout_marginBottom="30dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/img_write_photo"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="30dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray4_sub"
                     android:text="@string/how_your_drive"
-                    android:textSize="14sp" />
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_write_photo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,55 +78,55 @@
                     android:id="@+id/text_write_qa_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/which_location"
                     android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/which_location"
                     android:textColor="@color/black_sub"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_write_select_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/text_write_qa_location"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="30dp"
-                    android:text="@string/select_location"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/select_location"
                     android:textColor="@color/gray4_sub"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_write_qa_location" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_write_do"
+                    android:id="@+id/btn_write_city"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
-                    android:paddingRight="10dp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:background="@drawable/btn_dialog_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:textColor="@color/gray4_sub"
-                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
                     android:text="@string/unit_do"
-                    android:gravity="center" />
+                    android:textColor="@color/gray4_sub"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_write_si"
+                    android:id="@+id/btn_write_region"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    android:paddingRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/btn_dialog_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/unit_si"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/unit_si"
-                    android:gravity="center" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,70 +141,70 @@
                     android:id="@+id/text_write_qa_theme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/which_theme"
                     android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:text="@string/which_theme"
                     android:textColor="@color/black_sub"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_write_select_theme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/text_write_qa_theme"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="30dp"
-                    android:text="@string/select_theme"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/select_theme"
                     android:textColor="@color/gray4_sub"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_write_qa_theme" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_theme1"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    android:paddingRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:background="@drawable/btn_dialog_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/theme1"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/theme1"
-                    android:gravity="center" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_theme2"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    android:paddingRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/btn_dialog_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/theme2"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/theme2"
-                    android:gravity="center" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_theme3"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    android:paddingRight="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/btn_dialog_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:gravity="center"
+                    android:paddingRight="10dp"
+                    android:text="@string/theme3"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/theme3"
-                    android:gravity="center" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -218,12 +219,12 @@
                     android:id="@+id/text_write_qa_park"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:textColor="@color/black_sub"
                     android:text="@string/how_park"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_park_yes"
@@ -231,14 +232,14 @@
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="6dp"
-                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_write_park_no"
+                    android:background="@drawable/btn_park_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/park_yes"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/park_yes"
-                    android:background="@drawable/btn_park_click"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_park_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park"
 
                     />
 
@@ -247,26 +248,27 @@
                     android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park"
-                    app:layout_constraintStart_toEndOf="@id/btn_write_park_yes"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/btn_park_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/park_no"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/park_no"
-                    android:background="@drawable/btn_park_click" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_park_yes"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_qa_park" />
 
                 <EditText
                     android:id="@+id/et_write_park_review"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ui_write_btn_parking_unselect_android"
-                    app:layout_constraintTop_toBottomOf="@id/btn_write_park_yes"
                     android:layout_marginTop="8dp"
-                    android:hint="@string/et_park"
+                    android:background="@drawable/ui_write_btn_parking_unselect_android"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/et_park"
+                    android:maxLength="23"
+                    android:paddingHorizontal="16dp"
                     android:textSize="13sp"
-                    android:paddingHorizontal="16dp" />
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_park_yes" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -281,24 +283,24 @@
                     android:id="@+id/text_write_qa_caution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:textColor="@color/black_sub"
                     android:text="@string/what_caution"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_write_select_caution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/text_write_qa_caution"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="30dp"
-                    android:text="@string/select_caution"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:text="@string/select_caution"
                     android:textColor="@color/gray4_sub"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/text_write_qa_caution" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_caution_highway"
@@ -306,14 +308,14 @@
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="6dp"
-                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_moun"
+                    android:background="@drawable/btn_warning_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/highway"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/highway"
-                    android:background="@drawable/btn_warning_click"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_moun"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution"
 
                     />
 
@@ -322,14 +324,14 @@
                     android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution"
-                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_highway"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/btn_warning_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/mountain"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/mountain"
-                    android:background="@drawable/btn_warning_click" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_highway"
+                    app:layout_constraintTop_toBottomOf="@id/text_write_select_caution" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_caution_diffi"
@@ -337,14 +339,14 @@
                     android:layout_height="42dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="6dp"
-                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_people"
+                    android:background="@drawable/btn_warning_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/difficult"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/difficult"
-                    android:background="@drawable/btn_warning_click"
+                    app:layout_constraintEnd_toStartOf="@id/btn_write_caution_people"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway"
 
                     />
 
@@ -353,14 +355,14 @@
                     android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway"
-                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_diffi"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/btn_warning_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:text="@string/people"
                     android:textColor="@color/gray4_sub"
                     android:textSize="14sp"
-                    android:text="@string/people"
-                    android:background="@drawable/btn_warning_click" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_write_caution_diffi"
+                    app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -376,27 +378,28 @@
                     android:id="@+id/text_write_my_drive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:textColor="@color/black_sub"
                     android:text="@string/what_my_drive"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black_sub"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/et_write_my_drive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/text_write_my_drive"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="100dp"
                     android:background="@drawable/rectangle_243"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:gravity="top"
                     android:hint="@string/hint_my_drive"
+                    android:maxLength="280"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="22dp"
-                    android:gravity="top"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_write_my_drive" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -406,24 +409,24 @@
         android:id="@+id/cl_write_bottom"
         android:layout_width="match_parent"
         android:layout_height="84dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#FFFFFF">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_write_bottom_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/ui_view_textfield_location_show_android"
+            android:backgroundTint="@color/blue_main"
             android:text="@string/next"
             android:textColor="@color/white"
-            android:backgroundTint="@color/blue_main"
-            android:background="@drawable/ui_view_textfield_location_show_android" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
