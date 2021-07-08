@@ -42,7 +42,6 @@ class DetailActivity : AppCompatActivity() {
         imgDetailCopyOnClickEvent()
         // T/F 따라서 속성 바뀌는지 test
         test()
-
     }
 
     private fun test() {

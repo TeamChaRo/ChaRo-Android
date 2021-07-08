@@ -674,19 +674,21 @@
 
                 <ImageView
                     android:id="@+id/img_detail_parking_yes"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:background="@drawable/selector_detail_parking"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_parking_no"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_parking_title" />
 
                 <ImageView
                     android:id="@+id/img_detail_parking_no"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/selector_detail_parking"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_parking_yes"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/img_detail_parking_yes" />
 
@@ -775,42 +777,46 @@
 
                 <ImageView
                     android:id="@+id/img_detail_warning_highway"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
                     android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toTopOf="@id/img_detail_warning_beginner"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_warning_mountain"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_warning" />
 
                 <ImageView
                     android:id="@+id/img_detail_warning_mountain"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingEnd="4dp"
                     android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toTopOf="@id/img_detail_warning_crowded"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_warning_highway"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_warning" />
 
                 <ImageView
                     android:id="@+id/img_detail_warning_beginner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
                     android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_warning_crowded"
                     app:layout_constraintTop_toBottomOf="@id/img_detail_warning_highway" />
 
                 <ImageView
                     android:id="@+id/img_detail_warning_crowded"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingEnd="4dp"
                     android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_warning_beginner"
                     app:layout_constraintTop_toBottomOf="@id/img_detail_warning_mountain" />
 
                 <TextView
