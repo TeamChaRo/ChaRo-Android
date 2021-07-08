@@ -63,15 +63,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
 }
 
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment) {
+
+fun AppCompatActivity.replaceFragment(fragment: Fragment){
     val fragmentManager = supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
     transaction.replace(R.id.fragment_container, fragment)
         .addToBackStack(null)
         .commit()
 }
-
 
