@@ -10,10 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.charo_android.databinding.ActivityMainBinding
-import com.example.charo_android.ui.home.HomeFragment
+
 import com.example.charo_android.ui.home.HomeViewPagerAdapter
 
 import com.example.charo_android.ui.write.WriteActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,4 +63,18 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
 }
+
+fun AppCompatActivity.replaceFragment(fragment: Fragment){
+    val fragmentManager = supportFragmentManager
+    val transaction = fragmentManager.beginTransaction()
+    transaction.replace(R.id.fragment_container, fragment)
+        .addToBackStack(null)
+        .commit()
+}
+
+
+
+
+
