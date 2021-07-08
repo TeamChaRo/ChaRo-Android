@@ -56,32 +56,32 @@
                     android:textColor="#212429"
                     android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_icon_back_1"
-                    app:layout_constraintEnd_toStartOf="@id/img_detail_ic_heart_line"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_heart"
                     app:layout_constraintStart_toEndOf="@id/img_detail_icon_back_1"
                     app:layout_constraintTop_toTopOf="@id/img_detail_icon_back_1" />
 
                 <ImageView
-                    android:id="@+id/img_detail_ic_heart_line"
+                    android:id="@+id/img_detail_heart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:layout_marginBottom="2dp"
-                    android:src="@drawable/ic_heart_line"
+                    android:background="@drawable/selector_detail_like"
                     app:layout_constraintBottom_toBottomOf="@id/img_detail_icon_back_1"
-                    app:layout_constraintEnd_toStartOf="@id/img_detail_ic_save_5_inactive"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_save"
                     app:layout_constraintStart_toEndOf="@id/tv_detail_current_page"
                     app:layout_constraintTop_toTopOf="@id/img_detail_icon_back_1" />
 
                 <ImageView
-                    android:id="@+id/img_detail_ic_save_5_inactive"
+                    android:id="@+id/img_detail_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="11dp"
-                    android:src="@drawable/ic_save_5_inactive"
-                    app:layout_constraintBottom_toBottomOf="@id/img_detail_ic_heart_line"
+                    android:background="@drawable/selector_detail_save"
+                    app:layout_constraintBottom_toBottomOf="@id/img_detail_heart"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img_detail_ic_heart_line"
-                    app:layout_constraintTop_toTopOf="@id/img_detail_ic_heart_line" />
+                    app:layout_constraintStart_toEndOf="@id/img_detail_heart"
+                    app:layout_constraintTop_toTopOf="@id/img_detail_heart" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -677,7 +677,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:src="@drawable/ui_view_selectbox_yes_android"
+                    android:background="@drawable/selector_detail_parking"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_parking_title" />
 
@@ -686,7 +686,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:src="@drawable/ui_view_selectbox_no_android"
+                    android:background="@drawable/selector_detail_parking"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/img_detail_parking_yes" />
 
@@ -778,7 +778,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
-                    android:src="@drawable/ui_view_selectbox_warning_select_android"
+                    android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toTopOf="@id/img_detail_warning_beginner"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_warning" />
@@ -788,7 +788,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="4dp"
-                    android:src="@drawable/ui_view_selectbox_warning_unselect_android"
+                    android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toTopOf="@id/img_detail_warning_crowded"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_detail_warning" />
@@ -798,7 +798,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
-                    android:src="@drawable/ui_view_selectbox_warning_select_android"
+                    android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_detail_warning_highway" />
@@ -808,7 +808,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingEnd="4dp"
-                    android:src="@drawable/ui_view_selectbox_warning_unselect_android"
+                    android:background="@drawable/selector_detail_warning"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_detail_warning_mountain" />
