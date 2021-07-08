@@ -32,5 +32,6 @@
     <string name="search">드라이브 맞춤 검색</string>
     <string name="search_user_id">배희진희진님의</string>
     <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
+    <string name="search_start">찾아보기</string>
 
 </resources>
