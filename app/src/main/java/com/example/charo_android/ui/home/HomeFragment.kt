@@ -13,14 +13,14 @@ import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
-import com.example.charo_android.replaceFragment
+//import com.example.charo_android.replaceFragment
 import com.example.charo_android.ui.home.more.MoreViewFragment
 
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private var homeViewPagerAdapter = HomeViewPagerAdapter()
+    private var homeViewPagerAdapter =  HomeViewPagerAdapter()
     private var homeTodayDriveAdapter = HomeTodayDriveAdapter()
     private var homeThemeAdapter = HomeThemeAdapter()
     private var homeHotDriveAdapter = HomeHotDriveAdapter()
@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         initHomeHotDrive()
         initHomeNightDrive()
         initHomeLocationDrive()
-        replaceMoreViewFragment()
+     //   replaceMoreViewFragment()
 
 
 
@@ -93,13 +93,13 @@ class HomeFragment : Fragment() {
         homeLocationDriveAdapter.notifyDataSetChanged()
     }
 
-    private fun replaceMoreViewFragment(){
-        binding.textHomeHotDrivePlus.setOnClickListener {
-            context?.replaceFragment(MoreViewFragment())
-            Log.d("name", "name")
-        }
-
-    }
+//    private fun replaceMoreViewFragment(){
+//        binding.textHomeHotDrivePlus.setOnClickListener {
+//            context?.replaceFragment(MoreViewFragment())
+//            Log.d("name", "name")
+//        }
+//
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
