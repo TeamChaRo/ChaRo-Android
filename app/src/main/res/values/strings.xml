@@ -59,4 +59,5 @@
     <string name="mid_adress">경유지 주소 입력은 필수가 아닙니다</string>
     <string name="end_adress">목적지 주소</string>
     <string name="text_map">주소 입력 완료시 경로가 표현됩니다</string>
+    <string name="select_theme">드라이브 테마를 한개 이상 설정해주세요</string>
 </resources>
