@@ -12,8 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid">
-
-
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".DetailActivity"/>
         <activity
@@ -23,7 +21,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

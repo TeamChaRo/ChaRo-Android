@@ -29,5 +29,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="main_charo_more_filter">인기순</string>
     <string name="main_charo_more_title">해얀도로 정복할 수 있는 포항 드라이브 코스</string>
+    <string name="search">드라이브 맞춤 검색</string>
+    <string name="search_user_id">배희진희진님의</string>
+    <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
 
 </resources>

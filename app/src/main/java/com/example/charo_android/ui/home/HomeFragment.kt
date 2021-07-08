@@ -1,16 +1,12 @@
 package com.example.charo_android.ui.home
 
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.example.charo_android.MainActivity
-import com.example.charo_android.R
 import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
 import com.example.charo_android.replaceFragment
@@ -45,7 +41,6 @@ class HomeFragment : Fragment() {
         initHomeNightDrive()
         initHomeLocationDrive()
         replaceMoreViewFragment()
-
 
 
 
@@ -93,12 +88,12 @@ class HomeFragment : Fragment() {
         homeLocationDriveAdapter.notifyDataSetChanged()
     }
 
-    private fun replaceMoreViewFragment(){
-        binding.textHomeHotDrivePlus.setOnClickListener {
-            context?.replaceFragment(MoreViewFragment())
-            Log.d("name", "name")
-        }
 
+
+    private fun replaceMoreViewFragment(){
+        binding.imgHomeHotDrivePlus.setOnClickListener {
+            context?.replaceFragment(MoreViewFragment())
+        }
     }
 
     override fun onDestroyView() {
