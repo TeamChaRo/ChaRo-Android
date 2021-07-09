@@ -90,6 +90,11 @@ class WriteMapActivity : AppCompatActivity() {
 //            ).show()
 //        }
 
+        var items = arrayOf("SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL", "K5", "K7")
+
+        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, items)
+        binding.etWriteMapStart.setAdapter(adapter)
+
 
 
     }
