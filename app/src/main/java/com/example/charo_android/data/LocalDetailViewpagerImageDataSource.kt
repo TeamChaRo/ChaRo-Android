@@ -1,4 +1,7 @@
-package com.example.charo_android
+package com.example.charo_android.data
+
+import com.example.charo_android.DetailViewpagerImageInfo
+import com.example.charo_android.R
 
 class LocalDetailViewpagerImageDataSource: DetailViewpagerImageDataSource {
     override fun fetchData(): MutableList<DetailViewpagerImageInfo> {

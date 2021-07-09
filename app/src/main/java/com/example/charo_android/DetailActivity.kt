@@ -7,12 +7,11 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.charo_android.data.LocalDetailViewpagerImageDataSource
 import com.example.charo_android.databinding.ActivityDetailViewBinding
-import com.example.charo_android.databinding.ItemDetailImageBinding
 import com.skt.Tmap.TMapView
 
 class DetailActivity : AppCompatActivity() {
@@ -27,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
         // tMapView 생성부분
         val tMapView = TMapView(this)
         val tMapViewContainer = binding.clDetailMapview
-        tMapView.setSKTMapApiKey("")
+        tMapView.setSKTMapApiKey("l7xx94a7679a3e1d41a782105327ae7af1cd")
         tMapViewContainer.addView(tMapView)
 
         // 뷰페이저의 초기 데이터 삽입

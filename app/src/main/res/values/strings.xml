@@ -64,10 +64,10 @@
     <string name="end_adress">목적지 주소</string>
     <string name="text_map">주소 입력 완료시 경로가 표현됩니다</string>
     <string name="select_theme">드라이브 테마를 한개 이상 설정해주세요</string>
-    <string name="search">드라이브 맞춤 검색</string>
-    <string name="search_user_id">배희진희진님의</string>
-    <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
-    <string name="search_start">찾아보기</string>
-
+    <string name="my_charo_title">MY PAGE</string>
+    <string name="following">팔로잉</string>
+    <string name="follower">팔로워</string>
+    <string name="my_charo_board_count">전체 6개 게시물</string>
+    <string name="my_charo_filter_hot">인기순</string>
 
 </resources>
