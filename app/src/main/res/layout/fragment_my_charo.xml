@@ -46,25 +46,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_my_charo_filter" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nscv_my_charo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_my_charo_filter">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_my_charo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="9.5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_my_charo_filter"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-<!--marginBottom 100dp-->
-    </androidx.core.widget.NestedScrollView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

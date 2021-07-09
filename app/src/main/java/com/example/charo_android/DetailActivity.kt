@@ -26,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
         // tMapView 생성부분
         val tMapView = TMapView(this)
         val tMapViewContainer = binding.clDetailMapview
-        tMapView.setSKTMapApiKey("l7xx94a7679a3e1d41a782105327ae7af1cd")
+        tMapView.setSKTMapApiKey("")
         tMapViewContainer.addView(tMapView)
 
         // 뷰페이저의 초기 데이터 삽입
