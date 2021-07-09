@@ -7,7 +7,7 @@
     tools:context=".DetailActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scv_detail_detail"
+        android:id="@+id/nscv_detail_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/neomorfism_lightgray"

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_charo_img"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/cl_my_charo_info"
+        app:layout_constraintEnd_toStartOf="@id/cl_my_charo_info"
+        app:layout_constraintHorizontal_weight="355"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_my_charo_info">
+
+        <ImageView
+            android:id="@+id/img_my_charo_picture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="57:41"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_charo_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="645"
+        app:layout_constraintStart_toEndOf="@id/cl_my_charo_img"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_my_charo_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12.5dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:lineHeight="18.9sp"
+            android:maxLines="2"
+            android:text="제목"
+            android:textAlignment="textStart"
+            android:textColor="@color/black_sub"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_my_charo_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:lineHeight="13sp"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="2dp"
+            android:text="#태그1"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_main"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/tv_my_charo_title"
+            app:layout_constraintTop_toTopOf="@id/tv_my_charo_title" />
+
+        <TextView
+            android:id="@+id/tv_my_charo_tag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:lineHeight="13sp"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="2dp"
+            android:text="#태그2"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_main"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@id/tv_my_charo_tag1"
+            app:layout_constraintTop_toTopOf="@id/tv_my_charo_tag1" />
+
+        <TextView
+            android:id="@+id/tv_my_charo_tag3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:lineHeight="13sp"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="2dp"
+            android:text="#태그3"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue_main"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@id/tv_my_charo_tag2"
+            app:layout_constraintTop_toTopOf="@id/tv_my_charo_tag1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_my_charo_date"
+            android:text="2021.07.10"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:textSize="11sp"
+            android:textAlignment="textStart"
+            android:lineHeight="14.3sp"
+            android:textColor="@color/gray3_sub"
+            app:layout_constraintStart_toStartOf="@id/tv_my_charo_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_charo_tag1"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_my_charo_like"
+            android:src="@drawable/ic_heart_active"
+            app:layout_constraintTop_toTopOf="@id/tv_my_charo_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"
+            android:layout_marginEnd="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_my_charo_like_count"
+            android:text="0"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:textSize="11sp"
+            android:textAlignment="textStart"
+            android:lineHeight="14.3sp"
+            android:textColor="@color/gray4_sub"
+            app:layout_constraintStart_toEndOf="@id/img_my_charo_like"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
