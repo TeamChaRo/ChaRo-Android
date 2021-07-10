@@ -128,7 +128,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_my_charo_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"
-            android:layout_marginEnd="14dp"/>
+            android:layout_marginEnd="62dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,6 +141,29 @@
             android:lineHeight="14.3sp"
             android:textColor="@color/gray4_sub"
             app:layout_constraintStart_toEndOf="@id/img_my_charo_like"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/img_my_charo_save"
+            android:src="@drawable/ic_save_5_active"
+            app:layout_constraintTop_toTopOf="@id/tv_my_charo_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"
+            android:layout_marginEnd="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_my_charo_save_count"
+            android:text="0"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:textSize="11sp"
+            android:textAlignment="textStart"
+            android:lineHeight="14.3sp"
+            android:textColor="@color/gray4_sub"
+            app:layout_constraintStart_toEndOf="@id/img_my_charo_save"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

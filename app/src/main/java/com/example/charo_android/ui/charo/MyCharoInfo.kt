@@ -8,4 +8,5 @@ data class MyCharoInfo(
     val hashtag3: String,
     val date: String,
     val likeCount: Int,
+    val saveCount: Int,
 )

@@ -43,6 +43,7 @@ class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
             binding.tvMyCharoTag3.text = myCharoInfo.hashtag3
             binding.tvMyCharoDate.text = myCharoInfo.date
             binding.tvMyCharoLikeCount.text = myCharoInfo.likeCount.toString()
+            binding.tvMyCharoSaveCount.text = myCharoInfo.saveCount.toString()
         }
     }
 }

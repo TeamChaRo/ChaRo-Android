@@ -30,6 +30,11 @@ class MyCharoFragment : Fragment() {
         return root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun initMyCharoItem() {
         binding.recyclerviewMyCharo.adapter = myCharoAdapter
         myCharoAdapter.itemList.addAll(LocalMyCharoDataSource().fetchData())
