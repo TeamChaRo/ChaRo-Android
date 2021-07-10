@@ -40,156 +40,176 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/img_charo_profile_border"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/shape_charo_profile_border"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_charo_my_page" />
-
-        <ImageView
-            android:id="@+id/img_charo_profile"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginVertical="5dp"
-            android:src="@drawable/ellipse_4"
-            app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
-            app:layout_constraintEnd_toEndOf="@id/img_charo_profile_border"
-            app:layout_constraintStart_toStartOf="@id/img_charo_profile_border"
-            app:layout_constraintTop_toTopOf="@id/img_charo_profile_border" />
-
-        <ImageView
-            android:id="@+id/img_charo_camera_border"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_charo_camera_border"
-            app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
-            app:layout_constraintEnd_toEndOf="@id/img_charo_profile_border" />
-
-        <ImageView
-            android:id="@+id/img_charo_camera"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_camera_mypage"
-            app:layout_constraintBottom_toBottomOf="@id/img_charo_camera_border"
-            app:layout_constraintEnd_toEndOf="@id/img_charo_camera_border"
-            app:layout_constraintStart_toStartOf="@id/img_charo_camera_border"
-            app:layout_constraintTop_toTopOf="@id/img_charo_camera_border" />
-
-        <TextView
-            android:id="@+id/tv_charo_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:lineHeight="23.4sp"
-            android:text="nickname님"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_charo_profile_border" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_charo_follow"
-            android:layout_width="wrap_content"
+            android:id="@+id/cl_charo_profile"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:layout_marginBottom="31dp"
+            android:layout_marginBottom="25dp"
+            android:layout_marginHorizontal="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_charo_nickname">
+            app:layout_constraintTop_toBottomOf="@id/tv_charo_my_page"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <TextView
-                android:id="@+id/tv_charo_following"
+            <ImageView
+                android:id="@+id/img_charo_profile_border"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:lineHeight="17.3sp"
-                android:text="@string/following"
-                android:textAlignment="center"
-                android:textColor="@color/gray2_sub"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_charo_following_count"
+                android:background="@drawable/shape_charo_profile_border"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_charo_following_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="21dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:lineHeight="20.8sp"
-                android:text="194"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_charo_follower"
-                app:layout_constraintStart_toEndOf="@id/tv_charo_following"
-                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/img_charo_profile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
+                android:src="@drawable/ellipse_4"
+                app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
+                app:layout_constraintEnd_toEndOf="@id/img_charo_profile_border"
+                app:layout_constraintStart_toStartOf="@id/img_charo_profile_border"
+                app:layout_constraintTop_toTopOf="@id/img_charo_profile_border" />
 
-            <TextView
-                android:id="@+id/tv_charo_follower"
+            <ImageView
+                android:id="@+id/img_charo_camera_border"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:lineHeight="17.3sp"
-                android:text="@string/follower"
-                android:textAlignment="center"
-                android:textColor="@color/gray2_sub"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_charo_follower_count"
-                app:layout_constraintStart_toEndOf="@id/tv_charo_following_count"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@drawable/shape_charo_camera_border"
+                app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
+                app:layout_constraintEnd_toEndOf="@id/img_charo_profile_border" />
 
-            <TextView
-                android:id="@+id/tv_charo_follower_count"
+            <ImageView
+                android:id="@+id/img_charo_camera"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_camera_mypage"
+                app:layout_constraintBottom_toBottomOf="@id/img_charo_camera_border"
+                app:layout_constraintEnd_toEndOf="@id/img_charo_camera_border"
+                app:layout_constraintStart_toStartOf="@id/img_charo_camera_border"
+                app:layout_constraintTop_toTopOf="@id/img_charo_camera_border" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_my_charo_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:lineHeight="20.8sp"
-                android:text="194"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="41dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_charo_follower"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
+                app:layout_constraintStart_toEndOf="@id/img_charo_profile_border"
+                app:layout_constraintTop_toTopOf="@id/img_charo_profile_border">
+
+                <TextView
+                    android:id="@+id/tv_charo_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:lineHeight="23.4sp"
+                    android:text="nickname님"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_charo_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_charo_nickname">
+
+                    <TextView
+                        android:id="@+id/tv_charo_following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:lineHeight="17.3sp"
+                        android:text="@string/following"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray2_sub"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_charo_following_count"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_charo_following_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="21dp"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:lineHeight="20.8sp"
+                        android:text="194"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_charo_follower"
+                        app:layout_constraintStart_toEndOf="@id/tv_charo_following"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_charo_follower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:lineHeight="17.3sp"
+                        android:text="@string/follower"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray2_sub"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_charo_follower_count"
+                        app:layout_constraintStart_toEndOf="@id/tv_charo_following_count"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_charo_follower_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:lineHeight="20.8sp"
+                        android:text="194"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_charo_follower"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tab_charo"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/cl_charo_top"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_charo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_charo_top" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/viewpager_charo"
-        app:layout_constraintTop_toBottomOf="@id/tab_charo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="91dp"/>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_charo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_charo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
