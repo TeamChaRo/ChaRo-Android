@@ -13,7 +13,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -21,7 +21,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = true
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -29,7 +29,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -37,7 +37,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -45,7 +45,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -53,7 +53,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -61,7 +61,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
             HomeHotDriveInfo(
                 homeHotDriveImage = R.drawable.home_today_drive_image,
@@ -69,7 +69,7 @@ class LocalHomeHotDriveDataSource : HomeHotDriveDataSource {
                 homeHotDriveChip_1 = "#7번 국도",
                 homeHotDriveChip_2 = "#바다",
                 homeHotDriveChip_3 = "#포항",
-                homeHotDriveHeart = R.drawable.selector_home_heart
+                homeHotDriveHeart = false
             ),
         )
 

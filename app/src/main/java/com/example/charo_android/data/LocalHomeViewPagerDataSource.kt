@@ -9,28 +9,29 @@ class LocalHomeViewPagerDataSource : HomeViewPagerDataSource {
             HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image,
                 homeViewPagerTitle = "차로와 함께 \n즐기는 \n드라이브 코스",
-                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면"
+                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면",
+                homeViewPagerRoadImage = R.drawable.road_android_1
+
             ),
             HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image,
                 homeViewPagerTitle = "차로와 함께 \n즐기는 \n드라이브 코스",
-                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면"
+                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면",
+                homeViewPagerRoadImage = R.drawable.road_android_2
             ),
             HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image,
                 homeViewPagerTitle = "차로와 함께 \n즐기는 \n드라이브 코스",
-                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면"
+                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면",
+                homeViewPagerRoadImage = R.drawable.road_android_3
             ),
             HomeViewPagerInfo(
                 homeViewPagerImage = R.drawable.main_image,
                 homeViewPagerTitle = "차로와 함께 \n즐기는 \n드라이브 코스",
-                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면"
+                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면",
+                homeViewPagerRoadImage = R.drawable.road_android_4
             ),
-            HomeViewPagerInfo(
-                homeViewPagerImage = R.drawable.main_image,
-                homeViewPagerTitle = "차로와 함께 \n즐기는 \n드라이브 코스",
-                homeViewPagerHashTag = "#날씨도좋은데#바다와함께라면"
-            )
+
         )
     }
 }

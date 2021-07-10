@@ -6,5 +6,5 @@ data class HomeHotDriveInfo(
     val homeHotDriveChip_1 : String,
     val homeHotDriveChip_2 : String,
     val homeHotDriveChip_3 : String,
-    val homeHotDriveHeart : Int,
+    val homeHotDriveHeart : Boolean,
 )

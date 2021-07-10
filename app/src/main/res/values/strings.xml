@@ -70,6 +70,12 @@
     <string name="search_text_1">에 있는</string>
     <string name="search_text_2">에 어울리는 코스로</string>
     <string name="search_text_3">은 피하고 싶어요</string>
+    <string-array name="search_spinner">
+        <item>인기순</item>
+        <item>최신순</item>
+    </string-array>
+    <string name="spinner_more_view_text_1">인기순</string>
+    <string name="spinner_more_view_text_2">최신순</string>
 
 
 </resources>

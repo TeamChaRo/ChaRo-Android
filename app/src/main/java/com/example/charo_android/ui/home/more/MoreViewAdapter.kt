@@ -28,16 +28,15 @@ class MoreViewAdapter: RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>(
     }
 
     class MoreViewViewHolder(
-        private val binding : ItemMoreViewBinding
-    ): RecyclerView.ViewHolder(binding.root){
+        private val itemMoreViewbinding : ItemMoreViewBinding
+    ): RecyclerView.ViewHolder(itemMoreViewbinding.root){
         fun onBind(moreViewInfo: MoreViewInfo){
-            binding.apply {
+            itemMoreViewbinding.apply {
                 imgMoreView.setImageResource(moreViewInfo.moreViewImage)
                 textMoreViewTitle.text = moreViewInfo.moreViewTitle
                 chipMoreView1.text = moreViewInfo.moreViewChip_1
                 chipMoreView2.text = moreViewInfo.moreViewChip_2
                 chipMoreView3.text = moreViewInfo.moreViewChip_3
-
                 with(imgMoreViewHeart){
                     isSelected = false
                     setOnClickListener { it.isSelected = !it.isSelected }

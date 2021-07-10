@@ -37,6 +37,7 @@ class HomeViewPagerAdapter(): RecyclerView.Adapter<HomeViewPagerAdapter.HomeView
             binding.imgViewpager.setImageResource(homeViewPagerinfo.homeViewPagerImage)
             binding.textViewpagerTitle.text = homeViewPagerinfo.homeViewPagerTitle
             binding.textViewpagerHashtag.text = homeViewPagerinfo.homeViewPagerHashTag
+            binding.imgViewpagerLine.setImageResource(homeViewPagerinfo.homeViewPagerRoadImage)
         }
 
     }

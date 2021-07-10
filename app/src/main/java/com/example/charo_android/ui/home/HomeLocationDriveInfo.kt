@@ -6,5 +6,5 @@ data class HomeLocationDriveInfo(
     val homeLocationDriveChip_1 : String,
     val homeLocationDriveChip_2 : String,
     val homeLocationDriveChip_3 : String,
-    val homeLocationDriveHeart : Int,
+    val homeLocationDriveHeart : Boolean,
 )

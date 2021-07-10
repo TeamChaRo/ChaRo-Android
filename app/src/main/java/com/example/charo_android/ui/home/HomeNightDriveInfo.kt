@@ -6,5 +6,5 @@ data class HomeNightDriveInfo(
     val homeNightDriveChip_1 : String,
     val homeNightDriveChip_2 : String,
     val homeNightDriveChip_3 : String,
-    val homeNightDriveHeart : Int,
+    val homeNightDriveHeart : Boolean,
 )
