@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.write.WriteMapSearchActivity">
+
+    <ImageView
+        android:id="@+id/img_write_map_search_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_icon_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/et_write_map_search_start"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/start"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="44dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_write_map_search_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/edit_under"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#DDE2E5"
+        app:layout_constraintTop_toBottomOf="@id/et_write_map_search_start" />
+
+    <TextView
+        android:id="@+id/text_result_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="3dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/noto_sans_cjkkr_regular"
+        android:text="검색 결과"
+        android:textColor="@color/gray4_sub"
+        app:layout_constraintBottom_toTopOf="@id/recyclerview_write_map_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_under" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_write_map_search"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_result_search"
+        tools:listitem="@layout/item_auto_search" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
