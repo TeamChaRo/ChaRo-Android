@@ -21,45 +21,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_my_charo_filter"
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12.5dp"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/notosanscjkkr_regular"
-        android:lineHeight="22sp"
-        android:text="@string/my_charo_filter_hot"
-        android:textAlignment="textStart"
-        android:textColor="@color/gray5_sub"
-        android:textSize="12sp"
+        android:id="@+id/spinner_my_charo_filter"
+        app:layout_constraintTop_toTopOf="@id/tv_my_charo_board_count"
+        app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_board_count"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/img_my_charo_filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:src="@drawable/ic_down_42_px"
-        app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_filter"
+        android:layout_marginEnd="10dp"/>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_my_charo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="9.5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_my_charo_filter" />
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_my_charo"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="9.5dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_my_charo_filter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_my_charo_board_count" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
