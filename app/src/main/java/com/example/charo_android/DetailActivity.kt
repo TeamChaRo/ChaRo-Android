@@ -11,16 +11,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.charo_android.data.LocalDetailViewpagerImageDataSource
-import com.example.charo_android.databinding.ActivityDetailViewBinding
+import com.example.charo_android.databinding.ActivityDetailBinding
 import com.skt.Tmap.TMapView
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailViewBinding
+    private lateinit var binding: ActivityDetailBinding
     private var detailViewPagerAdapter = DetailViewpagerImageAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailViewBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // tMapView 생성부분
