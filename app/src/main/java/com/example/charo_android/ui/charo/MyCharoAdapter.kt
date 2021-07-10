@@ -1,11 +1,14 @@
 package com.example.charo_android.ui.charo
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.charo_android.DetailActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 
-class MyCharoAdapter : RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
+class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
     val itemList = mutableListOf<MyCharoInfo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCharoViewHolder {
@@ -21,10 +24,16 @@ class MyCharoAdapter : RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() 
 
     override fun onBindViewHolder(holder: MyCharoViewHolder, position: Int) {
         holder.onBind(itemList[position])
+
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("title", holder.binding.tvMyCharoTitle.text)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     class MyCharoViewHolder(
-        private val binding: ItemCharoMyCharoBinding
+        val binding: ItemCharoMyCharoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(myCharoInfo: MyCharoInfo) {
             binding.imgMyCharoPicture.setImageResource(myCharoInfo.image)

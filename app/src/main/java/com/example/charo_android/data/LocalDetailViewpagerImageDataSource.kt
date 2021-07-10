@@ -1,5 +1,6 @@
 package com.example.charo_android.data
 
+import android.util.Log
 import com.example.charo_android.DetailViewpagerImageInfo
 import com.example.charo_android.R
 
