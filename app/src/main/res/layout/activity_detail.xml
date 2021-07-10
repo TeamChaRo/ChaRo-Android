@@ -7,10 +7,10 @@
     tools:context=".DetailActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scv_detail_detail"
+        android:id="@+id/nscv_detail_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#fbfbfb"
+        android:background="@color/neomorfism_lightgray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,10 +149,11 @@
                     android:textAlignment="textStart"
                     android:textColor="#acb5bd"
                     android:textSize="12sp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/tv_detail_writer_name"
                     app:layout_constraintStart_toStartOf="@id/tv_detail_writer_name"
-                    app:layout_constraintTop_toBottomOf="@id/tv_detail_writer_name" />
+                    app:layout_constraintTop_toTopOf="@id/tv_detail_writer_name" />
 
                 <ImageView
                     android:id="@+id/img_detail_heart_count_2"
@@ -202,23 +203,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/img_detail_viewpager_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_photo_next_white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/img_detail_viewpager_next"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/ic_photo_next_white"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/img_detail_viewpager_prev"
-                    android:src="@drawable/ic_photo_previous_white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/img_detail_viewpager_prev"-->
+<!--                    android:src="@drawable/ic_photo_previous_white"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"/>-->
 
                 <!--                <ImageView-->
                 <!--                    android:id="@+id/img_detail_image"-->

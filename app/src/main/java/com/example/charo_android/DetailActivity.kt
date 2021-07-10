@@ -7,21 +7,20 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.example.charo_android.databinding.ActivityDetailViewBinding
-import com.example.charo_android.databinding.ItemDetailImageBinding
+import com.example.charo_android.data.LocalDetailViewpagerImageDataSource
+import com.example.charo_android.databinding.ActivityDetailBinding
 import com.skt.Tmap.TMapView
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailViewBinding
+    private lateinit var binding: ActivityDetailBinding
     private var detailViewPagerAdapter = DetailViewpagerImageAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailViewBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // tMapView 생성부분
@@ -42,6 +41,8 @@ class DetailActivity : AppCompatActivity() {
         imgDetailCopyOnClickEvent()
         // T/F 따라서 속성 바뀌는지 test
         test()
+
+        binding.tvDetailTitle.text = intent.getStringExtra("title")
     }
 
     private fun test() {

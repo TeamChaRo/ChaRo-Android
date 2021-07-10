@@ -76,7 +76,14 @@
     </string-array>
     <string name="spinner_more_view_text_1">인기순</string>
     <string name="spinner_more_view_text_2">최신순</string>
+    <string name="my_charo_title">MY PAGE</string>
+    <string name="following">팔로잉</string>
+    <string name="follower">팔로워</string>
+    <string name="my_charo_board_count">전체 6개 게시물</string>
+    <string name="my_charo_filter_hot">인기순</string>
 
-
-
+    <string-array name="charo_filter">
+        <item>인기순</item>
+        <item>최신순</item>
+    </string-array>
 </resources>
