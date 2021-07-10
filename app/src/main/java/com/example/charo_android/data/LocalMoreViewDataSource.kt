@@ -13,7 +13,7 @@ class LocalMoreViewDataSource : MoreViewDataSource {
                 moreViewChip_1 = "#7번 국도",
                 moreViewChip_2 = "#바다",
                 moreViewChip_3 = "#포항",
-                moreViewHeart = R.drawable.selector_home_heart
+                moreViewHeart = false
             ),
             MoreViewInfo(
                 moreViewImage = R.drawable.home_today_drive_image,
@@ -21,7 +21,7 @@ class LocalMoreViewDataSource : MoreViewDataSource {
                 moreViewChip_1 = "#7번 국도",
                 moreViewChip_2 = "#바다",
                 moreViewChip_3 = "#포항",
-                moreViewHeart = R.drawable.selector_home_heart
+                moreViewHeart = false
             ),
             MoreViewInfo(
                 moreViewImage = R.drawable.home_today_drive_image,
@@ -29,7 +29,7 @@ class LocalMoreViewDataSource : MoreViewDataSource {
                 moreViewChip_1 = "#7번 국도",
                 moreViewChip_2 = "#바다",
                 moreViewChip_3 = "#포항",
-                moreViewHeart = R.drawable.selector_home_heart
+                moreViewHeart = false
             ),
             MoreViewInfo(
                 moreViewImage = R.drawable.home_today_drive_image,
@@ -37,7 +37,7 @@ class LocalMoreViewDataSource : MoreViewDataSource {
                 moreViewChip_1 = "#7번 국도",
                 moreViewChip_2 = "#바다",
                 moreViewChip_3 = "#포항",
-                moreViewHeart = R.drawable.selector_home_heart
+                moreViewHeart = false
             ),
             MoreViewInfo(
                 moreViewImage = R.drawable.home_today_drive_image,
@@ -45,7 +45,7 @@ class LocalMoreViewDataSource : MoreViewDataSource {
                 moreViewChip_1 = "#7번 국도",
                 moreViewChip_2 = "#바다",
                 moreViewChip_3 = "#포항",
-                moreViewHeart = R.drawable.selector_home_heart
+                moreViewHeart = false
             ),
             MoreViewInfo(
                 moreViewImage = R.drawable.home_today_drive_image,
@@ -53,8 +53,8 @@ class LocalMoreViewDataSource : MoreViewDataSource {
                 moreViewChip_1 = "#7번 국도",
                 moreViewChip_2 = "#바다",
                 moreViewChip_3 = "#포항",
-                moreViewHeart = R.drawable.selector_home_heart
-            ),
+                moreViewHeart = false
+            )
         )
     }
 }

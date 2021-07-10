@@ -2,29 +2,37 @@ package com.example.charo_android
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.charo_android.databinding.ActivityMainBinding
+import com.example.charo_android.ui.charo.CharoFragment
+import com.example.charo_android.ui.home.HomeFragment
 
 import com.example.charo_android.ui.home.HomeViewPagerAdapter
+import com.example.charo_android.ui.home.replaceFragment
 
 import com.example.charo_android.ui.write.WriteActivity
+import com.example.charo_android.ui.write.WriteFragment
 
 
 class MainActivity : AppCompatActivity() {
+    private val homeFragment: HomeFragment by lazy { HomeFragment() }
+    private val writeFragment : WriteFragment by lazy { WriteFragment() }
+    private val charoFragment: CharoFragment by lazy { CharoFragment() }
 
     private lateinit var binding: ActivityMainBinding
-    private val homeViewPagerAdapter = HomeViewPagerAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        replaceHomeFragment()
         initNavView()
 
 
@@ -32,30 +40,45 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initNavView() {
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_write, R.id.navigation_charo
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        binding.apply {
 
+            navView.setOnItemSelectedListener {
+                when(it.itemId) {
+                    R.id.navigation_home -> {
+                        replaceHomeFragment()
+                        return@setOnItemSelectedListener true
+                    }
+                    R.id.navigation_write -> {
+                        replaceWriteFragment()
+                        return@setOnItemSelectedListener true
+                    }
+                    R.id.navigation_charo -> {
+                        replaceCharoFragment()
+                        return@setOnItemSelectedListener true
+                    }
+                }
+                false
+            }
 
-        binding.btnWrite.setOnClickListener {
-            startActivityWrite()
+            binding.btnWrite.setOnClickListener {
+                startActivityWrite()
+            }
         }
-    }
 
 
-    fun AppCompatActivity.replaceFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment_activity_main, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
+
+    private fun replaceHomeFragment(){
+        replaceFragment(homeFragment)
+    }
+    private fun replaceWriteFragment(){
+        replaceFragment(writeFragment)
+    }
+
+    private fun replaceCharoFragment(){
+        replaceFragment(charoFragment)
+    }
+
 
     fun startActivityWrite() {
         val intent = Intent(this@MainActivity, WriteActivity::class.java)
@@ -63,16 +86,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
 }
 
 
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment){
-    val fragmentManager = supportFragmentManager
-    val transaction = fragmentManager.beginTransaction()
-    transaction.replace(R.id.fragment_container, fragment)
-        .addToBackStack(null)
-        .commit()
-}
 

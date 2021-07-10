@@ -6,5 +6,5 @@ data class HomeTodayDriverInfo(
     val homeTodayDriveChip_1 : String,
     val homeTodayDriveChip_2 : String,
     val homeTodayDriveChip_3 : String,
-    val homeTodayDriveHeart : Int,
+    val homeTodayDriveHeart : Boolean,
 )

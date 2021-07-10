@@ -12,7 +12,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = true
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -20,7 +20,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -28,7 +28,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -36,7 +36,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -44,7 +44,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -52,7 +52,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -60,7 +60,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -68,7 +68,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
             HomeLocationDriveInfo(
                 homeLocationDriveImage = R.drawable.home_today_drive_image,
@@ -76,7 +76,7 @@ class LocalHomeLocationDataSource: HomeLocationDriveDataSource {
                 homeLocationDriveChip_1 = "#7번 국도",
                 homeLocationDriveChip_2 = "#바다",
                 homeLocationDriveChip_3 = "#포항",
-                homeLocationDriveHeart = R.drawable.selector_home_heart
+                homeLocationDriveHeart = false
             ),
         )
     }

@@ -37,14 +37,10 @@ class HomeHotDriveAdapter() : RecyclerView.Adapter<HomeHotDriveAdapter.HomeHotDr
         private val binding: ItemHomeHotDriveBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(homeHotDriveInfo: HomeHotDriveInfo) {
-            binding.apply {
-                imgHomeHotDrive.setImageResource(homeHotDriveInfo.homeHotDriveImage)
-                textHomeHotDriveTitle.text = homeHotDriveInfo.homeHotDriveTitle
-                chipHomeHotDrive1.text = homeHotDriveInfo.homeHotDriveChip_1
-                chipHomeHotDrive2.text = homeHotDriveInfo.homeHotDriveChip_2
-                chipHomeTodayDrive3.text = homeHotDriveInfo.homeHotDriveChip_3
+           binding.homeHotDriveData = homeHotDriveInfo
 
-                with(imgHomeHotDriveHeart) {
+                binding.apply{
+                    with(imgHomeHotDriveHeart) {
                     isSelected = false
                     setOnClickListener { it.isSelected = !it.isSelected }
                 }

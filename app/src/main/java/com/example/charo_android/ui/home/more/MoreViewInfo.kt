@@ -6,5 +6,5 @@ data class MoreViewInfo(
     val moreViewChip_1 : String,
     val moreViewChip_2 : String,
     val moreViewChip_3 : String,
-    val moreViewHeart : Int,
+    val moreViewHeart : Boolean,
 )
