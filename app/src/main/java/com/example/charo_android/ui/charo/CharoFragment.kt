@@ -57,7 +57,7 @@ class CharoFragment : Fragment() {
         binding.apply {
             val charoViewPagerAdapter = CharoFragmentStateAdapter(requireActivity())
             with (charoViewPagerAdapter) {
-                fragmentList = listOf(MyCharoFragment(), SaveFragment())
+                fragmentList = listOf(MyCharoFragment(), MyCharoFragment())
             }
             with (binding.viewpagerCharo) {
                 adapter = charoViewPagerAdapter
