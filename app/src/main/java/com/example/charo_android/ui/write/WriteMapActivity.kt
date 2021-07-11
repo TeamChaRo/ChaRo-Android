@@ -19,14 +19,6 @@ import kotlin.concurrent.thread
 class WriteMapActivity : AppCompatActivity() {
 
     // 좌표 상수
-    val inha_univ_latitude = 37.450026
-    val inha_univ_longitude = 126.651299
-    val soraepogu_station_latitude = 37.400979
-    val soraepogu_station_longitude = 126.731358
-    val pangyo_station_latitude = 37.394780
-    val pangyo_station_longitude = 127.108971
-    val gangnam_station_latitude = 37.497161
-    val gangnam_station_longitude = 127.025548
     var markerCount = 0
     var pathMarkerCount = 0
     val path = arrayListOf<TMapPoint>()
@@ -45,24 +37,58 @@ class WriteMapActivity : AppCompatActivity() {
 
         binding.etWriteMapStart.setOnClickListener {
             val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
+            intent.putExtra("startLocation","startLocation")
+            startActivity(intent)
+
+        }
+        binding.etWriteMapMid1.setOnClickListener {
+            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
+            val intent2 = Intent(this@WriteMapActivity, WriteMapLocationActivity::class.java)
+            intent2.putExtra("mid1Location","mid1Location")
+            startActivity(intent)
+
+        }
+        binding.etWriteMapMid2.setOnClickListener {
+            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
+            val intent2 = Intent(this@WriteMapActivity, WriteMapLocationActivity::class.java)
+            intent2.putExtra("mid2Location","mid2Location")
+            startActivity(intent)
+
+        }
+        binding.etWriteMapEnd.setOnClickListener {
+            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
+            val intent2 = Intent(this@WriteMapActivity, WriteMapLocationActivity::class.java)
+            intent2.putExtra("endLocation","endLocation")
             startActivity(intent)
 
         }
 
+        binding.etWriteMapStart.text = intent.getStringExtra("locationName")
+
         val tMapView = TMapView(this@WriteMapActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey("")
+        tMapView.setSKTMapApiKey("l7xx94a7679a3e1d41a782105327ae7af1cd")
         binding.clWriteTmapView.addView(tMapView)
+
+        var long = intent.getDoubleExtra("pointLong", 0.0)
+        var lat = intent.getDoubleExtra("pointLat", 0.0)
+
+        if (long != null && lat != null) {
+            btnPathMarkKeywordOnClickEvent(tMapView, long, lat)
+
+            //도착지가 있으면 <- 조건문 걸어주기
+            btnFindKeywordOnClickEvent(tMapView)
+        }
 
 
         // 강남역 마커
 //        markGangnamStation(tMapView)
 
         // 지도 레벨 확대
-  //      btnSizeUpOnClickEvent(tMapView)
+        //      btnSizeUpOnClickEvent(tMapView)
         // 지도 레벨 축소
-  //      btnSizeDownOnClickEvent(tMapView)
+        //      btnSizeDownOnClickEvent(tMapView)
 
         // 자동차 경로안내
 //        findRoadFromSoraepoguViaPangyoToGangnam(tMapView)
@@ -75,18 +101,18 @@ class WriteMapActivity : AppCompatActivity() {
         btnFindOnClickEvent(tMapView)
     }
 
-
-    private fun markGangnamStation(tmapView: TMapView) {
-        val marker_gangnam_station = TMapMarkerItem()
-        val tmapPoint_gangnam_station =
-            TMapPoint(gangnam_station_latitude, gangnam_station_longitude)
-        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-        marker_gangnam_station.icon = bitmap
-        marker_gangnam_station.setPosition(0.5F, 1.0F)
-        marker_gangnam_station.tMapPoint = tmapPoint_gangnam_station
-        marker_gangnam_station.name = "강남역"
-        tmapView.addMarkerItem("marker_gangnam_station", marker_gangnam_station)
-    }
+//
+//    private fun markGangnamStation(tmapView: TMapView) {
+//        val marker_gangnam_station = TMapMarkerItem()
+//        val tmapPoint_gangnam_station =
+//            TMapPoint(gangnam_station_latitude, gangnam_station_longitude)
+//        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
+//        marker_gangnam_station.icon = bitmap
+//        marker_gangnam_station.setPosition(0.5F, 1.0F)
+//        marker_gangnam_station.tMapPoint = tmapPoint_gangnam_station
+//        marker_gangnam_station.name = "강남역"
+//        tmapView.addMarkerItem("marker_gangnam_station", marker_gangnam_station)
+//    }
 
 //    private fun btnSizeUpOnClickEvent(tmapView: TMapView) {
 //        binding.btnSizeUp.setOnClickListener() {
@@ -100,39 +126,9 @@ class WriteMapActivity : AppCompatActivity() {
 //        }
 //    }
 
-    private fun findRoadFromSoraepoguViaPangyoToGangnam(tmapView: TMapView) {
-        Thread() {
-            try {
-                val tMapPointStart =
-                    TMapPoint(soraepogu_station_latitude, soraepogu_station_longitude)
-                val tMapPointVia = TMapPoint(pangyo_station_latitude, pangyo_station_longitude)
-                val tMapPointEnd = TMapPoint(gangnam_station_latitude, gangnam_station_longitude)
-                val tMapPolyLineSV: TMapPolyLine =
-                    TMapData().findPathData(tMapPointStart, tMapPointVia)
-                tMapPolyLineSV.lineColor = Color.BLUE
-                tMapPolyLineSV.lineWidth = 3F
-                tmapView.addTMapPolyLine("tMapPolyLineSV", tMapPolyLineSV)
-                val tMapPolyLineVE: TMapPolyLine =
-                    TMapData().findPathData(tMapPointVia, tMapPointEnd)
-                tMapPolyLineVE.lineColor = Color.BLUE
-                tMapPolyLineVE.lineWidth = 3F
-                tmapView.addTMapPolyLine("tMapPolyLineVE", tMapPolyLineVE)
-                val arr = arrayListOf<TMapPoint>()
-                arr.add(tMapPointStart)
-                arr.add(tMapPointVia)
-                arr.add(tMapPointEnd)
-                val info: TMapInfo = tmapView.getDisplayTMapInfo(arr)
-                tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                tmapView.zoomLevel = info.tMapZoomLevel
-            } catch (e: Exception) {
-                Log.d("error", e.printStackTrace().toString())
-                e.printStackTrace()
-            }
-        }.start()
-    }
 
     //마커 찍기
-    private fun btnMarkOnClickEvent(tmapView: TMapView) {
+    fun btnMarkOnClickEvent(tmapView: TMapView) {
         binding.btnMark.setOnClickListener() {
             val markerCurrentSpot = TMapMarkerItem()
             val tmapPointCurrentSpot = tmapView.centerPoint
@@ -163,15 +159,31 @@ class WriteMapActivity : AppCompatActivity() {
         }
     }
 
+    private fun btnPathMarkKeywordOnClickEvent(tmapView: TMapView, long: Double, lat: Double) {
+        val markerPathSpot = TMapMarkerItem()
+        tmapView.setCenterPoint(long, lat);
+        val tmapPointCurrentSpot = tmapView.centerPoint
+        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
+        markerPathSpot.icon = bitmap
+        markerPathSpot.setPosition(0.5F, 1.0F)
+        markerPathSpot.tMapPoint = tmapPointCurrentSpot
+        markerPathSpot.name = "pathSpot$pathMarkerCount"
+        tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
+        pathMarkerCount++
+
+        path.add(tmapPointCurrentSpot)
+
+    }
+
     //경로 연결
     private fun btnFindOnClickEvent(tmapView: TMapView) {
         binding.btnFind.setOnClickListener() {
             for (i in 0 until pathMarkerCount - 1) {
-                var flag:Boolean = true
-                if(i%2 == 0){
+                var flag: Boolean = true
+                if (i % 2 == 0) {
                     flag = !flag
                 }
-                drawPath(tmapView, path[i], path[i+1], i, flag)
+                drawPath(tmapView, path[i], path[i + 1], i, flag)
             }
             val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
             tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
@@ -180,7 +192,29 @@ class WriteMapActivity : AppCompatActivity() {
         }
     }
 
-    private fun drawPath(tmapView: TMapView, tmapPointStart: TMapPoint, tmapPointEnd: TMapPoint, cnt:Int, flag:Boolean) {
+    private fun btnFindKeywordOnClickEvent(tmapView: TMapView) {
+        //    if(pathMarkerCount >= 2)
+        for (i in 0 until pathMarkerCount - 1) {
+            var flag: Boolean = true
+            if (i % 2 == 0) {
+                flag = !flag
+            }
+            drawPath(tmapView, path[i], path[i + 1], i, flag)
+        }
+        val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
+        tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+        tmapView.zoomLevel = info.tMapZoomLevel
+        Log.d("error", "finish")
+
+    }
+
+    private fun drawPath(
+        tmapView: TMapView,
+        tmapPointStart: TMapPoint,
+        tmapPointEnd: TMapPoint,
+        cnt: Int,
+        flag: Boolean
+    ) {
 //        thread() {
 //            try{
 //                val tmapPolyLine: TMapPolyLine =
@@ -194,29 +228,29 @@ class WriteMapActivity : AppCompatActivity() {
 //                e.printStackTrace()
 //            }
 //        }.start()
-        val thr : Thread = Thread(){
-            try{
+        val thr: Thread = Thread() {
+            try {
                 val tmapPolyLine: TMapPolyLine =
                     TMapData().findPathData(tmapPointStart, tmapPointEnd)
                 tmapPolyLine.lineColor = Color.BLUE
                 tmapPolyLine.lineWidth = 3F
                 tmapView.addTMapPolyLine("tmapPolyLine$cnt", tmapPolyLine)
                 Log.d("try", "tmapPolyLine$cnt")
-            } catch(e:Exception){
+            } catch (e: Exception) {
                 Log.d("catch", e.printStackTrace().toString())
                 e.printStackTrace()
             }
         }
         thr.start()
 
-        try{
+        try {
             thr.join()
-        } catch (e:Exception){
+        } catch (e: Exception) {
             Log.d("catch", e.printStackTrace().toString())
             e.printStackTrace()
         }
 
-        if(flag){
+        if (flag) {
             Thread.sleep(1000)
         }
     }
