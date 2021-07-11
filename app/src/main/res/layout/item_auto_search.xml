@@ -43,7 +43,7 @@
             android:textColor="@color/gray4_sub"
             android:textSize="13sp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
-            android:text="@{mapData.locationName}"
+            android:text="@{mapData.locationAddress}"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="25dp" />
 

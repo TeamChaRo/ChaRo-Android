@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/et_write_map_search_start"
         android:layout_width="match_parent"
         android:layout_height="72dp"
