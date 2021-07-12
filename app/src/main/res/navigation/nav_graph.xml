@@ -17,7 +17,7 @@
 
     <activity
         android:id="@+id/detailActivity"
-        android:name="com.example.charo_android.DetailActivity"
+        android:name="com.example.charo_android.ui.detail.DetailActivity"
         android:label="DetailActivity"
         tools:layout="@layout/activity_detail"/>
 </navigation>

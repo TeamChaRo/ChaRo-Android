@@ -1,4 +1,4 @@
-package com.example.charo_android
+package com.example.charo_android.ui.detail
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.DetailViewpagerImageInfo
 import com.example.charo_android.data.ResponseDetailData

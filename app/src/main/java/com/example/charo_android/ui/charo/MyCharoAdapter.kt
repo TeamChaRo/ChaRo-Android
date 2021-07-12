@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.DetailActivity
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.detail.DetailActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 
 class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
