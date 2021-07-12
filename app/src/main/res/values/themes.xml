@@ -130,4 +130,13 @@
         <item name="android:textSize">19sp</item>
         <item name="android:lineSpacingExtra">5.7sp</item>
     </style>
+
+    <style name="Theme.ChaRoAndroid.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ChaRoAndroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ChaRoAndroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

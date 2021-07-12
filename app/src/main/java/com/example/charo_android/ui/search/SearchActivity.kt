@@ -16,10 +16,10 @@ import java.time.chrono.JapaneseEra.values
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     val itemTheme = arrayOf(
-        "산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"
+        "선택안함","산", "바다", "호수", "강", "봄", "여름", "가을", "겨울", "해안도로", "벚꽃", "단풍", "여유", "스피드", "야경", "도심"
     )
 
-    val itemCaution = arrayOf("고속도로", "산길포함", "초보힘듦", "사람많음")
+    val itemCaution = arrayOf("선택안함","고속도로", "산길포함", "초보힘듦", "사람많음")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

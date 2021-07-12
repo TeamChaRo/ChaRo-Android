@@ -12,5 +12,8 @@ object ApiService {
         .build()
 
     val moreViewService: MoreViewService = retrofit.create(MoreViewService::class.java)
+
     val detailViewService: DetailViewService = retrofit.create(DetailViewService::class.java)
+    val mainViewService:  HomeViewService = retrofit.create(HomeViewService::class.java)
 }
+

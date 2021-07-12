@@ -11,7 +11,7 @@
     <string name="main_charo_notice">알림</string>
     <string name="main_charo_pick">이번주 차로\'S PICK</string>
     <string name="main_charo_today_drive">차로의 \'오늘 드라이브\'</string>
-    <string name="main_charo_today_drive_title">해안 도로 정복할 수 있는 포항 드라이브 코스 다같이 지금 바로 출발해요</string>
+    <string name="main_charo_today_drive_title">해안 도로 정복할 수 있는\n 포항 드라이브 코스 다같이\n 지금 바로 출발해요</string>
     <string name="main_charo_today_drive_chip">#7번 국도</string>
     <string name="main_charo_today_drive_chip_2">#바다</string>
     <string name="main_charo_today_drive_chip_3">#포항</string>
@@ -86,5 +86,8 @@
         <item>최신순</item>
     </string-array>
     <string name="blossom">#벚꽃</string>
-
+    <string name="title_activity_no_search">NoSearchActivity</string>
+    <string name="search_activity">드라이브 맞춤 검색 결과</string>
+    <string name="search_mention">검색하신 드라이브 코스가 아직 없습니다.\n 직접 나만의 드라이브 코스를 \n 만들어보는 것은 어떠신가요?</string>
+    <string name="search_write">드라이브 코스 작성하기</string>
 </resources>

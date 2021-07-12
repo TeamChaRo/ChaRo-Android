@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = Versions.java_version
-        targetCompatibility = Versions.java_version
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = Versions.jvm_version
+        jvmTarget = "1.8"
     }
     buildFeatures {
         dataBinding = true
@@ -61,6 +61,8 @@ dependencies {
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation(files("libs/com.skt.Tmap_1.67.jar"))
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     kapt(KaptDependencies.hilt)
 
     // DataStore
@@ -118,4 +120,6 @@ dependencies {
     //recyclerview
     implementation("androidx.recyclerview:recyclerview:1.0.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
+
+
 }

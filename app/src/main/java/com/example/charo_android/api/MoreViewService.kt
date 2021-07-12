@@ -7,7 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoreViewService {
-    @GET("/preview/{userId}/{identifier}")
+    @GET("/preview/like/{userId}/{identifier}")
     fun getPreview(
         @Path("userId") userId: String,
         @Path("identifier") identifier: String,

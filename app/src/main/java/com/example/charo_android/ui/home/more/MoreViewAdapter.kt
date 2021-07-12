@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.charo_android.R
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
 
@@ -40,28 +41,36 @@ class MoreViewAdapter() : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolde
             itemMoreViewBinding.apply {
                 with(moreViewItem) {
                     Glide.with(imgMoreView.context)
-                        .load(moreViewItem.image)
+                        .load(this.image)
                         .into(imgMoreView)
 
-                    textMoreViewTitle.text = moreViewItem.title
+                    textMoreViewTitle.text = this.title
 
                     if (moreViewItem.tags.count() == 2) {
-                        chipMoreView1.text = moreViewItem.tags[0]
-                        chipMoreView2.text = moreViewItem.tags[1]
+                        chipMoreView1.text = this.tags[0]
+                        chipMoreView2.text = this.tags[1]
                         chipMoreView3.visibility = View.INVISIBLE
 
                     } else {
-                        chipMoreView1.text = moreViewItem.tags[0]
-                        chipMoreView2.text = moreViewItem.tags[1]
-                        chipMoreView3.text = moreViewItem.tags[2]
+                        chipMoreView1.text = this.tags[0]
+                        chipMoreView2.text = this.tags[1]
+                        chipMoreView3.text = this.tags[2]
                     }
 
-                    Log.d("more", moreViewItem.title)
-
-                    with(imgMoreViewHeart) {
-                        isSelected = false
-                        setOnClickListener { it.isSelected = !it.isSelected }
+                    Log.d("more", this.title)
+                    imgMoreViewHeart.setImageResource(R.drawable.selector_home_heart)
+                    if (this.isFavorite == false){
+                        with(imgMoreViewHeart) {
+                            this.isSelected = false
+                            setOnClickListener { this.isSelected != this.isSelected }
+                        }
+                    } else{
+                        with(imgMoreViewHeart){
+                            this.isSelected = true
+                            setOnClickListener { this.isSelected != this.isSelected }
+                        }
                     }
+
 
 
                 }
