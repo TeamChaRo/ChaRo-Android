@@ -1,12 +1,17 @@
 package com.example.charo_android.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.charo_android.R
+import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
 
-class HomeNIghtDriveAdapter():RecyclerView.Adapter<HomeNIghtDriveAdapter.HomeNightDriveViewHolder>() {
-    val nightData = mutableListOf<HomeNightDriveInfo>()
+class HomeNIghtDriveAdapter() :
+    RecyclerView.Adapter<HomeNIghtDriveAdapter.HomeNightDriveViewHolder>() {
+    val nightData = mutableListOf<ResponseHomeViewData.Data.CustomThemeDrive>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,22 +37,49 @@ class HomeNIghtDriveAdapter():RecyclerView.Adapter<HomeNIghtDriveAdapter.HomeNig
     }
 
     class HomeNightDriveViewHolder(
-        private val binding : ItemHomeNightDriveBinding
-    ): RecyclerView.ViewHolder(binding.root){
-        fun onBind(homeNightDriveInfo: HomeNightDriveInfo){
+        private val binding: ItemHomeNightDriveBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(responseHomeCustomThemeDrive: ResponseHomeViewData.Data.CustomThemeDrive) {
             binding.apply {
-                imgHomeNightDrive.setImageResource(homeNightDriveInfo.homeNightDriveImage)
-                textHomeNightDriveTitle.text = homeNightDriveInfo.homeNightDriveTitle
-                chipHomeNightDrive1.text = homeNightDriveInfo.homeNightDriveChip_1
-                chipHomeNightDrive2.text = homeNightDriveInfo.homeNightDriveChip_2
-                chipHomeNightDrive3.text = homeNightDriveInfo.homeNightDriveChip_3
+                with(responseHomeCustomThemeDrive) {
+                    Glide.with(imgHomeNightDrive.context)
+                        .load(this.image)
+                        .placeholder(R.drawable.home_today_drive_image)
+                        .into(imgHomeNightDrive)
 
-                with(imgHomeNightDriveHeart) {
-                    isSelected = false
-                    setOnClickListener { it.isSelected = !it.isSelected }
+
+                    textHomeNightDriveTitle.text = this.title
+                    if (this.tags.count() == 2) {
+                        chipHomeNightDrive1.text = this.tags[0]
+                        chipHomeNightDrive2.text = this.tags[1]
+                        chipHomeNightDrive3.visibility = View.INVISIBLE
+
+                    } else if (this.tags.count() == 1) {
+                        chipHomeNightDrive1.text = this.tags[0]
+                        chipHomeNightDrive2.visibility = View.INVISIBLE
+                        chipHomeNightDrive3.visibility = View.INVISIBLE
+                    } else {
+                        chipHomeNightDrive1.text = this.tags[0]
+                        chipHomeNightDrive2.text = this.tags[1]
+                        chipHomeNightDrive3.text = this.tags[2]
+                    }
+
+                }
+
+                imgHomeNightDriveHeart.setImageResource(R.drawable.selector_home_heart)
+                if (responseHomeCustomThemeDrive.isFavorite == false) {
+                    with(imgHomeNightDriveHeart) {
+                        this.isSelected = false
+                        this.setOnClickListener { this.isSelected = !this.isSelected }
+                    }
+                } else {
+                    with(imgHomeNightDriveHeart) {
+                        this.isSelected = true
+                        this.setOnClickListener { this.isSelected = !this.isSelected }
+                    }
                 }
             }
         }
-
     }
+
 }

@@ -11,6 +11,7 @@
         android:id="@+id/cl_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="126dp">
@@ -32,9 +33,9 @@
                     style="@style/HeaderH4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="96dp"
-                    android:layout_marginTop="34dp"
+                    android:layout_marginTop="86dp"
                     android:layout_marginEnd="96dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginBottom="23dp"
                     android:text="@string/search"
                     android:textColor="@color/white"
@@ -42,17 +43,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/img_search_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:clickable="true"
-                    android:src="@drawable/back1"
-                    app:layout_constraintBottom_toBottomOf="@+id/text_search_drive"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/text_search_drive" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -65,8 +55,8 @@
             android:id="@+id/img_search_car"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="120dp"
+
+            android:layout_marginTop="140dp"
             android:src="@drawable/ic_car_search"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,21 +108,22 @@
             android:id="@+id/btn_search_area_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_dialog_click"
+            android:background="@drawable/ic_ui_search_btn_unselect_android"
             android:paddingRight="4dp"
             android:text="@string/area"
-            app:layout_constraintStart_toStartOf="@+id/text_today_drive"
+            android:layout_marginStart="29dp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_today_drive" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_search_area_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:background="@drawable/btn_dialog_click"
+            android:layout_marginStart="120dp"
+            android:background="@drawable/ic_ui_search_btn_unselect_android"
             android:paddingRight="4dp"
             android:text="@string/area"
-            app:layout_constraintStart_toEndOf="@id/btn_search_area_1"
+            app:layout_constraintStart_toStartOf="@id/img_search_background"
             app:layout_constraintTop_toTopOf="@+id/btn_search_area_1" />
 
         <TextView
@@ -140,57 +131,57 @@
             style="@style/HeaderH4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="120dp"
             android:text="@string/search_text_1"
             android:textColor="@color/gray5_sub"
             app:layout_constraintBottom_toBottomOf="@+id/btn_search_area_2"
-            app:layout_constraintStart_toEndOf="@id/btn_search_area_2"
+            app:layout_constraintStart_toStartOf="@id/btn_search_area_2"
             app:layout_constraintTop_toTopOf="@+id/btn_search_area_2" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_search_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/btn_dialog_click"
+            android:background="@drawable/ic_ui_search_btn_unselect_android"
             android:paddingRight="4dp"
             android:text="@string/main_charo_theme"
+            android:layout_marginTop="58dp"
             app:layout_constraintStart_toStartOf="@+id/btn_search_area_1"
-            app:layout_constraintTop_toBottomOf="@+id/btn_search_area_1" />
+            app:layout_constraintTop_toTopOf="@+id/btn_search_area_1" />
 
         <TextView
             android:id="@+id/text_search_2"
             style="@style/HeaderH4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="125dp"
             android:text="@string/search_text_2"
             android:textColor="@color/gray5_sub"
             app:layout_constraintBottom_toBottomOf="@+id/btn_search_theme"
-            app:layout_constraintStart_toEndOf="@+id/btn_search_theme"
+            app:layout_constraintStart_toStartOf="@+id/btn_search_theme"
             app:layout_constraintTop_toTopOf="@+id/btn_search_theme" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_search_caution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/btn_dialog_click"
+            android:layout_marginTop="58dp"
+            android:background="@drawable/ic_ui_search_btn_unselect_android"
             android:paddingRight="4dp"
             android:text="@string/caution"
             app:layout_constraintStart_toStartOf="@+id/btn_search_theme"
-            app:layout_constraintTop_toBottomOf="@+id/btn_search_theme" />
+            app:layout_constraintTop_toTopOf="@+id/btn_search_theme" />
 
         <TextView
             android:id="@+id/text_search_3"
             style="@style/HeaderH4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="125dp"
             android:text="@string/search_text_3"
             android:textColor="@color/gray5_sub"
             app:layout_constraintBottom_toBottomOf="@+id/btn_search_caution"
-            app:layout_constraintStart_toEndOf="@+id/btn_search_caution"
+            app:layout_constraintStart_toStartOf="@+id/btn_search_caution"
             app:layout_constraintTop_toTopOf="@+id/btn_search_caution" />
 
         <ImageButton
@@ -198,22 +189,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:background="@drawable/ic_search_start"
+            android:background="@drawable/ic_search_btn_white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_search_background" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_search_caution" />
 
         <TextView
             android:id="@+id/text_search_start"
             style="@style/SectionH1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="13dp"
             android:text="@string/search_start"
             android:textColor="@color/blue_main"
             app:layout_constraintBottom_toBottomOf="@+id/img_search_start"
             app:layout_constraintEnd_toEndOf="@+id/img_search_start"
             app:layout_constraintStart_toStartOf="@id/img_search_start"
-            app:layout_constraintTop_toTopOf="@id/img_search_start" />
+            app:layout_constraintTop_toTopOf="@id/img_search_start"/>
+
+        <ImageButton
+            android:id="@+id/img_search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close_white"
+            android:layout_marginTop="45dp"
+            app:layout_constraintStart_toStartOf="@id/img_search_car"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

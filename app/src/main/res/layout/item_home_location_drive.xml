@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +22,7 @@
             android:id="@+id/img_home_location_drive"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
+            app:layout_constraintDimensionRatio="5:4"
             android:scaleType="fitXY"
             android:src="@drawable/home_today_drive_image"
             app:layout_constraintEnd_toEndOf="parent"

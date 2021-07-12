@@ -16,5 +16,6 @@ data class ResponseMoreViewData(
             val tags: List<String>,
             val title: String
         )
+
     }
 }
