@@ -76,7 +76,7 @@
     </string-array>
     <string name="spinner_more_view_text_1">인기순</string>
     <string name="spinner_more_view_text_2">최신순</string>
-
+    <string name="blossom">#벚꽃</string>
 
 
 </resources>

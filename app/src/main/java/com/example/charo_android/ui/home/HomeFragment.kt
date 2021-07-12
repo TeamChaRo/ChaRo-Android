@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
+import com.example.charo_android.ui.home.more.MoreThemeContentViewFragment
+import com.example.charo_android.ui.home.more.MoreThemeViewFragment
 import com.example.charo_android.ui.home.more.MoreViewFragment
 import com.example.charo_android.ui.search.SearchActivity
 
@@ -134,8 +136,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

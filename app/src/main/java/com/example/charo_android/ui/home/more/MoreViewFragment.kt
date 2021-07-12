@@ -9,40 +9,72 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.charo_android.R
-import com.example.charo_android.data.LocalMoreViewDataSource
+import com.example.charo_android.api.ApiService
+import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.FragmentMoreViewBinding
 import com.example.charo_android.ui.home.HomeFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MoreViewFragment : Fragment() {
     private var _binding: FragmentMoreViewBinding? = null
     private val binding get() = _binding!!
-    private lateinit var moreViewAdapter : MoreViewAdapter
     private var homeFragment = HomeFragment()
+    private lateinit var moreViewAdapter : MoreViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMoreViewBinding.inflate(inflater, container, false)
+        val root : View = binding.root
         moreViewAdapter = MoreViewAdapter()
 
-        val root: View = binding.root
+        return root
+    }
 
-        initMoreView()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        moreViewLoadData()
         initSpinner()
         clickBackButton()
+    }
 
-        return binding.root
+    fun moreViewLoadData(){
+        val call: Call<ResponseMoreViewData> = ApiService.moreViewService.getPreview("111", "1", "summer")
+        call.enqueue(object : Callback<ResponseMoreViewData>{
+            override fun onResponse(
+                call: Call<ResponseMoreViewData>,
+                response: Response<ResponseMoreViewData>
+            ) {
+                if(response.isSuccessful) {
+                    val data = response.body()?.data?.drive
+                    val count = response.body()?.data?.totalCourse
+                    binding.recyclerviewMoreView.adapter = moreViewAdapter
+                    moreViewAdapter.moreData.addAll(data!!)
+                    moreViewAdapter.notifyDataSetChanged()
+                    binding.textMoreViewCount.text = "전체 ${count}개 게시물"
+                    Log.d("server connect", "success")
+                } else {
+                    Log.d("server connect", "failed")
+                    Log.d("server connect", "${response.errorBody()}")
+                    Log.d("server connect", "${response.message()}")
+                    Log.d("server connect", "${response.code()}")
+                    Log.d("server connect", "${response.raw().request.url}")
+                }
+            }
+            override fun onFailure(call: Call<ResponseMoreViewData>, t: Throwable) {
+                Log.d("server connect", "error:${t.message}")
+            }
+        })
+
     }
 
 
-    private fun initMoreView() {
-        binding.recyclerviewMoreView.adapter = moreViewAdapter
-        moreViewAdapter.moreData.addAll(LocalMoreViewDataSource().fetchData())
-        moreViewAdapter.notifyDataSetChanged()
-        Log.d("1111", "success")
-    }
+
 
     private fun initSpinner(){
         val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.search_spinner, android.R.layout.simple_spinner_item)
@@ -87,14 +119,14 @@ class MoreViewFragment : Fragment() {
 
     }
 
+
+
     private fun clickBackButton(){
         binding.imgBackHome.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)
                 ?.commit()
-
-
         }
 
     }
