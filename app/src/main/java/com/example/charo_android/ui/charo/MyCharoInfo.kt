@@ -9,4 +9,5 @@ data class MyCharoInfo(
     val date: String,
     val likeCount: Int,
     val saveCount: Int,
+    val postId: String,
 )
