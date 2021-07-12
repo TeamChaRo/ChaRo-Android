@@ -1,10 +1,11 @@
 package com.example.charo_android.api
 
+import com.example.charo_android.hidden.Hidden
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
-    private const val BASE_URL = ""
+    private const val BASE_URL = Hidden.baseUrl
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

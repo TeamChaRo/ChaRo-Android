@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.charo_android.api.ApiService
+import com.example.charo_android.data.DetailViewpagerImageInfo
 import com.example.charo_android.data.ResponseDetailData
 import com.example.charo_android.databinding.ActivityDetailBinding
 import com.example.charo_android.hidden.Hidden
