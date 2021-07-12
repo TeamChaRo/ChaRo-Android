@@ -3,6 +3,7 @@ package com.example.charo_android
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.charo_android.databinding.ItemDetailImageBinding
 
 class DetailViewpagerImageAdapter: RecyclerView.Adapter<DetailViewpagerImageAdapter.DetailImageViewHolder>() {
@@ -20,15 +21,17 @@ class DetailViewpagerImageAdapter: RecyclerView.Adapter<DetailViewpagerImageAdap
     override fun getItemCount(): Int = imageList.size
 
     override fun onBindViewHolder(holder: DetailImageViewHolder, position: Int) {
-        holder.onBind(imageList[position], position)
+        holder.onBind(imageList[position])
     }
 
     class DetailImageViewHolder(
         private val binding : ItemDetailImageBinding
     ): RecyclerView.ViewHolder(binding.root){
-        fun onBind(detailImageInfo: DetailViewpagerImageInfo, position: Int){
-            binding.imgDetailViewpagerImage.setImageResource(detailImageInfo.image)
-            binding.imgDetailViewpagerImage.tag = position
+        fun onBind(detailImageInfo: DetailViewpagerImageInfo){
+//            binding.imgDetailViewpagerImage.setImageResource(detailImageInfo.image)
+            Glide.with(itemView.context)
+                .load(detailImageInfo.image)
+                .into(binding.imgDetailViewpagerImage)
         }
     }
 }

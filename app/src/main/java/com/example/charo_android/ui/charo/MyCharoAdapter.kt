@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.DetailActivity
+import com.example.charo_android.MainActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 
 class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
@@ -27,7 +28,12 @@ class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
 
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("title", holder.binding.tvMyCharoTitle.text)
+            intent.putExtra("userId", "111")
+            intent.putExtra("postId", itemList[position].postId)
+            // 서버통신 하기 전에
+            // intent로 recyclerview item이
+            // 내가 선택한 item의 ~~로 intent가 잘 넘어가는지
+            // test -> O
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

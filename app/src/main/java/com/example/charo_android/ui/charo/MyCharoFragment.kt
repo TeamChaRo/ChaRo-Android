@@ -39,6 +39,7 @@ class MyCharoFragment : Fragment() {
         binding.recyclerviewMyCharo.adapter = myCharoAdapter
         myCharoAdapter.itemList.addAll(LocalMyCharoDataSource().fetchData())
         myCharoAdapter.notifyDataSetChanged()
+        binding.tvMyCharoBoardCount.text = "전체 ${myCharoAdapter.itemList.size}개의 게시물"
     }
     
     private fun setUpSpinner() {
