@@ -81,9 +81,10 @@
     <string name="follower">팔로워</string>
     <string name="my_charo_board_count">전체 6개 게시물</string>
     <string name="my_charo_filter_hot">인기순</string>
-
     <string-array name="charo_filter">
         <item>인기순</item>
         <item>최신순</item>
     </string-array>
+    <string name="blossom">#벚꽃</string>
+
 </resources>
