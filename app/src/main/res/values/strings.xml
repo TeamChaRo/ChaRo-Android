@@ -86,5 +86,7 @@
         <item>최신순</item>
     </string-array>
     <string name="blossom">#벚꽃</string>
+    <string name="signin_login">로그인</string>
+    <string name="signin_signup">회원가입</string>
 
 </resources>
