@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.charo_android.ui.write.WriteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".WriteMapLocationFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_write_map_location_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/img_write_map_location_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/back1_gray5_wth_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_bottom_location"
+            android:layout_width="match_parent"
+            android:layout_height="155dp"
+            android:background="@drawable/background_bottom_sheet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="28dp">
+
+            <TextView
+                android:id="@+id/text_location_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="서울역 경부선 (고속철도)"
+                android:textColor="@color/gray5_sub"
+                android:textSize="16sp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular" />
+
+            <TextView
+                android:id="@+id/text_location_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="서울특별시 중구 한강대로 405 서울역"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/gray4_sub"
+                android:textSize="14sp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular" />
+
+            <Button
+                android:id="@+id/btn_set_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.text}"
+                android:background="@color/blue_main"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

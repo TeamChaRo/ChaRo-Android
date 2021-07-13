@@ -13,7 +13,6 @@ import com.example.charo_android.databinding.ItemAutoSearchBinding
 
 class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSearchViewHolder>() {
 
-    private lateinit var activity: WriteMapSearchActivity
     /* 2. Adapter 는 ViewHolder 로 변경할 Data 를 가지고 있어야함 */
     var userList = mutableListOf<MapSearchInfo>()
 //    var text = activity.intent.getStringExtra("locationM")
@@ -25,8 +24,6 @@ class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSear
             parent,
             false
         )
-        activity = WriteMapSearchActivity()
-
         return MapSearchViewHolder(
             binding
         )
@@ -40,11 +37,10 @@ class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSear
         holder.onBind(userList[position])
 
 
-        var text = activity.intent.getStringExtra("locationM")
+//        var text = activity.intent.getStringExtra("locationM")
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context,WriteMapLocationActivity::class.java)
-
 
             intent.putExtra("locationName",userList[position].locationName)
                 .putExtra("locationAddress",userList[position].locationAddress)
@@ -60,7 +56,6 @@ class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSear
         fun onBind(mapSearchInfo: MapSearchInfo) {
 
             binding.mapData = mapSearchInfo
-
 
         }
     }
