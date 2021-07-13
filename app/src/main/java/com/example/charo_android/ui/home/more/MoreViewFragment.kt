@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.setFragmentResultListener
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.ResponseMoreViewData
@@ -22,67 +23,158 @@ class MoreViewFragment : Fragment() {
     private var _binding: FragmentMoreViewBinding? = null
     private val binding get() = _binding!!
     private var homeFragment = HomeFragment()
-    private lateinit var moreViewAdapter : MoreViewAdapter
+    private lateinit var moreViewAdapter: MoreViewAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMoreViewBinding.inflate(inflater, container, false)
-        val root : View = binding.root
         moreViewAdapter = MoreViewAdapter()
 
-        return root
+
+
+
+
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         moreViewLoadData()
         initSpinner()
         clickBackButton()
     }
 
-    fun moreViewLoadData(){
-        val call: Call<ResponseMoreViewData> = ApiService.moreViewService.getPreview("111", "1", "summer")
-        call.enqueue(object : Callback<ResponseMoreViewData>{
-            override fun onResponse(
-                call: Call<ResponseMoreViewData>,
-                response: Response<ResponseMoreViewData>
-            ) {
-                if(response.isSuccessful) {
-                    val data = response.body()?.data?.drive
-                    val count = response.body()?.data?.totalCourse
-                    binding.recyclerviewMoreView.adapter = moreViewAdapter
-                    moreViewAdapter.moreData.addAll(data!!)
-                    moreViewAdapter.notifyDataSetChanged()
-                    binding.textMoreViewCount.text = "전체 ${count}개 게시물"
-                    Log.d("server connect", "success")
-                } else {
-                    Log.d("server connect", "failed")
-                    Log.d("server connect", "${response.errorBody()}")
-                    Log.d("server connect", "${response.message()}")
-                    Log.d("server connect", "${response.code()}")
-                    Log.d("server connect", "${response.raw().request.url}")
-                }
-            }
-            override fun onFailure(call: Call<ResponseMoreViewData>, t: Throwable) {
-                Log.d("server connect", "error:${t.message}")
-            }
-        })
 
+    fun moreViewLoadData() {
+        setFragmentResultListener("title") { requestKey, bundle ->
+            val result = bundle.getString("title")
+            val num = bundle.getInt("num")
+            Log.d("result", result.toString())
+            Log.d("result", num.toString())
+
+
+            if (num == 0) {
+                val call: Call<ResponseMoreViewData> =
+                    ApiService.moreViewService.getPreview("111", "0", "summer")
+                call.enqueue(object : Callback<ResponseMoreViewData> {
+                    override fun onResponse(
+                        call: Call<ResponseMoreViewData>,
+                        response: Response<ResponseMoreViewData>
+                    ) {
+                        if (response.isSuccessful) {
+
+                            val data = response.body()?.data?.drive
+                            Log.d("please",data.toString())
+
+                            val count = response.body()?.data?.totalCourse
+                            binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.addAll(data!!)
+                            moreViewAdapter.notifyDataSetChanged()
+                            binding.textMoreViewCount.text = "전체 ${count}개 게시물"
+                            binding.textToolbarTitle.text = result
+
+                            Log.d("server connect", "success")
+                        } else {
+                            Log.d("server connect", "failed")
+                            Log.d("server connect", "${response.errorBody()}")
+                            Log.d("server connect", "${response.message()}")
+                            Log.d("server connect", "${response.code()}")
+                            Log.d("server connect", "${response.raw().request.url}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseMoreViewData>, t: Throwable) {
+                        Log.d("server connect", "error:${t.message}")
+                    }
+                })
+
+            } else if (num == 2) {
+                val call: Call<ResponseMoreViewData> =
+                    ApiService.moreViewService.getPreview("111", "2", "summer")
+                call.enqueue(object : Callback<ResponseMoreViewData> {
+                    override fun onResponse(
+                        call: Call<ResponseMoreViewData>,
+                        response: Response<ResponseMoreViewData>
+                    ) {
+                        if (response.isSuccessful) {
+                            val data = response.body()?.data?.drive
+                            val count = response.body()?.data?.totalCourse
+                            binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.addAll(data!!)
+                            moreViewAdapter.notifyDataSetChanged()
+                            binding.textMoreViewCount.text = "전체 ${count}개 게시물"
+                            binding.textToolbarTitle.text = result
+                            Log.d("server connect", "success")
+                        } else {
+                            Log.d("server connect", "failed")
+                            Log.d("server connect", "${response.errorBody()}")
+                            Log.d("server connect", "${response.message()}")
+                            Log.d("server connect", "${response.code()}")
+                            Log.d("server connect", "${response.raw().request.url}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseMoreViewData>, t: Throwable) {
+                        Log.d("server connect", "error:${t.message}")
+                    }
+                })
+
+            } else if (num == 1) {
+                val call: Call<ResponseMoreViewData> =
+                    ApiService.moreViewService.getPreview("111", "1", "summer")
+                call.enqueue(object : Callback<ResponseMoreViewData> {
+                    override fun onResponse(
+                        call: Call<ResponseMoreViewData>,
+                        response: Response<ResponseMoreViewData>
+                    ) {
+                        if (response.isSuccessful) {
+                            val data = response.body()?.data?.drive
+                            val count = response.body()?.data?.totalCourse
+                            Log.d("please",data.toString())
+                            binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.addAll(data!!)
+                            moreViewAdapter.notifyDataSetChanged()
+                            binding.textMoreViewCount.text = "전체 ${count}개 게시물"
+                            binding.textToolbarTitle.text = result
+                            Log.d("server connect", "success")
+                        } else {
+                            Log.d("server connect", "failed")
+                            Log.d("server connect", "${response.errorBody()}")
+                            Log.d("server connect", "${response.message()}")
+                            Log.d("server connect", "${response.code()}")
+                            Log.d("server connect", "${response.raw().request.url}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseMoreViewData>, t: Throwable) {
+                        Log.d("server connect", "error:${t.message}")
+                    }
+                })
+            }
+        }
     }
 
-
-
-
-    private fun initSpinner(){
-        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.search_spinner, android.R.layout.simple_spinner_item)
+    private fun initSpinner() {
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.search_spinner,
+            android.R.layout.simple_spinner_item
+        )
         binding.spinnerMoreView.adapter = adapter
     }
 
-    private fun clickSpinner(){
-        binding.spinnerMoreView.onItemSelectedListener = object: AdapterView.OnItemClickListener,
+    private fun loadTitleData() {
+
+    }
+
+
+    private fun clickSpinner() {
+        binding.spinnerMoreView.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -90,7 +182,7 @@ class MoreViewFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                when (position){
+                when (position) {
                     0 -> {
                         binding.textMoreViewSpinner.text = "인기순"
                     }
@@ -120,8 +212,7 @@ class MoreViewFragment : Fragment() {
     }
 
 
-
-    private fun clickBackButton(){
+    private fun clickBackButton() {
         binding.imgBackHome.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val transaction = fragmentManager?.beginTransaction()

@@ -39,45 +39,45 @@ class MoreViewAdapter() : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolde
         fun onBind(moreViewItem: ResponseMoreViewData.Data.Drive) {
 
             itemMoreViewBinding.apply {
+                textMoreViewTitle.text = moreViewItem.title
+
                 with(moreViewItem) {
                     Glide.with(imgMoreView.context)
-                        .load(this.image)
+                        .load(moreViewItem.image)
+                        .placeholder(R.drawable.image_more_view)
                         .into(imgMoreView)
+                }
 
-                    textMoreViewTitle.text = this.title
 
-                    if (moreViewItem.tags.count() == 2) {
-                        chipMoreView1.text = this.tags[0]
-                        chipMoreView2.text = this.tags[1]
-                        chipMoreView3.visibility = View.INVISIBLE
+                if (moreViewItem.tags.count() == 2) {
+                    chipMoreView1.text = moreViewItem.tags[0]
+                    chipMoreView2.text = moreViewItem.tags[1]
+                    chipMoreView3.visibility = View.INVISIBLE
 
-                    } else {
-                        chipMoreView1.text = this.tags[0]
-                        chipMoreView2.text = this.tags[1]
-                        chipMoreView3.text = this.tags[2]
+                } else {
+                    chipMoreView1.text = moreViewItem.tags[0]
+                    chipMoreView2.text = moreViewItem.tags[1]
+                    chipMoreView3.text = moreViewItem.tags[2]
+                }
+
+                imgMoreViewHeart.setImageResource(R.drawable.selector_home_heart)
+                if (moreViewItem.isFavorite == false) {
+                    with(imgMoreViewHeart) {
+                        this.isSelected = false
+                        setOnClickListener { this.isSelected != this.isSelected }
                     }
-
-                    Log.d("more", this.title)
-                    imgMoreViewHeart.setImageResource(R.drawable.selector_home_heart)
-                    if (this.isFavorite == false){
-                        with(imgMoreViewHeart) {
-                            this.isSelected = false
-                            setOnClickListener { this.isSelected != this.isSelected }
-                        }
-                    } else{
-                        with(imgMoreViewHeart){
-                            this.isSelected = true
-                            setOnClickListener { this.isSelected != this.isSelected }
-                        }
+                } else {
+                    with(imgMoreViewHeart) {
+                        this.isSelected = true
+                        setOnClickListener { this.isSelected != this.isSelected }
                     }
-
-
-
                 }
 
 
             }
 
+
         }
+
     }
 }
