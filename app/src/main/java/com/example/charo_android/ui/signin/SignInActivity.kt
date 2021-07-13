@@ -24,12 +24,13 @@ class SignInActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         btnLoginOnClickEvent()
+        imgClearOnClickEvent()
     }
 
     private fun btnLoginOnClickEvent() {
         binding.btnSigninLogin.setOnClickListener() {
             if (binding.etSigninId == null || binding.etSigninPw == null) {
-                Toast.makeText(this, "ID/PW를 확인해주세요!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
                 val requestSignInData = RequestSignInData(
                     id = binding.etSigninId.text.toString(),
@@ -61,6 +62,7 @@ class SignInActivity : AppCompatActivity() {
                             Log.d("server connect", "${response.message()}")
                             Log.d("server connect", "${response.code()}")
                             Log.d("server connect", "${response.raw().request.url}")
+                            Toast.makeText(applicationContext, "ID/PW를 확인해주세요!", Toast.LENGTH_LONG).show()
                             binding.etSigninPw.text = null
                         }
                     }
@@ -70,6 +72,15 @@ class SignInActivity : AppCompatActivity() {
                     }
                 })
             }
+        }
+    }
+
+    private fun imgClearOnClickEvent() {
+        binding.imgSigninIdClear.setOnClickListener() {
+            binding.etSigninId.text.clear()
+        }
+        binding.imgSigninPwClear.setOnClickListener() {
+            binding.etSigninPw.text.clear()
         }
     }
 }
