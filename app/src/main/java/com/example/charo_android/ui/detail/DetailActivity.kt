@@ -19,8 +19,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.DetailViewpagerImageInfo
-import com.example.charo_android.data.ResponseDetailData
+import com.example.charo_android.data.*
 import com.example.charo_android.databinding.ActivityDetailBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.ui.write.WriteActivity
@@ -58,9 +57,9 @@ class DetailActivity : AppCompatActivity() {
 
         init(userId, postId, tMapView)
         // 좋아요 클릭 이벤트
-        imgDetailHeartOnClickEvent()
+        imgDetailHeartOnClickEvent(userId, postId)
         // 저장 클릭 이벤트
-        imgDetailSaveOnClickEvent()
+        imgDetailSaveOnClickEvent(userId, postId)
         // 주소 복사
         imgDetailCopyOnClickEvent()
         // 뒤로가기 || 닫힘 버튼 클릭 이벤트
@@ -260,7 +259,7 @@ class DetailActivity : AppCompatActivity() {
         binding.tvDetailInformationTextLength.text = textLength.toString() + "/280자"
     }
 
-    private fun imgDetailHeartOnClickEvent() {
+    private fun imgDetailHeartOnClickEvent(userId: String, postId: String) {
         binding.imgDetailHeart.setOnClickListener() {
             val heart = binding.imgDetailHeart
             if (heart.isSelected) {
@@ -272,6 +271,34 @@ class DetailActivity : AppCompatActivity() {
                 binding.tvDetailHeartCount.text = likeCount.toString()
             }
             heart.isSelected = !heart.isSelected
+
+            val requestDetailLikeData = RequestDetailLikeData(
+                userId = userId, postId = postId
+            )
+
+            val call: Call<ResponseDetailLikeData> = ApiService.detailViewLikeService
+                .postDetailLike(requestDetailLikeData)
+
+            call.enqueue(object : Callback<ResponseDetailLikeData>{
+                override fun onResponse(
+                    call: Call<ResponseDetailLikeData>,
+                    response: Response<ResponseDetailLikeData>
+                ) {
+                    if(response.isSuccessful) {
+                        Log.d("server connect", "success")
+                    } else{
+                        Log.d("server connect", "fail")
+                        Log.d("server connect", "${response.errorBody()}")
+                        Log.d("server connect", "${response.message()}")
+                        Log.d("server connect", "${response.code()}")
+                        Log.d("server connect", "${response.raw().request.url}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDetailLikeData>, t: Throwable) {
+                    Log.d("server connect", "error:${t.message}")
+                }
+            })
         }
     }
 
