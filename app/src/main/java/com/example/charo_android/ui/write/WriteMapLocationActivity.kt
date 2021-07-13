@@ -6,8 +6,9 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.example.charo_android.databinding.ActivityWriteMapLocationBinding
 import com.skt.Tmap.TMapData
 import com.skt.Tmap.TMapMarkerItem
@@ -17,6 +18,7 @@ import com.skt.Tmap.TMapView
 class WriteMapLocationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteMapLocationBinding
+    private val viewModel : WriteViewModel by viewModels()
 
     val markerCount = 1
 
@@ -24,24 +26,43 @@ class WriteMapLocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_write_map_location)
+//
+//        binding.lifecycleOwner = this
+//        binding.viewModel = viewModel
 
         binding.imgWriteMapLocationBack.setOnClickListener {
             onBackPressed()
 
         }
 
-      //  if(intent.getStringExtra("endLocation"))
+        var resultLocation = intent.getStringExtra("setLocation").toString()
 
+        Log.d("location", intent.getStringExtra("setLocation").toString())
+        binding.btnSetLocation.text = intent.getStringExtra("setLocation").toString()
+
+
+//        var list = arrayOf<String>("","","","")
+//        binding.btnSetLocation.text = viewModel.text.toString()
+//        if(viewModel.data ==0 || viewModel.text.toString() == "출발지"){
+//            list[0]="1"
+//            Log.d("locationlist",list.toString())
+//        }else if(viewModel.data ==3 || viewModel.text.toString() == "도착지"){
+//            list[3]="1"
+//            Log.d("locationlist",list.toString())
+//        }
+//        Log.d("locationlist",list.toString())
 
 
         val tMapView = TMapView(this@WriteMapLocationActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey("l7xx94a7679a3e1d41a782105327ae7af1cd")
+        tMapView.setSKTMapApiKey("")
         binding.clWriteMapLocationView.addView(tMapView)
 
         val locationName = intent.getStringExtra("locationName")
         val locationAddress = intent.getStringExtra("locationAddress")
+    //    var location = intent.getStringExtra("location")
 
         binding.textLocationName.text = locationName
         binding.textLocationAddress.text = locationAddress
@@ -66,18 +87,12 @@ class WriteMapLocationActivity : AppCompatActivity() {
                 intent.putExtra("locationName",locationName)
                     .putExtra("pointLong",poiItem[0].poiPoint.longitude)
                     .putExtra("pointLat",poiItem[0].poiPoint.latitude)
+                    .putExtra("resultLocation",resultLocation)
 
                 startActivity(intent)
 
             }
         }
-
-
-        binding.imgWriteMapLocationBack.setOnClickListener {
-            onBackPressed()
-        }
-
-
 
 
     }

@@ -17,6 +17,7 @@ import kotlinx.coroutines.*
 
 class WriteMapSearchActivity : AppCompatActivity() {
 
+    lateinit var location: String
     private lateinit var binding: ActivityWriteMapSearchBinding
     private lateinit var writeMapSearchAdapter: WriteMapSearchAdapter
 
@@ -29,10 +30,23 @@ class WriteMapSearchActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d("111", "success go searchActivity")
 
-        binding.textResultSearch.setOnClickListener {
-            val intent = Intent(this, WriteMapLocationActivity::class.java)
-            startActivity(intent)
+        var text = intent.getStringExtra("locationM")
+        binding.etWriteMapSearchStart.hint = intent.getStringExtra("locationM")
+
+        if(text == "출발지를 입력하세요"){
+            var intent = Intent(this,WriteMapLocationActivity::class.java)
+            intent.putExtra("setLocation","출발지로 설정")
+        }else if(text == "경유지1를 입력하세요"){
+            var intent = Intent(this,WriteMapLocationActivity::class.java)
+            intent.putExtra("setLocation","경유지1지로 설정")
+        }else if(text == "경유지2를 입력하세요"){
+            var intent = Intent(this,WriteMapLocationActivity::class.java)
+            intent.putExtra("setLocation","경유지2로 설정")
+        }else if(text == "도착지를 입력하세요"){
+            var intent = Intent(this,WriteMapLocationActivity::class.java)
+            intent.putExtra("setLocation","도착지로 설정")
         }
+
 
 
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
@@ -46,10 +60,6 @@ class WriteMapSearchActivity : AppCompatActivity() {
         val tmapdata = TMapData()
 //        var list = listOf<MapSearchInfo>()
         //      val POIItem = tmapdata.findAllPOI("SKT타워")
-
-
-        val start = binding.etWriteMapSearchStart.text.toString()
-        Log.d("1111", binding.etWriteMapSearchStart.text.toString())
 
 
         //동기화 필요 //뒤로가기 이슈
@@ -70,15 +80,7 @@ class WriteMapSearchActivity : AppCompatActivity() {
                     }
                     writeMapSearchAdapter.userList = list
 
-                    Log.d(
-                        "list ", list.toString()
-                    )
-               //     writeMapSearchAdapter.userList.addAll(list)
                 }
-                Log.d(
-                    "list ", list.toString()
-                )
-//                writeMapSearchAdapter.userList = list
                 writeMapSearchAdapter.notifyDataSetChanged()
 
             }
@@ -86,73 +88,5 @@ class WriteMapSearchActivity : AppCompatActivity() {
             true
         }
 
-
-
-
-
-
-
-
-
-//        binding.etWriteMapSearchStart.setOnEditorActionListener { v, actionId, event ->
-//            var handled = false
-//            if (actionId == EditorInfo.IME_ACTION_DONE) {
-////                var list = mutableListOf<MapSearchInfo>()
-//                tmapdata.findAllPOI(binding.etWriteMapSearchStart.text.toString()) { poiItem ->
-//                    for (i in 0 until poiItem.size) {
-//                        val item = poiItem[i]
-//
-//                        list.add(
-//                            MapSearchInfo(
-//                                locationName = item.poiName,
-//                                locationAddress = item.poiAddress.replace("null", "")
-//                            )
-//
-//                        )
-//                    }
-//                    //     writeMapSearchAdapter.userList.addAll(list)
-//                }
-//                Log.d(
-//                    "list ", list.toString()
-//                )
-//                writeMapSearchAdapter.userList.addAll(list)
-//                writeMapSearchAdapter.notifyDataSetChanged()
-//                handled = true
-//            }
-//            handled
-//        }
     }
 }
-
-
-//runBlocking {
-//    var list = mutableListOf<MapSearchInfo>()
-//
-//    var a = launch{
-//        tmapdata.findAllPOI(binding.etWriteMapSearchStart.text.toString()) { poiItem ->
-//            for (i in 0 until poiItem.size) {
-//                val item = poiItem[i]
-//
-//                list.add(
-//                    MapSearchInfo(
-//                        locationName = item.poiName,
-//                        locationAddress = item.poiAddress.replace("null", "")
-//                    )
-//
-//                )
-//                Log.d(
-//                    "list 11", list.toString()
-//                )
-//                //    delay(10)
-//            }
-//        }
-//    }
-//    a.join()
-//
-//    Log.d(
-//        "list ", list.toString()
-//    )
-//    writeMapSearchAdapter.userList.addAll(list)
-//    writeMapSearchAdapter.notifyDataSetChanged()
-//
-//}

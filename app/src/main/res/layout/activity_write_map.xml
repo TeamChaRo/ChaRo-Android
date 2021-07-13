@@ -1,189 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.write.WriteMapActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.charo_android.ui.write.WriteViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_write_tmap_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.write.WriteMapActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_write_tmap_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_write_search_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingVertical="18dp"
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_write_search_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingVertical="18dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_write_map_back"
+            <ImageView
+                android:id="@+id/img_write_map_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_icon_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/et_write_map_start"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/view_radius_68"
+                android:gravity="center|left"
+                android:hint="@string/start"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_write_map_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/et_write_map_mid1"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/view_radius_68"
+                android:gravity="center|left"
+                android:hint="@string/start"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_write_map_back"
+                app:layout_constraintTop_toBottomOf="@id/et_write_map_start" />
+
+            <ImageView
+                android:id="@+id/img_write_map_delete1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_waypoint_minus_48px_active"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/et_write_map_mid1"
+                app:layout_constraintEnd_toEndOf="@id/et_write_map_mid1"
+                app:layout_constraintTop_toTopOf="@id/et_write_map_mid1" />
+
+            <TextView
+                android:id="@+id/et_write_map_mid2"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/view_radius_68"
+                android:gravity="center|left"
+                android:hint="@string/start"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_write_map_back"
+                app:layout_constraintTop_toBottomOf="@id/et_write_map_mid1" />
+
+            <ImageView
+                android:id="@+id/img_write_map_delete2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_waypoint_minus_48px_active"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/et_write_map_mid2"
+                app:layout_constraintEnd_toEndOf="@id/et_write_map_mid2"
+                app:layout_constraintTop_toTopOf="@id/et_write_map_mid2" />
+
+
+            <TextView
+                android:id="@+id/et_write_map_end"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/view_radius_68"
+                android:gravity="center|left"
+                android:hint="@string/end"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_write_map_back"
+                app:layout_constraintTop_toBottomOf="@id/et_write_map_mid2" />
+
+            <ImageView
+                android:id="@+id/img_write_map_add_adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_waypoint_plus_48px_inactive"
+                app:layout_constraintBottom_toBottomOf="@id/et_write_map_end"
+                app:layout_constraintEnd_toEndOf="@id/et_write_map_end"
+                app:layout_constraintTop_toTopOf="@id/et_write_map_end" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_write_complete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="28dp"
+            android:background="@color/gray3_sub"
+            android:text="작성완료"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_icon_back"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="마커 찍기" />
 
-        <TextView
-            android:id="@+id/et_write_map_start"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/view_radius_68"
-            android:gravity="center|left"
-            android:hint="@string/start"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingLeft="16dp"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_write_map_back"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/et_write_map_mid1"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/view_radius_68"
-            android:gravity="center|left"
-            android:hint="@string/start"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingLeft="16dp"
-            android:textSize="14sp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_write_map_back"
-            app:layout_constraintTop_toBottomOf="@id/et_write_map_start" />
-
-        <ImageView
-            android:id="@+id/img_write_map_delete1"
+        <Button
+            android:id="@+id/btn_path_mark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_waypoint_minus_48px_active"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_mid1"
-            app:layout_constraintEnd_toEndOf="@id/et_write_map_mid1"
-            app:layout_constraintTop_toTopOf="@id/et_write_map_mid1" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_mark"
+            android:text="마커 찍고 경로" />
 
-        <TextView
-            android:id="@+id/et_write_map_mid2"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/view_radius_68"
-            android:gravity="center|left"
-            android:hint="@string/start"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingLeft="16dp"
-            android:textSize="14sp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_write_map_back"
-            app:layout_constraintTop_toBottomOf="@id/et_write_map_mid1" />
-
-        <ImageView
-            android:id="@+id/img_write_map_delete2"
+        <Button
+            android:id="@+id/btn_find"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_waypoint_minus_48px_active"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_mid2"
-            app:layout_constraintEnd_toEndOf="@id/et_write_map_mid2"
-            app:layout_constraintTop_toTopOf="@id/et_write_map_mid2" />
-
-
-        <TextView
-            android:id="@+id/et_write_map_end"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/view_radius_68"
-            android:gravity="center|left"
-            android:hint="@string/end"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingLeft="16dp"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_write_map_back"
-            app:layout_constraintTop_toBottomOf="@id/et_write_map_mid2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_path_mark"
+            android:text="경로 생성" />
 
         <ImageView
-            android:id="@+id/img_write_map_add_adress"
+            android:id="@+id/img_mark_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_waypoint_plus_48px_inactive"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_end"
-            app:layout_constraintEnd_toEndOf="@id/et_write_map_end"
-            app:layout_constraintTop_toTopOf="@id/et_write_map_end" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_img_delete_36_px_black" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_write_complete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="28dp"
-        android:background="@color/gray3_sub"
-        android:text="작성완료"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_mark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="마커 찍기"
-        />
-
-    <Button
-        android:id="@+id/btn_path_mark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_mark"
-        android:text="마커 찍고 경로"
-        />
-
-    <Button
-        android:id="@+id/btn_find"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_path_mark"
-        android:text="경로 생성"
-        />
-
-    <ImageView
-        android:id="@+id/img_mark_center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_img_delete_36_px_black"
-        />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

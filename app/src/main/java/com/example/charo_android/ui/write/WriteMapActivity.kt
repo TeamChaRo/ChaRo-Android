@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.write
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -7,7 +8,9 @@ import android.graphics.Color
 import android.graphics.PointF
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.skt.Tmap.*
@@ -24,51 +27,76 @@ class WriteMapActivity : AppCompatActivity() {
     val path = arrayListOf<TMapPoint>()
 
     private lateinit var binding: ActivityWriteMapBinding
+    private val viewModel : WriteViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //ViewModel 사용한 부분
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_write_map)
+//        binding.lifecycleOwner = this
+//        binding.viewModel = viewModel
+
+
         binding.imgWriteMapBack.setOnClickListener {
             onBackPressed()
 
         }
 
-        binding.etWriteMapStart.setOnClickListener {
-            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            intent.putExtra("startLocation","startLocation")
-            startActivity(intent)
 
+        binding.etWriteMapStart.setOnClickListener {
+     //       viewModel.data = 0
+
+            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
+            intent.putExtra("locationM","출발지를 입력하세요")
+
+            startActivity(intent)
         }
         binding.etWriteMapMid1.setOnClickListener {
-            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            val intent2 = Intent(this@WriteMapActivity, WriteMapLocationActivity::class.java)
-            intent2.putExtra("mid1Location","mid1Location")
-            startActivity(intent)
+        //    viewModel.data = 1
 
+            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
+            intent.putExtra("locationM","경유지1를 입력하세요")
+            startActivity(intent)
         }
         binding.etWriteMapMid2.setOnClickListener {
+         //   viewModel.data = 2
+
             val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            val intent2 = Intent(this@WriteMapActivity, WriteMapLocationActivity::class.java)
-            intent2.putExtra("mid2Location","mid2Location")
+            intent.putExtra("locationM","경유지2를 입력하세요")
             startActivity(intent)
 
         }
         binding.etWriteMapEnd.setOnClickListener {
+         //   viewModel.data = 3
+
             val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            val intent2 = Intent(this@WriteMapActivity, WriteMapLocationActivity::class.java)
-            intent2.putExtra("endLocation","endLocation")
+            intent.putExtra("locationM","도착지를 입력하세요")
+
             startActivity(intent)
+
+
 
         }
 
-        binding.etWriteMapStart.text = intent.getStringExtra("locationName")
+        var getLocation = intent.getStringExtra("resultLocation")
+        Log.d("getlocation", getLocation.toString())
+
+        when(getLocation.toString()){
+            "출발지로 설정" -> binding.etWriteMapStart.text = intent.getStringExtra("locationName")
+            "경유지1로 설정" -> binding.etWriteMapMid1.text = intent.getStringExtra("locationName")
+            "경유지2로 설정" -> binding.etWriteMapMid2.text = intent.getStringExtra("locationName")
+            "도착지로 설정" -> binding.etWriteMapEnd.text = intent.getStringExtra("locationName")
+        }
+
 
         val tMapView = TMapView(this@WriteMapActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey("l7xx94a7679a3e1d41a782105327ae7af1cd")
+        tMapView.setSKTMapApiKey("")
         binding.clWriteTmapView.addView(tMapView)
 
         var long = intent.getDoubleExtra("pointLong", 0.0)
@@ -100,6 +128,7 @@ class WriteMapActivity : AppCompatActivity() {
         btnPathMarkOnClickEvent(tMapView)
         btnFindOnClickEvent(tMapView)
     }
+
 
 //
 //    private fun markGangnamStation(tmapView: TMapView) {
@@ -215,19 +244,6 @@ class WriteMapActivity : AppCompatActivity() {
         cnt: Int,
         flag: Boolean
     ) {
-//        thread() {
-//            try{
-//                val tmapPolyLine: TMapPolyLine =
-//                    TMapData().findPathData(tmapPointStart, tmapPointEnd)
-//                tmapPolyLine.lineColor = Color.BLUE
-//                tmapPolyLine.lineWidth = 3F
-//                tmapView.addTMapPolyLine("tmapPolyLine$cnt", tmapPolyLine)
-//                Log.d("error", "tmapPolyLine$cnt")
-//            } catch(e:Exception){
-//                Log.d("error", e.printStackTrace().toString())
-//                e.printStackTrace()
-//            }
-//        }.start()
         val thr: Thread = Thread() {
             try {
                 val tmapPolyLine: TMapPolyLine =
@@ -254,6 +270,17 @@ class WriteMapActivity : AppCompatActivity() {
             Thread.sleep(1000)
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 //        var items = arrayOf("SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL", "K5", "K7")
@@ -276,14 +303,3 @@ class WriteMapActivity : AppCompatActivity() {
 //                )
 //            }
 //        }
-
-
-//WritwActivity에 값 보내기
-//   fun sendData(){
-//        var intent = Intent(this, WriteActivity::class.java)
-////        intent.putExtra("theme1", theme11)
-////            .putExtra("theme2",theme22)
-//
-//        setResult(RESULT_OK, intent)
-//        finish()
-//    }

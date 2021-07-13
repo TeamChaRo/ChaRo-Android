@@ -1,6 +1,9 @@
 package com.example.charo_android.ui.write
 
+import android.app.Activity
 import android.content.Intent
+import android.content.Intent.getIntent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,8 +13,10 @@ import com.example.charo_android.databinding.ItemAutoSearchBinding
 
 class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSearchViewHolder>() {
 
+    private lateinit var activity: WriteMapSearchActivity
     /* 2. Adapter 는 ViewHolder 로 변경할 Data 를 가지고 있어야함 */
     var userList = mutableListOf<MapSearchInfo>()
+//    var text = activity.intent.getStringExtra("locationM")
 
     // 3. Adapter 는 아이템마다 ViewHolder를 만드는 방법을 정의
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapSearchViewHolder {
@@ -20,6 +25,8 @@ class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSear
             parent,
             false
         )
+        activity = WriteMapSearchActivity()
+
         return MapSearchViewHolder(
             binding
         )
@@ -32,8 +39,13 @@ class WriteMapSearchAdapter : RecyclerView.Adapter<WriteMapSearchAdapter.MapSear
     override fun onBindViewHolder(holder: MapSearchViewHolder, position: Int) {
         holder.onBind(userList[position])
 
+
+        var text = activity.intent.getStringExtra("locationM")
+
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context,WriteMapLocationActivity::class.java)
+
+
             intent.putExtra("locationName",userList[position].locationName)
                 .putExtra("locationAddress",userList[position].locationAddress)
 
