@@ -25,12 +25,15 @@ class MainActivity : AppCompatActivity() {
     private val writeFragment : WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
 
+    private lateinit var userId: String
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userId = intent.getStringExtra("userId").toString()
 
         replaceHomeFragment()
         initNavView()
@@ -38,6 +41,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun getUserId(): String {
+        return userId
+    }
 
     private fun initNavView() {
         binding.apply {
