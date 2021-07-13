@@ -56,8 +56,6 @@ class DetailActivity : AppCompatActivity() {
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         tMapViewContainer.addView(tMapView)
 
-        Log.d("server connect", userId)
-        Log.d("server connect", postId.toString())
         init(userId, postId, tMapView)
         // 좋아요 클릭 이벤트
         imgDetailHeartOnClickEvent()
