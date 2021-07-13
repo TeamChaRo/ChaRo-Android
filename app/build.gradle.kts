@@ -74,6 +74,7 @@ dependencies {
     implementation(AndroidXDependencies.fragmentKtx)
     implementation(AndroidXDependencies.activityKtx)
     implementation(AndroidXDependencies.viewModelKtx)
+    implementation(AndroidXDependencies.liveDataKtx)
 
     // Glide
     implementation(ThirdPartyDependencies.glide)

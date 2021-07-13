@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="mapData"
+            type="com.example.charo_android.data.MapSearchInfo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F3F3F3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_name_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/blue_main"
+            android:textSize="15sp"
+            android:fontFamily="@font/noto_sans_cjkkr_regular"
+            android:text="@{mapData.locationName}"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp" />
+
+        <TextView
+            android:id="@+id/item_adress_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/item_name_location"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/gray4_sub"
+            android:textSize="13sp"
+            android:fontFamily="@font/noto_sans_cjkkr_regular"
+            android:text="@{mapData.locationAddress}"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="25dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

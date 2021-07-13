@@ -25,6 +25,8 @@ object AndroidXDependencies {
     const val kotlinxSerialization =
         "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinx_serialization_version}"
     const val cardview = "androidx.cardview:cardview:${Versions.cardview_version}"
+    const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_ktx_version}"
+
 
 }
 
