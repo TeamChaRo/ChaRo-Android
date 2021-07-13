@@ -63,6 +63,7 @@
             android:textAlignment="textStart"
             android:textColor="@color/gray3_sub"
             android:textSize="13sp"
+            android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@id/img_signin_textfield_id"
             app:layout_constraintEnd_toStartOf="@id/img_signin_id_clear"
             app:layout_constraintStart_toEndOf="@id/img_signin_id_icon"
@@ -161,21 +162,6 @@
             android:minHeight="0dp"
             android:includeFontPadding="false"
             android:layout_marginBottom="77dp"/>
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/tv_signin_login"-->
-<!--            android:text="@string/signin_login"-->
-<!--            android:fontFamily="@font/notosanscjkkr_medium"-->
-<!--            android:textSize="14sp"-->
-<!--            android:textAlignment="center"-->
-<!--            android:lineHeight="21sp"-->
-<!--            android:textColor="@color/white"-->
-<!--            app:layout_constraintStart_toStartOf="@id/btn_signin_login"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/btn_signin_login"-->
-<!--            app:layout_constraintTop_toTopOf="@id/btn_signin_login"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/btn_signin_login" />-->
 
         <TextView
             android:layout_width="0dp"
