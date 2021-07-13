@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.signin.SignInActivity">
+
+    <ImageView
+        android:id="@+id/img_signin_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/login_background"
+        app:layout_constraintBottom_toTopOf="@id/cl_signin_login_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_signin_login_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_signin_background"
+        app:layout_constraintBottom_toTopOf="@id/cl_signin_btn">
+
+        <ImageView
+            android:id="@+id/img_signin_textfield_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ui_view_textfield_login_empty"
+            app:layout_constraintBottom_toTopOf="@id/img_signin_textfield_pw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_signin_id_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_id_40_px"
+            app:layout_constraintStart_toStartOf="@id/img_signin_textfield_id"
+            app:layout_constraintTop_toTopOf="@id/img_signin_textfield_id" />
+
+        <EditText
+            android:id="@+id/et_signin_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.5dp"
+            android:background="@null"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:hint="아이디"
+            android:lineHeight="20.8sp"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray3_sub"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@id/img_signin_textfield_id"
+            app:layout_constraintEnd_toStartOf="@id/img_signin_id_clear"
+            app:layout_constraintStart_toEndOf="@id/img_signin_id_icon"
+            app:layout_constraintTop_toTopOf="@id/img_signin_textfield_id" />
+
+        <ImageView
+            android:id="@+id/img_signin_id_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_map_search_close"
+            app:layout_constraintEnd_toEndOf="@id/img_signin_textfield_id"
+            app:layout_constraintStart_toEndOf="@id/et_signin_id"
+            app:layout_constraintTop_toTopOf="@id/img_signin_textfield_id" />
+
+        <ImageView
+            android:id="@+id/img_signin_textfield_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ui_view_textfield_login_empty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cl_signin_login_info" />
+
+        <ImageView
+            android:id="@+id/img_signin_pw_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="11dp"
+            android:src="@drawable/ic_password_40_px"
+            app:layout_constraintStart_toStartOf="@id/img_signin_textfield_pw"
+            app:layout_constraintTop_toTopOf="@id/img_signin_textfield_pw" />
+
+        <EditText
+            android:id="@+id/et_signin_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.5dp"
+            android:background="@null"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:lineHeight="20.8sp"
+            android:textAlignment="textStart"
+            android:textColor="@color/gray3_sub"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@id/img_signin_textfield_pw"
+            app:layout_constraintEnd_toStartOf="@id/img_signin_pw_clear"
+            app:layout_constraintStart_toEndOf="@id/img_signin_pw_icon"
+            app:layout_constraintTop_toTopOf="@id/img_signin_textfield_pw" />
+
+        <ImageView
+            android:id="@+id/img_signin_pw_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_map_search_close"
+            app:layout_constraintEnd_toEndOf="@id/img_signin_textfield_pw"
+            app:layout_constraintStart_toEndOf="@id/et_signin_pw"
+            app:layout_constraintTop_toTopOf="@id/img_signin_textfield_pw" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/cl_signin_btn"
+        app:layout_constraintTop_toBottomOf="@id/cl_signin_login_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_signin_login"
+            android:background="@drawable/btn_signin_login"
+            android:text="@string/signin_login"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:lineHeight="21sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:minHeight="0dp"
+            android:includeFontPadding="false"
+            android:layout_marginBottom="77dp"/>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/tv_signin_login"-->
+<!--            android:text="@string/signin_login"-->
+<!--            android:fontFamily="@font/notosanscjkkr_medium"-->
+<!--            android:textSize="14sp"-->
+<!--            android:textAlignment="center"-->
+<!--            android:lineHeight="21sp"-->
+<!--            android:textColor="@color/white"-->
+<!--            app:layout_constraintStart_toStartOf="@id/btn_signin_login"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/btn_signin_login"-->
+<!--            app:layout_constraintTop_toTopOf="@id/btn_signin_login"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/btn_signin_login" />-->
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_signin_signup"
+            android:text="@string/signin_signup"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:lineHeight="21sp"
+            android:textColor="@color/gray3_sub"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="27dp"
+            android:layout_marginHorizontal="70dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
