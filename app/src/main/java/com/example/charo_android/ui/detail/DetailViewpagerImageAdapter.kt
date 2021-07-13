@@ -1,9 +1,10 @@
-package com.example.charo_android
+package com.example.charo_android.ui.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.charo_android.data.DetailViewpagerImageInfo
 import com.example.charo_android.databinding.ItemDetailImageBinding
 
 class DetailViewpagerImageAdapter: RecyclerView.Adapter<DetailViewpagerImageAdapter.DetailImageViewHolder>() {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.data.LocalMyCharoDataSource
 import com.example.charo_android.databinding.FragmentMyCharoBinding
@@ -14,12 +15,15 @@ import com.example.charo_android.databinding.FragmentMyCharoBinding
 class MyCharoFragment : Fragment() {
     private var _binding: FragmentMyCharoBinding? = null
     private val binding get() = _binding!!
-    private var myCharoAdapter = MyCharoAdapter()
+//    private var myCharoAdapter = MyCharoAdapter()
+    private lateinit var myCharoAdapter: MyCharoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val userId: String = (activity as MainActivity).getUserId()
+        myCharoAdapter = MyCharoAdapter(userId)
         _binding = FragmentMyCharoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

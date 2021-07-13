@@ -17,18 +17,21 @@
             android:name=".ui.search.NoSearchActivity"
             android:label="@string/title_activity_no_search"
             android:theme="@style/Theme.ChaRoAndroid.NoActionBar"></activity>
-        <activity android:name=".ui.search.SearchActivity" />
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".ui.write.WriteMapActivity" />
-        <activity android:name=".ui.write.WriteActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+        <activity android:name=".ui.signin.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".ui.write.WriteMapActivity" />
+        <activity android:name=".ui.write.WriteActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+
         </activity>
     </application>
 

@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.DetailActivity
 import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.detail.DetailActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 
-class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
+class MyCharoAdapter(
+    val userId: String
+): RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
     val itemList = mutableListOf<MyCharoInfo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCharoViewHolder {
@@ -28,7 +30,8 @@ class MyCharoAdapter: RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
 
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", "111")
+            lateinit var activity: MainActivity
+            intent.putExtra("userId", userId)
             intent.putExtra("postId", itemList[position].postId)
             // 서버통신 하기 전에
             // intent로 recyclerview item이

@@ -90,4 +90,8 @@
     <string name="search_activity">드라이브 맞춤 검색 결과</string>
     <string name="search_mention">검색하신 드라이브 코스가 아직 없습니다.\n 직접 나만의 드라이브 코스를 \n 만들어보는 것은 어떠신가요?</string>
     <string name="search_write">드라이브 코스 작성하기</string>
+    <string name="signin_login">로그인</string>
+    <string name="signin_signup">회원가입</string>
+
+>>>>>>> feat/47_sign_in_view
 </resources>

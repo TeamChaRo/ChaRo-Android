@@ -1,4 +1,4 @@
-package com.example.charo_android
+package com.example.charo_android.ui.detail
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -17,7 +17,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
+import com.example.charo_android.data.DetailViewpagerImageInfo
 import com.example.charo_android.data.ResponseDetailData
 import com.example.charo_android.databinding.ActivityDetailBinding
 import com.example.charo_android.hidden.Hidden
@@ -54,8 +56,6 @@ class DetailActivity : AppCompatActivity() {
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         tMapViewContainer.addView(tMapView)
 
-        Log.d("server connect", userId)
-        Log.d("server connect", postId.toString())
         init(userId, postId, tMapView)
         // 좋아요 클릭 이벤트
         imgDetailHeartOnClickEvent()
