@@ -302,13 +302,41 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun imgDetailSaveOnClickEvent() {
+    private fun imgDetailSaveOnClickEvent(userId: String, postId: String) {
         binding.imgDetailSave.setOnClickListener() {
             val save = binding.imgDetailSave
             if (save.isSelected) {
                 Log.d("log", "save is selected")
             }
             save.isSelected = !save.isSelected
+
+            val requestDetailSaveData = RequestDetailSaveData(
+                userId = userId, postId = postId
+            )
+
+            val call: Call<ResponseDetailSaveData> = ApiService.detailViewSaveService
+                .postDetailSave(requestDetailSaveData)
+
+            call.enqueue(object: Callback<ResponseDetailSaveData> {
+                override fun onResponse(
+                    call: Call<ResponseDetailSaveData>,
+                    response: Response<ResponseDetailSaveData>
+                ) {
+                    if(response.isSuccessful){
+                        Log.d("server connect", "success")
+                    } else {
+                        Log.d("server connect", "fail")
+                        Log.d("server connect", "${response.errorBody()}")
+                        Log.d("server connect", "${response.message()}")
+                        Log.d("server connect", "${response.code()}")
+                        Log.d("server connect", "${response.raw().request.url}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseDetailSaveData>, t: Throwable) {
+                    Log.d("server connect", "error:${t.message}")
+                }
+            })
         }
     }
 
