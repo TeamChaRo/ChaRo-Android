@@ -69,7 +69,6 @@
                 android:id="@+id/btn_set_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.text}"
                 android:background="@color/blue_main"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent" />
