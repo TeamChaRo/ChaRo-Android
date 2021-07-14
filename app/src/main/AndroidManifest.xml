@@ -12,6 +12,7 @@
 
 
     <application
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -31,16 +32,16 @@
             android:label="@string/title_activity_no_search"
             android:theme="@style/Theme.ChaRoAndroid.NoActionBar"></activity>
         <activity android:name=".ui.signin.SignInActivity">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
-
         </activity>
     </application>
 
