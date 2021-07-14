@@ -27,260 +27,448 @@ class WriteMapActivity : AppCompatActivity() {
     var path = arrayListOf<TMapPoint>()
 
     private lateinit var binding: ActivityWriteMapBinding
-    private val viewModel : WriteViewModel by viewModels()
 
+    private lateinit var locationFlag: String
+    private lateinit var textview: String
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+
+    //    private var mapData = WriteMapPointData()
+    private var mapData = WriteMapPointData
+//    private val viewModel : WriteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //ViewModel 사용한 부분
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_write_map)
-//        binding.lifecycleOwner = this
-//        binding.viewModel = viewModel
+        locationFlag = intent.getStringExtra("locationFlag").toString()
+        Log.d("locationFlag", locationFlag)
+        textview = intent.getStringExtra("textview").toString()
+        Log.d("textview", textview)
+        latitude = intent.getDoubleExtra("pointLat", 0.0)
+        Log.d("latitude", latitude.toString())
+        longitude = intent.getDoubleExtra("pointLong", 0.0)
+        Log.d("longitude", longitude.toString())
 
-
+        // 뒤로가기 image click하면 뒤로 가짐
         binding.imgWriteMapBack.setOnClickListener {
-            onBackPressed()
+            mapData.startAddress = ""
+            mapData.mid1Address = ""
+            mapData.mid2Address = ""
+            mapData.endAddress = ""
+            mapData.startLat = 0.0
+            mapData.startLong = 0.0
+            mapData.mid1Lat = 0.0
+            mapData.mid1Long = 0.0
+            mapData.mid2Lat = 0.0
+            mapData.mid2Long = 0.0
+            mapData.endLat = 0.0
+            mapData.endLong = 0.0
 
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userId", "and")
+            startActivity(intent)
         }
 
-
+        // 출발지 누르면 검색창으로 감
         binding.etWriteMapStart.setOnClickListener {
-     //       viewModel.data = 0
-
-            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            intent.putExtra("locationM","출발지를 입력하세요")
-
+            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
+            intent.putExtra("locationM", "출발지를 입력하세요")
+            intent.putExtra("locationFlag", "1")
             startActivity(intent)
         }
+
+        // 경유지1 누르면 검색창으로 감
         binding.etWriteMapMid1.setOnClickListener {
-        //    viewModel.data = 1
-
-            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            intent.putExtra("locationM","경유지1를 입력하세요")
+            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
+            intent.putExtra("locationM", "경유지1를 입력하세요")
+            intent.putExtra("locationFlag", "2")
             startActivity(intent)
         }
+        // 경유지2 누르면 검색창으로 감
         binding.etWriteMapMid2.setOnClickListener {
-         //   viewModel.data = 2
-
-            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            intent.putExtra("locationM","경유지2를 입력하세요")
+            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
+            intent.putExtra("locationM", "경유지2를 입력하세요")
+            intent.putExtra("locationFlag", "3")
             startActivity(intent)
-
         }
+        // 도착지 누르면 검색창으로 감
         binding.etWriteMapEnd.setOnClickListener {
-         //   viewModel.data = 3
-
-            val intent = Intent(this@WriteMapActivity, WriteMapSearchActivity::class.java)
-            intent.putExtra("locationM","도착지를 입력하세요")
-
+            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
+            intent.putExtra("locationM", "도착지를 입력하세요")
+            intent.putExtra("locationFlag", "4")
             startActivity(intent)
-
-
-
         }
 
-        var getLocation = intent.getStringExtra("resultLocation")
-        Log.d("getlocation", getLocation.toString())
-
-        when(getLocation.toString()){
-            "출발지로 설정" -> binding.etWriteMapStart.text = intent.getStringExtra("locationName")
-            "경유지1로 설정" -> binding.etWriteMapMid1.text = intent.getStringExtra("locationName")
-            "경유지2로 설정" -> binding.etWriteMapMid2.text = intent.getStringExtra("locationName")
-            "도착지로 설정" -> binding.etWriteMapEnd.text = intent.getStringExtra("locationName")
-        }
+//        내가 주석쳐놓음
+//        var getLocation = intent.getStringExtra("resultLocation")
+//        Log.d("getlocation", getLocation.toString())
+//        when(getLocation.toString()){
+//            "출발지로 설정" -> binding.etWriteMapStart.text = intent.getStringExtra("locationName")
+//            "경유지1로 설정" -> binding.etWriteMapMid1.text = intent.getStringExtra("locationName")
+//            "경유지2로 설정" -> binding.etWriteMapMid2.text = intent.getStringExtra("locationName")
+//            "도착지로 설정" -> binding.etWriteMapEnd.text = intent.getStringExtra("locationName")
+//        }
 
 
         val tMapView = TMapView(this@WriteMapActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey("")
+        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteTmapView.addView(tMapView)
 
-        var long = intent.getDoubleExtra("pointLong", 0.0)
-        var lat = intent.getDoubleExtra("pointLat", 0.0)
-
-        if (long != null && lat != null) {
-            btnPathMarkKeywordOnClickEvent(tMapView, long, lat)
-
-            //도착지가 있으면 <- 조건문 걸어주기
-            btnFindKeywordOnClickEvent(tMapView)
-        }
-
-
-        // 강남역 마커
-//        markGangnamStation(tMapView)
-
-        // 지도 레벨 확대
-        //      btnSizeUpOnClickEvent(tMapView)
-        // 지도 레벨 축소
-        //      btnSizeDownOnClickEvent(tMapView)
-
-        // 자동차 경로안내
-//        findRoadFromSoraepoguViaPangyoToGangnam(tMapView)
-
-        // 현위치 마커
-        btnMarkOnClickEvent(tMapView)
-
-        // 직접 마커 찍어서 경로 탐색
-        btnPathMarkOnClickEvent(tMapView)
-        btnFindOnClickEvent(tMapView)
-    }
-
-
+//        내가 주석쳐놓음
+//        var long = intent.getDoubleExtra("pointLong", 0.0)
+//        var lat = intent.getDoubleExtra("pointLat", 0.0)
+//        if (long != null && lat != null) {
+//            btnPathMarkKeywordOnClickEvent(tMapView, long, lat)
 //
-//    private fun markGangnamStation(tmapView: TMapView) {
-//        val marker_gangnam_station = TMapMarkerItem()
-//        val tmapPoint_gangnam_station =
-//            TMapPoint(gangnam_station_latitude, gangnam_station_longitude)
-//        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-//        marker_gangnam_station.icon = bitmap
-//        marker_gangnam_station.setPosition(0.5F, 1.0F)
-//        marker_gangnam_station.tMapPoint = tmapPoint_gangnam_station
-//        marker_gangnam_station.name = "강남역"
-//        tmapView.addMarkerItem("marker_gangnam_station", marker_gangnam_station)
-//    }
-
-//    private fun btnSizeUpOnClickEvent(tmapView: TMapView) {
-//        binding.btnSizeUp.setOnClickListener() {
-//            tmapView.MapZoomIn()
+//            //도착지가 있으면 <- 조건문 걸어주기
+//            btnFindKeywordOnClickEvent(tMapView)
 //        }
-//    }
+
+//        현위치 마커
+//        btnMarkOnClickEvent(tMapView)
 //
-//    private fun btnSizeDownOnClickEvent(tmapView: TMapView) {
-//        binding.btnSizeDown.setOnClickListener() {
-//            tmapView.MapZoomOut()
-//        }
-//    }
+//        직접 마커 찍어서 경로 탐색
+//        btnPathMarkOnClickEvent(tMapView)
+//        btnFindOnClickEvent(tMapView)
 
-
-    //마커 찍기
-    fun btnMarkOnClickEvent(tmapView: TMapView) {
-        binding.btnMark.setOnClickListener() {
-            val markerCurrentSpot = TMapMarkerItem()
-            val tmapPointCurrentSpot = tmapView.centerPoint
-            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-            markerCurrentSpot.icon = bitmap
-            markerCurrentSpot.setPosition(0.5F, 1.0F)
-            markerCurrentSpot.tMapPoint = tmapPointCurrentSpot
-            markerCurrentSpot.name = "currentSpot$markerCount"
-            tmapView.addMarkerItem("marker_current_spot$markerCount", markerCurrentSpot)
-            markerCount++
-        }
+        fillTextView(locationFlag, textview, latitude, longitude, tMapView)
     }
 
-    //마커 찍고 find 누르면 경로 생성
-    private fun btnPathMarkOnClickEvent(tmapView: TMapView) {
-        binding.btnPathMark.setOnClickListener() {
-            val markerPathSpot = TMapMarkerItem()
-            val tmapPointCurrentSpot = tmapView.centerPoint
-            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-            markerPathSpot.icon = bitmap
-            markerPathSpot.setPosition(0.5F, 1.0F)
-            markerPathSpot.tMapPoint = tmapPointCurrentSpot
-            markerPathSpot.name = "pathSpot$pathMarkerCount"
-            tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
-            pathMarkerCount++
+    private fun fillTextView(
+        locationFlag: String,
+        textview: String,
+        latitude: Double,
+        longitude: Double,
+        tMapView: TMapView
+    ) {
+        if (locationFlag == "1") { // 출발지인 경우
+            mapData.startAddress = textview
+            mapData.startLat = latitude
+            mapData.startLong = longitude
 
-            path.add(tmapPointCurrentSpot)
-        }
-    }
+            binding.etWriteMapStart.text = mapData.startAddress
+            binding.etWriteMapMid1.text = mapData.mid1Address
+            binding.etWriteMapMid2.text = mapData.mid2Address
+            binding.etWriteMapEnd.text = mapData.endAddress
 
-    private fun btnPathMarkKeywordOnClickEvent(tmapView: TMapView, long: Double, lat: Double) {
-        val markerPathSpot = TMapMarkerItem()
-        tmapView.setCenterPoint(long, lat);
-        val tmapPointCurrentSpot = tmapView.centerPoint
-        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-        markerPathSpot.icon = bitmap
-        markerPathSpot.setPosition(0.5F, 1.0F)
-        markerPathSpot.tMapPoint = tmapPointCurrentSpot
-        markerPathSpot.name = "pathSpot$pathMarkerCount"
-        tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
-        pathMarkerCount++
-
-        path.add(tmapPointCurrentSpot)
-
-    }
-
-    //경로 연결
-    private fun btnFindOnClickEvent(tmapView: TMapView) {
-        binding.btnFind.setOnClickListener() {
-            for (i in 0 until pathMarkerCount - 1) {
-                var flag: Boolean = true
-                if (i % 2 == 0) {
-                    flag = !flag
-                }
-                drawPath(tmapView, path[i], path[i + 1], i, flag)
+            if(mapData.mid1Address != "") {
+                binding.etWriteMapMid1.visibility = View.VISIBLE
+                binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
-            tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-            tmapView.zoomLevel = info.tMapZoomLevel
-            Log.d("error", "finish")
+            if(mapData.mid2Address != ""){
+                binding.etWriteMapMid2.visibility = View.VISIBLE
+                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+            }
+        } else if (locationFlag == "2") { // 경유지1인 경우
+            binding.etWriteMapMid1.visibility = View.VISIBLE
+            binding.imgWriteMapDelete1.visibility = View.VISIBLE
+
+            mapData.mid1Address = textview
+            mapData.mid1Lat = latitude
+            mapData.mid1Long = longitude
+
+            binding.etWriteMapStart.text = mapData.startAddress
+            binding.etWriteMapMid1.text = mapData.mid1Address
+            binding.etWriteMapMid2.text = mapData.mid2Address
+            binding.etWriteMapEnd.text = mapData.endAddress
+
+            if(mapData.mid1Address != "") {
+                binding.etWriteMapMid1.visibility = View.VISIBLE
+                binding.imgWriteMapDelete1.visibility = View.VISIBLE
+            }
+            if(mapData.mid2Address != ""){
+                binding.etWriteMapMid2.visibility = View.VISIBLE
+                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+            }
+        } else if (locationFlag == "3") { // 경유지2인 경우
+            binding.etWriteMapMid1.visibility = View.VISIBLE
+            binding.imgWriteMapDelete1.visibility = View.VISIBLE
+            binding.etWriteMapMid2.visibility = View.VISIBLE
+            binding.imgWriteMapDelete2.visibility = View.VISIBLE
+
+            mapData.mid2Address = textview
+            mapData.mid2Lat = latitude
+            mapData.mid2Long = longitude
+
+            binding.etWriteMapStart.text = mapData.startAddress
+            binding.etWriteMapMid1.text = mapData.mid1Address
+            binding.etWriteMapMid2.text = mapData.mid2Address
+            binding.etWriteMapEnd.text = mapData.endAddress
+
+            if(mapData.mid1Address != "") {
+                binding.etWriteMapMid1.visibility = View.VISIBLE
+                binding.imgWriteMapDelete1.visibility = View.VISIBLE
+            }
+            if(mapData.mid2Address != ""){
+                binding.etWriteMapMid2.visibility = View.VISIBLE
+                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+            }
+        } else if (locationFlag == "4") { // 도착지인 경우
+            mapData.endAddress = textview
+            mapData.endLat = latitude
+            mapData.endLong = longitude
+
+            binding.etWriteMapStart.text = mapData.startAddress
+            binding.etWriteMapMid1.text = mapData.mid1Address
+            binding.etWriteMapMid2.text = mapData.mid2Address
+            binding.etWriteMapEnd.text = mapData.endAddress
+
+            if(mapData.mid1Address != "") {
+                binding.etWriteMapMid1.visibility = View.VISIBLE
+                binding.imgWriteMapDelete1.visibility = View.VISIBLE
+            }
+            if(mapData.mid2Address != ""){
+                binding.etWriteMapMid2.visibility = View.VISIBLE
+                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+            }
+        }
+
+        imgWriteMapAddAddressOnClickEvent()
+        imgWriteMapDelete1OnClickEvent(tMapView)
+        imgWriteMapDelete2OnClickEvent(tMapView)
+        addList(tMapView)
+    }
+
+    private fun imgWriteMapAddAddressOnClickEvent() {
+        binding.imgWriteMapAddAdress.setOnClickListener() {
+            if(binding.etWriteMapMid1.visibility == View.GONE) {
+                binding.etWriteMapMid1.visibility = View.VISIBLE
+                binding.imgWriteMapDelete1.visibility = View.VISIBLE
+
+                binding.etWriteMapMid1.text = mapData.mid1Address
+            } else {
+                binding.etWriteMapMid2.visibility = View.VISIBLE
+                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+
+                binding.etWriteMapMid2.text = mapData.mid2Address
+            }
         }
     }
 
-    private fun btnFindKeywordOnClickEvent(tmapView: TMapView) {
-        //    if(pathMarkerCount >= 2)
-        for (i in 0 until pathMarkerCount - 1) {
+    private fun imgWriteMapDelete1OnClickEvent(tMapView: TMapView) {
+        binding.imgWriteMapDelete1.setOnClickListener() {
+            if (mapData.mid2Address != "") {
+                binding.etWriteMapMid2.visibility = View.GONE
+                binding.imgWriteMapDelete2.visibility = View.GONE
+
+                mapData.mid1Address = mapData.mid2Address
+                mapData.mid1Lat = mapData.mid2Lat
+                mapData.mid1Long = mapData.mid2Long
+
+                mapData.mid2Address = ""
+                mapData.mid2Lat = 0.0
+                mapData.mid2Long = 0.0
+
+                binding.etWriteMapMid1.text = mapData.mid1Address
+            } else {
+                binding.etWriteMapMid1.visibility = View.GONE
+                binding.imgWriteMapDelete1.visibility = View.GONE
+
+                mapData.mid1Address = ""
+                mapData.mid1Lat = 0.0
+                mapData.mid1Long = 0.0
+            }
+            path.clear()
+            addList(tMapView)
+        }
+    }
+
+    private fun imgWriteMapDelete2OnClickEvent(tMapView: TMapView) {
+        binding.imgWriteMapDelete2.setOnClickListener() {
+            binding.etWriteMapMid2.visibility = View.GONE
+            binding.imgWriteMapDelete2.visibility = View.GONE
+
+            mapData.mid2Address = ""
+            mapData.mid2Lat = 0.0
+            mapData.mid2Long = 0.0
+
+            path.clear()
+            addList(tMapView)
+        }
+    }
+
+    private fun addList(tMapView: TMapView) {
+        if (mapData.startLat != 0.0) {
+            path.add(TMapPoint(mapData.startLat, mapData.startLong))
+        }
+        if(mapData.mid1Lat != 0.0) {
+            path.add(TMapPoint(mapData.mid1Lat, mapData.mid1Long))
+        }
+        if(mapData.mid2Lat != 0.0) {
+            path.add(TMapPoint(mapData.mid2Lat, mapData.mid2Long))
+        }
+        if(mapData.endLat != 0.0) {
+            path.add(TMapPoint(mapData.endLat, mapData.endLong))
+        }
+
+        if(path.isNotEmpty()){
+            setCenter(tMapView)
+        }
+        tMapView.removeAllTMapPolyLine()
+        mark(tMapView)
+    }
+
+    private fun setCenter(tMapView: TMapView) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            val info: TMapInfo = tMapView.getDisplayTMapInfo(path)
+            tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+            tMapView.zoomLevel = info.tMapZoomLevel - 1
+        }, 500)
+    }
+
+    private fun mark(tMapView: TMapView) {
+        for(i in 0 until path.size) {
+            val marker = TMapMarkerItem()
+            val mapPoint = path[i]
+            var bitmap: Bitmap = if (i == 0) {
+                BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
+            } else if (i == path.size - 1) {
+                BitmapFactory.decodeResource(resources, R.drawable.ic_route_end)
+            } else {
+                BitmapFactory.decodeResource(resources, R.drawable.ic_route_waypoint)
+            }
+            marker.icon = bitmap
+            marker.setPosition(0.5F, 1.0F)
+            marker.tMapPoint = mapPoint
+            marker.name = "marker$i"
+            tMapView.addMarkerItem(marker.name, marker)
+        }
+
+        if(path.size > 1){
+            findPath(tMapView)
+        }
+    }
+
+    private fun findPath(tMapView: TMapView){
+        for(i in 0 until path.size - 1) {
             var flag: Boolean = true
-            if (i % 2 == 0) {
+            if(i != 0 && i % 2 == 0){
                 flag = !flag
             }
-            drawPath(tmapView, path[i], path[i + 1], i, flag)
+            drawPath(tMapView, path[i], path[i+1], i, flag)
         }
-        val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
-        tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-        tmapView.zoomLevel = info.tMapZoomLevel
-        Log.d("error", "finish")
-
     }
 
     private fun drawPath(
-        tmapView: TMapView,
-        tmapPointStart: TMapPoint,
-        tmapPointEnd: TMapPoint,
+        tMapView: TMapView,
+        start: TMapPoint,
+        end: TMapPoint,
         cnt: Int,
         flag: Boolean
     ) {
-        val thr: Thread = Thread() {
+
+
+        val thread: Thread = Thread() {
             try {
-                val tmapPolyLine: TMapPolyLine =
-                    TMapData().findPathData(tmapPointStart, tmapPointEnd)
-                tmapPolyLine.lineColor = Color.BLUE
-                tmapPolyLine.lineWidth = 3F
-                tmapView.addTMapPolyLine("tmapPolyLine$cnt", tmapPolyLine)
-                Log.d("try", "tmapPolyLine$cnt")
+                val tMapPolyLine: TMapPolyLine = TMapData().findPathData(start, end)
+                tMapPolyLine.lineWidth = 3F
+                tMapPolyLine.lineColor = getColor(R.color.blue_main)
+                tMapView.addTMapPolyLine("tMapPolyLine$cnt", tMapPolyLine)
             } catch (e: Exception) {
-                Log.d("catch", e.printStackTrace().toString())
                 e.printStackTrace()
             }
         }
-        thr.start()
+        thread.start()
 
         try {
-            thr.join()
+            thread.join()
         } catch (e: Exception) {
-            Log.d("catch", e.printStackTrace().toString())
             e.printStackTrace()
         }
 
-        if (flag) {
+        if (!flag) {
             Thread.sleep(1000)
         }
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+    }
 
+//    마커 찍기
+//    fun btnMarkOnClickEvent(tmapView: TMapView) {
+//        binding.btnMark.setOnClickListener() {
+//            val markerCurrentSpot = TMapMarkerItem()
+//            val tmapPointCurrentSpot = tmapView.centerPoint
+//            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
+//            markerCurrentSpot.icon = bitmap
+//            markerCurrentSpot.setPosition(0.5F, 1.0F)
+//            markerCurrentSpot.tMapPoint = tmapPointCurrentSpot
+//            markerCurrentSpot.name = "currentSpot$markerCount"
+//            tmapView.addMarkerItem("marker_current_spot$markerCount", markerCurrentSpot)
+//            markerCount++
+//        }
+//    }
+//
+//    마커 찍고 find 누르면 경로 생성
+//    private fun btnPathMarkOnClickEvent(tmapView: TMapView) {
+//        binding.btnPathMark.setOnClickListener() {
+//            val markerPathSpot = TMapMarkerItem()
+//            val tmapPointCurrentSpot = tmapView.centerPoint
+//            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
+//            markerPathSpot.icon = bitmap
+//            markerPathSpot.setPosition(0.5F, 1.0F)
+//            markerPathSpot.tMapPoint = tmapPointCurrentSpot
+//            markerPathSpot.name = "pathSpot$pathMarkerCount"
+//            tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
+//            pathMarkerCount++
+//
+//            path.add(tmapPointCurrentSpot)
+//        }
+//    }
 
+//    private fun btnPathMarkKeywordOnClickEvent(tmapView: TMapView, long: Double, lat: Double) {
+//        val markerPathSpot = TMapMarkerItem()
+//        tmapView.setCenterPoint(long, lat);
+//        val tmapPointCurrentSpot = tmapView.centerPoint
+//        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
+//        markerPathSpot.icon = bitmap
+//        markerPathSpot.setPosition(0.5F, 1.0F)
+//        markerPathSpot.tMapPoint = tmapPointCurrentSpot
+//        markerPathSpot.name = "pathSpot$pathMarkerCount"
+//        tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
+//        pathMarkerCount++
+//
+//        path.add(tmapPointCurrentSpot)
+//
+//    }
 
+//    경로 연결
+//    private fun btnFindOnClickEvent(tmapView: TMapView) {
+//        binding.btnFind.setOnClickListener() {
+//            for (i in 0 until pathMarkerCount - 1) {
+//                var flag: Boolean = true
+//                if (i % 2 == 0) {
+//                    flag = !flag
+//                }
+//                drawPath(tmapView, path[i], path[i + 1], i, flag)
+//            }
+//            val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
+//            tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+//            tmapView.zoomLevel = info.tMapZoomLevel
+//            Log.d("error", "finish")
+//        }
+//    }
 
-
-
-
-
-
-
+//    private fun btnFindKeywordOnClickEvent(tmapView: TMapView) {
+//        //    if(pathMarkerCount >= 2)
+//        for (i in 0 until pathMarkerCount - 1) {
+//            var flag: Boolean = true
+//            if (i % 2 == 0) {
+//                flag = !flag
+//            }
+//            drawPath(tmapView, path[i], path[i + 1], i, flag)
+//        }
+//        val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
+//        tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+//        tmapView.zoomLevel = info.tMapZoomLevel
+//        Log.d("error", "finish")
+//
+//    }
 }
 
 //        var items = arrayOf("SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL", "K5", "K7")
