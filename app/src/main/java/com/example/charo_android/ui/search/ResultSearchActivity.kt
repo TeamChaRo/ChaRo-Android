@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.RequestSearchViewData
@@ -23,6 +24,12 @@ class ResultSearchActivity : AppCompatActivity() {
 
         loadSearchData()
         backSearch()
+        initSpinner()
+
+
+
+
+        
     }
 
 
@@ -82,5 +89,15 @@ class ResultSearchActivity : AppCompatActivity() {
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
         }
+    }
+
+
+    private fun initSpinner() {
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.search_spinner,
+            android.R.layout.simple_spinner_item
+        )
+        binding.spinnerResultSearch.adapter = adapter
     }
 }

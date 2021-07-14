@@ -55,7 +55,7 @@ class SignInActivity : AppCompatActivity() {
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.putExtra("userId", binding.etSigninId.text.toString())
                             intent.putExtra("nickname", data?.nickname)
-                            ContextCompat.startActivity(applicationContext, intent, null)
+                            startActivity(intent)
                         } else {
                             Log.d("server connect", "fail")
                             Log.d("server connect", "${response.errorBody()}")
