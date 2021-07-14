@@ -236,7 +236,6 @@ class HomeFragment : Fragment() {
             val result = binding.textHomeHotDrive.text
             val num = 0
             setFragmentResult("title", bundleOf("title" to result, "num" to num))
-
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
@@ -248,7 +247,6 @@ class HomeFragment : Fragment() {
             val result = binding.textHomeLocationDrive.text
             val num = 2
             setFragmentResult("title", bundleOf("title" to result, "num" to num))
-
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())

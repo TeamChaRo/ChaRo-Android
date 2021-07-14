@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
 import com.example.charo_android.databinding.FragmentMoreViewBinding
@@ -18,11 +20,11 @@ class MoreThemeViewFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val themeViewIcon = arrayListOf(
-        R.drawable.image_home_theme, R.drawable.image_home_theme, R.drawable.image_home_theme,
-        R.drawable.image_home_theme, R.drawable.image_home_theme, R.drawable.image_home_theme,
-        R.drawable.image_home_theme, R.drawable.image_home_theme, R.drawable.image_home_theme,
-        R.drawable.image_home_theme, R.drawable.image_home_theme, R.drawable.image_home_theme,
-        R.drawable.image_home_theme, R.drawable.image_home_theme, R.drawable.image_home_theme,
+        R.drawable.ic_mouantin, R.drawable.ic_sea, R.drawable.ic_lake,
+        R.drawable.ic_river, R.drawable.ic_spirng, R.drawable.ic_summer,
+        R.drawable.ic_fall, R.drawable.ic_winter, R.drawable.ic_sea_road,
+        R.drawable.ic_bloosom, R.drawable.ic_maple, R.drawable.ic_relax,
+        R.drawable.ic_speed, R.drawable.ic_night_view, R.drawable.ic_city,
     )
 
     private val themeViewText = arrayListOf(
@@ -40,7 +42,7 @@ class MoreThemeViewFragment : Fragment() {
         "#여유",
         "#스피드",
         "#야경",
-        "#    도심"
+        "#도심"
     )
 
     override fun onCreateView(
@@ -81,15 +83,15 @@ class MoreThemeViewFragment : Fragment() {
             with(viewPagerMoreTheme) {
                 adapter = moreThemeViewPagerAdapter
             }
-            TabLayoutMediator(tabMoreTheme, viewPagerMoreTheme) { tab, position ->
-                tab.setIcon(themeViewIcon[position])
+            TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
+                tab.setIcon(R.drawable.ic_winter_please_3x)
                 tab.text = themeViewText[position]
             }.attach()
 
         }
     }
     private fun clickBackButton() {
-        binding.imgMoreThemeBackHome.setOnClickListener {
+        binding.imgBackTheme.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())

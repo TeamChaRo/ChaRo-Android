@@ -1,6 +1,5 @@
 package com.example.charo_android.ui.home.more
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,35 +9,36 @@ import com.example.charo_android.R
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
 
-class MoreViewAdapter() : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
-    var moreData = mutableListOf<ResponseMoreViewData.Data.Drive>()
+class MoreNewViewAdapter: RecyclerView.Adapter<MoreNewViewAdapter.MoreNewViewHolder>() {
+    val moreNewData = mutableListOf<ResponseMoreViewData.Data.Drive>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoreViewViewHolder {
+    ): MoreNewViewAdapter.MoreNewViewHolder {
         val binding = ItemMoreViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return MoreViewViewHolder(binding)
+        return MoreNewViewAdapter.MoreNewViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
-        holder.onBind(moreData[position])
+    override fun onBindViewHolder(holder: MoreNewViewAdapter.MoreNewViewHolder, position: Int) {
+        holder.onBind(moreNewData[position])
     }
+
+
 
     override fun getItemCount(): Int {
-        return moreData.size
+        return moreNewData.size
     }
 
-    class MoreViewViewHolder(
-        private val binding: ItemMoreViewBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(moreViewItem: ResponseMoreViewData.Data.Drive) {
-
-            binding.apply {
+    class MoreNewViewHolder(
+        private val itemMoreViewBinding: ItemMoreViewBinding
+    ): RecyclerView.ViewHolder(itemMoreViewBinding.root) {
+        fun onBind(moreViewItem: ResponseMoreViewData.Data.Drive){
+            itemMoreViewBinding.apply {
                 textMoreViewTitle.text = moreViewItem.title
 
                 with(moreViewItem) {
@@ -75,9 +75,6 @@ class MoreViewAdapter() : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolde
 
 
             }
-
-
         }
-
     }
 }

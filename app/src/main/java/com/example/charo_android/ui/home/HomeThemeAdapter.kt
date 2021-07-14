@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ItemHomeThemeBinding
 import com.example.charo_android.ui.home.more.MoreThemeViewFragment
-
 
 
 class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
@@ -29,7 +29,7 @@ class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHo
     override fun onBindViewHolder(holder: HomeThemeAdapter.HomeThemeViewHolder, position: Int) {
         holder.onBind(themeData[position])
 
-        holder.itemView.setOnClickListener ( object : View.OnClickListener{
+        holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val activity = v?.context as AppCompatActivity
                 val moreThemeViewFragment = MoreThemeViewFragment()
@@ -53,9 +53,15 @@ class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHo
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(homeThemeInfo: HomeThemeInfo) {
             binding.apply {
-                imgHomeTheme.setImageResource(homeThemeInfo.homeThemeImage)
-                textHomeTheme.text = homeThemeInfo.homeThemeTitle
+                with(homeThemeInfo) {
+                    Glide.with(imgHomeTheme.context)
+                        .load(this.homeThemeImage)
+                        .circleCrop()
+                        .into(imgHomeTheme)
 
+                    textHomeTheme.text = homeThemeInfo.homeThemeTitle
+
+                }
             }
         }
     }

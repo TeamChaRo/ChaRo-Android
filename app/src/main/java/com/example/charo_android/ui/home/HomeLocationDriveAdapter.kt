@@ -43,7 +43,7 @@ class HomeLocationDriveAdapter :
                 with(responseHomeLocalData) {
                     com.bumptech.glide.Glide.with(imgHomeLocationDrive.context)
                         .load(this.image)
-                        .placeholder(R.drawable.home_today_drive_image)
+
                         .into(imgHomeLocationDrive)
                 }
                 textHomeLocationDriveTitle.text = responseHomeLocalData.title

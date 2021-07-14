@@ -13,10 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.search.ResultSearchActivity"></activity>
         <activity
             android:name=".ui.search.NoSearchActivity"
             android:label="@string/title_activity_no_search"
-            android:theme="@style/Theme.ChaRoAndroid.NoActionBar"></activity>
+            android:theme="@style/Theme.ChaRoAndroid.NoActionBar" />
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".ui.write.WriteMapActivity" />
