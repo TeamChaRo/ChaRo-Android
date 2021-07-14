@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userId = intent.getStringExtra("userId").toString()
+//        userId = intent.getStringExtra("userId").toString()
+        userId = "and"
 
         replaceHomeFragment()
         initNavView()
