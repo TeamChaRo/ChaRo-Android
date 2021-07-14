@@ -24,7 +24,7 @@ class WriteMapActivity : AppCompatActivity() {
     // 좌표 상수
     var markerCount = 0
     var pathMarkerCount = 0
-    val path = arrayListOf<TMapPoint>()
+    var path = arrayListOf<TMapPoint>()
 
     private lateinit var binding: ActivityWriteMapBinding
     private val viewModel : WriteViewModel by viewModels()
