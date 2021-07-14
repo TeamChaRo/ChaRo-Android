@@ -1,23 +1,23 @@
 package com.example.charo_android.ui.write
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.PointF
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import androidx.activity.viewModels
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityWriteMapBinding
+import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.*
-import com.skt.Tmap.TMapView.OnClickListenerCallback
+import kotlinx.android.synthetic.main.activity_write_map.*
 import java.util.*
 import java.lang.Exception
-import kotlin.concurrent.thread
 
 class WriteMapActivity : AppCompatActivity() {
 
