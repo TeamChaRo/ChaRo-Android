@@ -1,91 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.more.MoreViewFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:fitsSystemWindows="true">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_more_theme"
-            android:layout_width="match_parent"
-            android:layout_height="78dp"
-            app:layout_collapseMode="pin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    style="@style/HeaderH4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="96dp"
-                    android:layout_marginTop="34dp"
-                    android:layout_marginEnd="96dp"
-                    android:layout_marginBottom="23dp"
-                    android:text="@string/main_charo_theme"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/img_more_theme_back_home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginBottom="9dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_icon_back"
-                    android:clickable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_more_theme"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/blue_main"
-            app:tabSelectedTextColor="@color/blue_main"
-            app:tabMode="scrollable"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"
+            android:fitsSystemWindows="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_more_theme"
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                app:layout_collapseMode="pin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/text_toolbar_title"
+                        style="@style/HeaderH4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="96dp"
+                        android:layout_marginTop="34dp"
+                        android:layout_marginEnd="96dp"
+                        android:layout_marginBottom="23dp"
+                        android:text="@string/main_charo_theme"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/img_back_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="21dp"
+                        android:layout_marginBottom="9dp"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_icon_back"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_more_theme_tab"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="97dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/blue_main" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_more_theme"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_more_theme"/>
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_more_theme_tab" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

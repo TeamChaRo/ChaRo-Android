@@ -41,6 +41,8 @@
             style="@style/HeaderH5"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:lines="2"
             android:text=""
             android:maxLength="38"
             android:ellipsize="end"

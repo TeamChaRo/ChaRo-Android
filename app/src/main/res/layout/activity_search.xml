@@ -51,27 +51,19 @@
         </androidx.appcompat.widget.Toolbar>
 
 
-        <ImageView
-            android:id="@+id/img_search_car"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:layout_marginTop="140dp"
-            android:src="@drawable/ic_car_search"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_user_id"
             style="@style/HeaderH14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="90dp"
             android:text="@string/search_user_id"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_search_car" />
+            app:layout_constraintTop_toBottomOf="@+id/img_search_back" />
 
         <TextView
             android:id="@+id/text_search_custom"
@@ -188,7 +180,7 @@
             android:id="@+id/img_search_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/ic_search_btn_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_search_caution" />
@@ -212,8 +204,8 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_close_white"
             android:layout_marginTop="45dp"
-            app:layout_constraintStart_toStartOf="@id/img_search_car"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

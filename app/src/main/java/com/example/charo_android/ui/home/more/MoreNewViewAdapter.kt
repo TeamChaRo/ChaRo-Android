@@ -1,0 +1,80 @@
+package com.example.charo_android.ui.home.more
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.charo_android.R
+import com.example.charo_android.api.ResponseMoreViewData
+import com.example.charo_android.databinding.ItemMoreViewBinding
+
+class MoreNewViewAdapter: RecyclerView.Adapter<MoreNewViewAdapter.MoreNewViewHolder>() {
+    val moreNewData = mutableListOf<ResponseMoreViewData.Data.Drive>()
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MoreNewViewAdapter.MoreNewViewHolder {
+        val binding = ItemMoreViewBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return MoreNewViewAdapter.MoreNewViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MoreNewViewAdapter.MoreNewViewHolder, position: Int) {
+        holder.onBind(moreNewData[position])
+    }
+
+
+
+    override fun getItemCount(): Int {
+        return moreNewData.size
+    }
+
+    class MoreNewViewHolder(
+        private val itemMoreViewBinding: ItemMoreViewBinding
+    ): RecyclerView.ViewHolder(itemMoreViewBinding.root) {
+        fun onBind(moreViewItem: ResponseMoreViewData.Data.Drive){
+            itemMoreViewBinding.apply {
+                textMoreViewTitle.text = moreViewItem.title
+
+                with(moreViewItem) {
+                    Glide.with(imgMoreView.context)
+                        .load(moreViewItem.image)
+                        .placeholder(R.drawable.image_more_view)
+                        .into(imgMoreView)
+                }
+
+
+                if (moreViewItem.tags.count() == 2) {
+                    chipMoreView1.text = moreViewItem.tags[0]
+                    chipMoreView2.text = moreViewItem.tags[1]
+                    chipMoreView3.visibility = View.INVISIBLE
+
+                } else {
+                    chipMoreView1.text = moreViewItem.tags[0]
+                    chipMoreView2.text = moreViewItem.tags[1]
+                    chipMoreView3.text = moreViewItem.tags[2]
+                }
+
+                imgMoreViewHeart.setImageResource(R.drawable.selector_home_heart)
+                if (moreViewItem.isFavorite == false) {
+                    with(imgMoreViewHeart) {
+                        this.isSelected = false
+                        setOnClickListener { this.isSelected != this.isSelected }
+                    }
+                } else {
+                    with(imgMoreViewHeart) {
+                        this.isSelected = true
+                        setOnClickListener { this.isSelected != this.isSelected }
+                    }
+                }
+
+
+            }
+        }
+    }
+}

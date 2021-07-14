@@ -5,8 +5,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
-    private const val BASE_URL = Hidden.baseUrl
 
+    private const val BASE_URL = Hidden.baseUrl
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -18,5 +18,8 @@ object ApiService {
     val signInViewService: SignInViewService = retrofit.create(SignInViewService::class.java)
     val detailViewLikeService: DetailViewLikeService = retrofit.create(DetailViewLikeService::class.java)
     val detailViewSaveService: DetailViewSaveService = retrofit.create(DetailViewSaveService::class.java)
+    val moreViewNewService: MoreViewNewService = retrofit.create(MoreViewNewService::class.java)
+    val searchViewService : SearchViewService = retrofit.create(SearchViewService::class.java)
+
 }
 

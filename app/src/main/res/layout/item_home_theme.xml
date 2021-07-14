@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/image_home_theme"
             android:clickable="true"
+            android:background="@drawable/theme_circle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView

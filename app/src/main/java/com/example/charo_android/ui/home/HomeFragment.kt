@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.ResponseHomeViewData
@@ -25,14 +27,14 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding ?: error("view")
-    private var homeViewPagerAdapter = HomeViewPagerAdapter()
+    private lateinit var homeViewPagerAdapter : HomeViewPagerAdapter
     private var homeTodayDriveAdapter = HomeTodayDriveAdapter()
     private var homeThemeAdapter = HomeThemeAdapter()
     private var homeHotDriveAdapter = HomeHotDriveAdapter()
     private var homeNightDriveAdapter = HomeNIghtDriveAdapter()
     private var homeLocationDriveAdapter = HomeLocationDriveAdapter()
     val context = activity as? AppCompatActivity
-
+    var bundle = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +42,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-
+        homeViewPagerAdapter = HomeViewPagerAdapter()
+        binding.vpMain.adapter = homeViewPagerAdapter
 
 
         return binding.root
@@ -66,7 +68,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun initHomeViewPager() {
-        binding.vpMain.adapter = homeViewPagerAdapter
         val call: Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
         call.enqueue(object : Callback<ResponseHomeViewData> {
             override fun onResponse(
@@ -232,6 +233,9 @@ class HomeFragment : Fragment() {
 
     private fun replaceMoreViewFragment() {
         binding.textHomeHotDrivePlus.setOnClickListener {
+            val result = binding.textHomeHotDrive.text
+            val num = 0
+            setFragmentResult("title", bundleOf("title" to result, "num" to num))
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
@@ -240,6 +244,9 @@ class HomeFragment : Fragment() {
             }
         }
         binding.textHomeLocationDrivePlus.setOnClickListener {
+            val result = binding.textHomeLocationDrive.text
+            val num = 2
+            setFragmentResult("title", bundleOf("title" to result, "num" to num))
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
@@ -248,6 +255,9 @@ class HomeFragment : Fragment() {
             }
         }
         binding.textHomeNightDrivePlus.setOnClickListener {
+            val result = binding.textHomeNightDrive.text
+            val num = 1
+            setFragmentResult("title", bundleOf("title" to result, "num" to num))
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())

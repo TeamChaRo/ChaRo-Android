@@ -44,7 +44,6 @@ class HomeNIghtDriveAdapter() :
                 with(responseHomeCustomThemeDrive) {
                     Glide.with(imgHomeNightDrive.context)
                         .load(this.image)
-                        .placeholder(R.drawable.home_today_drive_image)
                         .into(imgHomeNightDrive)
 
 
