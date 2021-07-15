@@ -33,9 +33,7 @@ class WriteMapActivity : AppCompatActivity() {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
 
-    //    private var mapData = WriteMapPointData()
     private var mapData = WriteMapPointData
-//    private val viewModel : WriteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,39 +99,11 @@ class WriteMapActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        내가 주석쳐놓음
-//        var getLocation = intent.getStringExtra("resultLocation")
-//        Log.d("getlocation", getLocation.toString())
-//        when(getLocation.toString()){
-//            "출발지로 설정" -> binding.etWriteMapStart.text = intent.getStringExtra("locationName")
-//            "경유지1로 설정" -> binding.etWriteMapMid1.text = intent.getStringExtra("locationName")
-//            "경유지2로 설정" -> binding.etWriteMapMid2.text = intent.getStringExtra("locationName")
-//            "도착지로 설정" -> binding.etWriteMapEnd.text = intent.getStringExtra("locationName")
-//        }
-
-
         val tMapView = TMapView(this@WriteMapActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteTmapView.addView(tMapView)
-
-//        내가 주석쳐놓음
-//        var long = intent.getDoubleExtra("pointLong", 0.0)
-//        var lat = intent.getDoubleExtra("pointLat", 0.0)
-//        if (long != null && lat != null) {
-//            btnPathMarkKeywordOnClickEvent(tMapView, long, lat)
-//
-//            //도착지가 있으면 <- 조건문 걸어주기
-//            btnFindKeywordOnClickEvent(tMapView)
-//        }
-
-//        현위치 마커
-//        btnMarkOnClickEvent(tMapView)
-//
-//        직접 마커 찍어서 경로 탐색
-//        btnPathMarkOnClickEvent(tMapView)
-//        btnFindOnClickEvent(tMapView)
 
         fillTextView(locationFlag, textview, latitude, longitude, tMapView)
     }
@@ -388,106 +358,4 @@ class WriteMapActivity : AppCompatActivity() {
     override fun onBackPressed() {
 //        super.onBackPressed()
     }
-
-//    마커 찍기
-//    fun btnMarkOnClickEvent(tmapView: TMapView) {
-//        binding.btnMark.setOnClickListener() {
-//            val markerCurrentSpot = TMapMarkerItem()
-//            val tmapPointCurrentSpot = tmapView.centerPoint
-//            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-//            markerCurrentSpot.icon = bitmap
-//            markerCurrentSpot.setPosition(0.5F, 1.0F)
-//            markerCurrentSpot.tMapPoint = tmapPointCurrentSpot
-//            markerCurrentSpot.name = "currentSpot$markerCount"
-//            tmapView.addMarkerItem("marker_current_spot$markerCount", markerCurrentSpot)
-//            markerCount++
-//        }
-//    }
-//
-//    마커 찍고 find 누르면 경로 생성
-//    private fun btnPathMarkOnClickEvent(tmapView: TMapView) {
-//        binding.btnPathMark.setOnClickListener() {
-//            val markerPathSpot = TMapMarkerItem()
-//            val tmapPointCurrentSpot = tmapView.centerPoint
-//            val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-//            markerPathSpot.icon = bitmap
-//            markerPathSpot.setPosition(0.5F, 1.0F)
-//            markerPathSpot.tMapPoint = tmapPointCurrentSpot
-//            markerPathSpot.name = "pathSpot$pathMarkerCount"
-//            tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
-//            pathMarkerCount++
-//
-//            path.add(tmapPointCurrentSpot)
-//        }
-//    }
-
-//    private fun btnPathMarkKeywordOnClickEvent(tmapView: TMapView, long: Double, lat: Double) {
-//        val markerPathSpot = TMapMarkerItem()
-//        tmapView.setCenterPoint(long, lat);
-//        val tmapPointCurrentSpot = tmapView.centerPoint
-//        val bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.poi_dot)
-//        markerPathSpot.icon = bitmap
-//        markerPathSpot.setPosition(0.5F, 1.0F)
-//        markerPathSpot.tMapPoint = tmapPointCurrentSpot
-//        markerPathSpot.name = "pathSpot$pathMarkerCount"
-//        tmapView.addMarkerItem("path_spot_$pathMarkerCount", markerPathSpot)
-//        pathMarkerCount++
-//
-//        path.add(tmapPointCurrentSpot)
-//
-//    }
-
-//    경로 연결
-//    private fun btnFindOnClickEvent(tmapView: TMapView) {
-//        binding.btnFind.setOnClickListener() {
-//            for (i in 0 until pathMarkerCount - 1) {
-//                var flag: Boolean = true
-//                if (i % 2 == 0) {
-//                    flag = !flag
-//                }
-//                drawPath(tmapView, path[i], path[i + 1], i, flag)
-//            }
-//            val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
-//            tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-//            tmapView.zoomLevel = info.tMapZoomLevel
-//            Log.d("error", "finish")
-//        }
-//    }
-
-//    private fun btnFindKeywordOnClickEvent(tmapView: TMapView) {
-//        //    if(pathMarkerCount >= 2)
-//        for (i in 0 until pathMarkerCount - 1) {
-//            var flag: Boolean = true
-//            if (i % 2 == 0) {
-//                flag = !flag
-//            }
-//            drawPath(tmapView, path[i], path[i + 1], i, flag)
-//        }
-//        val info: TMapInfo = tmapView.getDisplayTMapInfo(path)
-//        tmapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-//        tmapView.zoomLevel = info.tMapZoomLevel
-//        Log.d("error", "finish")
-//
-//    }
 }
-
-//        var items = arrayOf("SM3", "SM5", "SM7", "SONATA", "AVANTE", "SOUL", "K5", "K7")
-//
-//        var adapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, items)
-//        binding.etWriteMapStart.setAdapter(adapter)
-
-//        val tMapPOIItem = TMapPOIItem()
-//        val tmapdata = TMapData()
-//     //   val POIItem = tmapdata.findAllPOI("SKT타워")
-//
-//        tmapdata.findAllPOI("SKT타워") { poiItem ->
-//            for (i in 0 until poiItem.size) {
-//                val item = poiItem[i]
-//                Toast.makeText(this, item.poiName, Toast.LENGTH_LONG).show()
-//                Log.d(
-//                    "POI Name: ", item.poiName.toString() + ", " +
-//                            "Address: " + item.poiAddress.replace("null", "") + ", " +
-//                            "Point: " + item.poiPoint.toString()
-//                )
-//            }
-//        }
