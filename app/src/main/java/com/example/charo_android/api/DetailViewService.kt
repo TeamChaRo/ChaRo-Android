@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface DetailViewService {
     @GET("/postDetail/{userId}/{postId}")
     fun getDetail(
-        @Path("userId") userId: String, @Path("postId") postId: String
+        @Path("userId") userId: String, @Path("postId") postId: Int
 //        @Query("userId", encoded=true) userId: String, @Query("postId", encoded=true) postId: String
     ): Call<ResponseDetailData>
 }
