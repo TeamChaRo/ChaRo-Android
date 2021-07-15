@@ -1,6 +1,8 @@
 package com.example.charo_android.ui.write
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -337,44 +339,48 @@ class WriteActivity : AppCompatActivity() {
 
         //서버 테스트
         binding.btnWriteBottomNext.setOnClickListener {
-            var file: File
-            var fileList = listOf<Any>()
-            var requestFile: RequestBody
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("작성을 완료하고, 드라이브 경로를 이어 작성하시겠습니까? 이후 글 수정은 어렵습니다.")
+                .setPositiveButton("예",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        var file: File
+                        var fileList = listOf<Any>()
+                        var requestFile: RequestBody
 //               for (i in 0 until writeAdapter.imgList.size){
 //                 file = File(writeAdapter.imgList[i].imgUri.toString()) //[WriteImgInfo(imgUri=content:/com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F45/ORIGINAL/NONE/image%2Fjpeg/1578402431), WriteImgInfo(imgUri=content:/com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F46/ORIGINAL/NONE/image%2Fjpeg/765233817)]
 
-            file =
-                File(writeAdapter.imgList[0].imgUri.toString()) //[WriteImgInfo(imgUri=content:/com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F45/ORIGINAL/NONE/image%2Fjpeg/1578402431), WriteImgInfo(imgUri=content:/com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F46/ORIGINAL/NONE/image%2Fjpeg/765233817)]
+                        file =
+                            File(writeAdapter.imgList[0].imgUri.toString()) //[WriteImgInfo(imgUri=content:/com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F45/ORIGINAL/NONE/image%2Fjpeg/1578402431), WriteImgInfo(imgUri=content:/com.google.android.apps.photos.contentprovider/-1/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F46/ORIGINAL/NONE/image%2Fjpeg/765233817)]
 
 //            requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
 //            fileList += requestFile
 
-            var warningList: List<Boolean>
-            warningList = listOf<Boolean>(true, false, true, false)
-            writePost(
-                binding.etWriteTitle.text.toString(),
-                "token",
-                "도",
-                "시",
-                warningList,
-                listOf(
-                    binding.btnWriteTheme1.text.toString(),
-                    binding.btnWriteTheme2.text.toString(),
-                    binding.btnWriteTheme3.text.toString()
-                ),
-                false,
-                binding.etWriteParkReview.text.toString(),
-                binding.etWriteMyDrive.text.toString(),
-                RequestWriteData.Course(listOf("123"), listOf("123"), listOf("123")),
-                file
-            )
+                        var warningList: List<Boolean>
+                        warningList = listOf<Boolean>(true, false, true, false)
+                        writePost(
+                            binding.etWriteTitle.text.toString(),
+                            "token",
+                            "도",
+                            "시",
+                            warningList,
+                            listOf(
+                                binding.btnWriteTheme1.text.toString(),
+                                binding.btnWriteTheme2.text.toString(),
+                                binding.btnWriteTheme3.text.toString()
+                            ),
+                            false,
+                            binding.etWriteParkReview.text.toString(),
+                            binding.etWriteMyDrive.text.toString(),
+                            RequestWriteData.Course(listOf("123"), listOf("123"), listOf("123")),
+                            file
+                        )
 //            requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
 //            fileList += requestFile
 //            //  }
 //            val body = MultipartBody.Part.createFormData("image", "파일명", requestFile)
 
-            Log.d("clip", fileList.toString())
-            //   startActivityWriteMap()
+                        Log.d("clip", fileList.toString())
+                        //   startActivityWriteMap()
 //            val requestWriteData = RequestWriteData(
 //                title = binding.etWriteTitle.text.toString(),
 //                userId = "token",
@@ -413,7 +419,7 @@ class WriteActivity : AppCompatActivity() {
 //              "latitude": [ "123", "123" ],
 //              "longtitude": [ "123", "123" ]
 //                    image = file
-            //   )
+                        //   )
 
 //            call.enqueue(object : Callback<ResponseWriteData> {
 //                override fun onResponse(
@@ -441,7 +447,16 @@ class WriteActivity : AppCompatActivity() {
 //                    onBackPressed()
 //                }
 //            })
+//
+            val intent = Intent(this, WriteMapActivity::class.java)
+                    startActivity(intent)
+                    })
+                .setNegativeButton("아니오",
+                    DialogInterface.OnClickListener { dialog, id ->
 
+                    })
+            // Create the AlertDialog object and return it
+            builder.create()
 
         }
 
