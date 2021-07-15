@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.write
 
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,12 @@ class WriteAdapter : RecyclerView.Adapter<WriteAdapter.WriteImgViewHolder>() {
         private val binding: ItemWriteImgBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(writeImgInfo: WriteImgInfo) {
+//            val bitmap =
+//                MediaStore.Images.Media.getBitmap(contentresolver, writeImgInfo.imgUri)
+        //    binding.itemWriteImg.setImageBitmap(bitmap)
+         //   binding.itemWriteImg.uri = writeImgInfo.imgUri
             binding.itemWriteImg.setImageURI(writeImgInfo.imgUri)
+        //    binding.itemWriteImg.setImageBitmap(bitmap)
         }
     }
 }

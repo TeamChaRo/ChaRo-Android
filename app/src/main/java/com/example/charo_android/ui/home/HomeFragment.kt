@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeViewPager() {
         binding.vpMain.adapter = homeViewPagerAdapter
-        val call: Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call: Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("jiwon0321")
         call.enqueue(object : Callback<ResponseHomeViewData> {
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
@@ -99,7 +99,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeTodayDrive() {
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("jiwon0321")
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
@@ -135,7 +135,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeHotDrive() {
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("jiwon0321")
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
@@ -164,7 +164,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeNightDrive() {
         binding.recyclerviewHomeNightDrive.adapter = homeNightDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("jiwon0321")
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
@@ -194,7 +194,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeLocationDrive() {
         binding.recyclerviewHomeLocationDrive.adapter = homeLocationDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("jiwon0321")
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,

@@ -18,5 +18,6 @@ object ApiService {
     val signInViewService: SignInViewService = retrofit.create(SignInViewService::class.java)
     val detailViewLikeService: DetailViewLikeService = retrofit.create(DetailViewLikeService::class.java)
     val detailViewSaveService: DetailViewSaveService = retrofit.create(DetailViewSaveService::class.java)
+    val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
 }
 
