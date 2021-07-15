@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityWriteMapLocationBinding
+import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.*
 import kotlin.concurrent.timer
 import java.lang.Exception
@@ -41,19 +42,6 @@ class WriteMapLocationActivity : AppCompatActivity() {
 
         Log.d("writeMapLocationActivity", intent.getStringExtra("text").toString())
         binding.btnSetLocation.text = resultLocation
-
-
-//        var list = arrayOf<String>("","","","")
-//        binding.btnSetLocation.text = viewModel.text.toString()
-//        if(viewModel.data ==0 || viewModel.text.toString() == "출발지"){
-//            list[0]="1"
-//            Log.d("locationlist",list.toString())
-//        }else if(viewModel.data ==3 || viewModel.text.toString() == "도착지"){
-//            list[3]="1"
-//            Log.d("locationlist",list.toString())
-//        }
-//        Log.d("locationlist",list.toString())
-
 
         val tMapView = TMapView(this@WriteMapLocationActivity)
 
