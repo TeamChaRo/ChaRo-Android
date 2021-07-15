@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         initNavView()
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+    }
+
     fun getUserId(): String {
         return userId
     }

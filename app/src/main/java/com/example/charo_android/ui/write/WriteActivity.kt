@@ -269,6 +269,9 @@ class WriteActivity : AppCompatActivity() {
         val intent = Intent(this@WriteActivity, WriteMapActivity::class.java)
         intent.putExtra("theme11", binding.btnWriteTheme1.text.toString())
             .putExtra("theme22", binding.btnWriteTheme2.text.toString())
+      // 내가 추가한 코드
+        intent.putExtra("locationFlag", "0")
+        intent.putExtra("textview", "0")
        // startActivityForResult(intent, 100) //REQUEST_CODE
        startActivity(intent)
     }

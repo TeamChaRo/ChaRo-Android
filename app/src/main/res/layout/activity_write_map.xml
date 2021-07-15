@@ -17,7 +17,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_write_tmap_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_write_search_map"
+            app:layout_constraintBottom_toBottomOf="parent">
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -62,7 +64,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/view_radius_68"
                 android:gravity="center|left"
-                android:hint="@string/start"
+                android:hint="경유지를 입력해주세요."
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingLeft="16dp"
@@ -90,7 +92,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/view_radius_68"
                 android:gravity="center|left"
-                android:hint="@string/start"
+                android:hint="경유지를 입력해주세요."
                 android:inputType="text"
                 android:maxLines="1"
                 android:paddingLeft="16dp"
@@ -146,48 +148,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="28dp"
-            android:background="@color/gray3_sub"
-            android:text="작성완료"
+            android:background="@color/blue_main"
+            android:text="작성 완료"
             android:textColor="@color/white"
             android:visibility="gone"
+            android:includeFontPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_mark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="마커 찍기" />
-
-        <Button
-            android:id="@+id/btn_path_mark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_mark"
-            android:text="마커 찍고 경로" />
-
-        <Button
-            android:id="@+id/btn_find"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_path_mark"
-            android:text="경로 생성" />
-
-        <ImageView
-            android:id="@+id/img_mark_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_img_delete_36_px_black" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
