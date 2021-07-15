@@ -1,13 +1,20 @@
 package com.example.charo_android.ui.home.more
 
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.charo_android.R
+import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreThemeContentViewBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class MoreThemeContentViewAdapter :
+class MoreThemeContentViewAdapter(val userId: String) :
     RecyclerView.Adapter<MoreThemeContentViewAdapter.MoreThemeContentViewHolder>() {
-    var moreThemeData = mutableListOf<MoreThemeInfo>()
+    var moreThemeData = mutableListOf<ResponseMoreViewData.Data.Drive>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,6 +33,10 @@ class MoreThemeContentViewAdapter :
         position: Int
     ) {
         holder.onBind(moreThemeData[position])
+        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("postId", moreThemeData[position].postId)
+        ContextCompat.startActivity(holder.itemView.context, intent, null)
     }
 
     override fun getItemCount(): Int {
@@ -35,17 +46,41 @@ class MoreThemeContentViewAdapter :
     class MoreThemeContentViewHolder(
         private val binding: ItemMoreThemeContentViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(moreThemeInfo: MoreThemeInfo) {
+        fun onBind(moreThemeInfo: ResponseMoreViewData.Data.Drive) {
             binding.apply {
-                imgMoreTheme.setImageResource(moreThemeInfo.moreThemeImage)
-                textMoreThemeTitle.text = moreThemeInfo.moreThemeTitle
-                chipMoreTheme1.text = moreThemeInfo.moreThemeChip_1
-                chipMoreTheme2.text = moreThemeInfo.moreThemeChip_2
-                chipMoreTheme3.text = moreThemeInfo.moreThemeChip_3
+                with(moreThemeInfo) {
+                    Glide.with(imgMoreTheme.context)
+                        .load(moreThemeInfo.image)
+                        .into(imgMoreTheme)
+                }
+                textMoreThemeTitle.text = moreThemeInfo.title
+                if (moreThemeInfo.tags.count() == 2) {
+                    chipMoreTheme1.text = moreThemeInfo.tags[0]
+                    chipMoreTheme2.text = moreThemeInfo.tags[1]
+                    chipMoreTheme3.visibility = View.INVISIBLE
 
-                with(imgMoreThemeHeart) {
-                    isSelected = false
-                    setOnClickListener { it.isSelected = !it.isSelected }
+                } else if (moreThemeInfo.tags.count() == 1) {
+                    chipMoreTheme1.text = moreThemeInfo.tags[0]
+                    chipMoreTheme2.visibility = View.INVISIBLE
+                    chipMoreTheme3.visibility = View.INVISIBLE
+                } else {
+                    chipMoreTheme1.text = moreThemeInfo.tags[0]
+                    chipMoreTheme2.text = moreThemeInfo.tags[1]
+                    chipMoreTheme3.text = moreThemeInfo.tags[2]
+                }
+
+
+                imgMoreThemeHeart.setImageResource(R.drawable.selector_home_heart)
+                if (moreThemeInfo.isFavorite == false) {
+                    with(imgMoreThemeHeart) {
+                        this.isSelected = false
+                        this.setOnClickListener { this.isSelected = !this.isSelected }
+                    }
+                } else {
+                    with(imgMoreThemeHeart) {
+                        this.isSelected = true
+                        this.setOnClickListener { this.isSelected = !this.isSelected }
+                    }
                 }
             }
 

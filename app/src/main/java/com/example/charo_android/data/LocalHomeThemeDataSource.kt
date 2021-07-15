@@ -9,7 +9,6 @@ class LocalHomeThemeDataSource: HomeThemeDataSource {
             HomeThemeInfo(
                 homeThemeImage = R.drawable.mouantin,
                 homeThemeTitle = "#산"
-
             ),
             HomeThemeInfo(
                 homeThemeImage = R.drawable.sea,

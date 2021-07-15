@@ -95,4 +95,11 @@
     <string name="start">출발지를 입력해주세요.</string>
     <string name="end">도착지를 입력해주세요.</string>
     <string name="auto_search">검색어를 입력해주세요</string>
+    <string name="skip">SKIP</string>
+    <string name="looking">구경해요!</string>
+    <string name="on_boarding_1">   사람들의 드라이브 경험을 \n  자유롭게 구경해보세요</string>
+    <string name="searching"> 검색해요!</string>
+    <string name="on_boarding_2">원하는 지역과 테마로 \n 맞춤 드라이브 코스를 찾아보세요</string>
+    <string name="writing">작성해요!</string>
+    <string name="on_boarding_3">나만의 드라이브 코스를 \n 기록하고 공유해보세요.</string>
 </resources>

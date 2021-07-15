@@ -1,15 +1,18 @@
 package com.example.charo_android.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeHotDriveBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class HomeHotDriveAdapter () : RecyclerView.Adapter<HomeHotDriveAdapter.HomeHotDriveViewHolder>() {
+class HomeHotDriveAdapter (val userId : String) : RecyclerView.Adapter<HomeHotDriveAdapter.HomeHotDriveViewHolder>() {
     val hotData = mutableListOf<ResponseHomeViewData.Data.TrendDrive>()
 
     override fun onCreateViewHolder(
@@ -31,6 +34,17 @@ class HomeHotDriveAdapter () : RecyclerView.Adapter<HomeHotDriveAdapter.HomeHotD
 
         holder.onBind(hotData[position])
 
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", hotData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+
+
+
+
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -38,7 +52,7 @@ class HomeHotDriveAdapter () : RecyclerView.Adapter<HomeHotDriveAdapter.HomeHotD
     }
 
     class HomeHotDriveViewHolder(
-        private val binding: ItemHomeHotDriveBinding
+        val binding: ItemHomeHotDriveBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(responseHomeViewTrendData: ResponseHomeViewData.Data.TrendDrive) {
            binding.apply{

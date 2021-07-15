@@ -1,16 +1,19 @@
 package com.example.charo_android.ui.home.more
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class MoreViewAdapter() : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
+class MoreViewAdapter(val userId: String) : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
     var moreData = mutableListOf<ResponseMoreViewData.Data.Drive>()
 
     override fun onCreateViewHolder(
@@ -27,6 +30,11 @@ class MoreViewAdapter() : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolde
 
     override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
         holder.onBind(moreData[position])
+
+        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("postId", moreData[position].postId)
+        ContextCompat.startActivity(holder.itemView.context, intent, null)
     }
 
     override fun getItemCount(): Int {

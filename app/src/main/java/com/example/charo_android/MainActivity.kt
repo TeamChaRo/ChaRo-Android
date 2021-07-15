@@ -15,6 +15,7 @@ import com.example.charo_android.ui.home.HomeFragment
 
 import com.example.charo_android.ui.home.HomeViewPagerAdapter
 import com.example.charo_android.ui.home.replaceFragment
+import com.example.charo_android.ui.search.SearchActivity
 
 import com.example.charo_android.ui.write.WriteActivity
 import com.example.charo_android.ui.write.WriteFragment
@@ -33,10 +34,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userId = "jiwon0321"
-//        userId = intent.getStringExtra("userId").toString()
+        userId = intent.getStringExtra("userId").toString()
 
-        replaceHomeFragment()
+        replaceHomeFragment(userId)
         initNavView()
     }
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             navView.setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.navigation_home -> {
-                        replaceHomeFragment()
+                        replaceHomeFragment(userId)
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
@@ -73,15 +73,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun replaceHomeFragment(){
-        replaceFragment(homeFragment)
+    private fun replaceHomeFragment(userId : String){
+        replaceFragment(homeFragment,userId)
     }
     private fun replaceWriteFragment(){
-        replaceFragment(writeFragment)
+        replaceFragment(writeFragment,userId)
     }
 
     private fun replaceCharoFragment(){
-        replaceFragment(charoFragment)
+        replaceFragment(charoFragment,userId)
     }
 
 

@@ -1,22 +1,25 @@
 package com.example.charo_android.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class HomeNIghtDriveAdapter() :
-    RecyclerView.Adapter<HomeNIghtDriveAdapter.HomeNightDriveViewHolder>() {
+class HomeNightDriveAdapter(val userId : String) :
+    RecyclerView.Adapter<HomeNightDriveAdapter.HomeNightDriveViewHolder>() {
     val nightData = mutableListOf<ResponseHomeViewData.Data.CustomThemeDrive>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): HomeNIghtDriveAdapter.HomeNightDriveViewHolder {
+    ): HomeNightDriveAdapter.HomeNightDriveViewHolder {
         val binding = ItemHomeNightDriveBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -26,10 +29,14 @@ class HomeNIghtDriveAdapter() :
     }
 
     override fun onBindViewHolder(
-        holder: HomeNIghtDriveAdapter.HomeNightDriveViewHolder,
+        holder: HomeNightDriveAdapter.HomeNightDriveViewHolder,
         position: Int
     ) {
         holder.onBind(nightData[position])
+        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("postId", nightData[position].postId)
+        ContextCompat.startActivity(holder.itemView.context, intent, null)
     }
 
     override fun getItemCount(): Int {

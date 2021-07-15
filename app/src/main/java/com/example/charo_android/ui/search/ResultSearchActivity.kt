@@ -17,62 +17,67 @@ import retrofit2.Response
 class ResultSearchActivity : AppCompatActivity() {
     private var resultSearchAdapter = ResultSearchAdapter()
     private lateinit var binding: ActivityResultSearchBinding
+    private lateinit var userId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        loadSearchData()
-        backSearch()
+        resultSearchAdapter = ResultSearchAdapter()
+        userId = intent.getStringExtra("userId").toString()
+        Log.d("jiwon", userId)
+        loadSearchData(userId)
+        backSearch(userId)
         initSpinner()
 
 
-
-
-        
     }
 
 
-
-
-    fun loadSearchData(){
-        if(intent.hasExtra("province")){
-            binding.chipResultSearch1.text = "#"+intent.getStringExtra("province")
+    fun loadSearchData(userId: String) {
+        if (intent.hasExtra("province")) {
+            binding.chipResultSearch1.text = "#" + intent.getStringExtra("province")
         }
-        if(intent.hasExtra("city")){
-            binding.chipResultSearch2.text = "#"+intent.getStringExtra("city")
+        if (intent.hasExtra("city")) {
+            binding.chipResultSearch2.text = "#" + intent.getStringExtra("city")
         }
-        if(intent.hasExtra("theme")){
-            binding.chipResultSearch3.text = "#"+intent.getStringExtra("theme")
+        if (intent.hasExtra("theme")) {
+            binding.chipResultSearch3.text = "#" + intent.getStringExtra("theme")
         }
-        if(intent.hasExtra("caution")){
-            binding.chipResultSearch4.text= "#"+intent.getStringExtra("caution")+"x"
+        if (intent.hasExtra("caution")) {
+            binding.chipResultSearch4.text = "#" + intent.getStringExtra("caution") + "x"
         }
+        val userId = intent.getStringExtra("userId").toString()
+        val city = intent.getStringExtra("city").toString()
+        val theme = intent.getStringExtra("theme").toString()
+        val caution = intent.getStringExtra("caution").toString()
 
-        val city = intent.getStringExtra("city")
-        val theme = intent.getStringExtra("theme")
-        val caution = intent.getStringExtra("caution")
-
-        Log.d("muyaho", city.toString())
-        Log.d("muyaho", theme.toString())
-        Log.d("muyaho", caution.toString())
-        val requestSearchViewData = RequestSearchViewData("111", city.toString(), theme.toString(), caution.toString())
-
-        val call: Call<ResponseSearchViewData> = ApiService.searchViewService.postSearch(requestSearchViewData)
-        call.enqueue(object : Callback<ResponseSearchViewData>{
+        Log.d("userId", userId)
+        Log.d("muyaho", city)
+        Log.d("muyaho", theme)
+        Log.d("no", caution)
+        binding.recyclerviewResultSearch.adapter = resultSearchAdapter
+        val requet = RequestSearchViewData(userId, city, theme, caution)
+        val call: Call<ResponseSearchViewData> =
+            ApiService.searchViewService.postSearch(requet)
+        call.enqueue(object : Callback<ResponseSearchViewData> {
             override fun onResponse(
                 call: Call<ResponseSearchViewData>,
                 response: Response<ResponseSearchViewData>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val data = response.body()?.data?.drive
                     val count = response.body()?.data?.totalCourse
-                    binding.recyclerviewResultSearch.adapter = resultSearchAdapter
                     resultSearchAdapter.searchData.addAll(data!!)
                     resultSearchAdapter.notifyDataSetChanged()
                     binding.textResultSearchCount.text = "전체 ${count}개 게시물"
 
-                    Log.d("muyaho","무야효~~~")
+                    Log.d("muyaho", "무야효~~~")
+                }else{
+                    Log.d("server connect", "failed")
+                    Log.d("server connect", "${response.errorBody()}")
+                    Log.d("server connect", "${response.message()}")
+                    Log.d("server connect", "${response.code()}")
+                    Log.d("server connect", "${response.raw().request.url}")
                 }
             }
 
@@ -84,10 +89,12 @@ class ResultSearchActivity : AppCompatActivity() {
     }
 
 
-    fun backSearch(){
-        binding.imgBackSearch.setOnClickListener{
-        val intent = Intent(this, SearchActivity::class.java)
-        startActivity(intent)
+
+    fun backSearch(userId: String) {
+        binding.imgBackSearch.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
     }
 

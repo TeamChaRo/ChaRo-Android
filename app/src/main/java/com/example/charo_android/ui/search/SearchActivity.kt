@@ -5,12 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.RequestSearchViewData
 import com.example.charo_android.api.ResponseSearchViewData
 import com.example.charo_android.databinding.ActivitySearchBinding
+import com.example.charo_android.ui.home.HomeFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
@@ -209,42 +211,49 @@ class SearchActivity : AppCompatActivity() {
         "화순"
     )
 
+    private lateinit var userId : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        clickSearch()
+
+        userId = intent.getStringExtra("userId").toString()
+        Log.d("nice",userId)
+        clickSearch(userId)
         initToolBar()
-        goHomeView()
+        goHomeView(userId)
         selectTheme()
         selectCatution()
         selectarea()
     }
 
 
-    fun clickSearch() {
+    fun clickSearch(userId : String) {
         binding.imgSearchStart.setOnClickListener {
-            var province = binding.btnSearchArea1.text.toString()
-            var city = binding.btnSearchArea2.text.toString()
-            var theme = binding.btnSearchTheme.text.toString()
-            var caution = binding.btnSearchCaution.text.toString()
+            val userId = userId
+            val province = binding.btnSearchArea1.text.toString()
+            val region = if(binding.btnSearchArea2.text.toString() == "선택안함") {
+                ""
+            } else {
+                binding.btnSearchArea2.text.toString()
+            }
+            val theme = if(binding.btnSearchTheme.text.toString() == "선택안함") {
+                ""
+            } else {
+                binding.btnSearchTheme.text.toString()
+            }
+            val caution = if(binding.btnSearchCaution.text.toString() == "선택안함") {
+                ""
+            } else {
+                binding.btnSearchCaution.text.toString()
+            }
 
-            if (binding.btnSearchArea1.text.toString() == "상관없음") {
-                province = ""
-            }
-            if (binding.btnSearchArea2.text.toString() == "상관없음") {
-                city = ""
-            }
-            if (binding.btnSearchTheme.text.toString() == "상관없음") {
-                theme = ""
-            }
-            if (binding.btnSearchCaution.toString() == "상관없음") {
-                caution = ""
-            }
+            Log.d("region", region)
+            Log.d("theme", theme)
+            Log.d("caution", caution)
 
-
-            val requestSearchViewData = RequestSearchViewData("111", city, theme, caution)
+            val requestSearchViewData = RequestSearchViewData(userId=userId, region= region, theme=theme, caution=caution)
 
             val call: Call<ResponseSearchViewData> =
                 ApiService.searchViewService.postSearch(requestSearchViewData)
@@ -255,6 +264,7 @@ class SearchActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val data = response.body()?.data?.totalCourse
+                        Log.d("data", data.toString())
                         if (data == 0) {
                             val intent = Intent(this@SearchActivity, NoSearchActivity::class.java)
                             startActivity(intent)
@@ -262,8 +272,9 @@ class SearchActivity : AppCompatActivity() {
                         } else {
                             val intent = Intent(this@SearchActivity, ResultSearchActivity::class.java)
                             intent.apply {
+                                putExtra("userId", userId)
                                 putExtra("province", province)
-                                putExtra("city", city)
+                                putExtra("city", region)
                                 putExtra("theme", theme)
                                 putExtra("caution", caution)
                                 startActivity(intent)
@@ -619,9 +630,10 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    private fun goHomeView() {
+    private fun goHomeView(userId : String) {
         binding.imgSearchBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
 

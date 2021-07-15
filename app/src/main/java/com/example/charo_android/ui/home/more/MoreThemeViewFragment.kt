@@ -1,31 +1,38 @@
 package com.example.charo_android.ui.home.more
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.example.charo_android.R
+import com.example.charo_android.api.ApiService
+import com.example.charo_android.api.RequestThemeViewData
+import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
-import com.example.charo_android.databinding.FragmentMoreViewBinding
 import com.example.charo_android.ui.home.HomeFragment
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MoreThemeViewFragment : Fragment() {
     private var _binding: FragmentMoreThemeViewBinding? = null
     private val binding get() = _binding!!
-
+    var requestThemeData = mutableListOf<RequestThemeViewData>()
     private val themeViewIcon = arrayListOf(
-        R.drawable.ic_mouantin, R.drawable.ic_sea, R.drawable.ic_lake,
+        R.drawable.mouantin, R.drawable.sea, R.drawable.ic_lake,
         R.drawable.ic_river, R.drawable.ic_spirng, R.drawable.ic_summer,
         R.drawable.ic_fall, R.drawable.ic_winter, R.drawable.ic_sea_road,
         R.drawable.ic_bloosom, R.drawable.ic_maple, R.drawable.ic_relax,
         R.drawable.ic_speed, R.drawable.ic_night_view, R.drawable.ic_city,
     )
+    private lateinit var userId : String
 
     private val themeViewText = arrayListOf(
         "#산",
@@ -45,6 +52,7 @@ class MoreThemeViewFragment : Fragment() {
         "#도심"
     )
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,32 +60,39 @@ class MoreThemeViewFragment : Fragment() {
         _binding = FragmentMoreThemeViewBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        initMoreThemeViewPager()
-        clickBackButton()
+
         return root
     }
 
-    private fun initMoreThemeViewPager() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        userId = arguments?.getString("userId").toString()
+
+        initMoreThemeViewPager(userId)
+        clickBackButton()
+        clickTab()
+    }
+
+    private fun initMoreThemeViewPager(userId : String) {
         binding.apply {
             val moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
-            val moreThemeContentViewFragment = MoreThemeContentViewFragment()
             with(moreThemeViewPagerAdapter) {
                 fragments = listOf(
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment(),
-                    MoreThemeContentViewFragment()
+                    MoreThemeContentViewFragment(userId,"1","mountain"),
+                    MoreThemeContentViewFragment(userId,"1","sea"),
+                    MoreThemeContentViewFragment(userId,"1","lake"),
+                    MoreThemeContentViewFragment(userId,"1","river"),
+                    MoreThemeContentViewFragment(userId,"1","spring"),
+                    MoreThemeContentViewFragment(userId,"1","summer"),
+                    MoreThemeContentViewFragment(userId,"1","fall"),
+                    MoreThemeContentViewFragment(userId,"1","winter"),
+                    MoreThemeContentViewFragment(userId,"1","oceanRoad"),
+                    MoreThemeContentViewFragment(userId,"1","blossom"),
+                    MoreThemeContentViewFragment(userId,"1","maple"),
+                    MoreThemeContentViewFragment(userId,"1","relax"),
+                    MoreThemeContentViewFragment(userId,"1","speed"),
+                    MoreThemeContentViewFragment(userId,"1","nightView"),
+                    MoreThemeContentViewFragment(userId,"1","cityView")
                 )
             }
             with(viewPagerMoreTheme) {
@@ -98,8 +113,32 @@ class MoreThemeViewFragment : Fragment() {
                 ?.commit()
         }
     }
+
+    fun clickTab(){
+    binding.tabMoreThemeTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+            when(tab?.position) {
+
+
+            }
+
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+        }
+
+        override fun onTabReselected(tab: TabLayout.Tab?) {
+
+        }
+    })
+
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+

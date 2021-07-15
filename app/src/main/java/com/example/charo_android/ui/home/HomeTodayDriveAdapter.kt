@@ -1,17 +1,20 @@
 package com.example.charo_android.ui.home
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemHomeTodayDriveBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class HomeTodayDriveAdapter(): RecyclerView.Adapter<HomeTodayDriveAdapter.HomeTodayDriveViewHolder>() {
+class HomeTodayDriveAdapter(val userId: String): RecyclerView.Adapter<HomeTodayDriveAdapter.HomeTodayDriveViewHolder>() {
     val driveData = mutableListOf<ResponseHomeViewData.Data.TodayCharoDrive>()
 
     override fun onCreateViewHolder(
@@ -31,6 +34,10 @@ class HomeTodayDriveAdapter(): RecyclerView.Adapter<HomeTodayDriveAdapter.HomeTo
         position: Int
     ) {
         holder.onBind(driveData[position])
+        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("postId", driveData[position].postId)
+        ContextCompat.startActivity(holder.itemView.context, intent, null)
     }
 
     override fun getItemCount(): Int {

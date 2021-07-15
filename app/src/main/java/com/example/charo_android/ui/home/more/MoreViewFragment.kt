@@ -19,12 +19,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
+
 class MoreViewFragment : Fragment() {
     private var _binding: FragmentMoreViewBinding? = null
     private val binding get() = _binding!!
     private var homeFragment = HomeFragment()
     private lateinit var moreViewAdapter: MoreViewAdapter
     private lateinit var moreNewViewAdapter : MoreNewViewAdapter
+    private lateinit var userId : String
+
 
 
     override fun onCreateView(
@@ -32,7 +35,7 @@ class MoreViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMoreViewBinding.inflate(inflater, container, false)
-        moreViewAdapter = MoreViewAdapter()
+        moreViewAdapter = MoreViewAdapter(userId)
         moreNewViewAdapter = MoreNewViewAdapter()
 
 
@@ -45,24 +48,26 @@ class MoreViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        moreViewLoadData()
+        userId = arguments?.getString("userId").toString()
+        Log.d("userIdeas",userId)
+        moreViewLoadData(userId)
         initSpinner()
-        clickBackButton()
+        clickBackButton(userId)
         clickSpinner()
     }
 
 
-    fun moreViewLoadData() {
+    fun moreViewLoadData(userId : String) {
         setFragmentResultListener("title") { requestKey, bundle ->
             val result = bundle.getString("title")
             val num = bundle.getInt("num")
+            val userId = bundle.getString("userId").toString()
             Log.d("result", result.toString())
             Log.d("result", num.toString())
 
-
             if (num == 0) {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewService.getPreview("111", "0","")
+                    ApiService.moreViewService.getPreview(userId, "0","")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -95,7 +100,7 @@ class MoreViewFragment : Fragment() {
 
             } else if (num == 2) {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewService.getPreview("111", "2", "summer")
+                    ApiService.moreViewService.getPreview(userId, "2", "busan")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -124,9 +129,9 @@ class MoreViewFragment : Fragment() {
                     }
                 })
 
-            } else if (num == 1) {
+            } else {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewService.getPreview("111", "1", "summer")
+                    ApiService.moreViewService.getPreview(userId, "1", "summer")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -143,6 +148,7 @@ class MoreViewFragment : Fragment() {
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
                             binding.textToolbarTitle.text = result
                             Log.d("server connect", "success")
+                            Log.d("ideas", userId)
                         } else {
                             Log.d("server connect", "failed")
                             Log.d("server connect", "${response.errorBody()}")
@@ -160,7 +166,7 @@ class MoreViewFragment : Fragment() {
         }
     }
 
-    fun moreViewNewData() {
+    fun moreViewNewData(userId : String) {
         setFragmentResultListener("title") { requestKey, bundle ->
             val result = bundle.getString("title")
             val num = bundle.getInt("num")
@@ -169,7 +175,7 @@ class MoreViewFragment : Fragment() {
 
             if (num == 0) {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewNewService.getNewPreview("111", "0", "summer")
+                    ApiService.moreViewNewService.getNewPreview(userId, "0", "")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -203,7 +209,7 @@ class MoreViewFragment : Fragment() {
 
             } else if (num == 2) {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewNewService.getNewPreview("111", "2", "summer")
+                    ApiService.moreViewNewService.getNewPreview(userId = userId, "2", "busan")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -234,7 +240,7 @@ class MoreViewFragment : Fragment() {
 
             } else if (num == 1) {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewNewService.getNewPreview("111", "1", "summer")
+                    ApiService.moreViewNewService.getNewPreview(userId, "1", "sea")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -292,12 +298,12 @@ class MoreViewFragment : Fragment() {
                     0 -> {
                         Log.d("click", "1")
                         moreViewAdapter.notifyItemRangeRemoved(0,moreViewAdapter.itemCount)
-                        moreViewLoadData()
+                        moreViewLoadData(userId)
                     }
                     1 -> {
                         Log.d("click", "2")
                         moreViewAdapter.notifyItemRangeRemoved(0,moreViewAdapter.itemCount)
-                        moreViewNewData()
+                        moreViewNewData(userId)
                     }
                 }
             }
@@ -321,8 +327,11 @@ class MoreViewFragment : Fragment() {
     }
 
 
-    private fun clickBackButton() {
+    private fun clickBackButton(userId: String) {
         binding.imgBackHome.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("userId", userId)
+            homeFragment.arguments = bundle
             val fragmentManager = activity?.supportFragmentManager
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)

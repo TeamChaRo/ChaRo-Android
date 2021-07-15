@@ -39,7 +39,7 @@ class ResultSearchAdapter(): RecyclerView.Adapter<ResultSearchAdapter.ResultSear
         fun onBind(resultSearchData : ResponseSearchViewData.Data.Drive) {
             binding.apply{
                 with(resultSearchData) {
-                    Glide.with(imgResultSearch)
+                    Glide.with(imgResultSearch.context)
                         .load(resultSearchData.image)
                         .into(imgResultSearch)
                 }
