@@ -46,7 +46,7 @@ class WriteMapLocationActivity : AppCompatActivity() {
         val tMapView = TMapView(this@WriteMapLocationActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey("")
+        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteMapLocationView.addView(tMapView)
 
         if (locationFlag == "1") {
@@ -100,7 +100,7 @@ class WriteMapLocationActivity : AppCompatActivity() {
             address = tmapdata.reverseGeocoding(lat, lon, "A10")
         }
 
-        val tmr = timer(period = 1000, initialDelay = 1000) {
+        val tmr = timer(period = 1000, initialDelay = 0) {
             lat = tMapView.centerPoint.latitude
             lon = tMapView.centerPoint.longitude
             if (tmapdata.reverseGeocoding(lat, lon, "A00") != null) {
@@ -111,7 +111,9 @@ class WriteMapLocationActivity : AppCompatActivity() {
                         "A00"
                     ).strFullAddress
                 ) { poiItem ->
-                    locationAddress = poiItem[0].name
+                    if(poiItem.size != 0) {
+                        locationAddress = poiItem[0].name
+                    }
                 }
                 if (tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName != null) {
                     locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName
