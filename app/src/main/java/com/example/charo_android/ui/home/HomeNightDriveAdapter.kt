@@ -9,14 +9,14 @@ import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
 
-class HomeNIghtDriveAdapter() :
-    RecyclerView.Adapter<HomeNIghtDriveAdapter.HomeNightDriveViewHolder>() {
+class HomeNightDriveAdapter() :
+    RecyclerView.Adapter<HomeNightDriveAdapter.HomeNightDriveViewHolder>() {
     val nightData = mutableListOf<ResponseHomeViewData.Data.CustomThemeDrive>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): HomeNIghtDriveAdapter.HomeNightDriveViewHolder {
+    ): HomeNightDriveAdapter.HomeNightDriveViewHolder {
         val binding = ItemHomeNightDriveBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -26,7 +26,7 @@ class HomeNIghtDriveAdapter() :
     }
 
     override fun onBindViewHolder(
-        holder: HomeNIghtDriveAdapter.HomeNightDriveViewHolder,
+        holder: HomeNightDriveAdapter.HomeNightDriveViewHolder,
         position: Int
     ) {
         holder.onBind(nightData[position])

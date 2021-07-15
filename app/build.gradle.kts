@@ -52,6 +52,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    //viewpager indicator
+    implementation("com.tbuonomo:dotsindicator:4.2")
+
     //viewpager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 

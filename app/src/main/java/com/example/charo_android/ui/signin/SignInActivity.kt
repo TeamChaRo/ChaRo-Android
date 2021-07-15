@@ -11,6 +11,7 @@ import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.RequestSignInData
 import com.example.charo_android.data.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
+import com.example.charo_android.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,10 +53,12 @@ class SignInActivity : AppCompatActivity() {
                                 "${data?.nickname}님 환영합니다!",
                                 Toast.LENGTH_LONG
                             ).show()
+
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.putExtra("userId", binding.etSigninId.text.toString())
                             intent.putExtra("nickname", data?.nickname)
                             startActivity(intent)
+
                         } else {
                             Log.d("server connect", "fail")
                             Log.d("server connect", "${response.errorBody()}")

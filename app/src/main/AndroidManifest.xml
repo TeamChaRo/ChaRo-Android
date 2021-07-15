@@ -3,13 +3,10 @@
     package="com.example.charo_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!--갤러리 권한-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 갤러리 권한 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
 
     <application
         android:allowBackup="true"
@@ -19,11 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true">
+        <activity android:name="com.example.charo_android.ui.onBoarding.OnBoardingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-        <activity android:name=".ui.write.WriteMapLocationActivity"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.write.WriteMapLocationActivity" />
         <activity android:name=".ui.write.WriteMapSearchActivity" />
-        <activity android:name=".ui.search.ResultSearchActivity"/>
+        <activity android:name=".ui.search.ResultSearchActivity" />
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.write.WriteMapActivity" />
@@ -31,18 +33,13 @@
         <activity
             android:name=".ui.search.NoSearchActivity"
             android:label="@string/title_activity_no_search"
-            android:theme="@style/Theme.ChaRoAndroid.NoActionBar"/>
+            android:theme="@style/Theme.ChaRoAndroid.NoActionBar" />
         <activity android:name=".ui.signin.SignInActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
-
-        </activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

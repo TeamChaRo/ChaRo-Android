@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ItemHomeThemeBinding
 import com.example.charo_android.ui.home.more.MoreThemeViewFragment
+import com.example.charo_android.ui.home.more.MoreViewFragment
 
 
 class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {

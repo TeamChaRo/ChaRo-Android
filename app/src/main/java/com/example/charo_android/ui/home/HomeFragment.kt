@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
+import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.ResponseHomeViewData
-import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.data.*
 import com.example.charo_android.databinding.FragmentHomeBinding
 import com.example.charo_android.ui.home.more.MoreViewFragment
@@ -23,18 +23,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding ?: error("view")
+    private val binding get() = _binding!!
     private lateinit var homeViewPagerAdapter : HomeViewPagerAdapter
-    private var homeTodayDriveAdapter = HomeTodayDriveAdapter()
-    private var homeThemeAdapter = HomeThemeAdapter()
-    private var homeHotDriveAdapter = HomeHotDriveAdapter()
-    private var homeNightDriveAdapter = HomeNIghtDriveAdapter()
-    private var homeLocationDriveAdapter = HomeLocationDriveAdapter()
+    private lateinit var homeTodayDriveAdapter : HomeTodayDriveAdapter
+    private lateinit var homeThemeAdapter : HomeThemeAdapter
+    private lateinit var homeHotDriveAdapter : HomeHotDriveAdapter
+    private lateinit var homeNightDriveAdapter : HomeNightDriveAdapter
+    private lateinit var homeLocationDriveAdapter : HomeLocationDriveAdapter
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
+    private lateinit var userId : String
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,24 +43,32 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val root : View = binding.root
         homeViewPagerAdapter = HomeViewPagerAdapter()
-        binding.vpMain.adapter = homeViewPagerAdapter
+        homeNightDriveAdapter = HomeNightDriveAdapter()
+        homeLocationDriveAdapter = HomeLocationDriveAdapter()
+        homeTodayDriveAdapter = HomeTodayDriveAdapter()
+        homeThemeAdapter = HomeThemeAdapter()
+        homeHotDriveAdapter = HomeHotDriveAdapter()
 
 
-        return binding.root
+        return root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val userId :String = (activity as MainActivity).getUserId()
+        initHomeViewPager(userId)
+        initHomeTodayDrive(userId)
+        initHomeHotDrive(userId)
+        initHomeNightDrive(userId)
+        initHomeLocationDrive(userId)
+        goSearchView(userId)
         initToolBar()
-        initHomeViewPager()
-        initHomeTodayDrive()
         initHomeTheme()
-        initHomeHotDrive()
-        initHomeNightDrive()
-        initHomeLocationDrive()
-        goSearchView()
-        replaceMoreViewFragment()
+        replaceMoreViewFragment(userId)
     }
 
     private fun initToolBar() {
@@ -67,19 +76,24 @@ class HomeFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
-    private fun initHomeViewPager() {
-        val call: Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+
+
+
+    private fun initHomeViewPager(userId : String) {
+        binding.vpMain.adapter = homeViewPagerAdapter
+        val call: Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
+        Log.d("userId", userId)
         call.enqueue(object : Callback<ResponseHomeViewData> {
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
                 response: Response<ResponseHomeViewData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("please","제발")
                     val data = response.body()?.data?.banner
                     homeViewPagerAdapter.item.addAll(data!!)
                     homeViewPagerAdapter.localItem.addAll(LocalHomeViewPagerDataSource().fetchData())
                     homeViewPagerAdapter.notifyDataSetChanged()
+
                     Log.d("server connect", "success")
                 } else {
                     Log.d("server connect", "failed")
@@ -98,19 +112,19 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initHomeTodayDrive() {
+    private fun initHomeTodayDrive(userId : String) {
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
                 response: Response<ResponseHomeViewData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("please","제발")
                     val data = response.body()?.data?.todayCharoDrive
                     homeTodayDriveAdapter.driveData.addAll(data!!)
                     homeTodayDriveAdapter.notifyDataSetChanged()
+
                     Log.d("server connect", "success")
                 } else {
                     Log.d("server connect", "failed")
@@ -134,16 +148,15 @@ class HomeFragment : Fragment() {
         homeThemeAdapter.notifyDataSetChanged()
     }
 
-    private fun initHomeHotDrive() {
+    private fun initHomeHotDrive(userId : String) {
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
                 response: Response<ResponseHomeViewData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("please","제발")
                     val data = response.body()?.data?.trendDrive
                     homeHotDriveAdapter.hotData.addAll(data!!)
                     homeHotDriveAdapter.notifyDataSetChanged()
@@ -163,19 +176,20 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun initHomeNightDrive() {
+    private fun initHomeNightDrive(userId : String) {
         binding.recyclerviewHomeNightDrive.adapter = homeNightDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
                 response: Response<ResponseHomeViewData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("please","제발")
                     val data = response.body()?.data?.customThemeDrive
+                    val customTheme = response.body()?.data?.customThemeTitle
                     homeNightDriveAdapter.nightData.addAll(data!!)
                     homeNightDriveAdapter.notifyDataSetChanged()
+                    _binding?.textHomeNightDrive?.text = customTheme
                     Log.d("server connect", "success")
                 } else {
                     Log.d("server connect", "failed")
@@ -193,20 +207,26 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initHomeLocationDrive() {
+
+
+    private fun initHomeLocationDrive(userId : String) {
         binding.recyclerviewHomeLocationDrive.adapter = homeLocationDriveAdapter
-        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain("111")
+        val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
                 response: Response<ResponseHomeViewData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("please","제발")
+
                     val data = response.body()?.data?.localDrive
+                    val location = response.body()?.data?.localTitle
                     homeLocationDriveAdapter.locationData.addAll(data!!)
                     homeLocationDriveAdapter.notifyDataSetChanged()
-                    Log.d("server connect", "success")
+                    _binding?.textHomeLocationDrive?.text = location
+
+
+                    Log.d("server connect", "local success")
                 } else {
                     Log.d("server connect", "failed")
                     Log.d("server connect", "${response.errorBody()}")
@@ -224,29 +244,19 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun goSearchView() {
+    private fun goSearchView(userId: String) {
         binding.imgMainSearch.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
+            intent.putExtra("userId",userId)
             startActivity(intent)
         }
     }
 
-    private fun replaceMoreViewFragment() {
+    private fun replaceMoreViewFragment(userId: String) {
         binding.textHomeHotDrivePlus.setOnClickListener {
             val result = binding.textHomeHotDrive.text
             val num = 0
-            setFragmentResult("title", bundleOf("title" to result, "num" to num))
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
-                addToBackStack(null)
-                commit()
-            }
-        }
-        binding.textHomeLocationDrivePlus.setOnClickListener {
-            val result = binding.textHomeLocationDrive.text
-            val num = 2
-            setFragmentResult("title", bundleOf("title" to result, "num" to num))
+            setFragmentResult("title", bundleOf("title" to result, "num" to num ,"userId" to userId))
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
@@ -257,7 +267,18 @@ class HomeFragment : Fragment() {
         binding.textHomeNightDrivePlus.setOnClickListener {
             val result = binding.textHomeNightDrive.text
             val num = 1
-            setFragmentResult("title", bundleOf("title" to result, "num" to num))
+            setFragmentResult("title", bundleOf("title" to result, "num" to num ,"userId" to userId))
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.apply {
+                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+        binding.textHomeLocationDrivePlus.setOnClickListener {
+            val result = binding.textHomeLocationDrive.text
+            val num = 2
+            setFragmentResult("title", bundleOf("title" to result, "num" to num ,"userId" to userId))
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
