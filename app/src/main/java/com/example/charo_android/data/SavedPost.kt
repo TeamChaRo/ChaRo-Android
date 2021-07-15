@@ -1,6 +1,6 @@
-package com.example.charo_android.ui.charo
+package com.example.charo_android.data
 
-data class MyCharoInfo(
+data class SavedPost(
     val day: String,
     val favoriteNum: Int,
     val image: String,

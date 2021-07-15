@@ -9,7 +9,6 @@
         android:id="@+id/cl_my_charo_img"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/cl_my_charo_info"
         app:layout_constraintEnd_toStartOf="@id/cl_my_charo_info"
         app:layout_constraintHorizontal_weight="355"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +19,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="57:41"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +44,16 @@
             android:ellipsize="end"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:lineHeight="18.9sp"
-            android:maxLines="2"
+            android:lines="2"
             android:text="제목"
             android:textAlignment="textStart"
             android:textColor="@color/black_sub"
             android:textSize="14sp"
+            android:layout_marginBottom="10dp"
+            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/tv_my_charo_tag1" />
 
         <TextView
             android:id="@+id/tv_my_charo_tag1"
@@ -65,6 +65,7 @@
             android:lineHeight="13sp"
             android:paddingHorizontal="11dp"
             android:paddingVertical="2dp"
+            android:includeFontPadding="false"
             android:text="#태그1"
             android:textAlignment="textStart"
             android:textColor="@color/blue_main"
@@ -80,6 +81,7 @@
             android:background="@drawable/shape_charo_hashtag"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:lineHeight="13sp"
+            android:includeFontPadding="false"
             android:paddingHorizontal="11dp"
             android:paddingVertical="2dp"
             android:text="#태그2"
@@ -98,6 +100,7 @@
             android:fontFamily="@font/notosanscjkkr_regular"
             android:lineHeight="13sp"
             android:paddingHorizontal="11dp"
+            android:includeFontPadding="false"
             android:paddingVertical="2dp"
             android:text="#태그3"
             android:textAlignment="textStart"
@@ -115,6 +118,7 @@
             android:textSize="11sp"
             android:textAlignment="textStart"
             android:lineHeight="14.3sp"
+            android:includeFontPadding="false"
             android:textColor="@color/gray3_sub"
             app:layout_constraintStart_toStartOf="@id/tv_my_charo_title"
             app:layout_constraintTop_toBottomOf="@id/tv_my_charo_tag1"
@@ -139,6 +143,7 @@
             android:textSize="11sp"
             android:textAlignment="textStart"
             android:lineHeight="14.3sp"
+            android:includeFontPadding="false"
             android:textColor="@color/gray4_sub"
             app:layout_constraintStart_toEndOf="@id/img_my_charo_like"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"/>
@@ -163,6 +168,7 @@
             android:textAlignment="textStart"
             android:lineHeight="14.3sp"
             android:textColor="@color/gray4_sub"
+            android:includeFontPadding="false"
             app:layout_constraintStart_toEndOf="@id/img_my_charo_save"
             app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"/>
 
