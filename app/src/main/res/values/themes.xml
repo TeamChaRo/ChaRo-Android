@@ -135,7 +135,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
+    <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="" >
         <item name="cornerSize">10%</item>
     </style>
 

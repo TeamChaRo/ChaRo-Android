@@ -22,5 +22,6 @@ object ApiService {
     val searchViewService : SearchViewService = retrofit.create(SearchViewService::class.java)
     val myPageViewLikeService: MyPageViewLikeService = retrofit.create(MyPageViewLikeService::class.java)
     val myPageViewNewService: MyPageViewNewService = retrofit.create(MyPageViewNewService::class.java)
+    val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
 }
 

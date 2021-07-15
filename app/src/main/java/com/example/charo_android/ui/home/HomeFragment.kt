@@ -82,7 +82,6 @@ class HomeFragment : Fragment() {
         binding.vpMain.adapter = homeViewPagerAdapter
         val call: Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         Log.d("userId", userId)
-
         call.enqueue(object : Callback<ResponseHomeViewData> {
             override fun onResponse(
                 call: Call<ResponseHomeViewData>,
@@ -150,6 +149,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeHotDrive(userId : String) {
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
+
         val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(
@@ -178,6 +178,7 @@ class HomeFragment : Fragment() {
 
     private fun initHomeNightDrive(userId : String) {
         binding.recyclerviewHomeNightDrive.adapter = homeNightDriveAdapter
+
         val call : Call<ResponseHomeViewData> = ApiService.mainViewService.getMain(userId)
         call.enqueue(object : Callback<ResponseHomeViewData>{
             override fun onResponse(

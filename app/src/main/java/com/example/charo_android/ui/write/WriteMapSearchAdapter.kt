@@ -15,7 +15,6 @@ class WriteMapSearchAdapter(
     val locationFlag: String, val text: String
 ) : RecyclerView.Adapter<WriteMapSearchAdapter.MapSearchViewHolder>() {
 
-    private lateinit var activity: WriteMapSearchActivity
     /* 2. Adapter 는 ViewHolder 로 변경할 Data 를 가지고 있어야함 */
     var userList = mutableListOf<MapSearchInfo>()
 //    var text = activity.intent.getStringExtra("locationM")
@@ -27,8 +26,6 @@ class WriteMapSearchAdapter(
             parent,
             false
         )
-        activity = WriteMapSearchActivity()
-
         return MapSearchViewHolder(
             binding
         )
@@ -47,7 +44,6 @@ class WriteMapSearchAdapter(
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context,WriteMapLocationActivity::class.java)
 
-
             intent.putExtra("locationName",userList[position].locationName)
                 .putExtra("locationAddress",userList[position].locationAddress)
                 .putExtra("locationFlag", locationFlag)
@@ -64,7 +60,6 @@ class WriteMapSearchAdapter(
         fun onBind(mapSearchInfo: MapSearchInfo) {
 
             binding.mapData = mapSearchInfo
-
 
         }
     }

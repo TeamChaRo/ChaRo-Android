@@ -3,6 +3,7 @@ package com.example.charo_android
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(homeFragment,userId)
     }
     private fun replaceWriteFragment(){
+
         replaceFragment(writeFragment,userId)
     }
 

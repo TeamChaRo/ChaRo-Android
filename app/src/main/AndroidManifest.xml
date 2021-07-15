@@ -29,7 +29,8 @@
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.detail.DetailActivity" />
         <activity android:name=".ui.write.WriteMapActivity" />
-        <activity android:name=".ui.write.WriteActivity" />
+        <activity android:name=".ui.write.WriteActivity" >
+        </activity>
         <activity
             android:name=".ui.search.NoSearchActivity"
             android:label="@string/title_activity_no_search"

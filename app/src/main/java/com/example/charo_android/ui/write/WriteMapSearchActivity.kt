@@ -13,6 +13,9 @@ import com.skt.Tmap.TMapData
 
 class WriteMapSearchActivity : AppCompatActivity() {
 
+
+//    lateinit var location: String
+
     private lateinit var binding: ActivityWriteMapSearchBinding
     private lateinit var writeMapSearchAdapter: WriteMapSearchAdapter
 
