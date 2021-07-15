@@ -33,10 +33,12 @@ class HomeNightDriveAdapter(val userId : String) :
         position: Int
     ) {
         holder.onBind(nightData[position])
-        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-        intent.putExtra("userId", userId)
-        intent.putExtra("postId", nightData[position].postId)
-        ContextCompat.startActivity(holder.itemView.context, intent, null)
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", nightData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -44,7 +46,7 @@ class HomeNightDriveAdapter(val userId : String) :
     }
 
     class HomeNightDriveViewHolder(
-        private val binding: ItemHomeNightDriveBinding
+        val binding: ItemHomeNightDriveBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(responseHomeCustomThemeDrive: ResponseHomeViewData.Data.CustomThemeDrive) {
             binding.apply {

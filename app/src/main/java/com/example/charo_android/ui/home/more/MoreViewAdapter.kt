@@ -30,11 +30,12 @@ class MoreViewAdapter(val userId: String) : RecyclerView.Adapter<MoreViewAdapter
 
     override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
         holder.onBind(moreData[position])
-
-        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-        intent.putExtra("userId", userId)
-        intent.putExtra("postId", moreData[position].postId)
-        ContextCompat.startActivity(holder.itemView.context, intent, null)
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", moreData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -42,7 +43,7 @@ class MoreViewAdapter(val userId: String) : RecyclerView.Adapter<MoreViewAdapter
     }
 
     class MoreViewViewHolder(
-        private val binding: ItemMoreViewBinding
+        val binding: ItemMoreViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(moreViewItem: ResponseMoreViewData.Data.Drive) {
 

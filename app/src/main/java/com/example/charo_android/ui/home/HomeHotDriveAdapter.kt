@@ -40,9 +40,6 @@ class HomeHotDriveAdapter (val userId : String) : RecyclerView.Adapter<HomeHotDr
             intent.putExtra("postId", hotData[position].postId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
 
-
-
-
         }
 
     }

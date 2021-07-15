@@ -267,6 +267,7 @@ class SearchActivity : AppCompatActivity() {
                         Log.d("data", data.toString())
                         if (data == 0) {
                             val intent = Intent(this@SearchActivity, NoSearchActivity::class.java)
+                            intent.putExtra("userId", userId)
                             startActivity(intent)
 
                         } else {

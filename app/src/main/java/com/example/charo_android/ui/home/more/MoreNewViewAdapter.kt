@@ -1,15 +1,18 @@
 package com.example.charo_android.ui.home.more
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class MoreNewViewAdapter: RecyclerView.Adapter<MoreNewViewAdapter.MoreNewViewHolder>() {
+class MoreNewViewAdapter(val userId : String): RecyclerView.Adapter<MoreNewViewAdapter.MoreNewViewHolder>() {
     val moreNewData = mutableListOf<ResponseMoreViewData.Data.Drive>()
 
     override fun onCreateViewHolder(
@@ -26,6 +29,13 @@ class MoreNewViewAdapter: RecyclerView.Adapter<MoreNewViewAdapter.MoreNewViewHol
 
     override fun onBindViewHolder(holder: MoreNewViewAdapter.MoreNewViewHolder, position: Int) {
         holder.onBind(moreNewData[position])
+
+        holder.itemMoreViewBinding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", moreNewData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
 
@@ -35,7 +45,7 @@ class MoreNewViewAdapter: RecyclerView.Adapter<MoreNewViewAdapter.MoreNewViewHol
     }
 
     class MoreNewViewHolder(
-        private val itemMoreViewBinding: ItemMoreViewBinding
+        val itemMoreViewBinding: ItemMoreViewBinding
     ): RecyclerView.ViewHolder(itemMoreViewBinding.root) {
         fun onBind(moreViewItem: ResponseMoreViewData.Data.Drive){
             itemMoreViewBinding.apply {

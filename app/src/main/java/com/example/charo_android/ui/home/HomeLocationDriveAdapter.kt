@@ -32,18 +32,20 @@ class HomeLocationDriveAdapter(val userId: String) :
         position: Int
     ) {
         holder.onBind(locationData[position])
-        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-        intent.putExtra("userId", userId)
-        intent.putExtra("postId", locationData[position].postId)
-        ContextCompat.startActivity(holder.itemView.context, intent, null)
-    }
 
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", locationData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
+    }
     override fun getItemCount(): Int {
         return locationData.size
     }
 
     class HomeLocationDriveViewHolder(
-        private val binding: ItemHomeLocationDriveBinding
+         val binding: ItemHomeLocationDriveBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(responseHomeLocalData: ResponseHomeViewData.Data.LocalDrive) {
             binding.apply {

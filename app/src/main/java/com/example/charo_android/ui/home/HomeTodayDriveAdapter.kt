@@ -34,10 +34,13 @@ class HomeTodayDriveAdapter(val userId: String): RecyclerView.Adapter<HomeTodayD
         position: Int
     ) {
         holder.onBind(driveData[position])
-        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-        intent.putExtra("userId", userId)
-        intent.putExtra("postId", driveData[position].postId)
-        ContextCompat.startActivity(holder.itemView.context, intent, null)
+
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", driveData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,7 +48,7 @@ class HomeTodayDriveAdapter(val userId: String): RecyclerView.Adapter<HomeTodayD
     }
 
     class HomeTodayDriveViewHolder(
-        private val binding : ItemHomeTodayDriveBinding
+         val binding : ItemHomeTodayDriveBinding
     ) : RecyclerView.ViewHolder(binding.root){
         fun onBind(responseHomeViewData : ResponseHomeViewData.Data.TodayCharoDrive){
             binding.apply {

@@ -29,6 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -64,18 +65,16 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_more_theme_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="97dp"
+            android:layout_marginTop="112dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/blue_main" />
-
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_more_theme"

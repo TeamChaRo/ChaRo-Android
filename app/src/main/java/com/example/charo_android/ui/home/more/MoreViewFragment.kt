@@ -35,8 +35,7 @@ class MoreViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMoreViewBinding.inflate(inflater, container, false)
-        moreViewAdapter = MoreViewAdapter(userId)
-        moreNewViewAdapter = MoreNewViewAdapter()
+
 
 
 
@@ -47,13 +46,14 @@ class MoreViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         userId = arguments?.getString("userId").toString()
+        moreViewAdapter = MoreViewAdapter(userId)
+        moreNewViewAdapter = MoreNewViewAdapter(userId)
         Log.d("userIdeas",userId)
         moreViewLoadData(userId)
         initSpinner()
         clickBackButton(userId)
-        clickSpinner()
+        clickSpinner(userId)
     }
 
 
@@ -78,6 +78,7 @@ class MoreViewFragment : Fragment() {
                             val data = response.body()?.data?.drive
                             val count = response.body()?.data?.totalCourse
                             binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.clear()
                             moreViewAdapter.moreData.addAll(data!!)
                             moreViewAdapter.notifyDataSetChanged()
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
@@ -110,6 +111,7 @@ class MoreViewFragment : Fragment() {
                             val data = response.body()?.data?.drive
                             val count = response.body()?.data?.totalCourse
                             binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.clear()
                             moreViewAdapter.moreData.addAll(data!!)
                             moreViewAdapter.notifyDataSetChanged()
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
@@ -143,6 +145,7 @@ class MoreViewFragment : Fragment() {
                             val size = response.body()?.data?.drive?.size
                             Log.d("please", data.toString())
                             binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.clear()
                             moreViewAdapter.moreData.addAll(data!!)
                             moreViewAdapter.notifyDataSetChanged()
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
@@ -187,6 +190,7 @@ class MoreViewFragment : Fragment() {
                             Log.d("please", data.toString())
                             val count = response.body()?.data?.totalCourse
                             binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.clear()
                             moreViewAdapter.moreData.addAll(data!!)
                             moreViewAdapter.notifyDataSetChanged()
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
@@ -219,6 +223,7 @@ class MoreViewFragment : Fragment() {
                             val data = response.body()?.data?.drive
                             val count = response.body()?.data?.totalCourse
                             binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.clear()
                             moreViewAdapter.moreData.addAll(data!!)
                             moreViewAdapter.notifyDataSetChanged()
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
@@ -251,6 +256,7 @@ class MoreViewFragment : Fragment() {
                             val count = response.body()?.data?.totalCourse
                             Log.d("please", data.toString())
                             binding.recyclerviewMoreView.adapter = moreViewAdapter
+                            moreViewAdapter.moreData.clear()
                             moreViewAdapter.moreData.addAll(data!!)
                             moreViewAdapter.notifyDataSetChanged()
                             binding.textMoreViewCount.text = "전체 ${count}개 게시물"
@@ -285,7 +291,7 @@ class MoreViewFragment : Fragment() {
     }
 
 
-    private fun clickSpinner() {
+    private fun clickSpinner(userId: String) {
         binding.spinnerMoreView.onItemSelectedListener = object : AdapterView.OnItemClickListener,
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -296,13 +302,10 @@ class MoreViewFragment : Fragment() {
             ) {
                 when (position) {
                     0 -> {
-                        Log.d("click", "1")
-                        moreViewAdapter.notifyItemRangeRemoved(0,moreViewAdapter.itemCount)
                         moreViewLoadData(userId)
                     }
                     1 -> {
-                        Log.d("click", "2")
-                        moreViewAdapter.notifyItemRangeRemoved(0,moreViewAdapter.itemCount)
+
                         moreViewNewData(userId)
                     }
                 }

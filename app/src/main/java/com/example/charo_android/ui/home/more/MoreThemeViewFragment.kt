@@ -16,6 +16,7 @@ import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
 import com.example.charo_android.ui.home.HomeFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_charo.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +27,7 @@ class MoreThemeViewFragment : Fragment() {
     private val binding get() = _binding!!
     var requestThemeData = mutableListOf<RequestThemeViewData>()
     private val themeViewIcon = arrayListOf(
-        R.drawable.mouantin, R.drawable.sea, R.drawable.ic_lake,
+        R.drawable.ic_mouantin, R.drawable.ic_sea, R.drawable.ic_lake,
         R.drawable.ic_river, R.drawable.ic_spirng, R.drawable.ic_summer,
         R.drawable.ic_fall, R.drawable.ic_winter, R.drawable.ic_sea_road,
         R.drawable.ic_bloosom, R.drawable.ic_maple, R.drawable.ic_relax,
@@ -99,7 +100,7 @@ class MoreThemeViewFragment : Fragment() {
                 adapter = moreThemeViewPagerAdapter
             }
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
-                tab.setIcon(R.drawable.ic_winter_please_3x)
+                tab.setIcon(R.drawable.ic_blossom)
                 tab.text = themeViewText[position]
             }.attach()
 

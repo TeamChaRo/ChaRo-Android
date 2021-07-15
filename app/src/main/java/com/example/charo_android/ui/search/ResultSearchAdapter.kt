@@ -1,15 +1,18 @@
 package com.example.charo_android.ui.search
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseSearchViewData
 import com.example.charo_android.databinding.ItemResultSearchBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class ResultSearchAdapter(): RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {
+class ResultSearchAdapter(val userId : String): RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {
     val searchData = mutableListOf<ResponseSearchViewData.Data.Drive>()
 
     override fun onCreateViewHolder(
@@ -27,6 +30,12 @@ class ResultSearchAdapter(): RecyclerView.Adapter<ResultSearchAdapter.ResultSear
         position: Int
     ) {
         holder.onBind(searchData[position])
+        holder.binding.root.setOnClickListener() {
+            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("postId", searchData[position].postId)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +43,7 @@ class ResultSearchAdapter(): RecyclerView.Adapter<ResultSearchAdapter.ResultSear
     }
 
     class ResultSearchViewHolder(
-        private val binding: ItemResultSearchBinding
+        val binding: ItemResultSearchBinding
     ) : RecyclerView.ViewHolder(binding.root){
         fun onBind(resultSearchData : ResponseSearchViewData.Data.Drive) {
             binding.apply{

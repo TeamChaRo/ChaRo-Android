@@ -15,15 +15,16 @@ class NoSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNoSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        clickBackButton()
+        val userId : String = intent.getStringExtra("userId").toString()
+        clickBackButton(userId)
         clickWriteButton()
     }
 
 
-    private fun clickBackButton() {
+    private fun clickBackButton(userId: String) {
         binding.imgBackHome.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
 

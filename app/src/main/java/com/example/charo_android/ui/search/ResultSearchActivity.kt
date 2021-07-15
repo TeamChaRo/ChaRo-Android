@@ -15,15 +15,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ResultSearchActivity : AppCompatActivity() {
-    private var resultSearchAdapter = ResultSearchAdapter()
     private lateinit var binding: ActivityResultSearchBinding
     private lateinit var userId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        resultSearchAdapter = ResultSearchAdapter()
         userId = intent.getStringExtra("userId").toString()
+
         Log.d("jiwon", userId)
         loadSearchData(userId)
         backSearch(userId)
@@ -55,6 +54,7 @@ class ResultSearchActivity : AppCompatActivity() {
         Log.d("muyaho", city)
         Log.d("muyaho", theme)
         Log.d("no", caution)
+        val resultSearchAdapter = ResultSearchAdapter(userId)
         binding.recyclerviewResultSearch.adapter = resultSearchAdapter
         val requet = RequestSearchViewData(userId, city, theme, caution)
         val call: Call<ResponseSearchViewData> =

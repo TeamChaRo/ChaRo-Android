@@ -33,10 +33,12 @@ class MoreThemeContentViewAdapter(val userId: String) :
         position: Int
     ) {
         holder.onBind(moreThemeData[position])
+        holder.binding.root.setOnClickListener() {
         val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("postId", moreThemeData[position].postId)
         ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -44,7 +46,7 @@ class MoreThemeContentViewAdapter(val userId: String) :
     }
 
     class MoreThemeContentViewHolder(
-        private val binding: ItemMoreThemeContentViewBinding
+        val binding: ItemMoreThemeContentViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(moreThemeInfo: ResponseMoreViewData.Data.Drive) {
             binding.apply {
