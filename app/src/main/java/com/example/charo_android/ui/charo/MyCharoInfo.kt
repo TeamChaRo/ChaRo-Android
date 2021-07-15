@@ -1,13 +1,13 @@
 package com.example.charo_android.ui.charo
 
 data class MyCharoInfo(
-    val image: Int,
+    val day: String,
+    val favoriteNum: Int,
+    val image: String,
+    val month: String,
+    val postId: Int,
+    val saveNum: Int,
+    val tags: List<String>,
     val title: String,
-    val hashtag1: String,
-    val hashtag2: String,
-    val hashtag3: String,
-    val date: String,
-    val likeCount: Int,
-    val saveCount: Int,
-    val postId: String,
+    val year: String
 )
