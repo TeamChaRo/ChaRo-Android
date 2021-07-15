@@ -35,21 +35,6 @@ class WriteMapSearchActivity : AppCompatActivity() {
         }
         binding.etWriteMapSearchStart.hint = text
 
-//        if(text == "출발지를 입력하세요"){
-//            var intent = Intent(this,WriteMapLocationActivity::class.java)
-//            intent.putExtra("setLocation","출발지로 설정")
-//        }else if(text == "경유지1를 입력하세요"){
-//            var intent = Intent(this,WriteMapLocationActivity::class.java)
-//            intent.putExtra("setLocation","경유지1지로 설정")
-//        }else if(text == "경유지2를 입력하세요"){
-//            var intent = Intent(this,WriteMapLocationActivity::class.java)
-//            intent.putExtra("setLocation","경유지2로 설정")
-//        }else if(text == "도착지를 입력하세요"){
-//            var intent = Intent(this,WriteMapLocationActivity::class.java)
-//            intent.putExtra("setLocation","도착지로 설정")
-//        }
-
-
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeMapSearchAdapter =
             WriteMapSearchAdapter(locationFlag, text)
@@ -57,10 +42,7 @@ class WriteMapSearchActivity : AppCompatActivity() {
         // 2. RecyclerView 에 어뎁터를 우리가 만든 어뎁터로 만들기
         binding.recyclerviewWriteMapSearch.adapter = writeMapSearchAdapter
 
-        val tMapPOIItem = TMapPOIItem()
         val tmapdata = TMapData()
-//        var list = listOf<MapSearchInfo>()
-        //      val POIItem = tmapdata.findAllPOI("SKT타워")
 
         binding.etWriteMapSearchStart.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
