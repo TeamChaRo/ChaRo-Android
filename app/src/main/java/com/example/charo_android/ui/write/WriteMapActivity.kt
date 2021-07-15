@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
@@ -21,9 +22,7 @@ import java.lang.Exception
 
 class WriteMapActivity : AppCompatActivity() {
 
-    // 좌표 상수
-    var markerCount = 0
-    var pathMarkerCount = 0
+//    좌표 배열
     var path = arrayListOf<TMapPoint>()
 
     private lateinit var binding: ActivityWriteMapBinding
@@ -93,10 +92,12 @@ class WriteMapActivity : AppCompatActivity() {
         }
         // 도착지 누르면 검색창으로 감
         binding.etWriteMapEnd.setOnClickListener {
-            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
-            intent.putExtra("locationM", "도착지를 입력하세요")
-            intent.putExtra("locationFlag", "4")
-            startActivity(intent)
+            if(mapData.startAddress != "") {
+                val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
+                intent.putExtra("locationM", "도착지를 입력하세요")
+                intent.putExtra("locationFlag", "4")
+                startActivity(intent)
+            }
         }
 
         val tMapView = TMapView(this@WriteMapActivity)
@@ -106,6 +107,7 @@ class WriteMapActivity : AppCompatActivity() {
         binding.clWriteTmapView.addView(tMapView)
 
         fillTextView(locationFlag, textview, latitude, longitude, tMapView)
+        btnWriteCompleteOnClickEvent()
     }
 
     private fun fillTextView(
@@ -197,6 +199,10 @@ class WriteMapActivity : AppCompatActivity() {
             }
         }
 
+        if(mapData.endAddress != ""){
+            binding.btnWriteComplete.visibility = View.VISIBLE
+        }
+
         imgWriteMapAddAddressOnClickEvent()
         imgWriteMapDelete1OnClickEvent(tMapView)
         imgWriteMapDelete2OnClickEvent(tMapView)
@@ -205,16 +211,19 @@ class WriteMapActivity : AppCompatActivity() {
 
     private fun imgWriteMapAddAddressOnClickEvent() {
         binding.imgWriteMapAddAdress.setOnClickListener() {
-            if(binding.etWriteMapMid1.visibility == View.GONE) {
-                binding.etWriteMapMid1.visibility = View.VISIBLE
-                binding.imgWriteMapDelete1.visibility = View.VISIBLE
+            if(mapData.startAddress != "" && mapData.endAddress != "") {
+                if (binding.etWriteMapMid1.visibility == View.GONE) {
+                    binding.etWriteMapMid1.visibility = View.VISIBLE
+                    binding.imgWriteMapDelete1.visibility = View.VISIBLE
 
-                binding.etWriteMapMid1.text = mapData.mid1Address
-            } else {
-                binding.etWriteMapMid2.visibility = View.VISIBLE
-                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+                    binding.etWriteMapMid1.text = mapData.mid1Address
+                }
+                if (binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address != "") {
+                    binding.etWriteMapMid2.visibility = View.VISIBLE
+                    binding.imgWriteMapDelete2.visibility = View.VISIBLE
 
-                binding.etWriteMapMid2.text = mapData.mid2Address
+                    binding.etWriteMapMid2.text = mapData.mid2Address
+                }
             }
         }
     }
@@ -355,6 +364,19 @@ class WriteMapActivity : AppCompatActivity() {
         }
     }
 
+    private fun btnWriteCompleteOnClickEvent() {
+        binding.btnWriteComplete.setOnClickListener() {
+            if (binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") {
+                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+
+            }
+            if (binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
+                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+
+            }
+        }
+        // 시작
+    }
     override fun onBackPressed() {
 //        super.onBackPressed()
     }
