@@ -35,7 +35,7 @@ class MoreViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMoreViewBinding.inflate(inflater, container, false)
-        moreViewAdapter = MoreViewAdapter()
+        moreViewAdapter = MoreViewAdapter(userId)
         moreNewViewAdapter = MoreNewViewAdapter()
 
 

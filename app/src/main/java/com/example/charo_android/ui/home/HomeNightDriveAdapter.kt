@@ -1,15 +1,18 @@
 package com.example.charo_android.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class HomeNightDriveAdapter() :
+class HomeNightDriveAdapter(val userId : String) :
     RecyclerView.Adapter<HomeNightDriveAdapter.HomeNightDriveViewHolder>() {
     val nightData = mutableListOf<ResponseHomeViewData.Data.CustomThemeDrive>()
 
@@ -30,6 +33,10 @@ class HomeNightDriveAdapter() :
         position: Int
     ) {
         holder.onBind(nightData[position])
+        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("postId", nightData[position].postId)
+        ContextCompat.startActivity(holder.itemView.context, intent, null)
     }
 
     override fun getItemCount(): Int {

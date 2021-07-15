@@ -1,15 +1,18 @@
 package com.example.charo_android.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeLocationDriveBinding
+import com.example.charo_android.ui.detail.DetailActivity
 
-class HomeLocationDriveAdapter :
+class HomeLocationDriveAdapter(val userId: String) :
     RecyclerView.Adapter<HomeLocationDriveAdapter.HomeLocationDriveViewHolder>() {
     val locationData = mutableListOf<ResponseHomeViewData.Data.LocalDrive>()
     override fun onCreateViewHolder(
@@ -29,6 +32,10 @@ class HomeLocationDriveAdapter :
         position: Int
     ) {
         holder.onBind(locationData[position])
+        val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("postId", locationData[position].postId)
+        ContextCompat.startActivity(holder.itemView.context, intent, null)
     }
 
     override fun getItemCount(): Int {

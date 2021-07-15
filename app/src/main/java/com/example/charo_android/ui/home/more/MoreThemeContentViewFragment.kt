@@ -24,7 +24,7 @@ class MoreThemeContentViewFragment(userId :String, identity :String, value :Stri
     ) : Fragment() {
     private var _binding: FragmentMoreThemeContentViewBinding? = null
     private val binding get() = _binding!!
-    private val moreThemeContentViewAdapter = MoreThemeContentViewAdapter()
+    private val moreThemeContentViewAdapter = MoreThemeContentViewAdapter(userId)
 
     val userId = userId
     val identity = identity

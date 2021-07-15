@@ -44,12 +44,7 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root : View = binding.root
-        homeViewPagerAdapter = HomeViewPagerAdapter()
-        homeNightDriveAdapter = HomeNightDriveAdapter()
-        homeLocationDriveAdapter = HomeLocationDriveAdapter()
-        homeTodayDriveAdapter = HomeTodayDriveAdapter()
-        homeThemeAdapter = HomeThemeAdapter()
-        homeHotDriveAdapter = HomeHotDriveAdapter()
+
 
 
         return root
@@ -58,14 +53,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val userId :String = (activity as MainActivity).getUserId()
+        homeViewPagerAdapter = HomeViewPagerAdapter()
+        homeNightDriveAdapter = HomeNightDriveAdapter(userId)
+        homeLocationDriveAdapter = HomeLocationDriveAdapter(userId)
+        homeTodayDriveAdapter = HomeTodayDriveAdapter(userId)
+        homeThemeAdapter = HomeThemeAdapter()
+        homeHotDriveAdapter = HomeHotDriveAdapter(userId)
         initHomeViewPager(userId)
         initHomeTodayDrive(userId)
         initHomeHotDrive(userId)
         initHomeNightDrive(userId)
         initHomeLocationDrive(userId)
         goSearchView(userId)
+
         initToolBar()
         initHomeTheme()
         replaceMoreViewFragment(userId)
