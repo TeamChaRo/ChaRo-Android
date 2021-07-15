@@ -45,9 +45,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var userId: String = intent.getStringExtra("userId").toString()
-        var postId: String = intent.getStringExtra("postId").toString()
+        var postId: Int = intent.getIntExtra("postId", 0)
         Log.d("log", userId)
-        Log.d("log", postId)
+        Log.d("log", postId.toString())
 
         // tMapView 생성부분
         val tMapView = TMapView(this)
@@ -68,7 +68,7 @@ class DetailActivity : AppCompatActivity() {
         imgDetailMoreMineOnClickEvent()
     }
 
-    private fun init(userId: String, postId: String, tMapView: TMapView) {
+    private fun init(userId: String, postId: Int, tMapView: TMapView) {
         val call: Call<ResponseDetailData> = ApiService.detailViewService.getDetail(userId, postId)
 
         call.enqueue(object : Callback<ResponseDetailData> {
@@ -259,7 +259,7 @@ class DetailActivity : AppCompatActivity() {
         binding.tvDetailInformationTextLength.text = textLength.toString() + "/280자"
     }
 
-    private fun imgDetailHeartOnClickEvent(userId: String, postId: String) {
+    private fun imgDetailHeartOnClickEvent(userId: String, postId: Int) {
         binding.imgDetailHeart.setOnClickListener() {
             val heart = binding.imgDetailHeart
             if (heart.isSelected) {
@@ -302,7 +302,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun imgDetailSaveOnClickEvent(userId: String, postId: String) {
+    private fun imgDetailSaveOnClickEvent(userId: String, postId: Int) {
         binding.imgDetailSave.setOnClickListener() {
             val save = binding.imgDetailSave
             if (save.isSelected) {
