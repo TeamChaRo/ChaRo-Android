@@ -1,18 +1,16 @@
 package com.example.charo_android.ui.write
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityWriteMapLocationBinding
 import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.*
-import kotlin.concurrent.timer
-import java.lang.Exception
-import kotlin.concurrent.timerTask
 
 class WriteMapLocationActivity : AppCompatActivity() {
 
@@ -38,6 +36,8 @@ class WriteMapLocationActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+
+
         var resultLocation = intent.getStringExtra("text").toString()
 
         Log.d("writeMapLocationActivity", intent.getStringExtra("text").toString())
@@ -49,23 +49,56 @@ class WriteMapLocationActivity : AppCompatActivity() {
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteMapLocationView.addView(tMapView)
 
-        if (locationFlag == "1") {
-            binding.imgWriteMapMarker.setImageResource(R.drawable.ic_route_start)
-        } else if (locationFlag == "4") {
-            binding.imgWriteMapMarker.setImageResource(R.drawable.ic_route_end)
-        } else {
-            binding.imgWriteMapMarker.setImageResource(R.drawable.ic_route_waypoint)
-        }
-        binding.imgWriteMapMarker.bringToFront()
-
         locationName = intent.getStringExtra("locationName").toString()
         locationAddress = intent.getStringExtra("locationAddress").toString()
+
+        val tmapdata = TMapData()
+        if (locationFlag == "1") {
+            tmapdata.findAllPOI(locationName) { poiItem ->
+                Log.d("poi", poiItem[0].poiPoint.toString())
+                val marker = TMapMarkerItem()
+                val mapPoint = poiItem[0].poiPoint
+                val bitmap: Bitmap =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
+                marker.icon = bitmap
+                marker.setPosition(0.5F, 1.0F)
+                marker.tMapPoint = mapPoint
+                marker.name = "marker${locationFlag}"
+                tMapView.addMarkerItem(marker.name, marker)
+            }
+        } else if (locationFlag == "4") {
+            tmapdata.findAllPOI(locationName) { poiItem ->
+                Log.d("poi", poiItem[0].poiPoint.toString())
+                val marker = TMapMarkerItem()
+                val mapPoint = poiItem[0].poiPoint
+                val bitmap: Bitmap =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_route_end)
+                marker.icon = bitmap
+                marker.setPosition(0.5F, 1.0F)
+                marker.tMapPoint = mapPoint
+                marker.name = "marker${locationFlag}"
+                tMapView.addMarkerItem(marker.name, marker)
+            }
+        } else {
+            tmapdata.findAllPOI(locationName) { poiItem ->
+                Log.d("poi", poiItem[0].poiPoint.toString())
+                val marker = TMapMarkerItem()
+                val mapPoint = poiItem[0].poiPoint
+                val bitmap: Bitmap =
+                    BitmapFactory.decodeResource(resources, R.drawable.ic_route_waypoint)
+                marker.icon = bitmap
+                marker.setPosition(0.5F, 1.0F)
+                marker.tMapPoint = mapPoint
+                marker.name = "marker${locationFlag}"
+                tMapView.addMarkerItem(marker.name, marker)
+            }
+        }
+
         //    var location = intent.getStringExtra("location")
 
         binding.textLocationName.text = locationName
         binding.textLocationAddress.text = locationAddress
 
-        val tmapdata = TMapData()
         tmapdata.findAllPOI(locationName) { poiItem ->
             Log.d("poi", poiItem[0].poiPoint.toString())
 
@@ -95,42 +128,43 @@ class WriteMapLocationActivity : AppCompatActivity() {
                 Log.d("address secondNo", poiItem[0].secondNo)
             }
             tMapView.setCenterPoint(tmapPointCurrentSpot.longitude, tmapPointCurrentSpot.latitude)
+//            binding.textLocationAddress.text = locationAddress
             lat = tmapPointCurrentSpot.latitude
             lon = tmapPointCurrentSpot.longitude
             address = tmapdata.reverseGeocoding(lat, lon, "A10")
         }
 
-        val tmr = timer(period = 1000, initialDelay = 0) {
-            lat = tMapView.centerPoint.latitude
-            lon = tMapView.centerPoint.longitude
-            if (tmapdata.reverseGeocoding(lat, lon, "A00") != null) {
-                tmapdata.findAllPOI(
-                    tmapdata.reverseGeocoding(
-                        lat,
-                        lon,
-                        "A00"
-                    ).strFullAddress
-                ) { poiItem ->
-                    if(poiItem.size != 0) {
-                        locationAddress = poiItem[0].name
-                    }
-                }
-                if (tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName != null) {
-                    locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName
-                    Log.d("myLog", locationName)
-                }
-                if (tmapdata.reverseGeocoding(lat, lon, "A10").strBuildingName != null) {
-                    locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strBuildingName
-                    Log.d("myLog", locationName)
-                }
-            }
-            runOnUiThread {
-                setLocationInfo()
-            }
-        }
+//        val tmr = timer(period = 1000, initialDelay = 0) {
+//            lat = tMapView.centerPoint.latitude
+//            lon = tMapView.centerPoint.longitude
+//            if (tmapdata.reverseGeocoding(lat, lon, "A00") != null) {
+//                tmapdata.findAllPOI(
+//                    tmapdata.reverseGeocoding(
+//                        lat,
+//                        lon,
+//                        "A00"
+//                    ).strFullAddress
+//                ) { poiItem ->
+//                    if(poiItem.size != 0) {
+//                        locationAddress = poiItem[0].name
+//                    }
+//                }
+//                if (tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName != null) {
+//                    locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName
+//                    Log.d("myLog", locationName)
+//                }
+//                if (tmapdata.reverseGeocoding(lat, lon, "A10").strBuildingName != null) {
+//                    locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strBuildingName
+//                    Log.d("myLog", locationName)
+//                }
+//            }
+//            runOnUiThread {
+//                setLocationInfo()
+//            }
+//        }
 
         binding.btnSetLocation.setOnClickListener {
-            tmr.cancel()
+//            tmr.cancel()
             lat = tMapView.centerPoint.latitude
             lon = tMapView.centerPoint.longitude
 
