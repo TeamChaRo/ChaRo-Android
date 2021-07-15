@@ -104,7 +104,6 @@ class WriteMapLocationActivity : AppCompatActivity() {
             lat = tMapView.centerPoint.latitude
             lon = tMapView.centerPoint.longitude
             if (tmapdata.reverseGeocoding(lat, lon, "A00") != null) {
-//                address = tmapdata.reverseGeocoding(lat, lon, "A00")
                 tmapdata.findAllPOI(
                     tmapdata.reverseGeocoding(
                         lat,
