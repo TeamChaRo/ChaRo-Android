@@ -30,10 +30,7 @@ class WriteMapLocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        binding = DataBindingUtil.setContentView(this, R.layout.activity_write_map_location)
-//
-//        binding.lifecycleOwner = this
-//        binding.viewModel = viewModel
+
         locationFlag = intent.getStringExtra("locationFlag").toString()
 
         binding.imgWriteMapLocationBack.setOnClickListener {
@@ -138,11 +135,6 @@ class WriteMapLocationActivity : AppCompatActivity() {
                     Log.d("myLog", locationName)
                 }
             }
-
-//            tmapdata.findAllPOI(address.strFullAddress) { poiItem ->
-//                locationName = poiItem[0].name
-//                locationAddress = poiItem[0].name
-//            }
             runOnUiThread {
                 setLocationInfo()
             }
@@ -171,24 +163,5 @@ class WriteMapLocationActivity : AppCompatActivity() {
     private fun setLocationInfo() {
         binding.textLocationAddress.text = locationAddress
         binding.textLocationName.text = locationName
-    }
-
-    private fun btnSetLocationOnClickEvent(tMapView: TMapView) {
-        binding.btnSetLocation.setOnClickListener {
-            lat = tMapView.centerPoint.latitude
-            lon = tMapView.centerPoint.longitude
-
-            Log.d("test lat", lat.toString())
-            Log.d("test lon", lon.toString())
-            Log.d("test addr", address.strFullAddress)
-
-            val intent = Intent(this, WriteMapActivity::class.java)
-            intent.putExtra("textview", locationAddress)
-                .putExtra("pointLong", lon)
-                .putExtra("pointLat", lat)
-                .putExtra("locationFlag", locationFlag)
-
-            startActivity(intent)
-        }
     }
 }
