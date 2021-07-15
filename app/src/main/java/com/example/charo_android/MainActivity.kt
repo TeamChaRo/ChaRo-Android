@@ -33,12 +33,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userId = intent.getStringExtra("userId").toString()
+        userId = "jiwon0321"
+//        userId = intent.getStringExtra("userId").toString()
 
         replaceHomeFragment()
         initNavView()
-
-
     }
 
     fun getUserId(): String {
@@ -90,8 +89,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this@MainActivity, WriteActivity::class.java)
         startActivity(intent)
     }
-
-
 }
 
 
