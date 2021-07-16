@@ -1,6 +1,6 @@
 package com.example.charo_android.ui.write
 
-import com.example.charo_android.ui.write.WriteMapPointData
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -52,6 +52,14 @@ class WriteMapActivity : AppCompatActivity() {
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if(mapData.startAddress == "") {
+            AlertDialog.Builder(this)
+                .setMessage("출발지와 목적지를 입력해 다녀온 드라이브 코스를 표현해주세요. 완성된 경로를 확인 후, 경유지를 초가해 원하는 경로로 수정이 가능합니다.")
+                .setPositiveButton("예") { dialog, which ->
+                }
+                .show()
+        }
+
         locationFlag = intent.getStringExtra("locationFlag").toString()
         Log.d("locationFlag", locationFlag)
         textview = intent.getStringExtra("textview").toString()
@@ -63,22 +71,30 @@ class WriteMapActivity : AppCompatActivity() {
 
         // 뒤로가기 image click하면 뒤로 가짐
         binding.imgWriteMapBack.setOnClickListener {
-            mapData.startAddress = ""
-            mapData.mid1Address = ""
-            mapData.mid2Address = ""
-            mapData.endAddress = ""
-            mapData.startLat = 0.0
-            mapData.startLong = 0.0
-            mapData.mid1Lat = 0.0
-            mapData.mid1Long = 0.0
-            mapData.mid2Lat = 0.0
-            mapData.mid2Long = 0.0
-            mapData.endLat = 0.0
-            mapData.endLong = 0.0
+            AlertDialog.Builder(this)
+                .setMessage("드라이브 코스 작성을 중단하시겠습니까?")
+                .setNeutralButton("아니오") { dialog, which ->
+                }
+                .setPositiveButton("예") { dialog, which ->
+                    mapData.startAddress = ""
+                    mapData.mid1Address = ""
+                    mapData.mid2Address = ""
+                    mapData.endAddress = ""
+                    mapData.startLat = 0.0
+                    mapData.startLong = 0.0
+                    mapData.mid1Lat = 0.0
+                    mapData.mid1Long = 0.0
+                    mapData.mid2Lat = 0.0
+                    mapData.mid2Long = 0.0
+                    mapData.endLat = 0.0
+                    mapData.endLong = 0.0
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("userId", "and")
-            startActivity(intent)
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("userId", "and")
+                    startActivity(intent)
+                }
+                .show()
+
         }
 
         // 출발지 누르면 검색창으로 감
@@ -379,10 +395,15 @@ class WriteMapActivity : AppCompatActivity() {
 
     private fun btnWriteCompleteOnClickEvent() {
         binding.btnWriteComplete.setOnClickListener() {
-            if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
-                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-            } else {
+            AlertDialog.Builder(this)
+                .setMessage("게시물 작성을 완료하시겠습니까??")
+                .setNeutralButton("아니오") { dialog, which ->
+                }
+                .setPositiveButton("예") { dialog, which ->
+                    if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                        binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
+                        Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+                    } else {
 //                var addressList = mutableListOf<String>()
 //                addressList.add(WriteData.startAddress)
 //                if(WriteData.mid1Address != "")
@@ -422,25 +443,25 @@ class WriteMapActivity : AppCompatActivity() {
 //                    WriteData.warning
 //                )
 
-    // 원래 주석이었음
-                /*@Part course: RequestWriteData.Course,
-                @Part courseDesc: String,
-                @Part isParking: Boolean,
-                @Part parkingDesc: String,
-                @Part province: String,
-                @Part region: String,
-                @Part theme: List<String>,
-                @Part title: String,
-                @Part userId: String,
-                @Part warning: List<Boolean>,
-                @Part files: List<MultipartBody.Part>*/
+                        // 원래 주석이었음
+                        /*@Part course: RequestWriteData.Course,
+                        @Part courseDesc: String,
+                        @Part isParking: Boolean,
+                        @Part parkingDesc: String,
+                        @Part province: String,
+                        @Part region: String,
+                        @Part theme: List<String>,
+                        @Part title: String,
+                        @Part userId: String,
+                        @Part warning: List<Boolean>,
+                        @Part files: List<MultipartBody.Part>*/
 
 //                val hashMap = HashMap<String, RequestBody>()
 //                val requestString: String = Gson().toJson(requestWriteData)
 //                val body = RequestBody.create("application/json".toMediaTypeOrNull(), requestString)
 //                hashMap.put("request", body)
 
-                // 이따 이어서 코딩할거다 진수야 기다려봐
+                        // 이따 이어서 코딩할거다 진수야 기다려봐
 //                val requestCourse = Gson().toJson(courseList)
 //                val multipartCourse = MultipartBody.Part.createFormData("course", requestCourse)
 //
@@ -507,10 +528,13 @@ class WriteMapActivity : AppCompatActivity() {
 //                        Log.d("server connect", "error:${t.message}")
 //                    }
 //                })
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.putExtra("userId", Hidden.userId)
-                startActivity(intent)
-            }
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.putExtra("userId", Hidden.userId)
+                        startActivity(intent)
+                    }
+
+                }
+                .show()
         }
         // 시작
     }

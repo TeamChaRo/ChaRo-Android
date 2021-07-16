@@ -36,7 +36,7 @@
                 android:id="@+id/img_write_map_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_icon_back"
+                android:src="@drawable/ic_close_black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
