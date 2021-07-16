@@ -3,6 +3,7 @@ package com.example.charo_android.ui.write
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -68,18 +69,29 @@ class WriteMapActivity : AppCompatActivity() {
 
         // 뒤로가기 image click하면 뒤로 가짐
         binding.imgWriteMapBack.setOnClickListener {
-            mapData.startAddress = ""
-            mapData.mid1Address = ""
-            mapData.mid2Address = ""
-            mapData.endAddress = ""
-            mapData.startLat = 0.0
-            mapData.startLong = 0.0
-            mapData.mid1Lat = 0.0
-            mapData.mid1Long = 0.0
-            mapData.mid2Lat = 0.0
-            mapData.mid2Long = 0.0
-            mapData.endLat = 0.0
-            mapData.endLong = 0.0
+            WriteData.startAddress = ""
+            WriteData.mid1Address = ""
+            WriteData.mid2Address = ""
+            WriteData.endAddress = ""
+            WriteData.startLat = 0.0
+            WriteData.startLong = 0.0
+            WriteData.mid1Lat = 0.0
+            WriteData.mid1Long = 0.0
+            WriteData.mid2Lat = 0.0
+            WriteData.mid2Long = 0.0
+            WriteData.endLat = 0.0
+            WriteData.endLong = 0.0
+
+            WriteData.courseDesc = ""
+            WriteData.isParking = false
+            WriteData.parkingDesc = ""
+            WriteData.province = ""
+            WriteData.region = ""
+            WriteData.theme.clear()
+            WriteData.title = ""
+            WriteData.userId = ""
+            WriteData.warning.clear()
+            WriteData.fileList.clear()
 
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("userId", userId)
@@ -397,6 +409,29 @@ class WriteMapActivity : AppCompatActivity() {
                 binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
                 Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
+                WriteData.startAddress = ""
+                WriteData.mid1Address = ""
+                WriteData.mid2Address = ""
+                WriteData.endAddress = ""
+                WriteData.startLat = 0.0
+                WriteData.startLong = 0.0
+                WriteData.mid1Lat = 0.0
+                WriteData.mid1Long = 0.0
+                WriteData.mid2Lat = 0.0
+                WriteData.mid2Long = 0.0
+                WriteData.endLat = 0.0
+                WriteData.endLong = 0.0
+
+                WriteData.courseDesc = ""
+                WriteData.isParking = false
+                WriteData.parkingDesc = ""
+                WriteData.province = ""
+                WriteData.region = ""
+                WriteData.theme.clear()
+                WriteData.title = ""
+                WriteData.userId = ""
+                WriteData.warning.clear()
+                WriteData.fileList.clear()
 //                var addressList = mutableListOf<String>()
 //                addressList.add(WriteData.startAddress)
 //                if(WriteData.mid1Address != "")
