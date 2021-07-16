@@ -58,7 +58,7 @@ class SignInActivity : AppCompatActivity() {
                             Hidden.userId = binding.etSigninId.text.toString()
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.putExtra("userId", binding.etSigninId.text.toString())
-                            intent.putExtra("nickname", data?.nickname)
+                            intent.putExtra("nickName", data?.nickname)
                             startActivity(intent)
 
                         } else {
