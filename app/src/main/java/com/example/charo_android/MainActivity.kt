@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
 
     private lateinit var userId: String
-
+    private lateinit var nickName: String
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userId = intent.getStringExtra("userId").toString()
-
-        replaceHomeFragment(userId)
+        nickName = intent.getStringExtra("nickname").toString()
+        replaceHomeFragment(userId, nickName)
         initNavView()
     }
 
@@ -49,13 +49,17 @@ class MainActivity : AppCompatActivity() {
         return userId
     }
 
+    fun getNickName(): String{
+        return nickName
+    }
+
     private fun initNavView() {
         binding.apply {
 
             navView.setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.navigation_home -> {
-                        replaceHomeFragment(userId)
+                        replaceHomeFragment(userId,nickName)
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 //                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
-                        replaceCharoFragment()
+                        replaceCharoFragment(userId, nickName)
                         return@setOnItemSelectedListener true
                     }
                 }
@@ -79,16 +83,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun replaceHomeFragment(userId : String){
-        replaceFragment(homeFragment,userId)
-    }
-    private fun replaceWriteFragment(){
-
-        replaceFragment(writeFragment,userId)
+    private fun replaceHomeFragment(userId : String, nickName : String){
+        replaceFragment(homeFragment,userId, nickName)
     }
 
-    private fun replaceCharoFragment(){
-        replaceFragment(charoFragment,userId)
+    private fun replaceWriteFragment(userId : String, nickName : String){
+        replaceFragment(writeFragment,userId,nickName)
+    }
+
+    private fun replaceCharoFragment(userId : String, nickName: String){
+        replaceFragment(charoFragment,userId,nickName)
     }
 
 

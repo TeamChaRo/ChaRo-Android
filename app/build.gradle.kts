@@ -52,6 +52,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
+    //lottie
+    implementation("com.airbnb.android:lottie:3.4.2")
+
     //viewpager indicator
     implementation("com.tbuonomo:dotsindicator:4.2")
 
@@ -127,5 +130,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.0.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 
+    implementation("org.jetbrains:annotations:15.0")
 
 }

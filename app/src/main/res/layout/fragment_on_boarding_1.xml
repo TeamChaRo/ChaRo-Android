@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.onBoarding.OnBoardingOneFragment">
 
+    <Button
+        android:id="@+id/btn_skips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/noto_sans_cjkkr_medium"
+        android:lineHeight="24sp"
+        android:layout_marginTop="7dp"
+        android:text="@string/skip"
+        android:textColor="@color/blue_main"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,28 +29,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
+
+
         <ImageView
             android:id="@+id/img_onBoarding"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="5:6"
             android:src="@drawable/onboarding_background_1_android"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <Button
-            android:id="@+id/btn_skips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="19dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:lineHeight="24sp"
-            android:text="@string/skip"
-            android:textColor="@color/blue_main"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/text_on_boarding_looking"

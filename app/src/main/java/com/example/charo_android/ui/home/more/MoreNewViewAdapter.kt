@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
@@ -54,7 +55,7 @@ class MoreNewViewAdapter(val userId : String): RecyclerView.Adapter<MoreNewViewA
                 with(moreViewItem) {
                     Glide.with(imgMoreView.context)
                         .load(moreViewItem.image)
-                        .placeholder(R.drawable.image_more_view)
+                        .transform(RoundedCorners(9))
                         .into(imgMoreView)
                 }
 

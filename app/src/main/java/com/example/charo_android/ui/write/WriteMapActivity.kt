@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.write
 
+import com.example.charo_android.ui.write.WriteMapPointData
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

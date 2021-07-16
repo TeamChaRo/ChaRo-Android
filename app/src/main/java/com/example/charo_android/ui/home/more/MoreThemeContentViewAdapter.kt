@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreThemeContentViewBinding
@@ -53,6 +54,8 @@ class MoreThemeContentViewAdapter(val userId: String) :
                 with(moreThemeInfo) {
                     Glide.with(imgMoreTheme.context)
                         .load(moreThemeInfo.image)
+                        .placeholder(R.drawable.more_theme_shape)
+                        .transform(RoundedCorners(20))
                         .into(imgMoreTheme)
                 }
                 textMoreThemeTitle.text = moreThemeInfo.title

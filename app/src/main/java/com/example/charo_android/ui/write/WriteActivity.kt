@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -547,6 +548,7 @@ class WriteActivity : AppCompatActivity() {
                             Toast.makeText(this, "사진은 6개까지 선택 가능", Toast.LENGTH_LONG).show()
                         }
                         clipData.getItemCount() == 1 -> {
+                            binding.clWritePhoto.visibility = View.GONE
                             imgPath = clipData.getItemAt(0).uri
                             Log.d("clipda", imgPath.toString())
                             writeAdapter.imgList.add(
@@ -558,6 +560,7 @@ class WriteActivity : AppCompatActivity() {
                             writeAdapter.notifyDataSetChanged()
                         }
                         clipData.itemCount in 2..5 -> {
+                            binding.clWritePhoto.visibility = View.GONE
                             var imgmoreList = mutableListOf<WriteImgInfo>()
                             for (i: Int in 0..clipData.itemCount) {
                                 Log.d("clipData", clipData.getItemAt(i).uri.toString())

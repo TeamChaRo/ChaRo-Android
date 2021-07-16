@@ -104,4 +104,20 @@
     <string name="on_boarding_2">원하는 지역과 테마로 \n 맞춤 드라이브 코스를 찾아보세요</string>
     <string name="writing">작성해요!</string>
     <string name="on_boarding_3">나만의 드라이브 코스를 \n 기록하고 공유해보세요.</string>
+    <string name="theme_mountain">#산</string>
+    <string name="theme_sea">#바다</string>
+    <string name="theme_lake">#호수</string>
+    <string name="theme_river">#강</string>
+    <string name="theme_spring">#봄</string>
+    <string name="theme_summer">#여름</string>
+    <string name="theme_fall">#가을</string>
+    <string name="theme_winter">#겨울</string>
+    <string name="theme_ocean_drive">#해안도로</string>
+    <string name="theme_blossom">#벚꽃</string>
+    <string name="theme_maple">#단풍</string>
+    <string name="theme_relax">#여유</string>
+    <string name="theme_speed">#스피드</string>
+    <string name="theme_night_view">#야경</string>
+    <string name="theme_city">#도심</string>
+
 </resources>
