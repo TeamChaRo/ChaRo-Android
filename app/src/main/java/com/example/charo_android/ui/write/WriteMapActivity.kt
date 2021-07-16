@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -84,18 +85,29 @@ class WriteMapActivity : AppCompatActivity() {
                 .setNeutralButton("아니오") { dialog, which ->
                 }
                 .setPositiveButton("예") { dialog, which ->
-                    mapData.startAddress = ""
-                    mapData.mid1Address = ""
-                    mapData.mid2Address = ""
-                    mapData.endAddress = ""
-                    mapData.startLat = 0.0
-                    mapData.startLong = 0.0
-                    mapData.mid1Lat = 0.0
-                    mapData.mid1Long = 0.0
-                    mapData.mid2Lat = 0.0
-                    mapData.mid2Long = 0.0
-                    mapData.endLat = 0.0
-                    mapData.endLong = 0.0
+                    WriteData.startAddress = ""
+                    WriteData.mid1Address = ""
+                    WriteData.mid2Address = ""
+                    WriteData.endAddress = ""
+                    WriteData.startLat = 0.0
+                    WriteData.startLong = 0.0
+                    WriteData.mid1Lat = 0.0
+                    WriteData.mid1Long = 0.0
+                    WriteData.mid2Lat = 0.0
+                    WriteData.mid2Long = 0.0
+                    WriteData.endLat = 0.0
+                    WriteData.endLong = 0.0
+
+                    WriteData.courseDesc = ""
+                    WriteData.isParking = false
+                    WriteData.parkingDesc = ""
+                    WriteData.province = ""
+                    WriteData.region = ""
+                    WriteData.theme.clear()
+                    WriteData.title = ""
+                    WriteData.userId = ""
+                    WriteData.warning.clear()
+                    WriteData.fileList.clear()
 
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("userId", "and")
@@ -415,16 +427,45 @@ class WriteMapActivity : AppCompatActivity() {
 
     private fun btnWriteCompleteOnClickEvent() {
         binding.btnWriteComplete.setOnClickListener() {
-            AlertDialog.Builder(this)
-                .setMessage("게시물 작성을 완료하시겠습니까??")
-                .setNeutralButton("아니오") { dialog, which ->
-                }
-                .setPositiveButton("예") { dialog, which ->
-                    if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                        binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
-                    ) {
-                        Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-                    } else {
+            if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
+            ) {
+                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+            } else {
+                AlertDialog.Builder(this)
+                    .setMessage("게시물 작성을 완료하시겠습니까??")
+                    .setNeutralButton("아니오") { dialog, which ->
+                    }
+                    .setPositiveButton("예") { dialog, which ->
+                        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                            binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
+                        ) {
+                            Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+                        } else {
+                            WriteData.startAddress = ""
+                            WriteData.mid1Address = ""
+                            WriteData.mid2Address = ""
+                            WriteData.endAddress = ""
+                            WriteData.startLat = 0.0
+                            WriteData.startLong = 0.0
+                            WriteData.mid1Lat = 0.0
+                            WriteData.mid1Long = 0.0
+                            WriteData.mid2Lat = 0.0
+                            WriteData.mid2Long = 0.0
+                            WriteData.endLat = 0.0
+                            WriteData.endLong = 0.0
+
+                            WriteData.courseDesc = ""
+                            WriteData.isParking = false
+                            WriteData.parkingDesc = ""
+                            WriteData.province = ""
+                            WriteData.region = ""
+                            WriteData.theme.clear()
+                            WriteData.title = ""
+                            WriteData.userId = ""
+                            WriteData.warning.clear()
+                            WriteData.fileList.clear()
+                        }
 //                var addressList = mutableListOf<String>()
 //                addressList.add(WriteData.startAddress)
 //                if(WriteData.mid1Address != "")
@@ -552,18 +593,16 @@ class WriteMapActivity : AppCompatActivity() {
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         intent.putExtra("userId", Hidden.userId)
                         startActivity(intent)
-                    }
-
-                }
-                .show()
+                    }.show()
+            }
             val intent = Intent(applicationContext, MainActivity::class.java)
             intent.putExtra("userId", userId)
             intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
     }
-    // 시작
 
+    // 시작
     override fun onBackPressed() {
 //        super.onBackPressed()
     }
