@@ -40,6 +40,8 @@
     <string name="unit_do">도 단위</string>
     <string name="unit_si">시 단위</string>
     <string name="which_theme">어떤 테마의 드라이브였나요?</string>
+    <string name="region">도 단위</string>
+    <string name="city">시 단위</string>
     <string name="theme1">테마1</string>
     <string name="theme2">테마2</string>
     <string name="theme3">테마3</string>

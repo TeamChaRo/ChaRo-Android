@@ -5,7 +5,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
-
     private const val BASE_URL = Hidden.baseUrl
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -24,4 +23,3 @@ object ApiService {
     val myPageViewNewService: MyPageViewNewService = retrofit.create(MyPageViewNewService::class.java)
     val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
 }
-

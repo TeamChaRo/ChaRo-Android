@@ -5,5 +5,6 @@ class Hidden {
 
     companion object {
         const val baseUrl: String = ""
+        val userId: String = ""
     }
 }

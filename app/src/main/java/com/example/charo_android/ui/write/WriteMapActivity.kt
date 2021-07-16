@@ -4,7 +4,6 @@ import com.example.charo_android.ui.write.WriteMapPointData
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,12 +13,24 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
+import com.example.charo_android.api.ApiService
+import com.example.charo_android.data.RequestWriteData
+import com.example.charo_android.data.ResponseWriteData
 import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.example.charo_android.hidden.Hidden
+import com.google.gson.Gson
 import com.skt.Tmap.*
 import kotlinx.android.synthetic.main.activity_write_map.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
 import java.util.*
 import java.lang.Exception
+import kotlin.collections.HashMap
 
 class WriteMapActivity : AppCompatActivity() {
 
@@ -33,7 +44,7 @@ class WriteMapActivity : AppCompatActivity() {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
 
-    private var mapData = WriteMapPointData
+    private var mapData = WriteData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -367,13 +378,88 @@ class WriteMapActivity : AppCompatActivity() {
 
     private fun btnWriteCompleteOnClickEvent() {
         binding.btnWriteComplete.setOnClickListener() {
-            if (binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") {
+            if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
                 Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+            } else {
+                var addressList = mutableListOf<String>()
+                addressList.add(WriteData.startAddress)
+                if(WriteData.mid1Address != "")
+                    addressList.add(WriteData.mid1Address)
+                if(WriteData.mid2Address != "")
+                    addressList.add(WriteData.mid2Address)
+                addressList.add(WriteData.endAddress)
 
-            }
-            if (binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
-                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+                var latList = mutableListOf<String>()
+                latList.add(WriteData.startLat.toString())
+                if(WriteData.mid1Lat != 0.0)
+                    latList.add(WriteData.mid1Lat.toString())
+                if(WriteData.mid2Lat != 0.0)
+                    latList.add(WriteData.mid2Lat.toString())
+                latList.add(WriteData.endLat.toString())
 
+                var longList = mutableListOf<String>()
+                longList.add(WriteData.startLong.toString())
+                if(WriteData.mid1Long != 0.0)
+                    longList.add(WriteData.mid1Long.toString())
+                if(WriteData.mid2Long != 0.0)
+                    longList.add(WriteData.mid2Long.toString())
+                longList.add(WriteData.endLong.toString())
+
+                var courseList = RequestWriteData.Course(addressList, latList, longList)
+
+                val requestWriteData = RequestWriteData(
+                    courseList,
+                    WriteData.courseDesc,
+                    WriteData.isParking,
+                    WriteData.parkingDesc,
+                    WriteData.province,
+                    WriteData.region,
+                    WriteData.theme,
+                    WriteData.title,
+                    Hidden.userId,
+                    WriteData.warning
+                )
+                val hashMap = HashMap<String, RequestBody>()
+                val requestString: String = Gson().toJson(requestWriteData)
+                val body = RequestBody.create("application/json".toMediaTypeOrNull(), requestString)
+                hashMap.put("request", body)
+
+                val imageFileList: MutableList<MultipartBody.Part> = mutableListOf()
+                for(img in WriteData.fileList) {
+                    var file = File(img.toString())
+                    var fileList = listOf<Any>()
+                    val re = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+                    val multipartItem = MultipartBody.Part.createFormData("image", file.name, re)
+                    imageFileList.add(multipartItem)
+                }
+
+                val call: Call<ResponseWriteData> = ApiService.writeViewService
+                    .writePost(hashMap, imageFileList)
+
+                call.enqueue(object: Callback<ResponseWriteData> {
+                    override fun onResponse(
+                        call: Call<ResponseWriteData>,
+                        response: Response<ResponseWriteData>
+                    ) {
+                        if(response.isSuccessful){
+                            Log.d("write_server_connect", "success")
+
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            intent.putExtra("userId", Hidden.userId)
+                            startActivity(intent)
+                        } else {
+                            Log.d("server connect", "fail")
+                            Log.d("server connect", "${response.errorBody()}")
+                            Log.d("server connect", "${response.message()}")
+                            Log.d("server connect", "${response.code()}")
+                            Log.d("server connect", "${response.raw().request.url}")
+                        }
+                    }
+                    override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
+                        Log.d("server connect", "error:${t.message}")
+                    }
+                })
             }
         }
         // 시작
