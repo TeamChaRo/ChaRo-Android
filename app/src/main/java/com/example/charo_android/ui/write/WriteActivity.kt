@@ -698,6 +698,8 @@ class WriteActivity : AppCompatActivity() {
             WriteData.fileList.add(writeAdapter.imgList[i].imgUri)
         }
         WriteData.fileList = fileList
+
+        startActivityWriteMap()
     }
 }
 

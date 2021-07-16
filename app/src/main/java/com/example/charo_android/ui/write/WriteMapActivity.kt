@@ -19,6 +19,7 @@ import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.google.gson.Gson
 import com.skt.Tmap.*
+import io.reactivex.processors.MulticastProcessor
 import kotlinx.android.synthetic.main.activity_write_map.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -381,84 +382,133 @@ class WriteMapActivity : AppCompatActivity() {
                 binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
                 Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
-                var addressList = mutableListOf<String>()
-                addressList.add(WriteData.startAddress)
-                if(WriteData.mid1Address != "")
-                    addressList.add(WriteData.mid1Address)
-                if(WriteData.mid2Address != "")
-                    addressList.add(WriteData.mid2Address)
-                addressList.add(WriteData.endAddress)
+//                var addressList = mutableListOf<String>()
+//                addressList.add(WriteData.startAddress)
+//                if(WriteData.mid1Address != "")
+//                    addressList.add(WriteData.mid1Address)
+//                if(WriteData.mid2Address != "")
+//                    addressList.add(WriteData.mid2Address)
+//                addressList.add(WriteData.endAddress)
+//
+//                var latList = mutableListOf<String>()
+//                latList.add(WriteData.startLat.toString())
+//                if(WriteData.mid1Lat != 0.0)
+//                    latList.add(WriteData.mid1Lat.toString())
+//                if(WriteData.mid2Lat != 0.0)
+//                    latList.add(WriteData.mid2Lat.toString())
+//                latList.add(WriteData.endLat.toString())
+//
+//                var longList = mutableListOf<String>()
+//                longList.add(WriteData.startLong.toString())
+//                if(WriteData.mid1Long != 0.0)
+//                    longList.add(WriteData.mid1Long.toString())
+//                if(WriteData.mid2Long != 0.0)
+//                    longList.add(WriteData.mid2Long.toString())
+//                longList.add(WriteData.endLong.toString())
+//
+//                var courseList = RequestWriteData.Course(addressList, latList, longList)
+//
+//                val requestWriteData = RequestWriteData(
+//                    courseList,
+//                    WriteData.courseDesc,
+//                    WriteData.isParking,
+//                    WriteData.parkingDesc,
+//                    WriteData.province,
+//                    WriteData.region,
+//                    WriteData.theme,
+//                    WriteData.title,
+//                    Hidden.userId,
+//                    WriteData.warning
+//                )
 
-                var latList = mutableListOf<String>()
-                latList.add(WriteData.startLat.toString())
-                if(WriteData.mid1Lat != 0.0)
-                    latList.add(WriteData.mid1Lat.toString())
-                if(WriteData.mid2Lat != 0.0)
-                    latList.add(WriteData.mid2Lat.toString())
-                latList.add(WriteData.endLat.toString())
+    // 원래 주석이었음
+                /*@Part course: RequestWriteData.Course,
+                @Part courseDesc: String,
+                @Part isParking: Boolean,
+                @Part parkingDesc: String,
+                @Part province: String,
+                @Part region: String,
+                @Part theme: List<String>,
+                @Part title: String,
+                @Part userId: String,
+                @Part warning: List<Boolean>,
+                @Part files: List<MultipartBody.Part>*/
 
-                var longList = mutableListOf<String>()
-                longList.add(WriteData.startLong.toString())
-                if(WriteData.mid1Long != 0.0)
-                    longList.add(WriteData.mid1Long.toString())
-                if(WriteData.mid2Long != 0.0)
-                    longList.add(WriteData.mid2Long.toString())
-                longList.add(WriteData.endLong.toString())
+//                val hashMap = HashMap<String, RequestBody>()
+//                val requestString: String = Gson().toJson(requestWriteData)
+//                val body = RequestBody.create("application/json".toMediaTypeOrNull(), requestString)
+//                hashMap.put("request", body)
 
-                var courseList = RequestWriteData.Course(addressList, latList, longList)
-
-                val requestWriteData = RequestWriteData(
-                    courseList,
-                    WriteData.courseDesc,
-                    WriteData.isParking,
-                    WriteData.parkingDesc,
-                    WriteData.province,
-                    WriteData.region,
-                    WriteData.theme,
-                    WriteData.title,
-                    Hidden.userId,
-                    WriteData.warning
-                )
-                val hashMap = HashMap<String, RequestBody>()
-                val requestString: String = Gson().toJson(requestWriteData)
-                val body = RequestBody.create("application/json".toMediaTypeOrNull(), requestString)
-                hashMap.put("request", body)
-
-                val imageFileList: MutableList<MultipartBody.Part> = mutableListOf()
-                for(img in WriteData.fileList) {
-                    var file = File(img.toString())
-                    var fileList = listOf<Any>()
-                    val re = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-                    val multipartItem = MultipartBody.Part.createFormData("image", file.name, re)
-                    imageFileList.add(multipartItem)
-                }
-
-                val call: Call<ResponseWriteData> = ApiService.writeViewService
-                    .writePost(hashMap, imageFileList)
-
-                call.enqueue(object: Callback<ResponseWriteData> {
-                    override fun onResponse(
-                        call: Call<ResponseWriteData>,
-                        response: Response<ResponseWriteData>
-                    ) {
-                        if(response.isSuccessful){
-                            Log.d("write_server_connect", "success")
-
-                            val intent = Intent(applicationContext, MainActivity::class.java)
-                            intent.putExtra("userId", Hidden.userId)
-                            startActivity(intent)
-                        } else {
-                            Log.d("server connect", "fail")
-                            Log.d("server connect", "${response.errorBody()}")
-                            Log.d("server connect", "${response.message()}")
-                            Log.d("server connect", "${response.code()}")
-                            Log.d("server connect", "${response.raw().request.url}")
-                        }
-                    }
-                    override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
-                        Log.d("server connect", "error:${t.message}")
-                    }
-                })
+                // 이따 이어서 코딩할거다 진수야 기다려봐
+//                val requestCourse = Gson().toJson(courseList)
+//                val multipartCourse = MultipartBody.Part.createFormData("course", requestCourse)
+//
+//                val requestCourseDesc = Gson().toJson(WriteData.courseDesc)
+//                val multipartCourseDesc = MultipartBody.Part.createFormData("courseDesc", requestCourseDesc)
+//
+//                val requestIsParking = Gson().toJson(WriteData.isParking)
+//                val multipartIsParking = MultipartBody.Part.createFormData("isParking", requestIsParking)
+//
+//                val requestParkingDesc = Gson().toJson(WriteData.parkingDesc)
+//                val multipartParkingDesc = MultipartBody.Part.createFormData("parkingDesc", requestParkingDesc)
+//
+//                val requestProvince = Gson().toJson(WriteData.province)
+//                val multipartProvince = MultipartBody.Part.createFormData("province", requestProvince)
+//
+//                val requestRegion = Gson().toJson(WriteData.region)
+//                val multipartRegion = MultipartBody.Part.createFormData("region", requestRegion)
+//
+//                val requestTheme = Gson().toJson(WriteData.theme)
+//                val multipartTheme = MultipartBody.Part.createFormData("theme", requestTheme)
+//
+//                val requestTitle = Gson().toJson(WriteData.title)
+//                val multipartTitle = MultipartBody.Part.createFormData("title", requestTitle)
+//
+//                val requestUserId = Gson().toJson(Hidden.userId)
+//                val multipartUserId = MultipartBody.Part.createFormData("userId", requestUserId)
+//
+//                val requestWarning = Gson().toJson(WriteData.warning)
+//                val multipartWarning = MultipartBody.Part.createFormData("warning", requestWarning)
+//
+//                val imageFileList: MutableList<MultipartBody.Part> = mutableListOf()
+//                for(img in WriteData.fileList) {
+//                    var file = File(img.toString())
+//                    var fileList = listOf<Any>()
+//                    val reFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+//                    val multipartItem = MultipartBody.Part.createFormData("files", file.name, reFile)
+//                    imageFileList.add(multipartItem)
+//                }
+//
+//                val call: Call<ResponseWriteData> = ApiService.writeViewService
+//                    .writePost(multipartCourse, multipartCourseDesc, multipartIsParking, multipartParkingDesc, multipartProvince,
+//                        multipartRegion, multipartTheme, multipartTitle, multipartUserId, multipartWarning, imageFileList)
+//
+//                call.enqueue(object: Callback<ResponseWriteData> {
+//                    override fun onResponse(
+//                        call: Call<ResponseWriteData>,
+//                        response: Response<ResponseWriteData>
+//                    ) {
+//                        if(response.isSuccessful){
+//                            Log.d("write_server_connect", "success")
+//
+//                            val intent = Intent(applicationContext, MainActivity::class.java)
+//                            intent.putExtra("userId", Hidden.userId)
+//                            startActivity(intent)
+//                        } else {
+//                            Log.d("server connect", "fail")
+//                            Log.d("server connect", "${response.errorBody()}")
+//                            Log.d("server connect", "${response.message()}")
+//                            Log.d("server connect", "${response.code()}")
+//                            Log.d("server connect", "${response.raw().request.url}")
+//                        }
+//                    }
+//                    override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
+//                        Log.d("server connect", "error:${t.message}")
+//                    }
+//                })
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                intent.putExtra("userId", Hidden.userId)
+                startActivity(intent)
             }
         }
         // 시작

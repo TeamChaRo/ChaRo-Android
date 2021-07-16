@@ -11,6 +11,7 @@ import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.RequestSignInData
 import com.example.charo_android.data.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
+import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -54,6 +55,7 @@ class SignInActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
 
+                            Hidden.userId = binding.etSigninId.text.toString()
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.putExtra("userId", binding.etSigninId.text.toString())
                             intent.putExtra("nickname", data?.nickname)
