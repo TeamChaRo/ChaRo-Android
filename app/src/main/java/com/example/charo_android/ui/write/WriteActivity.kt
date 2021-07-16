@@ -19,6 +19,7 @@ import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.FormDataUtil
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.databinding.ActivityWriteBinding
+import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -34,6 +35,7 @@ class WriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteBinding
     private lateinit var writeAdapter: WriteAdapter
 
+    private lateinit var mapBinding: ActivityWriteMapBinding
     val itemProvince =
         arrayOf("특별시", "광역시", "경기도", "강원도", "충청남도", "충청북도", "경상북도", "경상남도", "전라북도", "전라남도")
     val itemSpecial = arrayOf("서울", "제주")
@@ -204,6 +206,7 @@ class WriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         userId = intent.getStringExtra("userId").toString()
         nickName = intent.getStringExtra("nickName").toString()
@@ -409,6 +412,8 @@ class WriteActivity : AppCompatActivity() {
 
         //서버 테스트
         binding.btnWriteBottomNext.setOnClickListener {
+
+            mapBinding = ActivityWriteMapBinding.inflate(layoutInflater)
             AlertDialog.Builder(this)
                 .setMessage("작성을 완료하고, 드라이브 경로를 이어 작성하시겠습니까? 이후 글 수정은 어렵습니다.")
                 .setNeutralButton("아니오") { dialog, which ->
@@ -417,6 +422,8 @@ class WriteActivity : AppCompatActivity() {
                     insertDataToCompanionObject()
                 }
                 .show()
+
+
 //            writePost(
 //                binding.etWriteTitle.text.toString(),
 //                "jiwon0321",

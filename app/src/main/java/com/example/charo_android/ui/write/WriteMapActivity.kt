@@ -55,7 +55,7 @@ class WriteMapActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        if (mapData.startAddress == "") {
+        if (mapData.startAddress == ""||binding.etWriteMapStart.text==null||binding.etWriteMapStart.text=="") {
             AlertDialog.Builder(this)
                 .setMessage("출발지와 목적지를 입력해 다녀온 드라이브 코스를 표현해주세요. 완성된 경로를 확인 후, 경유지를 초가해 원하는 경로로 수정이 가능합니다.")
                 .setPositiveButton("예") { dialog, which ->
