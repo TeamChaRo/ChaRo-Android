@@ -66,6 +66,7 @@ class DetailActivity : AppCompatActivity() {
         imgDetailIconBackOnClickEvent()
         // 글 수정/삭제 이벤트
         imgDetailMoreMineOnClickEvent()
+
     }
 
     private fun init(userId: String, postId: Int, tMapView: TMapView) {
@@ -151,6 +152,7 @@ class DetailActivity : AppCompatActivity() {
                         Log.d("경도", data!![0].longtitude[i])
                     }
                     if (data!![0].isParking) {
+                        Log.d("uhhaha",data!![0].isParking.toString())
                         setAttributeByFlag(
                             binding.imgDetailParkingYes,
                             binding.tvDetailParkingYes,
@@ -162,6 +164,7 @@ class DetailActivity : AppCompatActivity() {
                             false
                         )
                     } else {
+                        Log.d("uhhaha",data!![0].isParking.toString())
                         setAttributeByFlag(
                             binding.imgDetailParkingYes,
                             binding.tvDetailParkingYes,

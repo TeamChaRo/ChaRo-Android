@@ -80,7 +80,7 @@ class WriteMapSearchFragment : Fragment() {
 
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeMapSearchAdapter =
-            WriteMapSearchAdapter()
+            WriteMapSearchAdapter("","")
 
         // 2. RecyclerView 에 어뎁터를 우리가 만든 어뎁터로 만들기
         binding.recyclerviewWriteMapSearch.adapter = writeMapSearchAdapter

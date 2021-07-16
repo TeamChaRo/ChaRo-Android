@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseSearchViewData
 import com.example.charo_android.databinding.ItemResultSearchBinding
@@ -50,19 +51,21 @@ class ResultSearchAdapter(val userId : String): RecyclerView.Adapter<ResultSearc
                 with(resultSearchData) {
                     Glide.with(imgResultSearch.context)
                         .load(resultSearchData.image)
+                        .placeholder(R.drawable.result_search_shape)
+                        .transform(RoundedCorners(9))
                         .into(imgResultSearch)
                 }
 
                 textResultSearch.text = resultSearchData.title
                 if (resultSearchData.tags.count() == 2) {
-                    chipItemResultSearch1.text = resultSearchData.tags[0]
-                    chipItemResultSearch2.text = resultSearchData.tags[1]
+                    chipItemResultSearch1.text = "#${resultSearchData.tags[0]}"
+                    chipItemResultSearch2.text = "#${resultSearchData.tags[1]}"
                     chipItemResultSearch3.visibility = View.INVISIBLE
 
                 } else {
-                    chipItemResultSearch1.text = resultSearchData.tags[0]
-                    chipItemResultSearch2.text = resultSearchData.tags[1]
-                    chipItemResultSearch3.text = resultSearchData.tags[2]
+                    chipItemResultSearch1.text = "#${resultSearchData.tags[0]}"
+                    chipItemResultSearch2.text = "#${resultSearchData.tags[1]}"
+                    chipItemResultSearch3.text = "#${resultSearchData.tags[2]}"
                 }
 
                 imgResultSearchHeart.setImageResource(R.drawable.selector_home_heart)

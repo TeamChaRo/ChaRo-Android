@@ -6,9 +6,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.charo_android.R
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment, userId : String){
+fun AppCompatActivity.replaceFragment(fragment: Fragment, userId : String, nickName: String){
     val bundle = Bundle()
     bundle.putString("userId", userId)
+    bundle.putString("nickName", nickName)
     fragment.arguments = bundle
     val fragmentManager = supportFragmentManager
     val transaction = fragmentManager.beginTransaction()

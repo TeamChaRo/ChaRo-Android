@@ -44,8 +44,8 @@ class SearchActivity : AppCompatActivity() {
     val itemCaution = arrayOf("선택안함", "고속도로", "산길포함", "초보힘듦", "사람많음")
     val itemProvince =
         arrayOf("선택안함", "특별시", "광역시", "경기도", "강원도", "충청남도", "충청북도", "경상북도", "경상남도", "전라북도", "전라남도")
-    val itemSpecial = arrayOf("서울", "제주")
-    val itemMetroPolitan = arrayOf("부산", "대구", "인천", "울산", "대전", "광주")
+    val itemSpecial = arrayOf("선택안함","서울", "제주")
+    val itemMetroPolitan = arrayOf("선택안함","부산", "대구", "인천", "울산", "대전", "광주")
     val itemGyounGi = arrayOf(
         "선택안함",
         "가평",
@@ -212,12 +212,12 @@ class SearchActivity : AppCompatActivity() {
     )
 
     private lateinit var userId : String
-
+    private lateinit var nickName : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        nickName = intent.getStringExtra("nickName").toString()
         userId = intent.getStringExtra("userId").toString()
         Log.d("nice",userId)
         clickSearch(userId)
@@ -226,14 +226,20 @@ class SearchActivity : AppCompatActivity() {
         selectTheme()
         selectCatution()
         selectarea()
+
+        binding.textUserId.text = "${nickName}님의"
     }
 
 
     fun clickSearch(userId : String) {
         binding.imgSearchStart.setOnClickListener {
             val userId = userId
-            val province = binding.btnSearchArea1.text.toString()
-            val region = if(binding.btnSearchArea2.text.toString() == "선택안함") {
+            val province = if(binding.btnSearchArea1.text.toString() == "선택안함"){
+                ""
+            } else{
+                binding.btnSearchArea1.text.toString()
+            }
+            val city = if(binding.btnSearchArea2.text.toString() == "선택안함" || binding.btnSearchArea2.text.toString() == "지역") {
                 ""
             } else {
                 binding.btnSearchArea2.text.toString()
@@ -248,12 +254,12 @@ class SearchActivity : AppCompatActivity() {
             } else {
                 binding.btnSearchCaution.text.toString()
             }
+            Log.d("hu", province)
+            Log.d("hu", city)
+            Log.d("hu", theme)
+            Log.d("hu", caution)
 
-            Log.d("region", region)
-            Log.d("theme", theme)
-            Log.d("caution", caution)
-
-            val requestSearchViewData = RequestSearchViewData(userId=userId, region= region, theme=theme, caution=caution)
+            val requestSearchViewData = RequestSearchViewData(userId=userId, region= city, theme=theme, caution=caution)
 
             val call: Call<ResponseSearchViewData> =
                 ApiService.searchViewService.postSearch(requestSearchViewData)
@@ -275,7 +281,7 @@ class SearchActivity : AppCompatActivity() {
                             intent.apply {
                                 putExtra("userId", userId)
                                 putExtra("province", province)
-                                putExtra("city", region)
+                                putExtra("city", city)
                                 putExtra("theme", theme)
                                 putExtra("caution", caution)
                                 startActivity(intent)

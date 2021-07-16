@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
@@ -53,23 +54,24 @@ class HomeNightDriveAdapter(val userId : String) :
                 with(responseHomeCustomThemeDrive) {
                     Glide.with(imgHomeNightDrive.context)
                         .load(this.image)
+                        .transform(RoundedCorners(20))
                         .into(imgHomeNightDrive)
 
 
                     textHomeNightDriveTitle.text = this.title
                     if (this.tags.count() == 2) {
-                        chipHomeNightDrive1.text = this.tags[0]
-                        chipHomeNightDrive2.text = this.tags[1]
+                        chipHomeNightDrive1.text = "#${this.tags[0]}"
+                        chipHomeNightDrive2.text = "#${this.tags[1]}"
                         chipHomeNightDrive3.visibility = View.INVISIBLE
 
                     } else if (this.tags.count() == 1) {
-                        chipHomeNightDrive1.text = this.tags[0]
+                        chipHomeNightDrive1.text = "#${this.tags[0]}"
                         chipHomeNightDrive2.visibility = View.INVISIBLE
                         chipHomeNightDrive3.visibility = View.INVISIBLE
                     } else {
-                        chipHomeNightDrive1.text = this.tags[0]
-                        chipHomeNightDrive2.text = this.tags[1]
-                        chipHomeNightDrive3.text = this.tags[2]
+                        chipHomeNightDrive1.text = "#${this.tags[0]}"
+                        chipHomeNightDrive2.text = "#${this.tags[1]}"
+                        chipHomeNightDrive3.text = "#${this.tags[2]}"
                     }
 
                 }

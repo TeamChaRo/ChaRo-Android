@@ -20,11 +20,11 @@
             android:id="@+id/img_result_search"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="5:4"
+            app:layout_constraintDimensionRatio="8:5"
             android:layout_marginTop="0dp"
             android:scaleType="fitXY"
             android:background="@android:color/transparent"
-            android:src="@drawable/image_more_view"
+            android:src="@drawable/result_search_shape"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,55 +40,70 @@
 
         <TextView
             android:id="@+id/text_result_search"
-            style="@style/HeaderH5"
-            android:layout_width="wrap_content"
+            style="@style/HeaderH12Android"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:text="@string/main_charo_hot_drive_title"
-            android:layout_marginTop="14dp"
-            android:lines="2"
+            android:lineSpacingExtra="0dp"
             android:includeFontPadding="false"
+            android:lines="2"
+            android:text="@string/main_charo_today_drive_title"
+            android:maxLength="38"
+            android:ellipsize="end"
+            android:layout_marginTop="7dp"
             app:layout_constraintStart_toStartOf="@id/img_result_search"
             app:layout_constraintTop_toBottomOf="@+id/img_result_search" />
 
-        <com.google.android.material.chip.Chip
+        <TextView
             android:id="@+id/chip_item_result_search_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="6dp"
-            android:text="@string/main_charo_today_drive_chip"
+            android:text="@string/theme1"
             style="@style/HeaderH9"
+            android:layout_marginTop="9dp"
             app:chipCornerRadius="10dp"
             app:chipStrokeColor="@color/blue_main"
             app:chipStrokeWidth="1dp"
             app:chipBackgroundColor="@color/white"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="11dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:includeFontPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/text_result_search"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.chip.Chip
+        <TextView
             android:id="@+id/chip_item_result_search_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main_charo_today_drive_chip_2"
+            android:text="@string/theme1"
             style="@style/HeaderH9"
+            android:layout_marginTop="9dp"
             app:chipCornerRadius="10dp"
             app:chipStrokeColor="@color/blue_main"
             app:chipStrokeWidth="1dp"
             app:chipBackgroundColor="@color/white"
-            android:layout_marginStart="4dp"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="11dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:includeFontPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/text_result_search"
             app:layout_constraintStart_toEndOf="@id/chip_item_result_search_1" />
 
-        <com.google.android.material.chip.Chip
+        <TextView
             android:id="@+id/chip_item_result_search_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/theme1"
             style="@style/HeaderH9"
+            android:layout_marginTop="9dp"
             app:chipCornerRadius="10dp"
             app:chipStrokeColor="@color/blue_main"
             app:chipStrokeWidth="1dp"
-            android:text="@string/main_charo_today_drive_chip_3"
             app:chipBackgroundColor="@color/white"
-            android:layout_marginStart="4dp"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="11dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:includeFontPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/text_result_search"
             app:layout_constraintStart_toEndOf="@id/chip_item_result_search_2" />
 
