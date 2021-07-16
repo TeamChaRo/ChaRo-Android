@@ -95,7 +95,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="41dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
                 app:layout_constraintStart_toEndOf="@id/img_charo_profile_border"
                 app:layout_constraintTop_toTopOf="@id/img_charo_profile_border">
