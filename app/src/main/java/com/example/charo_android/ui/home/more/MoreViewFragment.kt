@@ -19,15 +19,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
 class MoreViewFragment : Fragment() {
     private var _binding: FragmentMoreViewBinding? = null
     private val binding get() = _binding!!
     private var homeFragment = HomeFragment()
     private lateinit var moreViewAdapter: MoreViewAdapter
-    private lateinit var moreNewViewAdapter : MoreNewViewAdapter
-    private lateinit var userId : String
-
+    private lateinit var moreNewViewAdapter: MoreNewViewAdapter
+    private lateinit var userId: String
 
 
     override fun onCreateView(
@@ -49,7 +47,7 @@ class MoreViewFragment : Fragment() {
         userId = arguments?.getString("userId").toString()
         moreViewAdapter = MoreViewAdapter(userId)
         moreNewViewAdapter = MoreNewViewAdapter(userId)
-        Log.d("userIdeas",userId)
+        Log.d("userIdeas", userId)
         moreViewLoadData(userId)
         initSpinner()
         clickBackButton(userId)
@@ -57,7 +55,7 @@ class MoreViewFragment : Fragment() {
     }
 
 
-    fun moreViewLoadData(userId : String) {
+    fun moreViewLoadData(userId: String) {
         setFragmentResultListener("title") { requestKey, bundle ->
             val result = bundle.getString("title")
             val num = bundle.getInt("num")
@@ -67,7 +65,7 @@ class MoreViewFragment : Fragment() {
 
             if (num == 0) {
                 val call: Call<ResponseMoreViewData> =
-                    ApiService.moreViewService.getPreview(userId, "0","")
+                    ApiService.moreViewService.getPreview(userId, "0", "")
                 call.enqueue(object : Callback<ResponseMoreViewData> {
                     override fun onResponse(
                         call: Call<ResponseMoreViewData>,
@@ -169,7 +167,7 @@ class MoreViewFragment : Fragment() {
         }
     }
 
-    fun moreViewNewData(userId : String) {
+    fun moreViewNewData(userId: String) {
         setFragmentResultListener("title") { requestKey, bundle ->
             val result = bundle.getString("title")
             val num = bundle.getInt("num")
@@ -300,15 +298,13 @@ class MoreViewFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                when (position) {
-                    0 -> {
-                        moreViewLoadData(userId)
-                    }
-                    1 -> {
+                if (position == 0) {
+                    moreViewLoadData(userId)
+                } else {
 
-                        moreViewNewData(userId)
-                    }
+                    moreViewNewData(userId)
                 }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

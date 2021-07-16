@@ -6,10 +6,9 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="22dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -20,11 +19,10 @@
                 android:id="@+id/img_home_hot_drive"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="5:4"
-                android:layout_marginTop="0dp"
-                android:scaleType="fitXY"
+                app:layout_constraintDimensionRatio="77:75"
                 android:background="@android:color/transparent"
                 android:src="@drawable/home_today_drive_image"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,30 +38,37 @@
 
             <TextView
                 android:id="@+id/text_home_hot_drive_title"
-                style="@style/HeaderH5"
+                style="@style/HeaderH11Android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_home_eng"
-                android:layout_marginTop="14dp"
+                android:text="@string/main_charo_today_drive_title"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="0dp"
                 android:includeFontPadding="false"
+                android:lines="2"
+                android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="@id/img_home_hot_drive"
                 app:layout_constraintTop_toBottomOf="@+id/img_home_hot_drive" />
 
-            <com.google.android.material.chip.Chip
+            <TextView
                 android:id="@+id/chip_home_hot_drive_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="6dp"
                 android:text="@string/theme1"
                 style="@style/HeaderH9"
+                android:layout_marginTop="9dp"
                 app:chipCornerRadius="10dp"
                 app:chipStrokeColor="@color/blue_main"
                 app:chipStrokeWidth="1dp"
                 app:chipBackgroundColor="@color/white"
+                android:paddingVertical="2dp"
+                android:paddingHorizontal="11dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/text_home_hot_drive_title"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.chip.Chip
+            <TextView
                 android:id="@+id/chip_home_hot_drive_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,10 +79,14 @@
                 app:chipStrokeWidth="1dp"
                 app:chipBackgroundColor="@color/white"
                 android:layout_marginStart="4dp"
-                app:layout_constraintTop_toBottomOf="@+id/text_home_hot_drive_title"
+                android:paddingVertical="2dp"
+                android:paddingHorizontal="11dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="@+id/chip_home_hot_drive_1"
                 app:layout_constraintStart_toEndOf="@id/chip_home_hot_drive_1" />
 
-            <com.google.android.material.chip.Chip
+            <TextView
                 android:id="@+id/chip_home_hot_drive_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,7 +97,11 @@
                 android:text="@string/theme3"
                 app:chipBackgroundColor="@color/white"
                 android:layout_marginStart="4dp"
-                app:layout_constraintTop_toBottomOf="@+id/text_home_hot_drive_title"
+                android:paddingVertical="2dp"
+                android:paddingHorizontal="11dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="@+id/chip_home_hot_drive_2"
                 app:layout_constraintStart_toEndOf="@id/chip_home_hot_drive_2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

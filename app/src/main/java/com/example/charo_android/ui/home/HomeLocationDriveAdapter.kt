@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeLocationDriveBinding
@@ -52,23 +53,23 @@ class HomeLocationDriveAdapter(val userId: String) :
                 with(responseHomeLocalData) {
                     com.bumptech.glide.Glide.with(imgHomeLocationDrive.context)
                         .load(this.image)
-
+                        .transform(RoundedCorners(20))
                         .into(imgHomeLocationDrive)
                 }
                 textHomeLocationDriveTitle.text = responseHomeLocalData.title
                 if (responseHomeLocalData.tags.count() == 2) {
-                    chipHomeLocationDrive1.text = responseHomeLocalData.tags[0]
-                    chipHomeLocationDrive2.text = responseHomeLocalData.tags[1]
+                    chipHomeLocationDrive1.text = "#${responseHomeLocalData.tags[0]}"
+                    chipHomeLocationDrive2.text = "#${responseHomeLocalData.tags[1]}"
                     chipHomeLocationDrive3.visibility = View.INVISIBLE
 
                 } else if (responseHomeLocalData.tags.count() == 1) {
-                    chipHomeLocationDrive1.text = responseHomeLocalData.tags[0]
+                    chipHomeLocationDrive1.text = "#${responseHomeLocalData.tags[0]}"
                     chipHomeLocationDrive2.visibility = View.INVISIBLE
                     chipHomeLocationDrive3.visibility = View.INVISIBLE
                 } else {
-                    chipHomeLocationDrive1.text = responseHomeLocalData.tags[0]
-                    chipHomeLocationDrive2.text = responseHomeLocalData.tags[1]
-                    chipHomeLocationDrive3.text = responseHomeLocalData.tags[2]
+                    chipHomeLocationDrive1.text = "#${responseHomeLocalData.tags[0]}"
+                    chipHomeLocationDrive2.text = "#${responseHomeLocalData.tags[1]}"
+                    chipHomeLocationDrive3.text = "#${responseHomeLocalData.tags[2]}"
                 }
 
 

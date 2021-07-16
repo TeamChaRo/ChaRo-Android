@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
     private lateinit var userId : String
-
+    private lateinit var nickName : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userId :String = (activity as MainActivity).getUserId()
+        val nickName : String = (activity as MainActivity).getNickName()
         homeViewPagerAdapter = HomeViewPagerAdapter()
         homeNightDriveAdapter = HomeNightDriveAdapter(userId)
         homeLocationDriveAdapter = HomeLocationDriveAdapter(userId)
@@ -65,7 +66,7 @@ class HomeFragment : Fragment() {
         initHomeHotDrive(userId)
         initHomeNightDrive(userId)
         initHomeLocationDrive(userId)
-        goSearchView(userId)
+        goSearchView(userId, nickName)
 
         initToolBar()
         initHomeTheme()
@@ -244,13 +245,17 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun goSearchView(userId: String) {
+    private fun goSearchView(userId: String, nickName: String) {
         binding.imgMainSearch.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
-            intent.putExtra("userId",userId)
-            startActivity(intent)
+            intent.apply{
+                putExtra("userId",userId)
+                putExtra("nickName", nickName)
+            }
+                startActivity(intent)
+            }
         }
-    }
+
 
     private fun replaceMoreViewFragment(userId: String) {
         binding.textHomeHotDrivePlus.setOnClickListener {

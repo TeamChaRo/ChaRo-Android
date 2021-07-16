@@ -99,8 +99,9 @@ class MoreThemeViewFragment : Fragment() {
             with(viewPagerMoreTheme) {
                 adapter = moreThemeViewPagerAdapter
             }
+
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
-                tab.setIcon(R.drawable.ic_blossom)
+                tab.setIcon(themeViewIcon[position])
                 tab.text = themeViewText[position]
             }.attach()
 

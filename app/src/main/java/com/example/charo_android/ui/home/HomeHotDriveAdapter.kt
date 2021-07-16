@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeHotDriveBinding
@@ -56,24 +57,25 @@ class HomeHotDriveAdapter (val userId : String) : RecyclerView.Adapter<HomeHotDr
                with(responseHomeViewTrendData){
                    Glide.with(imgHomeHotDrive.context)
                        .load(this.image)
+                       .transform(RoundedCorners(20))
                        .into(imgHomeHotDrive)
 
                    textHomeHotDriveTitle.text = this.title
 
                    if (this.tags.count() == 2) {
-                       chipHomeHotDrive1.text = this.tags[0]
-                       chipHomeHotDrive2.text = this.tags[1]
+                       chipHomeHotDrive1.text = "#${this.tags[0]}"
+                       chipHomeHotDrive2.text = "#${this.tags[1]}"
                        chipHomeHotDrive3.visibility = View.INVISIBLE
 
                    } else if(this.tags.count() == 1){
-                       chipHomeHotDrive1.text = this.tags[0]
+                       chipHomeHotDrive1.text = "#${this.tags[0]}"
                        chipHomeHotDrive2.visibility = View.INVISIBLE
                        chipHomeHotDrive3.visibility = View.INVISIBLE
                    }
                    else {
-                       chipHomeHotDrive1.text = this.tags[0]
-                       chipHomeHotDrive2.text = this.tags[1]
-                       chipHomeHotDrive3.text = this.tags[2]
+                       chipHomeHotDrive1.text = "#${this.tags[0]}"
+                       chipHomeHotDrive2.text = "#${this.tags[1]}"
+                       chipHomeHotDrive3.text = "#${this.tags[2]}"
                    }
                }
 

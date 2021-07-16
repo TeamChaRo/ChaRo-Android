@@ -63,6 +63,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <ImageButton
+                        android:id="@+id/img_go_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_close_black"
+                        android:background="@android:color/transparent"
+                        android:layout_marginEnd="2dp"
+                        app:layout_constraintTop_toTopOf="@+id/img_back_search"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>

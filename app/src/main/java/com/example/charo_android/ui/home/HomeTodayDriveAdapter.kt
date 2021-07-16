@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.api.ResponseMoreViewData
@@ -55,26 +56,27 @@ class HomeTodayDriveAdapter(val userId: String): RecyclerView.Adapter<HomeTodayD
                 with(responseHomeViewData) {
                     Glide.with(imgHomeTodayDrive.context)
                         .load(responseHomeViewData.image)
-                        .placeholder(R.drawable.ic_mask_group_4)
+                        .placeholder(R.drawable.today_drive_shape)
+                        .transform(RoundedCorners(20))
                         .into(imgHomeTodayDrive)
 
                     Log.d("go",responseHomeViewData.image.toString())
 
                     textHomeTodayDriveTitle.text = this.title
                     if (this.tags.count() == 2) {
-                        chipHomeTodayDrive1.text = this.tags[0]
-                        chipHomeTodayDrive2.text = this.tags[1]
+                        chipHomeTodayDrive1.text = "#${this.tags[0]}"
+                        chipHomeTodayDrive2.text = "#${this.tags[1]}"
                         chipHomeTodayDrive3.visibility = View.INVISIBLE
 
                     } else if(this.tags.count() == 1){
-                        chipHomeTodayDrive1.text = this.tags[0]
+                        chipHomeTodayDrive1.text = "#${this.tags[0]}"
                         chipHomeTodayDrive2.visibility = View.INVISIBLE
                         chipHomeTodayDrive3.visibility = View.INVISIBLE
                     }
                     else {
-                        chipHomeTodayDrive1.text = this.tags[0]
-                        chipHomeTodayDrive2.text = this.tags[1]
-                        chipHomeTodayDrive3.text = this.tags[2]
+                        chipHomeTodayDrive1.text = "#${this.tags[0]}"
+                        chipHomeTodayDrive2.text = "#${this.tags[1]}"
+                        chipHomeTodayDrive3.text = "#${this.tags[2]}"
                     }
 
                 }
