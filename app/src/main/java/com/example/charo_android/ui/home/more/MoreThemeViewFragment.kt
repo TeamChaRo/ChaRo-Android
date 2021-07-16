@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -101,8 +102,26 @@ class MoreThemeViewFragment : Fragment() {
             }
 
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
-                tab.setIcon(themeViewIcon[position])
-                tab.text = themeViewText[position]
+                when(position){
+                    0 -> tab.setCustomView(R.layout.tablayout_one)
+                    1 -> tab.setCustomView(R.layout.tablayout_two)
+                    2 -> tab.setCustomView(R.layout.tablayout_three)
+                    3 -> tab.setCustomView(R.layout.tablayout_four)
+                    4 -> tab.setCustomView(R.layout.tablayout_five)
+                    5 -> tab.setCustomView(R.layout.tablayout_six)
+                    6 -> tab.setCustomView(R.layout.tablayout_seven)
+                    7 -> tab.setCustomView(R.layout.tablayout_eight)
+                    8 -> tab.setCustomView(R.layout.tablayout_nine)
+                    9 -> tab.setCustomView(R.layout.tablayout_ten)
+                    10 -> tab.setCustomView(R.layout.tablayout_eleven)
+                    11 -> tab.setCustomView(R.layout.tablayout_twelve)
+                    12 -> tab.setCustomView(R.layout.tablayout_thirteen)
+                    13 -> tab.setCustomView(R.layout.tablayout_fourteen)
+                    14 -> tab.setCustomView(R.layout.tablayout_fifteen)
+
+                }
+
+
             }.attach()
 
         }
@@ -114,6 +133,11 @@ class MoreThemeViewFragment : Fragment() {
             transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
                 ?.commit()
         }
+    }
+
+    private fun createTabView(){
+
+
     }
 
     fun clickTab(){

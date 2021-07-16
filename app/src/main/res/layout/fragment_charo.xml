@@ -10,7 +10,7 @@
         android:id="@+id/cl_charo_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0f6fff"
+        android:background="@color/blue_main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -108,7 +108,7 @@
                     android:lineHeight="23.4sp"
                     android:text="nickname님"
                     android:textAlignment="center"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -300,8 +300,8 @@ class MoreViewFragment : Fragment() {
             ) {
                 if (position == 0) {
                     moreViewLoadData(userId)
-                } else {
 
+                } else {
                     moreViewNewData(userId)
                 }
 
