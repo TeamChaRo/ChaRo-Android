@@ -54,7 +54,8 @@ class MoreThemeContentViewAdapter(val userId: String) :
                 with(moreThemeInfo) {
                     Glide.with(imgMoreTheme.context)
                         .load(moreThemeInfo.image)
-                        .transform(RoundedCorners(9))
+                        .placeholder(R.drawable.more_theme_shape)
+                        .transform(RoundedCorners(20))
                         .into(imgMoreTheme)
                 }
                 textMoreThemeTitle.text = moreThemeInfo.title

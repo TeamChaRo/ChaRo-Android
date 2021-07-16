@@ -20,7 +20,7 @@ class OnBoardingTwoFragment : Fragment() {
         _binding = FragmentOnBoarding2Binding.inflate(inflater, container, false)
 
 
-        binding.btnSkip.setOnClickListener {
+        binding.btnSkips.setOnClickListener {
             val intent = Intent(requireActivity(), SignInActivity::class.java)
             startActivity(intent)
         }
