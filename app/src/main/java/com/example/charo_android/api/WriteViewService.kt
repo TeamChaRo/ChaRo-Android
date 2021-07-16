@@ -1,24 +1,16 @@
 package com.example.charo_android.api
 
+import com.example.charo_android.data.ResponseWriteData
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface WriteViewService {
     @Multipart
     @POST("/writePost")
-    fun postWrite(
-    //    @Part body: RequestWriteData,
-        @Part title: MultipartBody.Part,
-        @Part userId: MultipartBody.Part,
-        @Part province: MultipartBody.Part,
-        @Part region: MultipartBody.Part,
-        @Part warning: MultipartBody.Part,
-        @Part theme: MultipartBody.Part,
-        @Part isParking: MultipartBody.Part,
-        @Part parkingDesc: MultipartBody.Part,
-        @Part courseDesc: MultipartBody.Part,
-        @Part course: MultipartBody.Part,
-        @Part image: MultipartBody.Part
-        ): Call<ResponseWriteData>
+    fun writePost(
+        @PartMap request: HashMap<String, RequestBody>,
+        @Part files: List<MultipartBody.Part>
+    ): Call<ResponseWriteData>
 }

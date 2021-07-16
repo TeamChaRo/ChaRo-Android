@@ -59,8 +59,9 @@ class MainActivity : AppCompatActivity() {
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
-                        replaceWriteFragment()
-                        return@setOnItemSelectedListener true
+                        startActivityWrite()
+//                        replaceWriteFragment()
+//                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
                         replaceCharoFragment()

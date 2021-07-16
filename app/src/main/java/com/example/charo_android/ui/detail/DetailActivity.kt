@@ -173,7 +173,7 @@ class DetailActivity : AppCompatActivity() {
                             true
                         )
                     }
-                    if (data!![0].parkingDesc != null) {
+                    if (data!![0].parkingDesc != "") {
                         binding.tvDetailParkingInformation.text = data!![0].parkingDesc
                     }
                     setAttributeByFlag(
