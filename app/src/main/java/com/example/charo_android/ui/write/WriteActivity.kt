@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -402,10 +403,20 @@ class WriteActivity : AppCompatActivity() {
             // addImage()
             openGallery()
         }
+        binding.imgWriteBack.setOnClickListener {
+            onBackPressed()
+        }
 
         //서버 테스트
         binding.btnWriteBottomNext.setOnClickListener {
-            insertDataToCompanionObject()
+            AlertDialog.Builder(this)
+                .setMessage("작성을 완료하고, 드라이브 경로를 이어 작성하시겠습니까? 이후 글 수정은 어렵습니다.")
+                .setNeutralButton("아니오") { dialog, which ->
+                }
+                .setPositiveButton("예") { dialog, which ->
+                    insertDataToCompanionObject()
+                }
+                .show()
 //            writePost(
 //                binding.etWriteTitle.text.toString(),
 //                "jiwon0321",
