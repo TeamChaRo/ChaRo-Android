@@ -195,11 +195,17 @@ class WriteActivity : AppCompatActivity() {
         "화순"
     )
 
+    private lateinit var userId: String
+    private lateinit var nickName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("log_activity", "activity start")
         super.onCreate(savedInstanceState)
         binding = ActivityWriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userId = intent.getStringExtra("userId").toString()
+        nickName = intent.getStringExtra("nickName").toString()
 
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeAdapter = WriteAdapter()
@@ -641,9 +647,11 @@ class WriteActivity : AppCompatActivity() {
     fun startActivityWriteMap() {
         val intent = Intent(this@WriteActivity, WriteMapActivity::class.java)
         intent.putExtra("theme11", binding.btnWriteTheme1.text.toString())
-            .putExtra("theme22", binding.btnWriteTheme2.text.toString())
+        intent.putExtra("theme22", binding.btnWriteTheme2.text.toString())
         intent.putExtra("locationFlag", "0")
         intent.putExtra("textview", "0")
+        intent.putExtra("userId", userId)
+        intent.putExtra("nickName", nickName)
         startActivity(intent)
     }
 
