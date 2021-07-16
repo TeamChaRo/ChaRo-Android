@@ -35,7 +35,7 @@ import kotlin.collections.HashMap
 
 class WriteMapActivity : AppCompatActivity() {
 
-//    좌표 배열
+    //    좌표 배열
     var path = arrayListOf<TMapPoint>()
 
     private lateinit var binding: ActivityWriteMapBinding
@@ -44,6 +44,8 @@ class WriteMapActivity : AppCompatActivity() {
     private lateinit var textview: String
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
+    private lateinit var userId: String
+    private lateinit var nickName: String
 
     private var mapData = WriteData
 
@@ -52,13 +54,18 @@ class WriteMapActivity : AppCompatActivity() {
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(mapData.startAddress == "") {
+
+        if (mapData.startAddress == "") {
             AlertDialog.Builder(this)
                 .setMessage("출발지와 목적지를 입력해 다녀온 드라이브 코스를 표현해주세요. 완성된 경로를 확인 후, 경유지를 초가해 원하는 경로로 수정이 가능합니다.")
                 .setPositiveButton("예") { dialog, which ->
                 }
                 .show()
         }
+
+        userId = intent.getStringExtra("userId").toString()
+        nickName = intent.getStringExtra("nickName").toString()
+
 
         locationFlag = intent.getStringExtra("locationFlag").toString()
         Log.d("locationFlag", locationFlag)
@@ -68,6 +75,7 @@ class WriteMapActivity : AppCompatActivity() {
         Log.d("latitude", latitude.toString())
         longitude = intent.getDoubleExtra("pointLong", 0.0)
         Log.d("longitude", longitude.toString())
+
 
         // 뒤로가기 image click하면 뒤로 가짐
         binding.imgWriteMapBack.setOnClickListener {
@@ -95,6 +103,10 @@ class WriteMapActivity : AppCompatActivity() {
                 }
                 .show()
 
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
+            startActivity(intent)
         }
 
         // 출발지 누르면 검색창으로 감
@@ -102,6 +114,8 @@ class WriteMapActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
             intent.putExtra("locationM", "출발지를 입력하세요")
             intent.putExtra("locationFlag", "1")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
 
@@ -110,6 +124,8 @@ class WriteMapActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
             intent.putExtra("locationM", "경유지1를 입력하세요")
             intent.putExtra("locationFlag", "2")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
         // 경유지2 누르면 검색창으로 감
@@ -117,14 +133,18 @@ class WriteMapActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
             intent.putExtra("locationM", "경유지2를 입력하세요")
             intent.putExtra("locationFlag", "3")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
         // 도착지 누르면 검색창으로 감
         binding.etWriteMapEnd.setOnClickListener {
-            if(mapData.startAddress != "") {
+            if (mapData.startAddress != "") {
                 val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
                 intent.putExtra("locationM", "도착지를 입력하세요")
                 intent.putExtra("locationFlag", "4")
+                intent.putExtra("userId", userId)
+                intent.putExtra("nickName", nickName)
                 startActivity(intent)
             }
         }
@@ -156,11 +176,11 @@ class WriteMapActivity : AppCompatActivity() {
             binding.etWriteMapMid2.text = mapData.mid2Address
             binding.etWriteMapEnd.text = mapData.endAddress
 
-            if(mapData.mid1Address != "") {
+            if (mapData.mid1Address != "") {
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            if(mapData.mid2Address != ""){
+            if (mapData.mid2Address != "") {
                 binding.etWriteMapMid2.visibility = View.VISIBLE
                 binding.imgWriteMapDelete2.visibility = View.VISIBLE
             }
@@ -177,11 +197,11 @@ class WriteMapActivity : AppCompatActivity() {
             binding.etWriteMapMid2.text = mapData.mid2Address
             binding.etWriteMapEnd.text = mapData.endAddress
 
-            if(mapData.mid1Address != "") {
+            if (mapData.mid1Address != "") {
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            if(mapData.mid2Address != ""){
+            if (mapData.mid2Address != "") {
                 binding.etWriteMapMid2.visibility = View.VISIBLE
                 binding.imgWriteMapDelete2.visibility = View.VISIBLE
             }
@@ -200,11 +220,11 @@ class WriteMapActivity : AppCompatActivity() {
             binding.etWriteMapMid2.text = mapData.mid2Address
             binding.etWriteMapEnd.text = mapData.endAddress
 
-            if(mapData.mid1Address != "") {
+            if (mapData.mid1Address != "") {
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            if(mapData.mid2Address != ""){
+            if (mapData.mid2Address != "") {
                 binding.etWriteMapMid2.visibility = View.VISIBLE
                 binding.imgWriteMapDelete2.visibility = View.VISIBLE
             }
@@ -218,17 +238,17 @@ class WriteMapActivity : AppCompatActivity() {
             binding.etWriteMapMid2.text = mapData.mid2Address
             binding.etWriteMapEnd.text = mapData.endAddress
 
-            if(mapData.mid1Address != "") {
+            if (mapData.mid1Address != "") {
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            if(mapData.mid2Address != ""){
+            if (mapData.mid2Address != "") {
                 binding.etWriteMapMid2.visibility = View.VISIBLE
                 binding.imgWriteMapDelete2.visibility = View.VISIBLE
             }
         }
 
-        if(mapData.endAddress != ""){
+        if (mapData.endAddress != "") {
             binding.btnWriteComplete.visibility = View.VISIBLE
         }
 
@@ -240,7 +260,7 @@ class WriteMapActivity : AppCompatActivity() {
 
     private fun imgWriteMapAddAddressOnClickEvent() {
         binding.imgWriteMapAddAdress.setOnClickListener() {
-            if(mapData.startAddress != "" && mapData.endAddress != "") {
+            if (mapData.startAddress != "" && mapData.endAddress != "") {
                 if (binding.etWriteMapMid1.visibility == View.GONE) {
                     binding.etWriteMapMid1.visibility = View.VISIBLE
                     binding.imgWriteMapDelete1.visibility = View.VISIBLE
@@ -303,17 +323,17 @@ class WriteMapActivity : AppCompatActivity() {
         if (mapData.startLat != 0.0) {
             path.add(TMapPoint(mapData.startLat, mapData.startLong))
         }
-        if(mapData.mid1Lat != 0.0) {
+        if (mapData.mid1Lat != 0.0) {
             path.add(TMapPoint(mapData.mid1Lat, mapData.mid1Long))
         }
-        if(mapData.mid2Lat != 0.0) {
+        if (mapData.mid2Lat != 0.0) {
             path.add(TMapPoint(mapData.mid2Lat, mapData.mid2Long))
         }
-        if(mapData.endLat != 0.0) {
+        if (mapData.endLat != 0.0) {
             path.add(TMapPoint(mapData.endLat, mapData.endLong))
         }
 
-        if(path.isNotEmpty()){
+        if (path.isNotEmpty()) {
             setCenter(tMapView)
         }
         tMapView.removeAllTMapPolyLine()
@@ -329,7 +349,7 @@ class WriteMapActivity : AppCompatActivity() {
     }
 
     private fun mark(tMapView: TMapView) {
-        for(i in 0 until path.size) {
+        for (i in 0 until path.size) {
             val marker = TMapMarkerItem()
             val mapPoint = path[i]
             var bitmap: Bitmap = if (i == 0) {
@@ -346,18 +366,18 @@ class WriteMapActivity : AppCompatActivity() {
             tMapView.addMarkerItem(marker.name, marker)
         }
 
-        if(path.size > 1){
+        if (path.size > 1) {
             findPath(tMapView)
         }
     }
 
-    private fun findPath(tMapView: TMapView){
-        for(i in 0 until path.size - 1) {
+    private fun findPath(tMapView: TMapView) {
+        for (i in 0 until path.size - 1) {
             var flag: Boolean = true
-            if(i != 0 && i % 2 == 0){
+            if (i != 0 && i % 2 == 0) {
                 flag = !flag
             }
-            drawPath(tMapView, path[i], path[i+1], i, flag)
+            drawPath(tMapView, path[i], path[i + 1], i, flag)
         }
     }
 
@@ -401,7 +421,8 @@ class WriteMapActivity : AppCompatActivity() {
                 }
                 .setPositiveButton("예") { dialog, which ->
                     if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                        binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == "") {
+                        binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
+                    ) {
                         Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
                     } else {
 //                var addressList = mutableListOf<String>()
@@ -535,9 +556,14 @@ class WriteMapActivity : AppCompatActivity() {
 
                 }
                 .show()
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
+            startActivity(intent)
         }
-        // 시작
     }
+    // 시작
+
     override fun onBackPressed() {
 //        super.onBackPressed()
     }

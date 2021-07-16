@@ -56,6 +56,14 @@
 차로는 시작되었습니다.
 ```
 
+# Preview
+<img width="200" src = "https://user-images.githubusercontent.com/81508084/125966681-47161406-0de0-4b53-acc4-4547c3f68886.png" /><img width="200" src = "https://user-images.githubusercontent.com/81508084/125966615-b9f2cbeb-9ca0-43e3-bd67-68bd4fae0302.png" /><img width="200" src="https://user-images.githubusercontent.com/81508084/125966875-26c75591-2c62-45b4-ad76-4e16548a2bb4.png"/><img width="200" src="https://user-images.githubusercontent.com/81508084/125966967-1548c4c3-0695-4caf-b37b-d4816358f97a.png"/>
+<img width="200" src = "https://user-images.githubusercontent.com/81508084/125967112-96da1334-8d76-4d93-bb5a-0f532b6d313d.png" /><img width="200" src = "https://user-images.githubusercontent.com/81508084/125967176-5ca91fa7-c1ba-4df0-950d-d6259c013c7d.png" /><img width="200" src="https://user-images.githubusercontent.com/81508084/125967200-1025c3ad-5f69-4f71-b75e-652af41a552d.png"/><img width="200" src="https://user-images.githubusercontent.com/81508084/125967246-597bf7f5-65fa-4a3b-92d9-3684e7046ce5.png"/>
+<img width="200" src = "https://user-images.githubusercontent.com/81508084/125967353-6fbb9422-e27f-46cb-bf31-5a131a4e3303.png" /><img width="200" src = "https://user-images.githubusercontent.com/81508084/125967380-ea02f368-46d3-4770-8f31-7ef78e0a1492.png" /><img width="200" src="https://user-images.githubusercontent.com/81508084/125967432-b23d6ce2-f0d6-48fe-bbbc-05cc149be924.png"/><img width="200" src="https://user-images.githubusercontent.com/81508084/125967473-2219c374-f361-43bf-963e-b0d4a257f475.png"/>
+<img width="200" src = "https://user-images.githubusercontent.com/81508084/125967614-87e1815a-f229-43a7-9052-8d5e174f426e.png" /><img width="200" src = "https://user-images.githubusercontent.com/81508084/125967634-0fb9b2d4-06a1-40e3-9ae3-19e5301df015.png" /><img width="200" src="https://user-images.githubusercontent.com/81508084/125967659-fc651c9d-1900-4933-8c84-33febf265cf8.png"/><img width="200" src="https://user-images.githubusercontent.com/81508084/125967676-e586a20b-8e5f-427c-9ff9-2b46c82b8e4f.png"/>
+<img width="200" src = "https://user-images.githubusercontent.com/81508084/125967694-4fd8d072-de05-471c-b761-6022d10800eb.png" /><img width="200" src = "https://user-images.githubusercontent.com/81508084/125967711-be6eace7-9638-467b-be97-853fa6398c7a.png" />
+
+
 # 기능 설명
 #### 스플래쉬
 ```

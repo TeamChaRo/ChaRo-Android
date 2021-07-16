@@ -12,7 +12,7 @@ import com.example.charo_android.data.MapSearchInfo
 import com.example.charo_android.databinding.ItemAutoSearchBinding
 
 class WriteMapSearchAdapter(
-    val locationFlag: String, val text: String
+    val locationFlag: String, val text: String, val userId: String, val nickName: String
 ) : RecyclerView.Adapter<WriteMapSearchAdapter.MapSearchViewHolder>() {
 
     /* 2. Adapter 는 ViewHolder 로 변경할 Data 를 가지고 있어야함 */
@@ -48,6 +48,8 @@ class WriteMapSearchAdapter(
                 .putExtra("locationAddress",userList[position].locationAddress)
                 .putExtra("locationFlag", locationFlag)
                 .putExtra("text", text)
+                .putExtra("userId", userId)
+                .putExtra("nickName", nickName)
 
             ContextCompat.startActivity(holder.itemView.context, intent, null)
 

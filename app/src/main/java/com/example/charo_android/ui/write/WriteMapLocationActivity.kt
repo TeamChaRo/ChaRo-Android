@@ -20,6 +20,8 @@ class WriteMapLocationActivity : AppCompatActivity() {
     private lateinit var locationName: String
     private lateinit var locationFlag: String
     private lateinit var address: TMapAddressInfo
+    private lateinit var userId: String
+    private lateinit var nickName: String
     private var lat = 0.0
     private var lon = 0.0
 
@@ -29,6 +31,9 @@ class WriteMapLocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userId = intent.getStringExtra("userId").toString()
+        nickName = intent.getStringExtra("nickName").toString()
 
         locationFlag = intent.getStringExtra("locationFlag").toString()
 
@@ -177,6 +182,8 @@ class WriteMapLocationActivity : AppCompatActivity() {
                 .putExtra("pointLong", lon)
                 .putExtra("pointLat", lat)
                 .putExtra("locationFlag", locationFlag)
+                .putExtra("userId", userId)
+                .putExtra("nickName",nickName)
 
             startActivity(intent)
         }

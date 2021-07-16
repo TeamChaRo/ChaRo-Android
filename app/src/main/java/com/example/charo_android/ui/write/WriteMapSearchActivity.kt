@@ -18,6 +18,8 @@ class WriteMapSearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteMapSearchBinding
     private lateinit var writeMapSearchAdapter: WriteMapSearchAdapter
+    lateinit var userId: String
+    lateinit var nickName: String
 
     private lateinit var locationFlag: String
 
@@ -26,6 +28,10 @@ class WriteMapSearchActivity : AppCompatActivity() {
         binding = ActivityWriteMapSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d("111", "success go searchActivity")
+
+        userId = intent.getStringExtra("userId").toString()
+        nickName = intent.getStringExtra("nickName").toString()
+
 
 //        내가 추가한 코드
         locationFlag = intent.getStringExtra("locationFlag").toString()
@@ -40,7 +46,7 @@ class WriteMapSearchActivity : AppCompatActivity() {
 
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeMapSearchAdapter =
-            WriteMapSearchAdapter(locationFlag, text)
+            WriteMapSearchAdapter(locationFlag, text, userId, nickName)
 
         // 2. RecyclerView 에 어뎁터를 우리가 만든 어뎁터로 만들기
         binding.recyclerviewWriteMapSearch.adapter = writeMapSearchAdapter

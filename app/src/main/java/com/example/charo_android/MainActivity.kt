@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userId = intent.getStringExtra("userId").toString()
-        nickName = intent.getStringExtra("nickname").toString()
+        nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userId, nickName)
         initNavView()
     }
@@ -98,10 +98,8 @@ class MainActivity : AppCompatActivity() {
 
     fun startActivityWrite() {
         val intent = Intent(this@MainActivity, WriteActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("nickname", nickName)
         startActivity(intent)
     }
 }
-
-
-
-

@@ -83,7 +83,7 @@ class CharoFragment : Fragment() {
 
                     likeData = response.body()!!.data
 
-                    binding.tvCharoNickname.text = likeData?.userInformation?.nickname
+                    binding.tvCharoNickname.text = "${likeData?.userInformation?.nickname} 드라이버님"
                     binding.tvCharoFollowingCount.text =
                         likeData?.userInformation?.following?.toString()
                     binding.tvCharoFollowerCount.text =
