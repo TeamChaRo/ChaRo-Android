@@ -27,6 +27,7 @@ class WriteAdapter : RecyclerView.Adapter<WriteAdapter.WriteImgViewHolder>() {
 
     // 5. Adapter 는 ViewHolder 에 Data 를 전달하는 방법을 정의
     override fun onBindViewHolder(holder: WriteImgViewHolder, position: Int) {
+
         holder.onBind(imgList[position])
     }
 

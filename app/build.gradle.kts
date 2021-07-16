@@ -127,5 +127,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.0.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 
+    implementation("org.jetbrains:annotations:15.0")
 
 }
