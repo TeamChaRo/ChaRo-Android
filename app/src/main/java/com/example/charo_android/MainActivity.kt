@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userId = intent.getStringExtra("userId").toString()
-        nickName = intent.getStringExtra("nickname").toString()
+        nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userId, nickName)
         initNavView()
     }

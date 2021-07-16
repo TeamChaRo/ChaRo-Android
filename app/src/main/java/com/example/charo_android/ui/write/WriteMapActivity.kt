@@ -1,6 +1,5 @@
 package com.example.charo_android.ui.write
 
-import com.example.charo_android.ui.write.WriteMapPointData
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -44,6 +43,8 @@ class WriteMapActivity : AppCompatActivity() {
     private lateinit var textview: String
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
+    private lateinit var userId: String
+    private lateinit var nickName: String
 
     private var mapData = WriteData
 
@@ -51,6 +52,9 @@ class WriteMapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userId = intent.getStringExtra("userId").toString()
+        nickName = intent.getStringExtra("nickName").toString()
 
         locationFlag = intent.getStringExtra("locationFlag").toString()
         Log.d("locationFlag", locationFlag)
@@ -60,6 +64,7 @@ class WriteMapActivity : AppCompatActivity() {
         Log.d("latitude", latitude.toString())
         longitude = intent.getDoubleExtra("pointLong", 0.0)
         Log.d("longitude", longitude.toString())
+
 
         // 뒤로가기 image click하면 뒤로 가짐
         binding.imgWriteMapBack.setOnClickListener {
@@ -77,7 +82,8 @@ class WriteMapActivity : AppCompatActivity() {
             mapData.endLong = 0.0
 
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("userId", "and")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
 
@@ -86,6 +92,8 @@ class WriteMapActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
             intent.putExtra("locationM", "출발지를 입력하세요")
             intent.putExtra("locationFlag", "1")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
 
@@ -94,6 +102,8 @@ class WriteMapActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
             intent.putExtra("locationM", "경유지1를 입력하세요")
             intent.putExtra("locationFlag", "2")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
         // 경유지2 누르면 검색창으로 감
@@ -101,6 +111,8 @@ class WriteMapActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
             intent.putExtra("locationM", "경유지2를 입력하세요")
             intent.putExtra("locationFlag", "3")
+            intent.putExtra("userId", userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
         // 도착지 누르면 검색창으로 감
@@ -109,6 +121,8 @@ class WriteMapActivity : AppCompatActivity() {
                 val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
                 intent.putExtra("locationM", "도착지를 입력하세요")
                 intent.putExtra("locationFlag", "4")
+                intent.putExtra("userId", userId)
+                intent.putExtra("nickName", nickName)
                 startActivity(intent)
             }
         }
@@ -508,7 +522,8 @@ class WriteMapActivity : AppCompatActivity() {
 //                    }
 //                })
                 val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.putExtra("userId", Hidden.userId)
+                intent.putExtra("userId", userId)
+                intent.putExtra("nickName", nickName)
                 startActivity(intent)
             }
         }
