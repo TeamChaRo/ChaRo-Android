@@ -98,10 +98,8 @@ class MainActivity : AppCompatActivity() {
 
     fun startActivityWrite() {
         val intent = Intent(this@MainActivity, WriteActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("nickname", nickName)
         startActivity(intent)
     }
 }
-
-
-
-
