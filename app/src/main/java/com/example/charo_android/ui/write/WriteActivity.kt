@@ -208,8 +208,10 @@ class WriteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
         userId = intent.getStringExtra("userId").toString()
         nickName = intent.getStringExtra("nickName").toString()
+
 
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeAdapter = WriteAdapter()

@@ -14,7 +14,7 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
         android:lineHeight="24sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:text="@string/skip"
         android:textColor="@color/blue_main"
         android:textSize="16sp"

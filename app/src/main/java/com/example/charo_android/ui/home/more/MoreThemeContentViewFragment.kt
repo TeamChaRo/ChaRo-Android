@@ -48,7 +48,7 @@ class MoreThemeContentViewFragment(userId :String, identity :String, value :Stri
 
 
     private fun initSpinner(){
-        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.search_spinner, android.R.layout.simple_spinner_item)
+        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.search_spinner, R.layout.custom_spinner_item)
         binding.spinnerMoreTheme.adapter = adapter
     }
 

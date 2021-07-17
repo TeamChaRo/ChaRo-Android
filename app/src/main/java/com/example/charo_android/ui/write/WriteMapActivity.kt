@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.write
 
+
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
@@ -50,10 +51,12 @@ class WriteMapActivity : AppCompatActivity() {
 
     private var mapData = WriteData
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
 
         if (mapData.startAddress == ""||binding.etWriteMapStart.text==null||binding.etWriteMapStart.text=="") {

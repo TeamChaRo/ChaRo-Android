@@ -69,6 +69,7 @@ class ResultSearchAdapter(val userId : String): RecyclerView.Adapter<ResultSearc
                 }
 
                 imgResultSearchHeart.setImageResource(R.drawable.selector_home_heart)
+                imgResultSearchHeart.setOnClickListener {
                 if (resultSearchData.isFavorite == false) {
                     with(imgResultSearchHeart) {
                         this.isSelected = false
@@ -80,7 +81,7 @@ class ResultSearchAdapter(val userId : String): RecyclerView.Adapter<ResultSearc
                         setOnClickListener { this.isSelected != this.isSelected }
                     }
                 }
-
+                }
 
             }
 
