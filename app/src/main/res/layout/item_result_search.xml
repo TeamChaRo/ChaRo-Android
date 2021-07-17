@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
         android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,12 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="8:5"
-            android:layout_marginTop="0dp"
             android:scaleType="fitXY"
             android:background="@android:color/transparent"
             android:src="@drawable/result_search_shape"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -55,21 +50,21 @@
 
         <TextView
             android:id="@+id/chip_item_result_search_1"
+            style="@style/HeaderH9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_charo_hashtag"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="2dp"
             android:text="@string/theme1"
-            style="@style/HeaderH9"
-            android:layout_marginTop="9dp"
+            app:chipBackgroundColor="@color/white"
             app:chipCornerRadius="10dp"
             app:chipStrokeColor="@color/blue_main"
             app:chipStrokeWidth="1dp"
-            app:chipBackgroundColor="@color/white"
-            android:paddingVertical="2dp"
-            android:paddingHorizontal="11dp"
-            android:background="@drawable/shape_charo_hashtag"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@+id/text_result_search"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/text_result_search"
+            app:layout_constraintTop_toBottomOf="@+id/text_result_search" />
 
         <TextView
             android:id="@+id/chip_item_result_search_2"
@@ -86,6 +81,7 @@
             android:paddingHorizontal="11dp"
             android:background="@drawable/shape_charo_hashtag"
             android:includeFontPadding="false"
+            android:layout_marginStart="4dp"
             app:layout_constraintTop_toBottomOf="@+id/text_result_search"
             app:layout_constraintStart_toEndOf="@id/chip_item_result_search_1" />
 
@@ -104,6 +100,7 @@
             android:paddingHorizontal="11dp"
             android:background="@drawable/shape_charo_hashtag"
             android:includeFontPadding="false"
+            android:layout_marginStart="4dp"
             app:layout_constraintTop_toBottomOf="@+id/text_result_search"
             app:layout_constraintStart_toEndOf="@id/chip_item_result_search_2" />
 

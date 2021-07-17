@@ -217,10 +217,12 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         nickName = intent.getStringExtra("nickName").toString()
         userId = intent.getStringExtra("userId").toString()
         Log.d("nice",userId)
-        clickSearch(userId)
+        Log.d("nickName", nickName)
+        clickSearch(userId,nickName)
         initToolBar()
         goHomeView(userId)
         selectTheme()
@@ -231,9 +233,10 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    fun clickSearch(userId : String) {
+    fun clickSearch(userId : String, nickName : String) {
         binding.imgSearchStart.setOnClickListener {
             val userId = userId
+            val nickName = nickName
             val province = if(binding.btnSearchArea1.text.toString() == "선택안함"){
                 ""
             } else{
@@ -274,6 +277,7 @@ class SearchActivity : AppCompatActivity() {
                         if (data == 0) {
                             val intent = Intent(this@SearchActivity, NoSearchActivity::class.java)
                             intent.putExtra("userId", userId)
+                            intent.putExtra("nicKName",nickName)
                             startActivity(intent)
 
                         } else {
@@ -284,7 +288,10 @@ class SearchActivity : AppCompatActivity() {
                                 putExtra("city", city)
                                 putExtra("theme", theme)
                                 putExtra("caution", caution)
+                                putExtra("nicKName",nickName)
                                 startActivity(intent)
+
+                                Log.d("nickName", nickName)
                             }
                         }
 
@@ -321,6 +328,7 @@ class SearchActivity : AppCompatActivity() {
                         btnSearchTheme.setTextColor(getColor(R.color.blue_main))
                         imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                         text_search_start.setTextColor(getColor(R.color.white))
+                        text_search_start.setPadding(0,0,0,15)
                     }
                 }.show()
         }

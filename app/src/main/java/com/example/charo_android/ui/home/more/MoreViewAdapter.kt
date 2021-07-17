@@ -14,7 +14,8 @@ import com.example.charo_android.api.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.ui.detail.DetailActivity
 
-class MoreViewAdapter(val userId: String) : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
+class MoreViewAdapter(val userId: String) :
+    RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
     var moreData = mutableListOf<ResponseMoreViewData.Data.Drive>()
 
     override fun onCreateViewHolder(
@@ -61,26 +62,32 @@ class MoreViewAdapter(val userId: String) : RecyclerView.Adapter<MoreViewAdapter
 
 
                 if (moreViewItem.tags.count() == 2) {
-                    chipMoreView1.text = moreViewItem.tags[0]
-                    chipMoreView2.text = moreViewItem.tags[1]
+                    chipMoreView1.text = "#${moreViewItem.tags[0]}"
+                    chipMoreView2.text = "#${moreViewItem.tags[1]}"
                     chipMoreView3.visibility = View.INVISIBLE
 
+                } else if (moreViewItem.tags.count() == 1) {
+                    chipMoreView1.text = "#${moreViewItem.tags[0]}"
+                    chipMoreView2.visibility = View.INVISIBLE
+                    chipMoreView3.visibility = View.INVISIBLE
                 } else {
-                    chipMoreView1.text = moreViewItem.tags[0]
-                    chipMoreView2.text = moreViewItem.tags[1]
-                    chipMoreView3.text = moreViewItem.tags[2]
+                    chipMoreView1.text = "#${moreViewItem.tags[0]}"
+                    chipMoreView2.text = "#${moreViewItem.tags[1]}"
+                    chipMoreView3.text = "#${moreViewItem.tags[2]}"
                 }
 
                 imgMoreViewHeart.setImageResource(R.drawable.selector_home_heart)
-                if (moreViewItem.isFavorite == false) {
-                    with(imgMoreViewHeart) {
-                        this.isSelected = false
-                        setOnClickListener { this.isSelected != this.isSelected }
-                    }
-                } else {
-                    with(imgMoreViewHeart) {
-                        this.isSelected = true
-                        setOnClickListener { this.isSelected != this.isSelected }
+                binding.imgMoreViewHeart.setOnClickListener {
+                    if (moreViewItem.isFavorite == false) {
+                        with(imgMoreViewHeart) {
+                            this.isSelected = false
+                            setOnClickListener { this.isSelected != this.isSelected }
+                        }
+                    } else {
+                        with(imgMoreViewHeart) {
+                            this.isSelected = true
+                            setOnClickListener { this.isSelected != this.isSelected }
+                        }
                     }
                 }
 

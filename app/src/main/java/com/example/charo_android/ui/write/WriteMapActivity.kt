@@ -1,6 +1,5 @@
 package com.example.charo_android.ui.write
 
-import com.example.charo_android.ui.write.WriteMapPointData
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -47,10 +46,14 @@ class WriteMapActivity : AppCompatActivity() {
 
     private var mapData = WriteData
 
+    private lateinit var userId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userId = intent.getStringExtra("userId").toString()
 
         locationFlag = intent.getStringExtra("locationFlag").toString()
         Log.d("locationFlag", locationFlag)
@@ -77,7 +80,7 @@ class WriteMapActivity : AppCompatActivity() {
             mapData.endLong = 0.0
 
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("userId", "and")
+            intent.putExtra("userId", userId)
             startActivity(intent)
         }
 

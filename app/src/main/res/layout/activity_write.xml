@@ -43,7 +43,7 @@
             <EditText
                 android:id="@+id/et_write_title"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/background_et_write"
                 android:fontFamily="@font/notosanscjkkr_regular"
@@ -151,10 +151,10 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_region"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/btn_dialog_click"
+                    android:background="@drawable/ic_group_724"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:gravity="center"
                     android:paddingRight="10dp"
@@ -162,22 +162,24 @@
                     android:textColor="@drawable/selector_text_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_write_location"
                     app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/btn_dialog_click"
+                    android:background="@drawable/ic_group_724"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:gravity="center"
                     android:paddingRight="10dp"
+                    android:layout_marginLeft="5dp"
                     android:text="@string/unit_si"
                     android:textColor="@drawable/selector_text_color"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_write_region"
                     app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -214,7 +216,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_theme1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/btn_dialog_click"
@@ -225,27 +227,29 @@
                     android:textColor="@drawable/selector_text_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_write_theme2"
                     app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_theme2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/btn_dialog_click"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:gravity="center"
+                    android:layout_marginHorizontal="5dp"
                     android:paddingRight="10dp"
                     android:text="@string/theme2"
                     android:textColor="@drawable/selector_text_color"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_write_theme3"
+                    app:layout_constraintStart_toEndOf="@+id/btn_write_theme1"
                     app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_write_theme3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/btn_dialog_click"
@@ -255,6 +259,7 @@
                     android:text="@string/theme3"
                     android:textColor="@drawable/selector_text_color"
                     android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/btn_write_theme2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
@@ -312,7 +317,7 @@
                 <EditText
                     android:id="@+id/et_write_park_review"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="42dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/background_et_write"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"

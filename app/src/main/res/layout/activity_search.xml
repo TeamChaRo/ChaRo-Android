@@ -33,7 +33,7 @@
                     style="@style/HeaderH4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="86dp"
+                    android:layout_marginTop="48dp"
                     android:layout_marginEnd="96dp"
                     android:layout_marginStart="60dp"
                     android:layout_marginBottom="23dp"
@@ -203,7 +203,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_close_white"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 

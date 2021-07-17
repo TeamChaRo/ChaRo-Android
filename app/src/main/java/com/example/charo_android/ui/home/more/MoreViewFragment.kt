@@ -283,7 +283,7 @@ class MoreViewFragment : Fragment() {
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.search_spinner,
-            android.R.layout.simple_spinner_item
+            R.layout.custom_spinner_item
         )
         binding.spinnerMoreView.adapter = adapter
     }

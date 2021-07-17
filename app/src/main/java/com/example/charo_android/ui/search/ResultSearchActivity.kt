@@ -20,18 +20,20 @@ import retrofit2.Response
 
 class ResultSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultSearchBinding
-    private lateinit var userId: String
+    private lateinit var userId : String
+    private lateinit var nickName : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        userId = intent.getStringExtra("userId").toString()
 
-        Log.d("jiwon", userId)
+        val userId = intent.getStringExtra("userId").toString()
+        val nickName = intent.getStringExtra("nickName").toString()
+        Log.d("nickName", nickName)
         loadSearchData(userId)
-        backSearch(userId)
+        backSearch(userId, nickName)
         initSpinner()
-        backHome(userId)
+        backHome(userId, nickName)
 
     }
 
@@ -107,20 +109,21 @@ class ResultSearchActivity : AppCompatActivity() {
 
 
 
-    fun backSearch(userId: String) {
+    fun backSearch(userId: String, nickName : String) {
         binding.imgBackSearch.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            intent.putExtra("userId", userId)
+        val intent = Intent(applicationContext, SearchActivity::class.java)
+            intent.putExtra("userId",userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
         }
     }
 
-    fun backHome(userId : String) {
-        binding.imgBackSearch.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("userId", userId)
+    fun backHome(userId: String, nickName : String) {
+        binding.imgGoHome.setOnClickListener {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            intent.putExtra("userId",userId)
+            intent.putExtra("nickName", nickName)
             startActivity(intent)
-
         }
     }
 
@@ -128,7 +131,7 @@ class ResultSearchActivity : AppCompatActivity() {
         val adapter = ArrayAdapter.createFromResource(
             this,
             R.array.search_spinner,
-            android.R.layout.simple_spinner_item
+            R.layout.custom_spinner_item
         )
         binding.spinnerResultSearch.adapter = adapter
     }
