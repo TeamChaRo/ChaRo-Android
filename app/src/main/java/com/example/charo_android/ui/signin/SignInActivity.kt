@@ -29,7 +29,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun btnLoginOnClickEvent() {
         binding.btnSigninLogin.setOnClickListener() {
-            if (binding.etSigninId == null || binding.etSigninPw == null) {
+            if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
                 Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
                 val requestSignInData = RequestSignInData(
@@ -62,11 +62,11 @@ class SignInActivity : AppCompatActivity() {
                         } else {
                             Log.d("server connect", "fail")
                             Log.d("server connect", "${response.errorBody()}")
-                            Log.d("server connect", "${response.message()}")
+                            Log.d("server connect", response.message())
                             Log.d("server connect", "${response.code()}")
                             Log.d("server connect", "${response.raw().request.url}")
                             Toast.makeText(applicationContext, "ID/PW를 확인해주세요!", Toast.LENGTH_LONG).show()
-                            binding.etSigninPw.text = null
+                            binding.etSigninPw.text.clear()
                         }
                     }
 
