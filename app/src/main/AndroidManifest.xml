@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +41,7 @@
         <activity android:name=".ui.signin.SignInActivity">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/app_name"></activity>
     </application>
 

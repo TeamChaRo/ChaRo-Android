@@ -5,14 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.RequestSignInData
 import com.example.charo_android.data.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

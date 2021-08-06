@@ -2,33 +2,21 @@ package com.example.charo_android.ui.write
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.charo_android.MainActivity
 import com.example.charo_android.R
-import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.FormDataUtil
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.databinding.ActivityWriteBinding
 import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
 
 
 class WriteActivity : AppCompatActivity() {

@@ -1,24 +1,20 @@
 package com.example.charo_android.ui.search
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.RequestSearchViewData
 import com.example.charo_android.api.ResponseSearchViewData
 import com.example.charo_android.databinding.ActivitySearchBinding
-import com.example.charo_android.ui.home.HomeFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.chrono.JapaneseEra.values
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding

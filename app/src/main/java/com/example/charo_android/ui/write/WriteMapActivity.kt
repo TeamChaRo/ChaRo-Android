@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,27 +12,14 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.R
-import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.RequestWriteData
-import com.example.charo_android.data.ResponseWriteData
 import com.example.charo_android.databinding.ActivityWriteMapBinding
 import com.example.charo_android.hidden.Hidden
-import com.google.gson.Gson
 import com.skt.Tmap.*
-import io.reactivex.processors.MulticastProcessor
 import kotlinx.android.synthetic.main.activity_write_map.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
 import java.util.*
 import java.lang.Exception
-import kotlin.collections.HashMap
 
 class WriteMapActivity : AppCompatActivity() {
 
