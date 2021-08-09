@@ -30,10 +30,13 @@ class ResultSearchActivity : AppCompatActivity() {
         val userId = intent.getStringExtra("userId").toString()
         val nickName = intent.getStringExtra("nickName").toString()
         Log.d("nickName", nickName)
+
+
         loadSearchData(userId)
-        backSearch(userId, nickName)
+        backSearch()
         initSpinner()
-        backHome(userId, nickName)
+        backHome()
+
 
     }
 
@@ -109,21 +112,23 @@ class ResultSearchActivity : AppCompatActivity() {
 
 
 
-    fun backSearch(userId: String, nickName : String) {
-        binding.imgBackSearch.setOnClickListener {
-        val intent = Intent(applicationContext, SearchActivity::class.java)
+    private fun backSearch() {
+        binding.imgBackSearchView.setOnClickListener {
+        val intent = Intent(this, SearchActivity::class.java)
             intent.putExtra("userId",userId)
             intent.putExtra("nickName", nickName)
             startActivity(intent)
+
         }
     }
 
-    fun backHome(userId: String, nickName : String) {
-        binding.imgGoHome.setOnClickListener {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+    private fun backHome() {
+        binding.imgBackSearchView.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("userId",userId)
             intent.putExtra("nickName", nickName)
             startActivity(intent)
+
         }
     }
 

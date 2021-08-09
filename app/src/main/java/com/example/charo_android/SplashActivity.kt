@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 
 class SplashActivity : AppCompatActivity() {
-    private val time : Long = 3000
+    private val time : Long = 2000
 
     private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
+import com.example.charo_android.ui.alarm.AlarmActivity
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.ResponseHomeViewData
 import com.example.charo_android.data.*
@@ -34,8 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeLocationDriveAdapter : HomeLocationDriveAdapter
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
-    private lateinit var userId : String
-    private lateinit var nickName : String
+    
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         initHomeNightDrive(userId)
         initHomeLocationDrive(userId)
         goSearchView(userId, nickName)
-
+        goAlarm()
         initToolBar()
         initHomeTheme()
         replaceMoreViewFragment(userId)
@@ -256,6 +256,13 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
+
+    private fun goAlarm(){
+        binding.imgMainAlarm.setOnClickListener {
+            val intent = Intent(activity, AlarmActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
 
     private fun replaceMoreViewFragment(userId: String) {
