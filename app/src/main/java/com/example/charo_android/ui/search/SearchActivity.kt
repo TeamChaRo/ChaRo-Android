@@ -87,6 +87,7 @@ class SearchActivity : AppCompatActivity() {
         "양양",
         "영월",
         "인제",
+        "원주",
         "정선",
         "철원",
         "춘천",
@@ -224,8 +225,7 @@ class SearchActivity : AppCompatActivity() {
         selectTheme()
         selectCatution()
         selectarea()
-
-        binding.textUserId.text = "${nickName}님의"
+        binding.textUserId.text = "복덩이님의"
     }
 
 

@@ -10,7 +10,7 @@ import com.example.charo_android.databinding.ActivitySplashBinding
 import com.example.charo_android.ui.onBoarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {
-    private val time : Long = 3000
+    private val time : Long = 2000
 
     private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
