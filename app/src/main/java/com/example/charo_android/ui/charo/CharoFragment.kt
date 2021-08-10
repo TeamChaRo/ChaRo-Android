@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.ResponseMyPageLikeData

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMyCharoBinding
 

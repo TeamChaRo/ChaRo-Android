@@ -1,24 +1,20 @@
 package com.example.charo_android.ui.search
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.api.RequestSearchViewData
 import com.example.charo_android.api.ResponseSearchViewData
 import com.example.charo_android.databinding.ActivitySearchBinding
-import com.example.charo_android.ui.home.HomeFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.chrono.JapaneseEra.values
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
@@ -91,6 +87,7 @@ class SearchActivity : AppCompatActivity() {
         "양양",
         "영월",
         "인제",
+        "원주",
         "정선",
         "철원",
         "춘천",
@@ -217,23 +214,25 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         nickName = intent.getStringExtra("nickName").toString()
         userId = intent.getStringExtra("userId").toString()
         Log.d("nice",userId)
-        clickSearch(userId)
+        Log.d("nickName", nickName)
+        clickSearch(userId,nickName)
         initToolBar()
         goHomeView(userId)
         selectTheme()
         selectCatution()
         selectarea()
-
-        binding.textUserId.text = "${nickName}님의"
+        binding.textUserId.text = "복덩이님의"
     }
 
 
-    fun clickSearch(userId : String) {
+    fun clickSearch(userId : String, nickName : String) {
         binding.imgSearchStart.setOnClickListener {
             val userId = userId
+            val nickName = nickName
             val province = if(binding.btnSearchArea1.text.toString() == "선택안함"){
                 ""
             } else{
@@ -274,6 +273,7 @@ class SearchActivity : AppCompatActivity() {
                         if (data == 0) {
                             val intent = Intent(this@SearchActivity, NoSearchActivity::class.java)
                             intent.putExtra("userId", userId)
+                            intent.putExtra("nicKName",nickName)
                             startActivity(intent)
 
                         } else {
@@ -284,7 +284,10 @@ class SearchActivity : AppCompatActivity() {
                                 putExtra("city", city)
                                 putExtra("theme", theme)
                                 putExtra("caution", caution)
+                                putExtra("nicKName",nickName)
                                 startActivity(intent)
+
+                                Log.d("nickName", nickName)
                             }
                         }
 
@@ -321,6 +324,7 @@ class SearchActivity : AppCompatActivity() {
                         btnSearchTheme.setTextColor(getColor(R.color.blue_main))
                         imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                         text_search_start.setTextColor(getColor(R.color.white))
+                        text_search_start.setPadding(0,0,0,15)
                     }
                 }.show()
         }

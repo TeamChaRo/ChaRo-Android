@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.MainActivity
+import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.ui.detail.DetailActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 

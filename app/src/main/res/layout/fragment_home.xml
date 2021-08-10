@@ -86,7 +86,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:overScrollMode="always">
 
@@ -129,14 +128,14 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_home_today_drive"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="@id/text_home_today_drive"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive" />
 
@@ -179,8 +178,10 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="14dp"
                     android:orientation="horizontal"
+                    android:layout_marginEnd="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_home_theme" />
 
 
@@ -347,13 +348,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="65dp"
                     android:layout_marginStart="20dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_home_location_drive"
+
                     app:spanCount="2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

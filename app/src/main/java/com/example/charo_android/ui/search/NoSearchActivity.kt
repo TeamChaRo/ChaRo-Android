@@ -10,12 +10,14 @@ import com.example.charo_android.ui.write.WriteActivity
 
 class NoSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoSearchBinding
-
+    private lateinit var userId : String
+    private lateinit var nickName : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNoSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val userId : String = intent.getStringExtra("userId").toString()
+        userId = intent.getStringExtra("userId").toString()
+        nickName = intent.getStringExtra("nickName").toString()
         clickBackButton(userId)
         clickWriteButton()
     }
@@ -24,8 +26,11 @@ class NoSearchActivity : AppCompatActivity() {
     private fun clickBackButton(userId: String) {
         binding.imgBackHome.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
-            intent.putExtra("userId", userId)
-            startActivity(intent)
+            intent.apply{
+                putExtra("userId", userId)
+                putExtra("nickName", nickName)
+                startActivity(intent)
+            }
         }
 
     }

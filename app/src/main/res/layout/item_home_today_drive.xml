@@ -6,8 +6,8 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="21dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/img_home_today_drive"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="360dp"
+            android:layout_height="220dp"
             android:scaleType="fitXY"
             android:src="@drawable/today_drive_shape"
             app:layout_constraintDimensionRatio="13:9"

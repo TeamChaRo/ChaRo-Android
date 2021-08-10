@@ -15,7 +15,6 @@
 local.properties
 
 #Map key class file
-/buildSrc
 /app/src/main/java/com/example/charo_android/hidden/Hidden.kt
 
 *.apk

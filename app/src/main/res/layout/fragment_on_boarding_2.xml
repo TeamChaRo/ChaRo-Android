@@ -14,7 +14,7 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
         android:lineHeight="24sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:text="@string/skip"
         android:textColor="@color/blue_main"
         android:textSize="16sp"
@@ -38,6 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/text_on_boarding_looking_2"
             android:src="@drawable/onboarding_background_2_android" />
 
 
@@ -47,6 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_onBoarding_2"
+            app:layout_constraintBottom_toTopOf="@id/text_on_boarding_information2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -56,12 +58,15 @@
             android:textSize="21sp" />
 
         <TextView
+            android:id="@+id/text_on_boarding_information2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_on_boarding_looking_2"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:lineSpacingExtra="0dp"
             android:includeFontPadding="false"
             android:lines="2"
