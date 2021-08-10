@@ -7,6 +7,9 @@
     android:fontFamily="@font/notosanscjkkr_regular"
     android:hint="text"
     android:lineHeight="22sp"
+    android:includeFontPadding="false"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp"
     android:textAlignment="textStart"
     android:textColor="@color/gray5_sub"
     android:textSize="12sp" />

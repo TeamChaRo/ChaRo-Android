@@ -175,7 +175,6 @@ class WriteMapLocationActivity : AppCompatActivity() {
 
             Log.d("test lat", lat.toString())
             Log.d("test lon", lon.toString())
-            Log.d("test addr", address.strFullAddress)
 
             val intent = Intent(this, WriteMapActivity::class.java)
             intent.putExtra("textview", locationAddress)

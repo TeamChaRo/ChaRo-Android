@@ -85,29 +85,29 @@ class WriteMapActivity : AppCompatActivity() {
                 .setNeutralButton("아니오") { dialog, which ->
                 }
                 .setPositiveButton("예") { dialog, which ->
-                    WriteData.startAddress = ""
-                    WriteData.mid1Address = ""
-                    WriteData.mid2Address = ""
-                    WriteData.endAddress = ""
-                    WriteData.startLat = 0.0
-                    WriteData.startLong = 0.0
-                    WriteData.mid1Lat = 0.0
-                    WriteData.mid1Long = 0.0
-                    WriteData.mid2Lat = 0.0
-                    WriteData.mid2Long = 0.0
-                    WriteData.endLat = 0.0
-                    WriteData.endLong = 0.0
+                    mapData.startAddress = ""
+                    mapData.mid1Address = ""
+                    mapData.mid2Address = ""
+                    mapData.endAddress = ""
+                    mapData.startLat = 0.0
+                    mapData.startLong = 0.0
+                    mapData.mid1Lat = 0.0
+                    mapData.mid1Long = 0.0
+                    mapData.mid2Lat = 0.0
+                    mapData.mid2Long = 0.0
+                    mapData.endLat = 0.0
+                    mapData.endLong = 0.0
 
-                    WriteData.courseDesc = ""
-                    WriteData.isParking = false
-                    WriteData.parkingDesc = ""
-                    WriteData.province = ""
-                    WriteData.region = ""
-                    WriteData.theme.clear()
-                    WriteData.title = ""
-                    WriteData.userId = ""
-                    WriteData.warning.clear()
-                    WriteData.fileList.clear()
+                    mapData.courseDesc = ""
+                    mapData.isParking = false
+                    mapData.parkingDesc = ""
+                    mapData.province = ""
+                    mapData.region = ""
+                    mapData.theme.clear()
+                    mapData.title = ""
+                    mapData.userId = ""
+                    mapData.warning.clear()
+                    mapData.fileList.clear()
 
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("userId", "and")
@@ -442,29 +442,33 @@ class WriteMapActivity : AppCompatActivity() {
                         ) {
                             Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
                         } else {
-                            WriteData.startAddress = ""
-                            WriteData.mid1Address = ""
-                            WriteData.mid2Address = ""
-                            WriteData.endAddress = ""
-                            WriteData.startLat = 0.0
-                            WriteData.startLong = 0.0
-                            WriteData.mid1Lat = 0.0
-                            WriteData.mid1Long = 0.0
-                            WriteData.mid2Lat = 0.0
-                            WriteData.mid2Long = 0.0
-                            WriteData.endLat = 0.0
-                            WriteData.endLong = 0.0
+                            mapData.startAddress = ""
+                            mapData.mid1Address = ""
+                            mapData.mid2Address = ""
+                            mapData.endAddress = ""
+                            mapData.startLat = 0.0
+                            mapData.startLong = 0.0
+                            mapData.mid1Lat = 0.0
+                            mapData.mid1Long = 0.0
+                            mapData.mid2Lat = 0.0
+                            mapData.mid2Long = 0.0
+                            mapData.endLat = 0.0
+                            mapData.endLong = 0.0
 
-                            WriteData.courseDesc = ""
-                            WriteData.isParking = false
-                            WriteData.parkingDesc = ""
-                            WriteData.province = ""
-                            WriteData.region = ""
-                            WriteData.theme.clear()
-                            WriteData.title = ""
-                            WriteData.userId = ""
-                            WriteData.warning.clear()
-                            WriteData.fileList.clear()
+                            mapData.courseDesc = ""
+                            mapData.isParking = false
+                            mapData.parkingDesc = ""
+                            mapData.province = ""
+                            mapData.region = ""
+                            mapData.theme.clear()
+                            mapData.title = ""
+                            mapData.userId = ""
+                            mapData.warning.clear()
+                            mapData.fileList.clear()
+
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            intent.putExtra("userId", Hidden.userId)
+                            startActivity(intent)
                         }
 //                var addressList = mutableListOf<String>()
 //                addressList.add(WriteData.startAddress)
@@ -590,9 +594,6 @@ class WriteMapActivity : AppCompatActivity() {
 //                        Log.d("server connect", "error:${t.message}")
 //                    }
 //                })
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.putExtra("userId", Hidden.userId)
-                        startActivity(intent)
                     }.show()
             }
             val intent = Intent(applicationContext, MainActivity::class.java)

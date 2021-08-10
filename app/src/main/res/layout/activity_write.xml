@@ -16,6 +16,7 @@
         android:textSize="17sp"
         android:gravity="center"
         android:text="작성하기"
+        android:includeFontPadding="false"
         android:fontFamily="@font/noto_sans_cjkkr_bold"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -28,6 +29,7 @@
         app:layout_constraintTop_toTopOf="@+id/top_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/top_layout"
+        android:layout_marginBottom="15dp"
         />
 
     <ScrollView
