@@ -10,10 +10,9 @@ import androidx.core.view.isGone
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.api.RequestSearchViewData
-import com.example.charo_android.api.ResponseSearchViewData
+import com.example.charo_android.data.request.RequestSearchViewData
+import com.example.charo_android.data.response.ResponseSearchViewData
 import com.example.charo_android.databinding.ActivityResultSearchBinding
-import kotlinx.android.synthetic.main.activity_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

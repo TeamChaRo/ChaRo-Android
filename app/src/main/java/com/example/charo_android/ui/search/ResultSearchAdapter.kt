@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
-import com.example.charo_android.api.ResponseSearchViewData
+import com.example.charo_android.data.response.ResponseSearchViewData
 import com.example.charo_android.databinding.ItemResultSearchBinding
 import com.example.charo_android.ui.detail.DetailActivity
 

@@ -1,10 +1,8 @@
 package com.example.charo_android.api
 
-import com.example.charo_android.data.RequestWriteData
-import com.example.charo_android.data.ResponseWriteData
-import com.google.gson.annotations.SerializedName
+import com.example.charo_android.data.request.RequestWriteData
+import com.example.charo_android.data.response.ResponseWriteData
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 

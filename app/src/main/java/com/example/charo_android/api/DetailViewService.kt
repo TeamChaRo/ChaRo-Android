@@ -1,10 +1,9 @@
 package com.example.charo_android.api
 
-import com.example.charo_android.data.ResponseDetailData
+import com.example.charo_android.data.response.ResponseDetailData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface DetailViewService {
     @GET("/postDetail/{userId}/{postId}")

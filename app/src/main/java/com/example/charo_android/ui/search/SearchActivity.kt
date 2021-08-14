@@ -9,8 +9,8 @@ import android.util.Log
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.api.RequestSearchViewData
-import com.example.charo_android.api.ResponseSearchViewData
+import com.example.charo_android.data.request.RequestSearchViewData
+import com.example.charo_android.data.response.ResponseSearchViewData
 import com.example.charo_android.databinding.ActivitySearchBinding
 import com.example.charo_android.ui.home.HomeFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

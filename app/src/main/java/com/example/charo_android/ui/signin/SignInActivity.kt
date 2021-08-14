@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.charo_android.MainActivity
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.RequestSignInData
-import com.example.charo_android.data.ResponseSignInData
+import com.example.charo_android.data.request.RequestSignInData
+import com.example.charo_android.data.response.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.ui.home.HomeFragment

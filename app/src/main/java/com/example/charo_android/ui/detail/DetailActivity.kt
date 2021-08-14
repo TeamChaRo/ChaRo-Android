@@ -20,6 +20,11 @@ import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.*
+import com.example.charo_android.data.request.RequestDetailLikeData
+import com.example.charo_android.data.request.RequestDetailSaveData
+import com.example.charo_android.data.response.ResponseDetailData
+import com.example.charo_android.data.response.ResponseDetailLikeData
+import com.example.charo_android.data.response.ResponseDetailSaveData
 import com.example.charo_android.databinding.ActivityDetailBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.ui.write.WriteActivity

@@ -15,10 +15,12 @@ import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.ui.alarm.AlarmActivity
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.api.ResponseHomeViewData
-import com.example.charo_android.data.*
+import com.example.charo_android.data.response.ResponseHomeViewData
+import com.example.charo_android.data.local.LocalHomeThemeDataSource
+import com.example.charo_android.data.local.LocalHomeViewPagerDataSource
 import com.example.charo_android.databinding.FragmentHomeBinding
-import com.example.charo_android.ui.home.more.MoreViewFragment
+import com.example.charo_android.ui.home.adapter.*
+import com.example.charo_android.ui.more.MoreViewFragment
 import com.example.charo_android.ui.search.SearchActivity
 import retrofit2.Call
 import retrofit2.Callback

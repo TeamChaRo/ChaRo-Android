@@ -63,9 +63,9 @@ dependencies {
 
     // Hilt
     implementation(AndroidXDependencies.hilt)
-    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
     implementation(files("libs/com.skt.Tmap_1.67.jar"))
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
@@ -76,7 +76,7 @@ dependencies {
     implementation(AndroidXDependencies.dataStoreCore)
 
     implementation("org.jetbrains:annotations:15.0")
-    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("androidx.annotation:annotation:1.2.0")
 
     // Android KTX
     implementation(AndroidXDependencies.fragmentKtx)
@@ -123,13 +123,22 @@ dependencies {
     androidTestImplementation(TestDependencies.androidTest)
     androidTestImplementation(TestDependencies.espresso)
 
+    //coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+
     //CardView
     implementation(AndroidXDependencies.cardview)
 
     //recyclerview
-    implementation("androidx.recyclerview:recyclerview:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
+    //annotation
     implementation("org.jetbrains:annotations:15.0")
+
+    //koin
+    implementation("org.koin:koin-android:2.0.1")
+    implementation("org.koin:koin-androidx-viewmodel:2.0.1")
 
 }

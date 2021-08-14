@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.charo_android.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.ResponseMyPageLikeData
-import com.example.charo_android.data.ResponseMyPageNewData
+import com.example.charo_android.data.response.ResponseMyPageLikeData
+import com.example.charo_android.data.response.ResponseMyPageNewData
 import com.example.charo_android.data.SavedPost
 import com.example.charo_android.data.WrittenPost
 import com.example.charo_android.databinding.FragmentCharoBinding

@@ -1,7 +1,7 @@
 package com.example.charo_android.api
 
-import com.example.charo_android.data.RequestDetailSaveData
-import com.example.charo_android.data.ResponseDetailSaveData
+import com.example.charo_android.data.request.RequestDetailSaveData
+import com.example.charo_android.data.response.ResponseDetailSaveData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
