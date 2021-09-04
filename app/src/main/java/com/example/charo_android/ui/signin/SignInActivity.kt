@@ -7,10 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.RequestSignInData
-import com.example.charo_android.data.ResponseSignInData
+import com.example.charo_android.data.login.RequestSignInData
+import com.example.charo_android.data.login.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
-import com.example.charo_android.hidden.Hidden
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,67 +22,66 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        btnLoginOnClickEvent()
-        imgClearOnClickEvent()
+        binding.btnSigninLogin.setOnClickListener { login() }
+        binding.imgSigninIdClear.setOnClickListener() { clearEmail() }
+        binding.imgSigninPwClear.setOnClickListener() { clearPassword() }
     }
 
-    private fun btnLoginOnClickEvent() {
-        binding.btnSigninLogin.setOnClickListener() {
-            if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
-                Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
-            } else {
-                val requestSignInData = RequestSignInData(
-                    id = binding.etSigninId.text.toString(),
-                    password = binding.etSigninPw.text.toString()
-                )
+    private fun login() {
+        if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
+            Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
+        } else {
+            val requestSignInData = RequestSignInData(
+                email = binding.etSigninId.text.toString(),
+                password = binding.etSigninPw.text.toString()
+            )
 
-                val call: Call<ResponseSignInData> = ApiService.signInViewService.postSignIn(requestSignInData)
+            val call: Call<ResponseSignInData> =
+                ApiService.signInViewService.postSignIn(requestSignInData)
 
-                call.enqueue(object : Callback<ResponseSignInData> {
-                    override fun onResponse(
-                        call: Call<ResponseSignInData>,
-                        response: Response<ResponseSignInData>
-                    ) {
-                        if (response.isSuccessful) {
-                            Log.d("server connect", "success")
-                            val data = response.body()?.data
-                            Toast.makeText(
-                                applicationContext,
-                                "${data?.nickname}님 환영합니다!",
-                                Toast.LENGTH_LONG
-                            ).show()
+            call.enqueue(object : Callback<ResponseSignInData> {
+                override fun onResponse(
+                    call: Call<ResponseSignInData>,
+                    response: Response<ResponseSignInData>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("server connect", "success")
+                        val data = response.body()?.data
+                        Toast.makeText(
+                            applicationContext,
+                            "${data?.nickname}님 환영합니다!",
+                            Toast.LENGTH_LONG
+                        ).show()
 
-                            Hidden.userId = binding.etSigninId.text.toString()
-                            val intent = Intent(applicationContext, MainActivity::class.java)
-                            intent.putExtra("userId", binding.etSigninId.text.toString())
-                            intent.putExtra("nickName", data?.nickname)
-                            startActivity(intent)
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.putExtra("userId", data?.email)
+                        intent.putExtra("nickName", data?.nickname)
+                        startActivity(intent)
 
-                        } else {
-                            Log.d("server connect", "fail")
-                            Log.d("server connect", "${response.errorBody()}")
-                            Log.d("server connect", response.message())
-                            Log.d("server connect", "${response.code()}")
-                            Log.d("server connect", "${response.raw().request.url}")
-                            Toast.makeText(applicationContext, "ID/PW를 확인해주세요!", Toast.LENGTH_LONG).show()
-                            binding.etSigninPw.text.clear()
-                        }
+                    } else {
+                        Log.d("server connect", "fail")
+                        Log.d("server connect", "${response.errorBody()}")
+                        Log.d("server connect", response.message())
+                        Log.d("server connect", "${response.code()}")
+                        Log.d("server connect", "${response.raw().request.url}")
+                        Toast.makeText(applicationContext, "ID/PW를 확인해주세요!", Toast.LENGTH_LONG)
+                            .show()
+                        binding.etSigninPw.text.clear()
                     }
+                }
 
-                    override fun onFailure(call: Call<ResponseSignInData>, t: Throwable) {
-                        Log.d("server connect", "error:${t.message}")
-                    }
-                })
-            }
+                override fun onFailure(call: Call<ResponseSignInData>, t: Throwable) {
+                    Log.d("server connect", "error:${t.message}")
+                }
+            })
         }
     }
 
-    private fun imgClearOnClickEvent() {
-        binding.imgSigninIdClear.setOnClickListener() {
-            binding.etSigninId.text.clear()
-        }
-        binding.imgSigninPwClear.setOnClickListener() {
-            binding.etSigninPw.text.clear()
-        }
+    private fun clearEmail() {
+        binding.etSigninId.text.clear()
+    }
+
+    private fun clearPassword() {
+        binding.etSigninPw.text.clear()
     }
 }
