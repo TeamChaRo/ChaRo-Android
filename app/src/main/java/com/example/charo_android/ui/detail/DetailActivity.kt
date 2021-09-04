@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.detail
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -83,8 +84,6 @@ class DetailActivity : AppCompatActivity() {
 
                     // view에 binding
                     // image는 나중에
-//                    val thread: Thread = Thread() {
-//                        try {
                     val mContext: Context = applicationContext
 
                     Glide.with(mContext)
@@ -93,9 +92,11 @@ class DetailActivity : AppCompatActivity() {
                         .circleCrop()
                         .into(binding.imgDetailWriterImage)
 
-                    for(i in data!![0].images.indices){
-                        inputImageList.add(data!![0].images[i])
-                    }
+//                    리팩토링) for문 사용 대신 addAll 사용
+//                    for(i in data!![0].images.indices){
+//                        inputImageList.add(data!![0].images[i])
+//                    }
+                    inputImageList.addAll(data!![0].images)
 
                     if(data!![0].isAuthor) {
                         binding.clDetailTopPartMine.visibility = View.VISIBLE
@@ -144,13 +145,16 @@ class DetailActivity : AppCompatActivity() {
                         binding.clDetailMapVia1.visibility = View.VISIBLE
                         binding.clDetailMapVia2.visibility = View.VISIBLE
                     }
-                    for (i in data!![0].latitude.indices) {
-                        inputLatiList.add(data!![0].latitude[i])
-                        inputLongList.add(data!![0].longtitude[i])
-
-                        Log.d("위도", data!![0].latitude[i])
-                        Log.d("경도", data!![0].longtitude[i])
-                    }
+//                    리팩토링) for문 대신 addAll 사용
+//                    for (i in data!![0].latitude.indices) {
+//                        inputLatiList.add(data!![0].latitude[i])
+//                        inputLongList.add(data!![0].longtitude[i])
+//
+//                        Log.d("위도", data!![0].latitude[i])
+//                        Log.d("경도", data!![0].longtitude[i])
+//                    }
+                    inputLatiList.addAll(data!![0].latitude)
+                    inputLongList.addAll(data!![0].longtitude)
                     if (data!![0].isParking) {
                         Log.d("uhhaha",data!![0].isParking.toString())
                         setAttributeByFlag(
@@ -200,19 +204,6 @@ class DetailActivity : AppCompatActivity() {
                         data!![0].warnings[3]
                     )
                     binding.tvDetailInformationText.text = data!![0].courseDesc
-//                        } catch(e: Exception){
-//                            e.printStackTrace()
-//                        }
-//                    }
-//                    thread.start()
-//
-//                    try {
-//                        thread.join()
-//                    } catch(e: Exception) {
-//                        e.printStackTrace()
-//                    }
-//
-//                    Thread.sleep(1000)
                 } else {
                     Log.d("server connect", "fail")
                     Log.d("server connect", "${response.errorBody()}")
@@ -247,8 +238,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun initDetailImageItem() {
         binding.viewpagerDetailImage.adapter = detailViewPagerAdapter
-//        detailViewPagerAdapter.imageList.addAll(LocalDetailViewpagerImageDataSource().fetchData())
-//        DetailViewpagerImageInfo(image = R.drawable.mask_group)
         for(i in inputImageList.indices) {
             detailViewPagerAdapter.imageList.add(DetailViewpagerImageInfo(inputImageList[i]))
         }
