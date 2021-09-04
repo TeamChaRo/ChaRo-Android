@@ -1,4 +1,4 @@
-package com.example.charo_android.data
+package com.example.charo_android.data.login
 
 data class ResponseSignInData(
     val data: Data,
@@ -6,8 +6,8 @@ data class ResponseSignInData(
     val success: Boolean
 ) {
     data class Data(
+        val email: String,
         val nickname: String,
-        val token: String,
-        val userId: String
+        val profileImage: String
     )
 }
