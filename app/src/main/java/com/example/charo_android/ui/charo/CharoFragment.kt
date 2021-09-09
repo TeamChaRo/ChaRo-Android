@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -15,7 +16,9 @@ import com.example.charo_android.data.ResponseMyPageLikeData
 import com.example.charo_android.data.ResponseMyPageNewData
 import com.example.charo_android.data.SavedPost
 import com.example.charo_android.data.WrittenPost
+import com.example.charo_android.data.mypage.ResponseMyPageSortedByPopularData
 import com.example.charo_android.databinding.FragmentCharoBinding
+import com.example.charo_android.hidden.Hidden
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +28,7 @@ class CharoFragment : Fragment() {
 
     private lateinit var charoViewModel: CharoViewModel
     private var _binding: FragmentCharoBinding? = null
-    private lateinit var userId: String
+    private lateinit var userEmail: String
     private lateinit var likeData: ResponseMyPageLikeData.Data
     private lateinit var newData: ResponseMyPageNewData.Data
 
@@ -46,7 +49,7 @@ class CharoFragment : Fragment() {
         charoViewModel =
             ViewModelProvider(this).get(CharoViewModel::class.java)
 
-        _binding = FragmentCharoBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
 
 //        val textView: TextView = binding.textCharo
@@ -57,7 +60,7 @@ class CharoFragment : Fragment() {
         val userId: String = (activity as MainActivity).getUserId()
 
         // 서버통신 구현
-        init(userId)
+        init(Hidden.userId)
 
         return root
     }
@@ -68,20 +71,17 @@ class CharoFragment : Fragment() {
     }
 
     private fun init(userId: String) {
-        val likeCall: Call<ResponseMyPageLikeData> =
-            ApiService.myPageViewLikeService.getMyPageLike(userId)
-        val newCall: Call<ResponseMyPageNewData> =
-            ApiService.myPageViewNewService.getMyPageNew(userId)
-
-        likeCall.enqueue(object : Callback<ResponseMyPageLikeData> {
+        val call: Call<ResponseMyPageSortedByPopularData> =
+            ApiService.myPageViewSortedByPopularService.getMyPage(userId)
+        call.enqueue(object: Callback<ResponseMyPageSortedByPopularData> {
             override fun onResponse(
-                call: Call<ResponseMyPageLikeData>,
-                response: Response<ResponseMyPageLikeData>
+                call: Call<ResponseMyPageSortedByPopularData>,
+                response: Response<ResponseMyPageSortedByPopularData>
             ) {
-                if (response.isSuccessful) {
+                if(response.isSuccessful) {
                     Log.d("server connect", "success")
-
-                    likeData = response.body()!!.data
+                    val data = response.body()?.data
+                    binding.profile = data!!
 
                     binding.tvCharoNickname.text = "${likeData?.userInformation?.nickname} 드라이버님"
                     binding.tvCharoFollowingCount.text =
@@ -127,8 +127,7 @@ class CharoFragment : Fragment() {
                     Log.d("server connect", "${response.raw().request.url}")
                 }
             }
-
-            override fun onFailure(call: Call<ResponseMyPageLikeData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseMyPageSortedByPopularData>, t: Throwable) {
                 Log.d("server connect", "error:${t.message}")
             }
         })
