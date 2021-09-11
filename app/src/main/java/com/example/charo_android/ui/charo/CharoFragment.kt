@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.ResponseMyPageLikeData
-import com.example.charo_android.data.ResponseMyPageNewData
+import com.example.charo_android.data.mypage.ResponseMyPageLikeData
+import com.example.charo_android.data.mypage.ResponseMyPageNewData
 import com.example.charo_android.data.SavedPost
 import com.example.charo_android.data.WrittenPost
 import com.example.charo_android.data.mypage.ResponseMyPageSortedByPopularData
@@ -26,19 +27,15 @@ import retrofit2.Response
 
 class CharoFragment : Fragment() {
 
-    private lateinit var charoViewModel: CharoViewModel
+    private val charoViewModel: CharoViewModel by viewModels()
     private var _binding: FragmentCharoBinding? = null
     private lateinit var userEmail: String
     private lateinit var likeData: ResponseMyPageLikeData.Data
     private lateinit var newData: ResponseMyPageNewData.Data
-
     private val tabIconList = arrayListOf(
         R.drawable.ic_write_active,
         R.drawable.ic_save_5_active
     )
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -46,8 +43,9 @@ class CharoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        charoViewModel =
-            ViewModelProvider(this).get(CharoViewModel::class.java)
+
+//        charoViewModel =
+//            ViewModelProvider(this).get(CharoViewModel::class.java)
 
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
@@ -56,11 +54,23 @@ class CharoFragment : Fragment() {
 //        charoViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
-        // userId 알아오기
-        val userId: String = (activity as MainActivity).getUserId()
+//        charoViewModel.userName.observe(viewLifecycleOwner, Observer {
+//            binding.tvCharoNickname.text = it
+//        })
+//        charoViewModel.following.observe(viewLifecycleOwner, Observer {
+//            binding.tvCharoFollowingCount.text = it.toString()
+//        })
+//        charoViewModel.follwer.observe(viewLifecycleOwner, Observer {
+//            binding.tvCharoFollowerCount.text = it.toString()
+//        })
 
         // 서버통신 구현
-        init(Hidden.userId)
+        // initialize(Hidden.userId)
+
+        charoViewModel.getServerData(Hidden.userId)
+        charoViewModel.userInformation.observe(viewLifecycleOwner, {
+            binding.profile = charoViewModel
+        })
 
         return root
     }
@@ -70,7 +80,7 @@ class CharoFragment : Fragment() {
         _binding = null
     }
 
-    private fun init(userId: String) {
+    private fun initialize(userId: String) {
         val call: Call<ResponseMyPageSortedByPopularData> =
             ApiService.myPageViewSortedByPopularService.getMyPage(userId)
         call.enqueue(object: Callback<ResponseMyPageSortedByPopularData> {
@@ -81,44 +91,12 @@ class CharoFragment : Fragment() {
                 if(response.isSuccessful) {
                     Log.d("server connect", "success")
                     val data = response.body()?.data
-                    binding.profile = data!!
 
-                    binding.tvCharoNickname.text = "${likeData?.userInformation?.nickname} 드라이버님"
-                    binding.tvCharoFollowingCount.text =
-                        likeData?.userInformation?.following?.toString()
-                    binding.tvCharoFollowerCount.text =
-                        likeData?.userInformation?.follower?.toString()
-
-                    val mContext = activity!!
-                    Glide.with(mContext)
-                        .load(likeData?.userInformation?.profileImage)
+                    Glide.with(activity!!)
+                        .load(data?.userInformation?.profileImage)
                         .override(56, 56)
                         .circleCrop()
                         .into(binding.imgCharoProfile)
-
-                    newCall.enqueue(object: Callback<ResponseMyPageNewData> {
-                        override fun onResponse(
-                            call: Call<ResponseMyPageNewData>,
-                            response: Response<ResponseMyPageNewData>
-                        ) {
-                            if (response.isSuccessful) {
-                                Log.d("server connect", "success")
-
-                                newData = response.body()!!.data
-
-                                initCharoViewPagerAdapter(likeData, newData)
-                            } else {
-                                Log.d("server connect", "fail")
-                                Log.d("server connect", "${response.errorBody()}")
-                                Log.d("server connect", "${response.message()}")
-                                Log.d("server connect", "${response.code()}")
-                                Log.d("server connect", "${response.raw().request.url}")
-                            }
-                        }
-                        override fun onFailure(call: Call<ResponseMyPageNewData>, t: Throwable) {
-                            Log.d("server connect", "error:${t.message}")
-                        }
-                    })
                 } else {
                     Log.d("server connect", "fail")
                     Log.d("server connect", "${response.errorBody()}")
