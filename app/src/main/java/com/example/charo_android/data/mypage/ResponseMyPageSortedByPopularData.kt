@@ -6,8 +6,8 @@ data class ResponseMyPageSortedByPopularData(
     val success: Boolean
 ) {
     data class Data (
-        val savedPost: SavedPost,
+        val savedPost: Post,
         val userInformation: UserInformation,
-        val writtenPost: WrittenPost
+        val writtenPost: Post
     )
 }

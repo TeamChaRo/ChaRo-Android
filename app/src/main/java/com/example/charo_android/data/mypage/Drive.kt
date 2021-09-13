@@ -11,6 +11,6 @@ data class Drive(
     val saveNum: Int,
     val theme: String,
     val title: String,
-    val warning: String,
+    val warning: String?,
     val year: String
 )

@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="profile"
+            name="myPageData"
             type="com.example.charo_android.ui.charo.CharoViewModel" />
     </data>
 
@@ -74,7 +74,7 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginVertical="5dp"
-                    app:profileImageUrl="@{profile.userInformation.profileImage}"
+                    app:profileImageUrl="@{myPageData.userInformation.profileImage}"
                     app:layout_constraintBottom_toBottomOf="@id/img_charo_profile_border"
                     app:layout_constraintEnd_toEndOf="@id/img_charo_profile_border"
                     app:layout_constraintStart_toStartOf="@id/img_charo_profile_border"
@@ -114,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosanscjkkr_bold"
                         android:lineHeight="23.4sp"
-                        android:text="@{profile.userInformation.nickname}"
+                        android:text="@{myPageData.userInformation.nickname}"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"
@@ -153,7 +153,7 @@
                             android:layout_marginEnd="21dp"
                             android:fontFamily="@font/notosanscjkkr_regular"
                             android:lineHeight="20.8sp"
-                            android:text="@{String.valueOf(profile.userInformation.following)}"
+                            android:text="@{String.valueOf(myPageData.userInformation.following)}"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="13sp"
@@ -184,7 +184,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/notosanscjkkr_regular"
                             android:lineHeight="20.8sp"
-                            android:text="@{String.valueOf(profile.userInformation.follower)}"
+                            android:text="@{String.valueOf(myPageData.userInformation.follower)}"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="13sp"

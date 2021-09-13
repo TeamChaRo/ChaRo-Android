@@ -1,12 +1,16 @@
 package com.example.charo_android.ui.charo
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.charo_android.data.mypage.Drive
+import com.example.charo_android.data.mypage.Post
 import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.ui.detail.DetailActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
@@ -14,7 +18,7 @@ import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 class MyCharoAdapter(
     val userId: String
 ): RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
-    val itemList = mutableListOf<MyCharoInfo>()
+    val itemList = mutableListOf<Drive>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCharoViewHolder {
         val binding = ItemCharoMyCharoBinding.inflate(
@@ -25,7 +29,10 @@ class MyCharoAdapter(
         return MyCharoViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = itemList.size
+    override fun getItemCount(): Int {
+        Log.d("recycler view item size", itemList.size.toString())
+        return itemList.size
+    }
 
     override fun onBindViewHolder(holder: MyCharoViewHolder, position: Int) {
         holder.onBind(itemList[position])
@@ -48,25 +55,16 @@ class MyCharoAdapter(
     class MyCharoViewHolder(
         val binding: ItemCharoMyCharoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(myCharoInfo: MyCharoInfo) {
-            val mContext = binding.imgMyCharoPicture.context
-            Glide.with(mContext)
-                .load(myCharoInfo.image)
-                .transform(RoundedCorners(9))
-                .into(binding.imgMyCharoPicture)
-            binding.tvMyCharoTitle.text = myCharoInfo.title
-            binding.tvMyCharoDate.text = "${myCharoInfo.year}.${myCharoInfo.month}.${myCharoInfo.day}"
-            binding.tvMyCharoLikeCount.text = myCharoInfo.favoriteNum.toString()
-            binding.tvMyCharoLikeCount.text = myCharoInfo.saveNum.toString()
-            binding.tvMyCharoTag1.text = "#${myCharoInfo.tags[0]}"
-            if(myCharoInfo.tags.size == 2) {
-                binding.tvMyCharoTag2.visibility = ViewGroup.INVISIBLE
-                binding.tvMyCharoTag3.visibility = ViewGroup.INVISIBLE
-                binding.tvMyCharoTag2.text = "#${myCharoInfo.tags[1]}"
-            } else if(myCharoInfo.tags.size == 3) {
-                binding.tvMyCharoTag3.visibility = ViewGroup.INVISIBLE
-                binding.tvMyCharoTag2.text = "#${myCharoInfo.tags[1]}"
-                binding.tvMyCharoTag3.text = "#${myCharoInfo.tags[2]}"
+        @SuppressLint("SetTextI18n")
+        fun onBind(drive: Drive) {
+//            val mContext = binding.imgMyCharoPicture.context
+//            Glide.with(mContext)
+//                .load(drive.image)
+//                .transform(RoundedCorners(9))
+//                .into(binding.imgMyCharoPicture)
+            binding.driveData = drive
+            drive.warning?.let {
+                binding.tvMyCharoTag3.visibility = ViewGroup.VISIBLE
             }
         }
     }
