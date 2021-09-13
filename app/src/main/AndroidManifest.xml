@@ -17,17 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WriteShareActivity"></activity>
-        <activity android:name=".ui.main.SplashActivity"></activity>
+        <activity android:name=".ui.write.WriteShareActivity" />
+        <activity android:name=".ui.main.SplashActivity"/>
         <activity android:name=".ui.alarm.AlarmActivity" />
         <activity android:name=".ui.onBoarding.OnBoardingActivity" /> <!-- <activity android:name=".ui.write.WriteMapLocationActivity" /> -->
         <!-- <activity android:name=".ui.write.WriteMapSearchActivity" /> -->
         <activity android:name=".ui.search.ResultSearchActivity" />
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.detail.DetailActivity" /> <!-- <activity android:name=".ui.write.WriteMapActivity" /> -->
-        <activity
-            android:name=".ui.write.WriteActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+<!--        <activity-->
+<!--            android:name=".ui.write.WriteActivity"-->
+<!--            android:windowSoftInputMode="stateHidden|adjustResize" />-->
         <activity
             android:name=".ui.search.NoSearchActivity"
             android:label="@string/title_activity_no_search"

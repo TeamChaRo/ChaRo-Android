@@ -1,4 +1,4 @@
-package com.example.charo_android
+package com.example.charo_android.ui.write
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import com.example.charo_android.data.MapSearchInfo
 import com.example.charo_android.databinding.FragmentWriteMapSearchBinding
-import com.example.charo_android.ui.write.WriteMapSearchAdapter
 import com.skt.Tmap.TMapData
 
 class WriteMapSearchFragment : Fragment() {
@@ -36,8 +37,12 @@ class WriteMapSearchFragment : Fragment() {
 
     private lateinit var locationFlag: String
 
-    private lateinit var viewModel: WriteMapSearchViewModel
-
+    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                WriteSharedViewModel() as T
+        }
+    }
     private var _binding: FragmentWriteMapSearchBinding? = null
 
     private val binding get() = _binding!!
@@ -56,24 +61,27 @@ class WriteMapSearchFragment : Fragment() {
         val root: View = binding.root
         Log.d("jjj", "success go searchActivity")
 
-//        userId = intent.getStringExtra("userId").toString()
-//        nickName = intent.getStringExtra("nickName").toString()
+        userId = sharedViewModel.userId.value.toString()
+        nickName = sharedViewModel.nickName.value.toString()
+        locationFlag = sharedViewModel.locationFlag.value.toString()
 
+        Log.d("uuuwritesear", userId)
+        Log.d("uuuwritesear", nickName)
+        Log.d("uuuwritesear", locationFlag)
 
-//        내가 추가한 코드
-//        locationFlag = intent.getStringExtra("locationFlag").toString()
-//        var text: String = when (locationFlag) {
-//            "1" -> {
-//                "출발지로 설정"
-//            }
-//            "4" -> {
-//                "도착지로 설정"
-//            }
-//            else -> {
-//                "경유지로 설정"
-//            }
-//        }
-//        binding.etWriteMapSearchStart.hint = text
+        var text: String = when (locationFlag) {
+            "1" -> {
+                "출발지로 설정"
+            }
+            "4" -> {
+                "도착지로 설정"
+            }
+            else -> {
+                "경유지로 설정"
+            }
+        }
+        binding.etWriteMapSearchStart.hint = text
+        sharedViewModel.resultLocation.value = text
 
         binding.imgWriteMapSearchBack.setOnClickListener {
             writeShareActivity?.onBackPressed()
@@ -125,11 +133,4 @@ class WriteMapSearchFragment : Fragment() {
 
         return root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(WriteMapSearchViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

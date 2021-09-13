@@ -1,7 +1,6 @@
-package com.example.charo_android
+package com.example.charo_android.ui.write
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModelProvider
@@ -13,10 +12,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.ui.main.MainActivity
-import com.example.charo_android.ui.write.WriteData
 //import com.example.charo_android.ui.write.WriteMapSearchActivity
 import com.skt.Tmap.*
 import java.lang.Exception
@@ -27,11 +27,18 @@ class WriteMapFragment : Fragment() {
         fun newInstance() = WriteMapFragment()
     }
 
+    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                WriteSharedViewModel() as T
+        }
+    }
+
     //    좌표 배열
     var path = arrayListOf<TMapPoint>()
 
     private lateinit var locationFlag: String
-    private lateinit var textview: String
+    private lateinit var locationName: String
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private lateinit var userId: String
@@ -43,8 +50,6 @@ class WriteMapFragment : Fragment() {
     private var _binding: FragmentWriteMapBinding? = null
 
     private val binding get() = _binding!!
-
-    private lateinit var viewModel: WriteMapViewModel
 
     var writeShareActivity: WriteShareActivity? = null
     override fun onAttach(context: Context) {
@@ -69,113 +74,62 @@ class WriteMapFragment : Fragment() {
 //                .show()
         }
 
-//        userId = intent.getStringExtra("userId").toString()
-//        nickName = intent.getStringExtra("nickName").toString()
+        userId = sharedViewModel.userId.value.toString()
+        nickName = sharedViewModel.nickName.value.toString()
+        locationFlag = sharedViewModel.locationFlag.value.toString()
+        locationName = sharedViewModel.locationName.value.toString()
+        latitude = sharedViewModel.latitude.value!!
+        longitude = sharedViewModel.longitude.value!!
+
+        Log.d("uuuwritemap", userId)
+        Log.d("uuuwritemap", nickName)
+        Log.d("uuuwritemap", locationFlag)
+        Log.d("uuuwritemap", locationName)
+        Log.d("uuuwritemap", latitude.toString())
+        Log.d("uuuwritemap", longitude.toString())
 
 
-//        locationFlag = intent.getStringExtra("locationFlag").toString()
-//        Log.d("locationFlag", locationFlag)
-//        textview = intent.getStringExtra("textview").toString()
-//        Log.d("textview", textview)
-//        latitude = intent.getDoubleExtra("pointLat", 0.0)
-//        Log.d("latitude", latitude.toString())
-//        longitude = intent.getDoubleExtra("pointLong", 0.0)
-//        Log.d("longitude", longitude.toString())
 
-
-        // 뒤로가기 image click하면 뒤로 가짐
+        // 뒤로가기 image click
         binding.imgWriteMapBack.setOnClickListener {
-            activity?.let{
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
-            }
-//            AlertDialog.Builder(this)
-//                .setMessage("드라이브 코스 작성을 중단하시겠습니까?")
-//                .setNeutralButton("아니오") { dialog, which ->
-//                }
-//                .setPositiveButton("예") { dialog, which ->
-//                    mapData.startAddress = ""
-//                    mapData.mid1Address = ""
-//                    mapData.mid2Address = ""
-//                    mapData.endAddress = ""
-//                    mapData.startLat = 0.0
-//                    mapData.startLong = 0.0
-//                    mapData.mid1Lat = 0.0
-//                    mapData.mid1Long = 0.0
-//                    mapData.mid2Lat = 0.0
-//                    mapData.mid2Long = 0.0
-//                    mapData.endLat = 0.0
-//                    mapData.endLong = 0.0
-//
-//                    mapData.courseDesc = ""
-//                    mapData.isParking = false
-//                    mapData.parkingDesc = ""
-//                    mapData.province = ""
-//                    mapData.region = ""
-//                    mapData.theme.clear()
-//                    mapData.title = ""
-//                    mapData.userId = ""
-//                    mapData.warning.clear()
-//                    mapData.fileList.clear()
-//
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    intent.putExtra("userId", "and")
-//                    startActivity(intent)
-//                }
-//                .show()
-//
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("userId", userId)
-//            intent.putExtra("nickName", nickName)
-//            startActivity(intent)
-
-
+            writeShareActivity?.onBackPressed()
         }
 
         // 출발지 누르면 검색창으로 감
         binding.etWriteMapStart.setOnClickListener {
+            sharedViewModel.locationFlag.value = "1"
             writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(), "writeMapSearch")
+
 //            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //            intent.putExtra("locationM", "출발지를 입력하세요")
-//            intent.putExtra("locationFlag", "1")
-//            intent.putExtra("userId", userId)
-//            intent.putExtra("nickName", nickName)
-//            startActivity(intent)
         }
 
         // 경유지1 누르면 검색창으로 감
         binding.etWriteMapMid1.setOnClickListener {
+            sharedViewModel.locationFlag.value = "2"
             writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(),"writeMapSearch")
 
 //            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //            intent.putExtra("locationM", "경유지1를 입력하세요")
-//            intent.putExtra("locationFlag", "2")
-//            intent.putExtra("userId", userId)
-//            intent.putExtra("nickName", nickName)
-//            startActivity(intent)
         }
         // 경유지2 누르면 검색창으로 감
         binding.etWriteMapMid2.setOnClickListener {
+            sharedViewModel.locationFlag.value = "3"
             writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(),"writeMapSearch")
 
 //            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //            intent.putExtra("locationM", "경유지2를 입력하세요")
-//            intent.putExtra("locationFlag", "3")
-//            intent.putExtra("userId", userId)
-//            intent.putExtra("nickName", nickName)
-//            startActivity(intent)
         }
         // 도착지 누르면 검색창으로 감
         binding.etWriteMapEnd.setOnClickListener {
-            writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(), "writeMapSearch")
+            if (mapData.startAddress != "") {
+                sharedViewModel.locationFlag.value = "4"
+                writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(),"writeMapSearch")
+            }
 
 //            if (mapData.startAddress != "") {
 //                val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //                intent.putExtra("locationM", "도착지를 입력하세요")
-//                intent.putExtra("locationFlag", "4")
-//                intent.putExtra("userId", userId)
-//                intent.putExtra("nickName", nickName)
-//                startActivity(intent)
 //            }
         }
 
@@ -185,27 +139,21 @@ class WriteMapFragment : Fragment() {
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteTmapView.addView(tMapView)
 
-//        fillTextView(locationFlag, textview, latitude, longitude, tMapView)
+        fillTextView(locationFlag, locationName, latitude, longitude, tMapView)
         btnWriteCompleteOnClickEvent()
 
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(WriteMapViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
     private fun fillTextView(
         locationFlag: String,
-        textview: String,
+        locationName: String,
         latitude: Double,
         longitude: Double,
         tMapView: TMapView
     ) {
         if (locationFlag == "1") { // 출발지인 경우
-            mapData.startAddress = textview
+            mapData.startAddress = locationName
             mapData.startLat = latitude
             mapData.startLong = longitude
 
@@ -226,7 +174,7 @@ class WriteMapFragment : Fragment() {
             binding.etWriteMapMid1.visibility = View.VISIBLE
             binding.imgWriteMapDelete1.visibility = View.VISIBLE
 
-            mapData.mid1Address = textview
+            mapData.mid1Address = locationName
             mapData.mid1Lat = latitude
             mapData.mid1Long = longitude
 
@@ -249,7 +197,7 @@ class WriteMapFragment : Fragment() {
             binding.etWriteMapMid2.visibility = View.VISIBLE
             binding.imgWriteMapDelete2.visibility = View.VISIBLE
 
-            mapData.mid2Address = textview
+            mapData.mid2Address = locationName
             mapData.mid2Lat = latitude
             mapData.mid2Long = longitude
 
@@ -267,7 +215,7 @@ class WriteMapFragment : Fragment() {
                 binding.imgWriteMapDelete2.visibility = View.VISIBLE
             }
         } else if (locationFlag == "4") { // 도착지인 경우
-            mapData.endAddress = textview
+            mapData.endAddress = locationName
             mapData.endLat = latitude
             mapData.endLong = longitude
 

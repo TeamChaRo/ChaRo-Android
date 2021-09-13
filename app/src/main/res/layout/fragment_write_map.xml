@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.charo_android.ui.write.WriteViewModel" />
+            type="com.example.charo_android.ui.write.WriteSharedViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".WriteMapFragment">
+        tools:context=".ui.write.WriteMapFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

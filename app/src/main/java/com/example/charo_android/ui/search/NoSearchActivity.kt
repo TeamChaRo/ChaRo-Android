@@ -3,10 +3,9 @@ package com.example.charo_android.ui.search
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityNoSearchBinding
-import com.example.charo_android.databinding.ActivitySearchBinding
-import com.example.charo_android.ui.write.WriteActivity
+//import com.example.charo_android.ui.write.WriteActivity
+import com.example.charo_android.ui.write.WriteShareActivity
 
 class NoSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoSearchBinding
@@ -37,7 +36,7 @@ class NoSearchActivity : AppCompatActivity() {
 
     private fun clickWriteButton(){
         binding.imgNoSearchClick.setOnClickListener {
-            val intent = Intent(this, WriteActivity::class.java)
+            val intent = Intent(this, WriteShareActivity::class.java)
             startActivity(intent)
         }
 

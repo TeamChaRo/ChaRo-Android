@@ -10,8 +10,8 @@ import com.example.charo_android.ui.home.HomeFragment
 
 import com.example.charo_android.ui.home.replaceFragment
 
-import com.example.charo_android.WriteFragment
-import com.example.charo_android.WriteShareActivity
+import com.example.charo_android.ui.write.WriteFragment
+import com.example.charo_android.ui.write.WriteShareActivity
 
 
 class MainActivity : AppCompatActivity() {

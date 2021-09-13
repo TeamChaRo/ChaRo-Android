@@ -1,20 +1,13 @@
 package com.example.charo_android.ui.write
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.Intent.getIntent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.WriteMapLocationFragment
-import com.example.charo_android.WriteMapSearchFragment
-import com.example.charo_android.WriteShareActivity
 import com.example.charo_android.data.MapSearchInfo
 import com.example.charo_android.databinding.ItemAutoSearchBinding
-import com.example.charo_android.ui.main.MainActivity
 
 class WriteMapSearchAdapter(
 //    val locationFlag: String, val text: String, val userId: String, val nickName: String
@@ -51,6 +44,7 @@ class WriteMapSearchAdapter(
 
 
         var writeShareActivity = holder.itemView.context as WriteShareActivity
+        var sharedViewModel = ViewModelProvider(writeShareActivity).get(WriteSharedViewModel::class.java)
 
 
 //        var text = activity.intent.getStringExtra("locationM")
@@ -64,6 +58,9 @@ class WriteMapSearchAdapter(
 //                .putExtra("text", text)
 //                .putExtra("userId", userId)
 //                .putExtra("nickName", nickName)
+
+            sharedViewModel.locationName.value = userList[position].locationName
+            sharedViewModel.locationAddress.value = userList[position].locationAddress
 
             writeShareActivity.replaceFragment(WriteMapLocationFragment.newInstance(), "writeMapLocation")
 
