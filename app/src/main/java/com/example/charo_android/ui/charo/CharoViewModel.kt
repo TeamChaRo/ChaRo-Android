@@ -1,21 +1,15 @@
 package com.example.charo_android.ui.charo
 
 import android.util.Log
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.Glide
-import com.example.charo_android.R
 import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.mypage.Post
+import com.example.charo_android.data.mypage.ResponseMyPageSortedByDateData
 import com.example.charo_android.data.mypage.ResponseMyPageSortedByPopularData
 import com.example.charo_android.data.mypage.UserInformation
 import com.example.charo_android.hidden.Hidden
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,15 +23,23 @@ class CharoViewModel : ViewModel() {
     val userInformation: LiveData<UserInformation>
         get() = _userInformation
 
-    private var _writtenPost = MutableLiveData<Post>(null)
-    val writtenPost: LiveData<Post>
-        get() = _writtenPost
+    private var _writtenPostSortedByPopular = MutableLiveData<Post>(null)
+    val writtenPostSortedByPopular: LiveData<Post>
+        get() = _writtenPostSortedByPopular
 
-    private var _savedPost = MutableLiveData<Post>(null)
-    val savedPost: LiveData<Post>
-        get() = _savedPost
+    private var _writtenPostSortedByDate = MutableLiveData<Post>(null)
+    val writtenPostSortedByDate: LiveData<Post>
+        get() = _writtenPostSortedByDate
 
-    fun getServerData() {
+    private var _savedPostSortedByPopular = MutableLiveData<Post>(null)
+    val savedPostSortedByPopular: LiveData<Post>
+        get() = _savedPostSortedByPopular
+
+    private var _savedPostSortedByDate = MutableLiveData<Post>(null)
+    val savedPostSortedByDate: LiveData<Post>
+        get() = _savedPostSortedByDate
+
+    fun getServerDataSortedByPopular() {
         val call: Call<ResponseMyPageSortedByPopularData> =
             ApiService.myPageViewSortedByPopularService.getMyPage(Hidden.userId)
         call.enqueue(object : Callback<ResponseMyPageSortedByPopularData> {
@@ -49,10 +51,8 @@ class CharoViewModel : ViewModel() {
                     Log.d("server connect : My Page", "success")
                     val data = response.body()?.data
                     _userInformation.value = data?.userInformation
-                    _writtenPost.value = data?.writtenPost
-                    _savedPost.value = data?.savedPost
-
-                    Log.d("writtenPost size", writtenPost.value?.drive?.size.toString())
+                    _writtenPostSortedByPopular.value = data?.writtenPost
+                    _savedPostSortedByPopular.value = data?.savedPost
                 } else {
                     Log.d("server connect : My Page", "error")
                     Log.d("server connect : My Page", "$response.errorBody()")
@@ -63,6 +63,35 @@ class CharoViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseMyPageSortedByPopularData>, t: Throwable) {
+                Log.d("server connect : My Page", "error: ${t.message}")
+            }
+        })
+    }
+
+    fun getServerDataSortedByDate() {
+        val call: Call<ResponseMyPageSortedByDateData> =
+            ApiService.myPageViewSortedByDateService.getMyPage(Hidden.userId)
+        call.enqueue(object: Callback<ResponseMyPageSortedByDateData> {
+            override fun onResponse(
+                call: Call<ResponseMyPageSortedByDateData>,
+                response: Response<ResponseMyPageSortedByDateData>
+            ) {
+                if(response.isSuccessful) {
+                    Log.d("server connect : My Page", "success")
+                    val data = response.body()?.data
+                    _userInformation.value = data?.userInformation
+                    _writtenPostSortedByDate.value = data?.writtenPost
+                    _savedPostSortedByDate.value = data?.savedPost
+                } else {
+                    Log.d("server connect : My Page", "error")
+                    Log.d("server connect : My Page", "$response.errorBody()")
+                    Log.d("server connect : My Page", response.message())
+                    Log.d("server connect : My Page", "${response.code()}")
+                    Log.d("server connect : My Page", "${response.raw().request.url}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseMyPageSortedByDateData>, t: Throwable) {
                 Log.d("server connect : My Page", "error: ${t.message}")
             }
         })
