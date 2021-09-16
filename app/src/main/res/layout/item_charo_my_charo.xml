@@ -149,12 +149,11 @@
 
             <TextView
                 android:id="@+id/tv_my_charo_like_count"
-                android:layout_width="3dp"
+                android:layout_width="wrap_content"
                 android:layout_height="15dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:lineHeight="14.3sp"
-                android:layout_marginEnd="5dp"
                 android:text="@{String.valueOf(driveData.favoriteNum)}"
                 android:textAlignment="textStart"
                 android:textColor="@color/gray4_sub"
