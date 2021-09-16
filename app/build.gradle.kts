@@ -3,22 +3,22 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+//    id("dagger.hilt.android.plugin")
   //  id("kotlin-parcelize")
 }
 
 android {
-    compileSdkVersion(Apps.compileSdk)
+    compileSdk = Apps.compileSdk
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = Apps.pacakageName
-        minSdkVersion(Apps.minSdk)
-        targetSdkVersion(Apps.targetSdk)
-        versionCode(Apps.versionCode)
-        versionName(Apps.versionName)
+        minSdk = Apps.minSdk
+        targetSdk = Apps.targetSdk
+        versionCode = Apps.versionCode
+        versionName = Apps.versionName
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -31,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         dataBinding = true
@@ -131,5 +131,4 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.1.0")
 
     implementation("org.jetbrains:annotations:15.0")
-
 }
