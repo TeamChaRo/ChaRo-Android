@@ -7,18 +7,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.data.mypage.Drive
-import com.example.charo_android.data.mypage.Post
 import com.example.charo_android.ui.main.MainActivity
 import com.example.charo_android.ui.detail.DetailActivity
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 
-class MyCharoAdapter(
+class CharoAdapter(
     val userId: String
-): RecyclerView.Adapter<MyCharoAdapter.MyCharoViewHolder>() {
-    val itemList = mutableListOf<Drive>()
+): RecyclerView.Adapter<CharoAdapter.MyCharoViewHolder>() {
+    var itemList = mutableListOf<Drive>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCharoViewHolder {
         val binding = ItemCharoMyCharoBinding.inflate(
@@ -38,8 +35,7 @@ class MyCharoAdapter(
         holder.onBind(itemList[position])
 
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            lateinit var activity: MainActivity
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
             intent.putExtra("userId", userId)
             intent.putExtra("postId", itemList[position].postId)
             // 서버통신 하기 전에
@@ -57,11 +53,6 @@ class MyCharoAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun onBind(drive: Drive) {
-//            val mContext = binding.imgMyCharoPicture.context
-//            Glide.with(mContext)
-//                .load(drive.image)
-//                .transform(RoundedCorners(9))
-//                .into(binding.imgMyCharoPicture)
             binding.driveData = drive
             drive.warning?.let {
                 binding.tvMyCharoTag3.visibility = ViewGroup.VISIBLE
