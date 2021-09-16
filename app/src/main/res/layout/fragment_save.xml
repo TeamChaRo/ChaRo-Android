@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.charo.MyCharoFragment">
+        tools:context=".ui.charo.SaveFragment">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nscv_my_charo"
