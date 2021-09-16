@@ -10,6 +10,7 @@ import com.example.charo_android.api.ApiService
 import com.example.charo_android.data.login.RequestSignInData
 import com.example.charo_android.data.login.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
+import com.example.charo_android.hidden.Hidden
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,6 +57,7 @@ class SignInActivity : AppCompatActivity() {
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         intent.putExtra("userId", data?.email)
                         intent.putExtra("nickName", data?.nickname)
+                        Hidden.userId = data?.email.toString()
                         startActivity(intent)
 
                     } else {
