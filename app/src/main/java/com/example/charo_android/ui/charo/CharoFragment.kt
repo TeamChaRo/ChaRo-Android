@@ -1,22 +1,15 @@
 package com.example.charo_android.ui.charo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 class CharoFragment : Fragment() {
     private val charoViewModel: CharoViewModel by activityViewModels()
@@ -35,7 +28,7 @@ class CharoFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
 
-        charoViewModel.getServerData()
+        charoViewModel.getServerDataSortedByPopular()
         charoViewModel.userInformation.observe(viewLifecycleOwner, {
             binding.myPageData = charoViewModel
         })
@@ -55,7 +48,7 @@ class CharoFragment : Fragment() {
             val charoViewPagerAdapter = CharoFragmentStateAdapter(requireActivity())
             with(charoViewPagerAdapter) {
                 fragmentList = listOf(
-                    MyCharoFragment(), MyCharoFragment()
+                    MyCharoFragment(), SaveFragment()
                 )
             }
             with(binding.viewpagerCharo) {
