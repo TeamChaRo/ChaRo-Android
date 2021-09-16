@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val writeFragment : WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
 
-    private lateinit var userId: String
+    private lateinit var userEmail: String
     private lateinit var nickName: String
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userId = intent.getStringExtra("userId").toString()
+        userEmail = intent.getStringExtra("userId").toString()
         nickName = intent.getStringExtra("nickName").toString()
-        replaceHomeFragment(userId, nickName)
+        replaceHomeFragment(userEmail, nickName)
         initNavView()
     }
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getUserId(): String {
-        return userId
+        return userEmail
     }
 
     fun getNickName(): String{
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             navView.setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.navigation_home -> {
-                        replaceHomeFragment(userId,nickName)
+                        replaceHomeFragment(userEmail,nickName)
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 //                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
-                        replaceCharoFragment(userId, nickName)
+                        replaceCharoFragment(userEmail, nickName)
                         return@setOnItemSelectedListener true
                     }
                 }
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     fun startActivityWrite() {
         val intent = Intent(this@MainActivity, WriteActivity::class.java)
-        intent.putExtra("userId", userId)
+        intent.putExtra("userId", userEmail)
         intent.putExtra("nickname", nickName)
         startActivity(intent)
     }
