@@ -1,5 +1,6 @@
 package com.example.charo_android.ui.charo
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
@@ -19,6 +21,7 @@ class MyCharoFragment : Fragment() {
     private var _binding: FragmentMyCharoBinding? = null
     private val binding get() = _binding!!
     private lateinit var charoAdapter: CharoAdapter
+    var itemLastSize = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +33,29 @@ class MyCharoFragment : Fragment() {
 
         Log.d("MyCharoFragment", "created!")
 
+        binding.recyclerviewMyCharo.adapter = charoAdapter
         setUpSpinner()
         setupSpinnerHandler()
+
+        myCharoViewModel.isServerConnection.observe(viewLifecycleOwner, {
+            if(charoAdapter.itemList.isNotEmpty()) {
+                charoAdapter.removeLoading()
+            }
+        })
+
+        myCharoViewModel.writtenMoreLikeData.observe(viewLifecycleOwner, {
+            if (myCharoViewModel.writtenLikeData.value?.drive != null && myCharoViewModel.writtenMoreLikeData.value?.drive != null) {
+                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreLikeData.value?.drive!!)
+                charoAdapter.notifyItemRangeInserted(itemLastSize, myCharoViewModel.writtenMoreLikeData.value?.drive!!.size)
+            }
+        })
+
+        myCharoViewModel.writtenMoreNewData.observe(viewLifecycleOwner, {
+            if(myCharoViewModel.writtenNewData.value?.drive != null && myCharoViewModel.writtenMoreNewData.value?.drive != null) {
+                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreNewData.value?.drive!!)
+                charoAdapter.notifyItemRangeInserted(itemLastSize, myCharoViewModel.writtenMoreNewData.value?.drive!!.size)
+            }
+        })
 
         // Inflate the layout for this fragment
         return root
@@ -44,15 +68,15 @@ class MyCharoFragment : Fragment() {
 
     private fun setUpSpinner() {
         val filter = resources.getStringArray(R.array.charo_filter)
-        val adapter =
-            activity?.let { ArrayAdapter(it, R.layout.item_charo_spinner, filter) }
-        adapter?.setDropDownViewResource(R.layout.item_charo_spinner)
+        val adapter = ArrayAdapter(requireActivity(), R.layout.item_charo_spinner, filter)
+        adapter.setDropDownViewResource(R.layout.item_charo_spinner)
         binding.spinnerMyCharoFilter.adapter = adapter
     }
 
     private fun setupSpinnerHandler() {
         binding.spinnerMyCharoFilter.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
@@ -60,30 +84,93 @@ class MyCharoFragment : Fragment() {
                     id: Long
                 ) {
                     if (position == 0) {
-                        binding.recyclerviewMyCharo.adapter = charoAdapter
-                        myCharoViewModel.writtenPostSortedByPopular.observe(viewLifecycleOwner, {
-                            if(myCharoViewModel.writtenPostSortedByPopular.value?.drive != null) {
-                                charoAdapter.itemList = myCharoViewModel.writtenPostSortedByPopular.value?.drive!!
+                        if (charoAdapter.spinnerPosition != 0) {
+                            charoAdapter.itemList.clear()
+                            charoAdapter.spinnerPosition = 0
+                        }
+
+                        myCharoViewModel.writtenLikeData.observe(viewLifecycleOwner, {
+                            if (myCharoViewModel.writtenLikeData.value?.drive != null) {
+                                charoAdapter.itemList.addAll(myCharoViewModel.writtenLikeData.value?.drive!!)
                                 charoAdapter.notifyDataSetChanged()
+                                itemLastSize = charoAdapter.itemList.size
                             }
                         })
                     } else {
-                        binding.recyclerviewMyCharo.adapter = charoAdapter
-                        if(myCharoViewModel.writtenPostSortedByDate.value == null) {
-                            myCharoViewModel.getServerDataSortedByDate()
+                        if (charoAdapter.spinnerPosition == 0) {
+                            charoAdapter.itemList.clear()
+                            charoAdapter.spinnerPosition = 1
                         }
-                        myCharoViewModel.writtenPostSortedByDate.observe(viewLifecycleOwner, {
-                            if(myCharoViewModel.writtenPostSortedByDate.value?.drive != null) {
-                                charoAdapter.itemList = myCharoViewModel.writtenPostSortedByDate.value?.drive!!
+
+                        if (myCharoViewModel.writtenNewData.value == null) {
+                            myCharoViewModel.getInitNewData()
+                        }
+
+                        myCharoViewModel.writtenNewData.observe(viewLifecycleOwner, {
+                            if (myCharoViewModel.writtenNewData.value?.drive != null) {
+                                charoAdapter.itemList.addAll(myCharoViewModel.writtenNewData.value?.drive!!)
                                 charoAdapter.notifyDataSetChanged()
+                                itemLastSize = charoAdapter.itemList.size
                             }
                         })
                     }
+                    infiniteScrolling(position)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    binding.recyclerviewMyCharo.adapter = charoAdapter
+
                 }
             }
+    }
+
+    private fun infiniteScrolling(spinnerPosition: Int) {
+        binding.nscvMyCharo.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (v.getChildAt(v.childCount - 1) != null) {
+                if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
+                    scrollY > oldScrollY
+                ) {
+                    Log.d("무한스크롤 최하단 도달", "도달완")
+                    if (myCharoViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
+                        charoAdapter.addLoading()
+                        when (spinnerPosition) {
+                            0 -> {
+                                myCharoViewModel.getMoreWrittenLikeData()
+                            }
+                            else -> {
+                                myCharoViewModel.getMoreWrittenNewData()
+                            }
+                        }
+                    }
+                }
+            }
+        }))
+
+//        무한스크롤 리사이클러뷰 코드 (폐기예정)
+//        binding.recyclerviewMyCharo.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//
+//                val lastVisibleItemPosition =
+//                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+//                val itemTotalCount = recyclerView.adapter!!.itemCount - 1
+//                Log.d("lastVisibleItemPosition", lastVisibleItemPosition.toString())
+//                Log.d("itemTotalCount", itemTotalCount.toString())
+//                Log.d("popularPage", popularPage.toString())
+//
+//                if (!recyclerView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
+//                    charoAdapter.deleteLoading()
+//                    when (spinnerPosition) {
+//                        0 -> {
+//                            popularPage++
+//                            myCharoViewModel.getInfiniteScrollingServerWrittenDataSortedByPopular()
+//                        }
+//                        else -> {
+//                            datePage++
+//                            myCharoViewModel.getInfiniteScrollingServerWrittenDataSortedByDate()
+//                        }
+//                    }
+//                }
+//            }
+//        })
     }
 }
