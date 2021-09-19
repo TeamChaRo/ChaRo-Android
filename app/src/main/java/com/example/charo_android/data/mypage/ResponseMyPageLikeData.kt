@@ -1,6 +1,6 @@
 package com.example.charo_android.data.mypage
 
-data class ResponseMyPageSortedByDateData(
+data class ResponseMyPageLikeData(
     val data: Data,
     val msg: String,
     val success: Boolean

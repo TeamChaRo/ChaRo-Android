@@ -1,8 +1,9 @@
 package com.example.charo_android.api
 
 import com.example.charo_android.api.login.SignInViewService
-import com.example.charo_android.api.mypage.MyPageViewSortedByDateService
-import com.example.charo_android.api.mypage.MyPageViewSortedByPopularService
+import com.example.charo_android.api.mypage.MyPageViewNewService
+import com.example.charo_android.api.mypage.MyPageViewLikeService
+import com.example.charo_android.api.mypage.MyPageViewMoreService
 import com.example.charo_android.hidden.Hidden
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
