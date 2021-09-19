@@ -24,36 +24,52 @@ class CharoViewModel : ViewModel() {
     val userInformation: LiveData<UserInformation>
         get() = _userInformation
 
-    private var _writtenPostSortedByPopular = MutableLiveData<Post>(null)
-    val writtenPostSortedByPopular: LiveData<Post>
-        get() = _writtenPostSortedByPopular
+    private var _writtenLikeData = MutableLiveData<Post>(null)
+    val writtenLikeData: LiveData<Post>
+        get() = _writtenLikeData
 
-    private var _writtenPostSortedByDate = MutableLiveData<Post>(null)
-    val writtenPostSortedByDate: LiveData<Post>
-        get() = _writtenPostSortedByDate
+    private var _writtenNewData = MutableLiveData<Post>(null)
+    val writtenNewData: LiveData<Post>
+        get() = _writtenNewData
 
-    private var _savedPostSortedByPopular = MutableLiveData<Post>(null)
-    val savedPostSortedByPopular: LiveData<Post>
-        get() = _savedPostSortedByPopular
+    private var _savedLikeData = MutableLiveData<Post>(null)
+    val savedLikeData: LiveData<Post>
+        get() = _savedLikeData
 
-    private var _savedPostSortedByDate = MutableLiveData<Post>(null)
-    val savedPostSortedByDate: LiveData<Post>
-        get() = _savedPostSortedByDate
+    private var _savedNewData = MutableLiveData<Post>(null)
+    val savedNewData: LiveData<Post>
+        get() = _savedNewData
 
-    fun getServerDataSortedByPopular() {
-        val call: Call<ResponseMyPageSortedByPopularData> =
-            ApiService.myPageViewSortedByPopularService.getMyPage(Hidden.userId)
-        call.enqueue(object : Callback<ResponseMyPageSortedByPopularData> {
+    private var _writtenMoreLikeData = MutableLiveData<Post>(null)
+    val writtenMoreLikeData: LiveData<Post>
+        get() = _writtenMoreLikeData
+
+    private var _writtenMoreNewData = MutableLiveData<Post>(null)
+    val writtenMoreNewData: LiveData<Post>
+        get() = _writtenMoreNewData
+
+    private var _savedMoreLikeData = MutableLiveData<Post>(null)
+    val savedMoreLikeData: LiveData<Post>
+        get() = _savedMoreLikeData
+
+    private var _savedMoreNewData = MutableLiveData<Post>(null)
+    val savedMoreNewData: LiveData<Post>
+        get() = _savedMoreNewData
+
+    fun getInitLikeData() {
+        val call: Call<ResponseMyPageNewData> =
+            ApiService.myPageViewLikeService.getMyPage(Hidden.userId)
+        call.enqueue(object : Callback<ResponseMyPageNewData> {
             override fun onResponse(
-                call: Call<ResponseMyPageSortedByPopularData>,
-                response: Response<ResponseMyPageSortedByPopularData>
+                call: Call<ResponseMyPageNewData>,
+                response: Response<ResponseMyPageNewData>
             ) {
                 if (response.isSuccessful) {
                     Log.d("server connect : My Page", "success")
                     val data = response.body()?.data
                     _userInformation.value = data?.userInformation
-                    _writtenPostSortedByPopular.value = data?.writtenPost
-                    _savedPostSortedByPopular.value = data?.savedPost
+                    _writtenLikeData.value = data?.writtenPost
+                    _savedLikeData.value = data?.savedPost
                 } else {
                     Log.d("server connect : My Page", "error")
                     Log.d("server connect : My Page", "$response.errorBody()")
@@ -63,26 +79,26 @@ class CharoViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseMyPageSortedByPopularData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseMyPageNewData>, t: Throwable) {
                 Log.d("server connect : My Page", "error: ${t.message}")
             }
         })
     }
 
-    fun getServerDataSortedByDate() {
-        val call: Call<ResponseMyPageSortedByDateData> =
-            ApiService.myPageViewSortedByDateService.getMyPage(Hidden.userId)
-        call.enqueue(object: Callback<ResponseMyPageSortedByDateData> {
+    fun getInitNewData() {
+        val call: Call<ResponseMyPageLikeData> =
+            ApiService.myPageViewNewService.getMyPage(Hidden.userId)
+        call.enqueue(object : Callback<ResponseMyPageLikeData> {
             override fun onResponse(
-                call: Call<ResponseMyPageSortedByDateData>,
-                response: Response<ResponseMyPageSortedByDateData>
+                call: Call<ResponseMyPageLikeData>,
+                response: Response<ResponseMyPageLikeData>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page", "success")
                     val data = response.body()?.data
                     _userInformation.value = data?.userInformation
-                    _writtenPostSortedByDate.value = data?.writtenPost
-                    _savedPostSortedByDate.value = data?.savedPost
+                    _writtenNewData.value = data?.writtenPost
+                    _savedNewData.value = data?.savedPost
                 } else {
                     Log.d("server connect : My Page", "error")
                     Log.d("server connect : My Page", "$response.errorBody()")
@@ -92,9 +108,137 @@ class CharoViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseMyPageSortedByDateData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseMyPageLikeData>, t: Throwable) {
                 Log.d("server connect : My Page", "error: ${t.message}")
             }
         })
+    }
+
+    fun getMoreWrittenLikeData() {
+        _isServerConnecting.value = true
+        val call: Call<ResponseMyPageMoreData> =
+            ApiService.myPageViewMoreService.getMoreData(
+                Hidden.userId,
+                writtenLikeData.value!!.lastId,
+                writtenLikeData.value!!.lastCount
+            )
+        call.enqueue(object : Callback<ResponseMyPageMoreData> {
+            override fun onResponse(
+                call: Call<ResponseMyPageMoreData>,
+                response: Response<ResponseMyPageMoreData>
+            ) {
+                _isServerConnecting.value = false
+                if (response.isSuccessful) {
+                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    val data = response.body()?.data
+                    _writtenMoreLikeData.value = data!!
+                    _writtenLikeData.value?.drive?.addAll(data.drive)
+                    if (data.lastId != 0) {
+                        _writtenLikeData.value?.lastId = data.lastId
+                        _writtenLikeData.value?.lastCount = data.lastCount
+                    }
+                } else {
+                    Log.d("server connect : My Page Infinite Scrolling", "error")
+                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
+                    Log.d("server connect : My Page Infinite Scrolling", response.message())
+                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
+                    Log.d(
+                        "server connect : My Page Infinite Scrolling",
+                        "${response.raw().request.url}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
+                _isServerConnecting.value = false
+                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+            }
+        })
+    }
+
+    fun getMoreWrittenNewData() {
+        _isServerConnecting.value = true
+        val call: Call<ResponseMyPageMoreData> =
+            ApiService.myPageViewMoreService.getMoreData(
+                Hidden.userId,
+                writtenNewData.value!!.lastId,
+                writtenNewData.value!!.lastCount
+            )
+        call.enqueue(object : Callback<ResponseMyPageMoreData> {
+            override fun onResponse(
+                call: Call<ResponseMyPageMoreData>,
+                response: Response<ResponseMyPageMoreData>
+            ) {
+                _isServerConnecting.value = false
+                if(response.isSuccessful) {
+                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    val data = response.body()?.data
+                    _writtenMoreNewData.value = data!!
+                    _writtenNewData.value?.drive?.addAll(data.drive)
+                    if (data.lastId != 0) {
+                        _writtenNewData.value?.lastId = data.lastId
+                        _writtenNewData.value?.lastCount = data.lastCount
+                    }
+                } else {
+                    Log.d("server connect : My Page Infinite Scrolling", "error")
+                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
+                    Log.d("server connect : My Page Infinite Scrolling", response.message())
+                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
+                    Log.d(
+                        "server connect : My Page Infinite Scrolling",
+                        "${response.raw().request.url}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
+                _isServerConnecting.value = false
+                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+            }
+        })
+    }
+
+    fun getMoreSavedLikeData() {
+        _isServerConnecting.value = true
+        val call: Call<ResponseMyPageMoreData> =
+            ApiService.myPageViewMoreService.getMoreData(
+                Hidden.userId,
+                savedLikeData.value!!.lastId,
+                savedLikeData.value!!.lastCount
+            )
+        call.enqueue(object: Callback<ResponseMyPageMoreData> {
+            override fun onResponse(
+                call: Call<ResponseMyPageMoreData>,
+                response: Response<ResponseMyPageMoreData>
+            ) {
+                if(response.isSuccessful) {
+                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    val data = response.body()?.data
+                    _savedMoreLikeData.value = data!!
+                    _savedLikeData.value?.drive?.addAll(data.drive)
+                    if (data.lastId != 0) {
+                        _savedLikeData.value?.lastId = data.lastId
+                    }
+                } else {
+                    Log.d("server connect : My Page Infinite Scrolling", "error")
+                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
+                    Log.d("server connect : My Page Infinite Scrolling", response.message())
+                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
+                    Log.d(
+                        "server connect : My Page Infinite Scrolling",
+                        "${response.raw().request.url}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
+                _isServerConnecting.value = false
+                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+            }
+        })
+    }
+
+    fun getMoreSavedNewData() {
+
     }
 }
