@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityWriteMapBinding
-import com.example.charo_android.data.api.hidden.Hidden
+import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.*
 import kotlinx.android.synthetic.main.activity_write_map.*
 import java.util.*

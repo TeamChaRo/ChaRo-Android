@@ -15,7 +15,7 @@ import com.example.charo_android.R
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.databinding.ActivityWriteBinding
 import com.example.charo_android.databinding.ActivityWriteMapBinding
-import com.example.charo_android.data.api.hidden.Hidden
+import com.example.charo_android.hidden.Hidden
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 

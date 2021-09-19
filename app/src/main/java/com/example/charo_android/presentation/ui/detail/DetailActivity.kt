@@ -27,7 +27,7 @@ import com.example.charo_android.data.model.response.ResponseDetailData
 import com.example.charo_android.data.model.response.ResponseDetailLikeData
 import com.example.charo_android.data.model.response.ResponseDetailSaveData
 import com.example.charo_android.databinding.ActivityDetailBinding
-import com.example.charo_android.data.api.hidden.Hidden
+import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.write.WriteActivity
 import com.example.charo_android.presentation.ui.write.WriteMapActivity
 import com.skt.Tmap.*

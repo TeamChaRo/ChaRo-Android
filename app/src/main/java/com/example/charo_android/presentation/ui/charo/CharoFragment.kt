@@ -28,7 +28,7 @@ class CharoFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
 
-        charoViewModel.getServerDataSortedByPopular()
+        charoViewModel.getInitLikeData()
         charoViewModel.userInformation.observe(viewLifecycleOwner, {
             binding.myPageData = charoViewModel
         })

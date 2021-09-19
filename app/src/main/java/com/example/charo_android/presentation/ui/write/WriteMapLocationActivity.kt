@@ -9,7 +9,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityWriteMapLocationBinding
-import com.example.charo_android.data.api.hidden.Hidden
+import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.*
 
 class WriteMapLocationActivity : AppCompatActivity() {

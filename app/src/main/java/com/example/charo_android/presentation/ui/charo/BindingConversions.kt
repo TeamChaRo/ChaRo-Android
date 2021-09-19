@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.charo
 
+import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -16,7 +17,7 @@ object BindingConversions {
             Glide.with(imageView.context)
                 .load(url)
                 .error(R.drawable.ellipse_4)
-                .override(56, 56)
+                .override(56 * DisplayMetrics().densityDpi, 56 * DisplayMetrics().densityDpi)
                 .circleCrop()
                 .into(imageView)
         }

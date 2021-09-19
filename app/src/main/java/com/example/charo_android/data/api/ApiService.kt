@@ -1,8 +1,11 @@
 package com.example.charo_android.data.api
+
 import com.example.charo_android.data.api.login.SignInViewService
-import com.example.charo_android.data.api.mypage.MyPageViewSortedByDateService
-import com.example.charo_android.data.api.mypage.MyPageViewSortedByPopularService
-import com.example.charo_android.data.api.hidden.Hidden
+import com.example.charo_android.data.api.mypage.MyPageViewLikeService
+import com.example.charo_android.data.api.mypage.MyPageViewMoreService
+import com.example.charo_android.data.api.mypage.MyPageViewNewService
+import com.example.charo_android.hidden.Hidden
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -21,9 +24,8 @@ object ApiService {
     val detailViewSaveService: DetailViewSaveService = retrofit.create(DetailViewSaveService::class.java)
     val moreViewNewService: MoreViewNewService = retrofit.create(MoreViewNewService::class.java)
     val searchViewService : SearchViewService = retrofit.create(SearchViewService::class.java)
-    val myPageViewSortedByPopularService: MyPageViewSortedByPopularService = retrofit.create(
-        MyPageViewSortedByPopularService::class.java)
-    val myPageViewSortedByDateService: MyPageViewSortedByDateService = retrofit.create(
-        MyPageViewSortedByDateService::class.java)
+    val myPageViewLikeService = retrofit.create(MyPageViewLikeService::class.java)
+    val myPageViewNewService = retrofit.create(MyPageViewNewService::class.java)
+    val myPageViewMoreService = retrofit.create(MyPageViewMoreService::class.java)
     val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
 }

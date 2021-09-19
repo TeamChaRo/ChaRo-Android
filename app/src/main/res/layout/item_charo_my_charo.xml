@@ -8,7 +8,7 @@
 
         <variable
             name="driveData"
-            type="com.example.charo_android.data.mypage.Drive" />
+            type="com.example.charo_android.data.model.mypage.Drive" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

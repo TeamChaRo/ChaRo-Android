@@ -1,6 +1,6 @@
-package com.example.charo_android.data.mypage
+package com.example.charo_android.data.model.mypage
 
-data class ResponseMyPageSortedByDateData(
+data class ResponseMyPageNewData(
     val data: Data,
     val msg: String,
     val success: Boolean

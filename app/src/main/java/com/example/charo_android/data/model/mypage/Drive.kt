@@ -1,5 +1,5 @@
 
-package com.example.charo_android.data.mypage
+package com.example.charo_android.data.model.mypage
 
 data class Drive(
     val day: String,

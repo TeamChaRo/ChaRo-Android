@@ -1,7 +1,7 @@
 package com.example.charo_android.presentation.di
 
 import com.example.charo_android.data.api.HomeViewService
-import com.example.charo_android.data.api.hidden.Hidden
+import com.example.charo_android.hidden.Hidden
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
