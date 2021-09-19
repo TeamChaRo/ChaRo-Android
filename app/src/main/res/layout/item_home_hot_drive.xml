@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    <variable
+        name="trendDrive"
+        type="com.example.charo_android.domain.model.home.TrendDrive" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -23,6 +30,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/home_today_drive_image"
                 android:scaleType="fitXY"
+                imgBind="@{trendDrive.homeTrendDriveImage}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +49,7 @@
                 style="@style/HeaderH11Android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_charo_today_drive_title"
+                android:text="@{trendDrive.homeTrendDriveTitle}"
                 android:layout_marginTop="10dp"
                 android:lineSpacingExtra="0dp"
                 android:includeFontPadding="false"
@@ -54,7 +62,7 @@
                 android:id="@+id/chip_home_hot_drive_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/theme1"
+                android:text="@{trendDrive.homeTrendDriveChip_1}"
                 style="@style/HeaderH9"
                 android:layout_marginTop="9dp"
                 app:chipCornerRadius="10dp"
@@ -72,7 +80,7 @@
                 android:id="@+id/chip_home_hot_drive_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/theme2"
+                android:text="@{trendDrive.homeTrendDriveChip_2}"
                 style="@style/HeaderH9"
                 app:chipCornerRadius="10dp"
                 app:chipStrokeColor="@color/blue_main"
@@ -94,7 +102,7 @@
                 app:chipCornerRadius="10dp"
                 app:chipStrokeColor="@color/blue_main"
                 app:chipStrokeWidth="1dp"
-                android:text="@string/theme3"
+                android:text="@{trendDrive.homeTrendDriveChip_3}"
                 app:chipBackgroundColor="@color/white"
                 android:layout_marginStart="4dp"
                 android:paddingVertical="2dp"
@@ -108,3 +116,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

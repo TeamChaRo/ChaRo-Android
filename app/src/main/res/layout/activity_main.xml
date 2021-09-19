@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".presentation.ui.main.MainActivity">
 
     <!--그림자 있는건 png 파일로 다운 받아야 함-->
     <com.google.android.material.bottomnavigation.BottomNavigationView

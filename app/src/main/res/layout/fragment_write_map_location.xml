@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.example.charo_android.ui.write.WriteViewModel" />
+            name="viewmodel"
+            type="com.example.charo_android.presentation.ui.write.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +69,7 @@
                 android:id="@+id/btn_set_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.text}"
+                android:text="@{viewmodel.text}"
                 android:background="@color/blue_main"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent" />

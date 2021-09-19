@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.charo_android.ui.write.WriteViewModel" />
+            type="com.example.charo_android.presentation.ui.write.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.write.WriteMapActivity">
+        tools:context=".presentation.ui.write.WriteMapActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_write_tmap_view"

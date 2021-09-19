@@ -1,108 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
+        <variable
+            name="customThemeDrive"
+            type="com.example.charo_android.domain.model.home.CustomThemeDrive" />
+    </data>
 
-        <ImageView
-            android:id="@+id/img_home_night_drive"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="77:75"
-            android:background="@android:color/transparent"
-            android:src="@drawable/home_today_drive_image"
-            android:scaleType="fitXY"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="22dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <ImageButton
-            android:id="@+id/img_home_night_drive_heart"
-            app:layout_constraintCircleRadius="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_home_heart"
-            app:layout_constraintEnd_toEndOf="@id/img_home_night_drive"
-            app:layout_constraintTop_toTopOf="@+id/img_home_night_drive"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_home_night_drive_title"
-            style="@style/HeaderH11Android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main_charo_today_drive_title"
-            android:layout_marginTop="10dp"
-            android:lineSpacingExtra="0dp"
-            android:includeFontPadding="false"
-            android:lines="2"
-            android:ellipsize="end"
-            app:layout_constraintStart_toStartOf="@id/img_home_night_drive"
-            app:layout_constraintTop_toBottomOf="@+id/img_home_night_drive"/>
+            <ImageView
+                android:id="@+id/img_home_night_drive"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="77:75"
+                android:background="@android:color/transparent"
+                android:src="@drawable/home_today_drive_image"
+                android:scaleType="fitXY"
+                imgBind="@{customThemeDrive.homeNightDriveImage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/chip_home_night_drive_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/theme1"
-            style="@style/HeaderH9"
-            android:layout_marginTop="9dp"
-            app:chipCornerRadius="10dp"
-            app:chipStrokeColor="@color/blue_main"
-            app:chipStrokeWidth="1dp"
-            app:chipBackgroundColor="@color/white"
-            android:paddingVertical="2dp"
-            android:paddingHorizontal="11dp"
-            android:background="@drawable/shape_charo_hashtag"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
-            app:layout_constraintStart_toStartOf="parent"/>
+            <ImageButton
+                android:id="@+id/img_home_night_drive_heart"
+                app:layout_constraintCircleRadius="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_home_heart"
+                app:layout_constraintEnd_toEndOf="@id/img_home_night_drive"
+                app:layout_constraintTop_toTopOf="@+id/img_home_night_drive" />
 
-        <TextView
-            android:id="@+id/chip_home_night_drive_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/theme1"
-            style="@style/HeaderH9"
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="4dp"
-            app:chipCornerRadius="10dp"
-            app:chipStrokeColor="@color/blue_main"
-            app:chipStrokeWidth="1dp"
-            app:chipBackgroundColor="@color/white"
-            android:paddingVertical="2dp"
-            android:paddingHorizontal="11dp"
-            android:background="@drawable/shape_charo_hashtag"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
-            app:layout_constraintStart_toEndOf="@id/chip_home_night_drive_1"/>
+            <TextView
+                android:id="@+id/text_home_night_drive_title"
+                style="@style/HeaderH11Android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{customThemeDrive.homeNightDriveTitle}"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="0dp"
+                android:includeFontPadding="false"
+                android:lines="2"
+                android:ellipsize="end"
+                app:layout_constraintStart_toStartOf="@id/img_home_night_drive"
+                app:layout_constraintTop_toBottomOf="@+id/img_home_night_drive" />
 
-        <TextView
-            android:id="@+id/chip_home_night_drive_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/theme1"
-            style="@style/HeaderH9"
-            android:layout_marginTop="9dp"
-            android:layout_marginStart="4dp"
-            app:chipCornerRadius="10dp"
-            app:chipStrokeColor="@color/blue_main"
-            app:chipStrokeWidth="1dp"
-            app:chipBackgroundColor="@color/white"
-            android:paddingVertical="2dp"
-            android:paddingHorizontal="11dp"
-            android:background="@drawable/shape_charo_hashtag"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
-            app:layout_constraintStart_toEndOf="@id/chip_home_night_drive_2"/>
+            <TextView
+                android:id="@+id/chip_home_night_drive_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{customThemeDrive.homeNightDriveChip_1}"
+                style="@style/HeaderH9"
+                android:layout_marginTop="9dp"
+                app:chipCornerRadius="10dp"
+                app:chipStrokeColor="@color/blue_main"
+                app:chipStrokeWidth="1dp"
+                app:chipBackgroundColor="@color/white"
+                android:paddingVertical="2dp"
+                android:paddingHorizontal="11dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
+                app:layout_constraintStart_toStartOf="parent" />
 
+            <TextView
+                android:id="@+id/chip_home_night_drive_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{customThemeDrive.homeNightDriveChip_2}"
+                style="@style/HeaderH9"
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="4dp"
+                app:chipCornerRadius="10dp"
+                app:chipStrokeColor="@color/blue_main"
+                app:chipStrokeWidth="1dp"
+                app:chipBackgroundColor="@color/white"
+                android:paddingVertical="2dp"
+                android:paddingHorizontal="11dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
+                app:layout_constraintStart_toEndOf="@id/chip_home_night_drive_1" />
+
+            <TextView
+                android:id="@+id/chip_home_night_drive_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{customThemeDrive.homeNightDriveChip_3}"
+                style="@style/HeaderH9"
+                android:layout_marginTop="9dp"
+                android:layout_marginStart="4dp"
+                app:chipCornerRadius="10dp"
+                app:chipStrokeColor="@color/blue_main"
+                app:chipStrokeWidth="1dp"
+                app:chipBackgroundColor="@color/white"
+                android:paddingVertical="2dp"
+                android:paddingHorizontal="11dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
+                app:layout_constraintStart_toEndOf="@id/chip_home_night_drive_2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

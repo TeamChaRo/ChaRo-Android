@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.write.WriteFragment">
+    tools:context=".presentation.ui.write.WriteFragment">
 
     <TextView
         android:id="@+id/top_layout"

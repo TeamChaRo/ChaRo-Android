@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.charo_android.ui.write.WriteViewModel" />
+            type="com.example.charo_android.presentation.ui.write.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.write.WriteMapLocationActivity">
+        tools:context=".presentation.ui.write.WriteMapLocationActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_write_map_location_view"

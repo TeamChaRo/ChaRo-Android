@@ -6,7 +6,7 @@ object Versions {
     const val appcompat_version = "1.2.0"
     const val material_design_version = "1.3.0"
     const val constraint_layout_version = "2.0.4"
-    const val hilt_version = "2.35"
+    const val hilt_version = "2.37"
     const val datastore_version = "1.0.0-beta01"
     const val lifecycle_ktx_version = "2.4.0-alpha02"
     const val activity_ktx = "1.2.1"
@@ -18,7 +18,7 @@ object Versions {
     const val kotlinx_serialization_version = "1.0.1"
     const val cardview_version= "1.0.0"
 
-    const val gradle_version = "4.2.0"
+    const val gradle_version = "7.0.2"
     const val ktlint_version = "10.0.0"
 
     const val glide_version = "4.12.0"
