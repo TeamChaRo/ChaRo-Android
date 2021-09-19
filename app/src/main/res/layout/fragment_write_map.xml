@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.charo_android.ui.write.WriteViewModel" />
+            type="com.example.charo_android.presentation.ui.write.WriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

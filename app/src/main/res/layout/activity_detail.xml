@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailActivity">
+    tools:context=".presentation.ui.detail.DetailActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nscv_detail_detail"

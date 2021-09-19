@@ -3,23 +3,14 @@ package com.example.charo_android
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.charo_android.databinding.ActivityMainBinding
-import com.example.charo_android.ui.charo.CharoFragment
-import com.example.charo_android.ui.home.HomeFragment
+import com.example.charo_android.presentation.ui.charo.CharoFragment
+import com.example.charo_android.presentation.ui.home.HomeFragment
+import com.example.charo_android.presentation.ui.home.replaceFragment
 
-import com.example.charo_android.ui.home.HomeViewPagerAdapter
-import com.example.charo_android.ui.home.replaceFragment
-import com.example.charo_android.ui.search.SearchActivity
-
-import com.example.charo_android.ui.write.WriteActivity
-import com.example.charo_android.ui.write.WriteFragment
+import com.example.charo_android.presentation.ui.write.WriteActivity
+import com.example.charo_android.presentation.ui.write.WriteFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userId, nickName)
         initNavView()
+        Log.d("please", "제발 되라")
     }
 
     override fun onBackPressed() {
@@ -91,7 +83,8 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(writeFragment,userId,nickName)
     }
 
-    private fun replaceCharoFragment(userId : String, nickName: String){
+    private fun
+            replaceCharoFragment(userId : String, nickName: String){
         replaceFragment(charoFragment,userId,nickName)
     }
 
