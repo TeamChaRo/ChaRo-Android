@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.api.ApiService
-import com.example.charo_android.data.mypage.Post
-import com.example.charo_android.data.mypage.ResponseMyPageSortedByDateData
-import com.example.charo_android.data.mypage.ResponseMyPageSortedByPopularData
-import com.example.charo_android.data.mypage.UserInformation
+import com.example.charo_android.data.mypage.*
 import com.example.charo_android.hidden.Hidden
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +15,10 @@ class CharoViewModel : ViewModel() {
 
 //    private val _text = MutableLiveData<String>().apply { value = "This is Charo Fragment" }
 //    val text: LiveData<String> = _text
+
+    private var _isServerConnecting = MutableLiveData(false)
+    val isServerConnection: LiveData<Boolean>
+        get() = _isServerConnecting
 
     private var _userInformation = MutableLiveData<UserInformation>(null)
     val userInformation: LiveData<UserInformation>
