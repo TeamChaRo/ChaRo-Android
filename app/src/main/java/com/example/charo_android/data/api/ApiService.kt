@@ -1,5 +1,6 @@
 package com.example.charo_android.data.api
 
+import com.example.charo_android.data.api.detail.DetailViewService
 import com.example.charo_android.data.api.login.SignInViewService
 import com.example.charo_android.data.api.mypage.MyPageViewLikeService
 import com.example.charo_android.data.api.mypage.MyPageViewMoreService
@@ -20,8 +21,6 @@ object ApiService {
     val moreViewService: MoreViewService = retrofit.create(MoreViewService::class.java)
     val detailViewService: DetailViewService = retrofit.create(DetailViewService::class.java)
     val signInViewService: SignInViewService = retrofit.create(SignInViewService::class.java)
-    val detailViewLikeService: DetailViewLikeService = retrofit.create(DetailViewLikeService::class.java)
-    val detailViewSaveService: DetailViewSaveService = retrofit.create(DetailViewSaveService::class.java)
     val moreViewNewService: MoreViewNewService = retrofit.create(MoreViewNewService::class.java)
     val searchViewService : SearchViewService = retrofit.create(SearchViewService::class.java)
     val myPageViewLikeService = retrofit.create(MyPageViewLikeService::class.java)
