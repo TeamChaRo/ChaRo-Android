@@ -142,4 +142,11 @@
     <style name="Theme.ChaRoAndroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ChaRoAndroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="signUpBlank" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+
+
+    </style>
 </resources>

@@ -10,6 +10,7 @@ import com.example.charo_android.data.model.login.RequestSignInData
 import com.example.charo_android.data.model.login.ResponseSignInData
 import com.example.charo_android.databinding.ActivitySignInBinding
 import com.example.charo_android.presentation.ui.main.MainActivity
+import com.example.charo_android.presentation.ui.signup.SignUpActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +23,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        clickSingUp()
         binding.btnSigninLogin.setOnClickListener { login() }
         binding.imgSigninIdClear.setOnClickListener() { clearEmail() }
         binding.imgSigninPwClear.setOnClickListener() { clearPassword() }
@@ -83,5 +85,12 @@ class SignInActivity : AppCompatActivity() {
 
     private fun clearPassword() {
         binding.etSigninPw.text.clear()
+    }
+
+    private fun clickSingUp(){
+        binding.tvSigninSignup.setOnClickListener {
+            val intent = Intent(applicationContext, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

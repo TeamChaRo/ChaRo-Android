@@ -13,7 +13,6 @@ object ApiService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val homeViewService: HomeViewService = retrofit.create(HomeViewService::class.java)
     val moreViewService: MoreViewService = retrofit.create(MoreViewService::class.java)
     val detailViewService: DetailViewService = retrofit.create(DetailViewService::class.java)
     val signInViewService: SignInViewService = retrofit.create(SignInViewService::class.java)
