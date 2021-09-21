@@ -87,6 +87,10 @@ class WriteMapSearchFragment : Fragment() {
             writeShareActivity?.onBackPressed()
         }
 
+        binding.deleteWord.setOnClickListener {
+            binding.etWriteMapSearchStart.setText("")
+        }
+
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeMapSearchAdapter =  WriteMapSearchAdapter()
 

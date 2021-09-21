@@ -34,7 +34,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_bottom_location"
                 android:layout_width="match_parent"
-                android:layout_height="155dp"
+                android:layout_height="167dp"
                 android:background="@drawable/background_bottom_sheet"
                 android:paddingHorizontal="20dp"
                 android:paddingBottom="28dp"
@@ -55,7 +55,7 @@
                     android:id="@+id/text_location_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="27dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:text="서울특별시 중구 한강대로 405 서울역"
                     android:textColor="@color/gray4_sub"
@@ -67,7 +67,8 @@
                     android:id="@+id/btn_set_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/blue_main"
+                    android:background="@drawable/background_et_write"
+                    android:backgroundTint="@color/blue_main"
                     android:text="설정"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent" />

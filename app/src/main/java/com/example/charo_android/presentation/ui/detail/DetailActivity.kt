@@ -1,4 +1,4 @@
-package com.example.charo_android.ui.detail
+package com.example.charo_android.presentation.ui.detail
 
 import android.content.ClipData
 import android.content.ClipboardManager

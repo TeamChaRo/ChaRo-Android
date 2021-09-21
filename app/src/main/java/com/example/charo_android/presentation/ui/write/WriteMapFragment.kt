@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.write
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -63,9 +64,9 @@ class WriteMapFragment : Fragment() {
         _binding = FragmentWriteMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        Log.d("Created WriteMapFragment","jjjjjjjj")
+        Log.d("Created WriteMapFragment", "jjjjjjjj")
 
-        if (mapData.startAddress == ""||binding.etWriteMapStart.text==null||binding.etWriteMapStart.text=="") {
+        if (mapData.startAddress == "" || binding.etWriteMapStart.text == null || binding.etWriteMapStart.text == "") {
 //            AlertDialog.Builder(this)
 //                .setMessage("출발지와 목적지를 입력해 다녀온 드라이브 코스를 표현해주세요. 완성된 경로를 확인 후, 경유지를 초가해 원하는 경로로 수정이 가능합니다.")
 //                .setPositiveButton("예") { dialog, which ->
@@ -88,7 +89,6 @@ class WriteMapFragment : Fragment() {
         Log.d("uuuwritemap", longitude.toString())
 
 
-
         // 뒤로가기 image click
         binding.imgWriteMapBack.setOnClickListener {
             writeShareActivity?.onBackPressed()
@@ -97,7 +97,10 @@ class WriteMapFragment : Fragment() {
         // 출발지 누르면 검색창으로 감
         binding.etWriteMapStart.setOnClickListener {
             sharedViewModel.locationFlag.value = "1"
-            writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(), "writeMapSearch")
+            writeShareActivity!!.replaceFragment(
+                WriteMapSearchFragment.newInstance(),
+                "writeMapSearch"
+            )
 
 //            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //            intent.putExtra("locationM", "출발지를 입력하세요")
@@ -106,7 +109,10 @@ class WriteMapFragment : Fragment() {
         // 경유지1 누르면 검색창으로 감
         binding.etWriteMapMid1.setOnClickListener {
             sharedViewModel.locationFlag.value = "2"
-            writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(),"writeMapSearch")
+            writeShareActivity!!.replaceFragment(
+                WriteMapSearchFragment.newInstance(),
+                "writeMapSearch"
+            )
 
 //            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //            intent.putExtra("locationM", "경유지1를 입력하세요")
@@ -114,7 +120,10 @@ class WriteMapFragment : Fragment() {
         // 경유지2 누르면 검색창으로 감
         binding.etWriteMapMid2.setOnClickListener {
             sharedViewModel.locationFlag.value = "3"
-            writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(),"writeMapSearch")
+            writeShareActivity!!.replaceFragment(
+                WriteMapSearchFragment.newInstance(),
+                "writeMapSearch"
+            )
 
 //            val intent = Intent(applicationContext, WriteMapSearchActivity::class.java)
 //            intent.putExtra("locationM", "경유지2를 입력하세요")
@@ -123,7 +132,10 @@ class WriteMapFragment : Fragment() {
         binding.etWriteMapEnd.setOnClickListener {
             if (mapData.startAddress != "") {
                 sharedViewModel.locationFlag.value = "4"
-                writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance(),"writeMapSearch")
+                writeShareActivity!!.replaceFragment(
+                    WriteMapSearchFragment.newInstance(),
+                    "writeMapSearch"
+                )
             }
 
 //            if (mapData.startAddress != "") {
@@ -405,16 +417,19 @@ class WriteMapFragment : Fragment() {
             ) {
 //                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
-//                AlertDialog.Builder(this)
-//                    .setMessage("게시물 작성을 완료하시겠습니까??")
-//                    .setNeutralButton("아니오") { dialog, which ->
-//                    }
-//                    .setPositiveButton("예") { dialog, which ->
-//                        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-//                            binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
-//                        ) {
+                AlertDialog.Builder(requireContext())
+                    .setMessage("게시물 작성을 완료하시겠습니까??")
+                    .setNeutralButton("아니오") { dialog, which ->
+                    }
+                    .setPositiveButton("예") { dialog, which ->
+                        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                            binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
+                        ) {
 ////                            Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-//                        } else {
+                        } else {
+                            //서버에 값 보내기
+
+
 //                            mapData.startAddress = ""
 //                            mapData.mid1Address = ""
 //                            mapData.mid2Address = ""
@@ -565,10 +580,13 @@ class WriteMapFragment : Fragment() {
 //                    }
 //                    override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
 //                        Log.d("server connect", "error:${t.message}")
-//                    }
+                    }
+                    .show()
 //                })
-//                    }.show()
             }
+        }
+
+    }
 //            val intent = Intent(applicationContext, MainActivity::class.java)
 //            intent.putExtra("userId", userId)
 //            intent.putExtra("nickName", nickName)
@@ -577,11 +595,9 @@ class WriteMapFragment : Fragment() {
 //        writeShareActivity!!.replaceFragment(WriteMapSearchFragment.newInstance())
 
 //    }
-    }
 
-    // 시작
+// 시작
 //    override fun onBackPressed() {
 //        super.onBackPressed()
 //    }
-
 }

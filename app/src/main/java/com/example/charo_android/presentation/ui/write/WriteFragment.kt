@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.write
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -496,8 +497,15 @@ class WriteFragment : Fragment() {
             openGallery()
         }
         binding.imgWriteBack.setOnClickListener {
-//            replaceFragment(homeFragment, userId, nickName)
-            writeShareActivity?.finish()
+
+            AlertDialog.Builder(requireContext())
+                .setMessage("게시물 작성을 중단하시겠습니까?\n")
+                .setNeutralButton("이어서 작성") { dialog, which ->
+                }
+                .setPositiveButton("작성중단") { dialog, which ->
+                    writeShareActivity?.finish()
+                }
+                .show()
         }
 
         //서버 테스트

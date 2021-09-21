@@ -4,17 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1734375" />
+        <entry key="app/src/main/res/drawable-xhdpi/background_bottom_bar.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background_bottom_sheet.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background_et_write.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/view_radius_68.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_write_share.xml" value="0.12117263843648209" />
         <entry key="app/src/main/res/layout/dialog_theme.xml" value="0.1125" />
         <entry key="app/src/main/res/layout/fragment_charo.xml" value="0.16710097719869707" />
         <entry key="app/src/main/res/layout/fragment_dialog_theme_one.xml" value="0.10054692141881029" />
         <entry key="app/src/main/res/layout/fragment_dialog_theme_three.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_dialog_theme_two.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_my_charo.xml" value="0.16710097719869707" />
-        <entry key="app/src/main/res/layout/fragment_write.xml" value="0.16710097719869707" />
+        <entry key="app/src/main/res/layout/fragment_write.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_write_map.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_write_map_location.xml" value="0.12084690553745929" />
         <entry key="app/src/main/res/layout/fragment_write_map_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_charo_my_charo.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout/item_home_night_drive.xml" value="0.10756578947368421" />
       </map>
     </option>
   </component>

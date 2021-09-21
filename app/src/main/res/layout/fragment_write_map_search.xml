@@ -14,23 +14,31 @@
             android:id="@+id/img_write_map_search_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:src="@drawable/ic_icon_back"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search_start"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_write_map_search_start"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
             android:background="@android:color/transparent"
             android:hint="@string/start"
             android:inputType="text"
             android:maxLines="1"
-            android:paddingLeft="44dp"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_write_map_search_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/delete_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_map_search_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search_start"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -47,7 +55,7 @@
             android:layout_marginVertical="3dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
-            android:text="검색 결과"
+            android:text="관련 검색어"
             android:textColor="@color/gray4_sub"
             app:layout_constraintBottom_toTopOf="@id/recyclerview_write_map_search"
             app:layout_constraintStart_toStartOf="parent"

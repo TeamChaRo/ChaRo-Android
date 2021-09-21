@@ -34,7 +34,7 @@
                     android:id="@+id/img_write_map_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_close_black"
+                    android:src="@drawable/ic_back_1_gray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,7 +146,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="28dp"
-                android:background="@color/blue_main"
+                android:background="@drawable/background_et_write"
+                android:backgroundTint="@color/blue_main"
                 android:includeFontPadding="false"
                 android:text="작성 완료"
                 android:textColor="@color/white"
