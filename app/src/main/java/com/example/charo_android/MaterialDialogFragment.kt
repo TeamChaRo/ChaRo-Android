@@ -1,5 +1,7 @@
 package com.example.charo_android
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +13,14 @@ open class MaterialDialogFragment : DialogFragment() {
     private var dialogView: View? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return MaterialAlertDialogBuilder(requireContext(), theme).apply {
+        return MaterialAlertDialogBuilder(requireContext(), R.style.Dialog).apply {
             dialogView = onCreateView(LayoutInflater.from(requireContext()), null, savedInstanceState)
 
-            dialogView?.let { onViewCreated(it, savedInstanceState) }
+            dialogView?.let {
+                onViewCreated(it, savedInstanceState)
+            }
+            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
             setView(dialogView)
         }.create()
     }

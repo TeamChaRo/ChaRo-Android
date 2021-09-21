@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp">
+    android:padding="32dp"
+    android:background="@drawable/background_radius_all_20"
+    style="@style/Dialog"
+    >
 
     <TextView
         android:id="@+id/title"
@@ -33,10 +36,11 @@
 
     <Button
         android:id="@+id/show_toast"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show Toast"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

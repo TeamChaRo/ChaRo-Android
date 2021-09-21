@@ -15,18 +15,27 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
-import com.example.charo_android.ExampleDialogFragment
+import androidx.viewpager2.widget.ViewPager2
+import com.example.charo_android.*
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.databinding.FragmentWriteBinding
 import com.example.charo_android.hidden.Hidden
-
+import com.example.charo_android.ui.DialogThemeViewPagerAdapter
 import com.example.charo_android.ui.home.HomeFragment
+
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class WriteFragment : Fragment() {
 
     companion object {
         fun newInstance() = WriteFragment()
     }
+    // viewPager2 뷰 객체 초기화를 액티비티 lifecycle에 맞게 지연시킴
+    private lateinit var viewPager2: ViewPager2
+    private lateinit var tabLayout: TabLayout
 
     private var _binding: FragmentWriteBinding? = null
     private lateinit var writeAdapter: WriteAdapter
@@ -43,9 +52,12 @@ class WriteFragment : Fragment() {
     }
 
     var writeShareActivity: WriteShareActivity? = null
+    var dialogThemeFragment: DialogThemeFragment? = DialogThemeFragment()
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         writeShareActivity = context as WriteShareActivity
+//        dialogThemeFragment = context as DialogThemeFragment
     }
 
     val itemProvince =
@@ -248,81 +260,83 @@ class WriteFragment : Fragment() {
         binding.btnWriteRegion.setOnClickListener() {
             val checkedItem = 0
 
-            showDialogFragment()
+//            showDialogFragment()
 
-//            MaterialAlertDialogBuilder(this.context)
-//                .setTitle(resources.getString(R.string.region))
-//                .setNeutralButton("취소") { dialog, which ->
-//                    binding.btnWriteRegion.text = resources.getString(R.string.region)
-//                    it.isSelected = false
-//                }
-//                .setPositiveButton("확인") { dialog, which ->
-//                    if (binding.btnWriteRegion.text.toString() == resources.getString(R.string.region)) {
-//                        it.isSelected = false
-//                    }
-//                    it.isSelected = true
-//                }
-//                // Single-choice items (initialized with checked item)
-//                .setSingleChoiceItems(itemProvince, checkedItem) { dialog, which ->
-//                    //which : index
-//                    //테마 고르면 텍스트 변경
-//                    binding.btnWriteRegion.text = itemProvince[which]
-//                }
-//                .show()
+            MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
+                .setTitle("지역")
+                .setNeutralButton("취소") { dialog, which ->
+                    binding.btnWriteRegion.text = resources.getString(R.string.region)
+                    it.isSelected = false
+                }
+                .setPositiveButton("확인") { dialog, which ->
+                    if (binding.btnWriteRegion.text.toString() == resources.getString(R.string.region)) {
+                        it.isSelected = false
+                    }
+                    it.isSelected = true
+                }
+                // Single-choice items (initialized with checked item)
+                .setSingleChoiceItems(itemProvince, checkedItem) { dialog, which ->
+                    //which : index
+                    //테마 고르면 텍스트 변경
+                    binding.btnWriteRegion.text = itemProvince[which]
+                }
+                .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
+                .show()
         }
 
         binding.btnWriteLocation.setOnClickListener() {
             val checkedItem = 0
-//            MaterialAlertDialogBuilder(this)
-//                .setTitle(resources.getString(R.string.city))
-//                .setNeutralButton("취소") { dialog, which ->
-//                    binding.btnWriteLocation.text = resources.getString(R.string.city)
-//                    it.isSelected = false
-//                }
-//                .setPositiveButton("확인") { dialog, which ->
-//                    if (binding.btnWriteLocation.text.toString() == resources.getString(R.string.city) ||
-//                        binding.btnWriteLocation.text.toString() == "선택안함"
-//                    ) {
-//                        it.isSelected = false
-//                    }
-//                    it.isSelected = true
-//                }
-//                // Single-choice items (initialized with checked item)
-//                .setSingleChoiceItems(
-//                    if (binding.btnWriteRegion.text == "특별시") itemSpecial
-//                    else if (binding.btnWriteRegion.text == "광역시") itemMetroPolitan
-//                    else if (binding.btnWriteRegion.text == "경기도") itemGyounGi
-//                    else if (binding.btnWriteRegion.text == "강원도") itemGangWon
-//                    else if (binding.btnWriteRegion.text == "충청남도") itemChoongNam
-//                    else if (binding.btnWriteRegion.text == "충청북도") itemChoongBuk
-//                    else if (binding.btnWriteRegion.text == "경상북도") itemGyungBuk
-//                    else if (binding.btnWriteRegion.text == "경상남도") itemGyungNam
-//                    else if (binding.btnWriteRegion.text == "전라북도") itemJunBuk
-//                    else itemJunNam, checkedItem
-//                ) { dialog, which ->
-//                    //which : index
-//                    //테마 고르면 텍스트 변경
-//                    if (binding.btnWriteRegion.text == "특별시") binding.btnWriteLocation.text =
-//                        itemSpecial[which]
-//                    else if (binding.btnWriteRegion.text == "광역시") binding.btnWriteLocation.text =
-//                        itemMetroPolitan[which]
-//                    else if (binding.btnWriteRegion.text == "경기도") binding.btnWriteLocation.text =
-//                        itemGyounGi[which]
-//                    else if (binding.btnWriteRegion.text == "강원도") binding.btnWriteLocation.text =
-//                        itemGangWon[which]
-//                    else if (binding.btnWriteRegion.text == "충청남도") binding.btnWriteLocation.text =
-//                        itemChoongNam[which]
-//                    else if (binding.btnWriteRegion.text == "충청북도") binding.btnWriteLocation.text =
-//                        itemChoongBuk[which]
-//                    else if (binding.btnWriteRegion.text == "경상북도") binding.btnWriteLocation.text =
-//                        itemGyungBuk[which]
-//                    else if (binding.btnWriteRegion.text == "경상남도") binding.btnWriteLocation.text =
-//                        itemGyungNam[which]
-//                    else if (binding.btnWriteRegion.text == "전라북도") binding.btnWriteLocation.text =
-//                        itemJunBuk[which]
-//                    else binding.btnWriteLocation.text = itemJunNam[which]
-//                }
-//                .show()
+            MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
+                .setTitle("지역")
+                .setNeutralButton("취소") { dialog, which ->
+                    binding.btnWriteLocation.text = resources.getString(R.string.city)
+                    it.isSelected = false
+                }
+                .setPositiveButton("확인") { dialog, which ->
+                    if (binding.btnWriteLocation.text.toString() == resources.getString(R.string.city) ||
+                        binding.btnWriteLocation.text.toString() == "선택안함"
+                    ) {
+                        it.isSelected = false
+                    }
+                    it.isSelected = true
+                }
+                // Single-choice items (initialized with checked item)
+                .setSingleChoiceItems(
+                    if (binding.btnWriteRegion.text == "특별시") itemSpecial
+                    else if (binding.btnWriteRegion.text == "광역시") itemMetroPolitan
+                    else if (binding.btnWriteRegion.text == "경기도") itemGyounGi
+                    else if (binding.btnWriteRegion.text == "강원도") itemGangWon
+                    else if (binding.btnWriteRegion.text == "충청남도") itemChoongNam
+                    else if (binding.btnWriteRegion.text == "충청북도") itemChoongBuk
+                    else if (binding.btnWriteRegion.text == "경상북도") itemGyungBuk
+                    else if (binding.btnWriteRegion.text == "경상남도") itemGyungNam
+                    else if (binding.btnWriteRegion.text == "전라북도") itemJunBuk
+                    else itemJunNam, checkedItem
+                ) { dialog, which ->
+                    //which : index
+                    //테마 고르면 텍스트 변경
+                    if (binding.btnWriteRegion.text == "특별시") binding.btnWriteLocation.text =
+                        itemSpecial[which]
+                    else if (binding.btnWriteRegion.text == "광역시") binding.btnWriteLocation.text =
+                        itemMetroPolitan[which]
+                    else if (binding.btnWriteRegion.text == "경기도") binding.btnWriteLocation.text =
+                        itemGyounGi[which]
+                    else if (binding.btnWriteRegion.text == "강원도") binding.btnWriteLocation.text =
+                        itemGangWon[which]
+                    else if (binding.btnWriteRegion.text == "충청남도") binding.btnWriteLocation.text =
+                        itemChoongNam[which]
+                    else if (binding.btnWriteRegion.text == "충청북도") binding.btnWriteLocation.text =
+                        itemChoongBuk[which]
+                    else if (binding.btnWriteRegion.text == "경상북도") binding.btnWriteLocation.text =
+                        itemGyungBuk[which]
+                    else if (binding.btnWriteRegion.text == "경상남도") binding.btnWriteLocation.text =
+                        itemGyungNam[which]
+                    else if (binding.btnWriteRegion.text == "전라북도") binding.btnWriteLocation.text =
+                        itemJunBuk[which]
+                    else binding.btnWriteLocation.text = itemJunNam[which]
+                }
+                .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
+                .show()
         }
 
         // 테마
@@ -344,8 +358,66 @@ class WriteFragment : Fragment() {
             "도심"
         )
 
+
+//
+//        // 2. 초기화 지연시킨 viewPager2 객체를 여기서 초기화함
+//        viewPager2 = bottomSheetView.findViewById(R.id.viewPager2)
+
+        // 3. viewPager2 뷰 객체에 어댑터 적용하기
+//        viewPager2.adapter = DialogThemeViewPagerAdapter(this.fragmentActivity)
+
+//        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+//        STATE_COLLAPSED : height 만큼 보이게
+//        STATE_EXPANDED : 가득 차게 처리
+//        STATE_HIDDEN : 숨김 처리
+
+//        val bottomSheetFragment = DialogThemeFragment()
+
+//        dialogThemeFragment = DialogThemeFragment()
+//        val bottomSheetDialog = BottomSheetDialog(requireContext())
+//        bottomSheetDialog.setContentView(dialogThemeFragment!!.requireView())
+
+
+        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_theme, container, false)
+
+
+        // 2. 초기화 지연시킨 viewPager2 객체를 여기서 초기화함
+        viewPager2 = bottomSheetView.findViewById(R.id.viewPager2)
+        tabLayout = bottomSheetView.findViewById(R.id.tabLayout)
+
+        // 3. viewPager2 뷰 객체에 어댑터 적용하기
+        val adapter = DialogThemeViewPagerAdapter(requireActivity())
+        adapter.addFragment(DialogThemeOneFragment())
+        adapter.addFragment(DialogThemeTwoFragment())
+        adapter.addFragment(DialogThemeThreeFragment())
+
+        viewPager2.adapter = adapter
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int){
+                super.onPageSelected(position)
+                Log.e("ViewPagerFragment", "Page ${position+1}")
+
+                adapter.showFragment(position)
+            }
+        })
+
+        TabLayoutMediator(tabLayout, viewPager2){tab, position ->
+            tab.text = "테마 ${position+1}"
+        }.attach()
+
+
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        bottomSheetDialog.setContentView(bottomSheetView)
+
         binding.btnWriteTheme1.setOnClickListener {
             val checkedItem = 0
+//            val bottomSheetDialog = BottomSheetDialog(dialogThemeFragment!!.requireContext())
+//            dialogThemeFragment.view?.let { it -> dialogThemeFragment.setContentView(it) }
+            bottomSheetDialog.show()
+
+
+//            bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+
 //            MaterialAlertDialogBuilder(this)
 //                .setTitle(resources.getString(R.string.theme1))
 //                .setNeutralButton("취소") { dialog, which ->
