@@ -11,6 +11,9 @@
         <entry key="app/src/main/res/layout/fragment_dialog_theme_two.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_my_charo.xml" value="0.16710097719869707" />
         <entry key="app/src/main/res/layout/fragment_write.xml" value="0.16710097719869707" />
+        <entry key="app/src/main/res/layout/fragment_write_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_write_map_location.xml" value="0.12084690553745929" />
+        <entry key="app/src/main/res/layout/fragment_write_map_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_charo_my_charo.xml" value="0.16875" />
       </map>
     </option>

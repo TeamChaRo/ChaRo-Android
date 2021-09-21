@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.write.WriteShareActivity">
+    tools:context=".presentation.ui.write.WriteShareActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/write_share_layout"
         android:layout_width="match_parent"

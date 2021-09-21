@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.charo_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,41 +8,43 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <application
+        android:name=".presentation.di.CharoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_charo"
+        android:appComponentFactory="@string/app_name"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_charo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChaRoAndroid"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".ui.write.WriteShareActivity" />
-        <activity android:name=".ui.main.SplashActivity"/>
-        <activity android:name=".ui.alarm.AlarmActivity" />
-        <activity android:name=".ui.onBoarding.OnBoardingActivity" /> <!-- <activity android:name=".ui.write.WriteMapLocationActivity" /> -->
-        <!-- <activity android:name=".ui.write.WriteMapSearchActivity" /> -->
-        <activity android:name=".ui.search.ResultSearchActivity" />
-        <activity android:name=".ui.search.SearchActivity" />
-        <activity android:name=".ui.detail.DetailActivity" /> <!-- <activity android:name=".ui.write.WriteMapActivity" /> -->
-<!--        <activity-->
-<!--            android:name=".ui.write.WriteActivity"-->
-<!--            android:windowSoftInputMode="stateHidden|adjustResize" />-->
-        <activity
-            android:name=".ui.search.NoSearchActivity"
-            android:label="@string/title_activity_no_search"
-            android:theme="@style/Theme.ChaRoAndroid.NoActionBar" />
-        <activity android:name=".ui.signin.SignInActivity" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:label="@string/app_name">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
+        
+        <activity android:name=".presentation.ui.write.WriteShareActivity" />
+        <activity android:name="com.example.charo_android.presentation.ui.alarm.AlarmActivity"/>
+        <activity android:name="com.example.charo_android.presentation.ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.charo_android.presentation.ui.onBoarding.OnBoardingActivity"/>
+        <activity android:name="com.example.charo_android.presentation.ui.write.WriteMapSearchActivity" />
+        <activity android:name="com.example.charo_android.presentation.ui.search.ResultSearchActivity" />
+        <activity android:name="com.example.charo_android.presentation.ui.search.SearchActivity" />
+        <activity android:name="com.example.charo_android.presentation.ui.detail.DetailActivity" />
+        <activity
+            android:name="com.example.charo_android.presentation.ui.write.WriteActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="com.example.charo_android.presentation.ui.search.NoSearchActivity"
+            android:label="@string/title_activity_no_search"
+            android:theme="@style/Theme.ChaRoAndroid.NoActionBar" />
+        <activity android:name="com.example.charo_android.presentation.ui.signin.SignInActivity"/>
+        <activity
+            android:name="com.example.charo_android.presentation.ui.main.MainActivity"
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>
