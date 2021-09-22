@@ -8,30 +8,19 @@ import retrofit2.http.*
 
 interface WriteViewService {
     @Multipart
-    @POST("/writePost")
+    @POST("/post/write")
     fun writePost(
-//        @PartMap request: RequestBody,
-//        @Part course: RequestWriteData.Course,
-//        @Part courseDesc: String,
-//        @Part isParking: Boolean,
-//        @Part parkingDesc: String,
-//        @Part province: String,
-//        @Part region: String,
-//        @Part theme: List<String>,
-//        @Part title: String,
-//        @Part userId: String,
-//        @Part warning: List<Boolean>,
-        @Part course: RequestWriteData.Course,
-        @Part courseDesc: String,
-        @Part isParking: Boolean,
-        @Part parkingDesc: String,
-        @Part province: String,
-        @Part region: String,
-        @Part theme: List<String>,
-        @Part title: String,
-        @Part userId: String,
-        @Part warning: List<Boolean>,
-        @Part files: List<MultipartBody.Part>
+        @Part("course") course: RequestWriteData.Course,
+        @Part("courseDesc") courseDesc: String,
+        @Part("isParking") isParking: Boolean,
+        @Part("parkingDesc") parkingDesc: String,
+        @Part("province") province: String,
+        @Part("region") region: String,
+        @Part("theme") theme: List<String>,
+        @Part("title") title: String,
+        @Part("userEmail") userEmail: String,
+        @Part("warning") warning: List<Boolean>,
+        @Part image: List<MultipartBody.Part>
     ): Call<ResponseWriteData>
 }
 

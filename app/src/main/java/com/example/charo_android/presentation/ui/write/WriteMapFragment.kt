@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
@@ -92,6 +93,25 @@ class WriteMapFragment : Fragment() {
         Log.d("uuuwritemap", locationName)
         Log.d("uuuwritemap", latitude.toString())
         Log.d("uuuwritemap", longitude.toString())
+
+//        val mapCustomToast = inflater.inflate(R.layout.toast_map_custom,container,false)
+//        val toastText = mapCustomToast.findViewById(R.id.text_toast)
+//        toastText.setText("출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")
+//
+//        mapCustomToast.findViewById(R.id.layout_toast).setBackgroundResource(R.drawable.ic_map_toast_message);
+//
+//        val mytoast = Toast(requireContext());
+//        mytoast.setView(mapCustomToast);
+//        mytoast.setDuration(Toast.LENGTH_LONG);
+//        mytoast.show();
+
+//        CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
+
+        customDialog()
+
+
+
+
 
 
         // 뒤로가기 image click
@@ -429,18 +449,34 @@ class WriteMapFragment : Fragment() {
                     binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
                 ) {
 //                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-            } else {
-                AlertDialog.Builder(requireContext())
-                    .setMessage("게시물 작성을 완료하시겠습니까??")
-                    .setNeutralButton("아니오") { dialog, which ->
-                    }
-                    .setPositiveButton("예") { dialog, which ->
-                        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                            binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
-                        ) {
+                } else {
+                    AlertDialog.Builder(requireContext())
+                        .setMessage("게시물 작성을 완료하시겠습니까??")
+                        .setNeutralButton("아니오") { dialog, which ->
+                        }
+                        .setPositiveButton("예") { dialog, which ->
+                            if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                                binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
+                            ) {
 ////                            Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-                        } else {
-                            //서버에 값 보내기
+                            } else {
+                                //서버에 값 보내기
+                                Log.e("sharedViewModel Data",sharedViewModel.userEmail.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.title.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.image.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.province.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.region.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.warning.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.theme.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.isParking.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.parkingDesc.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.courseDesc.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.locationAddress.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.latitude.value.toString())
+                                Log.e("sharedViewModel Data",sharedViewModel.longitude.value.toString())
+
+
+
 
 
 //                            mapData.startAddress = ""
@@ -470,7 +506,7 @@ class WriteMapFragment : Fragment() {
 //                            val intent = Intent(applicationContext, MainActivity::class.java)
 //                            intent.putExtra("userId", Hidden.userId)
 //                            startActivity(intent)
-                        }
+                            }
 //                var addressList = mutableListOf<String>()
 //                addressList.add(WriteData.startAddress)
 //                if(WriteData.mid1Address != "")
@@ -510,25 +546,25 @@ class WriteMapFragment : Fragment() {
 //                    WriteData.warning
 //                )
 
-                        // 원래 주석이었음
-                        /*@Part course: RequestWriteData.Course,
-                        @Part courseDesc: String,
-                        @Part isParking: Boolean,
-                        @Part parkingDesc: String,
-                        @Part province: String,
-                        @Part region: String,
-                        @Part theme: List<String>,
-                        @Part title: String,
-                        @Part userId: String,
-                        @Part warning: List<Boolean>,
-                        @Part files: List<MultipartBody.Part>*/
+                            // 원래 주석이었음
+                            /*@Part course: RequestWriteData.Course,
+                            @Part courseDesc: String,
+                            @Part isParking: Boolean,
+                            @Part parkingDesc: String,
+                            @Part province: String,
+                            @Part region: String,
+                            @Part theme: List<String>,
+                            @Part title: String,
+                            @Part userId: String,
+                            @Part warning: List<Boolean>,
+                            @Part files: List<MultipartBody.Part>*/
 
 //                val hashMap = HashMap<String, RequestBody>()
 //                val requestString: String = Gson().toJson(requestWriteData)
 //                val body = RequestBody.create("application/json".toMediaTypeOrNull(), requestString)
 //                hashMap.put("request", body)
 
-                        // 이따 이어서 코딩할거다 진수야 기다려봐
+                            // 이따 이어서 코딩할거다 진수야 기다려봐
 //                val requestCourse = Gson().toJson(courseList)
 //                val multipartCourse = MultipartBody.Part.createFormData("course", requestCourse)
 //
@@ -593,12 +629,13 @@ class WriteMapFragment : Fragment() {
 //                    }
 //                    override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
 //                        Log.d("server connect", "error:${t.message}")
-                    }
-                    .show()
+                        }
+                        .show()
 //                })
+                }
             }
-        }
 
+        }
     }
 //            val intent = Intent(applicationContext, MainActivity::class.java)
 //            intent.putExtra("userId", userId)
@@ -613,4 +650,3 @@ class WriteMapFragment : Fragment() {
 //    override fun onBackPressed() {
 //        super.onBackPressed()
 //    }
-}

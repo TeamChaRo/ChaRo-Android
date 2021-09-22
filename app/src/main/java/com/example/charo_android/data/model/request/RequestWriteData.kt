@@ -19,10 +19,10 @@ data class RequestWriteData(
     val theme: List<String>,
     @SerializedName("title")
     val title: String,
-    @SerializedName("userId")
-    val userId: String,
+    @SerializedName("userEmail")
+    val userEmail: String,
     @SerializedName("warning")
-    val warning: List<Boolean>
+    val warning: List<String>
 ) {
     data class Course(
         @SerializedName("address")
