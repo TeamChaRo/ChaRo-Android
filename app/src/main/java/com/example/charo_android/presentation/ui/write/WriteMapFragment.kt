@@ -13,12 +13,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.CustomToast
 import com.skt.Tmap.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import java.lang.Exception
 
 class WriteMapFragment : Fragment() {
@@ -410,11 +415,19 @@ class WriteMapFragment : Fragment() {
         }
     }
 
-    private fun btnWriteCompleteOnClickEvent() {
-        binding.btnWriteComplete.setOnClickListener() {
-            if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
-            ) {
+    fun customDialog() = runBlocking<Unit> {
+        withTimeout(1300L) {
+            launch {
+                CustomToast.createDialog(requireContext())
+            }
+        }
+    }
+
+        private fun btnWriteCompleteOnClickEvent() {
+            binding.btnWriteComplete.setOnClickListener() {
+                if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
+                    binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
+                ) {
 //                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
                 AlertDialog.Builder(requireContext())
