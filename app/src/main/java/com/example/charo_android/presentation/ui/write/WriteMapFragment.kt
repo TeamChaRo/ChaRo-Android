@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +24,7 @@ import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.CustomToast
 import com.skt.Tmap.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
@@ -107,9 +110,8 @@ class WriteMapFragment : Fragment() {
 
 //        CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
 
-        customDialog()
-
-
+//        customDialog()
+        this.customToast()
 
 
 
@@ -443,7 +445,18 @@ class WriteMapFragment : Fragment() {
         }
     }
 
-        private fun btnWriteCompleteOnClickEvent() {
+    lateinit var fadeoutAnim : Animation
+    fun customToast() = runBlocking<Unit>{
+        fadeoutAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
+
+        binding.grayBackgroundForToast.visibility = View.VISIBLE
+        CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
+        Handler().postDelayed({
+            binding.grayBackgroundForToast.startAnimation(fadeoutAnim)
+            binding.grayBackgroundForToast.visibility = View.GONE
+        },3800L) }
+
+    private fun btnWriteCompleteOnClickEvent() {
             binding.btnWriteComplete.setOnClickListener() {
                 if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
                     binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
