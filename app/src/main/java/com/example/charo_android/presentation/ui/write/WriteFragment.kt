@@ -27,6 +27,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 class WriteFragment : Fragment() {
 
@@ -244,6 +249,8 @@ class WriteFragment : Fragment() {
         // 2. RecyclerView 에 어뎁터를 우리가 만든 어뎁터로 만들기
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
+        getSharedViewModelData()
+
         //이미지 추가 버튼
         binding.imgWriteAddImg.setOnClickListener {
             openGallery()
@@ -278,6 +285,7 @@ class WriteFragment : Fragment() {
                     //which : index
                     //테마 고르면 텍스트 변경
                     binding.btnWriteRegion.text = itemProvince[which]
+                    sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
                 }
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
@@ -333,6 +341,9 @@ class WriteFragment : Fragment() {
                     else if (binding.btnWriteRegion.text == "전라북도") binding.btnWriteLocation.text =
                         itemJunBuk[which]
                     else binding.btnWriteLocation.text = itemJunNam[which]
+
+                    sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
+
                 }
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
@@ -356,26 +367,6 @@ class WriteFragment : Fragment() {
             "야경",
             "도심"
         )
-
-
-//
-//        // 2. 초기화 지연시킨 viewPager2 객체를 여기서 초기화함
-//        viewPager2 = bottomSheetView.findViewById(R.id.viewPager2)
-
-        // 3. viewPager2 뷰 객체에 어댑터 적용하기
-//        viewPager2.adapter = DialogThemeViewPagerAdapter(this.fragmentActivity)
-
-//        bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-//        STATE_COLLAPSED : height 만큼 보이게
-//        STATE_EXPANDED : 가득 차게 처리
-//        STATE_HIDDEN : 숨김 처리
-
-//        val bottomSheetFragment = DialogThemeFragment()
-
-//        dialogThemeFragment = DialogThemeFragment()
-//        val bottomSheetDialog = BottomSheetDialog(requireContext())
-//        bottomSheetDialog.setContentView(dialogThemeFragment!!.requireView())
-
 
         val bottomSheetView = layoutInflater.inflate(R.layout.dialog_theme, container, false)
 
@@ -486,14 +477,17 @@ class WriteFragment : Fragment() {
         binding.btnWriteParkYes.setOnClickListener() {
             binding.btnWriteParkYes.isSelected = true
             binding.btnWriteParkNo.isSelected = false
+
+            sharedViewModel.isParking.value = true
         }
         binding.btnWriteParkNo.setOnClickListener() {
             binding.btnWriteParkNo.isSelected = true
             binding.btnWriteParkYes.isSelected = false
+
+            sharedViewModel.isParking.value = false
         }
 
         binding.clWritePhoto.setOnClickListener {
-            // addImage()
             openGallery()
         }
         binding.imgWriteBack.setOnClickListener {
@@ -508,21 +502,34 @@ class WriteFragment : Fragment() {
                 .show()
         }
 
-        //서버 테스트
         binding.btnWriteBottomNext.setOnClickListener {
+            //주의사항
+            val warningList: ArrayList<String> = ArrayList()
 
-//            mapBinding = ActivityWriteMapBinding.inflate(layoutInflater)
-//            AlertDialog.Builder(this)
-//                .setMessage("작성을 완료하고, 드라이브 경로를 이어 작성하시겠습니까? 이후 글 수정은 어렵습니다.")
-//                .setNeutralButton("아니오") { dialog, which ->
-//                }
-//                .setPositiveButton("예") { dialog, which ->
-//                    insertDataToCompanionObject()
-//                }
-//                .show()
+            if(binding.btnWriteCautionHighway.isSelected) {
+                warningList.add("highway")
+            }
+            if(binding.btnWriteCautionMoun.isSelected){
+                warningList.add("mountainRoad")
+            }
+            if(binding.btnWriteCautionDiffi.isSelected){
+                warningList.add("")
+            }
+            if(binding.btnWriteCautionPeople.isSelected){
+                warningList.add("p")
+            }
+            sharedViewModel.warning.value = warningList
+
+            //제목
+            sharedViewModel.title.value = binding.etWriteTitle.text.toString()
+
+            //주차 설명
+            sharedViewModel.parkingDesc.value = binding.etWriteParkReview.text.toString()
+
+            //코스 설명
+            sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
 
             writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance(), "writeMap");
-
         }
 
 
@@ -556,6 +563,7 @@ class WriteFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         var imgPath: Uri
+        var image = ArrayList<MultipartBody.Part>()
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 1) {
                 if (data?.clipData == null) {
@@ -563,6 +571,7 @@ class WriteFragment : Fragment() {
 
                 } else {
                     var clipData = data.clipData
+                    var imageUriList = ArrayList<Uri>()
                     when {
                         clipData?.itemCount!! > 6 -> {
 //                            Toast.makeText(this, "사진은 6개까지 선택 가능", Toast.LENGTH_LONG).show()
@@ -570,14 +579,33 @@ class WriteFragment : Fragment() {
                         clipData.getItemCount() == 1 -> {
                             binding.clWritePhoto.visibility = View.GONE
                             imgPath = clipData.getItemAt(0).uri
-                            Log.d("clipda", imgPath.toString())
+
+                            //리사이클러뷰에 사진 추가
                             writeAdapter.imgList.add(
                                 WriteImgInfo(
                                     imgUri = imgPath,
                                 )
                             )
+
+                            sharedViewModel.imageUri.value = writeAdapter.imgList
+
                             writeAdapter.notifyItemInserted(0)
                             writeAdapter.notifyDataSetChanged()
+
+                            //uri -> file -> multipartform
+                            for (index in 0..writeAdapter.imgList.size - 1) {
+                                val file = File(writeAdapter.imgList[index].imgUri.path)
+                                val MEDIA_TYPE_IMAGE = "image/*".toMediaTypeOrNull()
+                                val surveyBody = RequestBody.create(MEDIA_TYPE_IMAGE, file)
+                                image.add(MultipartBody.Part.createFormData("image", file.name, surveyBody))
+                            }
+                            sharedViewModel.image.value = image
+
+                            Log.e("image",image.toString())
+                            Log.e("sharedViewModel.imageUri.value",sharedViewModel.imageUri.value.toString())
+                            Log.e("sharedViewModel.image.value",sharedViewModel.image.value.toString())
+                            Log.e("imgPath",imgPath.toString())
+
                         }
                         clipData.itemCount in 2..5 -> {
                             binding.clWritePhoto.visibility = View.GONE
@@ -600,17 +628,6 @@ class WriteFragment : Fragment() {
 
                 }
             }
-            var currentImageUrl: Uri? = data?.data
-
-//            try {
-//                val bitmap =
-//                    MediaStore.Images.Media.getBitmap(contentResolver, currentImageUrl)
-//                binding.imgWritePhoto.setImageBitmap(bitmap)
-//                writeAdapter.notifyItemInserted(0)
-//                writeAdapter.notifyDataSetChanged()
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
         } else {
             Log.d("ActivityResult", "something wrong")
 
@@ -657,17 +674,6 @@ class WriteFragment : Fragment() {
             it.isSelected = !it.isSelected
         }
     }
-
-//    fun startActivityWriteMap() {
-//        val intent = Intent(this@WriteFragment, WriteMapActivity::class.java)
-//        intent.putExtra("theme11", binding.btnWriteTheme1.text.toString())
-//        intent.putExtra("theme22", binding.btnWriteTheme2.text.toString())
-//        intent.putExtra("locationFlag", "0")
-//        intent.putExtra("textview", "0")
-//        intent.putExtra("userId", userId)
-//        intent.putExtra("nickName", nickName)
-//        startActivity(intent)
-//    }
 
     private fun insertDataToCompanionObject() {
         WriteData.courseDesc = binding.etWriteMyDrive.text.toString()
@@ -729,10 +735,63 @@ class WriteFragment : Fragment() {
 
     }
 
-}
+    //돌아왔을 때 값 유지
+    fun getSharedViewModelData() {
+        //사진
+        if (sharedViewModel.image.value != null) {
+            binding.clWritePhoto.visibility = View.GONE
 
-//            var file: File
-//            var fileList = listOf<Any>()
-//            var requestFile: RequestBody
-//            file =
-//                File(writeAdapter.imgList[0].imgUri.toString())
+            var imgmoreList = mutableListOf<WriteImgInfo>()
+
+            sharedViewModel.imageUri.value?.forEach { imageUri ->
+                writeAdapter.imgList = sharedViewModel.imageUri.value!!
+            }
+            Log.e("imgmoreList", imgmoreList.toString())
+            writeAdapter.notifyItemInserted(0)
+            writeAdapter.notifyDataSetChanged()
+
+        }
+
+        //지역 도 시
+        if(sharedViewModel.province.value != ""){
+            binding.btnWriteRegion.text = sharedViewModel.province.value
+            binding.btnWriteRegion.isSelected = true
+        }
+        if(sharedViewModel.region.value != "") {
+            binding.btnWriteLocation.text = sharedViewModel.region.value
+            binding.btnWriteLocation.isSelected = true
+        }
+
+        //테마
+
+
+        //주차 있없
+        if(sharedViewModel.isParking.value == true){
+            binding.btnWriteParkYes.isSelected = true
+            binding.btnWriteParkNo.isSelected = false
+
+        }else if(sharedViewModel.isParking.value == false){
+            binding.btnWriteParkYes.isSelected = false
+            binding.btnWriteParkNo.isSelected = true
+        }
+
+        //주의사항
+        sharedViewModel.warning.value?.forEach { warning ->
+            when (warning) {
+                "highway" -> {
+                    binding.btnWriteCautionHighway.isSelected = true
+                }
+                "mountainRoad" -> {
+                    binding.btnWriteCautionMoun.isSelected = true
+                }
+                "" -> {
+                    binding.btnWriteCautionDiffi.isSelected = true
+                }
+                "p" -> {
+                    binding.btnWriteCautionPeople.isSelected = true
+                }
+            }
+        }
+    }
+
+}

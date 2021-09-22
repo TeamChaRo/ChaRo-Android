@@ -21,10 +21,11 @@
         <entry key="app/src/main/res/layout/fragment_write_map_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_charo_my_charo.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/item_home_night_drive.xml" value="0.10756578947368421" />
+        <entry key="app/src/main/res/layout/toast_map_custom.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
