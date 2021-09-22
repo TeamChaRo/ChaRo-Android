@@ -97,20 +97,6 @@ class WriteMapFragment : Fragment() {
         Log.d("uuuwritemap", latitude.toString())
         Log.d("uuuwritemap", longitude.toString())
 
-//        val mapCustomToast = inflater.inflate(R.layout.toast_map_custom,container,false)
-//        val toastText = mapCustomToast.findViewById(R.id.text_toast)
-//        toastText.setText("출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")
-//
-//        mapCustomToast.findViewById(R.id.layout_toast).setBackgroundResource(R.drawable.ic_map_toast_message);
-//
-//        val mytoast = Toast(requireContext());
-//        mytoast.setView(mapCustomToast);
-//        mytoast.setDuration(Toast.LENGTH_LONG);
-//        mytoast.show();
-
-//        CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
-
-//        customDialog()
         this.customToast()
 
 
