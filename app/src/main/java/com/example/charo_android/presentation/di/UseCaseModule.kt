@@ -9,5 +9,6 @@ val useCaseModule = module{
     single{ GetRemoteLocalDriveUseCase(get())}
     single{GetRemoteTodayCharoDriveUseCase(get())}
     single{GetRemoteTrendDriveUseCase(get())}
+    single{GetRemoteSignUpEmailCheckUseCase(get())}
 
 }

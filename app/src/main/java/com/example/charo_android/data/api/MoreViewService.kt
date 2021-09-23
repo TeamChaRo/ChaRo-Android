@@ -14,4 +14,5 @@ interface MoreViewService {
         @Path("identifier") identifier: String,
         @Query("value") value:String
     ) : Call<ResponseMoreViewData>
+
 }

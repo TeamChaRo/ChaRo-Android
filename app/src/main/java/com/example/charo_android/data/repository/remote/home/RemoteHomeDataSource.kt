@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.remote
+package com.example.charo_android.data.repository.remote.home
 
 import com.example.charo_android.data.model.response.ResponseHomeViewData
 
