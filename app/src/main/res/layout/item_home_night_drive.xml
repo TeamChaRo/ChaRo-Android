@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -60,21 +61,21 @@
 
             <TextView
                 android:id="@+id/chip_home_night_drive_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{customThemeDrive.homeNightDriveChip_1}"
                 style="@style/HeaderH9"
+                android:layout_width="14dp"
+                android:layout_height="12dp"
                 android:layout_marginTop="9dp"
+                android:background="@drawable/shape_charo_hashtag"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="11dp"
+                android:paddingVertical="2dp"
+                android:text="@{customThemeDrive.homeNightDriveChip_1}"
+                app:chipBackgroundColor="@color/white"
                 app:chipCornerRadius="10dp"
                 app:chipStrokeColor="@color/blue_main"
                 app:chipStrokeWidth="1dp"
-                app:chipBackgroundColor="@color/white"
-                android:paddingVertical="2dp"
-                android:paddingHorizontal="11dp"
-                android:background="@drawable/shape_charo_hashtag"
-                android:includeFontPadding="false"
-                app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_home_night_drive_title" />
 
             <TextView
                 android:id="@+id/chip_home_night_drive_2"

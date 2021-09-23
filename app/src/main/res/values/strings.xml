@@ -119,5 +119,9 @@
     <string name="theme_speed">#스피드</string>
     <string name="theme_night_view">#야경</string>
     <string name="theme_city">#도심</string>
+    <string name="sign_up">회원가입</string>
+    <string name="email_id">이메일 아이디</string>
+    <string name="email_answer">이용할 이메일을 입력해주세요</string>
+    <string name="email_hint">ex)charorong@gmail.com</string>
 
 </resources>

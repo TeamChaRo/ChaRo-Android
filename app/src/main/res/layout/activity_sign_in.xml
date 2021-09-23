@@ -188,6 +188,7 @@
             android:textAlignment="center"
             android:textColor="@color/gray3_sub"
             android:textSize="14sp"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
