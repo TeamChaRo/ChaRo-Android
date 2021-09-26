@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.more
+package com.example.charo_android.presentation.ui.more.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

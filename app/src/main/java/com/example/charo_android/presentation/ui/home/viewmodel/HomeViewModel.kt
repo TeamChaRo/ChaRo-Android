@@ -1,13 +1,9 @@
 package com.example.charo_android.presentation.ui.home.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.charo_android.domain.model.home.*
-import com.example.charo_android.domain.usecase.*
-import kotlinx.coroutines.Dispatchers
+import com.example.charo_android.domain.usecase.home.*
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -15,7 +11,8 @@ class HomeViewModel(
     private val getRemoteCustomThemeUseCase: GetRemoteCustomThemeUseCase,
     private val getRemoteLocalDriveUseCase: GetRemoteLocalDriveUseCase,
     private val getRemoteTodayCharoDrive: GetRemoteTodayCharoDriveUseCase,
-    private val getRemoteTrendDrive: GetRemoteTrendDriveUseCase
+    private val getRemoteTrendDrive: GetRemoteTrendDriveUseCase,
+
 ) : ViewModel() {
 
     private val _banner = MutableLiveData<List<Banner>>()
@@ -38,8 +35,16 @@ class HomeViewModel(
     val trendDrive: LiveData<List<TrendDrive>>
         get() = _trendDrive
 
+    private val _theme = MutableLiveData<List<Theme>>()
+    val theme : LiveData<List<Theme>>
+        get() = _theme
 
-    fun getBanner(userEmail: String) {
+
+
+
+
+
+     fun getBanner(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteBannerUseCase.execute(userEmail) }
 
@@ -58,12 +63,18 @@ class HomeViewModel(
         }
     }
 
-    fun getCustomTheme(userEmail: String) {
+     fun getCustomTheme(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteCustomThemeUseCase.execute(userEmail) }
                 .onSuccess {
                     _customThemeDrive.value = it
-                    Log.d("new", "서버 통신 성공!")
+                    _theme.value = it.map{
+                        Theme(
+                            theme = it.homeNightDriveChip_2.toString()
+                        )
+                    }
+                    Log.d("customtheme", "서버 통신 성공!")
+                    Log.d("customtheme", _theme.value.toString())
                 }
                 .onFailure {
                     it.printStackTrace()
@@ -72,7 +83,7 @@ class HomeViewModel(
         }
     }
 
-    fun getLocalDrive(userEmail: String) {
+     fun getLocalDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteLocalDriveUseCase.execute(userEmail) }
                 .onSuccess {
@@ -88,7 +99,7 @@ class HomeViewModel(
     }
 
 
-    fun getTodayCharoDrive(userEmail: String) {
+     fun getTodayCharoDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteTodayCharoDrive.execute(userEmail) }
                 .onSuccess {
@@ -102,12 +113,13 @@ class HomeViewModel(
         }
     }
 
-    fun getTrendDrive(userEmail: String) {
+     fun getTrendDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteTrendDrive.execute(userEmail) }
-                .onSuccess {
+                .onSuccess { it ->
                     _trendDrive.value = it
                     Log.d("trend", "서버 통신 성공!")
+                    Log.d("trend", _theme.value.toString())
                 }
                 .onFailure {
                     it.printStackTrace()
@@ -118,5 +130,10 @@ class HomeViewModel(
         }
     }
 
+
+
 }
+
+
+
 

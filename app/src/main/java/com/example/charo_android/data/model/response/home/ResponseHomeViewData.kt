@@ -1,7 +1,7 @@
-package com.example.charo_android.data.model.response
+package com.example.charo_android.data.model.response.home
 
 data class ResponseHomeViewData(
-    val `data`: Data,
+    val data: Data,
     val msg: String,
     val success: Boolean
 ) {

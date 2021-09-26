@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.charo_android.R
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.response.ResponseMoreViewData
+import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.databinding.FragmentMoreThemeContentViewBinding
+import com.example.charo_android.presentation.ui.more.adapter.MoreThemeContentViewAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,7 +36,7 @@ class MoreThemeContentViewFragment(userId :String, identity :String, value :Stri
 
 
         initSpinner()
-        loadMoreThemeData()
+
 
         return root
     }
@@ -49,41 +50,12 @@ class MoreThemeContentViewFragment(userId :String, identity :String, value :Stri
     }
 
 
-    fun loadMoreThemeData(){
-        binding.recyclerviewMoreTheme.adapter = moreThemeContentViewAdapter
-        val call: Call<ResponseMoreViewData> = ApiService.moreViewService
-            .getPreview(userId = userId, identifier =  identity, value = value )
-        call.enqueue(object : Callback<ResponseMoreViewData>{
-            override fun onResponse(
-                call: Call<ResponseMoreViewData>,
-                response: Response<ResponseMoreViewData>
-            ) {
-                if (response.isSuccessful){
-                    val data = response.body()?.data?.drive
-                    val count = response.body()?.data?.totalCourse
-                    moreThemeContentViewAdapter.moreThemeData.addAll(data!!)
-                    binding.textMoreThemeCount.text = "전체 ${count}개 게시물"
-                    moreThemeContentViewAdapter.notifyDataSetChanged()
-                    Log.d("servers", "success")
-                }else{
-                    Log.d("servers", "failed")
-                    Log.d("servers", "${response.errorBody()}")
-                    Log.d("servers", "${response.message()}")
-                    Log.d("servers", "${response.code()}")
-                    Log.d("servers", "${response.raw().request.url}")
-                }
-
-            }
-
-            override fun onFailure(call: Call<ResponseMoreViewData>, t: Throwable) {
-
-            }
-        })
 
 
 
 
-    }
+
+
 
 
 

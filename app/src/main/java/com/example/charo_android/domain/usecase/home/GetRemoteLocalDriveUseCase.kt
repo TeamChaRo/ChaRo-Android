@@ -1,9 +1,9 @@
-package com.example.charo_android.domain.usecase
+package com.example.charo_android.domain.usecase.home
 
 
 
 
-import com.example.charo_android.data.mapper.mapperToLocalDrive
+import com.example.charo_android.data.mapper.HomeMapper.mapperToLocalDrive
 import com.example.charo_android.domain.model.home.LocalDrive
 import com.example.charo_android.domain.repository.HomeRepository
 

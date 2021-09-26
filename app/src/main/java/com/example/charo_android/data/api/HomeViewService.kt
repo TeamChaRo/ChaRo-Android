@@ -1,7 +1,6 @@
 package com.example.charo_android.data.api
 
-import com.example.charo_android.data.model.response.ResponseHomeViewData
-import retrofit2.Response
+import com.example.charo_android.data.model.response.home.ResponseHomeViewData
 import retrofit2.http.GET
 import retrofit2.http.Path
 

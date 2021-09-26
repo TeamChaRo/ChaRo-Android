@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.more
+package com.example.charo_android.presentation.ui.more.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.charo_android.R
-import com.example.charo_android.data.model.response.ResponseMoreViewData
+import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreThemeContentViewBinding
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 
@@ -20,17 +20,17 @@ class MoreThemeContentViewAdapter(val userId: String) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoreThemeContentViewAdapter.MoreThemeContentViewHolder {
+    ): MoreThemeContentViewHolder {
         val binding = ItemMoreThemeContentViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return MoreThemeContentViewAdapter.MoreThemeContentViewHolder(binding)
+        return MoreThemeContentViewHolder(binding)
     }
 
     override fun onBindViewHolder(
-        holder: MoreThemeContentViewAdapter.MoreThemeContentViewHolder,
+        holder: MoreThemeContentViewHolder,
         position: Int
     ) {
         holder.onBind(moreThemeData[position])
@@ -59,20 +59,6 @@ class MoreThemeContentViewAdapter(val userId: String) :
                         .into(imgMoreTheme)
                 }
                 textMoreThemeTitle.text = moreThemeInfo.title
-                if (moreThemeInfo.tags.count() == 2) {
-                    chipMoreTheme1.text = moreThemeInfo.tags[0]
-                    chipMoreTheme2.text = moreThemeInfo.tags[1]
-                    chipMoreTheme3.visibility = View.INVISIBLE
-
-                } else if (moreThemeInfo.tags.count() == 1) {
-                    chipMoreTheme1.text = moreThemeInfo.tags[0]
-                    chipMoreTheme2.visibility = View.INVISIBLE
-                    chipMoreTheme3.visibility = View.INVISIBLE
-                } else {
-                    chipMoreTheme1.text = moreThemeInfo.tags[0]
-                    chipMoreTheme2.text = moreThemeInfo.tags[1]
-                    chipMoreTheme3.text = moreThemeInfo.tags[2]
-                }
 
 
                 imgMoreThemeHeart.setImageResource(R.drawable.selector_home_heart)

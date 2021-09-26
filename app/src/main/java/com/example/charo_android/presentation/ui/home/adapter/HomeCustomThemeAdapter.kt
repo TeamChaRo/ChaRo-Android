@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.data.model.response.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
 import com.example.charo_android.domain.model.home.CustomThemeDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity

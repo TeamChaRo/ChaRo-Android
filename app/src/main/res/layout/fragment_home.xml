@@ -5,9 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="homeViewModel"
             type="com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel" />
+
+        <variable
+            name="sharedViewModel"
+            type="com.example.charo_android.presentation.ui.main.SharedViewModel"/>
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -94,8 +100,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:overScrollMode="always">
+            android:overScrollMode="always"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -143,8 +149,8 @@
                         android:layout_marginEnd="10dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive" />
 
                     <ImageView
@@ -185,11 +191,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="14dp"
-                        android:orientation="horizontal"
                         android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_home_theme" />
 
 
@@ -199,9 +205,9 @@
                     android:id="@+id/cl_home_hot_drive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="34dp"
                     app:layout_constraintTop_toBottomOf="@+id/cl_home_theme">
 
                     <TextView
@@ -240,10 +246,10 @@
                         android:id="@+id/recyclerview_home_hot_drive"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginBottom="16dp"
                         android:orientation="vertical"
-                        android:layout_marginStart="20dp"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -268,7 +274,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:text="@string/main_charo_night_dirve"
+                        android:text="@{sharedViewModel.customThemeTitle}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -298,9 +304,9 @@
                         android:id="@+id/recyclerview_home_night_drive"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginBottom="16dp"
-                        android:layout_marginStart="20dp"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -315,9 +321,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="33dp"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_home_night_drive"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/cl_home_night_drive">
 
                     <TextView
                         android:id="@+id/text_home_location_drive"
@@ -325,7 +331,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="19dp"
-                        android:text="@string/main_charo_locaion_dirve"
+                        android:text="@{sharedViewModel.localThemeTitle}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -355,9 +361,9 @@
                         android:id="@+id/recyclerview_home_location_drive"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginBottom="65dp"
-                        android:layout_marginStart="20dp"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
