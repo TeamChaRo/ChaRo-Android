@@ -15,9 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
@@ -97,7 +95,9 @@ class WriteMapFragment : Fragment() {
         Log.d("uuuwritemap", latitude.toString())
         Log.d("uuuwritemap", longitude.toString())
 
-        this.customToast()
+//        this.customToast()
+        blackOut()
+        Log.d("bbb",binding.etWriteMapEnd.text.toString())
 
 
 
@@ -437,10 +437,25 @@ class WriteMapFragment : Fragment() {
 
         binding.grayBackgroundForToast.visibility = View.VISIBLE
         CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
-        Handler().postDelayed({
-            binding.grayBackgroundForToast.startAnimation(fadeoutAnim)
+        //ToastMessage 사라질 때 회색화면도 같이 사라짐
+//        Handler().postDelayed({
+//            binding.grayBackgroundForToast.startAnimation(fadeoutAnim)
+//            binding.grayBackgroundForToast.visibility = View.GONE
+//        },3800L)
+        }
+
+    fun blackOut(){
+//        var isShowBlackout = binding.etWriteMapStart == null && binding.etWriteMapMid1 == null && binding.etWriteMapMid2 == null && binding.etWriteMapEnd == null
+        var isShowBlackout = sharedViewModel.locationName.value == "" || sharedViewModel.locationName.value == null
+
+        if(isShowBlackout){
+            binding.grayBackgroundForToast.visibility = View.VISIBLE
+            CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
+
+        }else{
             binding.grayBackgroundForToast.visibility = View.GONE
-        },3800L) }
+        }
+    }
 
     private fun btnWriteCompleteOnClickEvent() {
             binding.btnWriteComplete.setOnClickListener() {

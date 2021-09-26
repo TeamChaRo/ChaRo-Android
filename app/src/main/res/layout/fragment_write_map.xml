@@ -26,8 +26,8 @@
                 android:id="@+id/gray_background_for_toast"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#70000000"
-                android:visibility="gone"
+                android:background="#B3000000"
+                android:visibility="visible"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_write_search_map"
