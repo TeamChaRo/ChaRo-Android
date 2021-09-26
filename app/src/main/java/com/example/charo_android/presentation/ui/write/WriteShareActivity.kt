@@ -56,6 +56,10 @@ class WriteShareActivity : AppCompatActivity() {
 
     override fun onBackPressed(){
         supportFragmentManager.popBackStack();
+        sharedViewModel.latitude.value = 0.0
+        sharedViewModel.longitude.value = 0.0
+        sharedViewModel.locationName.value = ""
+        sharedViewModel.locationAddress.value = ""
     }
 
 }

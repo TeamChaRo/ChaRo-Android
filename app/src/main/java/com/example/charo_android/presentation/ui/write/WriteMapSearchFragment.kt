@@ -69,19 +69,32 @@ class WriteMapSearchFragment : Fragment() {
         Log.d("uuuwritesear", nickName)
         Log.d("uuuwritesear", locationFlag)
 
-        var text: String = when (locationFlag) {
+
+        when (locationFlag) {
             "1" -> {
-                "출발지로 설정"
+                sharedViewModel.resultLocation.value = "출발지로 설정"
+                when (sharedViewModel.startAddress.value){
+                    "" -> { binding.etWriteMapSearchStart.hint = "출발지를 입력해주세요"}
+                    else -> {binding.etWriteMapSearchStart.setText(sharedViewModel.startAddress.value)}
+                }
             }
             "4" -> {
-                "도착지로 설정"
+                sharedViewModel.resultLocation.value = "도착지로 설정"
+                when (sharedViewModel.endAddress.value){
+                    "" -> { binding.etWriteMapSearchStart.hint = "도착지를 입력해주세요"}
+                    else -> {binding.etWriteMapSearchStart.setText(sharedViewModel.endAddress.value)}
+                }
             }
             else -> {
-                "경유지로 설정"
+                sharedViewModel.resultLocation.value = "경유지로 설정"
+                when (sharedViewModel.mid1Address.value){
+                    "" -> { binding.etWriteMapSearchStart.hint = "경유지를 입력해주세요"}
+                    else -> {binding.etWriteMapSearchStart.setText(sharedViewModel.mid1Address.value)}
+                }
             }
         }
-        binding.etWriteMapSearchStart.hint = text
-        sharedViewModel.resultLocation.value = text
+//        binding.etWriteMapSearchStart.hint = text
+//        sharedViewModel.resultLocation.value = text
 
         binding.imgWriteMapSearchBack.setOnClickListener {
             writeShareActivity?.onBackPressed()

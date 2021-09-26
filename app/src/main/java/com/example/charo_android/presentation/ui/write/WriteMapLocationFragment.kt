@@ -206,10 +206,26 @@ class WriteMapLocationFragment : Fragment() {
             lat = tMapView.centerPoint.latitude
             lon = tMapView.centerPoint.longitude
 
-            sharedViewModel.latitude.value = tMapView.centerPoint.latitude
-            sharedViewModel.longitude.value = tMapView.centerPoint.longitude
-            sharedViewModel.locationName.value = locationName
-            sharedViewModel.locationAddress.value = locationAddress
+            when(sharedViewModel.locationFlag.value){
+                "1" -> {
+                    sharedViewModel.startLat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.startLong.value = tMapView.centerPoint.longitude
+                    sharedViewModel.startAddress.value = locationName
+//                    sharedViewModel.locationAddress.value = locationAddress
+                }
+                "4" -> {
+                    sharedViewModel.endLat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.endLong.value = tMapView.centerPoint.longitude
+                    sharedViewModel.endAddress.value = locationName
+//                    sharedViewModel.locationAddress.value = locationAddress
+                }
+                else -> {
+                    sharedViewModel.mid1Lat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.mid1Long.value = tMapView.centerPoint.longitude
+                    sharedViewModel.mid1Address.value = locationName
+//                    sharedViewModel.locationAddress.value = locationAddress
+                }
+            }
 
             Log.d("test lat", lat.toString())
             Log.d("test lon", lon.toString())
