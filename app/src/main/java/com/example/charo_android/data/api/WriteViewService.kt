@@ -10,17 +10,17 @@ interface WriteViewService {
     @Multipart
     @POST("/post/write")
     fun writePost(
-        @Part("course") course: RequestWriteData.Course,
-        @Part("courseDesc") courseDesc: String,
-        @Part("isParking") isParking: Boolean,
-        @Part("parkingDesc") parkingDesc: String,
+        @Part("userEmail") userEmail: String,
+        @Part("title") title: String,
         @Part("province") province: String,
         @Part("region") region: String,
-        @Part("theme") theme: List<String>,
-        @Part("title") title: String,
-        @Part("userEmail") userEmail: String,
-        @Part("warning") warning: List<Boolean>,
-        @Part image: List<MultipartBody.Part>
+        @Part("warning") warning: ArrayList<String>?,
+        @Part("theme") theme: ArrayList<String>?,
+        @Part("isParking") isParking: Boolean?,
+        @Part("parkingDesc") parkingDesc: String,
+        @Part("courseDesc") courseDesc: String,
+        @Part("course") course: Any?, //RequestWriteData.Course
+        @Part image: ArrayList<MultipartBody.Part>?
     ): Call<ResponseWriteData>
 }
 

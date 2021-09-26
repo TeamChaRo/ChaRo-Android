@@ -520,6 +520,20 @@ class WriteFragment : Fragment() {
             }
             sharedViewModel.warning.value = warningList
 
+            //테마
+            val themeList: ArrayList<String> = ArrayList()
+            if(binding.btnWriteTheme1.text.toString() != "테마1"){
+                themeList.add(binding.btnWriteTheme1.text.toString())
+            }
+            if(binding.btnWriteTheme2.text.toString() != "테마2"){
+                themeList.add(binding.btnWriteTheme2.text.toString())
+            }
+            if(binding.btnWriteTheme3.text.toString() != "테마3"){
+                themeList.add(binding.btnWriteTheme3.text.toString())
+            }
+            sharedViewModel.theme.value = themeList
+
+
             //제목
             sharedViewModel.title.value = binding.etWriteTitle.text.toString()
 
