@@ -3,6 +3,7 @@ package com.example.charo_android.presentation.ui.write
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -272,6 +273,8 @@ class WriteFragment : Fragment() {
                 .setTitle("지역")
                 .setNeutralButton("취소") { dialog, which ->
                     binding.btnWriteRegion.text = resources.getString(R.string.region)
+                    binding.btnWriteLocation.text = "시 단위"
+                    binding.btnWriteLocation.isSelected = false
                     it.isSelected = false
                 }
                 .setPositiveButton("확인") { dialog, which ->
@@ -283,9 +286,14 @@ class WriteFragment : Fragment() {
                 // Single-choice items (initialized with checked item)
                 .setSingleChoiceItems(itemProvince, checkedItem) { dialog, which ->
                     //which : index
-                    //테마 고르면 텍스트 변경
                     binding.btnWriteRegion.text = itemProvince[which]
+                    if(itemProvince[which] !=  sharedViewModel.province.value){
+                        binding.btnWriteLocation.text = "시 단위"
+                        binding.btnWriteLocation.isSelected = false
+                    }
+
                     sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
+
                 }
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
@@ -300,8 +308,7 @@ class WriteFragment : Fragment() {
                     it.isSelected = false
                 }
                 .setPositiveButton("확인") { dialog, which ->
-                    if (binding.btnWriteLocation.text.toString() == resources.getString(R.string.city) ||
-                        binding.btnWriteLocation.text.toString() == "선택안함"
+                    if (binding.btnWriteLocation.text.toString() == resources.getString(R.string.city)
                     ) {
                         it.isSelected = false
                     }
@@ -321,26 +328,46 @@ class WriteFragment : Fragment() {
                     else itemJunNam, checkedItem
                 ) { dialog, which ->
                     //which : index
-                    //테마 고르면 텍스트 변경
-                    if (binding.btnWriteRegion.text == "특별시") binding.btnWriteLocation.text =
-                        itemSpecial[which]
-                    else if (binding.btnWriteRegion.text == "광역시") binding.btnWriteLocation.text =
-                        itemMetroPolitan[which]
-                    else if (binding.btnWriteRegion.text == "경기도") binding.btnWriteLocation.text =
-                        itemGyounGi[which]
-                    else if (binding.btnWriteRegion.text == "강원도") binding.btnWriteLocation.text =
-                        itemGangWon[which]
-                    else if (binding.btnWriteRegion.text == "충청남도") binding.btnWriteLocation.text =
-                        itemChoongNam[which]
-                    else if (binding.btnWriteRegion.text == "충청북도") binding.btnWriteLocation.text =
-                        itemChoongBuk[which]
-                    else if (binding.btnWriteRegion.text == "경상북도") binding.btnWriteLocation.text =
-                        itemGyungBuk[which]
-                    else if (binding.btnWriteRegion.text == "경상남도") binding.btnWriteLocation.text =
-                        itemGyungNam[which]
-                    else if (binding.btnWriteRegion.text == "전라북도") binding.btnWriteLocation.text =
-                        itemJunBuk[which]
-                    else binding.btnWriteLocation.text = itemJunNam[which]
+                    fun setRegionForProvince(province:Array<String>){
+                        if(which == -1){
+                            binding.btnWriteLocation.text = province[0]
+                        }else{
+                            binding.btnWriteLocation.text = province[which]
+                        }
+                    }
+
+                    when(binding.btnWriteRegion.text){
+                        "특별시" -> {
+                            setRegionForProvince(itemSpecial)
+                        }
+                        "광역시" -> {
+                            setRegionForProvince(itemMetroPolitan)
+                        }
+                        "경기도" -> {
+                            setRegionForProvince(itemGyounGi)
+                        }
+                        "강원도" -> {
+                            setRegionForProvince(itemGangWon)
+                        }
+                        "충청남도" -> {
+                            setRegionForProvince(itemChoongNam)
+                        }
+                        "충청북도" -> {
+                            setRegionForProvince(itemChoongBuk)
+                        }
+                        "경상북도" -> {
+                            setRegionForProvince(itemGyungBuk)
+                        }
+                        "경상남도" -> {
+                            setRegionForProvince(itemGyungNam)
+                        }
+                        "전라북도" -> {
+                            setRegionForProvince(itemJunBuk)
+                        }
+                        else -> {
+                            setRegionForProvince(itemJunNam)
+                        }
+                    }
 
                     sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
 
