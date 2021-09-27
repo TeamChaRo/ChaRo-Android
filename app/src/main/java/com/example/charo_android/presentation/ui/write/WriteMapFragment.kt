@@ -2,6 +2,7 @@ package com.example.charo_android.presentation.ui.write
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModelProvider
@@ -22,11 +23,16 @@ import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.response.ResponseWriteData
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.util.CustomToast
 import com.skt.Tmap.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -580,6 +586,11 @@ class WriteMapFragment : Fragment() {
                         ) {
 ////                            Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
                         } else {
+//                            var theme: ArrayList<String> = arrayListOf<String>("sea")
+
+                            var theme: ArrayList<MultipartBody.Part> =
+                                arrayListOf<MultipartBody.Part>(MultipartBody.Part.createFormData("theme","sea"))
+
                             //서버에 값 보내기
                             Log.e(
                                 "sharedViewModel Data",
@@ -603,7 +614,7 @@ class WriteMapFragment : Fragment() {
                             )
                             Log.e(
                                 "sharedViewModel Data",
-                                sharedViewModel.theme.value.toString()
+                                theme.toString()
                             )
                             Log.e(
                                 "sharedViewModel Data",
@@ -626,18 +637,24 @@ class WriteMapFragment : Fragment() {
                                 sharedViewModel.image.value.toString()
                             )
 
+                            val userEmail = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.userEmail.value.toString())
+                            val title = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.title.value.toString())
+                            val province = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.province.value.toString())
+                            val region = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.region.value.toString())
+                            val parkingDesc = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.parkingDesc.value.toString())
+                            val courseDesc = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.courseDesc.value.toString())
 
                             val call: Call<ResponseWriteData> =
                                 ApiService.writeViewService.writePost(
-                                    sharedViewModel.userEmail.value.toString(),
-                                    sharedViewModel.title.value.toString(),
-                                    sharedViewModel.province.value.toString(),
-                                    sharedViewModel.region.value.toString(),
+                                    userEmail,
+                                    title,
+                                    province,
+                                    region,
                                     sharedViewModel.warning.value,
-                                    sharedViewModel.theme.value,
+                                    theme,
                                     sharedViewModel.isParking.value,
-                                    sharedViewModel.parkingDesc.value.toString(),
-                                    sharedViewModel.courseDesc.value.toString(),
+                                    parkingDesc,
+                                    courseDesc,
                                     sharedViewModel.course.value,
                                     sharedViewModel.image.value,
                                 )
@@ -653,7 +670,12 @@ class WriteMapFragment : Fragment() {
                                         //sharedViewMoel 값 초기화(다 지우기)
                                         sharedViewModel.initData()
 
+                                        Log.e("server connect", "success!!!!!!")
                                         //상세보기로 이동
+                                        activity?.let{
+                                            val intent = Intent(context, DetailActivity::class.java)
+                                            startActivity(intent)
+                                        }
 
                                     }
                                 }

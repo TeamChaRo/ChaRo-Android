@@ -3,6 +3,7 @@ package com.example.charo_android.data.api
 import com.example.charo_android.data.model.request.RequestWriteData
 import com.example.charo_android.data.model.response.ResponseWriteData
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -10,15 +11,15 @@ interface WriteViewService {
     @Multipart
     @POST("/post/write")
     fun writePost(
-        @Part("userEmail") userEmail: String,
-        @Part("title") title: String,
-        @Part("province") province: String,
-        @Part("region") region: String,
-        @Part("warning") warning: ArrayList<String>?,
-        @Part("theme") theme: ArrayList<String>?,
-        @Part("isParking") isParking: Boolean?,
-        @Part("parkingDesc") parkingDesc: String,
-        @Part("courseDesc") courseDesc: String,
+        @Part("userEmail") userEmail: RequestBody, //String
+        @Part("title") title: RequestBody,  //String
+        @Part("province") province: RequestBody,  //String
+        @Part("region") region: RequestBody,  //String
+        @Part warning: ArrayList<MultipartBody.Part>?,  //ArrayList<String>?
+        @Part theme: ArrayList<MultipartBody.Part>?,  //ArrayList<String>?
+        @Part("isParking") isParking: Boolean?,  //Boolean
+        @Part("parkingDesc") parkingDesc: RequestBody,  //String
+        @Part("courseDesc") courseDesc: RequestBody,  //String
         @Part("course") course: Any?, //RequestWriteData.Course
         @Part image: ArrayList<MultipartBody.Part>?
     ): Call<ResponseWriteData>

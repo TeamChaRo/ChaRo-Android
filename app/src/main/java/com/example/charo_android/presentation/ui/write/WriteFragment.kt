@@ -531,19 +531,19 @@ class WriteFragment : Fragment() {
 
         binding.btnWriteBottomNext.setOnClickListener {
             //주의사항
-            val warningList: ArrayList<String> = ArrayList()
+            val warningList: ArrayList<MultipartBody.Part> = ArrayList()
 
             if(binding.btnWriteCautionHighway.isSelected) {
-                warningList.add("highway")
+                warningList.add(MultipartBody.Part.createFormData("warning","highway"))
             }
             if(binding.btnWriteCautionMoun.isSelected){
-                warningList.add("mountainRoad")
+                warningList.add(MultipartBody.Part.createFormData("warning","mountainRoad"))
             }
             if(binding.btnWriteCautionDiffi.isSelected){
-                warningList.add("")
+                warningList.add(MultipartBody.Part.createFormData("warning",""))
             }
             if(binding.btnWriteCautionPeople.isSelected){
-                warningList.add("p")
+                warningList.add(MultipartBody.Part.createFormData("warning","p"))
             }
             sharedViewModel.warning.value = warningList
 
@@ -638,7 +638,7 @@ class WriteFragment : Fragment() {
                                 val file = File(writeAdapter.imgList[index].imgUri.path)
                                 val MEDIA_TYPE_IMAGE = "image/*".toMediaTypeOrNull()
                                 val surveyBody = RequestBody.create(MEDIA_TYPE_IMAGE, file)
-                                image.add(MultipartBody.Part.createFormData("image", file.name, surveyBody))
+                                image.add(MultipartBody.Part.createFormData("image", "file.png", surveyBody))
                             }
                             sharedViewModel.image.value = image
 
@@ -817,22 +817,22 @@ class WriteFragment : Fragment() {
         }
 
         //주의사항
-        sharedViewModel.warning.value?.forEach { warning ->
-            when (warning) {
-                "highway" -> {
-                    binding.btnWriteCautionHighway.isSelected = true
-                }
-                "mountainRoad" -> {
-                    binding.btnWriteCautionMoun.isSelected = true
-                }
-                "" -> {
-                    binding.btnWriteCautionDiffi.isSelected = true
-                }
-                "p" -> {
-                    binding.btnWriteCautionPeople.isSelected = true
-                }
-            }
-        }
+//        sharedViewModel.warning.value?.forEach { warning ->
+//            when (warning) {
+//                ("warning","highway") -> {
+//                    binding.btnWriteCautionHighway.isSelected = true
+//                }
+//                "mountainRoad" -> {
+//                    binding.btnWriteCautionMoun.isSelected = true
+//                }
+//                "" -> {
+//                    binding.btnWriteCautionDiffi.isSelected = true
+//                }
+//                "p" -> {
+//                    binding.btnWriteCautionPeople.isSelected = true
+//                }
+//            }
+//        }
     }
 
 }
