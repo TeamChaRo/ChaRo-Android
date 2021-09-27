@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
+    id("kotlin-android")
 //    id("dagger.hilt.android.plugin")
   //  id("kotlin-parcelize")
 }
@@ -97,6 +98,7 @@ dependencies {
     kapt(KaptDependencies.glideCompiler)
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
 // Navigation
     implementation(AndroidXDependencies.navigation)
     implementation(AndroidXDependencies.navigationFragment)

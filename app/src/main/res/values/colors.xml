@@ -31,4 +31,9 @@
     <color name="iris_80">#7879F1</color>
     <color name="iris_60">#A5A6F6</color>
     <color name="gray_blue">#d3e5ff</color>
+    <color name="blue_sign_up">#9dc3fd</color>
+    <color name="red_sign_up">#ff826e</color>
+
+
+
 </resources>

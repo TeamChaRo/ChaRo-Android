@@ -1,16 +1,10 @@
 package com.example.charo_android.presentation.ui.home.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.R
-import com.example.charo_android.data.model.response.ResponseHomeViewData
 import com.example.charo_android.databinding.ItemHomeTodayDriveBinding
 import com.example.charo_android.domain.model.home.TodayCharoDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity

@@ -2,6 +2,7 @@ package com.example.charo_android.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 
 import android.view.View
 
@@ -13,25 +14,33 @@ import com.example.charo_android.R
 import com.example.charo_android.presentation.ui.alarm.AlarmActivity
 
 import com.example.charo_android.databinding.FragmentHomeBinding
+import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.home.adapter.*
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
 import com.example.charo_android.presentation.ui.main.MainActivity
+import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
+import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.ThemeUtil
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
+    private val sharedViewModel : SharedViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
-
+    private var theme = ThemeUtil()
+    private var location = LocationUtil()
     private lateinit var homeViewPagerAdapter: HomeViewPagerAdapter
     private lateinit var homeTodayDriveAdapter: HomeTodayDriveAdapter
     private lateinit var homeThemeAdapter: HomeThemeAdapter
     private lateinit var homeHotDriveAdapter: HomeTrendDriveAdapter
     private lateinit var homeCustomThemeAdapter: HomeCustomThemeAdapter
     private lateinit var homeLocalDriveAdapter: HomeLocalDriveAdapter
+
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
 
@@ -43,13 +52,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         goSearchView(userId, nickName)
         goAlarm()
         initToolBar()
-        replaceMoreViewFragment(userId)
+        replaceMoreViewFragment(Hidden.userId)
         initBanner()
         initTrendDrive()
         initLocalDrive()
         initTodayCharoDrive()
         initCustomThemeDrive()
-
+        initHomeTitle()
 
     }
 
@@ -67,6 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.banner.observe(viewLifecycleOwner) {
             homeViewPagerAdapter.setHomeBanner(it)
         }
+
     }
 
     private fun initTrendDrive(){
@@ -105,6 +115,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
+    private fun initHomeTitle(){
+        sharedViewModel.getHomeTitle("and@naver.com")
+       binding.lifecycleOwner = viewLifecycleOwner
+        binding.sharedViewModel = sharedViewModel
+    }
+
 
 
     private fun goSearchView(userId: String, nickName: String) {
@@ -128,12 +144,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun replaceMoreViewFragment(userId: String) {
         binding.textHomeHotDrivePlus.setOnClickListener {
-            val result = binding.textHomeHotDrive.text
-            val num = 0
-            setFragmentResult(
-                "title",
-                bundleOf("title" to result, "num" to num, "userId" to userId)
-            )
+            sharedViewModel.num.value = 0
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
@@ -142,12 +153,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
         binding.textHomeNightDrivePlus.setOnClickListener {
-            val result = binding.textHomeNightDrive.text
-            val num = 1
-            setFragmentResult(
-                "title",
-                bundleOf("title" to result, "num" to num, "userId" to userId)
-            )
+            sharedViewModel.num.value = 1
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
@@ -156,12 +162,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
         binding.textHomeLocationDrivePlus.setOnClickListener {
-            val result = binding.textHomeLocationDrive.text
-            val num = 2
-            setFragmentResult(
-                "title",
-                bundleOf("title" to result, "num" to num, "userId" to userId)
-            )
+            sharedViewModel.num.value = 2
+
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())

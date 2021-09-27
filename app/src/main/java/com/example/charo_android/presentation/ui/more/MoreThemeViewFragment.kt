@@ -9,6 +9,7 @@ import com.example.charo_android.R
 import com.example.charo_android.data.model.request.RequestThemeViewData
 import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
 import com.example.charo_android.presentation.ui.home.HomeFragment
+import com.example.charo_android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

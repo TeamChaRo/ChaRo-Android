@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeViewpagerBinding
-import com.example.charo_android.data.model.entity.BannerEntity
 import com.example.charo_android.domain.model.home.Banner
 
 class HomeViewPagerAdapter() :
