@@ -123,5 +123,8 @@
     <string name="email_id">이메일 아이디</string>
     <string name="email_answer">이용할 이메일을 입력해주세요</string>
     <string name="email_hint">ex)charorong@gmail.com</string>
+    <string name="email_number">이메일 인증번호</string>
+    <string name="email_number_input">이메일로 보내드린 인증번호를 입력해주세요.</string>
+    <string name="resend">재전송</string>
 
 </resources>

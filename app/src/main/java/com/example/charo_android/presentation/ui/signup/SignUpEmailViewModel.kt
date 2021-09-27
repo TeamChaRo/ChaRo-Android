@@ -10,11 +10,11 @@ import com.example.charo_android.domain.model.signup.EmailCheck
 import com.example.charo_android.domain.usecase.GetRemoteSignUpEmailCheckUseCase
 import kotlinx.coroutines.launch
 
-class SignUpViewModel(
+class SignUpEmailViewModel(
     private val getRemoteSignUpEmailCheckUseCase: GetRemoteSignUpEmailCheckUseCase
 ) : ViewModel() {
 
-    private val _success = MutableLiveData<Boolean>()
+    private val _success = MutableLiveData<Boolean>(false)
     val success: LiveData<Boolean>
         get() = _success
 
@@ -27,7 +27,6 @@ class SignUpViewModel(
                     Log.d("signUp", "서버 통신 성공!")
                     Log.d("signUp", it.toString())
                 }
-
                 .onFailure {
                     it.printStackTrace()
                     Log.d("signUp", "서버 통신 실패")
