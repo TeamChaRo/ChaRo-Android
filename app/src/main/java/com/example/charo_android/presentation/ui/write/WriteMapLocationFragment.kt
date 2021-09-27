@@ -1,24 +1,31 @@
 package com.example.charo_android.presentation.ui.write
 
-import android.content.Intent
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityWriteMapLocationBinding
+import com.example.charo_android.databinding.FragmentWriteMapLocationBinding
 import com.example.charo_android.hidden.Hidden
-import com.skt.Tmap.*
+import com.skt.Tmap.TMapAddressInfo
+import com.skt.Tmap.TMapData
+import com.skt.Tmap.TMapMarkerItem
+import com.skt.Tmap.TMapView
 
-class WriteMapLocationActivity : AppCompatActivity() {
+class WriteMapLocationFragment : Fragment() {
 
-    private lateinit var binding: ActivityWriteMapLocationBinding
-    private val viewModel: WriteViewModel by viewModels()
     private lateinit var locationAddress: String
     private lateinit var locationName: String
     private lateinit var locationFlag: String
+    private lateinit var resultLocation: String
     private lateinit var address: TMapAddressInfo
     private lateinit var userId: String
     private lateinit var nickName: String
@@ -27,35 +34,61 @@ class WriteMapLocationActivity : AppCompatActivity() {
 
     val markerCount = 1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityWriteMapLocationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    companion object {
+        fun newInstance() = WriteMapLocationFragment()
+    }
 
-        userId = intent.getStringExtra("userId").toString()
-        nickName = intent.getStringExtra("nickName").toString()
+    private var _binding: FragmentWriteMapLocationBinding? = null
 
-        locationFlag = intent.getStringExtra("locationFlag").toString()
+    private val binding get() = _binding!!
 
-        binding.imgWriteMapLocationBack.setOnClickListener {
-            onBackPressed()
+    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                WriteSharedViewModel() as T
         }
+    }
 
+    var writeShareActivity: WriteShareActivity? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        writeShareActivity = context as WriteShareActivity
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        var resultLocation = intent.getStringExtra("text").toString()
+        _binding = FragmentWriteMapLocationBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        Log.d("writeMapLocationActivity", intent.getStringExtra("text").toString())
+        Log.d("Created WriteMapLocationFragment", "jjjjjjjj")
+
+        userId = sharedViewModel.userId.value.toString()
+        nickName = sharedViewModel.nickName.value.toString()
+        locationFlag = sharedViewModel.locationFlag.value.toString()
+        locationName = sharedViewModel.locationName.value.toString()
+        locationAddress = sharedViewModel.locationAddress.value.toString()
+        resultLocation = sharedViewModel.resultLocation.value.toString()
+
+        Log.d("uuuwriteloca", userId)
+        Log.d("uuuwriteloca", nickName)
+        Log.d("uuuwriteloca", locationFlag)
+        Log.d("uuuwritelocalocationnmae", locationName)
+        Log.d("uuuwriteloca", locationAddress)
+
         binding.btnSetLocation.text = resultLocation
 
-        val tMapView = TMapView(this@WriteMapLocationActivity)
+        binding.imgWriteMapLocationBack.setOnClickListener {
+            writeShareActivity?.onBackPressed()
+        }
+
+        val tMapView = TMapView(context)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteMapLocationView.addView(tMapView)
-
-        locationName = intent.getStringExtra("locationName").toString()
-        locationAddress = intent.getStringExtra("locationAddress").toString()
 
         val tmapdata = TMapData()
         if (locationFlag == "1") {
@@ -150,7 +183,7 @@ class WriteMapLocationActivity : AppCompatActivity() {
 //                        "A00"
 //                    ).strFullAddress
 //                ) { poiItem ->
-//                    if(poiItem.size != 0) {
+//                    if (poiItem.size != 0) {
 //                        locationAddress = poiItem[0].name
 //                    }
 //                }
@@ -173,22 +206,36 @@ class WriteMapLocationActivity : AppCompatActivity() {
             lat = tMapView.centerPoint.latitude
             lon = tMapView.centerPoint.longitude
 
+            when(sharedViewModel.locationFlag.value){
+                "1" -> {
+                    sharedViewModel.startLat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.startLong.value = tMapView.centerPoint.longitude
+                    sharedViewModel.startAddress.value = locationName
+//                    sharedViewModel.locationAddress.value = locationAddress
+                }
+                "4" -> {
+                    sharedViewModel.endLat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.endLong.value = tMapView.centerPoint.longitude
+                    sharedViewModel.endAddress.value = locationName
+//                    sharedViewModel.locationAddress.value = locationAddress
+                }
+                else -> {
+                    sharedViewModel.mid1Lat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.mid1Long.value = tMapView.centerPoint.longitude
+                    sharedViewModel.mid1Address.value = locationName
+//                    sharedViewModel.locationAddress.value = locationAddress
+                }
+            }
+
             Log.d("test lat", lat.toString())
             Log.d("test lon", lon.toString())
 
-            val intent = Intent(this, WriteMapActivity::class.java)
-            intent.putExtra("textview", locationAddress)
-                .putExtra("pointLong", lon)
-                .putExtra("pointLat", lat)
-                .putExtra("locationFlag", locationFlag)
-                .putExtra("userId", userId)
-                .putExtra("nickName",nickName)
+            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance(), "writeMap");
 
-            startActivity(intent)
         }
 
-    }
-
+            return root
+        }
     private fun setLocationInfo() {
         binding.textLocationAddress.text = locationAddress
         binding.textLocationName.text = locationName

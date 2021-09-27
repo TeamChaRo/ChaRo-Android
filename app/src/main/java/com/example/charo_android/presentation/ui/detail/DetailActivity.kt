@@ -1,6 +1,5 @@
 package com.example.charo_android.presentation.ui.detail
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -28,8 +27,8 @@ import com.example.charo_android.data.model.response.ResponseDetailLikeData
 import com.example.charo_android.data.model.response.ResponseDetailSaveData
 import com.example.charo_android.databinding.ActivityDetailBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.write.WriteActivity
-import com.example.charo_android.presentation.ui.write.WriteMapActivity
+import com.example.charo_android.presentation.ui.detail.DetailViewpagerImageAdapter
+import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.skt.Tmap.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -471,12 +470,12 @@ class DetailActivity : AppCompatActivity() {
             }
 
             binding.tvDetailMenuBoardUpdate.setOnClickListener() {
-                val intent = Intent(applicationContext, WriteActivity::class.java)
+                val intent = Intent(applicationContext, WriteShareActivity::class.java)
                 ContextCompat.startActivity(applicationContext, intent, null)
             }
             binding.tvDetailMenuMapUpdate.setOnClickListener() {
-                val intent = Intent(applicationContext, WriteMapActivity::class.java)
-                ContextCompat.startActivity(applicationContext, intent, null)
+//                val intent = Intent(applicationContext, WriteMapActivity::class.java)
+//                ContextCompat.startActivity(applicationContext, intent, null)
             }
             binding.tvDetailMenuDelete.setOnClickListener() {
                 Toast.makeText(applicationContext, "삭제되었습니다.", Toast.LENGTH_LONG).show()

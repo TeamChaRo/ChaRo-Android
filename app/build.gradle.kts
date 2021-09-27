@@ -75,6 +75,9 @@ dependencies {
     implementation(files("libs/com.skt.Tmap_1.67.jar"))
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     kapt(KaptDependencies.hilt)
 
 // DataStore
