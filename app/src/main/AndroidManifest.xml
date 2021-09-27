@@ -26,15 +26,16 @@
         <activity android:name=".presentation.ui.write.WriteShareActivity" />
         <activity android:name="com.example.charo_android.presentation.ui.alarm.AlarmActivity"/>
         <activity android:name="com.example.charo_android.presentation.ui.main.SplashActivity">
-        <activity
-            android:name=".presentation.ui.signup.SignUpActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.ui.signup.SignUpActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name="com.example.charo_android.presentation.ui.onBoarding.OnBoardingActivity"/>
         <activity android:name="com.example.charo_android.presentation.ui.search.ResultSearchActivity" />
