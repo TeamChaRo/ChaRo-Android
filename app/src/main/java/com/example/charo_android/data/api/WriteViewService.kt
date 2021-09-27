@@ -3,35 +3,25 @@ package com.example.charo_android.data.api
 import com.example.charo_android.data.model.request.RequestWriteData
 import com.example.charo_android.data.model.response.ResponseWriteData
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface WriteViewService {
     @Multipart
-    @POST("/writePost")
+    @POST("/post/write")
     fun writePost(
-//        @PartMap request: RequestBody,
-//        @Part course: RequestWriteData.Course,
-//        @Part courseDesc: String,
-//        @Part isParking: Boolean,
-//        @Part parkingDesc: String,
-//        @Part province: String,
-//        @Part region: String,
-//        @Part theme: List<String>,
-//        @Part title: String,
-//        @Part userId: String,
-//        @Part warning: List<Boolean>,
-        @Part course: RequestWriteData.Course,
-        @Part courseDesc: String,
-        @Part isParking: Boolean,
-        @Part parkingDesc: String,
-        @Part province: String,
-        @Part region: String,
-        @Part theme: List<String>,
-        @Part title: String,
-        @Part userId: String,
-        @Part warning: List<Boolean>,
-        @Part files: List<MultipartBody.Part>
+        @Part("userEmail") userEmail: RequestBody, //String
+        @Part("title") title: RequestBody,  //String
+        @Part("province") province: RequestBody,  //String
+        @Part("region") region: RequestBody,  //String
+        @Part warning: ArrayList<MultipartBody.Part>?,  //ArrayList<String>?
+        @Part theme: ArrayList<MultipartBody.Part>?,  //ArrayList<String>?
+        @Part("isParking") isParking: Boolean?,  //Boolean
+        @Part("parkingDesc") parkingDesc: RequestBody,  //String
+        @Part("courseDesc") courseDesc: RequestBody,  //String
+        @Part("course") course: Any?, //RequestWriteData.Course
+        @Part image: ArrayList<MultipartBody.Part>?
     ): Call<ResponseWriteData>
 }
 

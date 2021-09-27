@@ -9,8 +9,8 @@ import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
-import com.example.charo_android.presentation.ui.write.WriteActivity
 import com.example.charo_android.presentation.ui.write.WriteFragment
+import com.example.charo_android.presentation.ui.write.WriteShareActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
-                        startActivityWrite()
-//                        replaceWriteFragment()
+                        startActivityWriteShare()
+//                        replaceWriteFragment(userId,nickName)
 //                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             binding.btnWrite.setOnClickListener {
-                startActivityWrite()
+                startActivityWriteShare()
             }
         }
 
@@ -88,11 +88,11 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(charoFragment,userId,nickName)
     }
 
-
-    fun startActivityWrite() {
-        val intent = Intent(this@MainActivity, WriteActivity::class.java)
+    fun startActivityWriteShare() {
+        val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
         intent.putExtra("userId", userEmail)
         intent.putExtra("nickname", nickName)
         startActivity(intent)
     }
+
 }
