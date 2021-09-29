@@ -33,15 +33,6 @@ class CharoAdapter(
 
             binding.root.setOnClickListener { itemClick(drive) }
         }
-
-//        fun startDetailView() {
-//            binding.root.setOnClickListener {
-//                val intent = Intent(binding.root.context, DetailActivity::class.java)
-//                intent.putExtra("postId", itemList[bindingAdapterPosition]!!.postId)
-//                intent.putExtra("title", itemList[bindingAdapterPosition]!!.title)
-//                intent.putExtra("date", "${itemList[bindingAdapterPosition]!!.year}년 ${itemList[bindingAdapterPosition]!!.month}월 ${itemList[bindingAdapterPosition]!!.day}일")
-//            }
-//        }
     }
 
     inner class LoadingViewHolder(
@@ -78,15 +69,6 @@ class CharoAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MyCharoViewHolder) {
             holder.onBind(itemList[position]!!)
-
-//            holder.binding.root.setOnClickListener() {
-//                val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-//                intent.putExtra("userId", userId)
-//                intent.putExtra("postId", itemList[position]!!.postId)
-//
-//                ContextCompat.startActivity(holder.itemView.context, intent, null)
-//                // startActivity 바꿔라.
-//            }
         }
     }
 

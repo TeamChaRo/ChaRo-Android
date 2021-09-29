@@ -34,6 +34,8 @@ class MyCharoFragment : Fragment() {
             intent.putExtra("postId", it!!.postId)
             intent.putExtra("title", it.title)
             intent.putExtra("date", "${it.year}년 ${it.month}월 ${it.day}일")
+            intent.putExtra("imageUrl", it.image)
+            intent.putExtra("region", it.region)
             startActivity(intent)
         }
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_charo, container, false)
