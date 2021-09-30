@@ -153,7 +153,7 @@ class WriteMapActivity : AppCompatActivity() {
         val tMapView = TMapView(this@WriteMapActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+        tMapView.setSKTMapApiKey(Hidden.tMapApiKey)
         binding.clWriteTmapView.addView(tMapView)
 
         fillTextView(locationFlag, textview, latitude, longitude, tMapView)

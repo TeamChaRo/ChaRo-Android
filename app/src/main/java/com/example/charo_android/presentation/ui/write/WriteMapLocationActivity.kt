@@ -51,7 +51,7 @@ class WriteMapLocationActivity : AppCompatActivity() {
         val tMapView = TMapView(this@WriteMapLocationActivity)
 
         /*************커밋 푸시 머지할 때 키 삭제************/
-        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+        tMapView.setSKTMapApiKey(Hidden.tMapApiKey)
         binding.clWriteMapLocationView.addView(tMapView)
 
         locationName = intent.getStringExtra("locationName").toString()
