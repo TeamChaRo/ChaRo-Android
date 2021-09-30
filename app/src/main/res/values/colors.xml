@@ -33,7 +33,6 @@
     <color name="gray_blue">#d3e5ff</color>
     <color name="blue_sign_up">#9dc3fd</color>
     <color name="red_sign_up">#ff826e</color>
-
-
-
+    <color name="checked_box">#6ca6ff</color>
+    <color name="unchecked_box">#acb5bd</color>
 </resources>

@@ -13,7 +13,8 @@ import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 
 class CharoAdapter(
-    val userId: String
+    val userId: String,
+    val itemClick: (Drive?) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val VIEW_TYPE_ITEM = 0
     private val VIEW_TYPE_LOADING = 1
@@ -21,14 +22,16 @@ class CharoAdapter(
     var spinnerPosition = 0
 
     inner class MyCharoViewHolder(
-        val binding: ItemCharoMyCharoBinding
+        val binding: ItemCharoMyCharoBinding,
+        itemClick: (Drive?) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
         fun onBind(drive: Drive) {
             binding.driveData = drive
             drive.warning?.let {
                 binding.tvMyCharoTag3.visibility = ViewGroup.VISIBLE
             }
+
+            binding.root.setOnClickListener { itemClick(drive) }
         }
     }
 
@@ -51,7 +54,7 @@ class CharoAdapter(
             VIEW_TYPE_ITEM -> {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemCharoMyCharoBinding.inflate(layoutInflater, parent, false)
-                MyCharoViewHolder(binding)
+                MyCharoViewHolder(binding, itemClick)
             }
             else -> {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -66,15 +69,6 @@ class CharoAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MyCharoViewHolder) {
             holder.onBind(itemList[position]!!)
-
-            holder.binding.root.setOnClickListener() {
-                val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-                intent.putExtra("userId", userId)
-                intent.putExtra("postId", itemList[position]!!.postId)
-
-                ContextCompat.startActivity(holder.itemView.context, intent, null)
-                // startActivity 바꿔라.
-            }
         }
     }
 

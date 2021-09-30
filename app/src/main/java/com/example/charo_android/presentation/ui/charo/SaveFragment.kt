@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.charo
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.databinding.FragmentSaveBinding
+import com.example.charo_android.presentation.ui.detail.DetailActivity
 
 class SaveFragment : Fragment() {
     private val saveViewModel: CharoViewModel by activityViewModels()
@@ -27,7 +29,15 @@ class SaveFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        charoAdapter = CharoAdapter(Hidden.userId)
+        charoAdapter = CharoAdapter(Hidden.userId) {
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("postId", it!!.postId)
+            intent.putExtra("title", it.title)
+            intent.putExtra("date", "${it.year}년 ${it.month}월 ${it.day}일")
+            intent.putExtra("imageUrl", it.image)
+            intent.putExtra("region", it.region)
+            startActivity(intent)
+        }
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_save, container, false)
         val root: View = binding.root
 

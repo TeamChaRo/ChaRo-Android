@@ -130,5 +130,11 @@
     <string name="password_hint">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
     <string name="input_password_hint">5이상 15자 이내의 영문과 숫자</string>
     <string name="input_password_reconfirm_hint">비밀번호를 한번 더 작성해주세요</string>
-
+    <string name="start_point">출발지</string>
+    <string name="via_point">경유지</string>
+    <string name="end_point">도착지</string>
+    <string name="like_count">%1$d명이 좋아해요</string>
+    <string name="course_length">%1$d/280자</string>
+    <string name="region1">%1$s</string>
+    <string name="region2">%1$s %2$s</string>
 </resources>

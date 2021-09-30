@@ -1,14 +1,15 @@
 package com.example.charo_android.presentation.ui.detail
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.charo_android.data.DetailViewpagerImageInfo
+import com.example.charo_android.data.model.detail.DetailViewpagerImageInfo
 import com.example.charo_android.databinding.ItemDetailImageBinding
 
-class DetailViewpagerImageAdapter: RecyclerView.Adapter<DetailViewpagerImageAdapter.DetailImageViewHolder>() {
-    val imageList = mutableListOf<DetailViewpagerImageInfo>()
+class DetailViewpagerAdapter: RecyclerView.Adapter<DetailViewpagerAdapter.DetailImageViewHolder>() {
+    val itemList = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailImageViewHolder {
         val binding = ItemDetailImageBinding.inflate(
@@ -19,20 +20,22 @@ class DetailViewpagerImageAdapter: RecyclerView.Adapter<DetailViewpagerImageAdap
         return DetailImageViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = imageList.size
+    override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: DetailImageViewHolder, position: Int) {
-        holder.onBind(imageList[position])
+        holder.onBind(itemList[position], position + 1, itemList.size)
     }
 
     class DetailImageViewHolder(
         private val binding : ItemDetailImageBinding
     ): RecyclerView.ViewHolder(binding.root){
-        fun onBind(detailImageInfo: DetailViewpagerImageInfo){
-//            binding.imgDetailViewpagerImage.setImageResource(detailImageInfo.image)
+        @SuppressLint("SetTextI18n")
+        fun onBind(url: String, index: Int, itemCount: Int){
             Glide.with(itemView.context)
-                .load(detailImageInfo.image)
+                .load(url)
                 .into(binding.imgDetailViewpagerImage)
+
+            binding.tvDetailViewpagerImage.text = "$index/$itemCount"
         }
     }
 }

@@ -47,8 +47,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userId: String = (activity as MainActivity).getUserId()
-        val nickName: String = (activity as MainActivity).getNickName()
+        val userId: String = Hidden.userId
+        val nickName: String = Hidden.nickName
         goSearchView(userId, nickName)
         goAlarm()
         initToolBar()
