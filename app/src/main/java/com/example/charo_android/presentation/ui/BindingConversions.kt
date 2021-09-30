@@ -4,6 +4,7 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -68,6 +69,25 @@ object BindingConversions {
             view.visibility = View.GONE
         } else {
             view.visibility = View.VISIBLE
+        }
+    }
+
+    @BindingAdapter("show_province")
+    @JvmStatic
+    fun showProvince(textView: TextView, province: String?) {
+        textView.text = province
+    }
+
+    @BindingAdapter("show_region")
+    @JvmStatic
+    fun showRegion(textView: TextView, region: String?) {
+        if(region != null) {
+            val province: String = textView.text.toString()
+            if(province == "특별시" || province == "광역시") {
+                textView.text = region.plus(province)
+            } else {
+                textView.text = province.plus(" ").plus(region)
+            }
         }
     }
 }
