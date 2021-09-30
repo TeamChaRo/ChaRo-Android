@@ -5,5 +5,5 @@
         android:drawable="@drawable/ic_heart_active"/>
     <item
         android:state_selected="false"
-        android:drawable="@drawable/ic_heart_line"/>
+        android:drawable="@drawable/ic_bigheart_inactive"/>
 </selector>
