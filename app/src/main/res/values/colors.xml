@@ -31,4 +31,6 @@
     <color name="iris_80">#7879F1</color>
     <color name="iris_60">#A5A6F6</color>
     <color name="gray_blue">#d3e5ff</color>
+    <color name="checked_box">#6ca6ff</color>
+    <color name="unchecked_box">#acb5bd</color>
 </resources>
