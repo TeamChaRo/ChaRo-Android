@@ -3,7 +3,6 @@
     <style name="signUpBlankChange" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name= "boxStrokeErrorColor">@color/red_sign_up</item>
         <item name= "boxStrokeColor">@color/selector_text_input_color</item>
-        <item name= "background">@drawable/sign_up_blank</item>
     </style>
 
 

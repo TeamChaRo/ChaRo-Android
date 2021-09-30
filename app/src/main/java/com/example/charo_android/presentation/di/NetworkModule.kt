@@ -4,18 +4,27 @@ import com.example.charo_android.data.api.HomeViewService
 import com.example.charo_android.data.api.more.MoreViewInfiniteService
 
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.data.api.SignUpEmailCheckViewService
+import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
+import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
+    val interceptor = HttpLoggingInterceptor()
+    val client = OkHttpClient.Builder()
+        .addNetworkInterceptor(interceptor)
+    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+    client.addInterceptor(interceptor)
     single<Retrofit> {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Hidden.baseUrl)
+            .client(client.build())
             .build()
     }
 
@@ -37,6 +46,10 @@ val networkModule = module {
 
     single<MoreNewViewService>{
         get<Retrofit>().create(MoreNewViewService::class.java)
+    }
+
+    single<SignUpEmailCertificationViewService>{
+        get<Retrofit>().create(SignUpEmailCertificationViewService::class.java)
     }
 }
 

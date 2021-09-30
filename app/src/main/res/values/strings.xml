@@ -126,5 +126,9 @@
     <string name="email_number">이메일 인증번호</string>
     <string name="email_number_input">이메일로 보내드린 인증번호를 입력해주세요.</string>
     <string name="resend">재전송</string>
+    <string name="password">비밀번호</string>
+    <string name="password_hint">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
+    <string name="input_password_hint">5이상 15자 이내의 영문과 숫자</string>
+    <string name="input_password_reconfirm_hint">비밀번호를 한번 더 작성해주세요</string>
 
 </resources>

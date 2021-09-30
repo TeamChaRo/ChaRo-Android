@@ -1,13 +1,13 @@
-package com.example.charo_android.data.api
+package com.example.charo_android.data.api.signup
 
 import com.example.charo_android.data.model.response.signup.ResponseEmailCheckData
 import com.example.charo_android.domain.model.signup.Email
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface SignUpEmailCheckViewService {
-    @POST("/user/register/email")
+    @GET("/user/check/{userEmail}")
     suspend fun emailCheck(
-        @Body body : Email
+        @Path("userEmail") userEmail: String
     ) : ResponseEmailCheckData
 }

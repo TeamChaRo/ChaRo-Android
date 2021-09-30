@@ -4,8 +4,10 @@ package com.example.charo_android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpEmailBinding
 import com.example.charo_android.domain.model.signup.Email
@@ -13,7 +15,8 @@ import com.example.charo_android.presentation.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class SignUpEmailFragment : BaseFragment<FragmentSignUpEmailBinding>(R.layout.fragment_sign_up_email) {
+class SignUpEmailFragment :
+    BaseFragment<FragmentSignUpEmailBinding>(R.layout.fragment_sign_up_email) {
     private var pass = false
     private val signUpViewModel: SignUpEmailViewModel by viewModel()
 
@@ -22,6 +25,7 @@ class SignUpEmailFragment : BaseFragment<FragmentSignUpEmailBinding>(R.layout.fr
         super.onViewCreated(view, savedInstanceState)
         initView()
         observeSuccess()
+        certificationEmail()
     }
 
     private fun initView() {
@@ -52,15 +56,57 @@ class SignUpEmailFragment : BaseFragment<FragmentSignUpEmailBinding>(R.layout.fr
                         pass = false
                     } else {
                         pass = true
-                        checkEmail(Email(s.toString()))
+                        checkEmail(s.toString())
                     }
                 }
             })
         }
     }
 
+    private fun certificationEmail() {
+        with(binding) {
+            etInputEmailNum.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    signUpViewModel.data.observe(viewLifecycleOwner) {
+                        Log.d("certification", it.toString())
+                        if (s.toString() != it) {
+                            textInputEmailNum.error = "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요."
+                        } else {
+                            textInputEmailNum.error = null
+                            textInputEmailNum.isErrorEnabled = false
+                            textInputEmailNum.isHelperTextEnabled = true
+                            textInputEmailNum.helperText = "인증되었습니다."
+
+                            imgSignUpNext.setOnClickListener {
+                                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                                transaction?.apply {
+                                    replace(R.id.fragment_container_email, SignUpPassWordFragment())
+                                    commit()
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
+
+    }
+
+
     private fun observeSuccess() {
-        signUpViewModel.success.observe(this) {
+        signUpViewModel.success.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it) {
                     textInputSignUp.error = null
@@ -68,12 +114,13 @@ class SignUpEmailFragment : BaseFragment<FragmentSignUpEmailBinding>(R.layout.fr
                     textInputSignUp.isHelperTextEnabled = true
                     textInputSignUp.helperText = "사용 가능한 이메일 형식입니다."
 
-                    imgSignUpNext.setOnClickListener {
-                        clEmailNum.isVisible = true
-                    }
-                }
-                else {
-                    if(pass)
+                        imgSignUpNext.setOnClickListener {
+                            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
+                            Log.d("되라",etSignUpBlank.text.toString())
+                            clEmailNum.isVisible = true
+                        }
+                } else {
+                    if (pass)
                         textInputSignUp.error = "중복된 이메일 형식입니다."
                 }
             }
@@ -81,7 +128,8 @@ class SignUpEmailFragment : BaseFragment<FragmentSignUpEmailBinding>(R.layout.fr
 
     }
 
-    private fun checkEmail(email: Email) {
+    private fun checkEmail(email: String) {
         return signUpViewModel.emailCheck(email)
     }
+
 }
