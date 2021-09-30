@@ -1,40 +1,15 @@
 package com.example.charo_android.presentation.ui.detail
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.example.charo_android.R
-import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.*
-import com.example.charo_android.data.model.request.RequestDetailLikeData
-import com.example.charo_android.data.model.request.RequestDetailSaveData
-import com.example.charo_android.data.model.detail.ResponseDetailData
 import com.example.charo_android.databinding.ActivityDetailBinding
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.write.WriteActivity
-import com.example.charo_android.presentation.ui.write.WriteMapActivity
 import com.skt.Tmap.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-    private var detailViewPagerAdapter = DetailViewpagerImageAdapter()
+    private var detailViewPagerAdapter = DetailViewpagerAdapter()
 
     // test
     private var inputLatiList = arrayListOf<String>()
@@ -44,16 +19,20 @@ class DetailActivity : AppCompatActivity() {
     var postId = 0
     var title = ""
     var date = ""
-
+    var region = ""
+    var imageUrl = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        살려야함
         postId = intent.getIntExtra("postId", 0)
         title = intent.getStringExtra("title")!!
         date = intent.getStringExtra("date")!!
+        region = intent.getStringExtra("region")!!
+        imageUrl = intent.getStringExtra("imageUrl")!!
 
 //        var userId: String = intent.getStringExtra("userId").toString()
 //        var postId: Int = intent.getIntExtra("postId", 0)
