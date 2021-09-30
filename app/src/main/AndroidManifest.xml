@@ -32,10 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".presentation.ui.signup.SignUpActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".presentation.ui.signup.SignUpActivity"/>
 
 
         <activity android:name="com.example.charo_android.presentation.ui.onBoarding.OnBoardingActivity" />

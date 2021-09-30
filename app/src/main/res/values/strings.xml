@@ -130,5 +130,8 @@
     <string name="password_hint">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
     <string name="input_password_hint">5이상 15자 이내의 영문과 숫자</string>
     <string name="input_password_reconfirm_hint">비밀번호를 한번 더 작성해주세요</string>
+    <string name="profile_img_input">프로필 사진을 등록해 주세요</string>
+    <string name="write_nickname">닉네임을 작성해 주세요</string>
+    <string name="input_nickname">5자 이내 한글</string>
 
 </resources>

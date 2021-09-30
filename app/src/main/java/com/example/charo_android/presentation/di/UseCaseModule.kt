@@ -4,6 +4,7 @@ import com.example.charo_android.domain.usecase.*
 import com.example.charo_android.domain.usecase.home.*
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCertificationUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
+import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module{
@@ -18,5 +19,6 @@ val useCaseModule = module{
     single{GetRemoteHomeTitle(get())}
     single{GetRemoteMoreNewDriveUseCase(get())}
     single{ GetRemoteSignUpEmailCertificationUseCase(get()) }
+    single{ GetRemoteSignUpNickNameCheckUseCase(get())}
 
 }
