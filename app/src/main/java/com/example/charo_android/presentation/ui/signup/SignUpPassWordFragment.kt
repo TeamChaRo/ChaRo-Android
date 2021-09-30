@@ -16,6 +16,7 @@ class SignUpPassWordFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPasswordView()
+        checkPassword()
     }
 
     private fun initPasswordView() {
