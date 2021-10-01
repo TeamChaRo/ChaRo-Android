@@ -12,13 +12,14 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpEmailBinding
 import com.example.charo_android.domain.model.signup.Email
 import com.example.charo_android.presentation.base.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SignUpEmailFragment :
     BaseFragment<FragmentSignUpEmailBinding>(R.layout.fragment_sign_up_email) {
     private var pass = false
-    private val signUpViewModel: SignUpEmailViewModel by viewModel()
+    private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

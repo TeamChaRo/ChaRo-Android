@@ -3,10 +3,7 @@ package com.example.charo_android.presentation.di
 import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSource
 import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSourceImpl
 import com.example.charo_android.data.repository.remote.more.*
-import com.example.charo_android.data.repository.remote.signup.RemoteSignUpEmailCertificationDataSource
-import com.example.charo_android.data.repository.remote.signup.RemoteSignUpEmailCertificationDataSourceImpl
-import com.example.charo_android.data.repository.remote.signup.RemoteSignUpEmailCheckDataSource
-import com.example.charo_android.data.repository.remote.signup.RemoteSignUpEmailCheckDataSourceImpl
+import com.example.charo_android.data.repository.remote.signup.*
 import org.koin.dsl.module
 
 val dataSourceModule = module {
@@ -16,4 +13,5 @@ val dataSourceModule = module {
     single<RemoteMoreViewDataSource> { RemoteMoreViewDataSourceImpl(get())}
     single<RemoteMoreNewViewDataSource>{RemoteMoreNewViewDataSourceImpl(get())}
     single<RemoteSignUpEmailCertificationDataSource>{RemoteSignUpEmailCertificationDataSourceImpl(get())}
+    single<RemoteSignUpNickNameCheckDataSource>{RemoteSignUpNickNameCheckDataSourceImpl(get())}
 }

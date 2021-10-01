@@ -8,11 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.model.request.RequestCertificationData
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCertificationUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
+import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import kotlinx.coroutines.launch
 
 class SignUpEmailViewModel(
     private val getRemoteSignUpEmailCheckUseCase: GetRemoteSignUpEmailCheckUseCase,
-    private val getRemoteSignUpEmailCertificationUseCase: GetRemoteSignUpEmailCertificationUseCase
+    private val getRemoteSignUpEmailCertificationUseCase: GetRemoteSignUpEmailCertificationUseCase,
+    private val getRemoteSignUpNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase
 ) : ViewModel() {
 
     private val _success = MutableLiveData<Boolean>(false)
@@ -22,6 +24,17 @@ class SignUpEmailViewModel(
     private val _data = MutableLiveData<String>()
     val data: LiveData<String>
         get() = _data
+
+    private val _nickNameCheck = MutableLiveData<Boolean>()
+    val nickNameCheck : LiveData<Boolean>
+        get() = _nickNameCheck
+
+    var profileImage = MutableLiveData<String>()
+
+    var marketingPush = MutableLiveData<Boolean>()
+
+    var marketingEmail = MutableLiveData<Boolean>()
+
 
     fun emailCheck(email: String) {
         viewModelScope.launch {
@@ -50,10 +63,25 @@ class SignUpEmailViewModel(
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("signUps", it.printStackTrace().toString())
                     Log.d("signUps", "서버 통신 실패!")
 
                 }
         }
+    }
+
+    fun nickNameCheck(nickname: String){
+        viewModelScope.launch {
+            kotlin.runCatching { getRemoteSignUpNickNameCheckUseCase.execute(nickname) }
+                .onSuccess {
+                    _nickNameCheck.value = it
+                    Log.d("nickname", "서버 통신 성공!")
+                    Log.d("nickname", it.toString())
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("nickname", "서버 통신 실패!")
+                }
+        }
+
     }
 }

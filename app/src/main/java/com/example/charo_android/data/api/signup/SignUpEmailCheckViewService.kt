@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface SignUpEmailCheckViewService {
-    @GET("/user/check/{userEmail}")
+    @GET("/user/check/email/{userEmail}")
     suspend fun emailCheck(
         @Path("userEmail") userEmail: String
     ) : ResponseEmailCheckData

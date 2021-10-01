@@ -26,7 +26,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
 
     fun initSignUpEmailFragment(){
-        changeFragment(R.id.fragment_container_email, SignUpEmailFragment())
+        changeFragment(R.id.fragment_container_email, SignUpTermFragment())
 
     }
 
