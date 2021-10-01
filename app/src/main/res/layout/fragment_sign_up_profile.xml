@@ -51,6 +51,7 @@
                 android:id="@+id/img_sign_up_profile"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:clickable="true"
                 android:background="@drawable/sign_up_profile"
                 app:layout_constraintTop_toBottomOf="@+id/text_input_profile_img"
                 app:layout_constraintStart_toStartOf="@+id/text_input_profile_img"

@@ -29,6 +29,13 @@ class SignUpEmailViewModel(
     val nickNameCheck : LiveData<Boolean>
         get() = _nickNameCheck
 
+    var profileImage = MutableLiveData<String>()
+
+    var marketingPush = MutableLiveData<Boolean>()
+
+    var marketingEmail = MutableLiveData<Boolean>()
+
+
     fun emailCheck(email: String) {
         viewModelScope.launch {
             runCatching { getRemoteSignUpEmailCheckUseCase.execute(email) }
