@@ -49,7 +49,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val userId: String = Hidden.userId
         val nickName: String = Hidden.nickName
-        goSearchView(userId, nickName)
+        goSearchView(userId,nickName)
         goAlarm()
         initToolBar()
         replaceMoreViewFragment(Hidden.userId)

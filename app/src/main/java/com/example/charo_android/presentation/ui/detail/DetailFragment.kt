@@ -58,7 +58,7 @@ class DetailFragment : Fragment() {
 
         // tMapView 생성
         val tMapView = TMapView(requireContext())
-        tMapView.setSKTMapApiKey(Hidden.tMapApiKey)
+        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         tMapView.setUserScrollZoomEnable(true)
         binding.clDetailMapview.addView(tMapView)
 
