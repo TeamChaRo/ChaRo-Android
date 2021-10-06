@@ -14,4 +14,5 @@ val dataSourceModule = module {
     single<RemoteMoreNewViewDataSource>{RemoteMoreNewViewDataSourceImpl(get())}
     single<RemoteSignUpEmailCertificationDataSource>{RemoteSignUpEmailCertificationDataSourceImpl(get())}
     single<RemoteSignUpNickNameCheckDataSource>{RemoteSignUpNickNameCheckDataSourceImpl(get())}
+    single<RemoteSignUpRegisterDataSource>{RemoteSignUpRegisterDataSourceImpl(get())}
 }

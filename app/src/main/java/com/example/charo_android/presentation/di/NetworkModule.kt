@@ -9,6 +9,7 @@ import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
 import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
 import com.example.charo_android.data.api.signup.SignUpNickNameCheckViewService
+import com.example.charo_android.data.api.signup.SignUpRegisterService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -55,6 +56,9 @@ val networkModule = module {
 
     single<SignUpNickNameCheckViewService>{
         get<Retrofit>().create(SignUpNickNameCheckViewService::class.java)
+    }
+    single<SignUpRegisterService>{
+        get<Retrofit>().create(SignUpRegisterService::class.java)
     }
 }
 

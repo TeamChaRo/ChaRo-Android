@@ -3,6 +3,8 @@ package com.example.charo_android.presentation.ui.signup
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -28,7 +30,8 @@ class SignUpProfileFragment :
     private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
     private val getContent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            signUpViewModel.profileImage.value = result.data?.data.toString()
+            signUpViewModel.profileImage.value = result.data?.data
+            Log.d("imageProfile", signUpViewModel.profileImage.value.toString())
             binding.imgSignUpProfile.setImageURI(result.data?.data)
 
         }
@@ -74,11 +77,22 @@ class SignUpProfileFragment :
                                 textInputNickname.isErrorEnabled = false
                                 textInputNickname.isHelperTextEnabled = true
                                 textInputNickname.helperText = "사용 가능한 닉네임입니다"
+                                signUpViewModel.nickName.value = etSignUpNickname.text.toString()
+
+                                imgSignUpNicknameNext.setOnClickListener {
+                                    val transaction =
+                                        activity?.supportFragmentManager?.beginTransaction()
+                                    transaction?.apply {
+                                        replace(R.id.fragment_container_email, SignUpTermFragment())
+                                        commit()
+                                    }
+                                }
                             }
                         }
                     }
                 }
             })
+
         }
     }
 
@@ -113,11 +127,11 @@ class SignUpProfileFragment :
             }
 
         }
-
-
-
-
     }
+
+
+
+
 
 
 }

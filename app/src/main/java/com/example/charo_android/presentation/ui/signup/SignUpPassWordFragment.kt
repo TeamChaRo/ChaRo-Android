@@ -48,6 +48,7 @@ class SignUpPassWordFragment :
                     } else {
                         textInputPaasword.error = null
                         textInputPaasword.isErrorEnabled = false
+
                     }
 
 
@@ -79,6 +80,7 @@ class SignUpPassWordFragment :
                     } else{
                         textPasswordReconfirm.error = null
                         textPasswordReconfirm.isErrorEnabled = false
+                        signUpViewModel.password.value = etSignUpPassword.text.toString()
                         imgSignUpPasswordNext.setOnClickListener {
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
                             transaction?.apply {
