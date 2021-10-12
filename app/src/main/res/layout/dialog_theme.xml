@@ -1,63 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.write.DialogThemeFragment"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottomSheetDashBoardLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:behavior_draggable="true"
-        app:behavior_peekHeight="700dp"
-        >
-        <!--
-        app:behavior_hideable="true"
-        app:behavior_draggable="true"
-        app:behavior_peekHeight="700dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:context=".presentation.ui.write.DialogThemeFragment">
 
-        -->
-
-
-        <TextView
-            android:id="@+id/text_dialog_theme_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="테마"
-            android:gravity="center"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:textSize="17sp"
-            android:textColor="#495057"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomSheetDashBoardLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_dialog_theme_title">
+            android:layout_height="match_parent"
+            app:behavior_draggable="true"
+            app:behavior_peekHeight="700dp">
+            <!--
+            app:behavior_hideable="true"
+            app:behavior_draggable="true"
+            app:behavior_peekHeight="700dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
+            -->
 
 
-        </com.google.android.material.tabs.TabLayout>
+            <TextView
+                android:id="@+id/text_dialog_theme_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="테마"
+                android:gravity="center"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:textSize="17sp"
+                android:textColor="#495057"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_dialog_theme_title">
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/black"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
+            </com.google.android.material.tabs.TabLayout>
 
 
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/black"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</layout>

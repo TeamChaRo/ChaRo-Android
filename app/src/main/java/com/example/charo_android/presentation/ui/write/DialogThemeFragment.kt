@@ -7,16 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.charo_android.R
+import com.example.charo_android.databinding.FragmentDialogThemeTwoBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class DialogThemeFragment : BottomSheetDialogFragment() {
 
     companion object {
         fun newInstance() = DialogThemeFragment()
     }
+
     // 1. activity_main.xml 에 존재하는 viewPager2 뷰 객체 초기화를 액티비티 lifecycle에 맞게 지연시킴
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
@@ -60,16 +66,36 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
 //        val bottomSheetDialog = BottomSheetDialog(requireContext())
 //        bottomSheetDialog.setContentView(bottomSheetView)
 
-        showDialog(bottomSheetView)
+//        showDialog(bottomSheetView)
         return bottomSheetView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 팝업 생성 시 전체화면으로 띄우기
+        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_theme, container, false)
+//        val behavior = BottomSheetBehavior.from<View>(bottomSheetView!!)
+        val behavior = BottomSheetBehavior.from(bottomSheetView)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        // 드래그해도 팝업이 종료되지 않도록
+        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        })
     }
 
     fun showDialog(bottomSheetView: View){
         val bottomSheetDialog = BottomSheetDialog(requireContext())
+        if (bottomSheetView.parent != null) (bottomSheetView.parent as ViewGroup)
+            .removeView(bottomSheetView)
+
         bottomSheetDialog.setContentView(bottomSheetView)
     }
 
