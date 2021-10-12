@@ -5,7 +5,10 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -23,18 +26,30 @@ import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.signup.SignUpEmailViewModel
 
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okio.BufferedSink
 import java.io.File
 
 class WriteFragment : Fragment() {
+
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+        override fun contentType(): MediaType? = "image/jpeg".toMediaType()
+
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
+        }
+
+    }
 
     companion object {
         fun newInstance() = WriteFragment()
@@ -628,25 +643,51 @@ class WriteFragment : Fragment() {
                                     imgUri = imgPath,
                                 )
                             )
+                            sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
 
-                            sharedViewModel.imageUri.value = writeAdapter.imgList
+
+                            //UriList 에 추가
+                            imageUriList.add(imgPath)
+
 
                             writeAdapter.notifyItemInserted(0)
                             writeAdapter.notifyDataSetChanged()
 
-                            //uri -> file -> multipartform
-                            for (index in 0..writeAdapter.imgList.size - 1) {
-                                val file = File(writeAdapter.imgList[index].imgUri.path)
-                                val MEDIA_TYPE_IMAGE = "image/*".toMediaTypeOrNull()
-                                val surveyBody = RequestBody.create(MEDIA_TYPE_IMAGE, file)
-                                image.add(MultipartBody.Part.createFormData("image", "file.png", surveyBody))
-                            }
-                            sharedViewModel.image.value = image
+//                            //uri -> file -> multipartform
+//                            for (index in 0..writeAdapter.imgList.size - 1) {
+//                                val file = File(writeAdapter.imgList[index].imgUri.path)
+//                                val MEDIA_TYPE_IMAGE = "image/*".toMediaTypeOrNull()
+//                                val surveyBody = RequestBody.create(MEDIA_TYPE_IMAGE, file)
+//                                image.add(MultipartBody.Part.createFormData("image", "file.png", surveyBody))
+//                            }
+//                            sharedViewModel.imageMultiPart.value = image
+//
+//                            Log.e("image",image.toString())
+//                            Log.e("sharedViewModel.imageUriRecyclerView.value",sharedViewModel.imageUriRecyclerView.value.toString())
+//                            Log.e("sharedViewModel.imageMultiPart.value",sharedViewModel.imageMultiPart.value.toString())
+//                            Log.e("imgPath",imgPath.toString())
 
-                            Log.e("image",image.toString())
-                            Log.e("sharedViewModel.imageUri.value",sharedViewModel.imageUri.value.toString())
-                            Log.e("sharedViewModel.image.value",sharedViewModel.image.value.toString())
-                            Log.e("imgPath",imgPath.toString())
+                            //uri -> Bitmap -> multipartform
+                            val bitmap : Bitmap
+
+                            if(Build.VERSION.SDK_INT < 28) {
+                                bitmap = MediaStore.Images.Media.getBitmap(
+                                    context?.contentResolver,
+                                    imgPath
+                                )
+                            } else {
+                                val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
+                                bitmap = ImageDecoder.decodeBitmap(source)
+                            }
+
+                            val imageRequestBody = bitmap?.let {
+                                BitmapRequestBody(it)
+                            }
+                            val imageData: MultipartBody.Part =
+                                MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
+
+                            image.add(imageData)
+                            sharedViewModel.imageMultiPart.value = image
 
                         }
                         clipData.itemCount in 2..5 -> {
@@ -780,13 +821,13 @@ class WriteFragment : Fragment() {
     //돌아왔을 때 값 유지
     fun getSharedViewModelData() {
         //사진
-        if (sharedViewModel.image.value != null) {
+        if (sharedViewModel.imageMultiPart.value != null) {
             binding.clWritePhoto.visibility = View.GONE
 
             var imgmoreList = mutableListOf<WriteImgInfo>()
 
-            sharedViewModel.imageUri.value?.forEach { imageUri ->
-                writeAdapter.imgList = sharedViewModel.imageUri.value!!
+            sharedViewModel.imageUriRecyclerView.value?.forEach { imageUri ->
+                writeAdapter.imgList = sharedViewModel.imageUriRecyclerView.value!!
             }
             Log.e("imgmoreList", imgmoreList.toString())
             writeAdapter.notifyItemInserted(0)

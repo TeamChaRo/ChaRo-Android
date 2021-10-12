@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RequestWriteData(
     @SerializedName("course")
-    val course: Any,
+    val course: ArrayList<HashMap<String, String>>,
     @SerializedName("courseDesc")
     val courseDesc: String,
     @SerializedName("isParking")
@@ -28,8 +28,6 @@ data class RequestWriteData(
         val startCourse = mapOf<String,String>("address" to "", "latitude" to "", "longtitude" to "")
         val middleCourse = mapOf<String,String>("address" to "", "latitude" to "", "longtitude" to "")
         val endCourse = mapOf<String,String>("address" to "", "latitude" to "", "longtitude" to "")
-
-
 
     }
 //        @SerializedName("address")
