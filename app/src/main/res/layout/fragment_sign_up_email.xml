@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_email_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.signup.SignUpEmailFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_email_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cl_email_sign_up">
+
+            <ImageView
+                android:id="@+id/img_sign_up_road"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/sign_up_road_android_1"
+                app:layout_constraintBottom_toTopOf="@id/tv_email_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_email_id"
+                style="@style/SectionH1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:includeFontPadding="false"
+                android:text="@string/email_id"
+                app:layout_constraintBottom_toTopOf="@id/tv_email_answer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/img_sign_up_road"
+                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road" />
+
+            <TextView
+                android:id="@+id/tv_email_answer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/email_answer"
+                android:textColor="@color/gray4_sub"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toTopOf="@id/text_input_sign_up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_email_id"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email_id" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_sign_up"
+                style="@style/signUpBlankChange"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperTextTextColor="@color/blue_main"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_email_answer"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email_answer">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sign_up_blank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/email_hint"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textSize="13sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:id="@+id/img_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_map_search_close"
+                app:layout_constraintEnd_toEndOf="@+id/text_input_sign_up"
+                app:layout_constraintTop_toTopOf="@+id/text_input_sign_up" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_email_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cl_email_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp">
+
+            <TextView
+                android:id="@+id/tv_email_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/email_number"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"/>
+
+            <TextView
+                android:id="@+id/tv_email_number_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/email_number_input"
+                android:textColor="@color/gray4_sub"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_email_number"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email_number" />
+
+            <TextView
+                android:id="@+id/tv_email_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/resend"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:padding="10dp"
+                android:background="@drawable/resend"
+                />
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_email_num"
+                style="@style/signUpBlankChange"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperTextTextColor="@color/blue_main"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_email_number_input"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email_number_input">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_input_email_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/email_hint"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textSize="13sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:id="@+id/img_email_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_map_search_close"
+                app:layout_constraintEnd_toEndOf="@+id/text_input_email_num"
+                app:layout_constraintTop_toTopOf="@+id/text_input_email_num" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/img_sign_up_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/sign_up_next"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_next"
+            app:layout_constraintEnd_toEndOf="@+id/img_sign_up_next"
+            app:layout_constraintStart_toStartOf="@+id/img_sign_up_next"
+            app:layout_constraintTop_toTopOf="@+id/img_sign_up_next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

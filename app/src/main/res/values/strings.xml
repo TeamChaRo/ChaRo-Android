@@ -123,5 +123,30 @@
     <string name="email_id">이메일 아이디</string>
     <string name="email_answer">이용할 이메일을 입력해주세요</string>
     <string name="email_hint">ex)charorong@gmail.com</string>
+    <string name="email_number">이메일 인증번호</string>
+    <string name="email_number_input">이메일로 보내드린 인증번호를 입력해주세요.</string>
+    <string name="resend">재전송</string>
+    <string name="password">비밀번호</string>
+    <string name="password_hint">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
+    <string name="input_password_hint">5이상 15자 이내의 영문과 숫자</string>
+    <string name="input_password_reconfirm_hint">비밀번호를 한번 더 작성해주세요</string>
+    <string name="start_point">출발지</string>
+    <string name="via_point">경유지</string>
+    <string name="end_point">도착지</string>
+    <string name="like_count">%1$d명이 좋아해요</string>
+    <string name="course_length">%1$d/280자</string>
+    <string name="region1">%1$s</string>
+    <string name="region2">%1$s %2$s</string>
+    <string name="profile_img_input">프로필 사진을 등록해 주세요</string>
+    <string name="write_nickname">닉네임을 작성해 주세요</string>
+    <string name="input_nickname">5자 이내 한글</string>
+    <string name="accept_term">약관 동의</string>
+    <string name="input_accept_term">전체 동의</string>
+    <string name="input_accpet_term_push">(선택) 마케팅 푸시 수신 동의</string>
+    <string name="input_accpet_term_see">보기</string>
+    <string name="input_accept_term_email">(선택) 마케팅 이메일 푸시 수신 동의</string>
+    <string name="sign_up_start">시작하기</string>
+
+
 
 </resources>

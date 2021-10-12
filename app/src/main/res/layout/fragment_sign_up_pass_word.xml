@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.signup.SignUpPassWordFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_sign_up_road_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/road_android_2"
+                app:layout_constraintBottom_toTopOf="@+id/tv_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/password"
+                android:textColor="@color/black_sub"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road_2" />
+
+            <TextView
+                android:id="@+id/tv_password_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/password_hint"
+                android:textColor="@color/gray4_sub"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_password"
+                app:layout_constraintTop_toBottomOf="@+id/tv_password" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_paasword"
+                style="@style/signUpBlankChange"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                app:counterMaxLength="15"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperTextTextColor="@color/blue_main"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_eye_off"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_password_hint"
+                app:layout_constraintTop_toBottomOf="@+id/tv_password_hint">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_up_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjkkr_regular"
+                        android:hint="@string/input_password_hint"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:textSize="13sp"
+                        android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_password_reconfirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/signUpBlankChange"
+                app:counterMaxLength="15"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperTextTextColor="@color/blue_main"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_eye_off"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_paasword"
+                app:layout_constraintStart_toStartOf="@+id/text_input_paasword"
+                app:layout_constraintEnd_toEndOf="@+id/text_input_paasword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sign_up_password_reconfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/input_password_reconfirm_hint"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/img_sign_up_password_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/sign_up_next"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_password_next"
+            app:layout_constraintEnd_toEndOf="@+id/img_sign_up_password_next"
+            app:layout_constraintStart_toStartOf="@+id/img_sign_up_password_next"
+            app:layout_constraintTop_toTopOf="@+id/img_sign_up_password_next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

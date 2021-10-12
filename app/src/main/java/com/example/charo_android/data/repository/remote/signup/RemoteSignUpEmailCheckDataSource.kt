@@ -4,5 +4,5 @@ import com.example.charo_android.data.model.response.signup.ResponseEmailCheckDa
 import com.example.charo_android.domain.model.signup.Email
 
 interface RemoteSignUpEmailCheckDataSource {
-    suspend fun emailCheck(email: Email): ResponseEmailCheckData
+    suspend fun emailCheck(email: String): ResponseEmailCheckData
 }

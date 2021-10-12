@@ -117,7 +117,7 @@ class CharoViewModel : ViewModel() {
     fun getMoreWrittenLikeData() {
         _isServerConnecting.value = true
         val call: Call<ResponseMyPageMoreData> =
-            ApiService.myPageViewMoreService.getMoreData(
+            ApiService.myPageViewMoreService.getMoreWrittenLikeData(
                 Hidden.userId,
                 writtenLikeData.value!!.lastId,
                 writtenLikeData.value!!.lastCount
@@ -159,10 +159,9 @@ class CharoViewModel : ViewModel() {
     fun getMoreWrittenNewData() {
         _isServerConnecting.value = true
         val call: Call<ResponseMyPageMoreData> =
-            ApiService.myPageViewMoreService.getMoreData(
+            ApiService.myPageViewMoreService.getMoreWrittenNewData(
                 Hidden.userId,
-                writtenNewData.value!!.lastId,
-                writtenNewData.value!!.lastCount
+                writtenNewData.value!!.lastId
             )
         call.enqueue(object : Callback<ResponseMyPageMoreData> {
             override fun onResponse(
@@ -201,7 +200,7 @@ class CharoViewModel : ViewModel() {
     fun getMoreSavedLikeData() {
         _isServerConnecting.value = true
         val call: Call<ResponseMyPageMoreData> =
-            ApiService.myPageViewMoreService.getMoreData(
+            ApiService.myPageViewMoreService.getMoreSavedLikeData(
                 Hidden.userId,
                 savedLikeData.value!!.lastId,
                 savedLikeData.value!!.lastCount
@@ -242,10 +241,9 @@ class CharoViewModel : ViewModel() {
     fun getMoreSavedNewData() {
         _isServerConnecting.value = true
         val call: Call<ResponseMyPageMoreData> =
-            ApiService.myPageViewMoreService.getMoreData(
+            ApiService.myPageViewMoreService.getMoreSavedNewData(
                 Hidden.userId,
-                savedNewData.value!!.lastId,
-                savedNewData.value!!.lastCount
+                savedNewData.value!!.lastId
             )
         call.enqueue(object: Callback<ResponseMyPageMoreData> {
             override fun onResponse(
