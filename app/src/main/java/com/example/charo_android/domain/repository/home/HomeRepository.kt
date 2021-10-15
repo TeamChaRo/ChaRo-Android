@@ -1,4 +1,4 @@
-package com.example.charo_android.domain.repository
+package com.example.charo_android.domain.repository.home
 
 import com.example.charo_android.data.model.response.home.ResponseHomeViewData
 

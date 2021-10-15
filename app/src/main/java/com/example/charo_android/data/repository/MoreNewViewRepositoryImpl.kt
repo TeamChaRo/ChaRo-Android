@@ -2,9 +2,10 @@ package com.example.charo_android.data.repository
 
 import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.data.repository.remote.more.RemoteMoreNewViewDataSource
-import com.example.charo_android.domain.repository.MoreNewViewRepository
+import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
 
-class MoreNewViewRepositoryImpl(private val dataSource: RemoteMoreNewViewDataSource) : MoreNewViewRepository {
+class MoreNewViewRepositoryImpl(private val dataSource: RemoteMoreNewViewDataSource) :
+    MoreNewViewRepository {
     override suspend fun getMoreNewView(
         userEmail: String,
         identifer: String,

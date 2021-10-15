@@ -1,5 +1,7 @@
 package com.example.charo_android.presentation.di
 
+import com.example.charo_android.data.repository.local.LocalHomeThemeDataSource
+import com.example.charo_android.data.repository.local.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSource
 import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSourceImpl
 import com.example.charo_android.data.repository.remote.more.*
@@ -15,4 +17,5 @@ val dataSourceModule = module {
     single<RemoteSignUpEmailCertificationDataSource>{RemoteSignUpEmailCertificationDataSourceImpl(get())}
     single<RemoteSignUpNickNameCheckDataSource>{RemoteSignUpNickNameCheckDataSourceImpl(get())}
     single<RemoteSignUpRegisterDataSource>{RemoteSignUpRegisterDataSourceImpl(get())}
+    single<LocalHomeThemeDataSource>{LocalHomeThemeDataSourceImpl()}
 }

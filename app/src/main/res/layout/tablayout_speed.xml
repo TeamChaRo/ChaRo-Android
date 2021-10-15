@@ -24,7 +24,6 @@
         android:textColor="@color/blue_main"
         android:textSize="13sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/img_tab_one"
         app:layout_constraintStart_toStartOf="@+id/img_tab_one"
         app:layout_constraintTop_toBottomOf="@+id/img_tab_one" />

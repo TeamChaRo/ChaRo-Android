@@ -13,7 +13,7 @@ import com.example.charo_android.data.model.entity.HomeThemeInfo
 import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 
 
-class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
+class HomeThemeAdapter : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
     val themeData = mutableListOf<HomeThemeInfo>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,11 +30,10 @@ class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHo
     override fun onBindViewHolder(holder: HomeThemeViewHolder, position: Int) {
         holder.onBind(themeData[position])
 
-        holder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val activity = v?.context as AppCompatActivity
+        holder.itemView.setOnClickListener {
+                val activity = it.context as AppCompatActivity
                 val moreThemeViewFragment = MoreThemeViewFragment()
-                if (!moreThemeViewFragment.isAdded()) {
+                if (!moreThemeViewFragment.isAdded) {
                     activity.supportFragmentManager.beginTransaction()
                         .replace(R.id.nav_host_fragment_activity_main, moreThemeViewFragment)
                         .addToBackStack(null)
@@ -42,8 +41,8 @@ class HomeThemeAdapter() : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHo
                 }
 
             }
-        })
-    }
+        }
+
 
     override fun getItemCount(): Int {
         return themeData.size

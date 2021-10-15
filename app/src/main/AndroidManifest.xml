@@ -36,8 +36,7 @@
             android:name=".presentation.ui.signup.SignUpActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".presentation.ui.setting.SettingActivity"/>
-
+        <activity android:name=".presentation.ui.setting.SettingActivity" />
         <activity android:name=".presentation.ui.onBoarding.OnBoardingActivity" />
         <activity android:name=".presentation.ui.search.ResultSearchActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />

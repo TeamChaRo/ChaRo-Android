@@ -5,7 +5,10 @@ import com.example.charo_android.data.repository.signup.SignUpEmailCertification
 import com.example.charo_android.data.repository.signup.SignUpNickNameCheckRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpRegisterRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpRepositoryImpl
-import com.example.charo_android.domain.repository.*
+import com.example.charo_android.domain.repository.home.HomeRepository
+import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
+import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
+import com.example.charo_android.domain.repository.moreview.MoreViewRepository
 import com.example.charo_android.domain.repository.signup.SignUpEmailCertificationRepository
 import com.example.charo_android.domain.repository.signup.SignUpNickNameCheckRepository
 import com.example.charo_android.domain.repository.signup.SignUpRegisterRepository

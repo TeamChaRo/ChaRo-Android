@@ -62,7 +62,6 @@ class MoreViewAdapter(val userId: String) :
     }
 
     fun setHomeTrendDrive(moreData: List<MoreDrive>){
-
         this.moreData = moreData
         notifyDataSetChanged()
     }

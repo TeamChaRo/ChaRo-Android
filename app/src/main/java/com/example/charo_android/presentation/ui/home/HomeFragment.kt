@@ -2,24 +2,19 @@ package com.example.charo_android.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-
 import android.view.View
-
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-
-import androidx.fragment.app.setFragmentResult
 import com.example.charo_android.R
-import com.example.charo_android.presentation.ui.alarm.AlarmActivity
-
+import com.example.charo_android.data.repository.local.LocalHomeThemeDataSource
+import com.example.charo_android.data.repository.local.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.databinding.FragmentHomeBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.alarm.AlarmActivity
 import com.example.charo_android.presentation.ui.home.adapter.*
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
-import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.main.SharedViewModel
+import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
 import com.example.charo_android.presentation.util.LocationUtil
@@ -59,6 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initTodayCharoDrive()
         initCustomThemeDrive()
         initHomeTitle()
+        initThemeDrive()
 
     }
 
@@ -115,6 +111,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
+    private fun initThemeDrive(){
+        val themeData = LocalHomeThemeDataSourceImpl().fetchData()
+        homeThemeAdapter = HomeThemeAdapter()
+        binding.recyclerviewHomeTheme.adapter = homeThemeAdapter
+        homeThemeAdapter.themeData.addAll(themeData)
+    }
+
     private fun initHomeTitle(){
         sharedViewModel.getHomeTitle("and@naver.com")
        binding.lifecycleOwner = viewLifecycleOwner
@@ -153,10 +156,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
         binding.textHomeNightDrivePlus.setOnClickListener {
-            sharedViewModel.num.value = 1
+            sharedViewModel.num.value = 3
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
+                replace(R.id.nav_host_fragment_activity_main, MoreThemeViewFragment())
                 addToBackStack(null)
                 commit()
             }

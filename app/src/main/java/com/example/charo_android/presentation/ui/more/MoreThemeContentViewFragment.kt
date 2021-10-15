@@ -1,69 +1,81 @@
 package com.example.charo_android.presentation.ui.more
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.charo_android.R
-import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.databinding.FragmentMoreThemeContentViewBinding
-import com.example.charo_android.presentation.ui.more.adapter.MoreThemeContentViewAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.more.adapter.MoreViewAdapter
+import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MoreThemeContentViewFragment(userId :String, identity :String, value :String
-    ) : Fragment() {
-    private var _binding: FragmentMoreThemeContentViewBinding? = null
-    private val binding get() = _binding!!
-    private val moreThemeContentViewAdapter = MoreThemeContentViewAdapter(userId)
+class MoreThemeContentViewFragment(val userId: String, val identifier: String, val value: String) :
+    BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view) {
+    private val moreViewModel: MoreViewViewModel by viewModel()
+    private lateinit var moreViewAdapter: MoreViewAdapter
 
-    val userId = userId
-    val identity = identity
-    val value = value
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMoreThemeContentViewBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initSpinner()
-
-
-        return root
+        clickSpinner()
     }
 
+    private fun clickSpinner() {
+        binding.spinnerMoreTheme.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0) {
+                        initMoreThemeView()
 
+                    } else {
 
+                        initMoreThemeNewView()
+                    }
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+            }
+
+    }
+
+    private fun initMoreThemeView(){
+        moreViewModel.getMoreView(userId, identifier, value)
+        moreViewAdapter = MoreViewAdapter(Hidden.userId)
+        binding.recyclerviewMoreTheme.adapter = moreViewAdapter
+        moreViewModel.drive.observe(viewLifecycleOwner) {
+            moreViewAdapter.setHomeTrendDrive(it)
+        }
+    }
+
+    private fun initMoreThemeNewView(){
+            moreViewModel.getMoreNewView(userId, identifier, value)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            binding.recyclerviewMoreTheme.adapter = moreViewAdapter
+            moreViewModel.newDrive.observe(viewLifecycleOwner) {
+                moreViewAdapter.setHomeTrendDrive(it)
+            }
+    }
 
     private fun initSpinner(){
         val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.search_spinner, R.layout.custom_spinner_item)
         binding.spinnerMoreTheme.adapter = adapter
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
 
 }
