@@ -1,4 +1,4 @@
-package com.example.charo_android.data.api
+package com.example.charo_android.data.api.write
 
 import com.example.charo_android.data.model.request.RequestWriteData
 import com.example.charo_android.data.model.response.ResponseWriteData

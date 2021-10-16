@@ -6,6 +6,8 @@ import com.example.charo_android.data.api.more.MoreViewInfiniteService
 import com.example.charo_android.data.api.mypage.MyPageViewLikeService
 import com.example.charo_android.data.api.mypage.MyPageViewMoreService
 import com.example.charo_android.data.api.mypage.MyPageViewNewService
+import com.example.charo_android.data.api.search.SearchViewService
+import com.example.charo_android.data.api.write.WriteViewService
 import com.example.charo_android.hidden.Hidden
 
 import retrofit2.Retrofit

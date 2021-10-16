@@ -1,6 +1,6 @@
 package com.example.charo_android.presentation.di
 
-import com.example.charo_android.data.api.HomeViewService
+import com.example.charo_android.data.api.home.HomeViewService
 import com.example.charo_android.data.api.more.MoreViewInfiniteService
 
 import com.example.charo_android.hidden.Hidden

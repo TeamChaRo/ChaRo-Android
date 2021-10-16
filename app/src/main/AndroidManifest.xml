@@ -25,18 +25,20 @@
         tools:replace="android:appComponentFactory">
         <activity android:name=".presentation.ui.write.WriteShareActivity" />
         <activity android:name=".presentation.ui.alarm.AlarmActivity" />
-        <activity android:name=".presentation.ui.main.SplashActivity" />
-        <activity
-            android:name=".presentation.ui.signup.SignUpActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".presentation.ui.setting.SettingActivity">
+        <activity android:name=".presentation.ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.ui.signup.SignUpActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".presentation.ui.setting.SettingActivity" />
+
+
         <activity android:name=".presentation.ui.onBoarding.OnBoardingActivity" />
         <activity android:name=".presentation.ui.search.ResultSearchActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
