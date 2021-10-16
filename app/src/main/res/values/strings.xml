@@ -167,8 +167,7 @@
     <string name="version_num">1.0</string>
     <string name="logout">로그아웃</string>
     <string name="user_out">회원탈퇴</string>
-    
-
-
+    <string name="change_profile_image">프로필 사진 바꾸기</string>
+    <string name="nick_name">닉네임</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.signup
+package com.example.charo_android.presentation.ui.signup.viewmodel
 
 import android.content.Context
 import android.graphics.Bitmap

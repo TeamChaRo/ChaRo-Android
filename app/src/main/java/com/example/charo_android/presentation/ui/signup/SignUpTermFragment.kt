@@ -5,6 +5,7 @@ import android.view.View
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpTermBinding
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 

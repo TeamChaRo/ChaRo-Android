@@ -3,23 +3,20 @@ package com.example.charo_android.presentation.ui.signup
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpProfileBinding
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
@@ -32,7 +29,11 @@ class SignUpProfileFragment :
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             signUpViewModel.profileImage.value = result.data?.data
             Log.d("imageProfile", signUpViewModel.profileImage.value.toString())
-            binding.imgSignUpProfile.setImageURI(result.data?.data)
+
+            Glide.with(this)
+                .load(signUpViewModel.profileImage.value)
+                .centerCrop()
+                .into(binding.imgSignUpProfile)
 
         }
 

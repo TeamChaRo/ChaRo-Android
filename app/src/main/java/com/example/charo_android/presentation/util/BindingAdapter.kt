@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.util
 
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,6 +21,14 @@ object BindingAdapter {
             .transform(RoundedCorners(20))
             .into(imageView)
 
+    }
+    @JvmStatic
+    @BindingAdapter("profileBind")
+    fun setProfileImage(imageView: ImageView, imageUri : Uri){
+        Glide.with(imageView.context)
+            .load(imageUri)
+            .transform(RoundedCorners(20))
+            .into(imageView)
     }
 
     @JvmStatic
