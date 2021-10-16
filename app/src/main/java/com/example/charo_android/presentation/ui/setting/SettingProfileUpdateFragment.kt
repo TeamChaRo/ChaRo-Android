@@ -3,29 +3,28 @@ package com.example.charo_android.presentation.ui.setting
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSettingProfileUpdateBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
-import com.example.charo_android.presentation.ui.signup.SignUpTermFragment
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import kotlinx.android.synthetic.main.fragment_setting_profile_update.*
-import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
 
 
 class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBinding>
-(R.layout.fragment_setting_profile_update) {
+    (R.layout.fragment_setting_profile_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileCheckNickName()
+        initBottomSheet()
+        changeProfileImage()
     }
 
 
@@ -49,7 +48,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if (s.toString().length > 5) {
+                    if (s.toString().length > 5 || s.toString().isEmpty()) {
                         text_input_profile_change_nick_name.error = "5자 이내로 작성해주세요"
                     } else if (!Pattern.matches(nickNamePattern, s.toString())) {
                         text_input_profile_change_nick_name.error = "한글만 사용해주세요"
@@ -63,16 +62,46 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                                 text_input_profile_change_nick_name.isErrorEnabled = false
                                 text_input_profile_change_nick_name.isHelperTextEnabled = true
                                 text_input_profile_change_nick_name.helperText = "사용 가능한 닉네임입니다"
-                                settingViewModel.updateNickName.value = etSettingProfileChangeNickname.text.toString()
-
-
+                                settingViewModel.updateNickName.value =
+                                    etSettingProfileChangeNickname.text.toString()
+                                imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
                             }
                         }
                     }
                 }
             })
-
         }
     }
 
+
+    private fun initBottomSheet() {
+        binding.imgProfileChange.setOnClickListener {
+            val bottomSheet = SettingBottomSheetFragment()
+            bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+        }
+    }
+
+    private fun changeProfileImage(){
+        settingViewModel.profileChangeUri.observe(viewLifecycleOwner){
+            if (it != null){
+                Glide.with(this)
+                    .load(it)
+                    .centerCrop()
+                    .into(binding.imgProfileChange)
+                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+
+            } else{
+                with(binding){
+                    imgProfileChange.setImageResource(R.drawable.setting_profile_update)
+                    imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+                }
+
+            }
+
+
+        }
+
+    }
+
 }
+

@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.setting.viewmodel
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,7 @@ class SettingViewModel(
 
     val userId = MutableLiveData<String>()
 
+    val profileChangeUri = MutableLiveData<Uri>()
 
     val updateNickName = MutableLiveData<String>()
 

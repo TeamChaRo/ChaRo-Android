@@ -8,6 +8,8 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_off.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_on.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/selector_mypage_switch.xml" value="0.175" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/setting_no_next.xml" value="0.17324414715719064" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/sign_up_next.xml" value="0.17324414715719064" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_alarm.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -27,9 +29,10 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_more_theme_view.xml" value="0.16" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_my_charo.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_save.xml" value="0.2" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_bottom_sheet.xml" value="0.359375" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_main.xml" value="0.16452702702702704" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_profile_update.xml" value="0.20439189189189189" />
-        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_email.xml" value="0.1" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_email.xml" value="0.144" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_profile.xml" value="0.128" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_term.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_charo_my_charo.xml" value="0.1" />

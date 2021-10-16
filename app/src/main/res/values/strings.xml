@@ -169,5 +169,8 @@
     <string name="user_out">회원탈퇴</string>
     <string name="change_profile_image">프로필 사진 바꾸기</string>
     <string name="nick_name">닉네임</string>
+    <string name="perfect">완료</string>
+    <string name="normal_image">기본 이미지 설정</string>
+    <string name="select_library">라이브러리에서 선택</string>
 
 </resources>
