@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
+import com.google.android.material.chip.Chip
 
 object BindingAdapter {
     @JvmStatic
@@ -38,6 +39,16 @@ object BindingAdapter {
             textView.visibility = View.GONE
         } else{
             textView.text = text
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("chipBind")
+    fun setChip(chip: Chip, text: String){
+        if (text == ""){
+            chip.visibility = View.GONE
+        } else{
+            chip.text = text
         }
     }
 

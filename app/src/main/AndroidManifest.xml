@@ -32,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.ui.signup.SignUpActivity"
             android:exported="true"
@@ -40,13 +41,9 @@
 
 
         <activity android:name=".presentation.ui.onBoarding.OnBoardingActivity" />
-        <activity android:name=".presentation.ui.search.ResultSearchActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
+
         <activity android:name=".presentation.ui.detail.DetailActivity" />
-        <activity
-            android:name=".presentation.ui.search.NoSearchActivity"
-            android:label="@string/title_activity_no_search"
-            android:theme="@style/Theme.ChaRoAndroid.NoActionBar" />
         <activity android:name=".presentation.ui.signin.SignInActivity" />
         <activity
             android:name=".presentation.ui.main.MainActivity"

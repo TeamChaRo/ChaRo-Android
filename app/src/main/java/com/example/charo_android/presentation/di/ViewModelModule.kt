@@ -3,6 +3,7 @@ package com.example.charo_android.presentation.di
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,5 +15,6 @@ val viewModelModule = module {
     viewModel{MoreViewViewModel(get(),get(),get())}
     viewModel{SharedViewModel(get())}
     viewModel{ SettingViewModel(get()) }
+    viewModel{ SearchViewModel(get()) }
 
 }

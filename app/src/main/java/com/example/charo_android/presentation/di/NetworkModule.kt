@@ -7,6 +7,7 @@ import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
+import com.example.charo_android.data.api.search.SearchViewService
 import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
 import com.example.charo_android.data.api.signup.SignUpNickNameCheckViewService
 import com.example.charo_android.data.api.signup.SignUpRegisterService
@@ -60,5 +61,10 @@ val networkModule = module {
     single<SignUpRegisterService>{
         get<Retrofit>().create(SignUpRegisterService::class.java)
     }
+
+    single<SearchViewService>{
+        get<Retrofit>().create(SearchViewService::class.java)
+    }
+
 }
 

@@ -9,6 +9,7 @@ import com.example.charo_android.domain.repository.home.HomeRepository
 import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewRepository
+import com.example.charo_android.domain.repository.search.SearchViewRepository
 import com.example.charo_android.domain.repository.signup.SignUpEmailCertificationRepository
 import com.example.charo_android.domain.repository.signup.SignUpNickNameCheckRepository
 import com.example.charo_android.domain.repository.signup.SignUpRegisterRepository
@@ -24,4 +25,5 @@ val repositoryModule = module {
     single<SignUpEmailCertificationRepository>{SignUpEmailCertificationRepositoryImpl(get())}
     single<SignUpNickNameCheckRepository>{SignUpNickNameCheckRepositoryImpl(get())}
     single<SignUpRegisterRepository>{SignUpRegisterRepositoryImpl(get())}
+    single<SearchViewRepository>{SearchViewRepositoryImpl(get())}
 }

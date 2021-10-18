@@ -5,6 +5,8 @@ import com.example.charo_android.data.repository.local.LocalHomeThemeDataSourceI
 import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSource
 import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSourceImpl
 import com.example.charo_android.data.repository.remote.more.*
+import com.example.charo_android.data.repository.remote.search.RemoteSearchViewDataSource
+import com.example.charo_android.data.repository.remote.search.RemoteSearchViewDataSourceImpl
 import com.example.charo_android.data.repository.remote.signup.*
 import org.koin.dsl.module
 
@@ -18,4 +20,5 @@ val dataSourceModule = module {
     single<RemoteSignUpNickNameCheckDataSource>{RemoteSignUpNickNameCheckDataSourceImpl(get())}
     single<RemoteSignUpRegisterDataSource>{RemoteSignUpRegisterDataSourceImpl(get())}
     single<LocalHomeThemeDataSource>{LocalHomeThemeDataSourceImpl()}
+    single<RemoteSearchViewDataSource>{RemoteSearchViewDataSourceImpl(get())}
 }
