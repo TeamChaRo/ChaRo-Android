@@ -44,11 +44,11 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("chipBind")
-    fun setChip(chip: Chip, text: String){
-        if (text == ""){
-            chip.visibility = View.GONE
-        } else{
+    fun setChip(chip: Chip, text: String?){
+        if (text != null){
             chip.text = text
+        } else{
+            chip.visibility = View.GONE
         }
     }
 
