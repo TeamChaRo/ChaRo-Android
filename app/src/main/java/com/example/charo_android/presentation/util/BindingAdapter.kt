@@ -29,6 +29,7 @@ object BindingAdapter {
         Glide.with(imageView.context)
             .load(imageUri)
             .transform(RoundedCorners(20))
+            .centerCrop()
             .into(imageView)
     }
 

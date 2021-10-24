@@ -11,6 +11,7 @@
 
     <application
         android:name=".presentation.di.CharoApplication"
+
         android:allowBackup="true"
         android:appComponentFactory="@string/app_name"
         android:icon="@mipmap/ic_launcher_charo"
@@ -23,28 +24,34 @@
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
+        <activity
+            android:name=".presentation.ui.signin.SocialSignInActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="oauth"
+                    android:scheme="kakao1c4649ba2d391b77eba1164b785bc1e1" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".presentation.ui.write.WriteShareActivity" />
         <activity android:name=".presentation.ui.alarm.AlarmActivity" />
-        <activity android:name=".presentation.ui.main.SplashActivity" >
+        <activity android:name=".presentation.ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".presentation.ui.signup.SignUpActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".presentation.ui.setting.SettingActivity"/>
-
-
+        <activity android:name=".presentation.ui.setting.SettingActivity" />
         <activity android:name=".presentation.ui.onBoarding.OnBoardingActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
-
-
         <activity android:name=".presentation.ui.detail.DetailActivity" />
         <activity android:name=".presentation.ui.signin.SignInActivity" />
         <activity

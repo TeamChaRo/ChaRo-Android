@@ -4,8 +4,7 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("kotlin-android")
-//    id("dagger.hilt.android.plugin")
-  //  id("kotlin-parcelize")
+
 }
 
 android {
@@ -155,5 +154,6 @@ dependencies {
     implementation("io.insert-koin:koin-android-compat:3.1.2")
     testImplementation("io.insert-koin:koin-test:3.1.2")
 
-
+//kakao
+    implementation("com.kakao.sdk:v2-user:2.8.2")
 }

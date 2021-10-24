@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.signin.SocialSignInActivity">
+
+        <TextView
+            android:id="@+id/text_social_look"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/look_at"
+            android:textSize="14sp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:textColor="@color/blue_main"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="21dp"
+            android:layout_marginTop="58dp" />
+
+        <TextView
+            android:id="@+id/text_social_drive_mate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drive_mate"
+            android:textSize="13sp"
+            android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:textColor="@color/blue_main"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="189dp"
+            android:layout_marginStart="113dp"
+            android:layout_marginEnd="112dp"/>
+
+        <ImageView
+            android:id="@+id/img_social_charo_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            app:layout_constraintTop_toBottomOf="@+id/text_social_drive_mate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/img_social_apple"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kakao_login_medium_wide"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="185dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageView
+            android:id="@+id/img_social_google"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kakao_login_medium_wide"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_apple"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+
+
+        <ImageView
+            android:id="@+id/img_social_kakao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kakao_login_medium_wide"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_google"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/text_social_email_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_login"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="14sp"
+            android:includeFontPadding="false"
+            android:textColor="@color/gray3_sub"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_kakao"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="34dp"
+            android:layout_marginStart="86dp"/>
+
+        <TextView
+            android:id="@+id/text_social_email_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_sign_up"
+            app:layout_constraintTop_toTopOf="@+id/text_social_email_login"
+            app:layout_constraintStart_toEndOf="@+id/text_social_email_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="87dp"/>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

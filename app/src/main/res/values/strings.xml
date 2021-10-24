@@ -172,5 +172,9 @@
     <string name="perfect">완료</string>
     <string name="normal_image">기본 이미지 설정</string>
     <string name="select_library">라이브러리에서 선택</string>
+    <string name="look_at">둘러보기</string>
+    <string name="drive_mate">당신의 드라이브 메이트</string>
+    <string name="email_login">이메일 로그인</string>
+    <string name="email_sign_up">이메일로 가입</string>
 
 </resources>
