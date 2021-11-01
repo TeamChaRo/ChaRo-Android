@@ -61,4 +61,6 @@ class CharoFragment : Fragment() {
             }.attach()
         }
     }
+
+    
 }
