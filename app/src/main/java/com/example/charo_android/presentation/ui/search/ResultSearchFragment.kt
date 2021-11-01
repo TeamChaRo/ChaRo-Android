@@ -22,14 +22,29 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         loadSearchData()
         initSpinner()
         initResultSearchView()
-    }
-
-
-    fun loadSearchData() {
         Log.d("searchViewModel", searchViewModel.province.value.toString())
         Log.d("searchViewModel", searchViewModel.city.value.toString())
         Log.d("searchViewModel", searchViewModel.theme.value.toString())
         Log.d("searchViewModel", searchViewModel.caution.value.toString())
+    }
+
+
+    fun loadSearchData() {
+        if (searchViewModel.province.value == "") {
+            binding.chipResultSearch1.visibility = View.GONE
+        } else {
+            binding.chipResultSearch1.text = "${searchViewModel.province.value}"
+        }
+        if (searchViewModel.city.value == "") {
+            binding.chipResultSearch2.visibility = View.GONE
+        } else {
+            binding.chipResultSearch2.text = "${searchViewModel.city.value}"
+        }
+        if (searchViewModel.theme.value == "") {
+            binding.chipResultSearch3.visibility = View.GONE
+        } else {
+            binding.chipResultSearch3.text = "${searchViewModel.theme.value}"
+        }
 
         if (searchViewModel.caution.value == "") {
             binding.chipResultSearch4.visibility = View.GONE

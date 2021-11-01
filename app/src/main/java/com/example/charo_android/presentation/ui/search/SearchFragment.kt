@@ -43,7 +43,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private fun clickSearch() {
         binding.imgSearchStart.setOnClickListener {
             searchViewModel.province.value = if (binding.btnSearchArea1.text.toString() == "선택안함") {
-                " "
+                ""
             } else {
                 binding.btnSearchArea1.text.toString()
             }

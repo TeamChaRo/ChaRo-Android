@@ -1,8 +1,11 @@
 package com.example.charo_android.presentation.ui.home
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charo_android.R
 import com.example.charo_android.data.repository.local.LocalHomeThemeDataSource
@@ -13,12 +16,15 @@ import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.alarm.AlarmActivity
 import com.example.charo_android.presentation.ui.home.adapter.*
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
+import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
+import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
 import com.example.charo_android.presentation.util.LocationUtil
 import com.example.charo_android.presentation.util.ThemeUtil
+import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,9 +61,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initCustomThemeDrive()
         initHomeTitle()
         initThemeDrive()
+        logoutKakao()
+        deleteKakao()
+    }
+    private fun logoutKakao(){
+        binding.btnSocialKakaoDelete.setOnClickListener {
+            UserApiClient.instance.unlink { error ->
+                if (error != null) {
+                    Toast.makeText(requireActivity(), "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
+                startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                requireActivity().finish()
+            }
+        }
 
     }
+    private fun deleteKakao(){
+        binding.btnSocialKakaoLogout.setOnClickListener {
+            UserApiClient.instance.logout { error ->
+                if (error != null) {
+                    Toast.makeText(requireActivity(), "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
+                startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                requireActivity().finish()
+            }
+        }
 
+    }
     private fun initToolBar() {
         val toolbar = binding.toolbarMain
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
