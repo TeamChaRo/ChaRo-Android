@@ -2,21 +2,22 @@ import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSe
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val kotlin_version by extra("1.5.0-release-764")
+    val kotlin_version by extra("1.5.31")
     repositories {
         google()
         mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
+
+
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.0.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30")
+        classpath("com.android.tools.build:gradle:7.0.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
 //        classpath(ClassPathDependencies.hilt)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}")
         classpath(ClassPathDependencies.hilt)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath("com.google.gms:google-services:4.3.10")
     }
 }
 
@@ -25,6 +26,9 @@ allprojects {
         google()
         mavenCentral()
         maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
+        maven("https://plugins.gradle.org/m2/")
+        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
+        maven("https://maven.google.com")
     }
 }
 

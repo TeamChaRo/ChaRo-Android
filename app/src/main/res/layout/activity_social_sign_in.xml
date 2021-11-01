@@ -21,10 +21,13 @@
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
             android:textColor="@color/blue_main"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="21dp"
-            android:layout_marginTop="58dp" />
+            android:layout_marginTop="58dp"
+             />
 
         <TextView
             android:id="@+id/text_social_drive_mate"
@@ -64,19 +67,23 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/img_social_google"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/kakao_login_medium_wide"
+            android:background="@drawable/google_signin_shape"
+            android:drawableStart="@drawable/google_logo"
             android:scaleType="fitXY"
+            android:text="@string/google_sign_in"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_medium"
             app:layout_constraintTop_toBottomOf="@+id/img_social_apple"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:paddingStart="7dp"
             android:layout_marginTop="12dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
-
 
 
         <ImageView

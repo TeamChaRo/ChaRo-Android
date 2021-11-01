@@ -4,7 +4,7 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("kotlin-android")
-
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -12,7 +12,7 @@ android {
 }
 
 android {
-    compileSdk=Apps.compileSdk
+    compileSdk = Apps.compileSdk
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
@@ -22,7 +22,7 @@ android {
         versionCode = Apps.versionCode
         versionName = Apps.versionName
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -70,13 +70,15 @@ dependencies {
     implementation(AndroidXDependencies.hilt)
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation(files("libs/com.skt.Tmap_1.67.jar"))
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation("com.google.firebase:firebase-common-ktx:20.0.0")
+    implementation("com.google.firebase:firebase-auth-ktx:21.0.1")
     kapt(KaptDependencies.hilt)
 
 // DataStore
@@ -156,4 +158,9 @@ dependencies {
 
 //kakao
     implementation("com.kakao.sdk:v2-user:2.8.2")
+
+//google
+    implementation("com.google.android.gms:play-services-auth:19.2.0")
+
+
 }
