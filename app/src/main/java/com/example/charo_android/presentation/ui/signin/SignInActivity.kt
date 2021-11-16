@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.request.signin.RequestSignInData
 import com.example.charo_android.data.model.response.signin.ResponseSignInData
@@ -41,7 +42,9 @@ class SignInActivity : AppCompatActivity() {
                     password = binding.etSigninPw.text.toString()
                 )
                 emailSignInViewModel.getEmailSignInData(requestSignInData)
-                Log.d("emailLogin", emailSignInViewModel.profileImage.toString())
+                emailSignInViewModel.emailSignInData.observe(this, Observer {
+                    Log.d("emailSignIn", it.profileImage.toString())
+                })
             }
         }
     }

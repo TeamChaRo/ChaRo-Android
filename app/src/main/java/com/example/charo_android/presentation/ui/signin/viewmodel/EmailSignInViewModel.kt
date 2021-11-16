@@ -1,10 +1,12 @@
 package com.example.charo_android.presentation.ui.signin.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.model.request.signin.RequestSignInData
+import com.example.charo_android.domain.model.signin.EmailSignInData
 import com.example.charo_android.domain.usecase.signin.GetRemoteEmailLoginUseCase
 import kotlinx.coroutines.launch
 
@@ -12,13 +14,10 @@ class EmailSignInViewModel(
     private val getRemoteEmailLoginUseCase: GetRemoteEmailLoginUseCase
 ): ViewModel() {
 
-    var userEmail = MutableLiveData<String>()
+    private val _emailSignInData = MutableLiveData<EmailSignInData>()
+    var emailSignInData : LiveData<EmailSignInData> = _emailSignInData
 
-    var nickname = MutableLiveData<String>()
 
-    var profileImage = MutableLiveData<String>()
-
-    var isSocial = MutableLiveData<Boolean>()
 
 
 
@@ -27,11 +26,9 @@ class EmailSignInViewModel(
         viewModelScope.launch {
             runCatching { getRemoteEmailLoginUseCase.execute(requestSignInData) }
                 .onSuccess {
-                    userEmail.value = it.userEmail
-                    nickname.value = it.nickname
-                    profileImage.value = it.profileImage
-                    isSocial.value = it.isSocial
+                   _emailSignInData.value = it
                     Log.d("emailLogin", "서버 통신 성공")
+                    Log.d("emailLogin", it.toString())
                 }
                 .onFailure {
                     it.printStackTrace()
