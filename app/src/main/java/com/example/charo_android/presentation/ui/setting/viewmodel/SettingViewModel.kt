@@ -24,6 +24,8 @@ class SettingViewModel(
 
     val updateNickName = MutableLiveData<String>()
 
+    val updateTabText = MutableLiveData<String>()
+
     fun profileNickNameCheck(nickname: String) {
         viewModelScope.launch {
             runCatching { getRemoteProfileNickNameCheckUseCase.execute(nickname) }

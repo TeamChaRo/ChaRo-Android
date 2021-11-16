@@ -5,6 +5,7 @@ import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.example.charo_android.presentation.ui.signin.viewmodel.EmailSignInViewModel
 import com.example.charo_android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,4 +19,5 @@ val viewModelModule = module {
     viewModel{ SettingViewModel(get()) }
     viewModel{ SearchViewModel(get()) }
     viewModel{ SocialSignInViewModel(get())}
+    viewModel{ EmailSignInViewModel(get()) }
 }

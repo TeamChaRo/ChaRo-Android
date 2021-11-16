@@ -32,7 +32,7 @@ class SignUpProfileFragment :
 
             Glide.with(this)
                 .load(signUpViewModel.profileImage.value)
-                .centerCrop()
+                .circleCrop()
                 .into(binding.imgSignUpProfile)
 
         }

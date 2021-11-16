@@ -1,7 +1,9 @@
 package com.example.charo_android.data.mapper
 
 import com.example.charo_android.data.model.request.signin.RequestSocialData
+import com.example.charo_android.data.model.response.signin.ResponseSignInData
 import com.example.charo_android.data.model.response.signin.ResponseSocialData
+import com.example.charo_android.domain.model.signin.EmailSignInData
 import com.example.charo_android.domain.model.signin.SocialLoginData
 import com.example.charo_android.domain.model.signin.SocialUserEmail
 
@@ -21,4 +23,14 @@ object SignInMapper {
             isSocial = responseKakaoData.data.isSocial
         )
     }
-}
+
+    fun mapperToEmailSignInData(responseSignInData: ResponseSignInData) : EmailSignInData {
+        return EmailSignInData(
+            userEmail = responseSignInData.data.userEmail,
+            nickname = responseSignInData.data.nickname,
+            profileImage = responseSignInData.data.profileImage,
+            isSocial = responseSignInData.data.isSocial
+        )
+
+        }
+    }

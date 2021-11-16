@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.charo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoBinding
+import com.example.charo_android.presentation.ui.setting.SettingActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CharoFragment : Fragment() {
@@ -27,7 +29,7 @@ class CharoFragment : Fragment() {
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
-
+        goSettingView()
         charoViewModel.getInitLikeData()
         charoViewModel.userInformation.observe(viewLifecycleOwner, {
             binding.myPageData = charoViewModel
@@ -62,5 +64,11 @@ class CharoFragment : Fragment() {
         }
     }
 
+    private fun goSettingView(){
+        binding.imgCharoSetting.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingActivity::class.java)
+            startActivity(intent)
+        }
+    }
     
 }

@@ -7,6 +7,8 @@ import com.example.charo_android.data.repository.remote.home.RemoteHomeDataSourc
 import com.example.charo_android.data.repository.remote.more.*
 import com.example.charo_android.data.repository.remote.search.RemoteSearchViewDataSource
 import com.example.charo_android.data.repository.remote.search.RemoteSearchViewDataSourceImpl
+import com.example.charo_android.data.repository.remote.signin.RemoteEmailSignInDataSource
+import com.example.charo_android.data.repository.remote.signin.RemoteEmailSignInDataSourceImpl
 import com.example.charo_android.data.repository.remote.signin.RemoteKakaoSignInDataSource
 import com.example.charo_android.data.repository.remote.signin.RemoteKakaoSignInDataSourceImpl
 import com.example.charo_android.data.repository.remote.signup.*
@@ -24,4 +26,5 @@ val dataSourceModule = module {
     single<LocalHomeThemeDataSource>{LocalHomeThemeDataSourceImpl()}
     single<RemoteSearchViewDataSource>{RemoteSearchViewDataSourceImpl(get())}
     single<RemoteKakaoSignInDataSource>{RemoteKakaoSignInDataSourceImpl(get())}
+    single<RemoteEmailSignInDataSource>{RemoteEmailSignInDataSourceImpl(get())}
 }

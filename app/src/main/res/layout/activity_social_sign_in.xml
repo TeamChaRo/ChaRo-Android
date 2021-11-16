@@ -54,18 +54,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageView
-            android:id="@+id/img_social_apple"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/kakao_login_medium_wide"
-            android:scaleType="fitXY"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="185dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/img_social_google"
@@ -77,11 +65,11 @@
             android:text="@string/google_sign_in"
             android:textSize="17sp"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_apple"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingStart="7dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="185dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 

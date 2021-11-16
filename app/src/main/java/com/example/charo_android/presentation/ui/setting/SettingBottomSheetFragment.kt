@@ -25,6 +25,7 @@ class SettingBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding : FragmentSettingBottomSheetBinding ? = null
     val binding get() = _binding!!
     private val settingViewModel: SettingViewModel by sharedViewModel()
+
     private val profileImageChange: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK){
@@ -40,6 +41,9 @@ class SettingBottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting_bottom_sheet, container, false)
         clickBottomSheet()
+
+
+
         return binding.root
 
 
