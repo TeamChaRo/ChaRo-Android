@@ -34,7 +34,7 @@ class SignInActivity : AppCompatActivity() {
             Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
         } else {
             val requestSignInData = RequestSignInData(
-                email = binding.etSigninId.text.toString(),
+                userEmail = binding.etSigninId.text.toString(),
                 password = binding.etSigninPw.text.toString()
             )
 
