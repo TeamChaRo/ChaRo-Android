@@ -574,6 +574,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_detail_map_end" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:id="@+id/cl_detail_mapview_touch"
+                        app:layout_constraintStart_toStartOf="@id/cl_detail_mapview"
+                        app:layout_constraintEnd_toEndOf="@id/cl_detail_mapview"
+                        app:layout_constraintTop_toTopOf="@id/cl_detail_mapview"
+                        app:layout_constraintBottom_toBottomOf="@id/cl_detail_mapview"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
