@@ -215,8 +215,8 @@ class DetailFragment : Fragment() {
     }
 
     private fun copyAddress(textView: TextView) {
-        var clipboardManager = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val address: String = binding.tvDetailMapStartAddress.text.toString()
+        val clipboardManager = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val address: String = textView.text.toString()
         val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(requireContext(), "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
