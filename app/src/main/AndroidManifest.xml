@@ -39,7 +39,6 @@
         <activity android:name="com.example.charo_android.presentation.ui.search.ResultSearchActivity" />
         <activity android:name="com.example.charo_android.presentation.ui.search.SearchActivity" />
         <activity android:name="com.example.charo_android.presentation.ui.detail.DetailActivity" />
-        <activity android:name="com.example.charo_android.presentation.ui.write.WriteMapActivity" />
         <activity
             android:name=".presentation.ui.search.NoSearchActivity"
             android:label="@string/title_activity_no_search"
