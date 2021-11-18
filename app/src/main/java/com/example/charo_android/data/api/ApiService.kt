@@ -6,6 +6,8 @@ import com.example.charo_android.data.api.more.MoreViewInfiniteService
 import com.example.charo_android.data.api.mypage.MyPageViewLikeService
 import com.example.charo_android.data.api.mypage.MyPageViewMoreService
 import com.example.charo_android.data.api.mypage.MyPageViewNewService
+import com.example.charo_android.data.api.search.SearchViewService
+import com.example.charo_android.data.api.write.WriteViewService
 import com.example.charo_android.hidden.Hidden
 
 import retrofit2.Retrofit
@@ -21,7 +23,6 @@ object ApiService {
     val moreViewService: MoreViewInfiniteService = retrofit.create(MoreViewInfiniteService::class.java)
     val detailViewService: DetailViewService = retrofit.create(DetailViewService::class.java)
     val signInViewService: SignInViewService = retrofit.create(SignInViewService::class.java)
-    val searchViewService : SearchViewService = retrofit.create(SearchViewService::class.java)
     val myPageViewLikeService = retrofit.create(MyPageViewLikeService::class.java)
     val myPageViewNewService = retrofit.create(MyPageViewNewService::class.java)
     val myPageViewMoreService = retrofit.create(MyPageViewMoreService::class.java)

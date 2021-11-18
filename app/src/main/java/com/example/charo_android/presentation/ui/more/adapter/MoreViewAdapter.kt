@@ -16,7 +16,7 @@ import com.example.charo_android.presentation.ui.detail.DetailActivity
 
 class MoreViewAdapter(val userId: String) :
     RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
-     val _moreData = mutableListOf<MoreDrive>()
+     private val _moreData = mutableListOf<MoreDrive>()
      private var moreData : List<MoreDrive> = _moreData
 
 
@@ -62,7 +62,6 @@ class MoreViewAdapter(val userId: String) :
     }
 
     fun setHomeTrendDrive(moreData: List<MoreDrive>){
-
         this.moreData = moreData
         notifyDataSetChanged()
     }

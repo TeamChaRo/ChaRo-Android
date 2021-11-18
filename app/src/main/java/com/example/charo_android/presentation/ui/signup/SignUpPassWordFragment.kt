@@ -8,10 +8,14 @@ import android.view.View
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpPassWordBinding
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
 
 class SignUpPassWordFragment :
     BaseFragment<FragmentSignUpPassWordBinding>(R.layout.fragment_sign_up_pass_word) {
+
+    private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +49,7 @@ class SignUpPassWordFragment :
                     } else {
                         textInputPaasword.error = null
                         textInputPaasword.isErrorEnabled = false
+
                     }
 
 
@@ -76,8 +81,13 @@ class SignUpPassWordFragment :
                     } else{
                         textPasswordReconfirm.error = null
                         textPasswordReconfirm.isErrorEnabled = false
+                        signUpViewModel.password.value = etSignUpPassword.text.toString()
                         imgSignUpPasswordNext.setOnClickListener {
-
+                            val transaction = activity?.supportFragmentManager?.beginTransaction()
+                            transaction?.apply {
+                                replace(R.id.fragment_container_email, SignUpProfileFragment())
+                                commit()
+                            }
                         }
                     }
                 }

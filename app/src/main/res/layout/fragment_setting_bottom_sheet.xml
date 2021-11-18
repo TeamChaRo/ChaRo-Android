@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".presentation.ui.setting.SettingBottomSheetFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/text_bottom_sheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/change_profile_image"
+                android:textColor="@color/sub_black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_bottom_sheet" />
+
+            <TextView
+                android:id="@+id/text_bottom_sheet_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/normal_image"
+                android:textColor="@color/sub_black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/text_bottom_sheet"
+                app:layout_constraintTop_toBottomOf="@+id/img_bottom_sheet_one" />
+
+            <ImageView
+                android:id="@+id/img_bottom_sheet_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_bottom_sheet_normal" />
+
+            <TextView
+                android:id="@+id/text_bottom_sheet_library"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/select_library"
+                android:textColor="@color/sub_black"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/text_bottom_sheet_normal"
+                app:layout_constraintTop_toBottomOf="@+id/img_bottom_sheet_two" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

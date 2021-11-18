@@ -5,12 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charo_android.R
 import android.util.Log
+import com.bumptech.glide.util.Util
 import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
+import com.kakao.sdk.common.util.Utility
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         userEmail = intent.getStringExtra("userId").toString()
         nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userEmail, nickName)

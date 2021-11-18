@@ -5,6 +5,7 @@ import com.example.charo_android.presentation.di.networkModule
 import com.example.charo_android.presentation.di.dataSourceModule
 import com.example.charo_android.presentation.di.repositoryModule
 import com.example.charo_android.presentation.di.viewModelModule
+import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -12,7 +13,7 @@ import org.koin.core.context.startKoin
 class CharoApplication: Application() {
     override fun onCreate() {
         super.onCreate()
-
+        KakaoSdk.init(this, "1c4649ba2d391b77eba1164b785bc1e1")
         startKoin {
             androidLogger()
             androidContext(this@CharoApplication)

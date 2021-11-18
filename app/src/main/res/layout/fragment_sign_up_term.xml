@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.signup.SignUpTermFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_term"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_sign_up_road_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/sign_up_road_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_accept_term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/accept_term"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black_sub"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road_4"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="22dp"
+                android:layout_marginStart="20dp"/>
+
+            <ImageView
+                android:id="@+id/img_sign_up_term_background"
+                android:layout_width="0dp"
+                android:layout_height="193dp"
+                android:background="@drawable/rectangle_243"
+                app:layout_constraintStart_toStartOf="@+id/text_accept_term"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_accept_term"
+                android:layout_marginTop="12dp"/>
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/img_sign_up_term_background"
+                app:layout_constraintStart_toStartOf="@+id/img_sign_up_term_background"
+                app:layout_constraintEnd_toEndOf="@+id/img_sign_up_term_background">
+
+                <ImageView
+                    android:id="@+id/img_sign_up_term_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/selector_sign_up_term_big"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginStart="12dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/input_accept_term"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray5_sub"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="@+id/img_sign_up_term_big"
+                    app:layout_constraintStart_toEndOf="@+id/img_sign_up_term_big"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_term_big"/>
+
+                <View
+                    android:id="@+id/img_sign_up_term_line"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray2_sub"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_sign_up_term_big"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"/>
+
+                <ImageView
+                    android:id="@+id/img_sign_up_term_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_sign_up_term_small"
+                    app:layout_constraintTop_toBottomOf="@+id/img_sign_up_term_line"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/text_input_term_push"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/input_accpet_term_push"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray5_sub"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="@+id/img_sign_up_term_small"
+                    app:layout_constraintStart_toEndOf="@+id/img_sign_up_term_small"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_term_small"/>
+
+                <TextView
+                    android:id="@+id/text_input_term_see_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="@string/input_accpet_term_see"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray3_sub"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="@+id/text_input_term_push"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_input_term_push"
+                    android:layout_marginEnd="24dp"/>
+
+                <ImageView
+                    android:id="@+id/img_sign_up_term_small_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_sign_up_term_small"
+                    app:layout_constraintTop_toBottomOf="@+id/img_sign_up_term_small"
+                    app:layout_constraintStart_toStartOf="@+id/img_sign_up_term_small"
+                    app:layout_constraintEnd_toEndOf="@+id/img_sign_up_term_small"
+                    android:layout_marginTop="1dp"/>
+
+                <TextView
+                    android:id="@+id/text_input_term_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/input_accept_term_email"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray5_sub"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="@+id/img_sign_up_term_small_2"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_term_small_2"
+                    app:layout_constraintStart_toEndOf="@+id/img_sign_up_term_small_2"/>
+
+                <TextView
+                    android:id="@+id/text_input_term_see_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="@string/input_accpet_term_see"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray3_sub"
+                    android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="@+id/text_input_term_email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_input_term_email"
+                    android:layout_marginEnd="24dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/img_sign_up_term_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/sign_up_next"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/sign_up_start"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_term_next"
+            app:layout_constraintEnd_toEndOf="@+id/img_sign_up_term_next"
+            app:layout_constraintStart_toStartOf="@+id/img_sign_up_term_next"
+            app:layout_constraintTop_toTopOf="@+id/img_sign_up_term_next" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
