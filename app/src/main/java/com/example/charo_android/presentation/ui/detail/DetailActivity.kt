@@ -2,8 +2,10 @@ package com.example.charo_android.presentation.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityDetailBinding
 import com.skt.Tmap.*
 
@@ -34,6 +36,10 @@ class DetailActivity : AppCompatActivity() {
         region = intent.getStringExtra("region")!!
         imageUrl = intent.getStringExtra("imageUrl")!!
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.detail_fragment, DetailFragment())
+            .commit()
+
 //        var userId: String = intent.getStringExtra("userId").toString()
 //        var postId: Int = intent.getIntExtra("postId", 0)
 //        Log.d("log", userId)
@@ -56,7 +62,19 @@ class DetailActivity : AppCompatActivity() {
 //        imgDetailIconBackOnClickEvent()
 //        // 글 수정/삭제 이벤트
 //        imgDetailMoreMineOnClickEvent()
+    }
 
+    fun openFragment(num: Int) {
+        Log.d("openFragment", "called")
+        val transaction = supportFragmentManager.beginTransaction()
+        when (num) {
+            0 -> transaction.replace(R.id.detail_fragment, DetailFragment())
+            else -> {
+                transaction.replace(R.id.detail_fragment, DetailMapFragment())
+                    .addToBackStack("detailMap")
+            }
+        }
+        transaction.commit()
     }
 
     private fun init(userId: String, postId: Int, tMapView: TMapView) {
