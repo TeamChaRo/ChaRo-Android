@@ -23,7 +23,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.skt.Tmap.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 
 class DetailFragment : Fragment() {
@@ -110,6 +112,11 @@ class DetailFragment : Fragment() {
         // 지도 클릭 이벤트
         binding.clDetailMapviewTouch.setOnClickListener {
             (context as DetailActivity).openFragment(1)
+        }
+
+        // n명이 좋아해요 클릭 이벤트
+        binding.tvDetailLike.setOnClickListener {
+            openBottomSheetDialog()
         }
     }
 
@@ -232,5 +239,10 @@ class DetailFragment : Fragment() {
         val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(requireContext(), "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+    }
+
+    private fun openBottomSheetDialog() {
+        val bottomSheetDialogFragment = DetailLikeFragment()
+        bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
 }
