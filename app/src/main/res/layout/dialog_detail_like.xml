@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cl_detail_dialog"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_detail_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:behavior_draggable="true"
@@ -10,39 +10,53 @@
     app:behavior_peekHeight="200dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_detail_dialog_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cl_detail_dialog_top"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/img_detail_dialog_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/img_detail_dialog_close"
-            android:src="@drawable/ic_close"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="7dp"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="3dp"
+            android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="7dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_detail_dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_detail_dialog_title"
-            android:text="@string/like"
+            android:layout_marginVertical="19dp"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
-            android:textSize="17sp"
             android:lineHeight="24sp"
-            android:layout_marginVertical="19dp"
+            android:text="@string/like"
             android:textColor="@color/black_sub"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_detail_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_detail_dialog_top"
+        app:layout_constraintVertical_bias="1.0"
+        tools:itemCount="15"
+        tools:listitem="@layout/item_detail_like" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
