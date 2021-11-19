@@ -44,7 +44,7 @@
     <TextView
         android:layout_width="56dp"
         android:layout_height="22dp"
-        android:id="@+id/btn_detail_like_follow"
+        android:id="@+id/tv_detail_like_follow"
         android:background="@drawable/selector_detail_like_isfollow"
         android:text="팔로우"
         android:fontFamily="@font/noto_sans_cjkkr_regular"
