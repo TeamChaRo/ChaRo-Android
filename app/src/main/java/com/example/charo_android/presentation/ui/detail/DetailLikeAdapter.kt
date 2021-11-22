@@ -5,19 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.R
-import com.example.charo_android.data.model.detail.Data
-import com.example.charo_android.data.model.detail.ResponseDetailLikeData
+import com.example.charo_android.data.model.detail.UserData
 import com.example.charo_android.databinding.ItemDetailLikeBinding
 
-class DetailLikeAdapter(val itemClick: (Data) -> Unit) :
+class DetailLikeAdapter(val itemClick: (UserData) -> Unit) :
     RecyclerView.Adapter<DetailLikeAdapter.DetailLikeViewHolder>() {
-    val itemList = mutableListOf<Data>()
+    val itemList = mutableListOf<UserData>()
 
     class DetailLikeViewHolder(
         private val binding: ItemDetailLikeBinding,
-        private val itemClick: (Data) -> Unit
+        private val itemClick: (UserData) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Data) {
+        fun onBind(data: UserData) {
             Glide.with(binding.imgDetailLikeImage.context)
                 .load(data.image)
                 .error(R.drawable.myimage)
