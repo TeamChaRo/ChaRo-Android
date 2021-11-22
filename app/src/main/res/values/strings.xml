@@ -178,4 +178,5 @@
     <string name="email_sign_up">이메일로 가입</string>
     <string name="firebase_web_client_id">570607218249-6osutorq2vh0q71gvcus4e6n6c5d4n5j.apps.googleusercontent.com</string>
     <string name="google_sign_in">Google 로그인</string>
+    <string name="like">좋아요</string>
 </resources>
