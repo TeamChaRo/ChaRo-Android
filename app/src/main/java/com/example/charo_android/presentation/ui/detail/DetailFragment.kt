@@ -55,6 +55,7 @@ class DetailFragment : Fragment() {
         val region = (activity as DetailActivity).region
 
         // ViewModel LiveData
+        viewModel.setPostId(postId)
         if (viewModel.detailData.value == null)
             viewModel.getData(postId, title, date, region)
 
