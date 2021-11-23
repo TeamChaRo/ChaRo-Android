@@ -50,6 +50,7 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
         viewModel.userData.observe(viewLifecycleOwner, {
             addRecyclerViewItem()
         })
+        clickClose()
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -90,5 +91,11 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
         }
         binding.rcvDetailDialog.adapter = adapter
         adapter.notifyDataSetChanged()
+    }
+
+    private fun clickClose() {
+        binding.imgDetailDialogClose.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 }
