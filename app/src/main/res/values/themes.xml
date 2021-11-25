@@ -154,6 +154,14 @@
         <item name="android:background">@drawable/background_radius_all_20</item>
     </style>
 
+<!--    승현 바텀시트다이얼로그-->
+    <style name="DetailLikeBottomSheet" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/DetailLikeBottomSheetStyle</item>
+    </style>
+    <style name="DetailLikeBottomSheetStyle" parent="">
+        <item name="android:background">@drawable/shape_detail_dialog</item>
+    </style>
+
     <style name="Theme.ChaRoAndroid.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

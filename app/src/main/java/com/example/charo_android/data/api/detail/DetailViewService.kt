@@ -3,11 +3,10 @@ package com.example.charo_android.data.api.detail
 import com.example.charo_android.data.model.detail.RequestDetailLikeAndSave
 import com.example.charo_android.data.model.detail.ResponseDetailData
 import com.example.charo_android.data.model.detail.ResponseDetailLikeAndSave
+import com.example.charo_android.data.model.detail.ResponseDetailLikes
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface DetailViewService {
     @GET("/post/detail/{userEmail}/{postId}")
@@ -24,4 +23,9 @@ interface DetailViewService {
     fun postDetailSave(
         @Body body: RequestDetailLikeAndSave
     ): Call<ResponseDetailLikeAndSave>
+
+    @GET("/post/likes/{postId}")
+    fun getLikes(
+        @Path("postId") postId: Int, @Query("userEmail") userEmail: String
+    ): Call<ResponseDetailLikes>
 }

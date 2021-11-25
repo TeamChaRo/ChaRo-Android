@@ -48,12 +48,6 @@
             android:name=".presentation.ui.signup.SignUpActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.example.charo_android.presentation.ui.onBoarding.OnBoardingActivity" />
-        <activity android:name="com.example.charo_android.presentation.ui.search.ResultSearchActivity" />
-        <activity
-            android:name=".presentation.ui.search.NoSearchActivity"
-            android:label="@string/title_activity_no_search"
-            android:theme="@style/Theme.ChaRoAndroid.NoActionBar" />
         <activity android:name=".presentation.ui.setting.SettingActivity" />
         <activity android:name=".presentation.ui.onBoarding.OnBoardingActivity" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
