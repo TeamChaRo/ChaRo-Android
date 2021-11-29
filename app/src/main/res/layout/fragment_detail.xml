@@ -246,14 +246,14 @@
 
                     <TextView
                         android:id="@+id/tv_detail_drive_region"
+                        show_province="@{detailData.detailData.data.province}"
+                        show_region="@{detailData.detailData.region}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
                         android:lineHeight="21sp"
-                        show_province="@{detailData.detailData.data.province}"
-                        show_region="@{detailData.detailData.region}"
                         android:textAlignment="textStart"
                         android:textColor="@color/gray5_sub"
                         android:textSize="14sp"
@@ -302,6 +302,7 @@
 
                         <TextView
                             android:id="@+id/tv_detail_theme1"
+                            is_INVISIBLE="@{detailData.detailData.data.themes.size &lt; 1}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/shape_detail_checked_box"
@@ -311,7 +312,6 @@
                             android:paddingHorizontal="21dp"
                             android:paddingVertical="10dp"
                             android:text="@{detailData.detailData.data.themes[0]}"
-                            is_INVISIBLE="@{detailData.detailData.data.themes.size &lt; 1}"
                             android:textAlignment="center"
                             android:textColor="@color/gray5_sub"
                             android:textSize="14sp"
@@ -323,6 +323,7 @@
 
                         <TextView
                             android:id="@+id/tv_detail_theme2"
+                            is_INVISIBLE="@{detailData.detailData.data.themes.size &lt; 2}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="6dp"
@@ -333,7 +334,6 @@
                             android:paddingHorizontal="21dp"
                             android:paddingVertical="10dp"
                             android:text='@{detailData.detailData.data.themes[1] ?? ""}'
-                            is_INVISIBLE="@{detailData.detailData.data.themes.size &lt; 2}"
                             android:textAlignment="center"
                             android:textColor="@color/gray5_sub"
                             android:textSize="14sp"
@@ -344,6 +344,7 @@
 
                         <TextView
                             android:id="@+id/tv_detail_theme3"
+                            is_INVISIBLE="@{detailData.detailData.data.themes.size &lt; 3}"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/shape_detail_checked_box"
@@ -353,7 +354,6 @@
                             android:paddingHorizontal="21dp"
                             android:paddingVertical="10dp"
                             android:text='@{detailData.detailData.data.themes[2] ?? ""}'
-                            is_INVISIBLE="@{detailData.detailData.data.themes.size &lt; 3}"
                             android:textAlignment="center"
                             android:textColor="@color/gray5_sub"
                             android:textSize="14sp"
@@ -441,10 +441,10 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_detail_map_via"
+                        is_GONE="@{detailData.detailData.data.course.size != 3}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        is_GONE="@{detailData.detailData.data.course.size != 3}"
                         app:layout_constraintBottom_toTopOf="@id/cl_detail_map_end"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -573,6 +573,15 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_detail_map_end" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_detail_mapview_touch"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="@id/cl_detail_mapview"
+                        app:layout_constraintEnd_toEndOf="@id/cl_detail_mapview"
+                        app:layout_constraintStart_toStartOf="@id/cl_detail_mapview"
+                        app:layout_constraintTop_toTopOf="@id/cl_detail_mapview" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -876,10 +885,10 @@
 
                 <ImageView
                     android:id="@+id/img_detail_like"
+                    is_selected="@{detailData.detailData.data.isFavorite() == 1}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_detail_like"
-                    is_selected="@{detailData.detailData.data.isFavorite() == 1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_detail_like"
                     app:layout_constraintStart_toStartOf="parent"
@@ -906,11 +915,11 @@
 
             <ImageView
                 android:id="@+id/img_detail_save"
+                is_selected="@{detailData.detailData.data.isStored() == 1}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="14dp"
                 android:background="@drawable/selector_detail_save"
-                is_selected="@{detailData.detailData.data.isStored() == 1}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/img_detail_share"
                 app:layout_constraintStart_toEndOf="@id/cl_detail_bottom_like"

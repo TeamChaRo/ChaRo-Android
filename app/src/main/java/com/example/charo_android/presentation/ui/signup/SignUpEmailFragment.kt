@@ -8,13 +8,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpEmailBinding
-import com.example.charo_android.domain.model.signup.Email
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SignUpEmailFragment :

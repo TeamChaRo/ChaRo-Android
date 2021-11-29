@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".presentation.ui.more.MoreThemeContentViewFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        tools:context=".presentation.ui.more.MoreThemeContentViewFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="90dp">
 
-            <TextView
-                android:id="@+id/text_more_theme_count"
-                style="@style/HeaderH8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="22dp"
-                android:text="@string/main_charo_more_view_count"
-                android:textColor="@color/gray5_sub"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinner_more_theme"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_more_theme_count" />
-
-            <TextView
-                android:id="@+id/text_more_theme_spinner"
-                style="@style/HeaderH8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/spinner_more_theme"
-                app:layout_constraintTop_toTopOf="@+id/spinner_more_theme"
-                tools:text="@string/main_charo_theme" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_more_theme"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="29dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_more_theme_count" />
+                android:layout_height="wrap_content">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <Spinner
+                    android:id="@+id/spinner_more_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="18dp"/>
+
+                <TextView
+                    android:id="@+id/text_more_theme_spinner"
+                    style="@style/HeaderH8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/spinner_more_theme"
+                    app:layout_constraintTop_toTopOf="@+id/spinner_more_theme"
+                    tools:text="@string/main_charo_theme" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_more_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="29dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_more_theme_spinner" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

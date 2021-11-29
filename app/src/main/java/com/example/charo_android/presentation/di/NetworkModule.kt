@@ -1,12 +1,14 @@
 package com.example.charo_android.presentation.di
 
-import com.example.charo_android.data.api.HomeViewService
+import com.example.charo_android.data.api.home.HomeViewService
+import com.example.charo_android.data.api.login.KakaoSignInService
 import com.example.charo_android.data.api.more.MoreViewInfiniteService
 
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
+import com.example.charo_android.data.api.search.SearchViewService
 import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
 import com.example.charo_android.data.api.signup.SignUpNickNameCheckViewService
 import com.example.charo_android.data.api.signup.SignUpRegisterService
@@ -59,6 +61,14 @@ val networkModule = module {
     }
     single<SignUpRegisterService>{
         get<Retrofit>().create(SignUpRegisterService::class.java)
+    }
+
+    single<SearchViewService>{
+        get<Retrofit>().create(SearchViewService::class.java)
+    }
+
+    single<KakaoSignInService>{
+        get<Retrofit>().create(KakaoSignInService::class.java)
     }
 }
 

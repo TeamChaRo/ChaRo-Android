@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.detail.DetailData
-import com.example.charo_android.data.model.detail.RequestDetailLikeAndSave
-import com.example.charo_android.data.model.detail.ResponseDetailData
-import com.example.charo_android.data.model.detail.ResponseDetailLikeAndSave
+import com.example.charo_android.data.model.detail.*
 import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.TMapInfo
 import com.skt.Tmap.TMapMarkerItem
@@ -21,6 +18,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailViewModel: ViewModel() {
+    private var _postId = MutableLiveData<Int>()
+    val postId: LiveData<Int> get() = _postId
+
     private var _detailData = MutableLiveData<DetailData>(null)
     val detailData: LiveData<DetailData> get() = _detailData
 
@@ -35,6 +35,13 @@ class DetailViewModel: ViewModel() {
 
     private var _lineList = MutableLiveData<ArrayList<TMapPolyLine>>(null)
     val lineList: LiveData<ArrayList<TMapPolyLine>> get() = _lineList
+
+    private var _userData = MutableLiveData<List<UserData>>(null)
+    val userData: LiveData<List<UserData>> get() = _userData
+
+    fun setPostId(postId: Int) {
+        _postId.value = postId
+    }
 
     fun getData(postId: Int, title: String, date: String, region: String) {
         val call: Call<ResponseDetailData> =
@@ -122,6 +129,36 @@ class DetailViewModel: ViewModel() {
 
             override fun onFailure(call: Call<ResponseDetailLikeAndSave>, t: Throwable) {
                 Log.d("server connect : DetailView Save", "error: ${t.message}")
+            }
+        })
+    }
+
+    fun getLikes(postId: Int) {
+        val call: Call<ResponseDetailLikes> =
+            ApiService.detailViewService.getLikes(postId, Hidden.userId)
+        call.enqueue(object: Callback<ResponseDetailLikes> {
+            override fun onResponse(
+                call: Call<ResponseDetailLikes>,
+                response: Response<ResponseDetailLikes>
+            ) {
+                if(response.isSuccessful) {
+                    Log.d("server connect : DetailView Likes", "success")
+                    Log.d("server connect : DetailView Likes List size", response.body()?.data?.size.toString())
+                    _userData.value = response.body()?.data
+                } else {
+                    Log.d("server connect : DetailView Likes", "error")
+                    Log.d("server connect : DetailView Likes", "$response.errorBody()")
+                    Log.d("server connect : DetailView Likes", response.message())
+                    Log.d("server connect : DetailView Likes", "${response.code()}")
+                    Log.d(
+                        "server connect : DetailView Likes",
+                        "${response.raw().request.url}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseDetailLikes>, t: Throwable) {
+                Log.d("server connect : DetailView Likes", "error: ${t.message}")
             }
         })
     }

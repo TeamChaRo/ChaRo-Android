@@ -37,12 +37,11 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
         initSpinner()
         clickBackButton(userId)
-        clickSpinner(userId)
+        clickSpinner()
     }
 
 
     fun moreViewLoadData() {
-
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreView("and@naver.com", "0", "")
             moreViewAdapter = MoreViewAdapter(Hidden.userId)
@@ -51,22 +50,20 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                 moreViewAdapter.setHomeTrendDrive(it)
             }
 
-        } else if (sharedViewModel.num.value == 1) {
-            moreViewModel.getMoreView(Hidden.userId, "1", "summer")
-            sharedViewModel.getHomeTitle(Hidden.userId)
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
-            binding.textToolbarTitle.text = sharedViewModel.customThemeTitle.value
-            binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.drive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it)
-            }
-
-
-        } else {
+        } else if(sharedViewModel.num.value == 2) {
             moreViewModel.getMoreView(Hidden.userId, "2", "busan")
             sharedViewModel.getHomeTitle(Hidden.userId)
             moreViewAdapter = MoreViewAdapter(Hidden.userId)
             binding.textToolbarTitle.text = sharedViewModel.localThemeTitle.value
+            binding.recyclerviewMoreView.adapter = moreViewAdapter
+            moreViewModel.drive.observe(viewLifecycleOwner) {
+                moreViewAdapter.setHomeTrendDrive(it)
+            }
+        } else{
+            moreViewModel.getMoreView(Hidden.userId, "3", "")
+            sharedViewModel.getHomeTitle(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            binding.textToolbarTitle.text = sharedViewModel.customThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
@@ -85,22 +82,21 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                 moreViewAdapter.setHomeTrendDrive(it)
             }
 
-        } else if (sharedViewModel.num.value == 1) {
-            moreViewModel.getMoreView(Hidden.userId, "1", "summer")
+        } else if (sharedViewModel.num.value == 2) {
+            moreViewModel.getMoreNewView(Hidden.userId, "2", "busan")
             moreViewAdapter = MoreViewAdapter(Hidden.userId)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
             }
-
-
-        } else {
-            moreViewModel.getMoreView(Hidden.userId, "2", "busan")
+        }  else {
+            moreViewModel.getMoreNewView(Hidden.userId, "3", "")
             moreViewAdapter = MoreViewAdapter(Hidden.userId)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.newDrive.observe(viewLifecycleOwner) {
+            moreViewModel.newDrive.observe(viewLifecycleOwner){
                 moreViewAdapter.setHomeTrendDrive(it)
             }
+
         }
     }
 
@@ -115,7 +111,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     }
 
 
-    private fun clickSpinner(userId: String) {
+    private fun clickSpinner() {
         binding.spinnerMoreView.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 @SuppressLint("NotifyDataSetChanged")

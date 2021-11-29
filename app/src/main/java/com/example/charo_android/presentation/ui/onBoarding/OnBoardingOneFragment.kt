@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.charo_android.databinding.FragmentOnBoarding1Binding
 import com.example.charo_android.presentation.ui.signin.SignInActivity
+import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
 
 
 class OnBoardingOneFragment : Fragment() {
@@ -20,7 +21,7 @@ class OnBoardingOneFragment : Fragment() {
         _binding = FragmentOnBoarding1Binding.inflate(inflater, container, false)
 
         binding.btnSkips.setOnClickListener {
-            val intent = Intent(requireActivity(), SignInActivity::class.java)
+            val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
             startActivity(intent)
         }
 

@@ -21,7 +21,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.skt.Tmap.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 
 class DetailFragment : Fragment() {
@@ -37,10 +39,6 @@ class DetailFragment : Fragment() {
         detailActivity = context as DetailActivity
     }
 
-    // Coroutine
-//    private val mainDispatcher = Dispatchers.Main
-//    private val ioDispatcher = Dispatchers.IO
-
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,20 +52,29 @@ class DetailFragment : Fragment() {
         val imageUrl = (activity as DetailActivity).imageUrl
         val region = (activity as DetailActivity).region
 
+        // ViewModel LiveData
+        viewModel.setPostId(postId)
+        if (viewModel.detailData.value == null)
+            viewModel.getData(postId, title, date, region)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // tMapView 생성
         val tMapView = TMapView(requireContext())
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         tMapView.setUserScrollZoomEnable(true)
         binding.clDetailMapview.addView(tMapView)
 
-        // ViewModel LiveData
-        viewModel.getData(postId, title, date, region)
         viewModel.detailData.observe(viewLifecycleOwner, {
             Log.d("detail", "observed")
             binding.detailData = viewModel
             if (viewModel.detailData.value != null) {
                 // Add Preview Image
-                viewModel.addImageAtFront(imageUrl)
+                viewModel.addImageAtFront((activity as DetailActivity).imageUrl)
                 // ViewPager
                 initViewPager(viewModel.detailData.value!!.data.images)
                 // tMapView
@@ -77,12 +84,12 @@ class DetailFragment : Fragment() {
 
         // 좋아요 클릭 이벤트
         binding.imgDetailLike.setOnClickListener {
-            clickLike(postId)
+            clickLike((activity as DetailActivity).postId)
         }
 
         // 저장하기 클릭 이벤트
         binding.imgDetailSave.setOnClickListener {
-            clickSave(postId)
+            clickSave((activity as DetailActivity).postId)
         }
 
         // 뒤로가기 클릭 이벤트
@@ -106,7 +113,15 @@ class DetailFragment : Fragment() {
             clickShare()
         }
 
-        return binding.root
+        // 지도 클릭 이벤트
+        binding.clDetailMapviewTouch.setOnClickListener {
+            (context as DetailActivity).openFragment(1)
+        }
+
+        // n명이 좋아해요 클릭 이벤트
+        binding.tvDetailLike.setOnClickListener {
+            openBottomSheetDialog()
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -182,13 +197,14 @@ class DetailFragment : Fragment() {
     }
 
     private fun addList(tMapView: TMapView) {
-        // 더미데이터 문
-        viewModel.detailData.value!!.data.course.forEach {
-            Log.d("latitude", it.latitude)
-            Log.d("longitude", it.longitude)
-            pointList.add(TMapPoint(it.latitude.toDouble(), it.longitude.toDouble()))
+        if(pointList.isEmpty()) {
+            viewModel.detailData.value!!.data.course.forEach {
+                Log.d("latitude", it.latitude)
+                Log.d("longitude", it.longitude)
+                pointList.add(TMapPoint(it.latitude.toDouble(), it.longitude.toDouble()))
+            }
         }
-        setCenter(tMapView)
+//        setCenter(tMapView)
         mark(tMapView)
     }
 
@@ -229,11 +245,14 @@ class DetailFragment : Fragment() {
                     val to = pointList[i + 1]
                     val tMapPolyLine: TMapPolyLine = TMapData().findPathData(from, to)
                     tMapPolyLine.lineWidth = 3F
-                    tMapPolyLine.outLineColor = ContextCompat.getColor(requireContext(), R.color.blue_main)
-                    tMapPolyLine.lineColor = ContextCompat.getColor(requireContext(), R.color.blue_main)
+                    tMapPolyLine.outLineColor =
+                        ContextCompat.getColor(requireContext(), R.color.blue_main)
+                    tMapPolyLine.lineColor =
+                        ContextCompat.getColor(requireContext(), R.color.blue_main)
                     tMapView.addTMapPolyLine("tMapPolyLine$i", tMapPolyLine)
                 }
-            } catch(e: Exception) {
+                setCenter(tMapView)
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
@@ -241,10 +260,16 @@ class DetailFragment : Fragment() {
     }
 
     private fun copyAddress(textView: TextView) {
-        var clipboardManager = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val address: String = binding.tvDetailMapStartAddress.text.toString()
+        val clipboardManager =
+            requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val address: String = textView.text.toString()
         val clip: ClipData = ClipData.newPlainText("Start Point Address", address)
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(requireContext(), "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+    }
+
+    private fun openBottomSheetDialog() {
+        val bottomSheetDialogFragment = DetailLikeFragment()
+        bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
 }

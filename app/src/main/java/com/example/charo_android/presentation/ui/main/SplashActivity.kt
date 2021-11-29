@@ -4,9 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivitySplashBinding
 import com.example.charo_android.presentation.ui.onBoarding.OnBoardingActivity
+import com.kakao.sdk.common.util.Utility
 
 class SplashActivity : AppCompatActivity() {
     private val time: Long = 2000
