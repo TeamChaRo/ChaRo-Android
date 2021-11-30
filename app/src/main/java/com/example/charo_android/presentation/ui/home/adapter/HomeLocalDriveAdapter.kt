@@ -49,8 +49,8 @@ class HomeLocalDriveAdapter(val userId: String) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(localDrive: LocalDrive) {
             binding.apply {
-                binding.locationDrive = localDrive
-                binding.executePendingBindings()
+                locationDrive = localDrive
+                executePendingBindings()
             }
         }
 

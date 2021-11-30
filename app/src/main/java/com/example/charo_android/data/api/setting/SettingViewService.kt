@@ -1,21 +1,26 @@
 package com.example.charo_android.data.api.setting
 
+import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface SettingViewService {
     @Multipart
-    @POST("/user/{userEmail}")
-    fun postSetting(
+    @PUT("/user/{userEmail}")
+    suspend fun profileChange(
         @Path("userEmail") userEmail : String,
-        @Part("image") image : MultipartBody.Part ?= null,
+        @Part("image") image : MultipartBody.Part,
         @Part("originImage") originImage : RequestBody,
         @Part("newNickname") newNickname : RequestBody
-    ){
+    ) : ResponseProfileUpdateData
 
-    }
+    @Multipart
+    @PUT("/user/{userEmail}")
+    suspend fun nickNameChange(
+        @Path("userEmail") userEmail: String,
+        @Part("profileImage") profileImage : RequestBody,
+        @Part("newNickname") newNickname: RequestBody
+    ) : ResponseProfileUpdateData
+
 }

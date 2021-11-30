@@ -67,25 +67,6 @@
                             app:layout_collapseMode="parallax"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
-                        <Button
-                            android:id="@+id/btn_social_kakao_delete"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/logo"
-                            android:text="회원탈퇴"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-                        <Button
-                            android:id="@+id/btn_social_kakao_logout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/logo"
-                            android:text="로그아웃"
-                            app:layout_constraintTop_toTopOf="@+id/img_main_logo"
-                            app:layout_constraintStart_toEndOf="@+id/img_main_logo"/>
-
-
 
                         <ImageView
                             android:id="@+id/img_main_search"

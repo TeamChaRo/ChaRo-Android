@@ -8,7 +8,6 @@ fun AppCompatActivity.changeFragment( layoutRes: Int, fragment: Fragment ) {
     val fragmentManager = supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
     transaction.replace(layoutRes, fragment)
-    .addToBackStack(null)
     .commit()
 
 

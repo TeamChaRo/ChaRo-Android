@@ -3,6 +3,9 @@ package com.example.charo_android.presentation.di
 import com.example.charo_android.domain.usecase.*
 import com.example.charo_android.domain.usecase.home.*
 import com.example.charo_android.domain.usecase.search.GetRemoteSearchUseCase
+import com.example.charo_android.domain.usecase.setting.ProfileImageChangeUseCase
+import com.example.charo_android.domain.usecase.setting.ProfileNickNameChangeUseCase
+import com.example.charo_android.domain.usecase.signin.GetRemoteEmailLoginUseCase
 import com.example.charo_android.domain.usecase.signin.GetRemoteSocialLoginData
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCertificationUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
@@ -26,5 +29,7 @@ val useCaseModule = module{
     single{ PostRemoteSignUpRegisterUseCase(get())}
     single{ GetRemoteSearchUseCase(get())}
     single{ GetRemoteSocialLoginData(get())}
-
+    single{ GetRemoteEmailLoginUseCase(get())}
+    single{ ProfileImageChangeUseCase(get())}
+    single{ ProfileNickNameChangeUseCase(get())}
 }

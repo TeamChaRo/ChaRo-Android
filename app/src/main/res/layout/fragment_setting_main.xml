@@ -381,6 +381,7 @@
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:textColor="@color/blue_main"
+                    android:clickable="true"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_version"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_version"
                     android:layout_marginTop="18dp"/>

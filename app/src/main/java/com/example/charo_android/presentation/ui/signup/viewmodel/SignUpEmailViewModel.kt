@@ -114,7 +114,7 @@ class SignUpEmailViewModel(
         context : Context
     ) {
         val userEmailRequestBody: RequestBody = userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
-        val passwordRequestBody: RequestBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
+         val passwordRequestBody: RequestBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
         val nicknameRequestBody: RequestBody = nickname.toRequestBody("text/plain".toMediaTypeOrNull())
         val pushAgreeRequestBody : RequestBody = pushAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val emailAgreeRequestBody : RequestBody = emailAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
