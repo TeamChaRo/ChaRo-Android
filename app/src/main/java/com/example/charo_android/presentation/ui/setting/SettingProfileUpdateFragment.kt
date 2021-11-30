@@ -19,8 +19,9 @@ import java.util.regex.Pattern
 class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBinding>
     (R.layout.fragment_setting_profile_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
-    private var image = false
-    private var text = false
+    var text = false
+    var image = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profileCheckNickName()
@@ -60,20 +61,27 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     } else if (s.toString().isEmpty()) {
                         text_input_profile_change_nick_name.isErrorEnabled = false
                         text_input_profile_change_nick_name.isHelperTextEnabled = false
-                        text = false
+                        binding.imgProfileUpdateButton.setImageResource(R.drawable.setting_no_next)
+
                     } else {
-                        Log.d("niceshot", "1")
                         settingViewModel.profileNickNameCheck(s.toString())
-                        if (!settingViewModel.profileNickName) {
-                            text_input_profile_change_nick_name.error = "중복되는 닉네임이 존재합니다"
-                        } else {
-                            text_input_profile_change_nick_name.isErrorEnabled = false
-                            text_input_profile_change_nick_name.isHelperTextEnabled = true
-                            text_input_profile_change_nick_name.helperText = "사용 가능한 닉네임입니다"
-                            binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
-                            Log.d("niceshot", s.toString())
-                            text = true
+                        settingViewModel.profileNickName.observe(viewLifecycleOwner){
+                            if (!it) {
+                                text_input_profile_change_nick_name.error = "중복되는 닉네임이 존재합니다"
+                            } else {
+                                text_input_profile_change_nick_name.isErrorEnabled = false
+                                text_input_profile_change_nick_name.isHelperTextEnabled = true
+                                text_input_profile_change_nick_name.helperText = "사용 가능한 닉네임입니다"
+                                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+                                binding.imgProfileUpdateButton.setOnClickListener {
+                                    text = true
+                                    profileNickNameUpdateChange(s.toString())
+                                }
+                                Log.d("niceshot", s.toString())
+
+                            }
                         }
+
 
 
                     }
@@ -93,24 +101,39 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     private fun changeProfileImage() {
         settingViewModel.profileChangeUri.observe(viewLifecycleOwner) {
             if (it != null) {
-                image = true
                 Glide.with(this)
                     .load(it)
                     .circleCrop()
                     .into(binding.imgProfileChange)
                 Log.d("updateProfile", it.toString())
-
+                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+                binding.imgProfileUpdateButton.setOnClickListener {
+                    image = true
+                }
             } else {
                 with(binding) {
                     imgProfileChange.setImageResource(R.drawable.setting_profile_update)
-                    image = false
                 }
-
             }
-
         }
+    }
+    // 프로필이랑 닉네임 둘다 변경은 안넣음
+    private fun profileImageUpdateChange(imageUri : Uri){
+        if (image && !text){
+            settingViewModel.profileImageChange("and@naver.com",
+                imageUri,
+                "",
+                "",
+                requireActivity()
+            )
+        }
+    }
 
-
+    private fun profileNickNameUpdateChange(s : String){
+        if (!image && text){
+            settingViewModel.profileNickNameChange("and@naver.com",
+            "", s)
+        }
     }
 
 

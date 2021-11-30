@@ -15,6 +15,7 @@ import com.example.charo_android.presentation.base.BaseActivity
 import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.example.charo_android.presentation.ui.signup.SignUpActivity
+import com.example.charo_android.presentation.util.SharedInformation
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -54,6 +55,8 @@ class SocialSignInActivity() :
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
                 Toast.makeText(this, "로그인에 성공했습니다", Toast.LENGTH_SHORT).show()
                 kakaoUserEmail()
+                val id = "1"
+                SharedInformation.saveSocialId(this, id)
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -168,6 +171,8 @@ class SocialSignInActivity() :
                                 this@SocialSignInActivity, "로그인에 성공하였습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            val id = "2"
+                            SharedInformation.saveSocialId(this, id)
                             val intent = Intent(this@SocialSignInActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()

@@ -35,27 +35,33 @@ class SettingViewModel(
 ) : ViewModel() {
 
 
-
-    private val _profileNickName : MutableLiveData<Boolean> = MutableLiveData()
+    //중복 닉네임 체크
+    private val _profileNickName : MutableLiveData<Boolean> = MutableLiveData(false)
     var profileNickName : LiveData<Boolean> = _profileNickName
 
 
     val userId = MutableLiveData<String>()
 
-
+    // 변경 uri
     val profileChangeUri = MutableLiveData<Uri>()
 
 
     private val _updateNickName : MutableLiveData<String> = MutableLiveData()
     val updateNickName : LiveData<String> = _updateNickName
 
-
+    // toolbar 텍스트
     val updateTabText = MutableLiveData<String>()
 
+    // 받아오는 프로필 이미지
     val originProfileUri = MutableLiveData<String>("newnew")
 
-    private val _profileChangeData = MutableLiveData<ProfileChangeData>()
+    // 프로필 변경시 success
+    private val _profileChangeData : MutableLiveData<ProfileChangeData> = MutableLiveData<ProfileChangeData>()
     val profileChangeData : LiveData<ProfileChangeData> = _profileChangeData
+
+    // 프로필 변경, 닉네임만 변경 체크
+    var numCheck : MutableLiveData<Int> = MutableLiveData()
+
 
     fun profileNickNameCheck(nickname: String) {
         viewModelScope.launch {
@@ -71,7 +77,7 @@ class SettingViewModel(
                 }
         }
     }
-
+    // 둘다 변경 시 또는 프로필 이미지만 변경 시
     fun profileImageChange(
         userEmail: String,
         image: Uri,
@@ -113,7 +119,7 @@ class SettingViewModel(
                }
         }
     }
-
+    //닉네임만 변경 시
     fun profileNickNameChange(
         userEmail: String,
         profileImage: String,

@@ -5,7 +5,7 @@
 
     <data>
     <variable
-        name="settingViewModel"
+        name="profileViewModel"
         type="com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel" />
     </data>
 
