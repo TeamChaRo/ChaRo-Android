@@ -9,6 +9,7 @@ import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
 import com.example.charo_android.data.api.search.SearchViewService
+import com.example.charo_android.data.api.setting.SettingViewService
 import com.example.charo_android.data.api.signin.SignInViewService
 import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
 import com.example.charo_android.data.api.signup.SignUpNickNameCheckViewService
@@ -74,6 +75,9 @@ val networkModule = module {
     }
     single<SignInViewService>{
         get<Retrofit>().create(SignInViewService::class.java)
+    }
+    single<SettingViewService>{
+        get<Retrofit>().create(SettingViewService::class.java)
     }
 }
 

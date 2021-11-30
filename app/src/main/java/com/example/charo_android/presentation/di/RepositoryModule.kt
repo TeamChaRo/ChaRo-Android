@@ -5,12 +5,14 @@ import com.example.charo_android.data.repository.more.MoreNewViewRepositoryImpl
 import com.example.charo_android.data.repository.more.MoreViewInfiniteRepositoryImpl
 import com.example.charo_android.data.repository.more.MoreViewRepositoryImpl
 import com.example.charo_android.data.repository.search.SearchViewRepositoryImpl
+import com.example.charo_android.data.repository.setting.SettingRepositoryImpl
 import com.example.charo_android.data.repository.signin.EmailSignInRepositoryImpl
 import com.example.charo_android.data.repository.signin.KakaoSignInRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpEmailCertificationRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpNickNameCheckRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpRegisterRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpRepositoryImpl
+import com.example.charo_android.domain.repository.SettingRepository
 import com.example.charo_android.domain.repository.home.HomeRepository
 import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
@@ -36,4 +38,5 @@ val repositoryModule = module {
     single<SearchViewRepository>{ SearchViewRepositoryImpl(get()) }
     single<KakaoSignInRepository>{KakaoSignInRepositoryImpl(get())}
     single<EmailSignInRepository>{EmailSignInRepositoryImpl(get())}
+    single<SettingRepository>{SettingRepositoryImpl(get())}
 }

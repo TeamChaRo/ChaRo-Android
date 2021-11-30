@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+    <variable
+        name="settingViewModel"
+        type="com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

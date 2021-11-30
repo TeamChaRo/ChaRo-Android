@@ -61,10 +61,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initCustomThemeDrive()
         initHomeTitle()
         initThemeDrive()
-        logoutKakao()
-        deleteKakao()
+
     }
-    private fun logoutKakao(){
+   /* private fun logoutKakao(){
         binding.btnSocialKakaoDelete.setOnClickListener {
             UserApiClient.instance.unlink { error ->
                 if (error != null) {
@@ -93,7 +92,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
 
-    }
+    } */
     private fun initToolBar() {
         val toolbar = binding.toolbarMain
         (activity as AppCompatActivity).setSupportActionBar(toolbar)

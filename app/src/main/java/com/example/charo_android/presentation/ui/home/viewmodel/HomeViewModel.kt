@@ -13,7 +13,7 @@ class HomeViewModel(
     private val getRemoteTodayCharoDrive: GetRemoteTodayCharoDriveUseCase,
     private val getRemoteTrendDrive: GetRemoteTrendDriveUseCase,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     private val _banner = MutableLiveData<List<Banner>>()
     val banner: LiveData<List<Banner>>
@@ -44,7 +44,7 @@ class HomeViewModel(
 
 
 
-     fun getBanner(userEmail: String) {
+    fun getBanner(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteBannerUseCase.execute(userEmail) }
 
@@ -63,7 +63,7 @@ class HomeViewModel(
         }
     }
 
-     fun getCustomTheme(userEmail: String) {
+    fun getCustomTheme(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteCustomThemeUseCase.execute(userEmail) }
                 .onSuccess {
@@ -83,7 +83,7 @@ class HomeViewModel(
         }
     }
 
-     fun getLocalDrive(userEmail: String) {
+    fun getLocalDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteLocalDriveUseCase.execute(userEmail) }
                 .onSuccess {
@@ -99,7 +99,7 @@ class HomeViewModel(
     }
 
 
-     fun getTodayCharoDrive(userEmail: String) {
+    fun getTodayCharoDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteTodayCharoDrive.execute(userEmail) }
                 .onSuccess {
@@ -113,7 +113,7 @@ class HomeViewModel(
         }
     }
 
-     fun getTrendDrive(userEmail: String) {
+    fun getTrendDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteTrendDrive.execute(userEmail) }
                 .onSuccess { it ->
@@ -133,7 +133,3 @@ class HomeViewModel(
 
 
 }
-
-
-
-
