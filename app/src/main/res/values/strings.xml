@@ -182,4 +182,8 @@
     <string name="log_out">로그아웃 하시겠습니까?</string>
     <string name="ok">예</string>
     <string name="no">아니요</string>
+    <string name="withdrawal">계정을 삭제하시겠습니까? \n회원 탈퇴시 계정이 모두 삭제됩니다.\n (단,작성하신 글은 익명의 형태로 남아
+    사용자에게 보여집니다.)</string>
+    <string name="cancel">취소</string>
+    <string name="agreement">확인</string>
 </resources>

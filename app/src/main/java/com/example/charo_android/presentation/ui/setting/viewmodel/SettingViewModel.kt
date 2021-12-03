@@ -15,6 +15,7 @@ import com.example.charo_android.domain.model.setting.ProfileChangeData
 import com.example.charo_android.domain.model.setting.ProfileRequestChangeData
 import com.example.charo_android.domain.usecase.setting.ProfileImageChangeUseCase
 import com.example.charo_android.domain.usecase.setting.ProfileNickNameChangeUseCase
+import com.example.charo_android.domain.usecase.setting.WithdrawalUserUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.example.charo_android.presentation.util.NonNullLiveData
@@ -31,7 +32,8 @@ import okio.BufferedSink
 class SettingViewModel(
     private val getRemoteProfileNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase,
     private val profileImageChangeUseCase : ProfileImageChangeUseCase,
-    private val profileNickNameChangeUseCase: ProfileNickNameChangeUseCase
+    private val profileNickNameChangeUseCase: ProfileNickNameChangeUseCase,
+    private val withdrawalUserUseCase: WithdrawalUserUseCase
 ) : ViewModel() {
 
 
@@ -62,6 +64,7 @@ class SettingViewModel(
     // 프로필 변경, 닉네임만 변경 체크
     var numCheck : MutableLiveData<Int> = MutableLiveData()
 
+    var withdrawalStatus : MutableLiveData<Boolean> = MutableLiveData()
 
     fun profileNickNameCheck(nickname: String) {
         viewModelScope.launch {
@@ -152,6 +155,21 @@ class SettingViewModel(
 
         override fun writeTo(sink: BufferedSink) {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
+        }
+    }
+
+    //회원 탈퇴
+    fun withdrawalUser(userEmail: String){
+        viewModelScope.launch {
+            runCatching { withdrawalUserUseCase.execute(userEmail) }
+                .onSuccess {
+                    withdrawalStatus.value = it.success
+                    Log.d("withdrawal", "서버 통신 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("withdrawal", "서버 통신 성공!")
+                }
         }
     }
 

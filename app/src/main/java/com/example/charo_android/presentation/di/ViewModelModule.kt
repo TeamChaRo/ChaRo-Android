@@ -16,7 +16,7 @@ val viewModelModule = module {
     viewModel{ SignUpEmailViewModel(get(),get(), get(),get()) }
     viewModel{MoreViewViewModel(get(),get(),get())}
     viewModel{SharedViewModel(get())}
-    viewModel{ SettingViewModel(get(),get(),get()) }
+    viewModel{ SettingViewModel(get(),get(),get(),get()) }
     viewModel{ SearchViewModel(get()) }
     viewModel{ SocialSignInViewModel(get())}
     viewModel{ EmailSignInViewModel(get()) }

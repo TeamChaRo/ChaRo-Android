@@ -1,6 +1,7 @@
-package com.example.charo_android.domain.repository
+package com.example.charo_android.domain.repository.setting
 
 import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
+import com.example.charo_android.domain.model.StatusCode
 import com.example.charo_android.domain.model.setting.ProfileChangeData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -18,4 +19,8 @@ interface SettingRepository {
         profileImage : RequestBody,
         newNickname: RequestBody
     ) : ProfileChangeData
+
+    suspend fun withdrawalUser(
+        userEmail : String
+    ) : StatusCode
 }

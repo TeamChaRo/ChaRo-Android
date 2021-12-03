@@ -12,7 +12,7 @@ import com.example.charo_android.data.repository.signup.SignUpEmailCertification
 import com.example.charo_android.data.repository.signup.SignUpNickNameCheckRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpRegisterRepositoryImpl
 import com.example.charo_android.data.repository.signup.SignUpRepositoryImpl
-import com.example.charo_android.domain.repository.SettingRepository
+import com.example.charo_android.domain.repository.setting.SettingRepository
 import com.example.charo_android.domain.repository.home.HomeRepository
 import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository

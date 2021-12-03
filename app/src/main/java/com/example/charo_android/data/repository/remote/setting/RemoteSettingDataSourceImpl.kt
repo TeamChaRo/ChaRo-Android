@@ -1,6 +1,7 @@
 package com.example.charo_android.data.repository.remote.setting
 
 import com.example.charo_android.data.api.setting.SettingViewService
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,5 +23,9 @@ class RemoteSettingDataSourceImpl(private val service: SettingViewService)
         newNickname: RequestBody
     ): ResponseProfileUpdateData {
         return service.nickNameChange(userEmail,profileImage, newNickname)
+    }
+
+    override suspend fun withdrawalUser(userEmail: String) : ResponseStatusCode {
+        return service.withdrawalUser(userEmail)
     }
 }

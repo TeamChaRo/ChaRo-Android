@@ -1,6 +1,7 @@
 package com.example.charo_android.data.repository.remote.setting
 
 import com.example.charo_android.data.api.setting.SettingViewService
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,4 +21,9 @@ interface RemoteSettingDataSource {
         profileImage : RequestBody,
         newNickname: RequestBody
     ) : ResponseProfileUpdateData
+
+
+    suspend fun withdrawalUser(
+        userEmail: String
+    ) : ResponseStatusCode
 }

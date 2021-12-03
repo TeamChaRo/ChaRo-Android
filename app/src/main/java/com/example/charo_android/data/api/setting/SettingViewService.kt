@@ -1,5 +1,6 @@
 package com.example.charo_android.data.api.setting
 
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,5 +23,10 @@ interface SettingViewService {
         @Part("profileImage") profileImage : RequestBody,
         @Part("newNickname") newNickname: RequestBody
     ) : ResponseProfileUpdateData
+
+    @DELETE("/user/{userEmail}")
+    suspend fun withdrawalUser(
+        @Path("userEmail") userEmail : String
+    ) : ResponseStatusCode
 
 }

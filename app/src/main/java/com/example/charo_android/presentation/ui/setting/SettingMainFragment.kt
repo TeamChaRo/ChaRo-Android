@@ -27,7 +27,8 @@ import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class SettingMainFragment : BaseFragment<FragmentSettingMainBinding>(R.layout.fragment_setting_main) {
+class SettingMainFragment :
+    BaseFragment<FragmentSettingMainBinding>(R.layout.fragment_setting_main) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class SettingMainFragment : BaseFragment<FragmentSettingMainBinding>(R.layout.fr
         clickProfileUpdate()
         changeTabText()
         clickLogOut()
+        withdrawal()
 
         Log.d("sharedLog", SharedInformation.getSocialId(requireActivity()))
         Log.d("sharedLog", SharedInformation.getEmail(requireActivity()))
@@ -51,7 +53,7 @@ class SettingMainFragment : BaseFragment<FragmentSettingMainBinding>(R.layout.fr
         })
     }
 
-
+    //프로필 수정
     private fun clickProfileUpdate() {
         binding.textSettingProfileUpdate.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
@@ -64,37 +66,44 @@ class SettingMainFragment : BaseFragment<FragmentSettingMainBinding>(R.layout.fr
         }
     }
 
-    private fun changeTabText(){
+    //제목 변경
+    private fun changeTabText() {
         settingViewModel.updateTabText.value = "설정"
     }
 
     //로그아웃
-    private fun clickLogOut(){
+    private fun clickLogOut() {
         val socialKeyStorage = SharedInformation
         val socialKey = socialKeyStorage.getSocialId(requireActivity())
         val dialog = CustomDialog(requireActivity())
         binding.textSettingLogout.setOnClickListener {
             SharedInformation.removeEmail(requireActivity())
             dialog.showDialog(R.layout.custom_dialog_log_out)
-            dialog.setOnClickedListener(object: CustomDialog.ButtonClickListener{
+            dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
-                    if (num == 1){
-                        if(socialKey == "1"){
+                    if (num == 1) {
+                        if (socialKey == "1") {
                             UserApiClient.instance.unlink { error ->
                                 if (error != null) {
-                                    Toast.makeText(requireActivity(), "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
-                                }else {
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "로그아웃 실패 $error",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
                                     SharedInformation.removeEmail(requireActivity())
                                     SharedInformation.removeSocialId(requireActivity())
-                                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT)
+                                        .show()
                                     ActivityCompat.finishAffinity(requireActivity())
-                                    val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
+                                    val intent =
+                                        Intent(requireActivity(), SocialSignInActivity::class.java)
                                     startActivity(intent)
 
                                 }
 
                             }
-                        } else if (socialKey == "3"){
+                        } else if (socialKey == "3") {
                             SharedInformation.removeEmail(requireActivity())
                             SharedInformation.removeSocialId(requireActivity())
                             Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
@@ -102,7 +111,7 @@ class SettingMainFragment : BaseFragment<FragmentSettingMainBinding>(R.layout.fr
                             val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                             startActivity(intent)
 
-                        }else{
+                        } else {
                             Firebase.auth.signOut()
                             SharedInformation.removeEmail(requireActivity())
                             SharedInformation.removeSocialId(requireActivity())
@@ -117,5 +126,30 @@ class SettingMainFragment : BaseFragment<FragmentSettingMainBinding>(R.layout.fr
 
         }
 
+    }
+
+    //회원 탈퇴
+    private fun withdrawal() {
+        binding.textSettingUserOut.setOnClickListener {
+            val dialog = CustomDialog(requireActivity())
+            dialog.showWithdrawal(R.layout.custom_dialog_withdrawal)
+            dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+                override fun onClicked(num: Int) {
+                        if(num == 1){
+                            settingViewModel.withdrawalUser("test@naver.com")
+                            settingViewModel.withdrawalStatus.observe(viewLifecycleOwner){
+                                if (it) {
+                                    Toast.makeText(requireActivity(), "회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                                    ActivityCompat.finishAffinity(requireActivity())
+                                }else{
+                                    Toast.makeText(requireActivity(), "회원 탈퇴 실패", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+
+                        }
+                }
+            })
+
+        }
     }
 }
