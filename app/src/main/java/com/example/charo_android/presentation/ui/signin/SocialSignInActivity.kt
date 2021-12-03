@@ -44,8 +44,18 @@ class SocialSignInActivity() :
         lookForMain()
         goEmailLogin()
         goEmailSignUp()
+        autoLogin()
     }
+    //자동 로그인
+    private fun autoLogin(){
+        val autoEmail = SharedInformation.getEmail(this)
+        if (autoEmail != ""){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
+    }
     //kakao
     private fun initKakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -55,8 +65,7 @@ class SocialSignInActivity() :
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
                 Toast.makeText(this, "로그인에 성공했습니다", Toast.LENGTH_SHORT).show()
                 kakaoUserEmail()
-                val id = "1"
-                SharedInformation.saveSocialId(this, id)
+                SharedInformation.saveSocialId(this, "1")
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -98,6 +107,7 @@ class SocialSignInActivity() :
                     startActivity(intent)
                     finish()
                 } else {
+                    SharedInformation.setEmail(this, user.kakaoAccount?.email!!)
                     Log.i(
                         "kakao", "사용자 정보 요청 성공" +
                                 "\n이메일: ${user.kakaoAccount?.email}"
@@ -171,8 +181,7 @@ class SocialSignInActivity() :
                                 this@SocialSignInActivity, "로그인에 성공하였습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            val id = "2"
-                            SharedInformation.saveSocialId(this, id)
+                            SharedInformation.saveSocialId(this, "2")
                             val intent = Intent(this@SocialSignInActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()

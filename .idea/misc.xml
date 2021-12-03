@@ -7,11 +7,15 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/google_signin_shape.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/ic_line.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/ic_main_logo_blue.xml" value="0.1" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/inset_right_40_left_40.xml" value="0.12107023411371237" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_thumb.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_off.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_on.xml" value="0.175" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/rectangle_white.xml" value="0.12107023411371237" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/selector_mypage_switch.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/setting_no_next.xml" value="0.17324414715719064" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/shape_detail_dialog.xml" value="0.12107023411371237" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/shape_detail_textbox.xml" value="0.12107023411371237" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/sign_up_next.xml" value="0.17324414715719064" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/font/font_family.xml" value="0.18227424749163879" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_alarm.xml" value="0.1" />
@@ -27,6 +31,7 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_sign_up.xml" value="0.152" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_social_sign_in.xml" value="0.2" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/custom_dialog_log_out.xml" value="0.176" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/custom_spinner_item.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_example.xml" value="0.2375" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_theme.xml" value="0.2375" />

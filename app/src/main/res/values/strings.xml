@@ -179,4 +179,7 @@
     <string name="firebase_web_client_id">570607218249-6osutorq2vh0q71gvcus4e6n6c5d4n5j.apps.googleusercontent.com</string>
     <string name="google_sign_in">Google 로그인</string>
     <string name="like">좋아요</string>
+    <string name="log_out">로그아웃 하시겠습니까?</string>
+    <string name="ok">예</string>
+    <string name="no">아니요</string>
 </resources>

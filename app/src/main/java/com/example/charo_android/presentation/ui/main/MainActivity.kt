@@ -12,6 +12,7 @@ import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
+import com.example.charo_android.presentation.util.SharedInformation
 import com.kakao.sdk.common.util.Utility
 
 
@@ -32,6 +33,12 @@ class MainActivity : AppCompatActivity() {
         replaceHomeFragment(userEmail, nickName)
         initNavView()
         Log.d("please", "제발 되라")
+
+
+
+        Log.d("sharedMain", SharedInformation.getEmail(this))
+        Log.d("sharedMain", SharedInformation.getSocialId(this))
+
     }
 
     override fun onBackPressed() {

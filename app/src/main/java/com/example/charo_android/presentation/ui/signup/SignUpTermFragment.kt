@@ -1,11 +1,14 @@
 package com.example.charo_android.presentation.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpTermBinding
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -75,7 +78,10 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
                         requireActivity()
                     )
                 }
-
+        SharedInformation.setEmail(requireActivity(), signUpViewModel.userEmail.value.toString())
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 

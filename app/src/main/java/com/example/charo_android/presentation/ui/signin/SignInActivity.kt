@@ -13,6 +13,7 @@ import com.example.charo_android.databinding.ActivitySignInBinding
 import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.signin.viewmodel.EmailSignInViewModel
 import com.example.charo_android.presentation.ui.signup.SignUpActivity
+import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +38,9 @@ class SignInActivity : AppCompatActivity() {
             if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
                 Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
+                val id = "0"
+                SharedInformation.saveSocialId(this, id)
+                SharedInformation.setEmail(this, binding.etSigninId.text.toString())
                 val requestSignInData = RequestSignInData(
                     userEmail = binding.etSigninId.text.toString(),
                     password = binding.etSigninPw.text.toString()
