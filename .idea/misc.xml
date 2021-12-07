@@ -7,10 +7,13 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/google_signin_shape.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/ic_line.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/ic_main_logo_blue.xml" value="0.1" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/ic_map_toast_message.xml" value="0.1625" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/ic_rectangle_62.xml" value="0.1625" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/inset_right_40_left_40.xml" value="0.12107023411371237" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_thumb.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_off.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_on.xml" value="0.175" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/rectangle_radius_5.xml" value="0.1625" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/rectangle_white.xml" value="0.12107023411371237" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/selector_mypage_switch.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/setting_no_next.xml" value="0.17324414715719064" />
@@ -56,7 +59,7 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_search.xml" value="0.16" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_bottom_sheet.xml" value="0.359375" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_main.xml" value="0.16452702702702704" />
-        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_pass_word_update.xml" value="0.2" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_pass_word_update.xml" value="0.152" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_profile_update.xml" value="0.20439189189189189" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_email.xml" value="0.144" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_pass_word.xml" value="0.1" />
@@ -95,6 +98,7 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/tablayout_two.xml" value="0.2" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/tablayout_winter.xml" value="0.16452702702702704" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/toast_map_custom.xml" value="0.11662242866622428" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/toast_password_update_custom.xml" value="0.2" />
         <entry key="app/src/main/res/drawable/selector_detail_box.xml" value="0.2423611111111111" />
         <entry key="app/src/main/res/drawable/selector_detail_like.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/selector_detail_parking.xml" value="0.2828125" />

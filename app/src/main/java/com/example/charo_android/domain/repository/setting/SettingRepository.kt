@@ -28,4 +28,9 @@ interface SettingRepository {
         userEmail : String,
         password : String
     ) : StatusCode
+
+    suspend fun newPasswordRegister(
+        userEmail: String,
+        newPassword: String
+    ) : StatusCode
 }

@@ -35,5 +35,12 @@ class RemoteSettingDataSourceImpl(private val service: SettingViewService)
     ): ResponseStatusCode {
         return service.originPasswordCheck(userEmail, password)
     }
+
+    override suspend fun newPasswordRegister(
+        userEmail: String,
+        newPassword: String
+    ): ResponseStatusCode {
+        return service.newPasswordRegister(userEmail, newPassword)
+    }
 }
 

@@ -31,4 +31,9 @@ interface RemoteSettingDataSource {
         userEmail : String,
         password : String
     ) : ResponseStatusCode
+
+    suspend fun newPasswordRegister(
+        userEmail: String,
+        newPassword: String
+    ) : ResponseStatusCode
 }

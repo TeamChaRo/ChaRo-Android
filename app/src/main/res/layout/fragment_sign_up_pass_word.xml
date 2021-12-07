@@ -156,5 +156,7 @@
             app:layout_constraintStart_toStartOf="@+id/img_sign_up_password_next"
             app:layout_constraintTop_toTopOf="@+id/img_sign_up_password_next" />
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

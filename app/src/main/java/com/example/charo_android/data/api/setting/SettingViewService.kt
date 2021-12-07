@@ -34,4 +34,10 @@ interface SettingViewService {
         @Query("userEmail") userEmail : String,
         @Query("password") password : String
     ) : ResponseStatusCode
+
+    @PUT("/user/password")
+    suspend fun newPasswordRegister(
+        @Query("userEmail") userEmail : String,
+        @Query("newPassword") newPassword: String,
+    ) : ResponseStatusCode
 }

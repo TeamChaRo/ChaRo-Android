@@ -10,10 +10,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.charo_android.domain.model.setting.ProfileChangeData
 import com.example.charo_android.domain.model.setting.ProfileRequestChangeData
-import com.example.charo_android.domain.usecase.setting.ProfileImageChangeUseCase
-import com.example.charo_android.domain.usecase.setting.ProfileNickNameChangeUseCase
-import com.example.charo_android.domain.usecase.setting.ProfilePasswordCheckUseCase
-import com.example.charo_android.domain.usecase.setting.WithdrawalUserUseCase
+import com.example.charo_android.domain.usecase.setting.*
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.example.charo_android.presentation.util.NonNullLiveData
@@ -32,7 +29,8 @@ class SettingViewModel(
     private val profileImageChangeUseCase : ProfileImageChangeUseCase,
     private val profileNickNameChangeUseCase: ProfileNickNameChangeUseCase,
     private val withdrawalUserUseCase: WithdrawalUserUseCase,
-    private val profilePasswordCheckUseCase: ProfilePasswordCheckUseCase
+    private val profilePasswordCheckUseCase: ProfilePasswordCheckUseCase,
+    private val newPasswordRegisterUseCase: NewPasswordRegisterUseCase
 ) : ViewModel() {
 
 
@@ -62,6 +60,13 @@ class SettingViewModel(
     //기존 비밀번호 확인
     private val _passwordCheck : MutableLiveData<Boolean> = MutableLiveData()
     val passwordCheck : LiveData<Boolean> = _passwordCheck
+
+    //새로운 비밀번호 등록
+    private val _newPasswordRegister : MutableLiveData<Boolean> = MutableLiveData()
+    val newPasswordRegister : LiveData<Boolean> = _newPasswordRegister
+
+    //새로운 비밀번호 확인
+    var newPasswordReconfirm : MutableLiveData<String> = MutableLiveData()
 
     // 변경 uri
     val profileChangeUri = MutableLiveData<Uri>()
@@ -222,6 +227,22 @@ class SettingViewModel(
                     _passwordCheck.value = false
                     it.printStackTrace()
                     Log.d("passwordCheck", "서버 통신 실패!")
+                }
+        }
+    }
+
+    // 새 비밀번호 등록
+    fun newPasswordRegister(userEmail: String, newPassword: String){
+        viewModelScope.launch {
+            runCatching { newPasswordRegisterUseCase.execute(userEmail, newPassword) }
+                .onSuccess {
+                    _newPasswordRegister.value = it.success
+                    Log.d("newPassword", "서버 통신 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("newPassword", "서버 통신 실패")
+
                 }
         }
     }
