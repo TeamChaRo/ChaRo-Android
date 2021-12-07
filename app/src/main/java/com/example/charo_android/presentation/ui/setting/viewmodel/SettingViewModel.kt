@@ -7,10 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.charo_android.domain.model.setting.ProfileChangeData
 import com.example.charo_android.domain.model.setting.ProfileRequestChangeData
 import com.example.charo_android.domain.usecase.setting.ProfileImageChangeUseCase
@@ -42,6 +39,21 @@ class SettingViewModel(
     var profileNickName : LiveData<Boolean> = _profileNickName
 
 
+    // 프로필 & 닉네임 변경 체크
+    var images : MutableLiveData<Boolean> = MutableLiveData()
+    var nickName : MutableLiveData<Boolean> = MutableLiveData()
+
+    var isProfileUpdate = MediatorLiveData<Int>().apply {
+        this.addSource(images){
+            this.value = isProfileUpdateCheck()
+        }
+        this.addSource(nickName){
+            this.value = isProfileUpdateCheck()
+        }
+    }
+
+
+
     val userId = MutableLiveData<String>()
 
     // 변경 uri
@@ -57,6 +69,9 @@ class SettingViewModel(
     // 받아오는 프로필 이미지
     val originProfileUri = MutableLiveData<String>("newnew")
 
+    //변경 닉네임
+    var newNickName : MutableLiveData<String> = MutableLiveData()
+
     // 프로필 변경시 success
     private val _profileChangeData : MutableLiveData<ProfileChangeData> = MutableLiveData<ProfileChangeData>()
     val profileChangeData : LiveData<ProfileChangeData> = _profileChangeData
@@ -65,6 +80,20 @@ class SettingViewModel(
     var numCheck : MutableLiveData<Int> = MutableLiveData()
 
     var withdrawalStatus : MutableLiveData<Boolean> = MutableLiveData()
+
+    // 프로필 & 닉네임 변경 체크 함수
+    private fun isProfileUpdateCheck() : Int {
+        if((images.value == true) && (nickName.value == true)){
+                return 0
+            }else if((images.value == false) && (nickName.value == true)){
+                return 1
+        } else if ((images.value == true) && (nickName.value == false)){
+            return 2
+        }
+        return 3
+    }
+
+
 
     fun profileNickNameCheck(nickname: String) {
         viewModelScope.launch {
@@ -102,7 +131,7 @@ class SettingViewModel(
             bitmap = ImageDecoder.decodeBitmap(source)
         }
 
-        val imageRequestBody = bitmap?.let { BitmapRequestBody(it) }
+        val imageRequestBody = bitmap?.let { ProfileUpdateBitmapRequest(it) }
         val imageMultiPartBody: MultipartBody.Part =
             MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
 
@@ -115,10 +144,11 @@ class SettingViewModel(
             )  }
                 .onSuccess {
                     _profileChangeData.value = it
-                    Log.d("profileChange", "서버 통신 성공")
+                    Log.d("profileImgChange", "서버 통신 성공")
                 }
                 .onFailure {
-                    Log.d("profileChange", "서버 통신 실패패")
+                    it.printStackTrace()
+                    Log.d("profileImgChange", "서버 통신 실패패")
                }
         }
     }
@@ -139,17 +169,17 @@ class SettingViewModel(
             ) }
                 .onSuccess {
                     _profileChangeData.value = it
-                    Log.d("profileChange", "서버 통신 성공")
+                    Log.d("profileNickChange", "서버 통신 성공")
                 }
                 .onFailure {
-                    Log.d("profileChange", "서버 통신 실패")
+                    Log.d("profileNickChange", "서버 통신 실패")
                 }
         }
     }
 
 
 
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+    inner class ProfileUpdateBitmapRequest(private val bitmap: Bitmap) : RequestBody(){
         override fun contentType(): MediaType? = "image/jpeg".toMediaType()
 
 

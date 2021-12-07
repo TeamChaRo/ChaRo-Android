@@ -148,8 +148,8 @@ class SignUpEmailViewModel(
                     Log.d("register", "서버 통신 성공!")
                 }
                 .onFailure {
-                    it.printStackTrace()
                     Log.d("register", "서버 통신 실패!")
+                    Log.d("register", it.printStackTrace().toString())
                 }
         }
     }

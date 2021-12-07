@@ -200,14 +200,14 @@
 
                 <TextView
                     android:id="@+id/text_setting_user_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@+id/text_setting_email"
-                    android:textSize="14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub"
-                    app:layout_constraintEnd_toEndOf="@+id/switch_email_agree"/>
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/switch_email_agree"
+                    app:layout_constraintTop_toTopOf="@+id/text_setting_email" />
 
                 <ImageView
                     android:id="@+id/img_setting_account"

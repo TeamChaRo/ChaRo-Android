@@ -11,7 +11,7 @@ interface SettingViewService {
     @PUT("/user/{userEmail}")
     suspend fun profileChange(
         @Path("userEmail") userEmail : String,
-        @Part("image") image : MultipartBody.Part,
+        @Part image : MultipartBody.Part,
         @Part("originImage") originImage : RequestBody,
         @Part("newNickname") newNickname : RequestBody
     ) : ResponseProfileUpdateData

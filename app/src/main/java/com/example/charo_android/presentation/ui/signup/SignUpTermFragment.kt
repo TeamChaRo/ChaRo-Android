@@ -77,11 +77,12 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
                         emailAgree.value ?: false,
                         requireActivity()
                     )
+                    SharedInformation.setEmail(requireActivity(), signUpViewModel.userEmail.value.toString())
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
-        SharedInformation.setEmail(requireActivity(), signUpViewModel.userEmail.value.toString())
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+
         }
     }
 

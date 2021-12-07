@@ -68,7 +68,9 @@ class SettingMainFragment :
 
     //제목 변경
     private fun changeTabText() {
+        val userEmail = SharedInformation.getEmail(requireActivity())
         settingViewModel.updateTabText.value = "설정"
+        binding.textSettingUserEmail.text = userEmail
     }
 
     //로그아웃
