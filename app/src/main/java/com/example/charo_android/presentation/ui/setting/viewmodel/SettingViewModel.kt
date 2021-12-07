@@ -219,6 +219,7 @@ class SettingViewModel(
                     Log.d("passwordCheck", "서버 통신 성공!")
                 }
                 .onFailure {
+                    _passwordCheck.value = false
                     it.printStackTrace()
                     Log.d("passwordCheck", "서버 통신 실패!")
                 }
