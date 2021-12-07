@@ -3,6 +3,8 @@ package com.example.charo_android.presentation.ui.setting
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
+import android.text.TextUtils.replace
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -14,12 +16,12 @@ import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewMo
 import kotlinx.android.synthetic.main.fragment_setting_profile_update.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
+import kotlin.properties.Delegates
 
 
 class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBinding>
     (R.layout.fragment_setting_profile_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +38,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     private fun initIsProfileNum(){
         settingViewModel.images.value = false
         settingViewModel.nickName.value = false
+        settingViewModel.buttonClick.value = false
     }
 
 
@@ -77,14 +80,16 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                             if (!it) {
                                 text_input_profile_change_nick_name.error = "중복되는 닉네임이 존재합니다"
                             } else {
-                                settingViewModel.newNickName.value = s.toString()
                                 text_input_profile_change_nick_name.isErrorEnabled = false
                                 text_input_profile_change_nick_name.isHelperTextEnabled = true
                                 text_input_profile_change_nick_name.helperText = "사용 가능한 닉네임입니다"
                                 binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
                                 Log.d("niceshot", s.toString())
                                 binding.imgProfileUpdateButton.setOnClickListener {
+                                    settingViewModel.newNickName.value = s.toString()
                                     settingViewModel.nickName.value = true
+                                    settingViewModel.buttonClick.value = true
+                                    changeSettingMain()
                                 }
                             }
                         }
@@ -115,20 +120,25 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                 Log.d("updateProfile", its.toString())
                 settingViewModel.images.value = true
                 binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+                binding.imgProfileUpdateButton.setOnClickListener {
+                    settingViewModel.buttonClick.value = true
+                    changeSettingMain()
+                }
+                profileImageUpdateChange(its, "")
+                settingViewModel.newNickName.observe(viewLifecycleOwner){
+                    profileImageUpdateChange(its, it)
+                }
             } else {
                 with(binding) {
                     imgProfileChange.setImageResource(R.drawable.setting_profile_update)
                     settingViewModel.images.value = false
                 }
             }
-            binding.imgProfileUpdateButton.setOnClickListener {
-                val newNickName = settingViewModel.newNickName.value
-                profileImageUpdateChange( its, newNickName.toString())
-            }
+
+
         }
+
     }
-
-
     // 프로필 사진 변경했을 때(닉네임이랑 / 닉네임 없이)
     private fun profileImageUpdateChange( imageUri: Uri, s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
@@ -141,6 +151,8 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     s,
                     requireActivity()
                 )
+
+
             } else if (it == 2) {
                 settingViewModel.profileImageChange(
                     "and@naver.com",
@@ -149,10 +161,14 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     "",
                     requireActivity()
                 )
+
             }
+
 
         }
     }
+
+
 
 
     //닉네임만 변경했을 때
@@ -165,8 +181,11 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     "",
                     s
                 )
+
             }
+
         }
+
     }
 
 
@@ -182,6 +201,15 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
             }
         }
 
+    }
+
+    //fragment 전환
+    private fun changeSettingMain(){
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.apply {
+            replace(R.id.fragment_container_setting, SettingMainFragment())
+            commit()
+        }
     }
 
 

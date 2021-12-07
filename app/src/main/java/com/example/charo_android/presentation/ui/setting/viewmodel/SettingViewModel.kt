@@ -42,12 +42,16 @@ class SettingViewModel(
     // 프로필 & 닉네임 변경 체크
     var images : MutableLiveData<Boolean> = MutableLiveData()
     var nickName : MutableLiveData<Boolean> = MutableLiveData()
+    var buttonClick : MutableLiveData<Boolean> = MutableLiveData()
 
     var isProfileUpdate = MediatorLiveData<Int>().apply {
         this.addSource(images){
             this.value = isProfileUpdateCheck()
         }
         this.addSource(nickName){
+            this.value = isProfileUpdateCheck()
+        }
+        this.addSource(buttonClick){
             this.value = isProfileUpdateCheck()
         }
     }
@@ -83,11 +87,11 @@ class SettingViewModel(
 
     // 프로필 & 닉네임 변경 체크 함수
     private fun isProfileUpdateCheck() : Int {
-        if((images.value == true) && (nickName.value == true)){
+        if((images.value == true) && (nickName.value == true) && (buttonClick.value == true)){
                 return 0
-            }else if((images.value == false) && (nickName.value == true)){
+            }else if((images.value == false) && (nickName.value == true) && (buttonClick.value == true)){
                 return 1
-        } else if ((images.value == true) && (nickName.value == false)){
+        } else if ((images.value == true) && (nickName.value == false) && (buttonClick.value == true)){
             return 2
         }
         return 3
