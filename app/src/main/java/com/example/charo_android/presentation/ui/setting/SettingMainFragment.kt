@@ -37,7 +37,7 @@ class SettingMainFragment :
         changeTabText()
         clickLogOut()
         withdrawal()
-
+        clickPasswordUpdate()
         Log.d("sharedLog", SharedInformation.getSocialId(requireActivity()))
         Log.d("sharedLog", SharedInformation.getEmail(requireActivity()))
 
@@ -63,6 +63,18 @@ class SettingMainFragment :
                 commit()
             }
 
+        }
+    }
+
+    //비밀번호 수정
+    private fun clickPasswordUpdate(){
+        binding.textSettingPasswordUpdate.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.apply {
+                replace(R.id.fragment_container_setting, SettingPasswordUpdate())
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 

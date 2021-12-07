@@ -30,4 +30,8 @@ class SettingRepositoryImpl(private val dataSource: RemoteSettingDataSource)
     override suspend fun withdrawalUser(userEmail: String) : StatusCode {
         return SettingMapper.mapperToStatusCode(dataSource.withdrawalUser(userEmail))
     }
+
+    override suspend fun originPasswordCheck(userEmail: String, password: String): StatusCode {
+        return SettingMapper.mapperToStatusCode(dataSource.originPasswordCheck(userEmail, password))
+    }
 }

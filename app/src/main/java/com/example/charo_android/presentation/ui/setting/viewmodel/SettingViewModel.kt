@@ -12,6 +12,7 @@ import com.example.charo_android.domain.model.setting.ProfileChangeData
 import com.example.charo_android.domain.model.setting.ProfileRequestChangeData
 import com.example.charo_android.domain.usecase.setting.ProfileImageChangeUseCase
 import com.example.charo_android.domain.usecase.setting.ProfileNickNameChangeUseCase
+import com.example.charo_android.domain.usecase.setting.ProfilePasswordCheckUseCase
 import com.example.charo_android.domain.usecase.setting.WithdrawalUserUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
@@ -30,7 +31,8 @@ class SettingViewModel(
     private val getRemoteProfileNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase,
     private val profileImageChangeUseCase : ProfileImageChangeUseCase,
     private val profileNickNameChangeUseCase: ProfileNickNameChangeUseCase,
-    private val withdrawalUserUseCase: WithdrawalUserUseCase
+    private val withdrawalUserUseCase: WithdrawalUserUseCase,
+    private val profilePasswordCheckUseCase: ProfilePasswordCheckUseCase
 ) : ViewModel() {
 
 
@@ -57,8 +59,9 @@ class SettingViewModel(
     }
 
 
-
-    val userId = MutableLiveData<String>()
+    //기존 비밀번호 확인
+    private val _passwordCheck : MutableLiveData<Boolean> = MutableLiveData()
+    val passwordCheck : LiveData<Boolean> = _passwordCheck
 
     // 변경 uri
     val profileChangeUri = MutableLiveData<Uri>()
@@ -202,7 +205,22 @@ class SettingViewModel(
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("withdrawal", "서버 통신 성공!")
+                    Log.d("withdrawal", "서버 통신 실패!")
+                }
+        }
+    }
+
+    // 비밀번호 수정
+    fun originPasswordCheck(userEmail: String, password : String){
+        viewModelScope.launch {
+            runCatching { profilePasswordCheckUseCase.execute(userEmail, password) }
+                .onSuccess {
+                    _passwordCheck.value = it.success
+                    Log.d("passwordCheck", "서버 통신 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("passwordCheck", "서버 통신 실패!")
                 }
         }
     }

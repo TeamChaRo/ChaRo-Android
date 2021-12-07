@@ -21,7 +21,6 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
 
         changeTabText()
         changeFragment(R.id.fragment_container_setting, SettingMainFragment())
-        settingViewModel.userId.value = "and@naver.com"
 
     }
 

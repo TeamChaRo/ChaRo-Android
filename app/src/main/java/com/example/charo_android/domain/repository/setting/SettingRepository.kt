@@ -23,4 +23,9 @@ interface SettingRepository {
     suspend fun withdrawalUser(
         userEmail : String
     ) : StatusCode
+
+    suspend fun originPasswordCheck(
+        userEmail : String,
+        password : String
+    ) : StatusCode
 }

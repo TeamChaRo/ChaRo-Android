@@ -28,4 +28,12 @@ class RemoteSettingDataSourceImpl(private val service: SettingViewService)
     override suspend fun withdrawalUser(userEmail: String) : ResponseStatusCode {
         return service.withdrawalUser(userEmail)
     }
+
+    override suspend fun originPasswordCheck(
+        userEmail: String,
+        password: String
+    ): ResponseStatusCode {
+        return service.originPasswordCheck(userEmail, password)
+    }
 }
+

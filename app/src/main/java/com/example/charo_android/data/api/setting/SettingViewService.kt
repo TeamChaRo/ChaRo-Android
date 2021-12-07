@@ -29,4 +29,9 @@ interface SettingViewService {
         @Path("userEmail") userEmail : String
     ) : ResponseStatusCode
 
+    @GET("/user/password")
+    suspend fun originPasswordCheck(
+        @Query("userEmail") userEmail : String,
+        @Query("password") password : String
+    ) : ResponseStatusCode
 }

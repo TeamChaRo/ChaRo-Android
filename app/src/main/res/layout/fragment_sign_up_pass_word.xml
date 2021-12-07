@@ -106,7 +106,8 @@
                 app:passwordToggleDrawable="@drawable/password_eye_off"
                 app:layout_constraintTop_toBottomOf="@+id/text_input_paasword"
                 app:layout_constraintStart_toStartOf="@+id/text_input_paasword"
-                app:layout_constraintEnd_toEndOf="@+id/text_input_paasword">
+                app:layout_constraintEnd_toEndOf="@+id/text_input_paasword"
+                android:layout_marginTop="15dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_sign_up_password_reconfirm"

@@ -26,4 +26,9 @@ interface RemoteSettingDataSource {
     suspend fun withdrawalUser(
         userEmail: String
     ) : ResponseStatusCode
+
+    suspend fun originPasswordCheck(
+        userEmail : String,
+        password : String
+    ) : ResponseStatusCode
 }
