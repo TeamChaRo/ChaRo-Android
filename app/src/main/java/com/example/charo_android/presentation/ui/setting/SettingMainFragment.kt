@@ -3,24 +3,17 @@ package com.example.charo_android.presentation.ui.setting
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.Observer
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSettingMainBinding
 import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
-import com.example.charo_android.presentation.ui.signup.SignUpPassWordFragment
 import com.example.charo_android.presentation.util.CustomDialog
 import com.example.charo_android.presentation.util.SharedInformation
-import com.example.charo_android.presentation.util.changeFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.user.UserApiClient
@@ -38,6 +31,7 @@ class SettingMainFragment :
         clickLogOut()
         withdrawal()
         clickPasswordUpdate()
+        clickNotice()
         Log.d("sharedLog", SharedInformation.getSocialId(requireActivity()))
         Log.d("sharedLog", SharedInformation.getEmail(requireActivity()))
 
@@ -71,7 +65,19 @@ class SettingMainFragment :
         binding.textSettingPasswordUpdate.setOnClickListener {
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
-                replace(R.id.fragment_container_setting, SettingPasswordUpdate())
+                replace(R.id.fragment_container_setting, SettingPasswordUpdateFragment())
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
+    // 공지사항
+    private fun clickNotice(){
+        binding.textSettingNotice.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.apply {
+                replace(R.id.fragment_container_setting, SettingNoticeFragment())
                 addToBackStack(null)
                 commit()
             }

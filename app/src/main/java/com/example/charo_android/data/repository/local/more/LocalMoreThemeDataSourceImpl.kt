@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.local
+package com.example.charo_android.data.repository.local.more
 
 import com.example.charo_android.R
 import com.example.charo_android.presentation.ui.more.MoreThemeInfo

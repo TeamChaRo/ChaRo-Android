@@ -59,6 +59,7 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_search.xml" value="0.16" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_bottom_sheet.xml" value="0.359375" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_main.xml" value="0.16452702702702704" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_notice.xml" value="0.128" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_pass_word_update.xml" value="0.152" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_setting_profile_update.xml" value="0.20439189189189189" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_sign_up_email.xml" value="0.144" />
@@ -78,6 +79,7 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_more_theme_content_view.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_more_view.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_result_search.xml" value="0.1" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_setting_notice.xml" value="0.12" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/tablayout_eight.xml" value="0.264" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/tablayout_eleven.xml" value="0.264" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/tablayout_fifteen.xml" value="0.264" />

@@ -192,4 +192,7 @@
     <string name="new_password_update_info">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
     <string name="one_more_password">비밀번호를 한번 더 작성해주세요</string>
     <string name="password_update_end">비밀번호가 변경되었습니다.</string>
+    <string name="setting_notice_title">업데이트 실행 1.0 -> 2.0 업데이트 안내</string>
+    <string name="setting_notice_date">2021.12.12</string>
+    <string name="setting_notice_content">어쩌구 저쩌구가 업데이트 됨!어쩌구 저쩌구가 업데이트 됨!</string>
 </resources>

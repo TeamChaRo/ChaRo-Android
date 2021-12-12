@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.local
+package com.example.charo_android.data.repository.local.home
 
 import com.example.charo_android.R
 import com.example.charo_android.data.model.entity.HomeThemeInfo

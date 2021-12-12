@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
 
 
-class SettingPasswordUpdate :
+class SettingPasswordUpdateFragment :
     BaseFragment<FragmentSettingPassWordUpdateBinding>(R.layout.fragment_setting_pass_word_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
     val emailPattern = "^[a-zA-Z0-9]{5,15}$"
