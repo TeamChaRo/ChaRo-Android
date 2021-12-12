@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSettingMainBinding
 import com.example.charo_android.presentation.base.BaseFragment
@@ -32,6 +33,7 @@ class SettingMainFragment :
         withdrawal()
         clickPasswordUpdate()
         clickNotice()
+        clickCs()
         Log.d("sharedLog", SharedInformation.getSocialId(requireActivity()))
         Log.d("sharedLog", SharedInformation.getEmail(requireActivity()))
 
@@ -50,39 +52,34 @@ class SettingMainFragment :
     //프로필 수정
     private fun clickProfileUpdate() {
         binding.textSettingProfileUpdate.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.fragment_container_setting, SettingProfileUpdateFragment())
-                addToBackStack(null)
-                commit()
-            }
-
+            changeSettingFragment(SettingProfileUpdateFragment())
         }
     }
 
     //비밀번호 수정
-    private fun clickPasswordUpdate(){
+    private fun clickPasswordUpdate() {
         binding.textSettingPasswordUpdate.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.fragment_container_setting, SettingPasswordUpdateFragment())
-                addToBackStack(null)
-                commit()
-            }
+            changeSettingFragment(SettingPasswordUpdateFragment())
         }
     }
 
+
     // 공지사항
-    private fun clickNotice(){
+    private fun clickNotice() {
         binding.textSettingNotice.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.fragment_container_setting, SettingNoticeFragment())
-                addToBackStack(null)
-                commit()
-            }
+            changeSettingFragment(SettingNoticeFragment())
         }
     }
+
+    //1:1문의
+    private fun clickCs() {
+        binding.textSettingCsQuery.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingCsActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
 
     //제목 변경
     private fun changeTabText() {
@@ -155,21 +152,32 @@ class SettingMainFragment :
             dialog.showWithdrawal(R.layout.custom_dialog_withdrawal)
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
-                        if(num == 1){
-                            settingViewModel.withdrawalUser("test@naver.com")
-                            settingViewModel.withdrawalStatus.observe(viewLifecycleOwner){
-                                if (it) {
-                                    Toast.makeText(requireActivity(), "회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
-                                    ActivityCompat.finishAffinity(requireActivity())
-                                }else{
-                                    Toast.makeText(requireActivity(), "회원 탈퇴 실패", Toast.LENGTH_SHORT).show()
-                                }
+                    if (num == 1) {
+                        settingViewModel.withdrawalUser("test@naver.com")
+                        settingViewModel.withdrawalStatus.observe(viewLifecycleOwner) {
+                            if (it) {
+                                Toast.makeText(requireActivity(), "회원 탈퇴 성공", Toast.LENGTH_SHORT)
+                                    .show()
+                                ActivityCompat.finishAffinity(requireActivity())
+                            } else {
+                                Toast.makeText(requireActivity(), "회원 탈퇴 실패", Toast.LENGTH_SHORT)
+                                    .show()
                             }
-
                         }
+
+                    }
                 }
             })
 
+        }
+    }
+
+    private fun changeSettingFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.apply {
+            replace(R.id.fragment_container_setting, fragment)
+            addToBackStack(null)
+            commit()
         }
     }
 }
