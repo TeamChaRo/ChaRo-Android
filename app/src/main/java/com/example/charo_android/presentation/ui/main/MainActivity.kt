@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         return userEmail
     }
 
-    fun getNickName(): String{
+    fun getNickName(): String {
         return nickName
     }
 
@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
 
             navView.setOnItemSelectedListener {
-                when(it.itemId) {
+                when (it.itemId) {
                     R.id.navigation_home -> {
-                        replaceHomeFragment(userEmail,nickName)
+                        replaceHomeFragment(userEmail, nickName)
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
@@ -83,17 +83,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun replaceHomeFragment(userId : String, nickName : String){
-        replaceFragment(homeFragment,userId, nickName)
+    private fun replaceHomeFragment(userId: String, nickName: String) {
+        replaceFragment(homeFragment, userId, nickName)
     }
 
-    private fun replaceWriteFragment(userId : String, nickName : String){
-        replaceFragment(writeFragment,userId,nickName)
+    private fun replaceWriteFragment(userId: String, nickName: String) {
+        replaceFragment(writeFragment, userId, nickName)
     }
 
-    private fun
-            replaceCharoFragment(userId : String, nickName: String){
-        replaceFragment(charoFragment,userId,nickName)
+    private fun replaceCharoFragment(userId: String, nickName: String) {
+        replaceFragment(charoFragment, userId, nickName)
     }
 
     fun startActivityWriteShare() {
