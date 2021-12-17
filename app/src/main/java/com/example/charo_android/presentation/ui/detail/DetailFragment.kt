@@ -51,13 +51,14 @@ class DetailFragment : Fragment() {
         val postId = (activity as DetailActivity).postId
         val title = (activity as DetailActivity).title
         val date = (activity as DetailActivity).date
-        val imageUrl = (activity as DetailActivity).imageUrl
         val region = (activity as DetailActivity).region
 
         // ViewModel LiveData
         viewModel.setPostId(postId)
-        if (viewModel.detailData.value == null)
+        if (viewModel.detailData.value == null) {
+            Log.d("viewModel", "getData() execute")
             viewModel.getData(postId, title, date, region)
+        }
 
         return binding.root
     }
@@ -71,12 +72,15 @@ class DetailFragment : Fragment() {
         tMapView.setUserScrollZoomEnable(true)
         binding.clDetailMapview.addView(tMapView)
 
+        val imageUrl = (activity as DetailActivity).imageUrl
         viewModel.detailData.observe(viewLifecycleOwner, {
             Log.d("detail", "observed")
             binding.detailData = viewModel
             if (viewModel.detailData.value != null) {
-                // Add Preview Image
-                viewModel.addImageAtFront((activity as DetailActivity).imageUrl)
+                if (viewPagerAdapter.itemList.isEmpty()) {
+                    // Add Preview Image
+                    viewModel.addImageAtFront(imageUrl)
+                }
                 // ViewPager
                 initViewPager(viewModel.detailData.value!!.data.images)
                 // tMapView
@@ -124,6 +128,7 @@ class DetailFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initViewPager(imgList: List<String>) {
         binding.viewpagerDetailImage.adapter = viewPagerAdapter
+        viewPagerAdapter.itemList.clear()
         imgList.forEach {
             viewPagerAdapter.itemList.add(it)
         }
@@ -171,7 +176,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun addList(tMapView: TMapView) {
-        if(pointList.isEmpty()) {
+        if (pointList.isEmpty()) {
             viewModel.detailData.value!!.data.course.forEach {
                 Log.d("latitude", it.latitude)
                 Log.d("longitude", it.longitude)
