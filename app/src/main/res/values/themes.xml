@@ -151,7 +151,7 @@
     </style>
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/background_radius_all_20</item>
+        <item name="android:background">@drawable/background_radius_top_20</item>
     </style>
 
 <!--    승현 바텀시트다이얼로그-->
