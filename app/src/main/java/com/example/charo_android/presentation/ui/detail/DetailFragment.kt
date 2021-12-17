@@ -7,8 +7,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,16 +15,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.skt.Tmap.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -125,14 +120,25 @@ class DetailFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun initViewPager(imgList: List<String>) {
+        // viewPager registerOnPageChangeCallback
+        binding.viewpagerDetailImage.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            @SuppressLint("SetTextI18n")
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                Log.e("Selected_Page", position.toString())
+                binding.tvDetailViewpagerImage.text = "${position+1}/${viewPagerAdapter.itemList.size}"
+            }
+        })
+
         binding.viewpagerDetailImage.adapter = viewPagerAdapter
         viewPagerAdapter.itemList.clear()
         imgList.forEach {
             viewPagerAdapter.itemList.add(it)
         }
         viewPagerAdapter.notifyDataSetChanged()
+        binding.tvDetailViewpagerImage.text = "1/${viewPagerAdapter.itemList.size}"
     }
 
     private fun clickLike(postId: Int) {
@@ -183,7 +189,6 @@ class DetailFragment : Fragment() {
                 pointList.add(TMapPoint(it.latitude.toDouble(), it.longitude.toDouble()))
             }
         }
-//        setCenter(tMapView)
         mark(tMapView)
     }
 
@@ -198,7 +203,7 @@ class DetailFragment : Fragment() {
     private fun mark(tMapView: TMapView) {
         for (i in pointList.indices) {
             val marker = TMapMarkerItem()
-            var bitmap: Bitmap = when (i) {
+            val bitmap: Bitmap = when (i) {
                 0 -> BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
                 pointList.size - 1 -> BitmapFactory.decodeResource(
                     resources,
@@ -217,7 +222,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun findPath(tMapView: TMapView) {
-        val thread = Thread() {
+        val thread = Thread {
             try {
                 for (i in 0 until pointList.size - 1) {
                     val from = pointList[i]
