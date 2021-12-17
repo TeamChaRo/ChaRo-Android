@@ -34,8 +34,6 @@ class DetailViewpagerAdapter: RecyclerView.Adapter<DetailViewpagerAdapter.Detail
             Glide.with(itemView.context)
                 .load(url)
                 .into(binding.imgDetailViewpagerImage)
-
-            binding.tvDetailViewpagerImage.text = "$index/$itemCount"
         }
     }
 }
