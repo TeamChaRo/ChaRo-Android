@@ -4,25 +4,18 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
-import androidx.appcompat.app.AppCompatActivity
-import com.example.charo_android.R
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.util.Util
+import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
-import com.example.charo_android.presentation.util.SharedInformation
-import com.kakao.sdk.common.util.Utility
-import java.util.jar.Manifest
 
 
 class MainActivity : AppCompatActivity() {
@@ -114,20 +107,32 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("nickname", nickName)
         startActivity(intent)
     }
+
     private fun requestPermissions() {
+
         val permissions: Array<String> =
             arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
-        if (ContextCompat.checkSelfPermission(this@MainActivity, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-        != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)){
-                Toast.makeText(this, "갤러리 권한 허용하지 않을시 앱 이용이 제한됩니다.", Toast.LENGTH_SHORT).show()
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                Toast.makeText(this, "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
                 ActivityCompat.requestPermissions(this, permissions, 1)
-            }else{
+            } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
             }
-
         }
+
+
+
     }
 
     override fun onRequestPermissionsResult(
@@ -142,7 +147,6 @@ class MainActivity : AppCompatActivity() {
                    Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
                } else {
                    Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
-                   finish()
                }
             }
             1 -> if(grantResults[0] == PackageManager.PERMISSION_GRANTED){

@@ -5,10 +5,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -99,38 +101,69 @@ class SignUpProfileFragment :
 
     // 프로필 사진 등록
     private fun registerProfile() {
-        val REQ_STORAGE_PERMISSION = 1001
-        var writePermission = ContextCompat.checkSelfPermission(
-            requireContext(),
-            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-
-        var readPermission = ContextCompat.checkSelfPermission(
-            requireContext(),
-            android.Manifest.permission.READ_EXTERNAL_STORAGE
-        )
         binding.imgSignUpProfile.setOnClickListener {
-            if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(
+            requestPermissions()
+        }
+    }
+
+    private fun requestPermissions() {
+
+        val permissions: Array<String> =
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
                     requireActivity(),
-                    arrayOf(
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ),
-                    REQ_STORAGE_PERMISSION
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
                 )
+            ) {
+                Toast.makeText(requireActivity(), "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(requireActivity(), permissions, 1)
             } else {
+                ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
+            }
+        }
+
+
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            0 -> {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(requireActivity(), "권한 허용", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(Intent.ACTION_PICK)
+                    intent.type = MediaStore.Images.Media.CONTENT_TYPE
+                    intent.type = "image/*"
+                    getContent.launch(intent)
+                } else {
+                    Toast.makeText(requireActivity(), "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            1 -> if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(requireActivity(), "권한 허용", Toast.LENGTH_SHORT).show()
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = MediaStore.Images.Media.CONTENT_TYPE
                 intent.type = "image/*"
                 getContent.launch(intent)
-
+            } else {
+                Toast.makeText(requireActivity(), "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                startActivity(intent)
             }
-
         }
     }
-
-
 
 
 
