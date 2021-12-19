@@ -1,9 +1,15 @@
 package com.example.charo_android.presentation.ui.home
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.charo_android.R
 import com.example.charo_android.data.repository.local.home.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.databinding.FragmentHomeBinding
@@ -35,6 +41,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var homeCustomThemeAdapter: HomeCustomThemeAdapter
     private lateinit var homeLocalDriveAdapter: HomeLocalDriveAdapter
 
+
+
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
 
@@ -43,6 +51,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val userId: String = Hidden.userId
         val nickName: String = Hidden.nickName
+
         goSearchView(userId,nickName)
         goAlarm()
         initToolBar()
@@ -54,7 +63,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initCustomThemeDrive()
         initHomeTitle()
         initThemeDrive()
-
     }
    /*
     private fun deleteKakao(){
@@ -72,6 +80,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
     } */
+
+
+
+
     private fun initToolBar() {
         val toolbar = binding.toolbarMain
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -190,5 +202,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
+    // 권한 설정
 
 }

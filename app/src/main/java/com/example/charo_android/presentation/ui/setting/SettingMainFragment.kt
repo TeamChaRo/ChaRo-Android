@@ -1,12 +1,15 @@
 package com.example.charo_android.presentation.ui.setting
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSettingMainBinding
@@ -24,6 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class SettingMainFragment :
     BaseFragment<FragmentSettingMainBinding>(R.layout.fragment_setting_main) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
+    private val permissionCheck = (android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,20 +38,27 @@ class SettingMainFragment :
         clickPasswordUpdate()
         clickNotice()
         clickCs()
-        Log.d("sharedLog", SharedInformation.getSocialId(requireActivity()))
-        Log.d("sharedLog", SharedInformation.getEmail(requireActivity()))
+        allowAccess()
 
-        binding.switchAlarm.setOnCheckedChangeListener(object :
-            CompoundButton.OnCheckedChangeListener {
-            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                if (isChecked) {
 
-                } else {
-
-                }
-            }
-        })
     }
+
+    // 알림, 사진 접근 허용
+    private fun allowAccess() {
+        binding.switchImg.isChecked = ContextCompat.checkSelfPermission(
+            requireActivity(),
+            permissionCheck
+        ) == PackageManager.PERMISSION_GRANTED
+
+
+        binding.switchImg.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (!isChecked){
+                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                startActivity(intent)
+            }
+        }
+    }
+
 
     //프로필 수정
     private fun clickProfileUpdate() {

@@ -1,44 +1,49 @@
 package com.example.charo_android.presentation.ui.main
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.charo_android.R
+import android.provider.Settings
 import android.util.Log
-import com.bumptech.glide.util.Util
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
-import com.example.charo_android.presentation.util.SharedInformation
-import com.kakao.sdk.common.util.Utility
 
 
 class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
-    private val writeFragment : WriteFragment by lazy { WriteFragment() }
+    private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
+
 
     private lateinit var userEmail: String
     private lateinit var nickName: String
     private lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        requestPermissions()
         setContentView(binding.root)
         userEmail = intent.getStringExtra("userId").toString()
         nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userEmail, nickName)
         initNavView()
-        Log.d("please", "제발 되라")
 
 
+        //권한 요청
 
-        Log.d("sharedMain", SharedInformation.getEmail(this))
-        Log.d("sharedMain", SharedInformation.getSocialId(this))
 
+    Log.d("lifecycler", "fir")
     }
 
     override fun onBackPressed() {
@@ -91,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(writeFragment, userId, nickName)
     }
 
+
     private fun replaceCharoFragment(userId: String, nickName: String) {
         replaceFragment(charoFragment, userId, nickName)
     }
@@ -101,5 +107,62 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("nickname", nickName)
         startActivity(intent)
     }
+
+    private fun requestPermissions() {
+
+        val permissions: Array<String> =
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                Toast.makeText(this, "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(this, permissions, 1)
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, 0)
+            }
+        }
+
+
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            0 -> {
+               if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                   Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
+               } else {
+                   Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+               }
+            }
+            1 -> if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                startActivity(intent)
+            }
+        }
+    }
+
+
+
+
+
+
 
 }
