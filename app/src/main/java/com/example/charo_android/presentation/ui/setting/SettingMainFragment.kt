@@ -39,7 +39,7 @@ class SettingMainFragment :
         clickNotice()
         clickCs()
         allowAccess()
-
+        clickPrivacy()
 
     }
 
@@ -56,6 +56,12 @@ class SettingMainFragment :
                 val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
                 startActivity(intent)
             }
+        }
+    }
+    private fun clickPrivacy(){
+        binding.textSettingPrivacy.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingPrivacyActivity::class.java)
+            startActivity(intent)
         }
     }
 
