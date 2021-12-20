@@ -47,9 +47,9 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
 
         initDialog()
         initRecyclerView()
-//        viewModel.userData.observe(viewLifecycleOwner, {
-//            addRecyclerViewItem()
-//        })
+        viewModel.userData.observe(viewLifecycleOwner, {
+            addRecyclerViewItem()
+        })
         clickClose()
     }
 
@@ -64,29 +64,12 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerView() {
-        adapter.itemList.addAll(
-            listOf(
-                UserData("한승현", "email", "", true),
-                UserData("한진희", "email", "", true),
-                UserData("곽호택", "email", "", true),
-                UserData("장혜령", "email", "", false),
-                UserData("박익범", "email", "", false),
-                UserData("이지원", "email", "", false),
-                UserData("최인정", "email", "", false),
-                UserData("오예원", "email", "", false),
-                UserData("황지은", "email", "", false),
-                UserData("배희진", "email", "", false),
-                UserData("고다빈", "email", "", false),
-                UserData("이성현", "email", "", false),
-                UserData("고수현", "email", "", false),
-            )
-        )
         binding.rcvDetailDialog.adapter = adapter
         adapter.notifyDataSetChanged()
     }
 
     private fun addRecyclerViewItem() {
-        if (viewModel.userData.value != null) {
+        if (viewModel.userData.value != null && adapter.itemList.isEmpty()) {
             adapter.itemList.addAll(viewModel.userData.value!!)
         }
         binding.rcvDetailDialog.adapter = adapter
