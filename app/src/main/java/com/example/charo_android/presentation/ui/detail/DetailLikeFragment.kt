@@ -81,30 +81,4 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
             dismiss()
         }
     }
-
-    private fun changeTopColor() {
-//        binding.nscvMyCharo.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-//            if (v.getChildAt(v.childCount - 1) != null) {
-//                if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
-//                    scrollY > oldScrollY
-//                ) {
-//                    Log.d("무한스크롤 최하단 도달", "도달완")
-//                    if (myCharoViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
-//                        charoAdapter.addLoading()
-//                        when (spinnerPosition) {
-//                            0 -> {
-//                                myCharoViewModel.getMoreWrittenLikeData()
-//                            }
-//                            else -> {
-//                                myCharoViewModel.getMoreWrittenNewData()
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }))
-        binding.nscvDetailLike.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener {v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            
-        }))
-    }
 }
