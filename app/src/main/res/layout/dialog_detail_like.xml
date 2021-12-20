@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:behavior_draggable="true"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="200dp">
+    app:behavior_peekHeight="320dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_detail_dialog_top"
