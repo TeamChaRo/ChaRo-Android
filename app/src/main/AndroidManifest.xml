@@ -26,6 +26,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
+            android:name=".presentation.ui.setting.SettingServiceTermActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.setting.SettingPrivacyActivity"
             android:exported="false" />
         <activity

@@ -40,7 +40,7 @@ class SettingMainFragment :
         clickCs()
         allowAccess()
         clickPrivacy()
-
+        clickServiceTerm()
     }
 
     // 알림, 사진 접근 허용
@@ -58,9 +58,17 @@ class SettingMainFragment :
             }
         }
     }
+    // 개인 정보 처리
     private fun clickPrivacy(){
         binding.textSettingPrivacy.setOnClickListener {
             val intent = Intent(requireActivity(), SettingPrivacyActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun clickServiceTerm(){
+        binding.textSettingService.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingServiceTermActivity::class.java)
             startActivity(intent)
         }
     }
