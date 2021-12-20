@@ -56,9 +56,11 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
     @RequiresApi(Build.VERSION_CODES.R)
     private fun initDialog() {
         binding.clDetailDialog.layoutParams.height =
-            (requireActivity().windowManager.currentWindowMetrics.bounds.height() * 0.9).toInt()
-        (dialog as BottomSheetDialog).behavior.apply {
+            (requireActivity().windowManager.currentWindowMetrics.bounds.height())
+        val offsetFromTop = 62
+        (dialog as? BottomSheetDialog)?.behavior?.apply {
             isFitToContents = false
+            expandedOffset = offsetFromTop
             state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
     }
