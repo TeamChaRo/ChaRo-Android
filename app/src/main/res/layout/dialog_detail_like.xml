@@ -13,6 +13,7 @@
         android:id="@+id/cl_detail_dialog_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_radius_top_20"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
