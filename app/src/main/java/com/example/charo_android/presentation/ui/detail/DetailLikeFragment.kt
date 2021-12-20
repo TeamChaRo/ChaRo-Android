@@ -78,7 +78,7 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
 
     private fun clickClose() {
         binding.imgDetailDialogClose.setOnClickListener {
-            requireActivity().onBackPressed()
+            dismiss()
         }
     }
 
