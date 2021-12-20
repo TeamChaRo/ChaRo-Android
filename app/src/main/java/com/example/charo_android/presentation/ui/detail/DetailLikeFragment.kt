@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
-import com.example.charo_android.data.model.detail.UserData
 import com.example.charo_android.databinding.DialogDetailLikeBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
