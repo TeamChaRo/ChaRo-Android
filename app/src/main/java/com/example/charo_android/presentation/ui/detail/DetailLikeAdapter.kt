@@ -19,6 +19,7 @@ class DetailLikeAdapter(val itemClick: (UserData) -> Unit) :
         fun onBind(data: UserData) {
             Glide.with(binding.imgDetailLikeImage.context)
                 .load(data.image)
+                .circleCrop()
                 .error(R.drawable.myimage)
                 .into(binding.imgDetailLikeImage)
 
