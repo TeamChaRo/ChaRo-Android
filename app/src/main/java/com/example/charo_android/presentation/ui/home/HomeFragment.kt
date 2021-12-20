@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.charo_android.R
 import com.example.charo_android.data.repository.local.home.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.databinding.FragmentHomeBinding
@@ -121,7 +122,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
+    //오늘 드라이브
     private fun initTodayCharoDrive(){
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerviewHomeTodayDrive)
         homeViewModel.getTodayCharoDrive("and@naver.com")
         homeTodayDriveAdapter = HomeTodayDriveAdapter("and@naver.com")
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
@@ -187,7 +191,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             sharedViewModel.num.value = 3
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreThemeViewFragment())
+                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
                 addToBackStack(null)
                 commit()
             }
