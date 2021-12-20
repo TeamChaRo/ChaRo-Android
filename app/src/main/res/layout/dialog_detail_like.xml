@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     app:behavior_draggable="true"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="200dp">
+    app:behavior_peekHeight="320dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_detail_dialog_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_radius_top_20"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView

@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui
+package com.example.charo_android.presentation.util
 
 import android.util.DisplayMetrics
 import android.util.Log
