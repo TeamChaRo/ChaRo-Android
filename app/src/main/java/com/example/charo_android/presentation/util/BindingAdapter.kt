@@ -17,7 +17,14 @@ object BindingAdapter {
             .load(imageUrl)
             .transform(RoundedCorners(20))
             .into(imageView)
+    }
 
+    @JvmStatic
+    @BindingAdapter("imgIntBind")
+    fun setImage(imageView: ImageView, imageDrawable : Int){
+        Glide.with(imageView.context)
+            .load(imageDrawable)
+            .into(imageView)
     }
     @JvmStatic
     @BindingAdapter("profileBind")

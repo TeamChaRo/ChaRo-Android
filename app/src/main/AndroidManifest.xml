@@ -36,7 +36,11 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.signin.SocialSignInActivity"
-            android:exported="true">
+            android:exported="true" />
+
+        <activity android:name=".presentation.ui.write.WriteShareActivity" />
+        <activity android:name=".presentation.ui.alarm.AlarmActivity" />
+        <activity android:name=".presentation.ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -48,9 +52,6 @@
                     android:scheme="kakao1c4649ba2d391b77eba1164b785bc1e1" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.write.WriteShareActivity" />
-        <activity android:name=".presentation.ui.alarm.AlarmActivity" />
-        <activity android:name=".presentation.ui.main.SplashActivity" />
         <activity
             android:name=".presentation.ui.signup.SignUpActivity"
             android:exported="true"

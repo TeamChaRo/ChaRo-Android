@@ -2,6 +2,7 @@ package com.example.charo_android.presentation.ui.home.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.charo_android.R
 import com.example.charo_android.domain.model.home.*
 import com.example.charo_android.domain.usecase.home.*
 import kotlinx.coroutines.launch
@@ -39,9 +40,26 @@ class HomeViewModel(
     val theme : LiveData<List<Theme>>
         get() = _theme
 
+    private var bannerRoad = listOf<BannerRoad>()
 
 
 
+    fun getBannerRoad() : List<BannerRoad>{
+        return listOf(
+            BannerRoad(
+                R.drawable.road_1
+            ),
+            BannerRoad(
+                R.drawable.road_2
+            ),
+            BannerRoad(
+                R.drawable.road_3
+            ),
+            BannerRoad(
+                R.drawable.road_4
+            )
+        )
+    }
 
 
     fun getBanner(userEmail: String) {

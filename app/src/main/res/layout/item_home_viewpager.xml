@@ -5,6 +5,10 @@
         <variable
             name="banner"
             type="com.example.charo_android.domain.model.home.Banner" />
+
+        <variable
+            name="bannerRoad"
+            type="com.example.charo_android.domain.model.home.BannerRoad" />
     </data>
         
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -58,7 +62,7 @@
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/road_1"
+            imgIntBind="@{bannerRoad.bannerRoadImg}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_viewpager_hashtag" />
 

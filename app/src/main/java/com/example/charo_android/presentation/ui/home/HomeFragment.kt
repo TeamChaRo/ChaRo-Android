@@ -90,14 +90,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
 
-
+    //배너 설정
     private fun initBanner() {
         homeViewModel.getBanner("and@naver.com")
         homeViewPagerAdapter = HomeViewPagerAdapter()
         binding.vpMain.adapter = homeViewPagerAdapter
         homeViewModel.banner.observe(viewLifecycleOwner) {
-            homeViewPagerAdapter.setHomeBanner(it)
+            homeViewPagerAdapter.setHomeBanner(it, homeViewModel.getBannerRoad())
         }
+
+
 
     }
 
