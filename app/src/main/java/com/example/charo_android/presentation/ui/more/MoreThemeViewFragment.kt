@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnAttach
 import com.example.charo_android.R
 import com.example.charo_android.data.model.request.RequestThemeViewData
 import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
@@ -33,7 +34,7 @@ class MoreThemeViewFragment :
 
         initMoreThemeViewPager(userId)
         clickBackButton()
-        clickTab()
+
     }
 
 
@@ -41,7 +42,12 @@ class MoreThemeViewFragment :
         binding.apply {
 
             moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
-
+            sharedViewModel.themeNum.observe(viewLifecycleOwner){
+                tabMoreThemeTab.getTabAt(it)?.select()
+                viewPagerMoreTheme.post{
+                    viewPagerMoreTheme.setCurrentItem(it, false)
+                }
+            }
             with(moreThemeViewPagerAdapter) {
                 fragments = listOf(
                     MoreThemeContentViewFragment(userId, "1", "spring"),
@@ -61,8 +67,13 @@ class MoreThemeViewFragment :
                     MoreThemeContentViewFragment(userId, "1", "cityView")
                 )
             }
-            with(viewPagerMoreTheme) {
-                adapter = moreThemeViewPagerAdapter
+            viewPagerMoreTheme.adapter = moreThemeViewPagerAdapter
+
+            sharedViewModel.themeNum.observe(viewLifecycleOwner){num ->
+                tabMoreThemeTab.getTabAt(num)?.select()
+                viewPagerMoreTheme.doOnAttach{
+                    viewPagerMoreTheme.currentItem = num
+                }
             }
 
 
@@ -86,12 +97,7 @@ class MoreThemeViewFragment :
                 }
             }.attach()
 
-            sharedViewModel.themeNum.observe(viewLifecycleOwner){
-                tabMoreThemeTab.getTabAt(it)?.select()
-                viewPagerMoreTheme.postDelayed({
-                    viewPagerMoreTheme.setCurrentItem(it, true)
-                },100)
-            }
+
 
         }
     }
@@ -106,30 +112,11 @@ class MoreThemeViewFragment :
     }
 
 
-    fun clickTab() {
-        binding.tabMoreThemeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
 
-                when (tab?.position) {
-
-
-                }
-
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-        })
 
 
     }
 
 
-}
+
 
