@@ -19,6 +19,7 @@ class DetailLikeAdapter(val itemClick: (UserData) -> Unit) :
         fun onBind(data: UserData) {
             Glide.with(binding.imgDetailLikeImage.context)
                 .load(data.image)
+                .circleCrop()
                 .error(R.drawable.myimage)
                 .into(binding.imgDetailLikeImage)
 
@@ -27,13 +28,13 @@ class DetailLikeAdapter(val itemClick: (UserData) -> Unit) :
                 true -> {
                     binding.tvDetailLikeFollow.apply {
                         isSelected = true
-                        text = "팔로잉"
+                        text = "팔로우"
                     }
                 }
                 else -> {
                     binding.tvDetailLikeFollow.apply {
                         isSelected = false
-                        text = "팔로우"
+                        text = "팔로잉"
                     }
                 }
             }
