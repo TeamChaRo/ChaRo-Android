@@ -12,14 +12,15 @@ import com.example.charo_android.databinding.ItemHomeThemeBinding
 import com.example.charo_android.data.model.entity.HomeThemeInfo
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
+import com.example.charo_android.presentation.util.SharedInformation
 
 
 class HomeThemeAdapter(
-    var links : HomeFragment.DataToMoreThemeViewFragment
+    var links: HomeFragment.DataToMoreThemeViewFragment
 ) : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
 
     val themeData = mutableListOf<HomeThemeInfo>()
-    var themeId : Int = 99
+    var themeId: Int = 99
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -37,19 +38,18 @@ class HomeThemeAdapter(
         holder.onBind(themeData[position])
 
         holder.itemView.setOnClickListener {
-                themeId = position
-                links.getThemeId(themeId)
-                val activity = it.context as AppCompatActivity
-                val moreThemeViewFragment = MoreThemeViewFragment()
-                if (!moreThemeViewFragment.isAdded) {
-                    activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main, moreThemeViewFragment)
-                        .addToBackStack(null)
-                        .commit()
-                }
-
+            val activity = it.context as AppCompatActivity
+            SharedInformation.setThemeNum(activity, position)
+            val moreThemeViewFragment = MoreThemeViewFragment()
+            if (!moreThemeViewFragment.isAdded) {
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, moreThemeViewFragment)
+                    .addToBackStack(null)
+                    .commit()
             }
+
         }
+    }
 
 
     override fun getItemCount(): Int {

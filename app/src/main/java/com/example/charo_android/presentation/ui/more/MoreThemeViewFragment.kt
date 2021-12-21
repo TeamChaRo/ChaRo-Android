@@ -14,6 +14,7 @@ import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
+import com.example.charo_android.presentation.util.SharedInformation
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -34,7 +35,7 @@ class MoreThemeViewFragment :
 
         initMoreThemeViewPager(userId)
         clickBackButton()
-
+        clickTab()
     }
 
 
@@ -42,12 +43,10 @@ class MoreThemeViewFragment :
         binding.apply {
 
             moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
-            sharedViewModel.themeNum.observe(viewLifecycleOwner){
-                tabMoreThemeTab.getTabAt(it)?.select()
-                viewPagerMoreTheme.post{
-                    viewPagerMoreTheme.setCurrentItem(it, false)
-                }
-            }
+            viewPagerMoreTheme.adapter = moreThemeViewPagerAdapter
+
+
+
             with(moreThemeViewPagerAdapter) {
                 fragments = listOf(
                     MoreThemeContentViewFragment(userId, "1", "spring"),
@@ -67,14 +66,12 @@ class MoreThemeViewFragment :
                     MoreThemeContentViewFragment(userId, "1", "cityView")
                 )
             }
-            viewPagerMoreTheme.adapter = moreThemeViewPagerAdapter
 
-            sharedViewModel.themeNum.observe(viewLifecycleOwner){num ->
-                tabMoreThemeTab.getTabAt(num)?.select()
-                viewPagerMoreTheme.doOnAttach{
-                    viewPagerMoreTheme.currentItem = num
+            val themeNum = SharedInformation.getThemeNum(requireActivity())
+            tabMoreThemeTab.getTabAt(themeNum)?.select()
+            viewPagerMoreTheme.doOnAttach {
+                    viewPagerMoreTheme.setCurrentItem(themeNum, false)
                 }
-            }
 
 
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
@@ -104,6 +101,7 @@ class MoreThemeViewFragment :
 
     private fun clickBackButton() {
         binding.imgBackTheme.setOnClickListener {
+            SharedInformation.removeThemeNum(requireActivity())
             val fragmentManager = activity?.supportFragmentManager
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
@@ -112,10 +110,27 @@ class MoreThemeViewFragment :
     }
 
 
+    fun clickTab() {
+        binding.tabMoreThemeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
 
 
+                }
 
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
     }
+
+}
 
 
 
