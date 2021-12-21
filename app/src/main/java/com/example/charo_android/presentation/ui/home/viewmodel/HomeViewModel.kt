@@ -40,7 +40,7 @@ class HomeViewModel(
     val theme : LiveData<List<Theme>>
         get() = _theme
 
-    private var bannerRoad = listOf<BannerRoad>()
+
 
 
 

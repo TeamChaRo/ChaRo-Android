@@ -30,7 +30,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-
     private val sharedViewModel : SharedViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
     private var theme = ThemeUtil()
@@ -42,7 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var homeCustomThemeAdapter: HomeCustomThemeAdapter
     private lateinit var homeLocalDriveAdapter: HomeLocalDriveAdapter
 
-
+    var links = DataToMoreThemeViewFragment()
 
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
@@ -145,7 +144,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initThemeDrive(){
         val themeData = LocalHomeThemeDataSourceImpl().fetchData()
-        homeThemeAdapter = HomeThemeAdapter()
+        homeThemeAdapter = HomeThemeAdapter(links)
         binding.recyclerviewHomeTheme.adapter = homeThemeAdapter
         homeThemeAdapter.themeData.addAll(themeData)
     }
@@ -208,6 +207,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    // 권한 설정
+    //메인뷰 테마 숫자 변경 ex)봄,여름 등등
+    inner class DataToMoreThemeViewFragment(){
+        fun getThemeId(themeId : Int){
+            sharedViewModel.themeNum.value = themeId
+            Log.d("themeId", themeId.toString())
+        }
+    }
+
 
 }

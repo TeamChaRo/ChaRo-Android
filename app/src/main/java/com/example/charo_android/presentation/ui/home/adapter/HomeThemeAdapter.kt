@@ -10,11 +10,17 @@ import com.bumptech.glide.Glide
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ItemHomeThemeBinding
 import com.example.charo_android.data.model.entity.HomeThemeInfo
+import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 
 
-class HomeThemeAdapter : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
+class HomeThemeAdapter(
+    var links : HomeFragment.DataToMoreThemeViewFragment
+) : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
+
     val themeData = mutableListOf<HomeThemeInfo>()
+    var themeId : Int = 99
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -31,6 +37,8 @@ class HomeThemeAdapter : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHold
         holder.onBind(themeData[position])
 
         holder.itemView.setOnClickListener {
+                themeId = position
+                links.getThemeId(themeId)
                 val activity = it.context as AppCompatActivity
                 val moreThemeViewFragment = MoreThemeViewFragment()
                 if (!moreThemeViewFragment.isAdded) {

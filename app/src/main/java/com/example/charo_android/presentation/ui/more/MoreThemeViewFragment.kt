@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.more
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,22 +11,25 @@ import com.example.charo_android.data.model.request.RequestThemeViewData
 import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
+import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class MoreThemeViewFragment : BaseFragment<FragmentMoreThemeViewBinding>(R.layout.fragment_more_theme_view) {
-
+class MoreThemeViewFragment :
+    BaseFragment<FragmentMoreThemeViewBinding>(R.layout.fragment_more_theme_view) {
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
     var requestThemeData = mutableListOf<RequestThemeViewData>()
-    private lateinit var userId : String
-
-
+    private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
+    private lateinit var userId: String
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userId = arguments?.getString("userId").toString()
+
 
         initMoreThemeViewPager(userId)
         clickBackButton()
@@ -33,35 +37,37 @@ class MoreThemeViewFragment : BaseFragment<FragmentMoreThemeViewBinding>(R.layou
     }
 
 
-
-    private fun initMoreThemeViewPager(userId : String) {
+    private fun initMoreThemeViewPager(userId: String) {
         binding.apply {
-            val moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
+
+            moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
+
             with(moreThemeViewPagerAdapter) {
                 fragments = listOf(
-                    MoreThemeContentViewFragment(userId,"1","spring"),
-                    MoreThemeContentViewFragment(userId,"1","summer"),
-                    MoreThemeContentViewFragment(userId,"1","fall"),
-                    MoreThemeContentViewFragment(userId,"1","winter"),
-                    MoreThemeContentViewFragment(userId,"1","mountain"),
-                    MoreThemeContentViewFragment(userId,"1","sea"),
-                    MoreThemeContentViewFragment(userId,"1","lake"),
-                    MoreThemeContentViewFragment(userId,"1","river"),
-                    MoreThemeContentViewFragment(userId,"1","oceanRoad"),
-                    MoreThemeContentViewFragment(userId,"1","blossom"),
-                    MoreThemeContentViewFragment(userId,"1","maple"),
-                    MoreThemeContentViewFragment(userId,"1","relax"),
-                    MoreThemeContentViewFragment(userId,"1","speed"),
-                    MoreThemeContentViewFragment(userId,"1","nightView"),
-                    MoreThemeContentViewFragment(userId,"1","cityView")
+                    MoreThemeContentViewFragment(userId, "1", "spring"),
+                    MoreThemeContentViewFragment(userId, "1", "summer"),
+                    MoreThemeContentViewFragment(userId, "1", "fall"),
+                    MoreThemeContentViewFragment(userId, "1", "winter"),
+                    MoreThemeContentViewFragment(userId, "1", "mountain"),
+                    MoreThemeContentViewFragment(userId, "1", "sea"),
+                    MoreThemeContentViewFragment(userId, "1", "lake"),
+                    MoreThemeContentViewFragment(userId, "1", "river"),
+                    MoreThemeContentViewFragment(userId, "1", "oceanRoad"),
+                    MoreThemeContentViewFragment(userId, "1", "blossom"),
+                    MoreThemeContentViewFragment(userId, "1", "maple"),
+                    MoreThemeContentViewFragment(userId, "1", "relax"),
+                    MoreThemeContentViewFragment(userId, "1", "speed"),
+                    MoreThemeContentViewFragment(userId, "1", "nightView"),
+                    MoreThemeContentViewFragment(userId, "1", "cityView")
                 )
             }
             with(viewPagerMoreTheme) {
                 adapter = moreThemeViewPagerAdapter
             }
 
+
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
-                when(position){
+                when (position) {
                     0 -> tab.setCustomView(R.layout.tablayout_spring)
                     1 -> tab.setCustomView(R.layout.tablayout_summer)
                     2 -> tab.setCustomView(R.layout.tablayout_fall)
@@ -78,12 +84,18 @@ class MoreThemeViewFragment : BaseFragment<FragmentMoreThemeViewBinding>(R.layou
                     13 -> tab.setCustomView(R.layout.tablayout_night_view)
                     14 -> tab.setCustomView(R.layout.tablayout_city)
                 }
-
-
             }.attach()
+
+            sharedViewModel.themeNum.observe(viewLifecycleOwner){
+                tabMoreThemeTab.getTabAt(it)?.select()
+                viewPagerMoreTheme.postDelayed({
+                    viewPagerMoreTheme.setCurrentItem(it, true)
+                },100)
+            }
 
         }
     }
+
     private fun clickBackButton() {
         binding.imgBackTheme.setOnClickListener {
             val fragmentManager = activity?.supportFragmentManager
@@ -94,24 +106,26 @@ class MoreThemeViewFragment : BaseFragment<FragmentMoreThemeViewBinding>(R.layou
     }
 
 
-    fun clickTab(){
-    binding.tabMoreThemeTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
-        override fun onTabSelected(tab: TabLayout.Tab?) {
-            when(tab?.position) {
+    fun clickTab() {
+        binding.tabMoreThemeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                when (tab?.position) {
+
+
+                }
 
 
             }
 
-        }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
 
-        override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
 
-        }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
 
-        override fun onTabReselected(tab: TabLayout.Tab?) {
-
-        }
-    })
+            }
+        })
 
 
     }
