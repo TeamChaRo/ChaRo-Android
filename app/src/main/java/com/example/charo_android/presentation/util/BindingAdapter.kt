@@ -15,23 +15,32 @@ object BindingAdapter {
     fun setImage(imageView: ImageView, imageUrl : String){
         Glide.with(imageView.context)
             .load(imageUrl)
-            .transform(RoundedCorners(20))
+            .transform(RoundedCorners(20.dpToPx))
+            .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("imgNoRoundBind")
+    fun setNoRadiusImage(imageView: ImageView, imageUrl : String){
+        Glide.with(imageView.context)
+            .load(imageUrl)
             .into(imageView)
     }
 
     @JvmStatic
     @BindingAdapter("imgIntBind")
-    fun setImage(imageView: ImageView, imageDrawable : Int){
+    fun setIntImage(imageView: ImageView, imageDrawable : Int){
         Glide.with(imageView.context)
             .load(imageDrawable)
             .into(imageView)
     }
+
     @JvmStatic
     @BindingAdapter("profileBind")
     fun setProfileImage(imageView: ImageView, imageUri : Uri){
         Glide.with(imageView.context)
             .load(imageUri)
-            .transform(RoundedCorners(20))
+            .transform(RoundedCorners(20.dpToPx))
             .centerCrop()
             .into(imageView)
     }

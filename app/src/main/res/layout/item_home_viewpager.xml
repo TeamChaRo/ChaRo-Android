@@ -18,10 +18,10 @@
 
         <ImageView
             android:id="@+id/img_viewpager"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            imgBind="@{banner.homeViewPagerRoadImage}"
+            imgNoRoundBind="@{banner.homeViewPagerRoadImage}"
             android:src="@drawable/main_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
