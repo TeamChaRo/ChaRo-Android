@@ -11,7 +11,6 @@ import com.skt.Tmap.*
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-    private var detailViewPagerAdapter = DetailViewpagerAdapter()
 
     // test
     private var inputLatiList = arrayListOf<String>()
