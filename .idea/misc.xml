@@ -15,6 +15,7 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/mypage_switch_turn_on.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/rectangle_radius_5.xml" value="0.1625" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/rectangle_white.xml" value="0.12107023411371237" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/selector_home_heart.xml" value="0.17152777777777778" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/selector_mypage_switch.xml" value="0.175" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/setting_no_next.xml" value="0.17324414715719064" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/drawable/shape_detail_dialog.xml" value="0.12107023411371237" />
@@ -75,9 +76,9 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_charo_my_charo.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_charo_spinner.xml" value="0.11662242866622428" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_detail_image.xml" value="0.11662242866622428" />
-        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_hot_drive.xml" value="0.536" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_hot_drive.xml" value="0.264" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_location_drive.xml" value="0.16" />
-        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_night_drive.xml" value="1.0" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_night_drive.xml" value="0.4" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_theme.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_today_drive.xml" value="0.152" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/item_home_viewpager.xml" value="0.1" />

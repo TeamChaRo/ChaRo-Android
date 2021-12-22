@@ -1,6 +1,8 @@
 package com.example.charo_android.data.mapper
 
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.home.ResponseHomeViewData
+import com.example.charo_android.domain.model.StatusCode
 import com.example.charo_android.domain.model.home.*
 
 object HomeMapper {
@@ -93,6 +95,10 @@ object HomeMapper {
             customTitle = responseHomeViewData.data.customTitle,
             localTitle = responseHomeViewData.data.localTitle
         )
+    }
+
+    fun mapperToHomeLike(responseStatusCode : ResponseStatusCode) : StatusCode{
+        return StatusCode(responseStatusCode.success)
     }
 }
 

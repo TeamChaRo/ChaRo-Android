@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.charo_android.R
+import com.example.charo_android.data.model.request.home.RequestHomeLikeData
 import com.example.charo_android.data.repository.local.home.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.databinding.FragmentHomeBinding
 import com.example.charo_android.hidden.Hidden
@@ -24,6 +25,7 @@ import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
 import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.ThemeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,7 +43,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var homeCustomThemeAdapter: HomeCustomThemeAdapter
     private lateinit var homeLocalDriveAdapter: HomeLocalDriveAdapter
 
-    var links = DataToMoreThemeViewFragment()
+    var links = DataToHomeLike()
+
+
 
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
@@ -105,7 +109,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initTrendDrive(){
         homeViewModel.getTrendDrive("and@naver.com")
-        homeHotDriveAdapter = HomeTrendDriveAdapter("and@naver.com")
+        homeHotDriveAdapter = HomeTrendDriveAdapter("and@naver.com", links)
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
         homeViewModel.trendDrive.observe(viewLifecycleOwner){
             homeHotDriveAdapter.setHomeTrendDrive(it)
@@ -114,7 +118,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initLocalDrive(){
         homeViewModel.getLocalDrive("and@naver.com")
-        homeLocalDriveAdapter = HomeLocalDriveAdapter("and@naver.com")
+        homeLocalDriveAdapter = HomeLocalDriveAdapter("and@naver.com", links)
         binding.recyclerviewHomeLocationDrive.adapter = homeLocalDriveAdapter
         homeViewModel.localDrive.observe(viewLifecycleOwner){
             homeLocalDriveAdapter.setLocalDrive(it)
@@ -126,7 +130,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recyclerviewHomeTodayDrive)
         homeViewModel.getTodayCharoDrive("and@naver.com")
-        homeTodayDriveAdapter = HomeTodayDriveAdapter("and@naver.com")
+        homeTodayDriveAdapter = HomeTodayDriveAdapter("and@naver.com", links)
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
         homeViewModel.todayCharoDrive.observe(viewLifecycleOwner){
             homeTodayDriveAdapter.setTodayDrive(it)
@@ -135,7 +139,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initCustomThemeDrive(){
         homeViewModel.getCustomTheme("and@naver.com")
-        homeCustomThemeAdapter = HomeCustomThemeAdapter("and@naver.com")
+        homeCustomThemeAdapter = HomeCustomThemeAdapter("and@naver.com", links)
         binding.recyclerviewHomeNightDrive.adapter = homeCustomThemeAdapter
         homeViewModel.customThemeDrive.observe(viewLifecycleOwner){
             homeCustomThemeAdapter.setCustomThemeDrive(it)
@@ -144,7 +148,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initThemeDrive(){
         val themeData = LocalHomeThemeDataSourceImpl().fetchData()
-        homeThemeAdapter = HomeThemeAdapter(links)
+        homeThemeAdapter = HomeThemeAdapter()
         binding.recyclerviewHomeTheme.adapter = homeThemeAdapter
         homeThemeAdapter.themeData.addAll(themeData)
     }
@@ -207,12 +211,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    //메인뷰 테마 숫자 변경 ex)봄,여름 등등
-    inner class DataToMoreThemeViewFragment(){
-        fun getThemeId(themeId : Int){
-            sharedViewModel.themeNum.value = themeId
-            Log.d("themeId", themeId.toString())
+
+    //좋아요 POST 보내기
+    inner class DataToHomeLike(){
+        fun getPostId(postId : Int){
+            val userEmail = SharedInformation.getEmail(requireActivity())
+            sharedViewModel.postId.value = postId
+
+            sharedViewModel.postId.observe(viewLifecycleOwner){
+                homeViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
+            }
         }
+
     }
 
 

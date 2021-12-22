@@ -2,6 +2,7 @@ package com.example.charo_android.presentation.util
 
 import android.net.Uri
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -63,6 +64,17 @@ object BindingAdapter {
         } else{
             chip.visibility = View.GONE
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("heartBind")
+    fun setHeart(imageButton: ImageButton, favorite : Boolean){
+        var select = true
+        imageButton.isSelected = favorite
+
+
+
+
     }
 
 }

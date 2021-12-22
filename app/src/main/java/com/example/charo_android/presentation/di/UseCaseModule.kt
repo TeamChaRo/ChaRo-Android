@@ -34,4 +34,5 @@ val useCaseModule = module{
     single { WithdrawalUserUseCase(get())}
     single { ProfilePasswordCheckUseCase(get()) }
     single { NewPasswordRegisterUseCase(get()) }
+    single{PostRemoteHomeLikeUseCase(get())}
 }

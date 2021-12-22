@@ -40,6 +40,7 @@
                 app:layout_constraintCircleRadius="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                heartBind = "@{todayCharoDrive.homeTodayDriveHeart}"
                 android:background="@drawable/selector_home_heart"
                 app:layout_constraintEnd_toEndOf="@id/img_home_today_drive"
                 app:layout_constraintTop_toTopOf="@+id/img_home_today_drive" />

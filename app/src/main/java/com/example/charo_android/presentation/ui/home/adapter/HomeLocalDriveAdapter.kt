@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeLocationDriveBinding
 import com.example.charo_android.domain.model.home.LocalDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.home.HomeFragment
 
-class HomeLocalDriveAdapter(val userId: String) :
+class HomeLocalDriveAdapter(val userId: String,
+                            var links: HomeFragment.DataToHomeLike) :
     RecyclerView.Adapter<HomeLocalDriveAdapter.HomeLocationDriveViewHolder>() {
     private val _localDrive = mutableListOf<LocalDrive>()
     private var localDrive : List<LocalDrive> = _localDrive
-
+    var postId : Int = 0
+    var select = true
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -31,7 +34,17 @@ class HomeLocalDriveAdapter(val userId: String) :
         position: Int
     ) {
         holder.onBind(localDrive[position])
+        holder.binding.imgHomeLocationDriveHeart.setOnClickListener{
+            postId = localDrive[position].homeLocationDrivePostId
+            if(select){
+                it.isSelected = !localDrive[position].homeLocationDriveHeart
+                select = false
+            }else{
+                it.isSelected = localDrive[position].homeLocationDriveHeart
+            }
 
+            links.getPostId(postId)
+        }
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
             intent.putExtra("userId", userId)

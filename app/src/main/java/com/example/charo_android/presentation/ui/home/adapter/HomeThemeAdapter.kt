@@ -16,7 +16,7 @@ import com.example.charo_android.presentation.util.SharedInformation
 
 
 class HomeThemeAdapter(
-    var links: HomeFragment.DataToMoreThemeViewFragment
+
 ) : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
 
     val themeData = mutableListOf<HomeThemeInfo>()
