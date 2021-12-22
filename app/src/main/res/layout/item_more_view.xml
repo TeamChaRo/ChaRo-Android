@@ -37,6 +37,7 @@
             <ImageButton
                 android:id="@+id/img_more_view_heart"
                 app:layout_constraintCircleRadius="10dp"
+                heartBind="@{moreDrive.moreIsFavorite}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_home_heart"

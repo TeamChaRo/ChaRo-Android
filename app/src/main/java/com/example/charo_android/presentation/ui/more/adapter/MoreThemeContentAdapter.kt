@@ -2,41 +2,35 @@ package com.example.charo_android.presentation.ui.more.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.R
-import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.ui.more.MoreThemeContentViewFragment
-import com.example.charo_android.presentation.ui.more.MoreViewFragment
 
-class MoreViewAdapter(val userId: String,
-    var links : MoreViewFragment.DataToMoreLike, ) :
-    RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
-     private val _moreData = mutableListOf<MoreDrive>()
-     private var moreData : List<MoreDrive> = _moreData
+class MoreThemeContentAdapter(
+    var link : MoreThemeContentViewFragment.DataToMoreThemeLike
+) : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
+    private val _moreData = mutableListOf<MoreDrive>()
+    private var moreData : List<MoreDrive> = _moreData
     var postId : Int = 0
     var select = true
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoreViewViewHolder {
+    ): MoreViewAdapter.MoreViewViewHolder {
         val binding = ItemMoreViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return MoreViewViewHolder(binding)
+        return MoreViewAdapter.MoreViewViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MoreViewAdapter.MoreViewViewHolder, position: Int) {
         holder.onBind(moreData[position])
         holder.binding.imgMoreViewHeart.setOnClickListener {
             postId = moreData[position].morePostId
@@ -47,12 +41,11 @@ class MoreViewAdapter(val userId: String,
                 it.isSelected = moreData[position].moreIsFavorite
                 select = true
             }
-            links.getPostId(postId)
+            link.getPostId(postId)
         }
 
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", userId)
             intent.putExtra("postId", moreData[position].morePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
