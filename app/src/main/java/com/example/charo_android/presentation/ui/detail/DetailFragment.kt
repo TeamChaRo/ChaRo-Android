@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -27,7 +28,9 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by activityViewModels()
-    private val viewPagerAdapter = DetailViewpagerAdapter()
+
+    //    private val viewPagerAdapter = DetailViewpagerAdapter()
+    private lateinit var viewPagerAdapter: DetailViewpagerAdapter
 
     private val pointList = arrayListOf<TMapPoint>()
     private var detailActivity: DetailActivity? = null
@@ -47,6 +50,18 @@ class DetailFragment : Fragment() {
         val title = (activity as DetailActivity).title
         val date = (activity as DetailActivity).date
         val region = (activity as DetailActivity).region
+
+        viewPagerAdapter = DetailViewpagerAdapter() {
+            val intent = Intent(requireContext(), DetailImageActivity::class.java)
+            val imageList: ArrayList<String> = ArrayList()
+            viewModel.detailData.observe(viewLifecycleOwner, {
+                viewModel.detailData.value!!.data.images.forEach {
+                    imageList.add(it)
+                }
+                intent.putExtra("imageList", imageList)
+            })
+            startActivity(intent)
+        }
 
         // ViewModel LiveData
         viewModel.setPostId(postId)
@@ -128,7 +143,8 @@ class DetailFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 Log.e("Selected_Page", position.toString())
-                binding.tvDetailViewpagerImage.text = "${position+1}/${viewPagerAdapter.itemList.size}"
+                binding.tvDetailViewpagerImage.text =
+                    "${position + 1}/${viewPagerAdapter.itemList.size}"
             }
         })
 
