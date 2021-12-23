@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
-            name="myPageData"
+            name="otherPageData"
             type="com.example.charo_android.presentation.ui.charo.CharoViewModel" />
     </data>
 
@@ -18,7 +19,7 @@
         tools:context=".ui.charo.OtherWriteCharoFragment">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nscv_my_charo"
+            android:id="@+id/nscv_other_charo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
                 android:layout_height="match_parent">
 
                 <Spinner
-                    android:id="@+id/spinner_my_charo_filter"
+                    android:id="@+id/spinner_other_charo_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="11.5dp"
@@ -40,17 +41,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_my_charo"
+                    android:id="@+id/recyclerview_other_charo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="9dp"
-                    tools:listitem="@layout/item_charo_my_charo"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spinner_my_charo_filter" />
+                    tools:listitem="@layout/item_charo_my_charo"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_other_charo_filter" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
