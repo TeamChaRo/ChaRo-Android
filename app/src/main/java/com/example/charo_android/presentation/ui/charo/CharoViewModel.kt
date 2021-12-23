@@ -186,7 +186,7 @@ class CharoViewModel : ViewModel() {
                 response: Response<ResponseMyPageMoreData>
             ) {
                 _isServerConnecting.value = false
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page Infinite Scrolling", "success")
                     val data = response.body()?.data
                     _writtenMoreNewData.value = data!!
@@ -222,12 +222,12 @@ class CharoViewModel : ViewModel() {
                 savedLikeData.value!!.lastId,
                 savedLikeData.value!!.lastCount
             )
-        call.enqueue(object: Callback<ResponseMyPageMoreData> {
+        call.enqueue(object : Callback<ResponseMyPageMoreData> {
             override fun onResponse(
                 call: Call<ResponseMyPageMoreData>,
                 response: Response<ResponseMyPageMoreData>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page Infinite Scrolling", "success")
                     val data = response.body()?.data
                     _savedMoreLikeData.value = data!!
@@ -262,12 +262,12 @@ class CharoViewModel : ViewModel() {
                 Hidden.userId,
                 savedNewData.value!!.lastId
             )
-        call.enqueue(object: Callback<ResponseMyPageMoreData> {
+        call.enqueue(object : Callback<ResponseMyPageMoreData> {
             override fun onResponse(
                 call: Call<ResponseMyPageMoreData>,
                 response: Response<ResponseMyPageMoreData>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page Infinite Scrolling", "success")
                     val data = response.body()?.data
                     _savedMoreNewData.value = data!!
