@@ -11,7 +11,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
+import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.charo.CharoFragment
+import com.example.charo_android.presentation.ui.charo.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.signup.SignUpEmailFragment
@@ -23,12 +25,11 @@ class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
-
+    private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
 
     private lateinit var userEmail: String
     private lateinit var nickName: String
     private lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +41,8 @@ class MainActivity : AppCompatActivity() {
         replaceHomeFragment(userEmail, nickName)
         initNavView()
 
-
         //권한 요청
-
-
-    Log.d("lifecycler", "fir")
+        Log.d("lifecycler", "fir")
     }
 
     override fun onBackPressed() {
@@ -61,7 +59,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavView() {
         binding.apply {
-
             navView.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.navigation_home -> {
@@ -85,8 +82,6 @@ class MainActivity : AppCompatActivity() {
                 startActivityWriteShare()
             }
         }
-
-
     }
 
     private fun replaceHomeFragment(userId: String, nickName: String) {
@@ -100,6 +95,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceCharoFragment(userId: String, nickName: String) {
         replaceFragment(charoFragment, userId, nickName)
+//        replaceFragment(otherCharoFragment, Hidden.otherUserEmail, Hidden.otherNickname)
     }
 
     fun startActivityWriteShare() {
@@ -110,7 +106,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun requestPermissions() {
-
         val permissions: Array<String> =
             arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
@@ -119,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                 android.Manifest.permission.READ_EXTERNAL_STORAGE
             )
             != PackageManager.PERMISSION_GRANTED
-        ){
+        ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
@@ -131,9 +126,6 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, permissions, 0)
             }
         }
-
-
-
     }
 
     override fun onRequestPermissionsResult(
@@ -144,13 +136,13 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             0 -> {
-               if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                   Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
-               } else {
-                   Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
-               }
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
             }
-            1 -> if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            1 -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
@@ -159,11 +151,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
-
-
-
 }

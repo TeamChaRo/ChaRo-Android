@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.mypage.*
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.enqueueUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,13 +57,29 @@ class CharoViewModel : ViewModel() {
     val savedMoreNewData: LiveData<Post>
         get() = _savedMoreNewData
 
+    private var _otherInformation = MutableLiveData<UserInformation>(null)
+    val otherInformation: LiveData<UserInformation>
+        get() = _otherInformation
+
+    private var _otherWrittenNewData = MutableLiveData<Post>()
+    val otherWrittenNewData: LiveData<Post> get() = _otherWrittenNewData
+
+    private var _otherWrittenLikeData = MutableLiveData<Post>()
+    val otherWrittenLikeData: LiveData<Post> get() = _otherWrittenLikeData
+
+    private var _otherWrittenMoreNewData = MutableLiveData<Post>()
+    val otherWrittenMoreNewData: LiveData<Post> get() = _otherWrittenMoreNewData
+
+    private var _otherWrittenMoreLikeData = MutableLiveData<Post>()
+    val otherWrittenMoreLikeData: LiveData<Post> get() = _otherWrittenMoreLikeData
+
     fun getInitLikeData() {
-        val call: Call<ResponseMyPageNewData> =
+        val call: Call<ResponseMyPageLikeData> =
             ApiService.myPageViewLikeService.getMyPage(Hidden.userId)
-        call.enqueue(object : Callback<ResponseMyPageNewData> {
+        call.enqueue(object : Callback<ResponseMyPageLikeData> {
             override fun onResponse(
-                call: Call<ResponseMyPageNewData>,
-                response: Response<ResponseMyPageNewData>
+                call: Call<ResponseMyPageLikeData>,
+                response: Response<ResponseMyPageLikeData>
             ) {
                 if (response.isSuccessful) {
                     Log.d("server connect : My Page", "success")
@@ -79,7 +96,7 @@ class CharoViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseMyPageNewData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseMyPageLikeData>, t: Throwable) {
                 Log.d("server connect : My Page", "error: ${t.message}")
             }
         })
@@ -169,7 +186,7 @@ class CharoViewModel : ViewModel() {
                 response: Response<ResponseMyPageMoreData>
             ) {
                 _isServerConnecting.value = false
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page Infinite Scrolling", "success")
                     val data = response.body()?.data
                     _writtenMoreNewData.value = data!!
@@ -205,12 +222,12 @@ class CharoViewModel : ViewModel() {
                 savedLikeData.value!!.lastId,
                 savedLikeData.value!!.lastCount
             )
-        call.enqueue(object: Callback<ResponseMyPageMoreData> {
+        call.enqueue(object : Callback<ResponseMyPageMoreData> {
             override fun onResponse(
                 call: Call<ResponseMyPageMoreData>,
                 response: Response<ResponseMyPageMoreData>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page Infinite Scrolling", "success")
                     val data = response.body()?.data
                     _savedMoreLikeData.value = data!!
@@ -245,12 +262,12 @@ class CharoViewModel : ViewModel() {
                 Hidden.userId,
                 savedNewData.value!!.lastId
             )
-        call.enqueue(object: Callback<ResponseMyPageMoreData> {
+        call.enqueue(object : Callback<ResponseMyPageMoreData> {
             override fun onResponse(
                 call: Call<ResponseMyPageMoreData>,
                 response: Response<ResponseMyPageMoreData>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : My Page Infinite Scrolling", "success")
                     val data = response.body()?.data
                     _savedMoreNewData.value = data!!
@@ -276,5 +293,72 @@ class CharoViewModel : ViewModel() {
                 Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
             }
         })
+    }
+
+    fun getInitOtherLikeData(userEmail: String) {
+        _isServerConnecting.value = true
+        Log.d("from", "CharoViewModel.getInitOtherLikeData")
+        val call = ApiService.myPageViewLikeService.getMyPage(userEmail)
+        call.enqueueUtil(
+            onSuccess = {
+                _otherInformation.value = it.data.userInformation
+                _otherWrittenLikeData.value = it.data.writtenPost
+            }
+        )
+        _isServerConnecting.value = false
+    }
+
+    fun getInitOtherNewData(userEmail: String) {
+        _isServerConnecting.value = true
+        Log.d("from", "CharoViewModel.getInitOtherNewData")
+        val call = ApiService.myPageViewNewService.getMyPage(userEmail)
+        call.enqueueUtil(
+            onSuccess = {
+                _otherInformation.value = it.data.userInformation
+                _otherWrittenNewData.value = it.data.writtenPost
+            }
+        )
+        _isServerConnecting.value = false
+    }
+
+    fun getMoreOtherWrittenLikeData(userEmail: String) {
+        _isServerConnecting.value = true
+        Log.d("from", "getMoreOtherWrittenLikeData")
+        val call = ApiService.myPageViewMoreService.getMoreWrittenLikeData(
+            userEmail,
+            otherWrittenLikeData.value!!.lastId,
+            otherWrittenLikeData.value!!.lastCount
+        )
+        call.enqueueUtil(
+            onSuccess = {
+                _otherWrittenMoreLikeData.value = it.data
+                _otherWrittenLikeData.value?.drive?.addAll(it.data.drive)
+                if (it.data.lastId != 0) {
+                    _otherWrittenLikeData.value?.lastId = it.data.lastId
+                    _otherWrittenLikeData.value?.lastCount = it.data.lastCount
+                }
+            }
+        )
+        _isServerConnecting.value = false
+    }
+
+    fun getMoreOtherWrittenNewData(userEmail: String) {
+        _isServerConnecting.value = true
+        Log.d("from", "getMoreOtherWrittenNewData")
+        val call = ApiService.myPageViewMoreService.getMoreWrittenNewData(
+            userEmail,
+            otherWrittenNewData.value!!.lastId
+        )
+        call.enqueueUtil(
+            onSuccess = {
+                _otherWrittenMoreNewData.value = it.data
+                _otherWrittenNewData.value?.drive?.addAll(it.data.drive)
+                if (it.data.lastId != 0) {
+                    _otherWrittenNewData.value?.lastId = it.data.lastId
+                    _otherWrittenNewData.value?.lastCount = it.data.lastCount
+                }
+            }
+        )
+        _isServerConnecting.value = false
     }
 }
