@@ -150,6 +150,7 @@ class MyCharoFragment : Fragment() {
                                 myCharoViewModel.getMoreWrittenNewData()
                             }
                         }
+                        charoAdapter.removeLoading()
                     }
                 }
             }
