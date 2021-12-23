@@ -11,7 +11,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
+import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.charo.CharoFragment
+import com.example.charo_android.presentation.ui.charo.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
-
+    private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
 
     private lateinit var userEmail: String
     private lateinit var nickName: String
@@ -92,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceCharoFragment(userId: String, nickName: String) {
         replaceFragment(charoFragment, userId, nickName)
+//        replaceFragment(otherCharoFragment, Hidden.otherUserEmail, Hidden.otherNickname)
     }
 
     fun startActivityWriteShare() {
