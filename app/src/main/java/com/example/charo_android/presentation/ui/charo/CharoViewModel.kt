@@ -74,12 +74,12 @@ class CharoViewModel : ViewModel() {
     val otherWrittenMoreLikeData: LiveData<Post> get() = _otherWrittenMoreLikeData
 
     fun getInitLikeData() {
-        val call: Call<ResponseMyPageNewData> =
+        val call: Call<ResponseMyPageLikeData> =
             ApiService.myPageViewLikeService.getMyPage(Hidden.userId)
-        call.enqueue(object : Callback<ResponseMyPageNewData> {
+        call.enqueue(object : Callback<ResponseMyPageLikeData> {
             override fun onResponse(
-                call: Call<ResponseMyPageNewData>,
-                response: Response<ResponseMyPageNewData>
+                call: Call<ResponseMyPageLikeData>,
+                response: Response<ResponseMyPageLikeData>
             ) {
                 if (response.isSuccessful) {
                     Log.d("server connect : My Page", "success")
@@ -96,7 +96,7 @@ class CharoViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseMyPageNewData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseMyPageLikeData>, t: Throwable) {
                 Log.d("server connect : My Page", "error: ${t.message}")
             }
         })
