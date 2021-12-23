@@ -57,6 +57,22 @@ class CharoViewModel : ViewModel() {
     val savedMoreNewData: LiveData<Post>
         get() = _savedMoreNewData
 
+    private var _otherInformation = MutableLiveData<UserInformation>(null)
+    val otherInformation: LiveData<UserInformation>
+        get() = _otherInformation
+
+    private var _otherWrittenNewData = MutableLiveData<Post>()
+    val otherWrittenNewData: LiveData<Post> get() = _otherWrittenNewData
+
+    private var _otherWrittenLikeData = MutableLiveData<Post>()
+    val otherWrittenLikeData: LiveData<Post> get() = _otherWrittenLikeData
+
+    private var _otherWrittenMoreNewData = MutableLiveData<Post>()
+    val otherWrittenMoreNewData: LiveData<Post> get() = _otherWrittenMoreNewData
+
+    private var _otherWrittenMoreLikeData = MutableLiveData<Post>()
+    val otherWrittenMoreLikeData: LiveData<Post> get() = _otherWrittenMoreLikeData
+
     fun getInitLikeData() {
         val call: Call<ResponseMyPageNewData> =
             ApiService.myPageViewLikeService.getMyPage(Hidden.userId)
