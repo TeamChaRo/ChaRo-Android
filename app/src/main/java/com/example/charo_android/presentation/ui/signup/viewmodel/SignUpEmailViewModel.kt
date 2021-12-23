@@ -47,6 +47,9 @@ class SignUpEmailViewModel(
     val registerSuccess: LiveData<Boolean>
         get() = _registerSuccess
 
+    //이메일 불가능한 형식인지 체크
+    var passEmail = MutableLiveData<Boolean>()
+
     val profileImage = MutableLiveData<Uri>()
     val pushAgree = MutableLiveData<Boolean>()
     val emailAgree = MutableLiveData<Boolean>()

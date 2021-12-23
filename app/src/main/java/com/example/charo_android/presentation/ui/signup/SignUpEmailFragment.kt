@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SignUpEmailFragment :
     BaseFragment<FragmentSignUpEmailBinding>(R.layout.fragment_sign_up_email) {
-    private var pass = false
+    var pass = false
     private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
 
 
@@ -27,7 +27,7 @@ class SignUpEmailFragment :
         observeSuccess()
         certificationEmail()
     }
-
+    //이메일 포함 되어있는지 확인
     private fun initView() {
         val naver = "@naver.com"
         val gmail = "@gmail.com"
@@ -56,13 +56,14 @@ class SignUpEmailFragment :
                         pass = false
                     } else {
                         pass = true
-                        checkEmail(s.toString())
+                        Log.d("signUpPass", pass.toString())
+                        signUpViewModel.emailCheck(s.toString())
                     }
                 }
             })
         }
     }
-
+    //인증번호 체크
     private fun certificationEmail() {
         with(binding) {
 
@@ -106,7 +107,7 @@ class SignUpEmailFragment :
 
     }
 
-
+    //이메일 중복 체크
     private fun observeSuccess() {
         signUpViewModel.success.observe(viewLifecycleOwner) {
             with(binding) {
@@ -127,16 +128,16 @@ class SignUpEmailFragment :
                         Toast.makeText(requireContext(), "재전송 했습니다",Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    if (pass)
+                    Log.d("signupPass", pass.toString())
+                    if (pass){
                         textInputSignUp.error = "중복된 이메일 형식입니다."
+                    }
                 }
             }
         }
 
     }
 
-    private fun checkEmail(email: String) {
-        return signUpViewModel.emailCheck(email)
-    }
+
 
 }

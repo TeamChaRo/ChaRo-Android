@@ -195,4 +195,9 @@
     <string name="setting_notice_title">업데이트 실행 1.0 -> 2.0 업데이트 안내</string>
     <string name="setting_notice_date">2021.12.12</string>
     <string name="setting_notice_content">어쩌구 저쩌구가 업데이트 됨!어쩌구 저쩌구가 업데이트 됨!</string>
+
+
+    <!-- KaKao -->
+    <string name="kakao_login">카카오 로그인</string>
+
 </resources>
