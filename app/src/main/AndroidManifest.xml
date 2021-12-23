@@ -26,9 +26,6 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
-            android:name=".presentation.ui.detail.DetailImageActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.ui.setting.SettingServiceTermActivity"
             android:exported="false" />
         <activity
@@ -40,6 +37,7 @@
         <activity
             android:name=".presentation.ui.signin.SocialSignInActivity"
             android:exported="true" />
+
         <activity android:name=".presentation.ui.write.WriteShareActivity" />
         <activity android:name=".presentation.ui.alarm.AlarmActivity" />
         <activity android:name=".presentation.ui.main.SplashActivity">
