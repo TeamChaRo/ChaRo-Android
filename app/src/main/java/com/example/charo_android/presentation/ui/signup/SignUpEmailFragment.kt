@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.signup
 
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -33,6 +34,8 @@ class SignUpEmailFragment :
         val naver = "@naver.com"
         val gmail = "@gmail.com"
         with(binding) {
+
+
             clEmailNum.isVisible = false
             imgDeleteButton.setOnClickListener {
                 etSignUpBlank.setText("")
@@ -137,6 +140,8 @@ class SignUpEmailFragment :
         }
 
     }
+
+    //키보드 올라올 때 버튼 뷰 변경
 
 
 

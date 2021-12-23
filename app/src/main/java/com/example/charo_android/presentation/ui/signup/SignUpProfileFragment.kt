@@ -127,6 +127,11 @@ class SignUpProfileFragment :
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
             }
+        } else{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = MediaStore.Images.Media.CONTENT_TYPE
+            intent.type = "image/*"
+            getContent.launch(intent)
         }
 
 
