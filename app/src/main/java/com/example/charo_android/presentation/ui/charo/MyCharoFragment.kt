@@ -154,33 +154,5 @@ class MyCharoFragment : Fragment() {
                 }
             }
         }))
-
-//        무한스크롤 리사이클러뷰 코드 (폐기예정)
-//        binding.recyclerviewMyCharo.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//
-//                val lastVisibleItemPosition =
-//                    (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
-//                val itemTotalCount = recyclerView.adapter!!.itemCount - 1
-//                Log.d("lastVisibleItemPosition", lastVisibleItemPosition.toString())
-//                Log.d("itemTotalCount", itemTotalCount.toString())
-//                Log.d("popularPage", popularPage.toString())
-//
-//                if (!recyclerView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
-//                    charoAdapter.deleteLoading()
-//                    when (spinnerPosition) {
-//                        0 -> {
-//                            popularPage++
-//                            myCharoViewModel.getInfiniteScrollingServerWrittenDataSortedByPopular()
-//                        }
-//                        else -> {
-//                            datePage++
-//                            myCharoViewModel.getInfiniteScrollingServerWrittenDataSortedByDate()
-//                        }
-//                    }
-//                }
-//            }
-//        })
     }
 }
