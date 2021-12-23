@@ -49,12 +49,12 @@ class SocialSignInActivity() :
     //자동 로그인
     private fun autoLogin(){
         val autoEmail = SharedInformation.getEmail(this)
+        Log.d("autoEmail", autoEmail)
         if (autoEmail != ""){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
-
     }
     //kakao
     private fun initKakaoLogin() {
@@ -82,6 +82,7 @@ class SocialSignInActivity() :
                     finish()
                 }
             }
+
 
         } else {
             binding.imgSocialKakao.setOnClickListener {

@@ -15,6 +15,7 @@ import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCerti
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import com.example.charo_android.domain.usecase.signup.PostRemoteSignUpRegisterUseCase
+import com.example.charo_android.presentation.util.NonNullMutableLiveData
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -46,6 +47,8 @@ class SignUpEmailViewModel(
     private val _registerSuccess = MutableLiveData<Boolean>()
     val registerSuccess: LiveData<Boolean>
         get() = _registerSuccess
+
+
 
     val profileImage = MutableLiveData<Uri>()
     val pushAgree = MutableLiveData<Boolean>()
