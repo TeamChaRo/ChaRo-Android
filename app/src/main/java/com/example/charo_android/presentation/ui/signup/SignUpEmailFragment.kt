@@ -13,6 +13,7 @@ import com.example.charo_android.databinding.FragmentSignUpEmailBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import kotlin.properties.Delegates
 
 
 class SignUpEmailFragment :
@@ -24,7 +25,7 @@ class SignUpEmailFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        observeSuccess()
+
         certificationEmail()
     }
     //이메일 포함 되어있는지 확인
@@ -56,8 +57,8 @@ class SignUpEmailFragment :
                         pass = false
                     } else {
                         pass = true
-                        Log.d("signUpPass", pass.toString())
                         signUpViewModel.emailCheck(s.toString())
+                        observeSuccess(pass)
                     }
                 }
             })
@@ -108,7 +109,7 @@ class SignUpEmailFragment :
     }
 
     //이메일 중복 체크
-    private fun observeSuccess() {
+    private fun observeSuccess(pass : Boolean) {
         signUpViewModel.success.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it) {
@@ -128,7 +129,6 @@ class SignUpEmailFragment :
                         Toast.makeText(requireContext(), "재전송 했습니다",Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Log.d("signupPass", pass.toString())
                     if (pass){
                         textInputSignUp.error = "중복된 이메일 형식입니다."
                     }
