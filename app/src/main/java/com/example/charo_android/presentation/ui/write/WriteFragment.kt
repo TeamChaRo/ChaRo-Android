@@ -26,7 +26,7 @@ import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.signup.SignUpEmailViewModel
+import com.example.charo_android.presentation.ui.detail.DetailLikeFragment
 
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -410,46 +410,8 @@ class WriteFragment : Fragment() {
             "도심"
         )
 
-//        val bottomSheetView = layoutInflater.inflate(R.layout.dialog_theme, container, false)
-//
-//
-//        // 2. 초기화 지연시킨 viewPager2 객체를 여기서 초기화함
-//        viewPager2 = bottomSheetView.findViewById(R.id.viewPager2)
-//        tabLayout = bottomSheetView.findViewById(R.id.tabLayout)
-//
-//        // 3. viewPager2 뷰 객체에 어댑터 적용하기
-//        val adapter = DialogThemeViewPagerAdapter(requireActivity())
-//        adapter.addFragment(DialogThemeOneFragment())
-//        adapter.addFragment(DialogThemeTwoFragment())
-//        adapter.addFragment(DialogThemeThreeFragment())
-//
-//        viewPager2.adapter = adapter
-//        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//            override fun onPageSelected(position: Int){
-//                super.onPageSelected(position)
-//                Log.e("ViewPagerFragment", "Page ${position+1}")
-//
-//                adapter.showFragment(position)
-//            }
-//        })
-//
-//        TabLayoutMediator(tabLayout, viewPager2){tab, position ->
-//            tab.text = "테마 ${position+1}"
-//        }.attach()
-//
-//
-//        val bottomSheetDialog = BottomSheetDialog(requireContext())
-//        bottomSheetDialog.setContentView(bottomSheetView)
-
         binding.btnWriteTheme1.setOnClickListener {
-            val checkedItem = 0
-//            val bottomSheetDialog = BottomSheetDialog(dialogThemeFragment!!.requireContext())
-//            dialogThemeFragment.view?.let { it -> dialogThemeFragment.setContentView(it) }
-//            bottomSheetDialog.show()
-
-            writeShareActivity!!.replaceFragment(DialogThemeFragment.newInstance(),"theme")
-
-//            bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+            openBottomSheetDialog()
 
 //            MaterialAlertDialogBuilder(this)
 //                .setTitle(resources.getString(R.string.theme1))
@@ -593,11 +555,10 @@ class WriteFragment : Fragment() {
         return root
     }
 
-    private fun showDialogFragment() {
-//        ExampleDialogFragment().show(supportFragmentManager, "exampleDialog")
-        ExampleDialogFragment().show(activity?.supportFragmentManager!!, "exampleDialog")
+    private fun openBottomSheetDialog() {
+        val bottomSheetDialogFragment = DialogThemeFragment()
+        bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
