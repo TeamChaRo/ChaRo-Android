@@ -1,5 +1,7 @@
 package com.example.charo_android.presentation.ui.detail
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,12 +30,37 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //공유하기 딥링크를 통해 들어온 경우
+        val action: String? = intent?.action
+//        val data: Uri? = intent?.data
+        val data: Uri? = intent?.data
+
+///////////////////////////////
+        postId = if (action == Intent.ACTION_VIEW) { // 앱 링크는 해당 인텐트 필터로만 가능하기 때문에
+                    data?.getQueryParameter("postId")?.toInt() ?: 0 //data.getParameter('postId')
+//            Log.e("### deep ", data?.getQueryParameter("postId").toString())
+            Log.e("### deep ", data.toString())
+                }else{
+                    intent.getIntExtra("postId", 0)
+            Log.e("### nodeep ", "0")
+        }
+//////////////////////////위 아래 둘 중 하나
+//        private static final String DEFAULT_PATH = “boyeproject://deeplink/“;
+//
+//        if (Intent.ACTION_VIEW.equalsIgnoreCase(action) && data != null) {
+//            if (data.startsWith(DEFAULT_PATH)) {
+//                String param = data.replace(DEFAULT_PATH, “”);
+//                textView.setText(param);
+//            }
+//        }
+//
+
 //        살려야함
-        postId = intent.getIntExtra("postId", 0)
-        title = intent.getStringExtra("title")!!
-        date = intent.getStringExtra("date")!!
-        region = intent.getStringExtra("region")!!
-        imageUrl = intent.getStringExtra("imageUrl")!!
+//        postId = intent.getIntExtra("postId", 0)
+//        title = intent.getStringExtra("title")!!
+//        date = intent.getStringExtra("date")!!
+//        region = intent.getStringExtra("region")!!
+//        imageUrl = intent.getStringExtra("imageUrl")!!
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.detail_fragment, DetailFragment())

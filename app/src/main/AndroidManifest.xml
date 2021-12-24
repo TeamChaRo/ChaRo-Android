@@ -68,7 +68,18 @@
         </activity>
 
         <activity android:name=".presentation.ui.search.SearchActivity" />
-        <activity android:name=".presentation.ui.detail.DetailActivity" />
+        <activity android:name=".presentation.ui.detail.DetailActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"
+                    android:host="www.charo.com/detail" />
+                <!--//www.example.com/detail/{postId} //www.example.com/detail?postId=postId-->
+
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.ui.signin.SignInActivity" />
 
         <activity
