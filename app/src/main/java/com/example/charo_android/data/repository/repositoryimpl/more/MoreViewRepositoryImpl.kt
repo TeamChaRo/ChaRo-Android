@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.more
+package com.example.charo_android.data.repository.repositoryimpl.more
 
 import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.data.repository.remote.more.RemoteMoreViewDataSource

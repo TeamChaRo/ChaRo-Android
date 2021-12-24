@@ -6,10 +6,7 @@ import com.example.charo_android.domain.usecase.search.GetRemoteSearchUseCase
 import com.example.charo_android.domain.usecase.setting.*
 import com.example.charo_android.domain.usecase.signin.GetRemoteEmailLoginUseCase
 import com.example.charo_android.domain.usecase.signin.GetRemoteSocialLoginData
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCertificationUseCase
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
-import com.example.charo_android.domain.usecase.signup.PostRemoteSignUpRegisterUseCase
+import com.example.charo_android.domain.usecase.signup.*
 import org.koin.dsl.module
 
 val useCaseModule = module{
@@ -35,4 +32,6 @@ val useCaseModule = module{
     single { ProfilePasswordCheckUseCase(get()) }
     single { NewPasswordRegisterUseCase(get()) }
     single{PostRemoteHomeLikeUseCase(get())}
+    single{ PostRemoteSocialSignUpRegisterUseCase(get()) }
+    single{PostRemoteKaKaoSignUpRegisterUseCase(get())}
 }

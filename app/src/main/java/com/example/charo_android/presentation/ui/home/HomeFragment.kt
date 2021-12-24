@@ -53,10 +53,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userId: String = Hidden.userId
+        val userEmail = SharedInformation.getEmail(requireActivity())
         val nickName: String = Hidden.nickName
-
-        goSearchView(userId,nickName)
+        goSearchView(userEmail,nickName)
         goAlarm()
         initToolBar()
         replaceMoreViewFragment(Hidden.userId)
@@ -96,7 +95,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     //배너 설정
     private fun initBanner() {
-        homeViewModel.getBanner("and@naver.com")
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        homeViewModel.getBanner(userEmail)
         homeViewPagerAdapter = HomeViewPagerAdapter()
         binding.vpMain.adapter = homeViewPagerAdapter
         homeViewModel.banner.observe(viewLifecycleOwner) {
@@ -108,8 +108,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initTrendDrive(){
-        homeViewModel.getTrendDrive("and@naver.com")
-        homeHotDriveAdapter = HomeTrendDriveAdapter("and@naver.com", links)
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        homeViewModel.getTrendDrive(userEmail)
+        homeHotDriveAdapter = HomeTrendDriveAdapter(userEmail, links)
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
         homeViewModel.trendDrive.observe(viewLifecycleOwner){
             homeHotDriveAdapter.setHomeTrendDrive(it)
@@ -117,8 +118,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initLocalDrive(){
-        homeViewModel.getLocalDrive("and@naver.com")
-        homeLocalDriveAdapter = HomeLocalDriveAdapter("and@naver.com", links)
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        homeViewModel.getLocalDrive(userEmail)
+        homeLocalDriveAdapter = HomeLocalDriveAdapter(userEmail, links)
         binding.recyclerviewHomeLocationDrive.adapter = homeLocalDriveAdapter
         homeViewModel.localDrive.observe(viewLifecycleOwner){
             homeLocalDriveAdapter.setLocalDrive(it)
@@ -127,10 +129,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     //오늘 드라이브
     private fun initTodayCharoDrive(){
+        val userEmail = SharedInformation.getEmail(requireActivity())
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recyclerviewHomeTodayDrive)
-        homeViewModel.getTodayCharoDrive("and@naver.com")
-        homeTodayDriveAdapter = HomeTodayDriveAdapter("and@naver.com", links)
+        homeViewModel.getTodayCharoDrive(userEmail)
+        homeTodayDriveAdapter = HomeTodayDriveAdapter(userEmail, links)
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
         homeViewModel.todayCharoDrive.observe(viewLifecycleOwner){
             homeTodayDriveAdapter.setTodayDrive(it)
@@ -138,8 +141,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initCustomThemeDrive(){
-        homeViewModel.getCustomTheme("and@naver.com")
-        homeCustomThemeAdapter = HomeCustomThemeAdapter("and@naver.com", links)
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        homeViewModel.getCustomTheme(userEmail)
+        homeCustomThemeAdapter = HomeCustomThemeAdapter(userEmail, links)
         binding.recyclerviewHomeNightDrive.adapter = homeCustomThemeAdapter
         homeViewModel.customThemeDrive.observe(viewLifecycleOwner){
             homeCustomThemeAdapter.setCustomThemeDrive(it)
@@ -154,13 +158,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initHomeTitle(){
-        sharedViewModel.getHomeTitle("and@naver.com")
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        sharedViewModel.getHomeTitle(userEmail)
        binding.lifecycleOwner = viewLifecycleOwner
         binding.sharedViewModel = sharedViewModel
     }
 
 
-
+    //검색 뷰 이동
     private fun goSearchView(userId: String, nickName: String) {
         binding.imgMainSearch.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
@@ -219,7 +224,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             sharedViewModel.postId.value = postId
 
             sharedViewModel.postId.observe(viewLifecycleOwner){
-                homeViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
+                homeViewModel.postLike(RequestHomeLikeData(userEmail,it))
             }
         }
 

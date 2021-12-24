@@ -24,6 +24,7 @@ interface SettingViewService {
         @Part("newNickname") newNickname: RequestBody
     ) : ResponseProfileUpdateData
 
+    //회원탈퇴
     @DELETE("/user/{userEmail}")
     suspend fun withdrawalUser(
         @Path("userEmail") userEmail : String
