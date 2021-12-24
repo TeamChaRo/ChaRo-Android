@@ -9,23 +9,30 @@ import com.example.charo_android.databinding.FragmentDialogThemeOneBinding
 import com.example.charo_android.databinding.FragmentDialogThemeTwoBinding
 
 class DialogThemeTwoFragment : Fragment() {
-    private lateinit var _binding: FragmentDialogThemeTwoBinding
-
-    private val binding get() = _binding!!
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    fun newInstance() : DialogThemeTwoFragment
+    {
+        val args = Bundle()
+        val frag = DialogThemeTwoFragment()
+        frag.arguments = args
+        return frag
     }
+
+    private lateinit var _binding: FragmentDialogThemeTwoBinding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDialogThemeTwoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        _binding = FragmentDialogThemeTwoBinding.inflate(layoutInflater, container, false)
 
-        return root
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
 }

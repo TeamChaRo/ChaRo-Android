@@ -19,7 +19,7 @@ import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.signup.SignUpEmailFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
-
+import com.example.charo_android.presentation.util.LoginUtil
 
 class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
@@ -88,8 +88,13 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(homeFragment, userId, nickName)
     }
 
-    private fun replaceWriteFragment(userId: String, nickName: String) {
-        replaceFragment(writeFragment, userId, nickName)
+    private fun replaceWriteFragment(userId : String, nickName : String){
+        if(userId == null || userEmail == "null"){
+            //로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this@MainActivity)
+        }else{
+            replaceFragment(writeFragment,userId,nickName)
+        }
     }
 
 
@@ -99,10 +104,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startActivityWriteShare() {
-        val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
-        intent.putExtra("userId", userEmail)
-        intent.putExtra("nickname", nickName)
-        startActivity(intent)
+
+        if(userEmail == null || userEmail == "null"){
+          //  로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this)
+        }else{
+            val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
+            intent.putExtra("userId", userEmail)
+            intent.putExtra("nickname", nickName)
+            startActivity(intent)
+        }
     }
 
     private fun requestPermissions() {
