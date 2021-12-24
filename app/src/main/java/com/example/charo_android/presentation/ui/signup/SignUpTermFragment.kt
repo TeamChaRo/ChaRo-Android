@@ -136,6 +136,9 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
             if(it.success){
                 SharedInformation.saveSocialId(requireActivity(), "1")
                 SharedInformation.setKaKaoSignUp(requireActivity(), 2)
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
 
         }
