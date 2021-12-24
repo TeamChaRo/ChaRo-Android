@@ -28,6 +28,8 @@ object SharedInformation {
             .apply()
     }
 
+    //이메일 저장
+
     fun getEmail(context: Context): String{
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
         return sharedPreferences.getString(APP_EMAIL,  "") ?: ""
@@ -48,7 +50,7 @@ object SharedInformation {
     }
 
 
-    // 메인뷰 themeNum 저장
+    // 메인뷰 themeNum 저장(HomeThemeAdapter)
     fun setThemeNum(context: Context, themeNum : Int){
         val sharedPreferences = context.getSharedPreferences(THEME_NUM, Context.MODE_PRIVATE)
         sharedPreferences.edit()
@@ -67,4 +69,6 @@ object SharedInformation {
             .remove(THEME_NUM)
             .apply()
     }
+
+
 }

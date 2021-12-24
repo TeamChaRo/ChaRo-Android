@@ -1,8 +1,12 @@
 package com.example.charo_android.data.api.signup
 
+import com.example.charo_android.data.model.request.signup.RequestSignUpSocialData
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.signup.ResponseRegisterData
+import com.example.charo_android.data.model.response.signup.ResponseSocialSignUpData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.Body
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -19,4 +23,9 @@ interface SignUpRegisterService {
         @Part("emailAgree") emailAgree : RequestBody,
 
         ) : ResponseRegisterData
+
+    @POST("/user/register/google")
+    suspend fun signUpGoogleRegister(
+        @Body requestSignUpSocialData : RequestSignUpSocialData
+    ) : ResponseStatusCode
 }

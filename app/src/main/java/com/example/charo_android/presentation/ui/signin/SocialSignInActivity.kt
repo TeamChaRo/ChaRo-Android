@@ -175,23 +175,31 @@ class SocialSignInActivity() :
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     val email = user?.email
+                    val profileImage = user?.photoUrl
                     Log.d("googles", email.toString())
+                    // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     socialSignInViewModel.success.observe(this, Observer {
                         if (it == false) {
                             Toast.makeText(
-                                this@SocialSignInActivity, "이메일이 없어 회원가입이 필요합니다.",
+                                this@SocialSignInActivity, "약관 동의가 필요합니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            val intent =
-                                Intent(this@SocialSignInActivity, SignUpActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                            val intent = Intent(this@SocialSignInActivity, SignUpActivity::class.java)
+                            intent.apply {
+                                putExtra("googleProfileImage", profileImage.toString())
+                                putExtra("googleSignUpEmail",email)
+                                putExtra("googleSignUp", 1)
+                            }
+                                startActivity(intent)
+                                finish()
+
                         } else {
                             Toast.makeText(
                                 this@SocialSignInActivity, "로그인에 성공하였습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            SharedInformation.setEmail(this, email.toString())
                             SharedInformation.saveSocialId(this, "2")
                             val intent = Intent(this@SocialSignInActivity, MainActivity::class.java)
                             startActivity(intent)

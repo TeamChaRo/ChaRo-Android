@@ -11,11 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCertificationUseCase
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
-import com.example.charo_android.domain.usecase.signup.PostRemoteSignUpRegisterUseCase
-import com.example.charo_android.presentation.util.NonNullMutableLiveData
+import com.example.charo_android.data.model.request.signup.RequestSignUpSocialData
+import com.example.charo_android.domain.model.StatusCode
+import com.example.charo_android.domain.model.signup.SocialSignUp
+import com.example.charo_android.domain.usecase.signup.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -29,7 +28,8 @@ class SignUpEmailViewModel(
     private val getRemoteSignUpEmailCheckUseCase: GetRemoteSignUpEmailCheckUseCase,
     private val getRemoteSignUpEmailCertificationUseCase: GetRemoteSignUpEmailCertificationUseCase,
     private val getRemoteSignUpNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase,
-    private val postRemoteSignUpRegisterUseCase: PostRemoteSignUpRegisterUseCase
+    private val postRemoteSignUpRegisterUseCase: PostRemoteSignUpRegisterUseCase,
+    private val PostRemoteSocialSIgnUpRegisterUseCase : PostRemoteSocialSignUpRegisterUseCase
 ) : ViewModel() {
 
     private val _success = MutableLiveData<Boolean>(false)
@@ -48,8 +48,13 @@ class SignUpEmailViewModel(
     val registerSuccess: LiveData<Boolean>
         get() = _registerSuccess
 
+    //구글 회원가입 데이터
+    private val _googleRegisterSuccess = MutableLiveData<StatusCode>()
+    val googleRegisterSuccess: LiveData<StatusCode>
+        get() = _googleRegisterSuccess
 
 
+    //회원가입시 필요한 것
     val profileImage = MutableLiveData<Uri>()
     val pushAgree = MutableLiveData<Boolean>()
     val emailAgree = MutableLiveData<Boolean>()
@@ -57,7 +62,15 @@ class SignUpEmailViewModel(
     val password = MutableLiveData<String>()
     val nickName = MutableLiveData<String>()
 
+    //소셜 로그인으로 회원가입 구분
+    val socialLoginNum = MutableLiveData<Int>()
+    val googleProfileImage = MutableLiveData<String>()
 
+
+
+
+
+    //이메일 중복 체크
     fun emailCheck(email: String) {
         viewModelScope.launch {
             runCatching { getRemoteSignUpEmailCheckUseCase.execute(email) }
@@ -75,6 +88,7 @@ class SignUpEmailViewModel(
         }
     }
 
+    //이메일 인증
     fun emailCertification(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteSignUpEmailCertificationUseCase.execute(userEmail) }
@@ -90,7 +104,7 @@ class SignUpEmailViewModel(
                 }
         }
     }
-
+    //닉네임 중복 체크
     fun nickNameCheck(nickname: String) {
         viewModelScope.launch {
             runCatching { getRemoteSignUpNickNameCheckUseCase.execute(nickname) }
@@ -106,7 +120,7 @@ class SignUpEmailViewModel(
         }
 
     }
-
+    //일반 회원가입 등록
     fun signUpRegister(
         image: Uri,
         userEmail: String,
@@ -156,16 +170,29 @@ class SignUpEmailViewModel(
                 }
         }
     }
-
     inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
         override fun contentType(): MediaType? = "image/jpeg".toMediaType()
-
 
         override fun writeTo(sink: BufferedSink) {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
         }
     }
 
-
+    //구글 회원가입 등록
+    fun signUpGoogle(userEmail: String, googleProfileImage:String, pushAgree : Boolean, emailAgree: Boolean){
+        viewModelScope.launch {
+            runCatching { PostRemoteSocialSIgnUpRegisterUseCase.execute(
+                RequestSignUpSocialData(userEmail, googleProfileImage, pushAgree, emailAgree))
+            }
+                .onSuccess {
+                    _googleRegisterSuccess.value = it
+                    Log.d("googleSignUp", "구글 회원가입 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("googleSignUp", "구글 회원가입 실패!")
+                }
+        }
+    }
 
 }

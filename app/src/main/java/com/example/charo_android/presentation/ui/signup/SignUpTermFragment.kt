@@ -20,6 +20,7 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
         super.onViewCreated(view, savedInstanceState)
         initTermView()
         signUpComplete()
+        googleSignUp()
     }
 
 
@@ -94,6 +95,20 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
                 }
 
         }
+    }
+    //구글 로그인으로 회원가입시에
+    fun googleSignUp(){
+        binding.imgSignUpTermNext.setOnClickListener {
+            with(signUpViewModel){
+                signUpGoogle(
+                    userEmail.value.toString(),
+                    googleProfileImage.value.toString(),
+                    pushAgree.value ?: false,
+                    emailAgree.value ?: false
+                )
+            }
+        }
+
     }
 
 
