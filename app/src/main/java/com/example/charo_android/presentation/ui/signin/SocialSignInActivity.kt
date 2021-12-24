@@ -45,6 +45,7 @@ class SocialSignInActivity() :
         goEmailLogin()
         goEmailSignUp()
         autoLogin()
+        goKaKaoMain()
     }
     //자동 로그인
     private fun autoLogin(){
@@ -77,9 +78,6 @@ class SocialSignInActivity() :
                     Log.d("kakao", "토큰 정보 보기 실패")
                 } else {
                     kakaoUserEmail()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
                 }
             }
 
@@ -121,6 +119,18 @@ class SocialSignInActivity() :
                 }
             }
         }
+    }
+    //카카오 로그인 성공시 main 이동
+    private fun goKaKaoMain(){
+        socialSignInViewModel.success.observe(this, Observer {
+            if(it){
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+
     }
 
 
