@@ -33,4 +33,5 @@ val useCaseModule = module{
     single { NewPasswordRegisterUseCase(get()) }
     single{PostRemoteHomeLikeUseCase(get())}
     single{ PostRemoteSocialSignUpRegisterUseCase(get()) }
+    single{PostRemoteKaKaoSignUpRegisterUseCase(get())}
 }

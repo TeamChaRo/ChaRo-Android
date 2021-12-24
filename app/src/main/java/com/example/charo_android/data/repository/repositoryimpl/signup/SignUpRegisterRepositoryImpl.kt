@@ -1,11 +1,11 @@
 package com.example.charo_android.data.repository.repositoryimpl.signup
 
 import com.example.charo_android.data.mapper.SignUpMapper
-import com.example.charo_android.data.model.request.signup.RequestSignUpSocialData
+import com.example.charo_android.data.model.request.signup.RequestSignUpGoogleData
+import com.example.charo_android.data.model.request.signup.RequestSignUpKaKaoData
 import com.example.charo_android.data.model.response.signup.ResponseRegisterData
 import com.example.charo_android.data.repository.remote.signup.RemoteSignUpRegisterDataSource
 import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.signup.SocialSignUp
 import com.example.charo_android.domain.repository.signup.SignUpRegisterRepository
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -30,11 +30,17 @@ class SignUpRegisterRepositoryImpl(private val dataSource: RemoteSignUpRegisterD
         )
     }
 
-    override suspend fun signUpGoogleRegister(requestSignUpSocialData: RequestSignUpSocialData): StatusCode {
+    override suspend fun signUpGoogleRegister(requestSignUpSocialData: RequestSignUpGoogleData): StatusCode {
         return SignUpMapper.mapperToSocialSignUp(
             dataSource.signUpGoogleRegister(
                 requestSignUpSocialData
             )
+        )
+    }
+
+    override suspend fun signUpKaKaoRegister(requestSignUpKaKaoData: RequestSignUpKaKaoData): StatusCode {
+        return SignUpMapper.mapperToSocialSignUp(
+            dataSource.signUpKaKaoRegister(requestSignUpKaKaoData)
         )
     }
 }

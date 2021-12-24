@@ -7,6 +7,9 @@ object SharedInformation {
     private const val SOCIAL_KEY = "SOCIAL_KEY"
     private const val APP_EMAIL = "APP_EMAIL"
     private const val THEME_NUM = "THEME_NUM"
+    private const val KAKAO_SIGN_UP = "KAKAO_SIGN_UP"
+    private const val SIGN_UP = "SIGN_UP"
+
 
     // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 0)
     fun getSocialId(context: Context): String{
@@ -70,5 +73,30 @@ object SharedInformation {
             .apply()
     }
 
+    //카카오 로그인 회원가입/로그아웃 해결
+    fun setKaKaoSignUp(context: Context, kakaoSignUp : Int){
+        val sharedPreferences = context.getSharedPreferences(KAKAO_SIGN_UP, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .putInt(KAKAO_SIGN_UP, kakaoSignUp)
+            .apply()
+    }
+
+    fun getKaKaoSignUp(context: Context): Int{
+        val sharedPreferences = context.getSharedPreferences(KAKAO_SIGN_UP, Context.MODE_PRIVATE)
+        return sharedPreferences.getInt(KAKAO_SIGN_UP,  999)
+    }
+
+
+    //카카오,구글, 일반 로그인 회원가입
+    fun setSignUp(context: Context, signUp : Int){
+        val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .putInt(SIGN_UP, signUp)
+            .apply()
+    }
+    fun getSignUp(context: Context): Int{
+        val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
+        return sharedPreferences.getInt(SIGN_UP,  999)
+    }
 
 }

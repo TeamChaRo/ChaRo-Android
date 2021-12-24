@@ -3,6 +3,7 @@ package com.example.charo_android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +16,7 @@ import com.example.charo_android.databinding.ActivitySignUpBinding
 import com.example.charo_android.domain.model.signup.Email
 import com.example.charo_android.presentation.base.BaseActivity
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.changeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Observer
@@ -32,19 +34,28 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
 
     fun initSignUpEmailFragment() {
-        changeFragment(R.id.fragment_container_email, SignUpEmailFragment())
+        if(SharedInformation.getSignUp(this) == 0){
+            changeFragment(R.id.fragment_container_email, SignUpEmailFragment())
+        }
+
 
     }
 
     //구글 회원가입시에
     fun changeGoogleSignUpFragment(){
-        val googleNum = intent.getIntExtra("googleSignUp", 999)
 
-        signUpViewModel.userEmail.value = intent.getStringExtra("googleSignUpEmail")
-        signUpViewModel.socialLoginNum.value = googleNum
-        signUpViewModel.googleProfileImage.value = intent.getStringExtra("googleProfileImage")
-        if(googleNum == 1){
+        if(SharedInformation.getSignUp(this) == 1){
+            signUpViewModel.userEmail.value = intent.getStringExtra("googleSignUpEmail")
+            signUpViewModel.googleProfileImage.value = intent.getStringExtra("googleProfileImage")
             changeFragment(R.id.fragment_container_email, SignUpTermFragment())
+            Log.d("google", "왜 니가 되는 거냐")
+        }
+
+
+        if(SharedInformation.getSignUp(this) == 2){
+            signUpViewModel.userEmail.value = intent.getStringExtra("kakaoSignUpEmail")
+
+            changeFragment(R.id.fragment_container_email, SignUpProfileFragment())
         }
     }
 

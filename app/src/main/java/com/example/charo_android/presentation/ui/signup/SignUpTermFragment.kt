@@ -21,6 +21,8 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
         initTermView()
         signUpComplete()
         googleSignUp()
+        kakaoSignUp()
+        kakaoSignUpSuccess()
     }
 
 
@@ -68,10 +70,11 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
     }
 
     fun signUpComplete(){
-        binding.imgSignUpTermNext.setOnClickListener {
+        if (SharedInformation.getSignUp(requireActivity()) == 0){
+            binding.imgSignUpTermNext.setOnClickListener {
                 with(signUpViewModel){
                     Log.d("signUp", userEmail.value.toString() + password.value.toString() +
-                        nickName.value.toString())
+                            nickName.value.toString())
                     signUpRegister(
                         profileImage.value!!,
                         userEmail.value.toString(),
@@ -88,28 +91,54 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
                             startActivity(intent)
                             requireActivity().finish()
                         }
-
-
                     }
-
                 }
+        }
+
 
         }
     }
     //구글 로그인으로 회원가입시에
     fun googleSignUp(){
-        binding.imgSignUpTermNext.setOnClickListener {
-            with(signUpViewModel){
-                signUpGoogle(
-                    userEmail.value.toString(),
-                    googleProfileImage.value.toString(),
-                    pushAgree.value ?: false,
-                    emailAgree.value ?: false
-                )
+        if(SharedInformation.getSignUp(requireActivity()) == 1){
+            binding.imgSignUpTermNext.setOnClickListener {
+                with(signUpViewModel){
+                    signUpGoogle(
+                        userEmail.value.toString(),
+                        googleProfileImage.value.toString(),
+                        pushAgree.value ?: false,
+                        emailAgree.value ?: false
+                    )
+                }
             }
         }
-
+    }
+    //카카오 회원가입
+    fun kakaoSignUp(){
+        if(SharedInformation.getSignUp(requireActivity()) == 2){
+            binding.imgSignUpTermNext.setOnClickListener {
+                with(signUpViewModel){
+                    signUpKaKao(
+                        userEmail.value.toString(),
+                        profileImage.value.toString(),
+                        nickName.value.toString(),
+                        pushAgree.value ?: false,
+                        emailAgree.value ?: false
+                    )
+                }
+            }
+        }
     }
 
+    //카카오 회원가입 성공
+    private fun kakaoSignUpSuccess(){
+        signUpViewModel.kakaoRegisterSuccess.observe(viewLifecycleOwner){
+            if(it.success){
+                SharedInformation.saveSocialId(requireActivity(), "1")
+                SharedInformation.setKaKaoSignUp(requireActivity(), 2)
+            }
+
+        }
+    }
 
 }

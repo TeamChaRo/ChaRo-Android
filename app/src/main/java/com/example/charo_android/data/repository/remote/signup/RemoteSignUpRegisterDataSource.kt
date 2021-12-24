@@ -1,9 +1,9 @@
 package com.example.charo_android.data.repository.remote.signup
 
-import com.example.charo_android.data.model.request.signup.RequestSignUpSocialData
+import com.example.charo_android.data.model.request.signup.RequestSignUpGoogleData
+import com.example.charo_android.data.model.request.signup.RequestSignUpKaKaoData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.signup.ResponseRegisterData
-import com.example.charo_android.data.model.response.signup.ResponseSocialSignUpData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -18,6 +18,10 @@ interface RemoteSignUpRegisterDataSource{
     ) : ResponseRegisterData
 
     suspend fun signUpGoogleRegister(
-        requestSignUpSocialData : RequestSignUpSocialData
+        requestSignUpSocialData : RequestSignUpGoogleData
+    ) : ResponseStatusCode
+
+    suspend fun signUpKaKaoRegister(
+        requestSignUpKaKaoData: RequestSignUpKaKaoData
     ) : ResponseStatusCode
 }

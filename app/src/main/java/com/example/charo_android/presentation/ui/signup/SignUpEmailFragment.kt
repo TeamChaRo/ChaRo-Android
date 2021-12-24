@@ -26,7 +26,7 @@ class SignUpEmailFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-
+        signUpNum()
         certificationEmail()
     }
     //이메일 포함 되어있는지 확인
@@ -143,6 +143,9 @@ class SignUpEmailFragment :
 
     //키보드 올라올 때 버튼 뷰 변경
 
-
+    //일반 회원가입 번호
+    private fun signUpNum(){
+        signUpViewModel.socialLoginNum.value = 0
+    }
 
 }

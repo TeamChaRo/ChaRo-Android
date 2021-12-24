@@ -1,8 +1,9 @@
 package com.example.charo_android.data.model.request.signup
 
-data class RequestSignUpSocialData(
+data class RequestSignUpKaKaoData(
     val userEmail : String,
     val profileImage : String,
+    val nickname : String,
     val pushAgree : Boolean,
     val emailAgree : Boolean
 )

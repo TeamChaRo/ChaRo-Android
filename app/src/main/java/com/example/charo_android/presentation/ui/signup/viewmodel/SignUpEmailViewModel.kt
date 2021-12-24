@@ -11,9 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.request.signup.RequestSignUpSocialData
+import com.example.charo_android.data.model.request.signup.RequestSignUpGoogleData
+import com.example.charo_android.data.model.request.signup.RequestSignUpKaKaoData
+import com.example.charo_android.data.model.response.signup.ResponseSocialSignUpData
 import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.signup.SocialSignUp
 import com.example.charo_android.domain.usecase.signup.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
@@ -29,7 +30,8 @@ class SignUpEmailViewModel(
     private val getRemoteSignUpEmailCertificationUseCase: GetRemoteSignUpEmailCertificationUseCase,
     private val getRemoteSignUpNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase,
     private val postRemoteSignUpRegisterUseCase: PostRemoteSignUpRegisterUseCase,
-    private val PostRemoteSocialSIgnUpRegisterUseCase : PostRemoteSocialSignUpRegisterUseCase
+    private val PostRemoteSocialSIgnUpRegisterUseCase : PostRemoteSocialSignUpRegisterUseCase,
+    private val postRemoteKaKaoSignUpRegisterUseCase: PostRemoteKaKaoSignUpRegisterUseCase
 ) : ViewModel() {
 
     private val _success = MutableLiveData<Boolean>(false)
@@ -53,6 +55,10 @@ class SignUpEmailViewModel(
     val googleRegisterSuccess: LiveData<StatusCode>
         get() = _googleRegisterSuccess
 
+    //카카오 회원가입 데이터
+    private val _kakaoRegisterSuccess = MutableLiveData<StatusCode>()
+    val kakaoRegisterSuccess: LiveData<StatusCode>
+        get() = _kakaoRegisterSuccess
 
     //회원가입시 필요한 것
     val profileImage = MutableLiveData<Uri>()
@@ -182,7 +188,7 @@ class SignUpEmailViewModel(
     fun signUpGoogle(userEmail: String, googleProfileImage:String, pushAgree : Boolean, emailAgree: Boolean){
         viewModelScope.launch {
             runCatching { PostRemoteSocialSIgnUpRegisterUseCase.execute(
-                RequestSignUpSocialData(userEmail, googleProfileImage, pushAgree, emailAgree))
+                RequestSignUpGoogleData(userEmail, googleProfileImage, pushAgree, emailAgree))
             }
                 .onSuccess {
                     _googleRegisterSuccess.value = it
@@ -192,6 +198,24 @@ class SignUpEmailViewModel(
                     it.printStackTrace()
                     Log.d("googleSignUp", "구글 회원가입 실패!")
                 }
+        }
+    }
+
+    //카카오 회원가입 등록
+    fun signUpKaKao(userEmail : String, profileImage : String, nickName : String, pushAgree : Boolean, emailAgree: Boolean ){
+        viewModelScope.launch {
+            runCatching { postRemoteKaKaoSignUpRegisterUseCase.execute(
+                RequestSignUpKaKaoData(userEmail, profileImage, nickName, pushAgree, emailAgree)
+            ) }
+                .onSuccess {
+                    _kakaoRegisterSuccess.value = it
+                    Log.d("kakaoSignUp", "카카오 회원가입 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("kakaoSignUp", "카카오 회원가입 실패!")
+                }
+
         }
     }
 
