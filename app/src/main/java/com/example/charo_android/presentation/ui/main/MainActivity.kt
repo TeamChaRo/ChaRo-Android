@@ -5,14 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charo_android.R
 import android.util.Log
-import com.bumptech.glide.util.Util
 import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
-import com.kakao.sdk.common.util.Utility
+import com.example.charo_android.presentation.util.LoginUtil
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,7 +80,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceWriteFragment(userId : String, nickName : String){
-        replaceFragment(writeFragment,userId,nickName)
+        if(userId == null || userEmail == "null"){
+            //로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this@MainActivity)
+        }else{
+            replaceFragment(writeFragment,userId,nickName)
+        }
     }
 
     private fun
@@ -90,10 +94,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startActivityWriteShare() {
-        val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
-        intent.putExtra("userId", userEmail)
-        intent.putExtra("nickname", nickName)
-        startActivity(intent)
+
+        if(userEmail == null || userEmail == "null"){
+          //  로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this)
+        }else{
+            val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
+            intent.putExtra("userId", userEmail)
+            intent.putExtra("nickname", nickName)
+            startActivity(intent)
+        }
     }
 
 }
