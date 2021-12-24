@@ -219,6 +219,21 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/tv_detail_viewpager_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjkkr_regular"
+                        tools:text="1/6"
+                        android:includeFontPadding="false"
+                        android:background="@drawable/shape_detail_img_viewpager"
+                        android:paddingHorizontal="15dp"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

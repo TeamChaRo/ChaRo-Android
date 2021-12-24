@@ -15,6 +15,7 @@ import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCerti
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpEmailCheckUseCase
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
 import com.example.charo_android.domain.usecase.signup.PostRemoteSignUpRegisterUseCase
+import com.example.charo_android.presentation.util.NonNullMutableLiveData
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -46,6 +47,8 @@ class SignUpEmailViewModel(
     private val _registerSuccess = MutableLiveData<Boolean>()
     val registerSuccess: LiveData<Boolean>
         get() = _registerSuccess
+
+
 
     val profileImage = MutableLiveData<Uri>()
     val pushAgree = MutableLiveData<Boolean>()
@@ -114,7 +117,7 @@ class SignUpEmailViewModel(
         context : Context
     ) {
         val userEmailRequestBody: RequestBody = userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
-        val passwordRequestBody: RequestBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
+         val passwordRequestBody: RequestBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
         val nicknameRequestBody: RequestBody = nickname.toRequestBody("text/plain".toMediaTypeOrNull())
         val pushAgreeRequestBody : RequestBody = pushAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val emailAgreeRequestBody : RequestBody = emailAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
@@ -148,8 +151,8 @@ class SignUpEmailViewModel(
                     Log.d("register", "서버 통신 성공!")
                 }
                 .onFailure {
-                    it.printStackTrace()
                     Log.d("register", "서버 통신 실패!")
+                    Log.d("register", it.printStackTrace().toString())
                 }
         }
     }

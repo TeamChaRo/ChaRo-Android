@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.setFragmentResultListener
 import com.example.charo_android.R
+import com.example.charo_android.data.model.request.home.RequestHomeLikeData
 import com.example.charo_android.databinding.FragmentMoreViewBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
@@ -16,6 +17,7 @@ import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.adapter.MoreViewAdapter
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,12 +29,13 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     private var homeFragment = HomeFragment()
     private lateinit var moreViewAdapter: MoreViewAdapter
     private lateinit var userId: String
+    var links = DataToMoreLike()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userId = arguments?.getString("userId").toString()
-        moreViewAdapter = MoreViewAdapter(userId)
+        moreViewAdapter = MoreViewAdapter(userId, links)
         Log.d("userIdeas", userId)
 
         initSpinner()
@@ -44,7 +47,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     fun moreViewLoadData() {
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreView("and@naver.com", "0", "")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
@@ -53,7 +56,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         } else if(sharedViewModel.num.value == 2) {
             moreViewModel.getMoreView(Hidden.userId, "2", "busan")
             sharedViewModel.getHomeTitle(Hidden.userId)
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
             binding.textToolbarTitle.text = sharedViewModel.localThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
@@ -62,7 +65,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         } else{
             moreViewModel.getMoreView(Hidden.userId, "3", "")
             sharedViewModel.getHomeTitle(Hidden.userId)
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
             binding.textToolbarTitle.text = sharedViewModel.customThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
@@ -76,7 +79,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreNewView("and@naver.com", "0", "")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
@@ -84,14 +87,14 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
         } else if (sharedViewModel.num.value == 2) {
             moreViewModel.getMoreNewView(Hidden.userId, "2", "busan")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
             }
         }  else {
             moreViewModel.getMoreNewView(Hidden.userId, "3", "")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
+            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner){
                 moreViewAdapter.setHomeTrendDrive(it)
@@ -149,6 +152,17 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)
                 ?.commit()
+        }
+
+    }
+
+    inner class DataToMoreLike(){
+        fun getPostId(postId : Int){
+            val userEmail = SharedInformation.getEmail(requireActivity())
+            sharedViewModel.postId.value = postId
+            sharedViewModel.postId.observe(viewLifecycleOwner){
+                moreViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
+            }
         }
 
     }

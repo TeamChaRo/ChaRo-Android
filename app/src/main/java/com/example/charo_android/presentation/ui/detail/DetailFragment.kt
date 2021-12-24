@@ -5,8 +5,6 @@ import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,22 +13,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.skt.Tmap.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by activityViewModels()
-    private val viewPagerAdapter = DetailViewpagerAdapter()
+
+    //    private val viewPagerAdapter = DetailViewpagerAdapter()
+    private lateinit var viewPagerAdapter: DetailViewpagerAdapter
 
     private val pointList = arrayListOf<TMapPoint>()
     private var detailActivity: DetailActivity? = null
@@ -49,13 +46,26 @@ class DetailFragment : Fragment() {
         val postId = (activity as DetailActivity).postId
         val title = (activity as DetailActivity).title
         val date = (activity as DetailActivity).date
-        val imageUrl = (activity as DetailActivity).imageUrl
         val region = (activity as DetailActivity).region
+
+        viewPagerAdapter = DetailViewpagerAdapter() {
+            val intent = Intent(requireContext(), DetailImageActivity::class.java)
+            val imageList: ArrayList<String> = ArrayList()
+            viewModel.detailData.observe(viewLifecycleOwner, {
+                viewModel.detailData.value!!.data.images.forEach {
+                    imageList.add(it)
+                }
+                intent.putExtra("imageList", imageList)
+            })
+            startActivity(intent)
+        }
 
         // ViewModel LiveData
         viewModel.setPostId(postId)
-        if (viewModel.detailData.value == null)
+        if (viewModel.detailData.value == null) {
+            Log.d("viewModel", "getData() execute")
             viewModel.getData(postId, title, date, region)
+        }
 
         return binding.root
     }
@@ -69,12 +79,15 @@ class DetailFragment : Fragment() {
         tMapView.setUserScrollZoomEnable(true)
         binding.clDetailMapview.addView(tMapView)
 
+        val imageUrl = (activity as DetailActivity).imageUrl
         viewModel.detailData.observe(viewLifecycleOwner, {
             Log.d("detail", "observed")
             binding.detailData = viewModel
             if (viewModel.detailData.value != null) {
-                // Add Preview Image
-                viewModel.addImageAtFront((activity as DetailActivity).imageUrl)
+                if (viewPagerAdapter.itemList.isEmpty()) {
+                    // Add Preview Image
+                    viewModel.addImageAtFront(imageUrl)
+                }
                 // ViewPager
                 initViewPager(viewModel.detailData.value!!.data.images)
                 // tMapView
@@ -124,13 +137,26 @@ class DetailFragment : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     private fun initViewPager(imgList: List<String>) {
+        // viewPager registerOnPageChangeCallback
+        binding.viewpagerDetailImage.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            @SuppressLint("SetTextI18n")
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                Log.e("Selected_Page", position.toString())
+                binding.tvDetailViewpagerImage.text =
+                    "${position + 1}/${viewPagerAdapter.itemList.size}"
+            }
+        })
+
         binding.viewpagerDetailImage.adapter = viewPagerAdapter
+        viewPagerAdapter.itemList.clear()
         imgList.forEach {
             viewPagerAdapter.itemList.add(it)
         }
         viewPagerAdapter.notifyDataSetChanged()
+        binding.tvDetailViewpagerImage.text = "1/${viewPagerAdapter.itemList.size}"
     }
 
     private fun clickShare(){
@@ -197,14 +223,13 @@ class DetailFragment : Fragment() {
     }
 
     private fun addList(tMapView: TMapView) {
-        if(pointList.isEmpty()) {
+        if (pointList.isEmpty()) {
             viewModel.detailData.value!!.data.course.forEach {
                 Log.d("latitude", it.latitude)
                 Log.d("longitude", it.longitude)
                 pointList.add(TMapPoint(it.latitude.toDouble(), it.longitude.toDouble()))
             }
         }
-//        setCenter(tMapView)
         mark(tMapView)
     }
 
@@ -219,7 +244,7 @@ class DetailFragment : Fragment() {
     private fun mark(tMapView: TMapView) {
         for (i in pointList.indices) {
             val marker = TMapMarkerItem()
-            var bitmap: Bitmap = when (i) {
+            val bitmap: Bitmap = when (i) {
                 0 -> BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
                 pointList.size - 1 -> BitmapFactory.decodeResource(
                     resources,
@@ -238,7 +263,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun findPath(tMapView: TMapView) {
-        val thread = Thread() {
+        val thread = Thread {
             try {
                 for (i in 0 until pointList.size - 1) {
                     val from = pointList[i]

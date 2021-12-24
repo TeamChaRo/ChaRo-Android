@@ -3,8 +3,12 @@ package com.example.charo_android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.blue
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivitySignUpBinding
@@ -25,12 +29,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     }
 
 
-    fun initSignUpEmailFragment(){
+    fun initSignUpEmailFragment() {
         changeFragment(R.id.fragment_container_email, SignUpEmailFragment())
 
     }
-
-
 
 
 

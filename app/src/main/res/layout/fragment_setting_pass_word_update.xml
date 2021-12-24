@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.setting.SettingPasswordUpdateFragment">
+
+        <TextView
+            android:id="@+id/text_info_password_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/origin_password"
+            android:fontFamily="@font/noto_sans_cjkkr_regular"
+            android:textSize="12sp"
+            android:textColor="@color/gray5_sub"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="26dp"
+            android:layout_marginStart="19dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_password_update"
+            style="@style/signUpBlankChange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@null"
+            app:helperTextTextColor="@color/blue_main"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@drawable/password_eye_off"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_info_password_update"
+            app:layout_constraintTop_toBottomOf="@+id/text_info_password_update">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:hint="@string/password_update_hint"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textSize="13sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_new_password_update"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_password_update"
+            app:layout_constraintStart_toStartOf="@+id/text_info_password_update"
+            app:layout_constraintEnd_toEndOf="@+id/text_input_password_update"
+            android:layout_marginTop="63dp">
+
+
+            <TextView
+                android:id="@+id/text_new_password_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_password_update"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:textSize="12sp"
+                android:textColor="@color/gray5_sub"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_info_new_password_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_password_update_info"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:textSize="11sp"
+                android:textColor="@color/gray4_sub"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/text_new_password_update"
+                app:layout_constraintStart_toStartOf="@+id/text_new_password_update"
+                android:layout_marginTop="12dp"/>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_new_password"
+                style="@style/signUpBlankChange"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:counterMaxLength="15"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperTextTextColor="@color/blue_main"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_eye_off"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_info_new_password_update">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_new_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/input_password_hint"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_new_password_reconfirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/signUpBlankChange"
+                app:counterMaxLength="15"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperTextTextColor="@color/blue_main"
+                app:hintEnabled="false"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_eye_off"
+                app:layout_constraintTop_toBottomOf="@+id/text_input_new_password"
+                app:layout_constraintStart_toStartOf="@+id/text_input_new_password"
+                app:layout_constraintEnd_toEndOf="@+id/text_input_new_password"
+                android:layout_marginTop="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_new_password_reconfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:hint="@string/input_password_reconfirm_hint"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textSize="13sp"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/img_password_update_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/setting_no_next"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="27dp"/>
+
+        <TextView
+            android:id="@+id/text_password_update_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/perfect"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/img_password_update_button"
+            app:layout_constraintEnd_toEndOf="@+id/img_password_update_button"
+            app:layout_constraintTop_toTopOf="@+id/img_password_update_button"
+            app:layout_constraintBottom_toBottomOf="@+id/img_password_update_button"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

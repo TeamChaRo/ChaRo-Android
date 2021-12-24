@@ -54,18 +54,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageView
-            android:id="@+id/img_social_apple"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/kakao_login_medium_wide"
-            android:scaleType="fitXY"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="185dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/img_social_google"
@@ -77,21 +65,25 @@
             android:text="@string/google_sign_in"
             android:textSize="17sp"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_apple"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingStart="7dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="185dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 
 
-        <ImageView
+        <TextView
             android:id="@+id/img_social_kakao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/kakao_login_medium_wide"
-            android:scaleType="fitXY"
+            android:background="@drawable/rectangle_kakao_yellow"
+            android:text="@string/kakao_login"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/img_social_google"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +91,16 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"/>
 
+
+        <ImageView
+            android:id="@+id/img_social_kakao_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kakao_logo"
+            app:layout_constraintTop_toTopOf="@+id/img_social_kakao"
+            app:layout_constraintStart_toStartOf="@+id/img_social_kakao"
+            app:layout_constraintBottom_toBottomOf="@+id/img_social_kakao"
+            android:layout_marginStart="6dp"/>
         <TextView
             android:id="@+id/text_social_email_login"
             android:layout_width="wrap_content"

@@ -8,13 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeHotDriveBinding
 import com.example.charo_android.domain.model.home.TrendDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.home.HomeFragment
 
-class HomeTrendDriveAdapter(val userId: String) :
+class HomeTrendDriveAdapter(val userId: String,
+                            var links: HomeFragment.DataToHomeLike) :
     RecyclerView.Adapter<HomeTrendDriveAdapter.HomeHotDriveViewHolder>() {
     private val _trendDrive = mutableListOf<TrendDrive>()
     private var trendDrive: List<TrendDrive> = _trendDrive
-
-
+    var postId : Int = 0
+    var select = true
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -33,7 +35,18 @@ class HomeTrendDriveAdapter(val userId: String) :
     ) {
 
         holder.onBind(trendDrive[position])
+        holder.binding.imgHomeHotDriveHeart.setOnClickListener{
+            postId = trendDrive[position].homeTrendDrivePostId
+            if(select){
+                it.isSelected = !trendDrive[position].homeTrendDriveHeart
+                select = false
+            }else{
+                it.isSelected = trendDrive[position].homeTrendDriveHeart
+                select = true
+            }
 
+            links.getPostId(postId)
+        }
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
             intent.putExtra("userId", userId)

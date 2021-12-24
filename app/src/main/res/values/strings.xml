@@ -179,4 +179,25 @@
     <string name="firebase_web_client_id">570607218249-6osutorq2vh0q71gvcus4e6n6c5d4n5j.apps.googleusercontent.com</string>
     <string name="google_sign_in">Google 로그인</string>
     <string name="like">좋아요</string>
+    <string name="log_out">로그아웃 하시겠습니까?</string>
+    <string name="ok">예</string>
+    <string name="no">아니요</string>
+    <string name="withdrawal">계정을 삭제하시겠습니까? \n회원 탈퇴시 계정이 모두 삭제됩니다.\n (단,작성하신 글은 익명의 형태로 남아
+    사용자에게 보여집니다.)</string>
+    <string name="cancel">취소</string>
+    <string name="agreement">확인</string>
+    <string name="origin_password">기존 비밀번호</string>
+    <string name="password_update_hint">5이상 15자 이내의 영문과 숫자</string>
+    <string name="new_password_update">새 비밀번호</string>
+    <string name="new_password_update_info">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
+    <string name="one_more_password">비밀번호를 한번 더 작성해주세요</string>
+    <string name="password_update_end">비밀번호가 변경되었습니다.</string>
+    <string name="setting_notice_title">업데이트 실행 1.0 -> 2.0 업데이트 안내</string>
+    <string name="setting_notice_date">2021.12.12</string>
+    <string name="setting_notice_content">어쩌구 저쩌구가 업데이트 됨!어쩌구 저쩌구가 업데이트 됨!</string>
+
+
+    <!-- KaKao -->
+    <string name="kakao_login">카카오 로그인</string>
+
 </resources>

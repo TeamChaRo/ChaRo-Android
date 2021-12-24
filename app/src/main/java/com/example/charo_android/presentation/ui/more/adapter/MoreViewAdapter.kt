@@ -13,12 +13,16 @@ import com.example.charo_android.data.model.response.more.ResponseMoreViewData
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.more.MoreThemeContentViewFragment
+import com.example.charo_android.presentation.ui.more.MoreViewFragment
 
-class MoreViewAdapter(val userId: String) :
+class MoreViewAdapter(val userId: String,
+    var links : MoreViewFragment.DataToMoreLike, ) :
     RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
      private val _moreData = mutableListOf<MoreDrive>()
      private var moreData : List<MoreDrive> = _moreData
-
+    var postId : Int = 0
+    var select = true
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,6 +38,18 @@ class MoreViewAdapter(val userId: String) :
 
     override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
         holder.onBind(moreData[position])
+        holder.binding.imgMoreViewHeart.setOnClickListener {
+            postId = moreData[position].morePostId
+            if(select){
+                it.isSelected = !moreData[position].moreIsFavorite
+                select = false
+            }else{
+                it.isSelected = moreData[position].moreIsFavorite
+                select = true
+            }
+            links.getPostId(postId)
+        }
+
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
             intent.putExtra("userId", userId)

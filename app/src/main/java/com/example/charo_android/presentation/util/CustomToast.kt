@@ -11,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.databinding.ToastMapCustomBinding
+import com.example.charo_android.databinding.ToastPasswordUpdateCustomBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 object CustomToast {
@@ -24,6 +25,18 @@ object CustomToast {
         return Toast(context).apply {
             setGravity(Gravity.CENTER, 0,0) //16.toPx
             duration =  Toast.LENGTH_LONG
+            view = binding.root
+        }
+    }
+
+    fun createPasswordUpdateToast(context: Context, message: String) : Toast? {
+        val inflater = LayoutInflater.from(context)
+        var binding: ToastPasswordUpdateCustomBinding
+            = DataBindingUtil.inflate(inflater, R.layout.toast_password_update_custom, null, false)
+
+        return Toast(context).apply {
+            setGravity(Gravity.CENTER, 0, 0)
+            duration = Toast.LENGTH_SHORT
             view = binding.root
         }
     }

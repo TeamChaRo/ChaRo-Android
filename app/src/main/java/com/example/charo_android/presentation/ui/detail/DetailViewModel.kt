@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.detail.*
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.enqueueUtil
 import com.skt.Tmap.TMapInfo
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapPoint
@@ -17,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
     private var _postId = MutableLiveData<Int>()
     val postId: LiveData<Int> get() = _postId
 
@@ -46,12 +47,12 @@ class DetailViewModel: ViewModel() {
     fun getData(postId: Int, title: String, date: String, region: String) {
         val call: Call<ResponseDetailData> =
             ApiService.detailViewService.getDetail(Hidden.userId, postId)
-        call.enqueue(object : Callback<ResponseDetailData>{
+        call.enqueue(object : Callback<ResponseDetailData> {
             override fun onResponse(
                 call: Call<ResponseDetailData>,
                 response: Response<ResponseDetailData>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : DetailView", "success")
                     val data = response.body()?.data!!
                     _detailData.value = DetailData(postId, title, date, region, data)
@@ -79,13 +80,18 @@ class DetailViewModel: ViewModel() {
 
     fun postLike(postId: Int) {
         val call: Call<ResponseDetailLikeAndSave> =
-            ApiService.detailViewService.postDetailLike(RequestDetailLikeAndSave(Hidden.userId, postId))
-        call.enqueue(object: Callback<ResponseDetailLikeAndSave> {
+            ApiService.detailViewService.postDetailLike(
+                RequestDetailLikeAndSave(
+                    Hidden.userId,
+                    postId
+                )
+            )
+        call.enqueue(object : Callback<ResponseDetailLikeAndSave> {
             override fun onResponse(
                 call: Call<ResponseDetailLikeAndSave>,
                 response: Response<ResponseDetailLikeAndSave>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : DetailView Like", "success")
                 } else {
                     Log.d("server connect : DetailView Like", "error")
@@ -107,13 +113,18 @@ class DetailViewModel: ViewModel() {
 
     fun postSave(postId: Int) {
         val call: Call<ResponseDetailLikeAndSave> =
-            ApiService.detailViewService.postDetailSave(RequestDetailLikeAndSave(Hidden.userId, postId))
-        call.enqueue(object: Callback<ResponseDetailLikeAndSave> {
+            ApiService.detailViewService.postDetailSave(
+                RequestDetailLikeAndSave(
+                    Hidden.userId,
+                    postId
+                )
+            )
+        call.enqueue(object : Callback<ResponseDetailLikeAndSave> {
             override fun onResponse(
                 call: Call<ResponseDetailLikeAndSave>,
                 response: Response<ResponseDetailLikeAndSave>
             ) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     Log.d("server connect : DetailView Save", "success")
                 } else {
                     Log.d("server connect : DetailView Save", "error")
@@ -134,32 +145,16 @@ class DetailViewModel: ViewModel() {
     }
 
     fun getLikes(postId: Int) {
-        val call: Call<ResponseDetailLikes> =
-            ApiService.detailViewService.getLikes(postId, Hidden.userId)
-        call.enqueue(object: Callback<ResponseDetailLikes> {
-            override fun onResponse(
-                call: Call<ResponseDetailLikes>,
-                response: Response<ResponseDetailLikes>
-            ) {
-                if(response.isSuccessful) {
-                    Log.d("server connect : DetailView Likes", "success")
-                    Log.d("server connect : DetailView Likes List size", response.body()?.data?.size.toString())
-                    _userData.value = response.body()?.data
-                } else {
-                    Log.d("server connect : DetailView Likes", "error")
-                    Log.d("server connect : DetailView Likes", "$response.errorBody()")
-                    Log.d("server connect : DetailView Likes", response.message())
-                    Log.d("server connect : DetailView Likes", "${response.code()}")
-                    Log.d(
-                        "server connect : DetailView Likes",
-                        "${response.raw().request.url}"
-                    )
-                }
+        val call = ApiService.detailViewService.getLikes(postId, Hidden.userId)
+        call.enqueueUtil(
+            onSuccess = {
+                Log.d("Current View", "DetailView Likes")
+                Log.d(
+                    "server connect : DetailView Likes List size",
+                    it.data.size.toString()
+                )
+                _userData.value = it.data
             }
-
-            override fun onFailure(call: Call<ResponseDetailLikes>, t: Throwable) {
-                Log.d("server connect : DetailView Likes", "error: ${t.message}")
-            }
-        })
+        )
     }
 }

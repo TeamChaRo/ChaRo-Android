@@ -1,16 +1,13 @@
 package com.example.charo_android.presentation.util
 
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isGone
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestListener
 import com.google.android.material.chip.Chip
 
 object BindingAdapter {
@@ -19,16 +16,32 @@ object BindingAdapter {
     fun setImage(imageView: ImageView, imageUrl : String){
         Glide.with(imageView.context)
             .load(imageUrl)
-            .transform(RoundedCorners(20))
+            .transform(RoundedCorners(20.dpToPx))
             .into(imageView)
-
     }
+
+    @JvmStatic
+    @BindingAdapter("imgNoRoundBind")
+    fun setNoRadiusImage(imageView: ImageView, imageUrl : String){
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("imgIntBind")
+    fun setIntImage(imageView: ImageView, imageDrawable : Int){
+        Glide.with(imageView.context)
+            .load(imageDrawable)
+            .into(imageView)
+    }
+
     @JvmStatic
     @BindingAdapter("profileBind")
     fun setProfileImage(imageView: ImageView, imageUri : Uri){
         Glide.with(imageView.context)
             .load(imageUri)
-            .transform(RoundedCorners(20))
+            .transform(RoundedCorners(20.dpToPx))
             .centerCrop()
             .into(imageView)
     }
@@ -51,6 +64,17 @@ object BindingAdapter {
         } else{
             chip.visibility = View.GONE
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("heartBind")
+    fun setHeart(imageButton: ImageButton, favorite : Boolean){
+        var select = true
+        imageButton.isSelected = favorite
+
+
+
+
     }
 
 }

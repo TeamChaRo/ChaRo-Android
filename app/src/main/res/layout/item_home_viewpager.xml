@@ -5,6 +5,10 @@
         <variable
             name="banner"
             type="com.example.charo_android.domain.model.home.Banner" />
+
+        <variable
+            name="bannerRoad"
+            type="com.example.charo_android.domain.model.home.BannerRoad" />
     </data>
         
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,17 +18,15 @@
 
         <ImageView
             android:id="@+id/img_viewpager"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            imgBind="@{banner.homeViewPagerRoadImage}"
+            imgNoRoundBind="@{banner.homeViewPagerRoadImage}"
             android:src="@drawable/main_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_viewpager_title"
@@ -58,7 +60,7 @@
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/road_1"
+            imgIntBind="@{bannerRoad.bannerRoadImg}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_viewpager_hashtag" />
 

@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.example.charo_android.data.model.detail.DetailViewpagerImageInfo
 import com.example.charo_android.databinding.ItemDetailImageBinding
 
-class DetailViewpagerAdapter: RecyclerView.Adapter<DetailViewpagerAdapter.DetailImageViewHolder>() {
+class DetailViewpagerAdapter(private val itemClick: (String) -> Unit) :
+    RecyclerView.Adapter<DetailViewpagerAdapter.DetailImageViewHolder>() {
     val itemList = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailImageViewHolder {
@@ -17,7 +18,7 @@ class DetailViewpagerAdapter: RecyclerView.Adapter<DetailViewpagerAdapter.Detail
             parent,
             false
         )
-        return DetailImageViewHolder(binding)
+        return DetailImageViewHolder(binding, itemClick)
     }
 
     override fun getItemCount(): Int = itemList.size
@@ -27,15 +28,18 @@ class DetailViewpagerAdapter: RecyclerView.Adapter<DetailViewpagerAdapter.Detail
     }
 
     class DetailImageViewHolder(
-        private val binding : ItemDetailImageBinding
-    ): RecyclerView.ViewHolder(binding.root){
+        private val binding: ItemDetailImageBinding,
+        private val itemClick: (String) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun onBind(url: String, index: Int, itemCount: Int){
+        fun onBind(url: String, index: Int, itemCount: Int) {
             Glide.with(itemView.context)
                 .load(url)
                 .into(binding.imgDetailViewpagerImage)
 
-            binding.tvDetailViewpagerImage.text = "$index/$itemCount"
+            binding.root.setOnClickListener {
+                itemClick(url)
+            }
         }
     }
 }

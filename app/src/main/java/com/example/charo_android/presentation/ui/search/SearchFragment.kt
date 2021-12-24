@@ -3,10 +3,7 @@ package com.example.charo_android.presentation.ui.search
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
 import com.example.charo_android.R
 import com.example.charo_android.data.model.request.search.RequestSearchViewData
@@ -14,13 +11,10 @@ import com.example.charo_android.databinding.FragmentSearchBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
-import com.example.charo_android.presentation.ui.signup.SignUpProfileFragment
 import com.example.charo_android.presentation.util.LocationUtil
 import com.example.charo_android.presentation.util.ThemeUtil
-import com.example.charo_android.presentation.util.changeFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private lateinit var userId: String

@@ -6,23 +6,32 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.charo_android.R
+import com.example.charo_android.data.model.request.home.RequestHomeLikeData
 import com.example.charo_android.databinding.FragmentMoreThemeContentViewBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
+import com.example.charo_android.presentation.ui.main.SharedViewModel
+import com.example.charo_android.presentation.ui.more.adapter.MoreThemeContentAdapter
 import com.example.charo_android.presentation.ui.more.adapter.MoreViewAdapter
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.example.charo_android.presentation.util.SharedInformation
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MoreThemeContentViewFragment(val userId: String, val identifier: String, val value: String) :
     BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view) {
     private val moreViewModel: MoreViewViewModel by viewModel()
-    private lateinit var moreViewAdapter: MoreViewAdapter
+    private lateinit var moreThemeContentAdapter: MoreThemeContentAdapter
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
+    var link = DataToMoreThemeLike()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSpinner()
         clickSpinner()
+
     }
 
     private fun clickSpinner() {
@@ -55,19 +64,19 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
     private fun initMoreThemeView(){
         moreViewModel.getMoreView(userId, identifier, value)
-        moreViewAdapter = MoreViewAdapter(Hidden.userId)
-        binding.recyclerviewMoreTheme.adapter = moreViewAdapter
+        moreThemeContentAdapter = MoreThemeContentAdapter(link)
+        binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.drive.observe(viewLifecycleOwner) {
-            moreViewAdapter.setHomeTrendDrive(it)
+            moreThemeContentAdapter.setHomeTrendDrive(it)
         }
     }
 
     private fun initMoreThemeNewView(){
             moreViewModel.getMoreNewView(userId, identifier, value)
-            moreViewAdapter = MoreViewAdapter(Hidden.userId)
-            binding.recyclerviewMoreTheme.adapter = moreViewAdapter
+        moreThemeContentAdapter = MoreThemeContentAdapter(link)
+            binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it)
+                moreThemeContentAdapter.setHomeTrendDrive(it)
             }
     }
 
@@ -77,5 +86,14 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     }
 
 
+    inner class DataToMoreThemeLike(){
+        fun getPostId(postId : Int){
+            val userEmail = SharedInformation.getEmail(requireActivity())
+            sharedViewModel.postId.value = postId
+            sharedViewModel.postId.observe(viewLifecycleOwner){
+                moreViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
+            }
+        }
 
+    }
 }

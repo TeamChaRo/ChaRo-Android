@@ -1,36 +1,37 @@
 package com.example.charo_android.presentation.ui.home
 
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.charo_android.R
-import com.example.charo_android.data.repository.local.LocalHomeThemeDataSource
-import com.example.charo_android.data.repository.local.LocalHomeThemeDataSourceImpl
+import com.example.charo_android.data.model.request.home.RequestHomeLikeData
+import com.example.charo_android.data.repository.local.home.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.databinding.FragmentHomeBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.alarm.AlarmActivity
 import com.example.charo_android.presentation.ui.home.adapter.*
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
-import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
-import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
 import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.ThemeUtil
-import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-
     private val sharedViewModel : SharedViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
     private var theme = ThemeUtil()
@@ -42,6 +43,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private lateinit var homeCustomThemeAdapter: HomeCustomThemeAdapter
     private lateinit var homeLocalDriveAdapter: HomeLocalDriveAdapter
 
+    var links = DataToHomeLike()
+
+
+
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
 
@@ -50,6 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val userId: String = Hidden.userId
         val nickName: String = Hidden.nickName
+
         goSearchView(userId,nickName)
         goAlarm()
         initToolBar()
@@ -61,24 +67,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initCustomThemeDrive()
         initHomeTitle()
         initThemeDrive()
-        logoutKakao()
-        deleteKakao()
     }
-    private fun logoutKakao(){
-        binding.btnSocialKakaoDelete.setOnClickListener {
-            UserApiClient.instance.unlink { error ->
-                if (error != null) {
-                    Toast.makeText(requireActivity(), "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
-                }else {
-                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
-                }
-                val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
-                startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
-                requireActivity().finish()
-            }
-        }
-
-    }
+   /*
     private fun deleteKakao(){
         binding.btnSocialKakaoLogout.setOnClickListener {
             UserApiClient.instance.logout { error ->
@@ -93,27 +83,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
 
-    }
+    } */
+
+
+
+
     private fun initToolBar() {
         val toolbar = binding.toolbarMain
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
 
-
+    //배너 설정
     private fun initBanner() {
         homeViewModel.getBanner("and@naver.com")
         homeViewPagerAdapter = HomeViewPagerAdapter()
         binding.vpMain.adapter = homeViewPagerAdapter
         homeViewModel.banner.observe(viewLifecycleOwner) {
-            homeViewPagerAdapter.setHomeBanner(it)
+            homeViewPagerAdapter.setHomeBanner(it, homeViewModel.getBannerRoad())
         }
+
+
 
     }
 
     private fun initTrendDrive(){
         homeViewModel.getTrendDrive("and@naver.com")
-        homeHotDriveAdapter = HomeTrendDriveAdapter("and@naver.com")
+        homeHotDriveAdapter = HomeTrendDriveAdapter("and@naver.com", links)
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
         homeViewModel.trendDrive.observe(viewLifecycleOwner){
             homeHotDriveAdapter.setHomeTrendDrive(it)
@@ -122,16 +118,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initLocalDrive(){
         homeViewModel.getLocalDrive("and@naver.com")
-        homeLocalDriveAdapter = HomeLocalDriveAdapter("and@naver.com")
+        homeLocalDriveAdapter = HomeLocalDriveAdapter("and@naver.com", links)
         binding.recyclerviewHomeLocationDrive.adapter = homeLocalDriveAdapter
         homeViewModel.localDrive.observe(viewLifecycleOwner){
             homeLocalDriveAdapter.setLocalDrive(it)
         }
     }
 
+    //오늘 드라이브
     private fun initTodayCharoDrive(){
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerviewHomeTodayDrive)
         homeViewModel.getTodayCharoDrive("and@naver.com")
-        homeTodayDriveAdapter = HomeTodayDriveAdapter("and@naver.com")
+        homeTodayDriveAdapter = HomeTodayDriveAdapter("and@naver.com", links)
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
         homeViewModel.todayCharoDrive.observe(viewLifecycleOwner){
             homeTodayDriveAdapter.setTodayDrive(it)
@@ -140,7 +139,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initCustomThemeDrive(){
         homeViewModel.getCustomTheme("and@naver.com")
-        homeCustomThemeAdapter = HomeCustomThemeAdapter("and@naver.com")
+        homeCustomThemeAdapter = HomeCustomThemeAdapter("and@naver.com", links)
         binding.recyclerviewHomeNightDrive.adapter = homeCustomThemeAdapter
         homeViewModel.customThemeDrive.observe(viewLifecycleOwner){
             homeCustomThemeAdapter.setCustomThemeDrive(it)
@@ -195,7 +194,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             sharedViewModel.num.value = 3
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreThemeViewFragment())
+                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
                 addToBackStack(null)
                 commit()
             }
@@ -210,6 +209,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 commit()
             }
         }
+    }
+
+
+    //좋아요 POST 보내기
+    inner class DataToHomeLike(){
+        fun getPostId(postId : Int){
+            val userEmail = SharedInformation.getEmail(requireActivity())
+            sharedViewModel.postId.value = postId
+
+            sharedViewModel.postId.observe(viewLifecycleOwner){
+                homeViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
+            }
+        }
+
     }
 
 

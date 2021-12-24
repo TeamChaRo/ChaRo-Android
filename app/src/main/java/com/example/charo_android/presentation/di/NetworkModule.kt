@@ -1,7 +1,7 @@
 package com.example.charo_android.presentation.di
 
 import com.example.charo_android.data.api.home.HomeViewService
-import com.example.charo_android.data.api.login.KakaoSignInService
+import com.example.charo_android.data.api.signin.KakaoSignInService
 import com.example.charo_android.data.api.more.MoreViewInfiniteService
 
 import com.example.charo_android.hidden.Hidden
@@ -9,6 +9,8 @@ import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
 import com.example.charo_android.data.api.search.SearchViewService
+import com.example.charo_android.data.api.setting.SettingViewService
+import com.example.charo_android.data.api.signin.SignInViewService
 import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
 import com.example.charo_android.data.api.signup.SignUpNickNameCheckViewService
 import com.example.charo_android.data.api.signup.SignUpRegisterService
@@ -24,6 +26,7 @@ val networkModule = module {
         .addNetworkInterceptor(interceptor)
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
     client.addInterceptor(interceptor)
+
     single<Retrofit> {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -69,6 +72,12 @@ val networkModule = module {
 
     single<KakaoSignInService>{
         get<Retrofit>().create(KakaoSignInService::class.java)
+    }
+    single<SignInViewService>{
+        get<Retrofit>().create(SignInViewService::class.java)
+    }
+    single<SettingViewService>{
+        get<Retrofit>().create(SettingViewService::class.java)
     }
 }
 
