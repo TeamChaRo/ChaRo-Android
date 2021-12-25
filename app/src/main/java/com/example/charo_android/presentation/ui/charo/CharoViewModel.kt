@@ -73,6 +73,9 @@ class CharoViewModel : ViewModel() {
     private var _otherWrittenMoreLikeData = MutableLiveData<Post>()
     val otherWrittenMoreLikeData: LiveData<Post> get() = _otherWrittenMoreLikeData
 
+    private var _followData = MutableLiveData<FollowData>()
+    val followData: LiveData<FollowData> get() = _followData
+
     fun getInitLikeData() {
         val call: Call<ResponseMyPageLikeData> =
             ApiService.myPageViewLikeService.getMyPage(Hidden.userId)
@@ -360,5 +363,20 @@ class CharoViewModel : ViewModel() {
             }
         )
         _isServerConnecting.value = false
+    }
+
+    fun getFollowData(userEmail: String, myPageEmail: String) {
+        _isServerConnecting.value = true
+        Log.d("from", "getFollowData")
+        val call = ApiService.myPageViewFollowService.getFollowInfo(userEmail, myPageEmail)
+        call.enqueueUtil(
+            onSuccess = {
+                _followData.value = it.data
+                Log.d("getFollowData", "success")
+            },
+            onError = {
+                Log.d("getFollowData", "failed")
+            }
+        )
     }
 }
