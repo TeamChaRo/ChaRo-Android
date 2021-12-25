@@ -30,6 +30,7 @@ class CharoFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
         goSettingView()
+        goFollowView()
         charoViewModel.getInitLikeData()
         charoViewModel.userInformation.observe(viewLifecycleOwner, {
             binding.myPageData = charoViewModel
@@ -70,5 +71,11 @@ class CharoFragment : Fragment() {
             startActivity(intent)
         }
     }
-    
+
+    private fun goFollowView() {
+        binding.clCharoFollow.setOnClickListener {
+            val intent = Intent(requireActivity(), CharoListActivity::class.java)
+            startActivity(intent)
+        }
+    }
 }
