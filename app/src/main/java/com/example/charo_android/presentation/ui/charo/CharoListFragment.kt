@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.charo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoListBinding
+import com.example.charo_android.hidden.Hidden
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.dialog_theme.*
 
@@ -25,6 +27,8 @@ class CharoListFragment(private val userEmail: String, private val userNickname:
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo_list, container, false)
         setTopTitle()
         initViewPager()
+        getFollowData()
+        goMyPage()
         return binding.root
     }
 
@@ -46,6 +50,18 @@ class CharoListFragment(private val userEmail: String, private val userNickname:
             TabLayoutMediator(tabLayoutCharoList, viewPagerCharoList) { tab, position ->
                 tab.text = tabTextList[position]
             }.attach()
+        }
+    }
+
+    private fun getFollowData() {
+        val myPageEmail: String? = (activity as CharoListActivity).myPageEmail
+        Log.d("myPageEmail", myPageEmail.toString())
+        myPageEmail?.let { charoViewModel.getFollowData(Hidden.userId, myPageEmail) }
+    }
+
+    private fun goMyPage() {
+        binding.imgCharoListBack.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 }
