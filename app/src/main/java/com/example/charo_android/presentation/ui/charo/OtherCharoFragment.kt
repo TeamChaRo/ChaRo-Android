@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.charo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,11 +26,18 @@ class OtherCharoFragment : Fragment() {
         charoViewModel.otherInformation.observe(viewLifecycleOwner, {
             binding.otherPageData = charoViewModel
         })
+        goFollowView(Hidden.otherUserEmail)
         return binding.root
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun goFollowView(myPageEmail: String) {
+        val intent = Intent(requireActivity(), CharoListActivity::class.java)
+        intent.putExtra("myPageEmail", myPageEmail)
+        startActivity(intent)
     }
 }
