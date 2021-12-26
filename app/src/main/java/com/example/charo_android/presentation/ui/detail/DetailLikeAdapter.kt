@@ -8,7 +8,7 @@ import com.example.charo_android.R
 import com.example.charo_android.data.model.detail.UserData
 import com.example.charo_android.databinding.ItemDetailLikeBinding
 
-class DetailLikeAdapter(val itemClick: (UserData) -> Unit) :
+class DetailLikeAdapter(private val itemClick: (UserData) -> Unit) :
     RecyclerView.Adapter<DetailLikeAdapter.DetailLikeViewHolder>() {
     val itemList = mutableListOf<UserData>()
 
@@ -40,6 +40,9 @@ class DetailLikeAdapter(val itemClick: (UserData) -> Unit) :
             }
 
             binding.tvDetailLikeNickname.setOnClickListener {
+                itemClick(data)
+            }
+            binding.imgDetailLikeImage.setOnClickListener {
                 itemClick(data)
             }
         }

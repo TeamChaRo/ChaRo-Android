@@ -41,10 +41,10 @@ class CharoAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return if (itemList[position] != null) {
-            Log.d("itemList[position]", "$position -> not null")
+//            Log.d("itemList[position]", "$position -> not null")
             VIEW_TYPE_ITEM
         } else {
-            Log.d("itemList[position]", "$position -> null")
+//            Log.d("itemList[position]", "$position -> null")
             VIEW_TYPE_LOADING
         }
     }
