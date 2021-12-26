@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("userId", userEmail)
         intent.putExtra("nickname", nickName)
         startActivity(intent)
+
     }
 
     private fun requestPermissions() {
