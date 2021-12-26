@@ -10,7 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
+import com.example.charo_android.data.model.detail.UserData
 import com.example.charo_android.databinding.DialogDetailLikeBinding
+import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -21,9 +24,24 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
     private val viewModel: DetailViewModel by activityViewModels()
     private val adapter by lazy {
         DetailLikeAdapter() {
-//            val intent = Intent(context, MainActivity::class.java)
-//            startActivity(intent)
-            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, MainActivity::class.java)
+            val userEmail: String = it.userEmail
+            val nickname: String = it.nickname
+            val isMyPage: Boolean
+            when(it.userEmail) {
+                Hidden.userId -> {
+                    isMyPage = true
+                    intent.putExtra("nickname", nickname)
+                }
+                else -> {
+                    isMyPage = false
+                    intent.putExtra("otherUserEmail", userEmail)
+                    intent.putExtra("otherUserNickname", nickname)
+                }
+            }
+            intent.putExtra("isMyPage", isMyPage)
+            intent.putExtra("isFromOtherPage", true)
+            startActivity(intent)
         }
     }
 
@@ -56,7 +74,7 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
     @RequiresApi(Build.VERSION_CODES.R)
     private fun initDialog() {
         binding.clDetailDialog.layoutParams.height =
-            (requireActivity().windowManager.currentWindowMetrics.bounds.height())
+            (requireActivity().windowManager.currentWindowMetrics.bounds.height()) - 62
         val offsetFromTop = 62
         (dialog as? BottomSheetDialog)?.behavior?.apply {
             isFitToContents = false
@@ -66,6 +84,23 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerView() {
+        adapter.itemList.addAll(
+            listOf(
+                UserData("아요네 곰돌군", "ios@gmail.com", "", true),
+                UserData("ㄱ", "and@naver.com", "", true),
+                UserData("곽호택", "email", "", true),
+                UserData("장혜령", "email", "", false),
+                UserData("박익범", "email", "", false),
+                UserData("이지원", "email", "", false),
+                UserData("최인정", "email", "", false),
+                UserData("오예원", "email", "", false),
+                UserData("황지은", "email", "", false),
+                UserData("배희진", "email", "", false),
+                UserData("고다빈", "email", "", false),
+                UserData("이성현", "email", "", false),
+                UserData("고수현", "email", "", false),
+            )
+        )
         binding.rcvDetailDialog.adapter = adapter
         adapter.notifyDataSetChanged()
     }
