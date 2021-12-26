@@ -53,7 +53,7 @@ class SocialSignInActivity() :
     private fun autoLogin() {
         val autoEmail = SharedInformation.getEmail(this)
         Log.d("autoEmail", autoEmail)
-        if (autoEmail != "") {
+        if (autoEmail != "@") {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -222,9 +222,10 @@ class SocialSignInActivity() :
                 }
             }
     }
-
+    //둘러보기
     private fun lookForMain() {
         binding.textSocialLook.setOnClickListener {
+            SharedInformation.setEmail(this, "@")
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

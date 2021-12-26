@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
@@ -18,6 +19,7 @@ import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,11 +27,11 @@ class MainActivity : AppCompatActivity() {
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
     private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
-
+    private val sharedViewModel : SharedViewModel by viewModel()
     private lateinit var userEmail: String
     private lateinit var nickName: String
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var lookFor : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userEmail = SharedInformation.getEmail(this)
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userEmail, nickName)
         initNavView()
-
+        lookFor()
         //권한 요청
 
     }
@@ -98,8 +100,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startActivityWriteShare() {
-
-        if(userEmail == null || userEmail == "null"){
+        userEmail = SharedInformation.getEmail(this@MainActivity)
+        if(userEmail == null || userEmail == "@"){
           //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
         }else{
@@ -108,14 +110,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("nickname", nickName)
             startActivity(intent)
         }
-
-        userEmail = SharedInformation.getEmail(this@MainActivity)
-        val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
-        intent.putExtra("userId", userEmail)
-        intent.putExtra("nickname", nickName)
-        startActivity(intent)
-
     }
+
+    //둘러보기 이메일 받기
+    private fun lookFor(){
+        lookFor = intent.getStringExtra("lookForEmail").toString()
+        sharedViewModel.lookForEmail.value = lookFor
+    }
+
 
     private fun requestPermissions() {
         val permissions: Array<String> =

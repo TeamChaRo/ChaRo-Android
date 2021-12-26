@@ -29,6 +29,8 @@ class SharedViewModel(
     //postId
     var postId : MutableLiveData<Int> = MutableLiveData()
 
+    //로그인 유저 & 둘러보기 유저 구분
+    var lookForEmail : MutableLiveData<String> = MutableLiveData()
 
     fun getHomeTitle(userEmail: String){
         viewModelScope.launch {
