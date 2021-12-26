@@ -45,17 +45,21 @@ class SocialSignInActivity() :
         goEmailLogin()
         goEmailSignUp()
         autoLogin()
+        goKaKaoMain()
+
     }
+
     //자동 로그인
-    private fun autoLogin(){
+    private fun autoLogin() {
         val autoEmail = SharedInformation.getEmail(this)
         Log.d("autoEmail", autoEmail)
-        if (autoEmail != ""){
+        if (autoEmail != "") {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
+
     //kakao
     private fun initKakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -63,54 +67,53 @@ class SocialSignInActivity() :
                 Log.e("kakao", "로그인 실패", error)
             } else if (token != null) {
                 Log.i("kakao", "로그인 성공 ${token.accessToken}")
-                Toast.makeText(this, "로그인에 성공했습니다", Toast.LENGTH_SHORT).show()
                 kakaoUserEmail()
-                SharedInformation.saveSocialId(this, "1")
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
             }
         }
+        binding.imgSocialKakao.setOnClickListener {
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
+                UserApiClient.instance.loginWithKakaoTalk(this, callback = callback)
+
+            } else {
+                UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+            }
+        }
+
         if (AuthApiClient.instance.hasToken()) {
             UserApiClient.instance.accessTokenInfo { _, error ->
                 if (error != null) {
                     Log.d("kakao", "토큰 정보 보기 실패")
-                } else {
+                }else{
                     kakaoUserEmail()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            }
-
-
-        } else {
-            binding.imgSocialKakao.setOnClickListener {
-                if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
-                    UserApiClient.instance.loginWithKakaoTalk(this, callback = callback)
-
-                } else {
-                    UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 }
             }
         }
+
     }
 
 
-    private fun kakaoUserEmail() {
+
+
+    fun kakaoUserEmail() {
+        Log.d("yeeee", SharedInformation.getKaKaoSignUp(this).toString())
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e("kakao", "사용자 정보 요청 실패", error)
             } else if (user != null) {
-                if (user?.kakaoAccount?.email == null) {
-                    Toast.makeText(this, "이메일이 없어 회원가입이 필요합니다.", Toast.LENGTH_SHORT).show()
+                if (SharedInformation.getKaKaoSignUp(this) == 999) {
+                    Toast.makeText(this, "동의가 필요합니다.", Toast.LENGTH_SHORT).show()
+                    SharedInformation.setSignUp(this, 2)
                     val intent = Intent(this, SignUpActivity::class.java)
+                    intent.apply {
+                        putExtra("kakaoSignUpEmail", user.kakaoAccount?.email)
+                    }
                     startActivity(intent)
                     finish()
-                } else {
+
+                } else if(SharedInformation.getKaKaoSignUp(this) == 2) {
                     SharedInformation.setEmail(this, user.kakaoAccount?.email!!)
                     Log.i(
-                        "kakao", "사용자 정보 요청 성공" +
+                        "kakaoUser", "사용자 정보 요청 성공" +
                                 "\n이메일: ${user.kakaoAccount?.email}"
                     )
                     socialSignInViewModel.kakaoLoginSuccess(
@@ -121,6 +124,19 @@ class SocialSignInActivity() :
                 }
             }
         }
+    }
+
+    //카카오 로그인 성공시 main 이동
+    private fun goKaKaoMain() {
+        socialSignInViewModel.success.observe(this, Observer {
+            if (it) {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+
     }
 
 
@@ -165,23 +181,33 @@ class SocialSignInActivity() :
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     val email = user?.email
+                    val profileImage = user?.photoUrl
                     Log.d("googles", email.toString())
+                    // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     socialSignInViewModel.success.observe(this, Observer {
                         if (it == false) {
+                            SharedInformation.setSignUp(this, 1)
                             Toast.makeText(
-                                this@SocialSignInActivity, "이메일이 없어 회원가입이 필요합니다.",
+                                this@SocialSignInActivity, "약관 동의가 필요합니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
                             val intent =
                                 Intent(this@SocialSignInActivity, SignUpActivity::class.java)
+                            intent.apply {
+                                putExtra("googleProfileImage", profileImage.toString())
+                                putExtra("googleSignUpEmail", email)
+                                putExtra("googleSignUp", 1)
+                            }
                             startActivity(intent)
                             finish()
+
                         } else {
                             Toast.makeText(
                                 this@SocialSignInActivity, "로그인에 성공하였습니다.",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            SharedInformation.setEmail(this, email.toString())
                             SharedInformation.saveSocialId(this, "2")
                             val intent = Intent(this@SocialSignInActivity, MainActivity::class.java)
                             startActivity(intent)
@@ -204,15 +230,16 @@ class SocialSignInActivity() :
         }
     }
 
-    private fun goEmailLogin(){
+    private fun goEmailLogin() {
         binding.textSocialEmailLogin.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun goEmailSignUp(){
+    private fun goEmailSignUp() {
         binding.textSocialEmailSignUp.setOnClickListener {
+            SharedInformation.setSignUp(this, 0)
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }

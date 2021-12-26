@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.search
+package com.example.charo_android.data.repository.repositoryimpl.search
 
 import com.example.charo_android.data.model.request.search.RequestSearchViewData
 import com.example.charo_android.data.model.response.search.ResponseSearchViewData

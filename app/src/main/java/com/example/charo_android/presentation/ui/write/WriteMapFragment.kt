@@ -33,11 +33,13 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Exception
 import java.util.*
+import kotlin.collections.HashMap
 
 class WriteMapFragment : Fragment() {
 
@@ -557,14 +559,14 @@ class WriteMapFragment : Fragment() {
                 sharedViewModel.endLat.value = mapData.endLat
                 sharedViewModel.endLong.value = mapData.endLong
 
-                val course = ArrayList<Map<String, String>>()
-                val startCourse = mapOf<String, String>("address" to sharedViewModel.startAddress.value.toString(),
+                val course = ArrayList<HashMap<String, String>>()
+                val startCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.startAddress.value.toString(),
                     "latitude" to sharedViewModel.startLat.value.toString(),
                     "longtitude" to sharedViewModel.startLong.value.toString())
-                val middleCourse = mapOf<String, String>("address" to sharedViewModel.mid1Address.value.toString(),
+                val middleCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.mid1Address.value.toString(),
                     "latitude" to sharedViewModel.mid1Lat.value.toString(),
                     "longtitude" to sharedViewModel.mid1Long.value.toString())
-                val endCourse = mapOf<String, String>("address" to sharedViewModel.endAddress.value.toString(),
+                val endCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.endAddress.value.toString(),
                     "latitude" to sharedViewModel.endLat.value.toString(),
                     "longtitude" to sharedViewModel.endLong.value.toString())
 
@@ -573,6 +575,15 @@ class WriteMapFragment : Fragment() {
                     course.add(middleCourse)
                 }
                 course.add(endCourse)
+
+                if(startCourse is HashMap){
+                    Log.e("startCHash", startCourse.toString())
+                }else{
+                    Log.e("elseeeee", startCourse.toString())
+
+                }
+
+
 
                 sharedViewModel.course.value = course
 
@@ -634,29 +645,73 @@ class WriteMapFragment : Fragment() {
                             )
                             Log.e(
                                 "sharedViewModel Data",
-                                sharedViewModel.image.value.toString()
+                                sharedViewModel.imageMultiPart.value.toString()
                             )
 
-                            val userEmail = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.userEmail.value.toString())
-                            val title = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.title.value.toString())
-                            val province = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.province.value.toString())
-                            val region = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.region.value.toString())
-                            val parkingDesc = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.parkingDesc.value.toString())
-                            val courseDesc = RequestBody.create("text/plain".toMediaTypeOrNull(), sharedViewModel.courseDesc.value.toString())
+                            val userEmailRB : RequestBody = sharedViewModel.userEmail.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+                            val titleRB : RequestBody = sharedViewModel.title.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+                            val provinceRB : RequestBody = sharedViewModel.province.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+                            val regionRB : RequestBody = sharedViewModel.region.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+                            val parkingDescRB : RequestBody = sharedViewModel.parkingDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+                            val courseDescRB : RequestBody = sharedViewModel.courseDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
 
+                            Log.e(
+                                "RequestBody",
+                                userEmailRB.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                titleRB.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                provinceRB.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                regionRB.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                sharedViewModel.warning.value.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                theme.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                sharedViewModel.isParking.value.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                parkingDescRB.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                courseDescRB.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                sharedViewModel.course.value.toString()
+                            )
+                            Log.e(
+                                "RequestBody",
+                                sharedViewModel.imageMultiPart.value.toString()
+                            )
                             val call: Call<ResponseWriteData> =
                                 ApiService.writeViewService.writePost(
-                                    userEmail,
-                                    title,
-                                    province,
-                                    region,
+                                    userEmailRB,
+                                    titleRB,
+                                    provinceRB,
+                                    regionRB,
                                     sharedViewModel.warning.value,
                                     theme,
                                     sharedViewModel.isParking.value,
-                                    parkingDesc,
-                                    courseDesc,
+                                    parkingDescRB,
+                                    courseDescRB,
                                     sharedViewModel.course.value,
-                                    sharedViewModel.image.value,
+                                    sharedViewModel.imageMultiPart.value,
                                 )
 
                             call.enqueue(object : Callback<ResponseWriteData> {

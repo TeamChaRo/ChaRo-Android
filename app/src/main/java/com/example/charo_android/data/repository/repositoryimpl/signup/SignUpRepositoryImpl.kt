@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.signup
+package com.example.charo_android.data.repository.repositoryimpl.signup
 
 import com.example.charo_android.data.model.response.signup.ResponseEmailCheckData
 import com.example.charo_android.data.repository.remote.signup.RemoteSignUpEmailCheckDataSource

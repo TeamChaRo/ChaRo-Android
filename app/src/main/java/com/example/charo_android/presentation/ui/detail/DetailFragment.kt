@@ -1,10 +1,7 @@
 package com.example.charo_android.presentation.ui.detail
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -124,6 +121,11 @@ class DetailFragment : Fragment() {
             copyAddress(binding.tvDetailMapEndAddress)
         }
 
+        //공유하기 클릭 이벤트
+        binding.imgDetailShare.setOnClickListener {
+            clickShare()
+        }
+
         // 지도 클릭 이벤트
         binding.clDetailMapviewTouch.setOnClickListener {
             (context as DetailActivity).openFragment(1)
@@ -155,6 +157,23 @@ class DetailFragment : Fragment() {
         }
         viewPagerAdapter.notifyDataSetChanged()
         binding.tvDetailViewpagerImage.text = "1/${viewPagerAdapter.itemList.size}"
+    }
+
+    private fun clickShare(){
+        try {
+            val deepLink = "http://www.charo.com/detail/${(activity as DetailActivity).postId}" //딥링크
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "*/*"
+            intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
+
+            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+
+            val chooser = Intent.createChooser(intent, "공유하기")
+            startActivity(chooser)
+
+        } catch (ignored: ActivityNotFoundException) {
+            Log.d("test", "ignored : $ignored")
+        }
     }
 
     private fun clickLike(postId: Int) {

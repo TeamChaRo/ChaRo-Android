@@ -20,7 +20,7 @@ interface WriteViewService {
         @Part("isParking") isParking: Boolean?,  //Boolean
         @Part("parkingDesc") parkingDesc: RequestBody,  //String
         @Part("courseDesc") courseDesc: RequestBody,  //String
-        @Part("course") course: Any?, //RequestWriteData.Course
+        @Part("course") course: ArrayList<HashMap<String, String>>?, //RequestWriteData.Course
         @Part image: ArrayList<MultipartBody.Part>?
     ): Call<ResponseWriteData>
 }

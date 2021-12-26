@@ -24,15 +24,15 @@ class WriteSharedViewModel : ViewModel() {
     val isParking = MutableLiveData<Boolean>().default(false)       //true
     val parkingDesc = MutableLiveData<String>().default("")
     val courseDesc = MutableLiveData<String>().default("")
-    val image = MutableLiveData<ArrayList<MultipartBody.Part>>()
-    val imageUri = MutableLiveData<MutableList<WriteImgInfo>>()
+    val imageMultiPart = MutableLiveData<ArrayList<MultipartBody.Part>>()
+    val imageUriRecyclerView = MutableLiveData<MutableList<WriteImgInfo>>()
 
     //writeMapFragment
     val locationFlag = MutableLiveData<String>() //출발 경유 도착
     val latitude = MutableLiveData<Double>().default(0.0)     //위도
     val longitude = MutableLiveData<Double>().default(0.0)    //경도
 
-    val course = MutableLiveData<Any>()    //서버에 보낼 경로
+    val course = MutableLiveData<ArrayList<HashMap<String, String>>>()    //서버에 보낼 경로
     var startAddress = MutableLiveData<String>().default("")
     var mid1Address = MutableLiveData<String>().default("")
     var mid2Address = MutableLiveData<String>().default("")
@@ -66,7 +66,7 @@ class WriteSharedViewModel : ViewModel() {
         isParking.value = false      //true
         parkingDesc.value = ""
         courseDesc.value = ""
-        image.value = ArrayList<MultipartBody.Part>()
+        imageMultiPart.value = ArrayList<MultipartBody.Part>()
 
         //writeMapFragment
         locationFlag.value = "" //출발 경유 도착

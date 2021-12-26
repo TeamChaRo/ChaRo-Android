@@ -4,22 +4,20 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
-import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.charo.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.home.replaceFragment
-import com.example.charo_android.presentation.ui.signup.SignUpEmailFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
-
+import com.example.charo_android.presentation.util.LoginUtil
+import com.example.charo_android.presentation.util.SharedInformation
 
 class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
@@ -33,32 +31,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userEmail = SharedInformation.getEmail(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_main)
         requestPermissions()
         setContentView(binding.root)
-        userEmail = intent.getStringExtra("userId").toString()
         nickName = intent.getStringExtra("nickName").toString()
         replaceHomeFragment(userEmail, nickName)
         initNavView()
 
         //권한 요청
-        Log.d("lifecycler", "fir")
+
     }
+
 
     override fun onBackPressed() {
 //        super.onBackPressed()
     }
 
-    fun getUserId(): String {
-        return userEmail
-    }
-
-    fun getNickName(): String {
-        return nickName
-    }
-
     private fun initNavView() {
         binding.apply {
+            userEmail = SharedInformation.getEmail(this@MainActivity)
             navView.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.navigation_home -> {
@@ -88,8 +81,13 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(homeFragment, userId, nickName)
     }
 
-    private fun replaceWriteFragment(userId: String, nickName: String) {
-        replaceFragment(writeFragment, userId, nickName)
+    private fun replaceWriteFragment(userId : String, nickName : String){
+        if(userId == null || userEmail == "null"){
+            //로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this@MainActivity)
+        }else{
+            replaceFragment(writeFragment,userId,nickName)
+        }
     }
 
 
@@ -99,6 +97,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startActivityWriteShare() {
+
+        if(userEmail == null || userEmail == "null"){
+          //  로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this)
+        }else{
+            val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
+            intent.putExtra("userId", userEmail)
+            intent.putExtra("nickname", nickName)
+            startActivity(intent)
+        }
+
+        userEmail = SharedInformation.getEmail(this@MainActivity)
         val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
         intent.putExtra("userId", userEmail)
         intent.putExtra("nickname", nickName)

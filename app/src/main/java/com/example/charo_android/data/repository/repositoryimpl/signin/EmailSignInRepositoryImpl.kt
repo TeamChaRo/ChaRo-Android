@@ -1,8 +1,7 @@
-package com.example.charo_android.data.repository.signin
+package com.example.charo_android.data.repository.repositoryimpl.signin
 
 import com.example.charo_android.data.mapper.SignInMapper
 import com.example.charo_android.data.model.request.signin.RequestSignInData
-import com.example.charo_android.data.model.response.signin.ResponseSignInData
 import com.example.charo_android.data.repository.remote.signin.RemoteEmailSignInDataSource
 import com.example.charo_android.domain.model.signin.EmailSignInData
 import com.example.charo_android.domain.repository.signin.EmailSignInRepository
