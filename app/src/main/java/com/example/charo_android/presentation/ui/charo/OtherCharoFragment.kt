@@ -16,17 +16,22 @@ class OtherCharoFragment : Fragment() {
     private val charoViewModel: CharoViewModel by activityViewModels()
     private var _binding: FragmentOtherCharoBinding? = null
     private val binding get() = _binding!!
+    private lateinit var otherUserEmail: String
+    private lateinit var otherUserNickname: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other_charo, container, false)
-        charoViewModel.getInitOtherLikeData(Hidden.otherUserEmail)
+        otherUserEmail = arguments?.getString("userId").toString()
+        otherUserNickname = arguments?.getString("nickName").toString()
+
+        charoViewModel.getInitOtherLikeData(otherUserEmail)
         charoViewModel.otherInformation.observe(viewLifecycleOwner, {
             binding.otherPageData = charoViewModel
         })
-        goFollowView(Hidden.otherUserEmail)
+        goFollowView(otherUserEmail, otherUserNickname)
         return binding.root
     }
 
@@ -35,9 +40,12 @@ class OtherCharoFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun goFollowView(myPageEmail: String) {
-        val intent = Intent(requireActivity(), CharoListActivity::class.java)
-        intent.putExtra("myPageEmail", myPageEmail)
-        startActivity(intent)
+    private fun goFollowView(myPageEmail: String, nickname: String) {
+        binding.clCharoFollow.setOnClickListener {
+            val intent = Intent(requireActivity(), CharoListActivity::class.java)
+            intent.putExtra("myPageEmail", myPageEmail)
+            intent.putExtra("nickname", nickname)
+            startActivity(intent)
+        }
     }
 }
