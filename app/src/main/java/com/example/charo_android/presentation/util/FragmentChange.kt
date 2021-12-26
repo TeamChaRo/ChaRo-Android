@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.home
+package com.example.charo_android.presentation.util
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
