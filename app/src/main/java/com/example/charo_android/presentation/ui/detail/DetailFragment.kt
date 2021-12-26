@@ -19,14 +19,13 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.main.MainActivity
 import com.skt.Tmap.*
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by activityViewModels()
-
-    //    private val viewPagerAdapter = DetailViewpagerAdapter()
     private lateinit var viewPagerAdapter: DetailViewpagerAdapter
 
     private val pointList = arrayListOf<TMapPoint>()
@@ -134,6 +133,14 @@ class DetailFragment : Fragment() {
         // n명이 좋아해요 클릭 이벤트
         binding.tvDetailLike.setOnClickListener {
             openBottomSheetDialog()
+        }
+
+        // 마이페이지 이동
+        binding.imgDetailWriterImage.setOnClickListener {
+            goMyPage()
+        }
+        binding.tvDetailWriterName.setOnClickListener {
+            goMyPage()
         }
     }
 
@@ -296,5 +303,30 @@ class DetailFragment : Fragment() {
     private fun openBottomSheetDialog() {
         val bottomSheetDialogFragment = DetailLikeFragment()
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
+    }
+
+    private fun goMyPage() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        val userEmail: String
+        val nickname: String
+        val isMyPage: Boolean
+        Log.d("author", viewModel.detailData.value?.data?.author.toString())
+        if(viewModel.detailData.value?.data?.author == Hidden.nickName) {
+            Log.d("DetailFragment", "true")
+            isMyPage = true
+            userEmail = Hidden.userId
+            nickname = Hidden.nickName
+            intent.putExtra("nickname", nickname)
+        } else {
+            Log.d("DetailFragment", "false")
+            isMyPage = false
+            userEmail = Hidden.otherUserEmail
+            nickname = Hidden.otherNickname
+            intent.putExtra("otherUserEmail", userEmail)
+            intent.putExtra("otherUserNickname", nickname)
+        }
+        intent.putExtra("isMyPage", isMyPage)
+        intent.putExtra("isFromOtherPage", true)
+        startActivity(intent)
     }
 }
