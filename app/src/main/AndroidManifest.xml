@@ -74,10 +74,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="http"
-                    android:host="www.charo.com/detail" />
+                    android:host="www.charo.com/detail/{postId}"
+                    tools:ignore="AppLinkUrlError" />
                 <!--//www.example.com/detail/{postId} //www.example.com/detail?postId=postId-->
-
-                <!-- note that the leading "/" is required for pathPrefix-->
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.signin.SignInActivity" />
