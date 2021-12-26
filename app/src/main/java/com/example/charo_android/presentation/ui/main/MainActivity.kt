@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -13,7 +14,7 @@ import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
 import com.example.charo_android.presentation.ui.charo.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
-import com.example.charo_android.presentation.ui.home.replaceFragment
+import com.example.charo_android.presentation.util.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
@@ -24,10 +25,13 @@ class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
-    private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
 
     private lateinit var userEmail: String
     private lateinit var nickName: String
+    var otherUserEmail: String? = null
+    var otherUserNickname: String? = null
+    private var isMyPage: Boolean = true
+    private var isFromOtherPage: Boolean = false
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,16 +42,32 @@ class MainActivity : AppCompatActivity() {
         requestPermissions()
         setContentView(binding.root)
         nickName = intent.getStringExtra("nickName").toString()
-        replaceHomeFragment(userEmail, nickName)
+        otherUserEmail = intent.getStringExtra("otherUserEmail")
+        otherUserNickname = intent.getStringExtra("otherUserNickname")
+        isMyPage = intent.getBooleanExtra("isMyPage", true)
+        isFromOtherPage = intent.getBooleanExtra("isFromOtherPage", false)
+        Log.d("otherUserEmail", otherUserEmail.toString())
+        Log.d("otherUserNickname", otherUserNickname.toString())
+        Log.d("isMyPage", isMyPage.toString())
+        Log.d("isFromOtherPage", isFromOtherPage.toString())
+        when (isFromOtherPage) {
+            true -> {
+                binding.navView.selectedItemId = R.id.navigation_charo
+                when (isMyPage) {
+                    true -> replaceCharoFragment(userEmail, nickName, isMyPage)
+                    false -> replaceCharoFragment(otherUserEmail!!, otherUserNickname!!, isMyPage)
+                }
+            }
+            false -> replaceHomeFragment(userEmail, nickName)
+        }
         initNavView()
 
         //권한 요청
 
     }
 
-
     override fun onBackPressed() {
-//        super.onBackPressed()
+        finish()
     }
 
     private fun initNavView() {
@@ -65,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 //                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
-                        replaceCharoFragment(userEmail, nickName)
+                        replaceCharoFragment(userEmail, nickName, isMyPage)
                         return@setOnItemSelectedListener true
                     }
                 }
@@ -82,27 +102,29 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(homeFragment, userId, nickName)
     }
 
-    private fun replaceWriteFragment(userId : String, nickName : String){
-        if(userId == null || userEmail == "null"){
+    private fun replaceWriteFragment(userId: String, nickName: String) {
+        if (userId == null || userEmail == "null") {
             //로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this@MainActivity)
-        }else{
-            replaceFragment(writeFragment,userId,nickName)
+        } else {
+            replaceFragment(writeFragment, userId, nickName)
         }
     }
 
 
-    private fun replaceCharoFragment(userId: String, nickName: String) {
-        replaceFragment(charoFragment, userId, nickName)
-//        replaceFragment(otherCharoFragment, Hidden.otherUserEmail, Hidden.otherNickname)
+    private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
+        when (isMyPage) {
+            true -> replaceFragment(charoFragment, userId, nickName)
+            false -> replaceFragment(OtherCharoFragment(), userId, nickName)
+        }
     }
 
     fun startActivityWriteShare() {
 
-        if(userEmail == null || userEmail == "null"){
-          //  로그인 유도 필요한 곳에 작성
+        if (userEmail == null || userEmail == "null") {
+            //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
-        }else{
+        } else {
             val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
             intent.putExtra("userId", userEmail)
             intent.putExtra("nickname", nickName)
