@@ -245,6 +245,7 @@ class SocialSignInActivity() :
 
     private fun goEmailLogin() {
         binding.textSocialEmailLogin.setOnClickListener {
+            SharedInformation.setSignUp(this, 0)
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }

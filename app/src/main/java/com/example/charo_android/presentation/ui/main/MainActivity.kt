@@ -98,7 +98,6 @@ class MainActivity : AppCompatActivity() {
     private fun replaceCharoFragment(userId: String, nickName: String) {
         userEmail = SharedInformation.getEmail(this@MainActivity)
         if(userEmail == null || userEmail == "@"){
-            //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
         }else{
             replaceFragment(charoFragment, userId, nickName)

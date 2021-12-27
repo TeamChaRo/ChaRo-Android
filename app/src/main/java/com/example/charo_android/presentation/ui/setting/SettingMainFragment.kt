@@ -84,7 +84,11 @@ class SettingMainFragment :
     //비밀번호 수정
     private fun clickPasswordUpdate() {
         binding.textSettingPasswordUpdate.setOnClickListener {
-            changeSettingFragment(SettingPasswordUpdateFragment())
+            if(SharedInformation.getSignUp(requireActivity()) == 0){
+                changeSettingFragment(SettingPasswordUpdateFragment())
+            }else{
+                Toast.makeText(requireActivity(), "소셜 로그인은 수정이 불가능 합니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

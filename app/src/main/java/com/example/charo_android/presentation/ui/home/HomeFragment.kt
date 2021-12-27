@@ -185,9 +185,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun goAlarm() {
+        val userEmail = SharedInformation.getEmail(requireActivity())
         binding.imgMainAlarm.setOnClickListener {
-            val intent = Intent(activity, AlarmActivity::class.java)
-            startActivity(intent)
+            if(userEmail == null || userEmail == "@"){
+                //로그인 유도 필요한 곳에 작성
+                LoginUtil.loginPrompt(requireActivity())
+            }else{
+                val intent = Intent(activity, AlarmActivity::class.java)
+                startActivity(intent)
+            }
+
         }
     }
 
