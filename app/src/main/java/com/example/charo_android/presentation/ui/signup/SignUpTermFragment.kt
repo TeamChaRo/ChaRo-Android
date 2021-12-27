@@ -69,6 +69,7 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
 
     }
 
+    //일반 회원가입 시에
     fun signUpComplete(){
         if (SharedInformation.getSignUp(requireActivity()) == 0){
             binding.imgSignUpTermNext.setOnClickListener {

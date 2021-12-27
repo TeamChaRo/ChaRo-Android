@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.CharoFragment
@@ -19,19 +20,24 @@ import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
-
+    private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
+    private val sharedViewModel : SharedViewModel by viewModel()
     private lateinit var userEmail: String
     private lateinit var nickName: String
+
     var otherUserEmail: String? = null
     var otherUserNickname: String? = null
     private var isMyPage: Boolean = true
     private var isFromOtherPage: Boolean = false
     private lateinit var binding: ActivityMainBinding
+    private lateinit var lookFor : String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +66,8 @@ class MainActivity : AppCompatActivity() {
             false -> replaceHomeFragment(userEmail, nickName)
         }
         initNavView()
+        lookFor()
 
-        //권한 요청
 
     }
 
@@ -101,14 +107,18 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(homeFragment, userId, nickName)
     }
 
-    private fun replaceWriteFragment(userId: String, nickName: String) {
-        if (userId == null || userEmail == "null") {
+
+
+    private fun replaceWriteFragment(userId : String, nickName : String){
+        if(userId == null || userEmail == "@"){
+
             //로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this@MainActivity)
         } else {
             replaceFragment(writeFragment, userId, nickName)
         }
     }
+
 
 
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
@@ -118,10 +128,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun startActivityWriteShare() {
 
-        if (userEmail == null || userEmail == "null") {
-            //  로그인 유도 필요한 곳에 작성
+    private fun replaceCharoFragment(userId: String, nickName: String) {
+        userEmail = SharedInformation.getEmail(this@MainActivity)
+        if(userEmail == null || userEmail == "@"){
+            LoginUtil.loginPrompt(this)
+        }else{
+            replaceFragment(charoFragment, userId, nickName)
+        }
+
+//        replaceFragment(otherCharoFragment, Hidden.otherUserEmail, Hidden.otherNickname)
+    }
+
+    fun startActivityWriteShare() {
+        userEmail = SharedInformation.getEmail(this@MainActivity)
+        Log.d("mainUserEmail", userEmail)
+        if(userEmail == null || userEmail == "@"){
+          //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
         } else {
             val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
@@ -129,14 +152,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("nickname", nickName)
             startActivity(intent)
         }
-
-        userEmail = SharedInformation.getEmail(this@MainActivity)
-        val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
-        intent.putExtra("userId", userEmail)
-        intent.putExtra("nickname", nickName)
-        startActivity(intent)
-
     }
+
+    //둘러보기 이메일 받기
+    private fun lookFor(){
+        lookFor = intent.getStringExtra("lookForEmail").toString()
+        sharedViewModel.lookForEmail.value = lookFor
+    }
+
 
     private fun requestPermissions() {
         val permissions: Array<String> =

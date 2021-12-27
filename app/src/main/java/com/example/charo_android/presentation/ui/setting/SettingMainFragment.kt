@@ -84,7 +84,11 @@ class SettingMainFragment :
     //비밀번호 수정
     private fun clickPasswordUpdate() {
         binding.textSettingPasswordUpdate.setOnClickListener {
-            changeSettingFragment(SettingPasswordUpdateFragment())
+            if(SharedInformation.getSignUp(requireActivity()) == 0){
+                changeSettingFragment(SettingPasswordUpdateFragment())
+            }else{
+                Toast.makeText(requireActivity(), "소셜 로그인은 수정이 불가능 합니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -115,11 +119,10 @@ class SettingMainFragment :
 
     //로그아웃
     private fun clickLogOut() {
-        val socialKeyStorage = SharedInformation
-        val socialKey = socialKeyStorage.getSocialId(requireActivity())
         val dialog = CustomDialog(requireActivity())
         binding.textSettingLogout.setOnClickListener {
-            SharedInformation.removeEmail(requireActivity())
+            val socialKey = SharedInformation.getSocialId(requireActivity())
+            Log.d("socialKey", socialKey)
             dialog.showDialog(R.layout.custom_dialog_log_out)
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
@@ -133,19 +136,20 @@ class SettingMainFragment :
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } else {
+                                    SharedInformation.setLogout(requireActivity(), "Logout")
                                     SharedInformation.removeEmail(requireActivity())
                                     SharedInformation.removeSocialId(requireActivity())
-                                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT)
+                                    Toast.makeText(requireActivity(), "카카오 로그아웃 성공", Toast.LENGTH_SHORT)
                                         .show()
                                     ActivityCompat.finishAffinity(requireActivity())
-                                    val intent =
-                                        Intent(requireActivity(), SocialSignInActivity::class.java)
+                                    val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                                     startActivity(intent)
 
                                 }
 
                             }
                         } else if (socialKey == "3") {
+                            SharedInformation.setLogout(requireActivity(), "Logout")
                             SharedInformation.removeEmail(requireActivity())
                             SharedInformation.removeSocialId(requireActivity())
                             Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
@@ -155,9 +159,10 @@ class SettingMainFragment :
 
                         } else {
                             Firebase.auth.signOut()
+                            SharedInformation.setLogout(requireActivity(), "Logout")
                             SharedInformation.removeEmail(requireActivity())
                             SharedInformation.removeSocialId(requireActivity())
-                            Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "구글 로그아웃 성공", Toast.LENGTH_SHORT).show()
                             ActivityCompat.finishAffinity(requireActivity())
                             val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                             startActivity(intent)

@@ -45,27 +45,28 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
 
     fun moreViewLoadData() {
+        val userEmail = SharedInformation.getEmail(requireActivity())
         if (sharedViewModel.num.value == 0) {
-            moreViewModel.getMoreView("and@naver.com", "0", "")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
+            moreViewModel.getMoreView(userEmail, "0", "")
+            moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
             }
 
         } else if(sharedViewModel.num.value == 2) {
-            moreViewModel.getMoreView(Hidden.userId, "2", "busan")
-            sharedViewModel.getHomeTitle(Hidden.userId)
-            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
+            moreViewModel.getMoreView(userEmail, "2", "busan")
+            sharedViewModel.getHomeTitle(userEmail)
+            moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.textToolbarTitle.text = sharedViewModel.localThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
             }
         } else{
-            moreViewModel.getMoreView(Hidden.userId, "3", "")
-            sharedViewModel.getHomeTitle(Hidden.userId)
-            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
+            moreViewModel.getMoreView(userEmail, "3", "")
+            sharedViewModel.getHomeTitle(userEmail)
+            moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.textToolbarTitle.text = sharedViewModel.customThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
@@ -76,25 +77,25 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
 
     fun moreNewViewData() {
-
+        val userEmail = SharedInformation.getEmail(requireActivity())
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreNewView("and@naver.com", "0", "")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
+            moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
             }
 
         } else if (sharedViewModel.num.value == 2) {
-            moreViewModel.getMoreNewView(Hidden.userId, "2", "busan")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
+            moreViewModel.getMoreNewView(userEmail, "2", "busan")
+            moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
                 moreViewAdapter.setHomeTrendDrive(it)
             }
         }  else {
-            moreViewModel.getMoreNewView(Hidden.userId, "3", "")
-            moreViewAdapter = MoreViewAdapter(Hidden.userId, links)
+            moreViewModel.getMoreNewView(userEmail, "3", "")
+            moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner){
                 moreViewAdapter.setHomeTrendDrive(it)
@@ -157,11 +158,12 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     }
 
     inner class DataToMoreLike(){
+
         fun getPostId(postId : Int){
             val userEmail = SharedInformation.getEmail(requireActivity())
             sharedViewModel.postId.value = postId
             sharedViewModel.postId.observe(viewLifecycleOwner){
-                moreViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
+                moreViewModel.postLike(RequestHomeLikeData(userEmail,it))
             }
         }
 
