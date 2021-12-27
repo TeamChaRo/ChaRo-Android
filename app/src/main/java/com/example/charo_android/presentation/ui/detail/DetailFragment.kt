@@ -27,6 +27,7 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by activityViewModels()
     private lateinit var viewPagerAdapter: DetailViewpagerAdapter
+    private var isAuthor: Boolean = false
 
     private val pointList = arrayListOf<TMapPoint>()
     private var detailActivity: DetailActivity? = null
@@ -91,6 +92,22 @@ class DetailFragment : Fragment() {
                 initViewPager(viewModel.detailData.value!!.data.images)
                 // tMapView
                 addList(tMapView)
+
+                isAuthor = viewModel.detailData.value?.data?.isAuthor == true
+                when(viewModel.detailData.value?.data?.isAuthor) {
+                    true -> {
+                        binding.apply {
+                            clDetailTopPartMine.visibility = View.VISIBLE
+                            clDetailTopPart.visibility = View.INVISIBLE
+                        }
+                    }
+                    else -> {
+                        binding.apply {
+                            clDetailTopPartMine.visibility = View.INVISIBLE
+                            clDetailTopPart.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
         })
 
@@ -106,7 +123,10 @@ class DetailFragment : Fragment() {
 
         // 뒤로가기 클릭 이벤트
         binding.imgDetailIconBack.setOnClickListener {
-            detailActivity?.onBackPressed()
+            requireActivity().onBackPressed()
+        }
+        binding.imgDetailIconBackMine.setOnClickListener {
+            requireActivity().onBackPressed()
         }
 
         // 주소 복사 클릭 이벤트
@@ -132,7 +152,9 @@ class DetailFragment : Fragment() {
 
         // n명이 좋아해요 클릭 이벤트
         binding.tvDetailLike.setOnClickListener {
-            openBottomSheetDialog()
+            if(isAuthor) {
+                openBottomSheetDialog()
+            }
         }
 
         // 마이페이지 이동

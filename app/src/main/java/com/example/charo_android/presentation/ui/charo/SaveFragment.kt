@@ -107,9 +107,11 @@ class SaveFragment : Fragment() {
 
                         saveViewModel.savedLikeData.observe(viewLifecycleOwner, {
                             if (saveViewModel.savedLikeData.value?.drive != null) {
-                                charoAdapter.itemList.addAll(saveViewModel.savedLikeData.value?.drive!!)
-                                charoAdapter.notifyDataSetChanged()
-                                itemLastSize = charoAdapter.itemList.size
+                                if(charoAdapter.itemList.isEmpty()) {
+                                    charoAdapter.itemList.addAll(saveViewModel.savedLikeData.value?.drive!!)
+                                    charoAdapter.notifyDataSetChanged()
+                                    itemLastSize = charoAdapter.itemList.size
+                                }
                             }
                         })
                     } else {
@@ -124,9 +126,11 @@ class SaveFragment : Fragment() {
 
                         saveViewModel.savedNewData.observe(viewLifecycleOwner, {
                             if (saveViewModel.savedNewData.value?.drive != null) {
-                                charoAdapter.itemList.addAll(saveViewModel.savedNewData.value?.drive!!)
-                                charoAdapter.notifyDataSetChanged()
-                                itemLastSize = charoAdapter.itemList.size
+                                if(charoAdapter.itemList.isEmpty()) {
+                                    charoAdapter.itemList.addAll(saveViewModel.savedNewData.value?.drive!!)
+                                    charoAdapter.notifyDataSetChanged()
+                                    itemLastSize = charoAdapter.itemList.size
+                                }
                             }
                         })
                     }
