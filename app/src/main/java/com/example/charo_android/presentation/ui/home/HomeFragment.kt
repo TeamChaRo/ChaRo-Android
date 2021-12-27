@@ -25,6 +25,7 @@ import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
 import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.ThemeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -55,7 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         val userEmail = SharedInformation.getEmail(requireActivity())
         val nickName: String = Hidden.nickName
-        goSearchView(userEmail,nickName)
+        goSearchView(nickName)
         goAlarm()
         initToolBar()
         replaceMoreViewFragment(Hidden.userId)
@@ -166,14 +167,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
     //검색 뷰 이동
-    private fun goSearchView(userId: String, nickName: String) {
+    private fun goSearchView(nickName: String) {
+        val userEmail = SharedInformation.getEmail(requireActivity())
         binding.imgMainSearch.setOnClickListener {
-            val intent = Intent(activity, SearchActivity::class.java)
-            intent.apply {
-                putExtra("userId", userId)
-                putExtra("nickName", nickName)
+            if(userEmail == null || userEmail == "@"){
+                //로그인 유도 필요한 곳에 작성
+                LoginUtil.loginPrompt(requireActivity())
+            }else{
+                val intent = Intent(activity, SearchActivity::class.java)
+                intent.apply {
+                    putExtra("nickName", nickName)
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
+
         }
     }
 

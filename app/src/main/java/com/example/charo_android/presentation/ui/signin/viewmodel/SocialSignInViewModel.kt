@@ -17,26 +17,27 @@ class SocialSignInViewModel(
     private val getRemoteSocialLoginData: GetRemoteSocialLoginData
 ) : ViewModel() {
 
-    private val _success = MutableLiveData<Boolean>()
-    val success : LiveData<Boolean>
-        get() = _success
+    //카카오 로그인 성공
+    var kakaoSuccess : MutableLiveData<Boolean> = MutableLiveData()
 
+    //구글 로그인 성공
+    var googleSuccess : MutableLiveData<Boolean> = MutableLiveData()
     private val _userEmail = MutableLiveData<String>()
     val userEmail : LiveData<String>
         get() = _userEmail
 
 
-
+    //카카오 로그인 성공
     fun kakaoLoginSuccess(requestSocialData: RequestSocialData){
         viewModelScope.launch {
             runCatching { getRemoteSocialLoginData.execute(requestSocialData) }
                 .onSuccess {
-                    _success.value = it.success
-                    Log.d("kakao", "서버 통신 성공")
+                    kakaoSuccess.value = it.success
+                    Log.d("kakaoSuccess", "서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("kakao", "서버 통신 실패")
+                    Log.d("kakaoSuccess", "서버 통신 실패")
                 }
         }
     }
@@ -45,11 +46,11 @@ class SocialSignInViewModel(
         viewModelScope.launch {
             runCatching { getRemoteSocialLoginData.execute(requestSocialData) }
                 .onSuccess {
-                    _success.value = it.success
+                    googleSuccess.value = it.success
                     Log.d("google", "서버 통신 성공")
                 }
                 .onFailure {
-                    _success.value = false
+                    googleSuccess.value = false
                     it.printStackTrace()
 
                 }

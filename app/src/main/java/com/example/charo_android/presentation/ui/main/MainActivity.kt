@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceWriteFragment(userId : String, nickName : String){
-        if(userId == null || userEmail == "null"){
+        if(userId == null || userEmail == "@"){
             //로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this@MainActivity)
         }else{
@@ -95,12 +96,20 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun replaceCharoFragment(userId: String, nickName: String) {
-        replaceFragment(charoFragment, userId, nickName)
+        userEmail = SharedInformation.getEmail(this@MainActivity)
+        if(userEmail == null || userEmail == "@"){
+            //  로그인 유도 필요한 곳에 작성
+            LoginUtil.loginPrompt(this)
+        }else{
+            replaceFragment(charoFragment, userId, nickName)
+        }
+
 //        replaceFragment(otherCharoFragment, Hidden.otherUserEmail, Hidden.otherNickname)
     }
 
     fun startActivityWriteShare() {
         userEmail = SharedInformation.getEmail(this@MainActivity)
+        Log.d("mainUserEmail", userEmail)
         if(userEmail == null || userEmail == "@"){
           //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
