@@ -38,9 +38,9 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_detail_top_part_mine"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toTopOf="@id/cl_detail_title_info"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="21dp"
                         android:layout_marginBottom="9dp"
-                        android:src="@drawable/ic_close_black"
+                        android:src="@drawable/icon_back_1"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tv_detail_current_page_mine"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,6 +90,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@id/cl_detail_title_info"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
