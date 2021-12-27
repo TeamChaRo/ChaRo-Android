@@ -123,7 +123,10 @@ class DetailFragment : Fragment() {
 
         // 뒤로가기 클릭 이벤트
         binding.imgDetailIconBack.setOnClickListener {
-            detailActivity?.onBackPressed()
+            requireActivity().onBackPressed()
+        }
+        binding.imgDetailIconBackMine.setOnClickListener {
+            requireActivity().onBackPressed()
         }
 
         // 주소 복사 클릭 이벤트
