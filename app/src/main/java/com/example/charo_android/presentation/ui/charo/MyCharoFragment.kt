@@ -48,7 +48,7 @@ class MyCharoFragment : Fragment() {
         setupSpinnerHandler()
 
         myCharoViewModel.isServerConnection.observe(viewLifecycleOwner, {
-            if(charoAdapter.itemList.isNotEmpty()) {
+            if (charoAdapter.itemList.isNotEmpty()) {
                 charoAdapter.removeLoading()
             }
         })
@@ -56,14 +56,20 @@ class MyCharoFragment : Fragment() {
         myCharoViewModel.writtenMoreLikeData.observe(viewLifecycleOwner, {
             if (myCharoViewModel.writtenLikeData.value?.drive != null && myCharoViewModel.writtenMoreLikeData.value?.drive != null) {
                 charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreLikeData.value?.drive!!)
-                charoAdapter.notifyItemRangeInserted(itemLastSize, myCharoViewModel.writtenMoreLikeData.value?.drive!!.size)
+                charoAdapter.notifyItemRangeInserted(
+                    itemLastSize,
+                    myCharoViewModel.writtenMoreLikeData.value?.drive!!.size
+                )
             }
         })
 
         myCharoViewModel.writtenMoreNewData.observe(viewLifecycleOwner, {
-            if(myCharoViewModel.writtenNewData.value?.drive != null && myCharoViewModel.writtenMoreNewData.value?.drive != null) {
+            if (myCharoViewModel.writtenNewData.value?.drive != null && myCharoViewModel.writtenMoreNewData.value?.drive != null) {
                 charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreNewData.value?.drive!!)
-                charoAdapter.notifyItemRangeInserted(itemLastSize, myCharoViewModel.writtenMoreNewData.value?.drive!!.size)
+                charoAdapter.notifyItemRangeInserted(
+                    itemLastSize,
+                    myCharoViewModel.writtenMoreNewData.value?.drive!!.size
+                )
             }
         })
 
@@ -101,9 +107,11 @@ class MyCharoFragment : Fragment() {
 
                         myCharoViewModel.writtenLikeData.observe(viewLifecycleOwner, {
                             if (myCharoViewModel.writtenLikeData.value?.drive != null) {
-                                charoAdapter.itemList.addAll(myCharoViewModel.writtenLikeData.value?.drive!!)
-                                charoAdapter.notifyDataSetChanged()
-                                itemLastSize = charoAdapter.itemList.size
+                                if(charoAdapter.itemList.isEmpty()) {
+                                    charoAdapter.itemList.addAll(myCharoViewModel.writtenLikeData.value?.drive!!)
+                                    charoAdapter.notifyDataSetChanged()
+                                    itemLastSize = charoAdapter.itemList.size
+                                }
                             }
                         })
                     } else {
@@ -118,9 +126,11 @@ class MyCharoFragment : Fragment() {
 
                         myCharoViewModel.writtenNewData.observe(viewLifecycleOwner, {
                             if (myCharoViewModel.writtenNewData.value?.drive != null) {
-                                charoAdapter.itemList.addAll(myCharoViewModel.writtenNewData.value?.drive!!)
-                                charoAdapter.notifyDataSetChanged()
-                                itemLastSize = charoAdapter.itemList.size
+                                if(charoAdapter.itemList.isEmpty()) {
+                                    charoAdapter.itemList.addAll(myCharoViewModel.writtenNewData.value?.drive!!)
+                                    charoAdapter.notifyDataSetChanged()
+                                    itemLastSize = charoAdapter.itemList.size
+                                }
                             }
                         })
                     }
