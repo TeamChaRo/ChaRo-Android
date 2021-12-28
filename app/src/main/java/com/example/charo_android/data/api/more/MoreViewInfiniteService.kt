@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface MoreViewInfiniteService {
     @GET("/post/preview/like/{userEmail}/{identifier}/{postId}/{count}")
     suspend fun getPreview(
-        @Path("userId") userId: String,
+        @Path("userEmail") userEmail: String,
         @Path("identifier") identifier: String,
         @Path("postId") postId: Int,
         @Path("count") count: Int,

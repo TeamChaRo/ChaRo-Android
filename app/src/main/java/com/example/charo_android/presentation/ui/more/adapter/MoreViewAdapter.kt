@@ -2,59 +2,78 @@ package com.example.charo_android.presentation.ui.more.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.R
-import com.example.charo_android.data.model.response.more.ResponseMoreViewData
+import com.example.charo_android.databinding.ItemCharoLoadingBinding
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
-import com.example.charo_android.presentation.ui.more.MoreThemeContentViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 
-class MoreViewAdapter(val userId: String,
-    var links : MoreViewFragment.DataToMoreLike, ) :
-    RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
-     private val _moreData = mutableListOf<MoreDrive>()
-     private var moreData : List<MoreDrive> = _moreData
-    var postId : Int = 0
+class MoreViewAdapter(
+    val userId: String,
+    var links: MoreViewFragment.DataToMoreLike,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var moreData : MutableList<MoreDrive> = mutableListOf()
+
+    var postId: Int = 0
     var select = true
+
+    //무한 스크롤 뷰타입
+    private val VIEW_TYPE = 0
+    private val VIEW_TYPE_LOADING = 1
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoreViewViewHolder {
-        val binding = ItemMoreViewBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return MoreViewViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
-        holder.onBind(moreData[position])
-        holder.binding.imgMoreViewHeart.setOnClickListener {
-            postId = moreData[position].morePostId
-            if(select){
-                it.isSelected = !moreData[position].moreIsFavorite
-                select = false
-            }else{
-                it.isSelected = moreData[position].moreIsFavorite
-                select = true
+    ): RecyclerView.ViewHolder {
+        return when(viewType){
+            VIEW_TYPE -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemMoreViewBinding.inflate(layoutInflater, parent, false)
+                MoreViewViewHolder(binding)
             }
-            links.getPostId(postId)
+            else -> {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemCharoLoadingBinding.inflate(layoutInflater, parent, false)
+                LoadingViewHolder(binding)
+            }
         }
 
-        holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", userId)
-            intent.putExtra("postId", moreData[position].morePostId)
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (moreData[position].moreDay != "") {
+            VIEW_TYPE
+        } else {
+            VIEW_TYPE_LOADING
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(holder is MoreViewViewHolder){
+            holder.onBind(moreData[position])
+            holder.binding.imgMoreViewHeart.setOnClickListener {
+                postId = moreData[position].morePostId
+                if (select) {
+                    it.isSelected = !moreData[position].moreIsFavorite
+                    select = false
+                } else {
+                    it.isSelected = moreData[position].moreIsFavorite
+                    select = true
+                }
+                links.getPostId(postId)
+            }
+
+            holder.binding.root.setOnClickListener() {
+                val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+                intent.putExtra("userId", userId)
+                intent.putExtra("postId", moreData[position].morePostId)
+                ContextCompat.startActivity(holder.itemView.context, intent, null)
+            }
         }
     }
 
@@ -62,7 +81,7 @@ class MoreViewAdapter(val userId: String,
         return moreData.size
     }
 
-    class MoreViewViewHolder(
+    inner class MoreViewViewHolder(
         val binding: ItemMoreViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(moreData: MoreDrive) {
@@ -71,14 +90,33 @@ class MoreViewAdapter(val userId: String,
                 binding.executePendingBindings()
 
             }
+        }
+    }
 
+    inner class LoadingViewHolder(private val binding: ItemCharoLoadingBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
+    fun setHomeTrendDrive(moreData: MutableList<MoreDrive>) {
+        this.moreData.addAll(moreData)
+        notifyDataSetChanged()
+        if(moreData.size > 0){
+            addLoading()
         }
 
+
     }
 
-    fun setHomeTrendDrive(moreData: List<MoreDrive>){
-        this.moreData = moreData
-        notifyDataSetChanged()
+
+
+    fun addLoading() {
+       moreData.add(MoreDrive("","",false,"",0,"","","","",""))
+        this.notifyItemRangeInserted(moreData.size, 1)
     }
+
+    fun removeLoading() {
+        if(moreData.last() == MoreDrive("","",false,"",0,"","","","","")) {
+            moreData.removeLast()
+        }
+    }
+
 }
