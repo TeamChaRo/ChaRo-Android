@@ -99,14 +99,17 @@ class MoreViewAdapter(
     fun setHomeTrendDrive(moreData: MutableList<MoreDrive>) {
         this.moreData.addAll(moreData)
         notifyDataSetChanged()
-        addLoading()
+        if(moreData.size > 0){
+            addLoading()
+        }
+
 
     }
 
 
 
     fun addLoading() {
-        moreData.add(MoreDrive("","",false,"",0,"","","","",""))
+       moreData.add(MoreDrive("","",false,"",0,"","","","",""))
         this.notifyItemRangeInserted(moreData.size, 1)
     }
 
