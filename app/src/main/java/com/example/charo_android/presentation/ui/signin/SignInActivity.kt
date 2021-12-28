@@ -38,16 +38,22 @@ class SignInActivity : AppCompatActivity() {
             if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
                 Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
-                val id = "0"
+                val id = "3"
                 SharedInformation.saveSocialId(this, id)
                 SharedInformation.setEmail(this, binding.etSigninId.text.toString())
+                Log.d("etSigninPw", binding.etSigninPw.text.toString())
                 val requestSignInData = RequestSignInData(
                     userEmail = binding.etSigninId.text.toString(),
                     password = binding.etSigninPw.text.toString()
                 )
+
                 emailSignInViewModel.getEmailSignInData(requestSignInData)
                 emailSignInViewModel.emailSignInData.observe(this, Observer {
-                    Log.d("emailSignIn", it.profileImage.toString())
+                    if(it.success){
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+
                 })
             }
         }

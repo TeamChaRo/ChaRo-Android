@@ -10,7 +10,7 @@ object SharedInformation {
     private const val KAKAO_SIGN_UP = "KAKAO_SIGN_UP"
     private const val SIGN_UP = "SIGN_UP"
     private const val LOG_OUT = "LOG_OUT"
-
+    private const val APP_PASSWORD = "APP_PASSWORD"
 
     // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 0)
     fun getSocialId(context: Context): String{
@@ -50,6 +50,25 @@ object SharedInformation {
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(APP_EMAIL)
+            .apply()
+    }
+    //패스워드 저장
+    fun getPassword(context: Context) : String{
+        val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(APP_PASSWORD,  "") ?: ""
+    }
+
+    fun setPassword(context: Context, password : String){
+        val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .putString(APP_PASSWORD, password)
+            .apply()
+    }
+
+    fun removePassword(context : Context){
+        val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .remove(APP_PASSWORD)
             .apply()
     }
 
