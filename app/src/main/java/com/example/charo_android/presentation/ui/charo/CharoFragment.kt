@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.setting.SettingActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
