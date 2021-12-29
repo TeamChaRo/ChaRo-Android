@@ -17,9 +17,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
+import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.detail.RequestDetailDeleteData
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.main.MainActivity
+import com.example.charo_android.presentation.util.enqueueUtil
 import com.skt.Tmap.*
 
 class DetailFragment : Fragment() {
@@ -352,10 +355,6 @@ class DetailFragment : Fragment() {
     }
 
     private fun popUpMenu() {
-//        val popUp = PopupMenu(requireContext(), binding.imgDetailMoreMine)
-//        val inflater: MenuInflater = popUp.menuInflater
-//        inflater.inflate(R.menu.detail_menu, popUp.menu)
-//        popUp.show()
         PopupMenu(requireContext(), binding.imgDetailMoreMine).apply {
             setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
                 when(it.itemId) {
@@ -365,6 +364,7 @@ class DetailFragment : Fragment() {
                     }
                     R.id.detail_menu_delete -> {
                         Log.d("delete", "clicked")
+                        deletePost()
                         true
                     }
                     else -> false
@@ -373,5 +373,20 @@ class DetailFragment : Fragment() {
             inflate(R.menu.detail_menu)
             show()
         }
+    }
+
+    private fun deletePost() {
+        val postId: Int = viewModel.postId.value!!
+        val images: MutableList<String> = viewModel.detailData.value?.data?.images!!
+        val call = ApiService.detailViewService.deletePost(
+            postId,
+            RequestDetailDeleteData(images)
+        )
+        call.enqueueUtil(
+            onSuccess = {
+                Log.d("deletePost", "execute")
+                requireActivity().finish()
+            }
+        )
     }
 }
