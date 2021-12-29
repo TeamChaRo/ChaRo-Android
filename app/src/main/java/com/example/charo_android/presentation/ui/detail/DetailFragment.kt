@@ -57,6 +57,7 @@ class DetailFragment : Fragment() {
                 }
                 intent.putExtra("imageList", imageList)
             })
+            intent.putExtra("itemPosition", it)
             startActivity(intent)
         }
 
