@@ -6,10 +6,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.ActionMenuView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -52,9 +52,7 @@ class DetailFragment : Fragment() {
             val intent = Intent(requireContext(), DetailImageActivity::class.java)
             val imageList: ArrayList<String> = ArrayList()
             viewModel.detailData.observe(viewLifecycleOwner, {
-                viewModel.detailData.value!!.data.images.forEach {
-                    imageList.add(it)
-                }
+                imageList.addAll(viewModel.detailData.value!!.data.images)
                 intent.putExtra("imageList", imageList)
             })
             intent.putExtra("itemPosition", it)
@@ -164,6 +162,11 @@ class DetailFragment : Fragment() {
         }
         binding.tvDetailWriterName.setOnClickListener {
             goMyPage()
+        }
+
+        // 메뉴 생성
+        binding.imgDetailMoreMine.setOnClickListener {
+            popUpMenu()
         }
     }
 
@@ -346,5 +349,29 @@ class DetailFragment : Fragment() {
         intent.putExtra("isMyPage", isMyPage)
         intent.putExtra("isFromOtherPage", true)
         startActivity(intent)
+    }
+
+    private fun popUpMenu() {
+//        val popUp = PopupMenu(requireContext(), binding.imgDetailMoreMine)
+//        val inflater: MenuInflater = popUp.menuInflater
+//        inflater.inflate(R.menu.detail_menu, popUp.menu)
+//        popUp.show()
+        PopupMenu(requireContext(), binding.imgDetailMoreMine).apply {
+            setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.detail_menu_edit -> {
+                        Log.d("edit", "clicked")
+                        true
+                    }
+                    R.id.detail_menu_delete -> {
+                        Log.d("delete", "clicked")
+                        true
+                    }
+                    else -> false
+                }
+            })
+            inflate(R.menu.detail_menu)
+            show()
+        }
     }
 }
