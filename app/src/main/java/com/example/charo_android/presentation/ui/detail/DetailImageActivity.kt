@@ -28,7 +28,7 @@ class DetailImageActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                Log.e("Selected_Page", position.toString())
+                Log.d("Selected_Page", position.toString())
                 binding.tvDetailImage.text = "${position+1}/${viewPagerAdapter.itemList.size}"
             }
         })
