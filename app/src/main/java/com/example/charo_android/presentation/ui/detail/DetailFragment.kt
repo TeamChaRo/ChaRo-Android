@@ -6,10 +6,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -17,9 +16,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
+import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.detail.RequestDetailDeleteData
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.main.MainActivity
+import com.example.charo_android.presentation.util.CustomDialog
+import com.example.charo_android.presentation.util.enqueueUtil
 import com.skt.Tmap.*
 
 class DetailFragment : Fragment() {
@@ -52,9 +55,7 @@ class DetailFragment : Fragment() {
             val intent = Intent(requireContext(), DetailImageActivity::class.java)
             val imageList: ArrayList<String> = ArrayList()
             viewModel.detailData.observe(viewLifecycleOwner, {
-                viewModel.detailData.value!!.data.images.forEach {
-                    imageList.add(it)
-                }
+                imageList.addAll(viewModel.detailData.value!!.data.images)
                 intent.putExtra("imageList", imageList)
             })
             intent.putExtra("itemPosition", it)
@@ -164,6 +165,11 @@ class DetailFragment : Fragment() {
         }
         binding.tvDetailWriterName.setOnClickListener {
             goMyPage()
+        }
+
+        // 메뉴 생성
+        binding.imgDetailMoreMine.setOnClickListener {
+            popUpMenu()
         }
     }
 
@@ -346,5 +352,49 @@ class DetailFragment : Fragment() {
         intent.putExtra("isMyPage", isMyPage)
         intent.putExtra("isFromOtherPage", true)
         startActivity(intent)
+    }
+
+    private fun popUpMenu() {
+        PopupMenu(requireContext(), binding.imgDetailMoreMine).apply {
+            setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.detail_menu_edit -> {
+                        Log.d("edit", "clicked")
+                        true
+                    }
+                    R.id.detail_menu_delete -> {
+                        Log.d("delete", "clicked")
+                        deletePost()
+                        true
+                    }
+                    else -> false
+                }
+            })
+            inflate(R.menu.detail_menu)
+            show()
+        }
+    }
+
+    private fun deletePost() {
+        val dialog = CustomDialog(requireActivity())
+        dialog.showDialog(R.layout.dialog_detail_delete)
+        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+            override fun onClicked(num: Int) {
+                if (num == 1) {
+                    val postId: Int = viewModel.postId.value!!
+                    val images: MutableList<String> = viewModel.detailData.value?.data?.images!!
+                    val call = ApiService.detailViewService.deletePost(
+                        postId,
+                        RequestDetailDeleteData(images)
+                    )
+                    call.enqueueUtil(
+                        onSuccess = {
+                            Log.d("deletePost", "execute")
+                            requireActivity().finish()
+                        }
+                    )
+                }
+            }
+        })
     }
 }
