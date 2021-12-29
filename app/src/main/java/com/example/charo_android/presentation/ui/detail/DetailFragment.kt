@@ -357,7 +357,7 @@ class DetailFragment : Fragment() {
     private fun popUpMenu() {
         PopupMenu(requireContext(), binding.imgDetailMoreMine).apply {
             setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
-                when(it.itemId) {
+                when (it.itemId) {
                     R.id.detail_menu_edit -> {
                         Log.d("edit", "clicked")
                         true
@@ -376,17 +376,25 @@ class DetailFragment : Fragment() {
     }
 
     private fun deletePost() {
-        val postId: Int = viewModel.postId.value!!
-        val images: MutableList<String> = viewModel.detailData.value?.data?.images!!
-        val call = ApiService.detailViewService.deletePost(
-            postId,
-            RequestDetailDeleteData(images)
-        )
-        call.enqueueUtil(
-            onSuccess = {
-                Log.d("deletePost", "execute")
-                requireActivity().finish()
+        val dialog = CustomDialog(requireActivity())
+        dialog.showDialog(R.layout.dialog_detail_delete)
+        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+            override fun onClicked(num: Int) {
+                if (num == 1) {
+                    val postId: Int = viewModel.postId.value!!
+                    val images: MutableList<String> = viewModel.detailData.value?.data?.images!!
+                    val call = ApiService.detailViewService.deletePost(
+                        postId,
+                        RequestDetailDeleteData(images)
+                    )
+                    call.enqueueUtil(
+                        onSuccess = {
+                            Log.d("deletePost", "execute")
+                            requireActivity().finish()
+                        }
+                    )
+                }
             }
-        )
+        })
     }
 }
