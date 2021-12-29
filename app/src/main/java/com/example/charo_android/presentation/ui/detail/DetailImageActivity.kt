@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
-import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityDetailImageBinding
 
 class DetailImageActivity : AppCompatActivity() {
