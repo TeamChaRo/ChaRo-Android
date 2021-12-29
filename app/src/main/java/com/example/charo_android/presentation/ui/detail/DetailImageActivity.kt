@@ -11,6 +11,7 @@ class DetailImageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailImageBinding
     private val viewPagerAdapter = DetailImageViewPagerAdapter()
     private lateinit var imageList: ArrayList<String>
+    private var itemPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +19,7 @@ class DetailImageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         imageList = intent.getSerializableExtra("imageList") as ArrayList<String>
-
+        itemPosition = intent.getIntExtra("itemPosition", 0)
         initViewPager()
     }
 
@@ -33,15 +34,12 @@ class DetailImageActivity : AppCompatActivity() {
             }
         })
 
-        binding.viewPagerDetailImage.adapter = viewPagerAdapter
-        imageList.forEach {
-            viewPagerAdapter.itemList.add(it)
+        binding.apply {
+            viewPagerDetailImage.adapter = viewPagerAdapter
+            viewPagerAdapter.itemList.addAll(imageList)
+            viewPagerAdapter.notifyDataSetChanged()
+            tvDetailImage.text = "1/${viewPagerAdapter.itemList.size}"
+            viewPagerDetailImage.setCurrentItem(itemPosition, false)
         }
-//        viewPagerAdapter.itemList.clear()
-//        imgList.forEach {
-//            viewPagerAdapter.itemList.add(it)
-//        }
-        viewPagerAdapter.notifyDataSetChanged()
-        binding.tvDetailImage.text = "1/${viewPagerAdapter.itemList.size}"
     }
 }
