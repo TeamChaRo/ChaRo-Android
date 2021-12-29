@@ -94,7 +94,7 @@ class DetailFragment : Fragment() {
                 addList(tMapView)
 
                 isAuthor = viewModel.detailData.value?.data?.isAuthor == true
-                when(viewModel.detailData.value?.data?.isAuthor) {
+                when (viewModel.detailData.value?.data?.isAuthor) {
                     true -> {
                         binding.apply {
                             clDetailTopPartMine.visibility = View.VISIBLE
@@ -152,7 +152,7 @@ class DetailFragment : Fragment() {
 
         // n명이 좋아해요 클릭 이벤트
         binding.tvDetailLike.setOnClickListener {
-            if(isAuthor) {
+            if (isAuthor) {
                 openBottomSheetDialog()
             }
         }
@@ -188,9 +188,10 @@ class DetailFragment : Fragment() {
         binding.tvDetailViewpagerImage.text = "1/${viewPagerAdapter.itemList.size}"
     }
 
-    private fun clickShare(){
+    private fun clickShare() {
         try {
-            val deepLink = "http://www.charo.com/detail/${(activity as DetailActivity).postId}" //딥링크
+            val deepLink =
+                "http://www.charo.com/detail/${(activity as DetailActivity).postId}" //딥링크
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "*/*"
             intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
@@ -327,7 +328,7 @@ class DetailFragment : Fragment() {
         val nickname: String
         val isMyPage: Boolean
         Log.d("author", viewModel.detailData.value?.data?.author.toString())
-        if(viewModel.detailData.value?.data?.author == Hidden.nickName) {
+        if (viewModel.detailData.value?.data?.author == Hidden.nickName) {
             Log.d("DetailFragment", "true")
             isMyPage = true
             userEmail = Hidden.userId
