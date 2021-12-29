@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.ActionMenuView
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +21,7 @@ import com.example.charo_android.data.model.detail.RequestDetailDeleteData
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.main.MainActivity
+import com.example.charo_android.presentation.util.CustomDialog
 import com.example.charo_android.presentation.util.enqueueUtil
 import com.skt.Tmap.*
 
