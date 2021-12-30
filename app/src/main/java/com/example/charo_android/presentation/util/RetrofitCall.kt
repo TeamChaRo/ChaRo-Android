@@ -16,7 +16,7 @@ fun <ResponseType> Call<ResponseType>.enqueueUtil(
             } else {
                 onError?.invoke(response.code())
                 Log.d("server connect", "error")
-                Log.d("server connect", "$response.errorBody()")
+                Log.d("server connect", "$response")
                 Log.d("server connect", response.message())
                 Log.d("server connect", "${response.code()}")
             }

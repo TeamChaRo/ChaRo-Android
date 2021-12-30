@@ -22,7 +22,7 @@
     <!--나의차로-->
     <fragment
         android:id="@+id/navigation_charo"
-        android:name="com.example.charo_android.presentation.ui.charo.CharoFragment"
+        android:name="com.example.charo_android.presentation.ui.charo.mypage.CharoFragment"
         android:label="@string/title_charo_eng"
         tools:layout="@layout/fragment_charo" />
 </navigation>

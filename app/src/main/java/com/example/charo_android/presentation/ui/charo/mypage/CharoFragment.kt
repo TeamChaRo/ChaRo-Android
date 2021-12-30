@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.mypage
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
+import com.example.charo_android.presentation.ui.charo.adapter.CharoFragmentStateAdapter
+import com.example.charo_android.presentation.ui.charo.follow.CharoListActivity
 import com.example.charo_android.presentation.ui.setting.SettingActivity
 import com.google.android.material.tabs.TabLayoutMediator
 

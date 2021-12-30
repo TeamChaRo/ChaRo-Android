@@ -9,11 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
-import com.example.charo_android.presentation.ui.charo.CharoFragment
-import com.example.charo_android.presentation.ui.charo.OtherCharoFragment
+import com.example.charo_android.presentation.ui.charo.mypage.CharoFragment
+import com.example.charo_android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.util.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
