@@ -7,7 +7,7 @@
 
         <variable
             name="charoListData"
-            type="com.example.charo_android.presentation.ui.charo.CharoViewModel" />
+            type="com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel" />
 
         <import type="android.view.View" />
     </data>

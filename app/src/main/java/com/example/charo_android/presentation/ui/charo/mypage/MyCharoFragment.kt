@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.mypage
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,12 +15,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.databinding.FragmentSaveBinding
+import com.example.charo_android.databinding.FragmentMyCharoBinding
+import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
+import com.example.charo_android.presentation.ui.charo.adapter.CharoAdapter
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 
-class SaveFragment : Fragment() {
-    private val saveViewModel: CharoViewModel by activityViewModels()
-    private var _binding: FragmentSaveBinding? = null
+class MyCharoFragment : Fragment() {
+    private val myCharoViewModel: CharoViewModel by activityViewModels()
+    private var _binding: FragmentMyCharoBinding? = null
     private val binding get() = _binding!!
     private lateinit var charoAdapter: CharoAdapter
     var itemLastSize = 0
@@ -38,10 +40,11 @@ class SaveFragment : Fragment() {
             intent.putExtra("region", it.region)
             startActivity(intent)
         }
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_save, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_charo, container, false)
         val root: View = binding.root
 
-        Log.d("SaveFragment", "created!")
+        Log.d("MyCharoFragment", "created!")
+
         binding.recyclerviewMyCharo.adapter = charoAdapter
         setUpSpinner()
         setupSpinnerHandler()
@@ -54,7 +57,7 @@ class SaveFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         charoAdapter.itemList.clear()
-        saveViewModel.clearPostData()
+        myCharoViewModel.clearPostData()
         setUpSpinner()
         setupSpinnerHandler()
         removeLoading()
@@ -90,10 +93,14 @@ class SaveFragment : Fragment() {
                             charoAdapter.spinnerPosition = 0
                         }
 
-                        saveViewModel.savedLikeData.observe(viewLifecycleOwner, {
-                            if (saveViewModel.savedLikeData.value?.drive != null) {
+                        if (myCharoViewModel.writtenLikeData.value == null) {
+                            myCharoViewModel.getInitLikeData()
+                        }
+
+                        myCharoViewModel.writtenLikeData.observe(viewLifecycleOwner, {
+                            if (myCharoViewModel.writtenLikeData.value?.drive != null) {
                                 if(charoAdapter.itemList.isEmpty()) {
-                                    charoAdapter.itemList.addAll(saveViewModel.savedLikeData.value?.drive!!)
+                                    charoAdapter.itemList.addAll(myCharoViewModel.writtenLikeData.value?.drive!!)
                                     charoAdapter.notifyDataSetChanged()
                                     itemLastSize = charoAdapter.itemList.size
                                 }
@@ -105,14 +112,14 @@ class SaveFragment : Fragment() {
                             charoAdapter.spinnerPosition = 1
                         }
 
-                        if (saveViewModel.writtenNewData.value == null) {
-                            saveViewModel.getInitNewData()
+                        if (myCharoViewModel.writtenNewData.value == null) {
+                            myCharoViewModel.getInitNewData()
                         }
 
-                        saveViewModel.savedNewData.observe(viewLifecycleOwner, {
-                            if (saveViewModel.savedNewData.value?.drive != null) {
+                        myCharoViewModel.writtenNewData.observe(viewLifecycleOwner, {
+                            if (myCharoViewModel.writtenNewData.value?.drive != null) {
                                 if(charoAdapter.itemList.isEmpty()) {
-                                    charoAdapter.itemList.addAll(saveViewModel.savedNewData.value?.drive!!)
+                                    charoAdapter.itemList.addAll(myCharoViewModel.writtenNewData.value?.drive!!)
                                     charoAdapter.notifyDataSetChanged()
                                     itemLastSize = charoAdapter.itemList.size
                                 }
@@ -134,17 +141,18 @@ class SaveFragment : Fragment() {
                 if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
                     scrollY > oldScrollY
                 ) {
-                    Log.d("무한스크롤 최하단 도달", "도달완")
-                    if (saveViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
+                    Log.d("무한스크롤 최하단 도달", "도달완료")
+                    if (myCharoViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
                         charoAdapter.addLoading()
                         when (spinnerPosition) {
                             0 -> {
-                                saveViewModel.getMoreSavedLikeData()
+                                myCharoViewModel.getMoreWrittenLikeData()
                             }
                             else -> {
-                                saveViewModel.getMoreSavedNewData()
+                                myCharoViewModel.getMoreWrittenNewData()
                             }
                         }
+                        charoAdapter.removeLoading()
                     }
                 }
             }
@@ -152,7 +160,7 @@ class SaveFragment : Fragment() {
     }
 
     private fun removeLoading() {
-        saveViewModel.isServerConnection.observe(viewLifecycleOwner, {
+        myCharoViewModel.isServerConnection.observe(viewLifecycleOwner, {
             if (charoAdapter.itemList.isNotEmpty()) {
                 charoAdapter.removeLoading()
             }
@@ -160,24 +168,24 @@ class SaveFragment : Fragment() {
     }
 
     private fun getMoreLikeData() {
-        saveViewModel.savedMoreLikeData.observe(viewLifecycleOwner, {
-            if (saveViewModel.savedLikeData.value?.drive != null && saveViewModel.savedMoreLikeData.value?.drive != null) {
-                charoAdapter.itemList.addAll(saveViewModel.savedMoreLikeData.value?.drive!!)
+        myCharoViewModel.writtenMoreLikeData.observe(viewLifecycleOwner, {
+            if (myCharoViewModel.writtenLikeData.value?.drive != null && myCharoViewModel.writtenMoreLikeData.value?.drive != null) {
+                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreLikeData.value?.drive!!)
                 charoAdapter.notifyItemRangeInserted(
                     itemLastSize,
-                    saveViewModel.savedMoreLikeData.value?.drive!!.size
+                    myCharoViewModel.writtenMoreLikeData.value?.drive!!.size
                 )
             }
         })
     }
 
     private fun getMoreNewData() {
-        saveViewModel.savedMoreNewData.observe(viewLifecycleOwner, {
-            if (saveViewModel.savedNewData.value?.drive != null && saveViewModel.savedMoreLikeData.value?.drive != null) {
-                charoAdapter.itemList.addAll(saveViewModel.savedMoreNewData.value?.drive!!)
+        myCharoViewModel.writtenMoreNewData.observe(viewLifecycleOwner, {
+            if (myCharoViewModel.writtenNewData.value?.drive != null && myCharoViewModel.writtenMoreNewData.value?.drive != null) {
+                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreNewData.value?.drive!!)
                 charoAdapter.notifyItemRangeInserted(
                     itemLastSize,
-                    saveViewModel.savedMoreNewData.value?.drive!!.size
+                    myCharoViewModel.writtenMoreNewData.value?.drive!!.size
                 )
             }
         })

@@ -10,13 +10,13 @@
 
         <variable
             name="otherPageData"
-            type="com.example.charo_android.presentation.ui.charo.CharoViewModel" />
+            type="com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.charo.CharoFragment">
+        tools:context=".presentation.ui.charo.mypage.CharoFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_charo_top"
@@ -199,7 +199,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv_charo"
-            android:name="com.example.charo_android.presentation.ui.charo.OtherWriteCharoFragment"
+            android:name="com.example.charo_android.presentation.ui.charo.otherpage.OtherWriteCharoFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingBottom="75dp"

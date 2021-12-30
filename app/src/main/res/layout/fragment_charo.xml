@@ -7,13 +7,13 @@
         <import type="android.view.View"/>
         <variable
             name="myPageData"
-            type="com.example.charo_android.presentation.ui.charo.CharoViewModel" />
+            type="com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.charo.CharoFragment">
+        tools:context=".presentation.ui.charo.mypage.CharoFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_charo_top"
