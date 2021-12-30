@@ -91,6 +91,10 @@ class MyCharoFragment : Fragment() {
                             charoAdapter.spinnerPosition = 0
                         }
 
+                        if (myCharoViewModel.writtenLikeData.value == null) {
+                            myCharoViewModel.getInitLikeData()
+                        }
+
                         myCharoViewModel.writtenLikeData.observe(viewLifecycleOwner, {
                             if (myCharoViewModel.writtenLikeData.value?.drive != null) {
                                 if(charoAdapter.itemList.isEmpty()) {
