@@ -32,13 +32,8 @@ class CharoFragment : Fragment() {
         val root: View = binding.root
         goSettingView()
         goFollowView(Hidden.userId, Hidden.nickName)
-        charoViewModel.getInitLikeData()
-        charoViewModel.userInformation.observe(viewLifecycleOwner, {
-            binding.myPageData = charoViewModel
-        })
-
+        getUserInfo()
         initializeViewPager()
-
         return root
     }
 
