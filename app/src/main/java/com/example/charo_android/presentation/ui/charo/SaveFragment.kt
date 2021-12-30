@@ -51,6 +51,17 @@ class SaveFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        charoAdapter.itemList.clear()
+        saveViewModel.clearPostData()
+        setUpSpinner()
+        setupSpinnerHandler()
+        removeLoading()
+        getMoreLikeData()
+        getMoreNewData()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
