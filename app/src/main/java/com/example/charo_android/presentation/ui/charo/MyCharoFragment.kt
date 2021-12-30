@@ -52,6 +52,17 @@ class MyCharoFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        charoAdapter.itemList.clear()
+        myCharoViewModel.clearPostData()
+        setUpSpinner()
+        setupSpinnerHandler()
+        removeLoading()
+        getMoreLikeData()
+        getMoreNewData()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
