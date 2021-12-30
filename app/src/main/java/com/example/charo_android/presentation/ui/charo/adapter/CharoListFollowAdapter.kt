@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

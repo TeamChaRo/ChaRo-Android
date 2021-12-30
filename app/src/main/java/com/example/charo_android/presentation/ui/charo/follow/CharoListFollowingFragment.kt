@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.follow
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.charo_android.databinding.FragmentCharoListFollowerBinding
+import com.example.charo_android.databinding.FragmentCharoListFollowingBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
+import com.example.charo_android.presentation.ui.charo.adapter.CharoListFollowAdapter
 import com.example.charo_android.presentation.ui.main.MainActivity
 
-class CharoListFollowerFragment : Fragment() {
-    private var _binding: FragmentCharoListFollowerBinding? = null
+class CharoListFollowingFragment : Fragment() {
+    private var _binding: FragmentCharoListFollowingBinding? = null
     private val binding get() = _binding!!
     private val charoViewModel: CharoViewModel by activityViewModels()
     private val followAdapter = CharoListFollowAdapter() {
@@ -41,10 +43,10 @@ class CharoListFollowerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCharoListFollowerBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentCharoListFollowingBinding.inflate(layoutInflater, container, false)
         initRecyclerView()
         charoViewModel.followData.observe(viewLifecycleOwner, {
-            followAdapter.itemList.addAll(it.follower)
+            followAdapter.itemList.addAll(it.following)
             Log.d("itemList.size", followAdapter.itemList.size.toString())
             followAdapter.notifyDataSetChanged()
         })
@@ -58,7 +60,7 @@ class CharoListFollowerFragment : Fragment() {
 
     private fun initRecyclerView() {
         with(binding) {
-            recyclerViewCharoListFollower.adapter = followAdapter
+            recyclerViewCharoListFollowing.adapter = followAdapter
             followAdapter.notifyDataSetChanged()
         }
     }

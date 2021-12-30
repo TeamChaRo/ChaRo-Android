@@ -1,16 +1,11 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.adapter
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.data.model.mypage.Drive
 import com.example.charo_android.databinding.ItemCharoLoadingBinding
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
-import com.example.charo_android.presentation.ui.detail.DetailActivity
 
 class CharoAdapter(
     val userId: String,
