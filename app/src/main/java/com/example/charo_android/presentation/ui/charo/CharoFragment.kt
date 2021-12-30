@@ -81,4 +81,11 @@ class CharoFragment : Fragment() {
             startActivity(intent)
         }
     }
+
+    private fun getUserInfo() {
+        charoViewModel.getInitLikeData()
+        charoViewModel.userInformation.observe(viewLifecycleOwner, {
+            binding.myPageData = charoViewModel
+        })
+    }
 }
