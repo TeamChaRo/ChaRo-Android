@@ -37,6 +37,11 @@ class CharoFragment : Fragment() {
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        getUserInfo()
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
