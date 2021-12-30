@@ -46,34 +46,9 @@ class MyCharoFragment : Fragment() {
         binding.recyclerviewMyCharo.adapter = charoAdapter
         setUpSpinner()
         setupSpinnerHandler()
-
-        myCharoViewModel.isServerConnection.observe(viewLifecycleOwner, {
-            if (charoAdapter.itemList.isNotEmpty()) {
-                charoAdapter.removeLoading()
-            }
-        })
-
-        myCharoViewModel.writtenMoreLikeData.observe(viewLifecycleOwner, {
-            if (myCharoViewModel.writtenLikeData.value?.drive != null && myCharoViewModel.writtenMoreLikeData.value?.drive != null) {
-                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreLikeData.value?.drive!!)
-                charoAdapter.notifyItemRangeInserted(
-                    itemLastSize,
-                    myCharoViewModel.writtenMoreLikeData.value?.drive!!.size
-                )
-            }
-        })
-
-        myCharoViewModel.writtenMoreNewData.observe(viewLifecycleOwner, {
-            if (myCharoViewModel.writtenNewData.value?.drive != null && myCharoViewModel.writtenMoreNewData.value?.drive != null) {
-                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreNewData.value?.drive!!)
-                charoAdapter.notifyItemRangeInserted(
-                    itemLastSize,
-                    myCharoViewModel.writtenMoreNewData.value?.drive!!.size
-                )
-            }
-        })
-
-        // Inflate the layout for this fragment
+        removeLoading()
+        getMoreLikeData()
+        getMoreNewData()
         return root
     }
 
@@ -165,5 +140,37 @@ class MyCharoFragment : Fragment() {
                 }
             }
         }))
+    }
+
+    private fun removeLoading() {
+        myCharoViewModel.isServerConnection.observe(viewLifecycleOwner, {
+            if (charoAdapter.itemList.isNotEmpty()) {
+                charoAdapter.removeLoading()
+            }
+        })
+    }
+
+    private fun getMoreLikeData() {
+        myCharoViewModel.writtenMoreLikeData.observe(viewLifecycleOwner, {
+            if (myCharoViewModel.writtenLikeData.value?.drive != null && myCharoViewModel.writtenMoreLikeData.value?.drive != null) {
+                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreLikeData.value?.drive!!)
+                charoAdapter.notifyItemRangeInserted(
+                    itemLastSize,
+                    myCharoViewModel.writtenMoreLikeData.value?.drive!!.size
+                )
+            }
+        })
+    }
+
+    private fun getMoreNewData() {
+        myCharoViewModel.writtenMoreNewData.observe(viewLifecycleOwner, {
+            if (myCharoViewModel.writtenNewData.value?.drive != null && myCharoViewModel.writtenMoreNewData.value?.drive != null) {
+                charoAdapter.itemList.addAll(myCharoViewModel.writtenMoreNewData.value?.drive!!)
+                charoAdapter.notifyItemRangeInserted(
+                    itemLastSize,
+                    myCharoViewModel.writtenMoreNewData.value?.drive!!.size
+                )
+            }
+        })
     }
 }
