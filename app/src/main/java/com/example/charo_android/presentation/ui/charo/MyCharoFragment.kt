@@ -139,7 +139,7 @@ class MyCharoFragment : Fragment() {
                 if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
                     scrollY > oldScrollY
                 ) {
-                    Log.d("무한스크롤 최하단 도달", "도달완")
+                    Log.d("무한스크롤 최하단 도달", "도달완료")
                     if (myCharoViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
                         charoAdapter.addLoading()
                         when (spinnerPosition) {
