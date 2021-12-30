@@ -42,38 +42,12 @@ class SaveFragment : Fragment() {
         val root: View = binding.root
 
         Log.d("SaveFragment", "created!")
-
         binding.recyclerviewMyCharo.adapter = charoAdapter
         setUpSpinner()
         setupSpinnerHandler()
-
-        saveViewModel.isServerConnection.observe(viewLifecycleOwner, {
-            if (charoAdapter.itemList.isNotEmpty()) {
-                charoAdapter.removeLoading()
-            }
-        })
-
-        saveViewModel.savedMoreLikeData.observe(viewLifecycleOwner, {
-            if (saveViewModel.savedLikeData.value?.drive != null && saveViewModel.savedMoreLikeData.value?.drive != null) {
-                charoAdapter.itemList.addAll(saveViewModel.savedMoreLikeData.value?.drive!!)
-                charoAdapter.notifyItemRangeInserted(
-                    itemLastSize,
-                    saveViewModel.savedMoreLikeData.value?.drive!!.size
-                )
-            }
-        })
-
-        saveViewModel.savedMoreNewData.observe(viewLifecycleOwner, {
-            if (saveViewModel.savedNewData.value?.drive != null && saveViewModel.savedMoreLikeData.value?.drive != null) {
-                charoAdapter.itemList.addAll(saveViewModel.savedMoreNewData.value?.drive!!)
-                charoAdapter.notifyItemRangeInserted(
-                    itemLastSize,
-                    saveViewModel.savedMoreNewData.value?.drive!!.size
-                )
-            }
-        })
-
-        // Inflate the layout for this fragment
+        removeLoading()
+        getMoreLikeData()
+        getMoreNewData()
         return root
     }
 
@@ -164,5 +138,37 @@ class SaveFragment : Fragment() {
                 }
             }
         }))
+    }
+
+    private fun removeLoading() {
+        saveViewModel.isServerConnection.observe(viewLifecycleOwner, {
+            if (charoAdapter.itemList.isNotEmpty()) {
+                charoAdapter.removeLoading()
+            }
+        })
+    }
+
+    private fun getMoreLikeData() {
+        saveViewModel.savedMoreLikeData.observe(viewLifecycleOwner, {
+            if (saveViewModel.savedLikeData.value?.drive != null && saveViewModel.savedMoreLikeData.value?.drive != null) {
+                charoAdapter.itemList.addAll(saveViewModel.savedMoreLikeData.value?.drive!!)
+                charoAdapter.notifyItemRangeInserted(
+                    itemLastSize,
+                    saveViewModel.savedMoreLikeData.value?.drive!!.size
+                )
+            }
+        })
+    }
+
+    private fun getMoreNewData() {
+        saveViewModel.savedMoreNewData.observe(viewLifecycleOwner, {
+            if (saveViewModel.savedNewData.value?.drive != null && saveViewModel.savedMoreLikeData.value?.drive != null) {
+                charoAdapter.itemList.addAll(saveViewModel.savedMoreNewData.value?.drive!!)
+                charoAdapter.notifyItemRangeInserted(
+                    itemLastSize,
+                    saveViewModel.savedMoreNewData.value?.drive!!.size
+                )
+            }
+        })
     }
 }
