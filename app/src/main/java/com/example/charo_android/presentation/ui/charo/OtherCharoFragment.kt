@@ -26,11 +26,7 @@ class OtherCharoFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other_charo, container, false)
         otherUserEmail = arguments?.getString("userId").toString()
         otherUserNickname = arguments?.getString("nickName").toString()
-
-        charoViewModel.getInitOtherLikeData(otherUserEmail)
-        charoViewModel.otherInformation.observe(viewLifecycleOwner, {
-            binding.otherPageData = charoViewModel
-        })
+        getUserInfo()
         goFollowView(otherUserEmail, otherUserNickname)
         return binding.root
     }
@@ -47,5 +43,12 @@ class OtherCharoFragment : Fragment() {
             intent.putExtra("nickname", nickname)
             startActivity(intent)
         }
+    }
+
+    private fun getUserInfo() {
+        charoViewModel.getInitOtherLikeData(otherUserEmail)
+        charoViewModel.otherInformation.observe(viewLifecycleOwner, {
+            binding.otherPageData = charoViewModel
+        })
     }
 }

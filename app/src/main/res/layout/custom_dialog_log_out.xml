@@ -21,7 +21,7 @@
         android:layout_marginTop="24dp"/>
 
     <TextView
-        android:id="@+id/text_logout_ok"
+        android:id="@+id/text_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ok"
@@ -36,7 +36,7 @@
         android:layout_marginStart="156dp"/>
 
     <TextView
-        android:id="@+id/text_logout_no"
+        android:id="@+id/text_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no"
@@ -44,8 +44,8 @@
         android:textSize="14sp"
         android:textColor="#2c98f0"
         android:includeFontPadding="false"
-        app:layout_constraintTop_toTopOf="@+id/text_logout_ok"
-        app:layout_constraintStart_toEndOf="@+id/text_logout_ok"
+        app:layout_constraintTop_toTopOf="@+id/text_ok"
+        app:layout_constraintStart_toEndOf="@+id/text_ok"
         android:layout_marginStart="16dp"/>
 
 
