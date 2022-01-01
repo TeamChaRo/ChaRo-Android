@@ -11,7 +11,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityMainBinding
-import com.example.charo_android.presentation.ui.charo.guestcharo.GuestCharoFragment
 import com.example.charo_android.presentation.ui.charo.mypage.CharoFragment
 import com.example.charo_android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
@@ -123,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
         when (isMyPage) {
-            true -> replaceFragment(GuestCharoFragment(), userId, nickName)
+            true -> replaceFragment(charoFragment, userId, nickName)
             false -> replaceFragment(OtherCharoFragment(), userId, nickName)
         }
     }
