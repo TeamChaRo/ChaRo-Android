@@ -25,12 +25,12 @@ class CustomDialog(context: Context) {
         dialog.show()
 
 
-        dialog.text_logout_ok.setOnClickListener {
+        dialog.text_ok.setOnClickListener {
             onClickedListener.onClicked(1)
             dialog.dismiss()
         }
 
-        dialog.text_logout_no.setOnClickListener {
+        dialog.text_no.setOnClickListener {
             dialog.dismiss()
         }
     }

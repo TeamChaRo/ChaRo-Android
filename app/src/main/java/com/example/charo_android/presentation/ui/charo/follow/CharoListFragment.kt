@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.follow
 
 import android.os.Bundle
 import android.util.Log
@@ -11,8 +11,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoListBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
+import com.example.charo_android.presentation.ui.charo.adapter.CharoListViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.dialog_theme.*
 
 class CharoListFragment(private val userEmail: String, private val userNickname: String) : Fragment() {
     private var _binding: FragmentCharoListBinding? = null

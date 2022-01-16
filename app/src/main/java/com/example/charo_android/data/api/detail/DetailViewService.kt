@@ -1,10 +1,6 @@
 package com.example.charo_android.data.api.detail
 
-import com.example.charo_android.data.model.detail.RequestDetailLikeAndSave
-import com.example.charo_android.data.model.detail.ResponseDetailData
-import com.example.charo_android.data.model.detail.ResponseDetailLikeAndSave
-import com.example.charo_android.data.model.detail.ResponseDetailLikes
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable
+import com.example.charo_android.data.model.detail.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -28,4 +24,9 @@ interface DetailViewService {
     fun getLikes(
         @Path("postId") postId: Int, @Query("userEmail") userEmail: String
     ): Call<ResponseDetailLikes>
+
+    @HTTP(method = "DELETE", path = "/post/{postId}", hasBody = true)
+    fun deletePost(
+        @Path("postId") postId: Int, @Body body: RequestDetailDeleteData
+    ): Call<ResponseDetailDeleteData>
 }

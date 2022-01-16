@@ -7,7 +7,7 @@
 
         <variable
             name="charoListData"
-            type="com.example.charo_android.presentation.ui.charo.CharoViewModel" />
+            type="com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -39,9 +39,9 @@
 
         <TextView
             android:id="@+id/tv_charo_list_nickname"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
+            android:layout_marginHorizontal="21dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
@@ -51,6 +51,7 @@
             app:layout_constraintBottom_toBottomOf="@id/img_charo_list_profile"
             app:layout_constraintStart_toEndOf="@id/img_charo_list_profile"
             app:layout_constraintTop_toTopOf="@id/img_charo_list_profile"
+            app:layout_constraintEnd_toStartOf="@id/tv_charo_list_is_follow"
             tools:text="한승현" />
 
         <TextView

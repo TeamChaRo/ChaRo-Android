@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.otherpage
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -16,6 +16,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentOtherWriteCharoBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
+import com.example.charo_android.presentation.ui.charo.adapter.CharoAdapter
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 
 class OtherWriteCharoFragment : Fragment() {

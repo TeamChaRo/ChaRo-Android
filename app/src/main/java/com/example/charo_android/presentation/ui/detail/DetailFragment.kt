@@ -6,10 +6,9 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -17,17 +16,21 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
+import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.detail.RequestDetailDeleteData
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.main.MainActivity
+import com.example.charo_android.presentation.util.CustomDialog
+import com.example.charo_android.presentation.util.enqueueUtil
 import com.skt.Tmap.*
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by activityViewModels()
-
-    //    private val viewPagerAdapter = DetailViewpagerAdapter()
     private lateinit var viewPagerAdapter: DetailViewpagerAdapter
+    private var isAuthor: Boolean = false
 
     private val pointList = arrayListOf<TMapPoint>()
     private var detailActivity: DetailActivity? = null
@@ -52,11 +55,10 @@ class DetailFragment : Fragment() {
             val intent = Intent(requireContext(), DetailImageActivity::class.java)
             val imageList: ArrayList<String> = ArrayList()
             viewModel.detailData.observe(viewLifecycleOwner, {
-                viewModel.detailData.value!!.data.images.forEach {
-                    imageList.add(it)
-                }
+                imageList.addAll(viewModel.detailData.value!!.data.images)
                 intent.putExtra("imageList", imageList)
             })
+            intent.putExtra("itemPosition", it)
             startActivity(intent)
         }
 
@@ -92,6 +94,22 @@ class DetailFragment : Fragment() {
                 initViewPager(viewModel.detailData.value!!.data.images)
                 // tMapView
                 addList(tMapView)
+
+                isAuthor = viewModel.detailData.value?.data?.isAuthor == true
+                when (viewModel.detailData.value?.data?.isAuthor) {
+                    true -> {
+                        binding.apply {
+                            clDetailTopPartMine.visibility = View.VISIBLE
+                            clDetailTopPart.visibility = View.INVISIBLE
+                        }
+                    }
+                    else -> {
+                        binding.apply {
+                            clDetailTopPartMine.visibility = View.INVISIBLE
+                            clDetailTopPart.visibility = View.VISIBLE
+                        }
+                    }
+                }
             }
         })
 
@@ -107,7 +125,10 @@ class DetailFragment : Fragment() {
 
         // 뒤로가기 클릭 이벤트
         binding.imgDetailIconBack.setOnClickListener {
-            detailActivity?.onBackPressed()
+            requireActivity().onBackPressed()
+        }
+        binding.imgDetailIconBackMine.setOnClickListener {
+            requireActivity().onBackPressed()
         }
 
         // 주소 복사 클릭 이벤트
@@ -133,7 +154,22 @@ class DetailFragment : Fragment() {
 
         // n명이 좋아해요 클릭 이벤트
         binding.tvDetailLike.setOnClickListener {
-            openBottomSheetDialog()
+            if (isAuthor) {
+                openBottomSheetDialog()
+            }
+        }
+
+        // 마이페이지 이동
+        binding.imgDetailWriterImage.setOnClickListener {
+            goMyPage()
+        }
+        binding.tvDetailWriterName.setOnClickListener {
+            goMyPage()
+        }
+
+        // 메뉴 생성
+        binding.imgDetailMoreMine.setOnClickListener {
+            popUpMenu()
         }
     }
 
@@ -159,9 +195,10 @@ class DetailFragment : Fragment() {
         binding.tvDetailViewpagerImage.text = "1/${viewPagerAdapter.itemList.size}"
     }
 
-    private fun clickShare(){
+    private fun clickShare() {
         try {
-            val deepLink = "http://www.charo.com/detail/${(activity as DetailActivity).postId}" //딥링크
+            val deepLink =
+                "http://www.charo.com/detail/${(activity as DetailActivity).postId}" //딥링크
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "*/*"
             intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
@@ -290,5 +327,74 @@ class DetailFragment : Fragment() {
     private fun openBottomSheetDialog() {
         val bottomSheetDialogFragment = DetailLikeFragment()
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
+    }
+
+    private fun goMyPage() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        val userEmail: String
+        val nickname: String
+        val isMyPage: Boolean
+        Log.d("author", viewModel.detailData.value?.data?.author.toString())
+        if (viewModel.detailData.value?.data?.author == Hidden.nickName) {
+            Log.d("DetailFragment", "true")
+            isMyPage = true
+            userEmail = Hidden.userId
+            nickname = Hidden.nickName
+            intent.putExtra("nickname", nickname)
+        } else {
+            Log.d("DetailFragment", "false")
+            isMyPage = false
+            userEmail = Hidden.otherUserEmail
+            nickname = Hidden.otherNickname
+            intent.putExtra("otherUserEmail", userEmail)
+            intent.putExtra("otherUserNickname", nickname)
+        }
+        intent.putExtra("isMyPage", isMyPage)
+        intent.putExtra("isFromOtherPage", true)
+        startActivity(intent)
+    }
+
+    private fun popUpMenu() {
+        PopupMenu(requireContext(), binding.imgDetailMoreMine).apply {
+            setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.detail_menu_edit -> {
+                        Log.d("edit", "clicked")
+                        true
+                    }
+                    R.id.detail_menu_delete -> {
+                        Log.d("delete", "clicked")
+                        deletePost()
+                        true
+                    }
+                    else -> false
+                }
+            })
+            inflate(R.menu.detail_menu)
+            show()
+        }
+    }
+
+    private fun deletePost() {
+        val dialog = CustomDialog(requireActivity())
+        dialog.showDialog(R.layout.dialog_detail_delete)
+        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+            override fun onClicked(num: Int) {
+                if (num == 1) {
+                    val postId: Int = viewModel.postId.value!!
+                    val images: MutableList<String> = viewModel.detailData.value?.data?.images!!
+                    val call = ApiService.detailViewService.deletePost(
+                        postId,
+                        RequestDetailDeleteData(images)
+                    )
+                    call.enqueueUtil(
+                        onSuccess = {
+                            Log.d("deletePost", "execute")
+                            requireActivity().finish()
+                        }
+                    )
+                }
+            }
+        })
     }
 }

@@ -69,6 +69,7 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
 
     }
 
+    //일반 회원가입 시에
     fun signUpComplete(){
         if (SharedInformation.getSignUp(requireActivity()) == 0){
             binding.imgSignUpTermNext.setOnClickListener {
@@ -86,6 +87,8 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
                     )
                     registerSuccess.observe(viewLifecycleOwner){
                         if(it){
+                            SharedInformation.saveSocialId(requireActivity(), "3")
+                            SharedInformation.setPassword(requireActivity(), signUpViewModel.password.value.toString())
                             SharedInformation.setEmail(requireActivity(), signUpViewModel.userEmail.value.toString())
                             val intent = Intent(requireActivity(), MainActivity::class.java)
                             startActivity(intent)

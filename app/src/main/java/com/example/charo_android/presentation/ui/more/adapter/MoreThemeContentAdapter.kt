@@ -12,7 +12,7 @@ import com.example.charo_android.presentation.ui.more.MoreThemeContentViewFragme
 
 class MoreThemeContentAdapter(
     var link : MoreThemeContentViewFragment.DataToMoreThemeLike
-) : RecyclerView.Adapter<MoreViewAdapter.MoreViewViewHolder>() {
+) : RecyclerView.Adapter<MoreThemeContentAdapter.MoreViewViewHolder>() {
     private val _moreData = mutableListOf<MoreDrive>()
     private var moreData : List<MoreDrive> = _moreData
     var postId : Int = 0
@@ -21,16 +21,16 @@ class MoreThemeContentAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoreViewAdapter.MoreViewViewHolder {
+    ): MoreThemeContentAdapter.MoreViewViewHolder {
         val binding = ItemMoreViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return MoreViewAdapter.MoreViewViewHolder(binding)
+        return MoreThemeContentAdapter.MoreViewViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MoreViewAdapter.MoreViewViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MoreThemeContentAdapter.MoreViewViewHolder, position: Int) {
         holder.onBind(moreData[position])
         holder.binding.imgMoreViewHeart.setOnClickListener {
             postId = moreData[position].morePostId

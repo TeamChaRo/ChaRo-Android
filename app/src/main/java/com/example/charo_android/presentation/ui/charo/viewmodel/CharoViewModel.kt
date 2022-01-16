@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -61,19 +61,19 @@ class CharoViewModel : ViewModel() {
     val otherInformation: LiveData<UserInformation>
         get() = _otherInformation
 
-    private var _otherWrittenNewData = MutableLiveData<Post>()
+    private var _otherWrittenNewData = MutableLiveData<Post>(null)
     val otherWrittenNewData: LiveData<Post> get() = _otherWrittenNewData
 
-    private var _otherWrittenLikeData = MutableLiveData<Post>()
+    private var _otherWrittenLikeData = MutableLiveData<Post>(null)
     val otherWrittenLikeData: LiveData<Post> get() = _otherWrittenLikeData
 
-    private var _otherWrittenMoreNewData = MutableLiveData<Post>()
+    private var _otherWrittenMoreNewData = MutableLiveData<Post>(null)
     val otherWrittenMoreNewData: LiveData<Post> get() = _otherWrittenMoreNewData
 
-    private var _otherWrittenMoreLikeData = MutableLiveData<Post>()
+    private var _otherWrittenMoreLikeData = MutableLiveData<Post>(null)
     val otherWrittenMoreLikeData: LiveData<Post> get() = _otherWrittenMoreLikeData
 
-    private var _followData = MutableLiveData<FollowData>()
+    private var _followData = MutableLiveData<FollowData>(null)
     val followData: LiveData<FollowData> get() = _followData
 
     fun getInitLikeData() {
@@ -378,5 +378,16 @@ class CharoViewModel : ViewModel() {
                 Log.d("getFollowData", "failed")
             }
         )
+    }
+
+    fun clearPostData() {
+        _writtenLikeData = MutableLiveData<Post>(null)
+        _writtenNewData = MutableLiveData<Post>(null)
+        _savedLikeData = MutableLiveData<Post>(null)
+        _savedNewData = MutableLiveData<Post>(null)
+        _writtenMoreLikeData = MutableLiveData<Post>(null)
+        _writtenMoreNewData = MutableLiveData<Post>(null)
+        _savedMoreLikeData = MutableLiveData<Post>(null)
+        _savedMoreNewData = MutableLiveData<Post>(null)
     }
 }

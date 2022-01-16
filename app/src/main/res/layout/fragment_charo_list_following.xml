@@ -7,7 +7,7 @@
 
         <variable
             name="charoListData"
-            type="com.example.charo_android.presentation.ui.charo.CharoViewModel" />
+            type="com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="17dp"
-        tools:context=".presentation.ui.charo.CharoListFollowingFragment">
+        tools:context=".presentation.ui.charo.follow.CharoListFollowingFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_charo_list_following"

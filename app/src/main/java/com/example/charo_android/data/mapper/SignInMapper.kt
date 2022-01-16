@@ -26,10 +26,14 @@ object SignInMapper {
 
     fun mapperToEmailSignInData(responseSignInData: ResponseSignInData) : EmailSignInData {
         return EmailSignInData(
-            userEmail = responseSignInData.data.userEmail,
-            nickname = responseSignInData.data.nickname,
-            profileImage = responseSignInData.data.profileImage,
-            isSocial = responseSignInData.data.isSocial
+            success = responseSignInData.success,
+            data = EmailSignInData.EmailSignIn(
+                userEmail = responseSignInData.data.userEmail,
+                nickname = responseSignInData.data.nickname,
+                profileImage = responseSignInData.data.profileImage,
+                isSocial = responseSignInData.data.isSocial
+            )
+
         )
 
         }

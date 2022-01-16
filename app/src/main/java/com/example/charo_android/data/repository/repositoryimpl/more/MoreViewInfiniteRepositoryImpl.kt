@@ -1,7 +1,9 @@
 package com.example.charo_android.data.repository.repositoryimpl.more
 
+import com.example.charo_android.data.mapper.MoreViewMapper
 import com.example.charo_android.data.model.response.more.ResponseMoreViewInfiniteData
 import com.example.charo_android.data.repository.remote.more.RemoteMoreViewInfiniteDataSource
+import com.example.charo_android.domain.model.more.MoreView
 import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
 
 class MoreViewInfiniteRepositoryImpl(private val dataSource: RemoteMoreViewInfiniteDataSource) :
@@ -12,7 +14,15 @@ class MoreViewInfiniteRepositoryImpl(private val dataSource: RemoteMoreViewInfin
         postId: Int,
         count: Int,
         value: String
-    ): ResponseMoreViewInfiniteData {
-        return dataSource.getPreview(userId, identifer, postId, count, value )
+    ): MoreView {
+        return MoreViewMapper.mapperToInfiniteMoreView(
+            dataSource.getPreview(
+                userId,
+                identifer,
+                postId,
+                count,
+                value
+            )
+        )
     }
 }

@@ -25,19 +25,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_search) {
-    private lateinit var userId: String
-    private lateinit var nickName: String
     private val themeUtil = ThemeUtil()
     private val locationUtil = LocationUtil()
     private val searchViewModel: SearchViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        nickName = intent.getStringExtra("nickName").toString()
-        userId = intent.getStringExtra("userId").toString()
-        Log.d("nice", userId)
-        Log.d("nickName", nickName)
 
         changeFragment(R.id.fragment_container_search, SearchFragment())
     }

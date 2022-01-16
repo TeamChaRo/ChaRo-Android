@@ -37,6 +37,7 @@ class SocialSignInActivity() :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoLogin()
         initKakaoLogin()
         initGoogleLogin()
         clickGoogleSignIn()
@@ -44,7 +45,6 @@ class SocialSignInActivity() :
         lookForMain()
         goEmailLogin()
         goEmailSignUp()
-        autoLogin()
         goKaKaoMain()
 
     }
@@ -53,7 +53,9 @@ class SocialSignInActivity() :
     private fun autoLogin() {
         val autoEmail = SharedInformation.getEmail(this)
         Log.d("autoEmail", autoEmail)
-        if (autoEmail != "") {
+        if (autoEmail != "@") {
+            Log.d("autoEmail", autoEmail)
+            Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -83,15 +85,14 @@ class SocialSignInActivity() :
             UserApiClient.instance.accessTokenInfo { _, error ->
                 if (error != null) {
                     Log.d("kakao", "토큰 정보 보기 실패")
-                }else{
+                } else {
                     kakaoUserEmail()
+
                 }
             }
         }
 
     }
-
-
 
 
     fun kakaoUserEmail() {
@@ -110,7 +111,7 @@ class SocialSignInActivity() :
                     startActivity(intent)
                     finish()
 
-                } else if(SharedInformation.getKaKaoSignUp(this) == 2) {
+                } else if (SharedInformation.getKaKaoSignUp(this) == 2) {
                     SharedInformation.setEmail(this, user.kakaoAccount?.email!!)
                     Log.i(
                         "kakaoUser", "사용자 정보 요청 성공" +
@@ -128,13 +129,19 @@ class SocialSignInActivity() :
 
     //카카오 로그인 성공시 main 이동
     private fun goKaKaoMain() {
-        socialSignInViewModel.success.observe(this, Observer {
-            if (it) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        })
+        if(SharedInformation.getLogout(this) != "Logout"){
+            socialSignInViewModel.kakaoSuccess.observe(this, Observer {
+                if (it) {
+                    SharedInformation.setLogout(this, "LogIn")
+                    Toast.makeText(this, "카카오 로그인 성공", Toast.LENGTH_SHORT).show()
+                    SharedInformation.saveSocialId(this@SocialSignInActivity, "1")
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            })
+        }
+
 
 
     }
@@ -168,6 +175,7 @@ class SocialSignInActivity() :
 
     private fun clickGoogleSignIn() {
         binding.imgSocialGoogle.setOnClickListener {
+            SharedInformation.setLogout(this, "LogIn")
             val intent = googleSignInClient?.signInIntent
             resultLauncher.launch(intent)
         }
@@ -185,7 +193,7 @@ class SocialSignInActivity() :
                     Log.d("googles", email.toString())
                     // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
-                    socialSignInViewModel.success.observe(this, Observer {
+                    socialSignInViewModel.googleSuccess.observe(this, Observer {
                         if (it == false) {
                             SharedInformation.setSignUp(this, 1)
                             Toast.makeText(
@@ -203,15 +211,18 @@ class SocialSignInActivity() :
                             finish()
 
                         } else {
-                            Toast.makeText(
-                                this@SocialSignInActivity, "로그인에 성공하였습니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            SharedInformation.setEmail(this, email.toString())
-                            SharedInformation.saveSocialId(this, "2")
-                            val intent = Intent(this@SocialSignInActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
+                            if (SharedInformation.getLogout(this) != "Logout") {
+                                Toast.makeText(
+                                    this@SocialSignInActivity, "구글 로그인에 성공하였습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                SharedInformation.setEmail(this, email.toString())
+                                SharedInformation.saveSocialId(this, "2")
+                                val intent =
+                                    Intent(this@SocialSignInActivity, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
                         }
                     })
 
@@ -223,8 +234,10 @@ class SocialSignInActivity() :
             }
     }
 
+    //둘러보기
     private fun lookForMain() {
         binding.textSocialLook.setOnClickListener {
+            SharedInformation.setEmail(this, "@")
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -232,6 +245,7 @@ class SocialSignInActivity() :
 
     private fun goEmailLogin() {
         binding.textSocialEmailLogin.setOnClickListener {
+            SharedInformation.setSignUp(this, 0)
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }

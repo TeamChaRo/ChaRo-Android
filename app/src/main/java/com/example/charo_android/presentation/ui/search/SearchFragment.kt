@@ -12,13 +12,12 @@ import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.main.MainActivity
 import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
 import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
-    private lateinit var userId: String
-    private lateinit var nickName: String
     private val themeUtil = ThemeUtil()
     private val locationUtil = LocationUtil()
     private val searchViewModel: SearchViewModel by sharedViewModel()
@@ -32,9 +31,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         selectarea()
         binding.textUserId.text = "복덩이님의"
     }
+    private fun nickName(){
 
+
+    }
 
     private fun clickSearch() {
+        val userEmail = SharedInformation.getEmail(requireActivity())
         binding.imgSearchStart.setOnClickListener {
             searchViewModel.province.value = if (binding.btnSearchArea1.text.toString() == "선택안함") {
                 ""
@@ -67,7 +70,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 region = searchViewModel.city.value.toString(),
                 theme = themeUtil.themeMap.get(searchViewModel.theme.value.toString()) ?: "",
                 warning = themeUtil.cautionMap.get(searchViewModel.caution.value.toString()) ?: "",
-                userEmail = searchViewModel.userEmail,
+                userEmail = userEmail,
             )
             searchViewModel.getSearch(requestSearchViewData)
             searchViewModel.search.observe(viewLifecycleOwner) {

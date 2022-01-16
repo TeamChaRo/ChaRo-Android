@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.charo
+package com.example.charo_android.presentation.ui.charo.mypage
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentCharoBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
+import com.example.charo_android.presentation.ui.charo.adapter.CharoFragmentStateAdapter
+import com.example.charo_android.presentation.ui.charo.follow.CharoListActivity
 import com.example.charo_android.presentation.ui.setting.SettingActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -31,20 +34,20 @@ class CharoFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_charo, container, false)
         val root: View = binding.root
         goSettingView()
-        goFollowView(Hidden.userId)
-        charoViewModel.getInitLikeData()
-        charoViewModel.userInformation.observe(viewLifecycleOwner, {
-            binding.myPageData = charoViewModel
-        })
-
+        goFollowView(Hidden.userId, Hidden.nickName)
+        getUserInfo()
         initializeViewPager()
-
         return root
     }
 
+    override fun onResume() {
+        super.onResume()
+        getUserInfo()
+    }
+
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 
     private fun initializeViewPager() {
@@ -73,11 +76,19 @@ class CharoFragment : Fragment() {
         }
     }
 
-    private fun goFollowView(myPageEmail: String) {
+    private fun goFollowView(myPageEmail: String, nickname: String) {
         binding.clCharoFollow.setOnClickListener {
             val intent = Intent(requireActivity(), CharoListActivity::class.java)
             intent.putExtra("myPageEmail", myPageEmail)
+            intent.putExtra("nickname", nickname)
             startActivity(intent)
         }
+    }
+
+    private fun getUserInfo() {
+        charoViewModel.getInitLikeData()
+        charoViewModel.userInformation.observe(viewLifecycleOwner, {
+            binding.myPageData = charoViewModel
+        })
     }
 }
