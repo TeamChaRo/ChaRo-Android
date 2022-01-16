@@ -1,5 +1,6 @@
 package com.example.charo_android.data.api
 
+import com.example.charo_android.data.api.alarm.AlarmViewService
 import com.example.charo_android.data.api.detail.DetailViewService
 import com.example.charo_android.data.api.signin.SignInViewService
 import com.example.charo_android.data.api.more.MoreViewInfiniteService
@@ -27,4 +28,5 @@ object ApiService {
     val myPageViewMoreService = retrofit.create(MyPageViewMoreService::class.java)
     val myPageViewFollowService = retrofit.create(MyPageViewFollowService::class.java)
     val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
+    val alarmViewService: AlarmViewService = retrofit.create(AlarmViewService::class.java)
 }
