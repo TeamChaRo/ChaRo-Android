@@ -37,14 +37,14 @@
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_setting_service_term.xml" value="0.15506756756756757" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_sign_up.xml" value="0.152" />
-        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_social_sign_in.xml" value="0.144" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_social_sign_in.xml" value="0.2" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/activity_splash.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/custom_dialog_log_out.xml" value="0.176" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/custom_dialog_withdrawal.xml" value="0.176" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/custom_spinner_item.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_detail_like.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_example.xml" value="0.2375" />
-        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_theme.xml" value="0.16" />
+        <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_theme.xml" value="0.2375" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/dialog_withdrawal.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_charo.xml" value="0.1" />
         <entry key="..\:/ChaRo-Android/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
@@ -129,7 +129,7 @@
         <entry key="app/src/main/res/drawable/shape_detail_unchecked_box.xml" value="0.2828125" />
         <entry key="app/src/main/res/drawable/shape_my_charo_picture.xml" value="0.2828125" />
         <entry key="app/src/main/res/layout-v28/fragment_detail.xml" value="0.25905797101449274" />
-        <entry key="app/src/main/res/layout/activity_alarm.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_alarm.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18237704918032788" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18237704918032788" />
         <entry key="app/src/main/res/layout/activity_no_search.xml" value="0.10460526315789474" />
@@ -139,9 +139,11 @@
         <entry key="app/src/main/res/layout/fragment_charo.xml" value="0.18237704918032788" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_dialog_theme_one.xml" value="0.12430555555555556" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/layout/fragment_my_charo.xml" value="0.18237704918032788" />
         <entry key="app/src/main/res/layout/fragment_save.xml" value="0.133203125" />
         <entry key="app/src/main/res/layout/fragment_write.xml" value="0.12430555555555556" />
+        <entry key="app/src/main/res/layout/item_alarm.xml" value="0.1537037037037037" />
         <entry key="app/src/main/res/layout/item_auto_search.xml" value="0.1953551912568306" />
         <entry key="app/src/main/res/layout/item_detail_image.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_home_location_drive.xml" value="0.1953551912568306" />
@@ -151,7 +153,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
