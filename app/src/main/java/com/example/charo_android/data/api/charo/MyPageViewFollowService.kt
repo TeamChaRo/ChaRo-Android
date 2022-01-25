@@ -1,4 +1,4 @@
-package com.example.charo_android.data.api.mypage
+package com.example.charo_android.data.api.charo
 
 import com.example.charo_android.data.model.charo.ResponseMyPageFollowData
 import retrofit2.Call
