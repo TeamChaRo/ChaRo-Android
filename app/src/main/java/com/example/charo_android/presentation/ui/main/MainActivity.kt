@@ -14,7 +14,7 @@ import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.mypage.CharoFragment
 import com.example.charo_android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
-import com.example.charo_android.presentation.ui.newcharo.ProfileFragment
+import com.example.charo_android.presentation.ui.mypage.ProfileFragment
 import com.example.charo_android.presentation.util.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity

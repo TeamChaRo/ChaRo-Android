@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.newcharo
+package com.example.charo_android.presentation.ui.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentProfileBinding
-import com.example.charo_android.presentation.ui.newcharo.mine.MyBottomFragment
-import com.example.charo_android.presentation.ui.newcharo.mine.MyTopFragment
+import com.example.charo_android.presentation.ui.mypage.mine.MyBottomFragment
+import com.example.charo_android.presentation.ui.mypage.mine.MyTopFragment
 
 // 마이페이지 프래그먼트(본체)
 class ProfileFragment : Fragment() {

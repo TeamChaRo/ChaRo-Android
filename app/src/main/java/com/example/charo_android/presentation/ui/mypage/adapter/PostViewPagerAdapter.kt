@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.newcharo.adapter
+package com.example.charo_android.presentation.ui.mypage.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

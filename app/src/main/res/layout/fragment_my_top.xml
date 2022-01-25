@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue_main_0f6fff"
-        tools:context=".presentation.ui.newcharo.mine.MyTopFragment">
+        tools:context=".presentation.ui.mypage.mine.MyTopFragment">
 
         <TextView
             android:id="@+id/tv_profile_title"

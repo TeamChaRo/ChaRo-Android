@@ -3,7 +3,7 @@ package com.example.charo_android.presentation.ui.charo.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.data.model.mypage.Drive
+import com.example.charo_android.data.model.charo.Drive
 import com.example.charo_android.databinding.ItemCharoLoadingBinding
 import com.example.charo_android.databinding.ItemCharoMyCharoBinding
 

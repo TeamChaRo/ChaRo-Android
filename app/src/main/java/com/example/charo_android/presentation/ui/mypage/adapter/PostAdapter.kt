@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.newcharo.adapter
+package com.example.charo_android.presentation.ui.mypage.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
-import com.example.charo_android.data.model.newcharo.SampleDataClass
+import com.example.charo_android.data.model.mypage.SampleDataClass
 import com.example.charo_android.databinding.ItemProfilePostBinding
 
 class PostAdapter: RecyclerView.Adapter<PostAdapter.PostViewHolder>() {

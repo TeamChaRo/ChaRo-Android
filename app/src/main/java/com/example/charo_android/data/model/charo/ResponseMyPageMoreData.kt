@@ -1,4 +1,4 @@
-package com.example.charo_android.data.model.mypage
+package com.example.charo_android.data.model.charo
 
 data class ResponseMyPageMoreData(
     val data: Post,

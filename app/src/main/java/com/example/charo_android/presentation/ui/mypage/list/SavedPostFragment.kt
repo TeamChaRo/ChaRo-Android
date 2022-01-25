@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.newcharo.list
+package com.example.charo_android.presentation.ui.mypage.list
 
 import android.os.Bundle
 import android.util.Log
@@ -10,19 +10,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentWrittenPostBinding
-import com.example.charo_android.presentation.ui.newcharo.adapter.PostAdapter
+import com.example.charo_android.databinding.FragmentSavedPostBinding
+import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 
-class WrittenPostFragment : Fragment() {
-    private var _binding: FragmentWrittenPostBinding? = null
-    val binding get() = _binding ?: error("binding not initialized")
+class SavedPostFragment : Fragment() {
+    private var _binding: FragmentSavedPostBinding? = null
+    val binding get() = _binding ?: error("binding not initiated")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_written_post, container, false)
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_saved_post, container, false)
         return binding.root
     }
 

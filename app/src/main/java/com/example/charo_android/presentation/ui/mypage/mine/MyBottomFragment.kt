@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.newcharo.mine
+package com.example.charo_android.presentation.ui.mypage.mine
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMyBottomBinding
-import com.example.charo_android.presentation.ui.newcharo.adapter.PostViewPagerAdapter
-import com.example.charo_android.presentation.ui.newcharo.list.SavedPostFragment
-import com.example.charo_android.presentation.ui.newcharo.list.WrittenPostFragment
+import com.example.charo_android.presentation.ui.mypage.adapter.PostViewPagerAdapter
+import com.example.charo_android.presentation.ui.mypage.list.SavedPostFragment
+import com.example.charo_android.presentation.ui.mypage.list.WrittenPostFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MyBottomFragment : Fragment() {
