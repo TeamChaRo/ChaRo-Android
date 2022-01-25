@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.ChaRoAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_main</item>
-        <item name="colorPrimaryVariant">@color/blue_52</item>
+        <item name="colorPrimary">@color/blue_main_0f6fff</item>
+        <item name="colorPrimaryVariant">@color/blue_5297ff</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/iris_100</item>
-        <item name="colorSecondaryVariant">@color/iris_60</item>
+        <item name="colorSecondary">@color/iris_100_5d5fef</item>
+        <item name="colorSecondaryVariant">@color/iris_60_a5a6f6</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
@@ -29,7 +29,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">13sp</item>
         <item name="android:lineSpacingExtra">5.5sp</item>
-        <item name="android:textColor">@color/blue_main</item>
+        <item name="android:textColor">@color/blue_main_0f6fff</item>
     </style>
 
     <style name="HeaderH3">
@@ -37,7 +37,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">17sp</item>
         <item name="android:lineSpacingExtra">6sp</item>
-        <item name="android:textColor">@color/black_sub</item>
+        <item name="android:textColor">@color/black_sub_212429</item>
     </style>
 
     <style name="HeaderH5">
@@ -45,7 +45,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4.9sp</item>
-        <item name="android:textColor">@color/black_sub</item>
+        <item name="android:textColor">@color/black_sub_212429</item>
     </style>
 
     <style name="HeaderH9">
@@ -53,7 +53,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">10sp</item>
         <item name="android:lineSpacingExtra">3sp</item>
-        <item name="android:textColor">@color/blue_main</item>
+        <item name="android:textColor">@color/blue_main_0f6fff</item>
     </style>
 
     <style name="TextStyle2">
@@ -62,7 +62,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">13sp</item>
         <item name="android:lineSpacingExtra">5sp</item>
-        <item name="android:textColor">@color/gray5_sub</item>
+        <item name="android:textColor">@color/gray5_sub_495057</item>
     </style>
 
     <style name="HeaderH8">
@@ -70,7 +70,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">10sp</item>
-        <item name="android:textColor">@color/gray4_sub</item>
+        <item name="android:textColor">@color/gray4_sub_889098</item>
     </style>
 
     <style name="HeaderH11Android">
@@ -78,7 +78,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">13sp</item>
         <item name="android:lineSpacingExtra">4.3sp</item>
-        <item name="android:textColor">@color/black_sub</item>
+        <item name="android:textColor">@color/black_sub_212429</item>
     </style>
 
     <style name="HeaderH1">
@@ -102,7 +102,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">17sp</item>
         <item name="android:lineSpacingExtra">7.1sp</item>
-        <item name="android:textColor">@color/black_sub</item>
+        <item name="android:textColor">@color/black_sub_212429</item>
     </style>
 
     <style name="HeaderH12Android">
@@ -110,7 +110,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">5.6sp</item>
-        <item name="android:textColor">@color/black_sub</item>
+        <item name="android:textColor">@color/black_sub_212429</item>
     </style>
 
     <style name="HeaderH14">

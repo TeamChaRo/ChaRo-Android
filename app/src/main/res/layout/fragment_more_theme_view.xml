@@ -80,7 +80,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/blue_main" />
+                app:tabSelectedTextColor="@color/blue_main_0f6fff" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager_more_theme"

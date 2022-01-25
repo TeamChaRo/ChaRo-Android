@@ -46,7 +46,7 @@
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
             android:lineHeight="19sp"
-            android:textColor="@color/black_sub"
+            android:textColor="@color/black_sub_212429"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/img_charo_list_profile"
             app:layout_constraintStart_toEndOf="@id/img_charo_list_profile"

@@ -45,7 +45,7 @@
                     android:layout_marginBottom="12dp"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:text="@string/sign_up"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     android:textSize="17sp"
                     android:textStyle="normal"
                     app:layout_constraintBottom_toBottomOf="parent"

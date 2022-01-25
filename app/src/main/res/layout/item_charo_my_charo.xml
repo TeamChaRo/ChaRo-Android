@@ -61,7 +61,7 @@
                 android:lines="2"
                 android:text="@{driveData.title}"
                 android:textAlignment="textStart"
-                android:textColor="@color/black_sub"
+                android:textColor="@color/black_sub_212429"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_my_charo_tag1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
                 android:paddingVertical="2dp"
                 android:text='@{"#" + driveData.region}'
                 android:textAlignment="textStart"
-                android:textColor="@color/blue_main"
+                android:textColor="@color/blue_main_0f6fff"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@id/tv_my_charo_title"
                 app:layout_constraintTop_toTopOf="@id/tv_my_charo_title" />
@@ -98,7 +98,7 @@
                 android:paddingVertical="2dp"
                 android:text='@{"#" + driveData.theme}'
                 android:textAlignment="textStart"
-                android:textColor="@color/blue_main"
+                android:textColor="@color/blue_main_0f6fff"
                 android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@id/tv_my_charo_tag1"
                 app:layout_constraintTop_toTopOf="@id/tv_my_charo_tag1" />
@@ -117,7 +117,7 @@
                 android:text='@{"#" + driveData.warning}'
                 android:visibility="invisible"
                 android:textAlignment="textStart"
-                android:textColor="@color/blue_main"
+                android:textColor="@color/blue_main_0f6fff"
                 android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@id/tv_my_charo_tag2"
                 app:layout_constraintTop_toTopOf="@id/tv_my_charo_tag1" />
@@ -131,7 +131,7 @@
                 android:lineHeight="14.3sp"
                 android:text='@{driveData.year + "." + driveData.month + "." + driveData.day}'
                 android:textAlignment="textStart"
-                android:textColor="@color/gray3_sub"
+                android:textColor="@color/gray3_sub_acb5bd"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_my_charo_title"
@@ -156,7 +156,7 @@
                 android:lineHeight="14.3sp"
                 android:text="@{String.valueOf(driveData.favoriteNum)}"
                 android:textAlignment="textStart"
-                android:textColor="@color/gray4_sub"
+                android:textColor="@color/gray4_sub_889098"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"
                 app:layout_constraintStart_toEndOf="@id/img_my_charo_like"
@@ -182,7 +182,7 @@
                 android:lineHeight="14.3sp"
                 android:text="@{String.valueOf(driveData.saveNum)}"
                 android:textAlignment="textStart"
-                android:textColor="@color/gray4_sub"
+                android:textColor="@color/gray4_sub_889098"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_my_charo_date"
                 app:layout_constraintStart_toEndOf="@id/img_my_charo_save" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="signUpBlankChange" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name= "boxStrokeErrorColor">@color/red_sign_up</item>
+        <item name= "boxStrokeErrorColor">@color/red_sign_up_ff826e</item>
         <item name= "boxStrokeColor">@color/selector_text_input_color</item>
     </style>
 

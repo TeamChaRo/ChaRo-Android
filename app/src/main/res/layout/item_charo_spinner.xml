@@ -11,6 +11,6 @@
     android:paddingHorizontal="20dp"
     android:paddingVertical="10dp"
     android:textAlignment="textStart"
-    android:textColor="@color/gray5_sub"
+    android:textColor="@color/gray5_sub_495057"
     android:textSize="12sp" />
 
