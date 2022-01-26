@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.data.model.mypage.SavedPost
 import com.example.charo_android.data.model.mypage.UserInformation
 import com.example.charo_android.data.model.mypage.WrittenPost
@@ -19,24 +20,24 @@ class MyPageViewModel: ViewModel() {
     // 인기순 작성한 글 정보
     private var _writtenLikeLastId = -1
     private var _writtenLikeLastCount = -1
-    private var _writtenLikePostList = MutableLiveData<List<WrittenPost.Data>>()
-    val writtenLikePost: LiveData<List<WrittenPost.Data>> get() = _writtenLikePostList
+    private var _writtenLikePostList = MutableLiveData<List<Post>>()
+    val writtenLikePost: LiveData<List<Post>> get() = _writtenLikePostList
 
     // 인기순 저장한 글 정보
     private var _savedLikeLastId = -1
     private var _savedLikeLastCount = -1
-    private var _savedLikePostList = MutableLiveData<List<SavedPost.Data>>()
-    val savedLikePostList: LiveData<List<SavedPost.Data>> get() = _savedLikePostList
+    private var _savedLikePostList = MutableLiveData<List<Post>>()
+    val savedLikePostList: LiveData<List<Post>> get() = _savedLikePostList
 
     // 최신순 작성한 글 정보
     private var _writtenNewLastId = -1
-    private var _writtenNewPostList = MutableLiveData<List<WrittenPost.Data>>()
-    val writtenNewPostList: LiveData<List<WrittenPost.Data>> get() = _writtenNewPostList
+    private var _writtenNewPostList = MutableLiveData<List<Post>>()
+    val writtenNewPostList: LiveData<List<Post>> get() = _writtenNewPostList
 
     // 최신순 저장한 글 정보
     private var _savedNewLastId = -1
-    private var _savedNewPostList = MutableLiveData<List<SavedPost.Data>>()
-    val savedNewPostList: LiveData<List<SavedPost.Data>> get() = _savedNewPostList
+    private var _savedNewPostList = MutableLiveData<List<Post>>()
+    val savedNewPostList: LiveData<List<Post>> get() = _savedNewPostList
 
     fun getLikePost() {
         // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
