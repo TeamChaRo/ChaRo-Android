@@ -22,6 +22,17 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("imgRoundBind")
+    fun setRadius9Image(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .placeholder(R.drawable.rectangle_radius_5)
+            .transform(RoundedCorners(9.dpToPx))
+            .into(imageView)
+    }
+
+
+    @JvmStatic
     @BindingAdapter("imgNoRoundBind")
     fun setNoRadiusImage(imageView: ImageView, imageUrl : String){
         Glide.with(imageView.context)
