@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_guest_charo.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/fragment_guest_charo_child.xml" value="0.3233695652173913" />
-        <entry key="app/src/main/res/layout/fragment_my_bottom.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/fragment_my_bottom.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my_charo.xml" value="0.2848731884057971" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/fragment_my_top.xml" value="0.3609375" />
@@ -28,10 +28,11 @@
         <entry key="app/src/main/res/layout/fragment_post_list.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/fragment_saved_post.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_written_post.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_written_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_charo_loading.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/item_charo_my_charo.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/item_detail_image.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/item_my_page_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_profile_post.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3453125" />
         <entry key="app/src/main/res/menu/detail_menu.xml" value="0.3453125" />
