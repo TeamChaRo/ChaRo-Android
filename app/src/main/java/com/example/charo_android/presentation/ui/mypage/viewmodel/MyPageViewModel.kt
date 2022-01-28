@@ -6,13 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.model.mypage.Post
-import com.example.charo_android.data.model.mypage.SavedPost
 import com.example.charo_android.data.model.mypage.UserInformation
-import com.example.charo_android.data.model.mypage.WrittenPost
-import com.example.charo_android.data.repository.remote.mypage.MyPageRepositoryImpl
+import com.example.charo_android.data.repository.repositoryimpl.mypage.MyPageRepositoryImpl
 import kotlinx.coroutines.launch
 
 class MyPageViewModel: ViewModel() {
+    // TODO: DI를 사용하면 뭔가 더 바꿔볼 수 있지 않을까?
+    private val myPageRepositoryImpl = MyPageRepositoryImpl()
+
     // 유저 정보
     private var _userInformation = MutableLiveData<UserInformation>()
     val userInformation: LiveData<UserInformation> get() = _userInformation
@@ -20,31 +21,29 @@ class MyPageViewModel: ViewModel() {
     // 인기순 작성한 글 정보
     private var _writtenLikeLastId = -1
     private var _writtenLikeLastCount = -1
-    private var _writtenLikePostList = MutableLiveData<List<Post>>()
-    val writtenLikePost: LiveData<List<Post>> get() = _writtenLikePostList
+    private var _writtenLikePostList = MutableLiveData<MutableList<Post>>()
+    val writtenLikePostList: LiveData<MutableList<Post>> get() = _writtenLikePostList
 
     // 인기순 저장한 글 정보
     private var _savedLikeLastId = -1
     private var _savedLikeLastCount = -1
-    private var _savedLikePostList = MutableLiveData<List<Post>>()
-    val savedLikePostList: LiveData<List<Post>> get() = _savedLikePostList
+    private var _savedLikePostList = MutableLiveData<MutableList<Post>>()
+    val savedLikePostList: LiveData<MutableList<Post>> get() = _savedLikePostList
 
     // 최신순 작성한 글 정보
     private var _writtenNewLastId = -1
-    private var _writtenNewPostList = MutableLiveData<List<Post>>()
-    val writtenNewPostList: LiveData<List<Post>> get() = _writtenNewPostList
+    private var _writtenNewPostList = MutableLiveData<MutableList<Post>>()
+    val writtenNewPostList: LiveData<MutableList<Post>> get() = _writtenNewPostList
 
     // 최신순 저장한 글 정보
     private var _savedNewLastId = -1
-    private var _savedNewPostList = MutableLiveData<List<Post>>()
-    val savedNewPostList: LiveData<List<Post>> get() = _savedNewPostList
+    private var _savedNewPostList = MutableLiveData<MutableList<Post>>()
+    val savedNewPostList: LiveData<MutableList<Post>> get() = _savedNewPostList
 
     fun getLikePost() {
         // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
         val userEmail = "and@naver.com"
 
-        // TODO: DI를 사용하면 뭔가 더 바꿔볼 수 있지 않을까?
-        val myPageRepositoryImpl = MyPageRepositoryImpl()
         viewModelScope.launch {
             try {
                 val response = myPageRepositoryImpl.getLikePost(userEmail).data
@@ -70,8 +69,6 @@ class MyPageViewModel: ViewModel() {
         // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
         val userEmail = "and@naver.com"
 
-        // TODO: DI를 사용하면 뭔가 더 바꿔볼 수 있지 않을까?
-        val myPageRepositoryImpl = MyPageRepositoryImpl()
         viewModelScope.launch {
             try {
                 val response = myPageRepositoryImpl.getNewPost(userEmail).data
@@ -87,6 +84,84 @@ class MyPageViewModel: ViewModel() {
                 Log.e("mlog: MyPageViewModel::getLikePost", "${e.code()}, ${e.message()}")
             } catch (t: Throwable) {
                 Log.e("mlog: MyPageViewModel::getLikePost", t.message.toString())
+            }
+        }
+    }
+
+    fun getMoreWrittenLikePost() {
+        // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
+        val userEmail = "and@naver.com"
+
+        viewModelScope.launch {
+            try {
+                val response = myPageRepositoryImpl.getMoreWrittenLikePost(userEmail, _writtenLikeLastId, _writtenLikeLastCount).data
+                // 인기순 작성한 글 정보
+                _writtenLikePostList.value?.addAll(response.drive)
+                _writtenLikeLastId = response.lastId
+                _writtenLikeLastCount = response.lastCount
+                Log.d("mlog: MyPageViewModel::getMoreWrittenLikePost", "success")
+            } catch (e: retrofit2.HttpException) {
+                Log.d("mlog: MyPageViewModel::getMoreWrittenLikePost", "${e.code()}, ${e.message()}")
+            } catch (t: Throwable) {
+                Log.e("mlog: MyPageViewModel::getMoreWrittenLikePost", t.message.toString())
+            }
+        }
+    }
+
+    fun getMoreWrittenNewPost() {
+        // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
+        val userEmail = "and@naver.com"
+
+        viewModelScope.launch {
+            try {
+                val response = myPageRepositoryImpl.getMoreWrittenNewPost(userEmail, _writtenNewLastId).data
+                // 인기순 작성한 글 정보
+                _writtenNewPostList.value?.addAll(response.drive)
+                _writtenNewLastId = response.lastId
+                Log.d("mlog: MyPageViewModel::getMoreWrittenNewPost", "success")
+            } catch (e: retrofit2.HttpException) {
+                Log.d("mlog: MyPageViewModel::getMoreWrittenNewPost", "${e.code()}, ${e.message()}")
+            } catch (t: Throwable) {
+                Log.e("mlog: MyPageViewModel::getMoreWrittenNewPost", t.message.toString())
+            }
+        }
+    }
+
+    fun getMoreSavedLikePost() {
+        // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
+        val userEmail = "and@naver.com"
+
+        viewModelScope.launch {
+            try {
+                val response = myPageRepositoryImpl.getMoreSavedLikePost(userEmail, _savedLikeLastId, _savedLikeLastCount).data
+                // 인기순 작성한 글 정보
+                _savedLikePostList.value?.addAll(response.drive)
+                _savedLikeLastId = response.lastId
+                _savedLikeLastCount = response.lastCount
+                Log.d("mlog: MyPageViewModel::getMoreSavedLikePost", "success")
+            } catch (e: retrofit2.HttpException) {
+                Log.d("mlog: MyPageViewModel::getMoreSavedLikePost", "${e.code()}, ${e.message()}")
+            } catch (t: Throwable) {
+                Log.e("mlog: MyPageViewModel::getMoreSavedLikePost", t.message.toString())
+            }
+        }
+    }
+
+    fun getMoreSavedNewPost() {
+        // TODO: userEmail 따로 받아와야 함(ex: sharedPreference)
+        val userEmail = "and@naver.com"
+
+        viewModelScope.launch {
+            try {
+                val response = myPageRepositoryImpl.getMoreSavedNewPost(userEmail, _savedNewLastId).data
+                // 인기순 작성한 글 정보
+                _savedNewPostList.value?.addAll(response.drive)
+                _savedNewLastId = response.lastId
+                Log.d("mlog: MyPageViewModel::getMoreSavedNewPost", "success")
+            } catch (e: retrofit2.HttpException) {
+                Log.d("mlog: MyPageViewModel::getMoreSavedNewPost", "${e.code()}, ${e.message()}")
+            } catch (t: Throwable) {
+                Log.e("mlog: MyPageViewModel::getMoreSavedNewPost", t.message.toString())
             }
         }
     }
