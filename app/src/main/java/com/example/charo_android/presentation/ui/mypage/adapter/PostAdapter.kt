@@ -6,12 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
 import com.example.charo_android.data.model.mypage.Post
-import com.example.charo_android.databinding.ItemProfilePostBinding
+import com.example.charo_android.databinding.ItemMyPagePostBinding
 
 class PostAdapter: RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
     val itemList = mutableListOf<Post>()
 
-    class WrittenPostViewHolder(private val binding: ItemProfilePostBinding): RecyclerView.ViewHolder(binding.root) {
+    class WrittenPostViewHolder(private val binding: ItemMyPagePostBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(model: Post) {
             binding.model = model
             binding.executePendingBindings()
@@ -19,9 +19,9 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WrittenPostViewHolder {
-        val binding = DataBindingUtil.inflate<ItemProfilePostBinding>(
+        val binding = DataBindingUtil.inflate<ItemMyPagePostBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_profile_post,
+            R.layout.item_my_page_post,
             parent,
             false
         )

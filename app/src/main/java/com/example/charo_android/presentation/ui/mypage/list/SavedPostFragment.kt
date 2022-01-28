@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.mypage.list
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,13 +10,16 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSavedPostBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
+import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 
 class SavedPostFragment : Fragment() {
     private var _binding: FragmentSavedPostBinding? = null
     val binding get() = _binding ?: error("binding not initiated")
+    val viewModel by activityViewModels<MyPageViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,8 +70,13 @@ class SavedPostFragment : Fragment() {
             }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initRecyclerView() {
-        val postAdapter = PostAdapter()
-        binding.rvPostList.adapter = postAdapter
+        val savedPostAdapter = PostAdapter()
+        binding.rvPostList.adapter = savedPostAdapter
+        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
+            savedPostAdapter.itemList.addAll(it)
+            savedPostAdapter.notifyDataSetChanged()
+        }
     }
 }

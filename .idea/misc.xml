@@ -5,7 +5,11 @@
       <map>
         <entry key="app/src/main/res/drawable-xxhdpi/background_radius_top_20.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/inset_right_40_left_40.xml" value="0.196875" />
+        <entry key="app/src/main/res/drawable/rectangle_blue_radius_10dp.xml" value="0.2601851851851852" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_5.xml" value="0.2601851851851852" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_9.xml" value="0.25925925925925924" />
         <entry key="app/src/main/res/drawable/rectangle_white.xml" value="0.196875" />
+        <entry key="app/src/main/res/drawable/shape_charo_camera_border.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/custom_dialog_log_out.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/layout/custom_dialog_withdrawal.xml" value="0.18072916666666666" />
@@ -16,12 +20,19 @@
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_guest_charo.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/fragment_guest_charo_child.xml" value="0.3233695652173913" />
+        <entry key="app/src/main/res/layout/fragment_my_bottom.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/fragment_my_charo.xml" value="0.2848731884057971" />
         <entry key="app/src/main/res/layout/fragment_my_page.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/fragment_my_top.xml" value="0.3609375" />
         <entry key="app/src/main/res/layout/fragment_other_charo.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/fragment_post_list.xml" value="0.3609375" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_saved_post.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_written_post.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_charo_loading.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/item_charo_my_charo.xml" value="0.2210144927536232" />
         <entry key="app/src/main/res/layout/item_detail_image.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/item_profile_post.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3453125" />
         <entry key="app/src/main/res/menu/detail_menu.xml" value="0.3453125" />
         <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.3453125" />

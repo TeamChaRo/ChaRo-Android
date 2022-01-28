@@ -8,14 +8,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentProfileBinding
+import com.example.charo_android.databinding.FragmentMyPageBinding
 import com.example.charo_android.presentation.ui.mypage.mine.MyBottomFragment
 import com.example.charo_android.presentation.ui.mypage.mine.MyTopFragment
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 
 // 마이페이지 프래그먼트(본체)
-class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
+class MyPageFragment : Fragment() {
+    private var _binding: FragmentMyPageBinding? = null
     val binding get() = _binding ?: error("binding not initiated")
     val viewModel by activityViewModels<MyPageViewModel>()
 
@@ -24,7 +24,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_profile, container, false)
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_my_page, container, false)
         initFragmentContainerView()
         return binding.root
     }

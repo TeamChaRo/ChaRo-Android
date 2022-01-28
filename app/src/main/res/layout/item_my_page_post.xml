@@ -29,8 +29,11 @@
             <ImageView
                 android:id="@+id/img_post_photo"
                 imgRoundBind="@{model.image}"
+                android:adjustViewBounds="true"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/rectangle_radius_9dp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_post_date"
                 app:layout_constraintDimensionRatio="114:82"
                 app:layout_constraintStart_toStartOf="parent"
