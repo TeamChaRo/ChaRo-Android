@@ -1,7 +1,7 @@
 package com.example.charo_android.data.model.mypage
 
-data class WrittenPost(
+data class PostInfo(
     val lastId: Int,
     val lastCount: Int,
-    val drive: List<Post>
+    val drive: MutableList<Post>
 )
