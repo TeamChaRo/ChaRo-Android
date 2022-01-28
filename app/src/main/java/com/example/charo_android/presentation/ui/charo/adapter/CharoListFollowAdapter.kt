@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.charo_android.data.model.mypage.User
+import com.example.charo_android.data.model.charo.User
 import com.example.charo_android.databinding.ItemCharoListBinding
 
 class CharoListFollowAdapter(val itemClick: (User) -> Unit) :

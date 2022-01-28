@@ -1,12 +1,11 @@
 package com.example.charo_android.data.api
 
 import com.example.charo_android.data.api.detail.DetailViewService
-import com.example.charo_android.data.api.signin.SignInViewService
-import com.example.charo_android.data.api.more.MoreViewInfiniteService
-import com.example.charo_android.data.api.mypage.MyPageViewFollowService
-import com.example.charo_android.data.api.mypage.MyPageViewLikeService
-import com.example.charo_android.data.api.mypage.MyPageViewMoreService
-import com.example.charo_android.data.api.mypage.MyPageViewNewService
+import com.example.charo_android.data.api.charo.MyPageViewFollowService
+import com.example.charo_android.data.api.charo.MyPageViewLikeService
+import com.example.charo_android.data.api.charo.MyPageViewMoreService
+import com.example.charo_android.data.api.charo.MyPageViewNewService
+import com.example.charo_android.data.api.mypage.MyPageService
 import com.example.charo_android.data.api.write.WriteViewService
 import com.example.charo_android.hidden.Hidden
 
@@ -27,4 +26,7 @@ object ApiService {
     val myPageViewMoreService = retrofit.create(MyPageViewMoreService::class.java)
     val myPageViewFollowService = retrofit.create(MyPageViewFollowService::class.java)
     val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
+
+    // 마이페이지 리팩토링 버전
+    val myPageService: MyPageService = retrofit.create(MyPageService::class.java)
 }

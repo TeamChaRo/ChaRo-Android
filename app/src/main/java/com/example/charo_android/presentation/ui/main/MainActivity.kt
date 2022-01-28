@@ -14,6 +14,7 @@ import com.example.charo_android.databinding.ActivityMainBinding
 import com.example.charo_android.presentation.ui.charo.mypage.CharoFragment
 import com.example.charo_android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
+import com.example.charo_android.presentation.ui.mypage.MyPageFragment
 import com.example.charo_android.presentation.util.replaceFragment
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
@@ -122,7 +123,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
         when (isMyPage) {
-            true -> replaceFragment(charoFragment, userId, nickName)
+//            true -> replaceFragment(charoFragment, userId, nickName)
+            // TODO: 테스트 코드입니다.
+            true -> replaceFragment(MyPageFragment(), userId, nickName)
             false -> replaceFragment(OtherCharoFragment(), userId, nickName)
         }
     }

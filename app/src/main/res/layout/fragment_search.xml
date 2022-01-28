@@ -87,7 +87,7 @@
                 android:layout_marginStart="23dp"
                 android:layout_marginTop="32dp"
                 android:text="@string/today_drive"
-                android:textColor="@color/gray5_sub"
+                android:textColor="@color/gray5_sub_495057"
                 app:layout_constraintStart_toStartOf="@+id/img_search_background"
                 app:layout_constraintTop_toTopOf="@+id/img_search_background" />
 
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120dp"
                 android:text="@string/search_text_1"
-                android:textColor="@color/gray5_sub"
+                android:textColor="@color/gray5_sub_495057"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_search_area_2"
                 app:layout_constraintStart_toStartOf="@id/btn_search_area_2"
                 app:layout_constraintTop_toTopOf="@+id/btn_search_area_2" />
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="125dp"
                 android:text="@string/search_text_2"
-                android:textColor="@color/gray5_sub"
+                android:textColor="@color/gray5_sub_495057"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_search_theme"
                 app:layout_constraintStart_toStartOf="@+id/btn_search_theme"
                 app:layout_constraintTop_toTopOf="@+id/btn_search_theme" />
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="125dp"
                 android:text="@string/search_text_3"
-                android:textColor="@color/gray5_sub"
+                android:textColor="@color/gray5_sub_495057"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_search_caution"
                 app:layout_constraintStart_toStartOf="@+id/btn_search_caution"
                 app:layout_constraintTop_toTopOf="@+id/btn_search_caution" />
@@ -186,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search_start"
-                android:textColor="@color/blue_main"
+                android:textColor="@color/blue_main_0f6fff"
                 app:layout_constraintBottom_toBottomOf="@+id/img_search_start"
                 app:layout_constraintEnd_toEndOf="@+id/img_search_start"
                 app:layout_constraintStart_toStartOf="@id/img_search_start"

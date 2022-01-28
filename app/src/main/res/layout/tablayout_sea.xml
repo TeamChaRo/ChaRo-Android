@@ -26,7 +26,7 @@
             android:includeFontPadding="false"
             android:lineSpacingExtra="5sp"
             android:text="@string/theme_sea"
-            android:textColor="@color/blue_main"
+            android:textColor="@color/blue_main_0f6fff"
             android:textSize="13sp"
             android:textStyle="normal"
             android:layout_marginBottom="8dp"

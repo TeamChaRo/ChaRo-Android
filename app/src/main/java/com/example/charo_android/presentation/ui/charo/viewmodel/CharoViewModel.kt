@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.mypage.*
+import com.example.charo_android.data.model.charo.*
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.enqueueUtil
 import retrofit2.Call

@@ -302,9 +302,9 @@ class DetailFragment : Fragment() {
                     val tMapPolyLine: TMapPolyLine = TMapData().findPathData(from, to)
                     tMapPolyLine.lineWidth = 3F
                     tMapPolyLine.outLineColor =
-                        ContextCompat.getColor(requireContext(), R.color.blue_main)
+                        ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
                     tMapPolyLine.lineColor =
-                        ContextCompat.getColor(requireContext(), R.color.blue_main)
+                        ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
                     tMapView.addTMapPolyLine("tMapPolyLine$i", tMapPolyLine)
                 }
                 setCenter(tMapView)

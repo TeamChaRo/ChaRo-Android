@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.example.charo_android.data.model.mypage.Post" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_post_photo"
+                imgRoundBind="@{model.image}"
+                android:adjustViewBounds="true"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:background="@drawable/rectangle_radius_9dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_post_date"
+                app:layout_constraintDimensionRatio="114:82"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_post_title" />
+
+            <TextView
+                android:id="@+id/tv_post_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="19sp"
+                android:lines="2"
+                android:text="@{model.title}"
+                android:textColor="@color/black_sub_212429"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_post_photo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_post_tag_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/rectangle_blue_radius_10dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:text="@{model.region}"
+                android:textColor="@color/blue_main_0f6fff"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@id/tv_post_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_post_title" />
+
+            <TextView
+                android:id="@+id/tv_post_tag_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/rectangle_blue_radius_10dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:text="@{model.theme}"
+                android:textColor="@color/blue_main_0f6fff"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@id/tv_post_tag_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_post_title" />
+
+            <TextView
+                android:id="@+id/tv_post_tag_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/rectangle_blue_radius_10dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="2dp"
+                android:text="@{model.warning}"
+                android:visibility="@{model.warning.length() == 0 ? View.INVISIBLE : View.VISIBLE}"
+                android:textColor="@color/blue_main_0f6fff"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@id/tv_post_tag_2"
+                app:layout_constraintTop_toBottomOf="@id/tv_post_title" />
+
+            <TextView
+                android:id="@+id/tv_post_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="9dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@{model.year + `.` + model.month + `.` + model.day}"
+                android:textColor="@color/gray3_sub_acb5bd"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="@id/tv_post_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_post_tag_1" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_post_like"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_post_like"
+                app:layout_constraintEnd_toStartOf="@id/tv_post_like"
+                app:layout_constraintTop_toTopOf="@id/tv_post_like">
+
+                <ImageView
+                    android:id="@+id/img_post_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@{model.favorite ? @drawable/ic_heart_active : @drawable/ic_heart_inactive}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_post_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="7dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@{Integer.toString(model.favoriteNum)}"
+                android:textColor="@color/gray4_sub_889098"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cl_post_save" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_post_save"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_post_save"
+                app:layout_constraintEnd_toStartOf="@id/tv_post_save"
+                app:layout_constraintTop_toTopOf="@id/tv_post_save">
+
+                <ImageView
+                    android:id="@+id/img_post_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_save_5_inactive"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_post_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@{Integer.toString(model.saveNum)}"
+                android:textColor="@color/gray4_sub_889098"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray2_sub_dde2e5"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

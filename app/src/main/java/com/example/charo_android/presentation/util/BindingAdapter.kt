@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.charo_android.R
 import com.google.android.material.chip.Chip
 
 object BindingAdapter {
@@ -19,6 +20,17 @@ object BindingAdapter {
             .transform(RoundedCorners(20.dpToPx))
             .into(imageView)
     }
+
+    @JvmStatic
+    @BindingAdapter("imgRoundBind")
+    fun setRadius9Image(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .placeholder(R.drawable.rectangle_radius_5)
+            .transform(RoundedCorners(9.dpToPx))
+            .into(imageView)
+    }
+
 
     @JvmStatic
     @BindingAdapter("imgNoRoundBind")
@@ -44,6 +56,18 @@ object BindingAdapter {
             .transform(RoundedCorners(20.dpToPx))
             .centerCrop()
             .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("setCircleImageUrl")
+    fun setCircleImageUrl(imageView: ImageView, imageUrl: String?) {
+        if(imageUrl != null) {
+            Glide.with(imageView.context)
+                .load(imageUrl)
+                .circleCrop()
+                .placeholder(R.drawable.rectangle_radius_5)
+                .into(imageView)
+        }
     }
 
     @JvmStatic

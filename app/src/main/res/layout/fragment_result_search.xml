@@ -111,7 +111,7 @@
                 android:background="@drawable/shape_charo_hashtag"
                 app:chipBackgroundColor="@color/white"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeColor="@color/blue_main"
+                app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -125,7 +125,7 @@
                 android:background="@drawable/shape_charo_hashtag"
                 app:chipBackgroundColor="@color/white"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeColor="@color/blue_main"
+                app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintStart_toEndOf="@id/chip_result_search_1"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -139,7 +139,7 @@
                 android:background="@drawable/shape_charo_hashtag"
                 app:chipBackgroundColor="@color/white"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeColor="@color/blue_main"
+                app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintStart_toEndOf="@id/chip_result_search_2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -150,11 +150,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:textColor="@color/gray4_sub"
+                android:textColor="@color/gray4_sub_889098"
                 android:background="@drawable/shape_charo_hashtag"
                 app:chipBackgroundColor="@color/white"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeColor="@color/gray4_sub"
+                app:chipStrokeColor="@color/gray4_sub_889098"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintStart_toEndOf="@id/chip_result_search_3"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -183,7 +183,7 @@
                     android:layout_marginTop="143dp"
                     android:layout_marginStart="20dp"
                     android:text="@string/main_charo_more_view_count"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -200,7 +200,7 @@
                     style="@style/HeaderH8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintEnd_toStartOf="@+id/spinner_result_search"
                     app:layout_constraintTop_toTopOf="@+id/spinner_result_search"
                     tools:text="@string/main_charo_theme" />

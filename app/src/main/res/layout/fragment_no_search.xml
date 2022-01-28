@@ -97,7 +97,7 @@
             android:lineHeight="21sp"
             android:text="@string/search_mention"
             android:textAlignment="center"
-            android:textColor="@color/gray5_sub"
+            android:textColor="@color/gray5_sub_495057"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +114,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_no_search_mention"
-            app:tint="@color/blue_main" />
+            app:tint="@color/blue_main_0f6fff" />
 
         <TextView
             android:id="@+id/text_no_search_start"

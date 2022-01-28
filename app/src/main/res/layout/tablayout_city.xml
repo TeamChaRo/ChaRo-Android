@@ -27,7 +27,7 @@
             android:includeFontPadding="false"
             android:lineSpacingExtra="5sp"
             android:text="@string/theme_city"
-            android:textColor="@color/blue_main"
+            android:textColor="@color/blue_main_0f6fff"
             android:textSize="13sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"

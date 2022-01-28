@@ -31,7 +31,7 @@
                     android:text="@string/access"
                     android:textSize="12sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     android:includeFontPadding="false"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                     android:text="@string/main_charo_notice"
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     android:includeFontPadding="false"
                     app:layout_constraintTop_toBottomOf="@+id/text_access"
                     app:layout_constraintStart_toStartOf="@+id/text_access"
@@ -71,7 +71,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_alarm"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_alarm"
                     android:layout_marginTop="17dp"/>
@@ -106,7 +106,7 @@
                     android:includeFontPadding="false"
                     android:textSize="12sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintTop_toBottomOf="@+id/img_access_line"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_image"
                     android:layout_marginTop="22dp"/>
@@ -119,7 +119,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_marketing_agree"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_marketing_agree"
                     android:layout_marginTop="25dp"/>
@@ -154,7 +154,7 @@
                     android:includeFontPadding="false"
                     android:textSize="12sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintTop_toBottomOf="@+id/img_agree_line"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_email_agree"
                     android:layout_marginTop="18dp"/>
@@ -167,7 +167,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     android:clickable="true"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_account"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_account"
@@ -181,7 +181,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_profile_update"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_profile_update"
                     android:layout_marginTop="18dp"/>
@@ -194,7 +194,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_password_update"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_password_update"
                     android:layout_marginTop="18dp"/>
@@ -205,7 +205,7 @@
                     android:layout_height="16dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/switch_email_agree"
                     app:layout_constraintTop_toTopOf="@+id/text_setting_email" />
@@ -229,7 +229,7 @@
                     android:includeFontPadding="false"
                     android:textSize="12sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintTop_toBottomOf="@+id/img_setting_account"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_email"
                     android:layout_marginTop="18dp"/>
@@ -242,7 +242,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_information"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_information"
                     android:layout_marginTop="18dp"/>
@@ -265,7 +265,7 @@
                     android:includeFontPadding="false"
                     android:textSize="12sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintTop_toBottomOf="@+id/img_setting_information"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_notice"
                     android:layout_marginTop="20dp"/>
@@ -278,7 +278,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_cs"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_cs"
                     android:layout_marginTop="18dp"/>
@@ -302,7 +302,7 @@
                     android:includeFontPadding="false"
                     android:textSize="12sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:textColor="@color/gray5_sub"
+                    android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintTop_toBottomOf="@+id/img_setting_cs"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_cs_query"
                     android:layout_marginTop="18dp"/>
@@ -315,7 +315,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_terms"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_terms"
                     android:layout_marginTop="18dp"/>
@@ -328,7 +328,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_privacy"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_privacy"
                     android:layout_marginTop="18dp"/>
@@ -341,7 +341,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black_sub"
+                    android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_service"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_service"
                     android:layout_marginTop="18dp"/>
@@ -354,7 +354,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/unchecked_box"
+                    android:textColor="@color/unchecked_box_acb5bd"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_open_source"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_open_source"
                     android:layout_marginTop="18dp"/>
@@ -368,7 +368,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/unchecked_box"
+                    android:textColor="@color/unchecked_box_acb5bd"
                     app:layout_constraintTop_toTopOf="@+id/text_setting_version"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="20dp"/>
@@ -381,7 +381,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/blue_main"
+                    android:textColor="@color/blue_main_0f6fff"
                     android:clickable="true"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_version"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_version"
@@ -395,7 +395,7 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
-                    android:textColor="@color/red_sign_up"
+                    android:textColor="@color/red_sign_up_ff826e"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_logout"
                     app:layout_constraintStart_toStartOf="@+id/text_setting_logout"
                     android:layout_marginTop="18dp"/>

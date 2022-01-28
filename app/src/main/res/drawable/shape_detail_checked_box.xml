@@ -4,6 +4,6 @@
     <corners android:radius="21dp" />
     <stroke
         android:width="1dp"
-        android:color="@color/checked_box" />
+        android:color="@color/checked_box_6ca6ff" />
     <solid android:color="@color/white" />
 </shape>
