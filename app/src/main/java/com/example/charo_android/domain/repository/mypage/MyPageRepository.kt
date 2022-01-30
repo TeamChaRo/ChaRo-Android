@@ -1,4 +1,4 @@
-package com.example.charo_android.data.repository.remote.mypage
+package com.example.charo_android.domain.repository.mypage
 
 import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
 import com.example.charo_android.data.model.mypage.ResponseMyPage

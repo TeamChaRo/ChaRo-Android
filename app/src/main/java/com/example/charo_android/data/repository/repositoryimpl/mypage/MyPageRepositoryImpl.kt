@@ -2,7 +2,7 @@ package com.example.charo_android.data.repository.repositoryimpl.mypage
 
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.mypage.*
-import com.example.charo_android.data.repository.remote.mypage.MyPageRepository
+import com.example.charo_android.domain.repository.mypage.MyPageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
