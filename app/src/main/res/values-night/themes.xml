@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.ChaRoAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_main</item>
-        <item name="colorPrimaryVariant">@color/blue_52</item>
+        <item name="colorPrimary">@color/blue_main_0f6fff</item>
+        <item name="colorPrimaryVariant">@color/blue_5297ff</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/iris_100</item>
-        <item name="colorSecondaryVariant">@color/iris_60</item>
+        <item name="colorSecondary">@color/iris_100_5d5fef</item>
+        <item name="colorSecondaryVariant">@color/iris_60_a5a6f6</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>

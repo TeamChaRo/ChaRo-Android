@@ -115,7 +115,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 .setSingleChoiceItems(themeUtil.itemTheme, searchItem) { dialog, which ->
                     binding.apply {
                         btnSearchTheme.setText(themeUtil.itemTheme[which])
-                        btnSearchTheme.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                        btnSearchTheme.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                         imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                         textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                         textSearchStart.setPadding(0, 0, 0, 20)
@@ -147,7 +147,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 ) { dialog, which ->
                     binding.apply {
                         btnSearchCaution.setText(themeUtil.itemCaution[which])
-                        btnSearchCaution.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                        btnSearchCaution.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                         imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                         textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                         textSearchStart.setPadding(0, 0, 0, 20)
@@ -177,7 +177,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 ) { dialog, which ->
                     binding.apply {
                         btnSearchArea1.setText(locationUtil.itemProvince[which])
-                        btnSearchArea1.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                        btnSearchArea1.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                         imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                         textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                         textSearchStart.setPadding(0, 0, 0, 20)
@@ -209,7 +209,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemSpecial[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -237,7 +237,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemMetroPolitan[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -265,7 +265,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemGyounGi[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -293,7 +293,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemGangWon[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -321,7 +321,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemChoongChungNam[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -349,7 +349,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemChoongChungBuk[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -378,7 +378,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemGyungSangBuk[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -406,7 +406,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemGyungSanNam[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -434,7 +434,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemJungLaBuk[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)
@@ -462,7 +462,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         ) { dialog, which ->
                             binding.apply {
                                 btnSearchArea2.setText(locationUtil.itemJungLaNam[which])
-                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main))
+                                btnSearchArea2.setTextColor(getColor(requireActivity(),R.color.blue_main_0f6fff))
                                 imgSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
                                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                                 textSearchStart.setPadding(0, 0, 0, 20)

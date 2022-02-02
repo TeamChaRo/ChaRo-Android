@@ -32,7 +32,7 @@
         android:id="@+id/tv_detail_like_nickname"
         tools:text="userName"
         android:fontFamily="@font/notosanscjkkr_medium"
-        android:textColor="@color/black_sub"
+        android:textColor="@color/black_sub_212429"
         android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@id/img_detail_like_image_border"
         android:layout_marginStart="10dp"

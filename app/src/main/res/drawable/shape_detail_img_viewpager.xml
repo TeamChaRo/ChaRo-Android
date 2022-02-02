@@ -2,5 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners android:radius="40dp"/>
-    <solid android:color="@color/unchecked_box"/>
+    <solid android:color="@color/unchecked_box_acb5bd"/>
 </shape>

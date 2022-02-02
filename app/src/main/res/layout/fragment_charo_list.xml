@@ -33,7 +33,7 @@
             android:layout_marginTop="34dp"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
-            android:textColor="@color/black_sub"
+            android:textColor="@color/black_sub_212429"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,9 +49,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_charo_list_title"
-            app:tabSelectedTextColor="@color/blue_main"
+            app:tabSelectedTextColor="@color/blue_main_0f6fff"
             app:tabTextAppearance="@style/charoListTabText"
-            app:tabTextColor="@color/gray4_sub" />
+            app:tabTextColor="@color/gray4_sub_889098" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_charo_list"
