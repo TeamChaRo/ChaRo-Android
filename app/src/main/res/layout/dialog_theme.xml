@@ -52,7 +52,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray2_sub"
+        android:background="@color/gray2_sub_dde2e5"
         app:layout_constraintTop_toBottomOf="@+id/text_dialog_theme_complete"
         />
 

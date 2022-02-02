@@ -73,7 +73,7 @@
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:includeFontPadding="false"
                 android:lineHeight="20sp"
-                android:textColor="@color/black_sub"
+                android:textColor="@color/black_sub_212429"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/tv_alarm_status"
                 app:layout_constraintTop_toBottomOf="@+id/tv_alarm_status"
