@@ -8,6 +8,7 @@ import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.more.MoreNewViewService
 import com.example.charo_android.data.api.more.MoreViewService
+import com.example.charo_android.data.api.mypage.MyPageService
 import com.example.charo_android.data.api.search.SearchViewService
 import com.example.charo_android.data.api.setting.SettingViewService
 import com.example.charo_android.data.api.signin.SignInViewService
@@ -39,45 +40,49 @@ val networkModule = module {
         get<Retrofit>().create(HomeViewService::class.java)
     }
 
-    single<SignUpEmailCheckViewService>{
+    single<SignUpEmailCheckViewService> {
         get<Retrofit>().create(SignUpEmailCheckViewService::class.java)
     }
 
-    single<MoreViewInfiniteService>{
+    single<MoreViewInfiniteService> {
         get<Retrofit>().create(MoreViewInfiniteService::class.java)
     }
 
-    single<MoreViewService>{
+    single<MoreViewService> {
         get<Retrofit>().create(MoreViewService::class.java)
     }
 
-    single<MoreNewViewService>{
+    single<MoreNewViewService> {
         get<Retrofit>().create(MoreNewViewService::class.java)
     }
 
-    single<SignUpEmailCertificationViewService>{
+    single<SignUpEmailCertificationViewService> {
         get<Retrofit>().create(SignUpEmailCertificationViewService::class.java)
     }
 
-    single<SignUpNickNameCheckViewService>{
+    single<SignUpNickNameCheckViewService> {
         get<Retrofit>().create(SignUpNickNameCheckViewService::class.java)
     }
-    single<SignUpRegisterService>{
+    single<SignUpRegisterService> {
         get<Retrofit>().create(SignUpRegisterService::class.java)
     }
 
-    single<SearchViewService>{
+    single<SearchViewService> {
         get<Retrofit>().create(SearchViewService::class.java)
     }
 
-    single<KakaoSignInService>{
+    single<KakaoSignInService> {
         get<Retrofit>().create(KakaoSignInService::class.java)
     }
-    single<SignInViewService>{
+    single<SignInViewService> {
         get<Retrofit>().create(SignInViewService::class.java)
     }
-    single<SettingViewService>{
+    single<SettingViewService> {
         get<Retrofit>().create(SettingViewService::class.java)
+    }
+    // SH
+    single<MyPageService> {
+        get<Retrofit>().create(MyPageService::class.java)
     }
 }
 
