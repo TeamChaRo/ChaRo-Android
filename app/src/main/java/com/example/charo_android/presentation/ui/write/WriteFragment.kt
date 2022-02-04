@@ -54,10 +54,6 @@ class WriteFragment : Fragment() {
     companion object {
         fun newInstance() = WriteFragment()
     }
-    // viewPager2 뷰 객체 초기화를 액티비티 lifecycle에 맞게 지연시킴
-    private lateinit var viewPager2: ViewPager2
-    private lateinit var tabLayout: TabLayout
-
     private var _binding: FragmentWriteBinding? = null
     private lateinit var writeAdapter: WriteAdapter
 
