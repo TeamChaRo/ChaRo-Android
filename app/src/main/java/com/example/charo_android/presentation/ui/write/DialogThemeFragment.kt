@@ -1,15 +1,17 @@
 package com.example.charo_android.presentation.ui.write
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.charo_android.R
 import com.example.charo_android.databinding.DialogThemeBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -40,6 +42,9 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initDialog()
+        binding.ivCloseTheme.setOnClickListener {
+            dismiss()
+        }
 
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutMountain, binding.innerTheme.chipTextMountain, binding.innerTheme.chipSelectMountain))
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutSea, binding.innerTheme.chipTextSea, binding.innerTheme.chipSelectSea))
@@ -56,8 +61,56 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutSpeed, binding.innerTheme.chipTextSpeed, binding.innerTheme.chipSelectSpeed))
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutNight, binding.innerTheme.chipTextNight, binding.innerTheme.chipSelectNight))
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutCity, binding.innerTheme.chipTextCity, binding.innerTheme.chipSelectCity))
+        clickTheme(WriteThemeData(binding.innerTheme.chipLayoutNoSelect, binding.innerTheme.chipTextNoSelect, binding.innerTheme.chipSelectNoSelect))
 
-        sharedViewModel.theme.value = selectedThemeList
+    }
+
+    private fun initDialog() {
+        (dialog as BottomSheetDialog).behavior.apply {
+            isFitToContents = false
+//            state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        }
+    }
+
+    private fun btnComplete(){
+        if(selectedThemeList.isNotEmpty()){
+            binding.textDialogThemeComplete.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff))
+
+            binding.textDialogThemeComplete.setOnClickListener{
+                sharedViewModel.theme.value = selectedThemeList
+                dismiss()
+            }
+        }else{
+            binding.textDialogThemeComplete.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray3_sub_acb5bd))
+        }
+    }
+
+    //선택 예외처리
+    private fun isPossibleSelect(themeData : WriteThemeData){
+        //선택안함 선택 후 다른 테마 선택 불가
+        if(themeData.textView.text != "선택안함" && selectedThemeList.contains("선택안함")){
+            AlertDialog.Builder(requireContext())
+                .setMessage("테마를 추가로 선택하려면 '선택안함'을 취소 후 다시 선택해 주세요.")
+                .setPositiveButton("확인") { dialog, which -> }
+                .show()
+
+            selectedThemeList.remove(themeData.textView.text as String)
+            themeData.seqView.visibility = View.GONE
+            themeData.layout.isSelected = false
+            return
+        }
+
+        //최대 선택 가능 테마 3개
+        if(selectedThemeList.size > 3){
+            AlertDialog.Builder(requireContext())
+                .setMessage("테마는 3개까지만 선택할 수 있습니다.")
+                .setPositiveButton("확인") { dialog, which -> }
+                .show()
+
+            selectedThemeList.remove(themeData.textView.text as String)
+            themeData.seqView.visibility = View.GONE
+            themeData.layout.isSelected = false
+        }
     }
 
     //선택한 테마 표시
@@ -69,11 +122,13 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
 
             if(it.isSelected){
                 selectedThemeList.add(themeData.textView.text as String)
+                isPossibleSelect(themeData)
             }else{
                 selectedThemeList.remove(themeData.textView.text as String)
                 themeData.seqView.visibility = View.GONE
             }
 
+            btnComplete()
             //테마 선택한 순서대로 숫자 설정
             setSelectSequence(chipTextMap)
         }
@@ -87,10 +142,5 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun initDialog() {
-        (dialog as BottomSheetDialog).behavior.apply {
-            isFitToContents = false
-            state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        }
-    }
+
 }

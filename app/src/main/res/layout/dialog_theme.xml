@@ -7,8 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:behavior_draggable="true"
-    app:behavior_peekHeight="700dp"
+    app:behavior_hideable="true"
+    app:behavior_halfExpandedRatio="0.7"
     tools:context=".presentation.ui.write.DialogThemeFragment"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     >
 
     <ImageView
@@ -43,7 +45,7 @@
         android:gravity="center"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
         android:textSize="17sp"
-        android:textColor="#ACB5BD"
+        android:textColor="@color/gray3_sub_acb5bd"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
