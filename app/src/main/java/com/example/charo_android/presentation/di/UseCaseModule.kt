@@ -40,7 +40,6 @@ val useCaseModule = module {
     single { PostRemoteKaKaoSignUpRegisterUseCase(get()) }
     single { GetRemoteMoreViewInfiniteUseCase(get()) }
     // SH
-    single { GetRemoteUserInformationUseCase(get()) }
     single { GetRemoteLikePostUseCase(get()) }
     single { GetRemoteNewPostUseCase(get()) }
     single { GetRemoteMoreWrittenLikePostUseCase(get()) }

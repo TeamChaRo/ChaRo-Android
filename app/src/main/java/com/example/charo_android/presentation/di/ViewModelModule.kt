@@ -22,5 +22,5 @@ val viewModelModule = module {
     viewModel { SocialSignInViewModel(get()) }
     viewModel { EmailSignInViewModel(get()) }
     // SH
-    viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
 }

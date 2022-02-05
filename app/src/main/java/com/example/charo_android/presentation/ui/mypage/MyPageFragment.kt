@@ -19,7 +19,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MyPageFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     val binding get() = _binding ?: error("binding not initiated")
-//    val viewModel: MyPageViewModel by activityViewModels()
     val viewModel: MyPageViewModel by sharedViewModel()
 
     override fun onCreateView(
@@ -35,7 +34,8 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // 내 마이페이지 보는 경우
-        viewModel.getUserInformation()
+        viewModel.getLikePost()
+        viewModel.getNewPost()
         viewModel.userInfo.observe(viewLifecycleOwner) {
             Log.d("mlog: MyPageFragment::onViewCreated", it.nickname)
         }
