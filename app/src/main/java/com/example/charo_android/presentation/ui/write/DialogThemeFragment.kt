@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
@@ -20,7 +21,9 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
 
     private val selectedThemeList: ArrayList<String> = ArrayList()
-    private val chipTextMap : HashMap<String, TextView> = HashMap()
+    private val chipSeqMap : HashMap<String, TextView> = HashMap()  //"산", chipSelectMountain (selectSeqTextView)
+    private val chipTextMap : HashMap<String, TextView> = HashMap()  //"산", chipTextMountain
+    private val isSelectMap : HashMap<TextView, ConstraintLayout> = HashMap()
 
     private val sharedViewModel: WriteSharedViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
@@ -63,12 +66,13 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutCity, binding.innerTheme.chipTextCity, binding.innerTheme.chipSelectCity))
         clickTheme(WriteThemeData(binding.innerTheme.chipLayoutNoSelect, binding.innerTheme.chipTextNoSelect, binding.innerTheme.chipSelectNoSelect))
 
+        setBeforeTheme(chipSeqMap)
+
     }
 
     private fun initDialog() {
         (dialog as BottomSheetDialog).behavior.apply {
             isFitToContents = false
-//            state = BottomSheetBehavior.STATE_HALF_EXPANDED
         }
     }
 
@@ -88,10 +92,11 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
     //선택 예외처리
     private fun isPossibleSelect(themeData : WriteThemeData){
         //선택안함 선택 후 다른 테마 선택 불가
-        if(themeData.textView.text != "선택안함" && selectedThemeList.contains("선택안함")){
+        val noSelect : String = getString(R.string.no_select)
+        if(themeData.textView.text != noSelect && selectedThemeList.contains(noSelect)){
             AlertDialog.Builder(requireContext())
                 .setMessage("테마를 추가로 선택하려면 '선택안함'을 취소 후 다시 선택해 주세요.")
-                .setPositiveButton("확인") { dialog, which -> }
+                .setPositiveButton(R.string.agreement) { dialog, which -> }
                 .show()
 
             selectedThemeList.remove(themeData.textView.text as String)
@@ -104,7 +109,7 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         if(selectedThemeList.size > 3){
             AlertDialog.Builder(requireContext())
                 .setMessage("테마는 3개까지만 선택할 수 있습니다.")
-                .setPositiveButton("확인") { dialog, which -> }
+                .setPositiveButton(R.string.agreement) { dialog, which -> }
                 .show()
 
             selectedThemeList.remove(themeData.textView.text as String)
@@ -115,32 +120,47 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
 
     //선택한 테마 표시
     private fun clickTheme(themeData : WriteThemeData){
-        chipTextMap[themeData.textView.text as String] = themeData.seqView
+        chipTextMap[themeData.textView.text as String] = themeData.textView
+        chipSeqMap[themeData.textView.text as String] = themeData.seqView
+        isSelectMap[themeData.seqView] = themeData.layout
 
         themeData.layout.setOnClickListener{
             it.isSelected = !it.isSelected
 
             if(it.isSelected){
                 selectedThemeList.add(themeData.textView.text as String)
+                themeData.textView.isSelected = true
                 isPossibleSelect(themeData)
             }else{
                 selectedThemeList.remove(themeData.textView.text as String)
                 themeData.seqView.visibility = View.GONE
+                themeData.textView.isSelected = false
             }
 
             btnComplete()
             //테마 선택한 순서대로 숫자 설정
-            setSelectSequence(chipTextMap)
+            setSelectSequence(chipSeqMap)
         }
     }
-    
-    private fun setSelectSequence(chipTextMap : HashMap<String, TextView>){
+
+    private fun setSelectSequence(chipSeqMap : HashMap<String, TextView>){
         for(i in 0 until selectedThemeList.count()){
             val index = i + 1
-            chipTextMap[selectedThemeList[i]]?.text = index.toString()
-            chipTextMap[selectedThemeList[i]]?.visibility = View.VISIBLE
+            chipSeqMap[selectedThemeList[i]]?.text = index.toString()
+            chipSeqMap[selectedThemeList[i]]?.visibility = View.VISIBLE
         }
     }
 
+    private fun setBeforeTheme(chipSeqMap : HashMap<String, TextView>){
+        //이전에 선택한 테마 유지
+        for(i in 0 until (sharedViewModel.theme.value?.count() ?: 0)){
+            val index = i + 1
+            chipSeqMap[sharedViewModel.theme.value?.get(i)]?.text = index.toString()
+            chipSeqMap[sharedViewModel.theme.value?.get(i)]?.visibility = View.VISIBLE
 
+            selectedThemeList.add(sharedViewModel.theme.value?.get(i) as String)
+            chipTextMap[sharedViewModel.theme.value?.get(i)]?.isSelected = true //TextView select
+            isSelectMap[chipSeqMap[sharedViewModel.theme.value?.get(i)]]?.isSelected = true //layout select
+        }
+    }
 }

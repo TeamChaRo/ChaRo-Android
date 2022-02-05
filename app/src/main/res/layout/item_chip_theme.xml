@@ -49,7 +49,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="산"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_mountain"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,7 +91,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="바다"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_sea"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,7 +133,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="호수"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_lake"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -180,7 +183,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="강"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_river"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -221,7 +225,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="봄"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_spring"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,7 +267,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="여름"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_summer"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -311,7 +317,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="가을"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_fall"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -352,7 +359,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="겨울"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_winter"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -393,7 +401,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="해안도로"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_ocean_drive"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -442,7 +451,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="벚꽃"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_blossom"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -483,7 +493,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="단풍"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_maple"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -524,7 +535,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="여유"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_relax"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -573,7 +585,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="스피드"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_speed"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -614,7 +627,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="야경"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_night_view"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -655,7 +669,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="도심"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/theme_city"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -703,7 +718,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:gravity="center"
-                android:text="선택안함"
+                android:textColor="@drawable/selector_text_color"
+                android:text="@string/no_select"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout

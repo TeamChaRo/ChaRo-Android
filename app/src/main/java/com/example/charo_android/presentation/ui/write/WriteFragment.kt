@@ -16,8 +16,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -274,6 +276,32 @@ class WriteFragment : Fragment() {
         //버튼 selected 상태 변화 함수
         setButtonClickEvent()
 
+        //테마 변경 실시간 적용
+        sharedViewModel.theme.observe(viewLifecycleOwner, Observer<ArrayList<String>> { newTheme ->
+            val textView = arrayOfNulls<TextView>(3)
+            var theme : Int
+
+            for(i in 0 until 3){
+                theme = resources.getIdentifier("btn_write_theme${i+1}","id", activity?.packageName)
+                textView[i] = view?.findViewById(theme)
+
+                //초기화   "테마${i+1}"
+                textView[i]?.text = getString(resources.getIdentifier("theme${i+1}","string", activity?.packageName))
+                textView[i]?.isSelected = false
+            }
+
+            for(i in 0 until newTheme.count()){
+                //재설정
+                textView[i]?.text = newTheme[i]
+                textView[i]?.isSelected = true
+            }
+        })
+
+
+
+
+
+
         // 지역(도 단위)
         binding.btnWriteRegion.setOnClickListener() {
             val checkedItem = 0
@@ -284,7 +312,7 @@ class WriteFragment : Fragment() {
                 .setTitle("지역")
                 .setNeutralButton("취소") { dialog, which ->
                     binding.btnWriteRegion.text = resources.getString(R.string.region)
-                    binding.btnWriteLocation.text = "시 단위"
+                    binding.btnWriteLocation.text = resources.getString(R.string.city)
                     binding.btnWriteLocation.isSelected = false
                     it.isSelected = false
                 }
@@ -299,7 +327,7 @@ class WriteFragment : Fragment() {
                     //which : index
                     binding.btnWriteRegion.text = itemProvince[which]
                     if(itemProvince[which] !=  sharedViewModel.province.value){
-                        binding.btnWriteLocation.text = "시 단위"
+                        binding.btnWriteLocation.text = resources.getString(R.string.city)
                         binding.btnWriteLocation.isSelected = false
                     }
 
@@ -408,70 +436,12 @@ class WriteFragment : Fragment() {
 
         binding.btnWriteTheme1.setOnClickListener {
             openBottomSheetDialog()
-
-//            MaterialAlertDialogBuilder(this)
-//                .setTitle(resources.getString(R.string.theme1))
-//                .setNeutralButton("취소") { dialog, which ->
-//                    binding.btnWriteTheme1.text = resources.getString(R.string.theme1)
-//                    it.isSelected = false
-//                }
-//                .setPositiveButton("확인") { dialog, which ->
-//                    if (binding.btnWriteTheme1.text.toString() == resources.getString(R.string.theme1)) {
-//                        it.isSelected = false
-//                    }
-//                    it.isSelected = true
-//                }
-//                // Single-choice items (initialized with checked item)
-//                .setSingleChoiceItems(ItemsTheme, checkedItem) { dialog, which ->
-//                    //which : index
-//                    //테마 고르면 텍스트 변경
-//                    binding.btnWriteTheme1.text = ItemsTheme[which]
-//                }
-//                .show()
         }
         binding.btnWriteTheme2.setOnClickListener {
-            val checkedItem = 0
-//            MaterialAlertDialogBuilder(this)
-//                .setTitle(resources.getString(R.string.theme2))
-//                .setNeutralButton("취소") { dialog, which ->
-//                    binding.btnWriteTheme2.text = resources.getString(R.string.theme2)
-//                    it.isSelected = false
-//                }
-//                .setPositiveButton("확인") { dialog, which ->
-//                    if (binding.btnWriteTheme1.text.toString() == resources.getString(R.string.theme2)) {
-//                        it.isSelected = false
-//                    }
-//                    it.isSelected = true
-//                }
-//                // Single-choice items (initialized with checked item)
-//                .setSingleChoiceItems(ItemsTheme, checkedItem) { dialog, which ->
-//                    //which : index
-//                    //테마 고르면 텍스트 변경
-//                    binding.btnWriteTheme2.text = ItemsTheme[which]
-//                }
-//                .show()
+            openBottomSheetDialog()
         }
         binding.btnWriteTheme3.setOnClickListener {
-            val checkedItem = 0
-//            MaterialAlertDialogBuilder(this)
-//                .setTitle(resources.getString(R.string.theme3))
-//                .setNeutralButton("취소") { dialog, which ->
-//                    binding.btnWriteTheme3.text = resources.getString(R.string.theme3)
-//                    it.isSelected = false
-//                }
-//                .setPositiveButton("확인") { dialog, which ->
-//                    if (binding.btnWriteTheme3.text.toString() == resources.getString(R.string.theme3)) {
-//                        it.isSelected = false
-//                    }
-//                    it.isSelected = true
-//                }
-//                // Single-choice items (initialized with checked item)
-//                .setSingleChoiceItems(ItemsTheme, checkedItem) { dialog, which ->
-//                    //which : index
-//                    //테마 고르면 텍스트 변경
-//                    binding.btnWriteTheme3.text = ItemsTheme[which]
-//                }
-//                .show()
+            openBottomSheetDialog()
         }
 
         //주차 - 둘 중 하나만 선택 가능하도록 하기
