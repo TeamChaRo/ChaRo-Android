@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="false">
-        <shape>
-            <stroke android:color="@color/gray2_sub_dde2e5" android:width="1dp" />
-            <corners android:radius="20dp" />
-        </shape>
-    </item>
-    <item android:state_selected="true">
-        <shape>
-            <stroke android:color="@color/blue_main_0f6fff" android:width="1dp" />
-            <solid android:color="@color/blue_select_f3f8ff" />
-            <corners android:radius="20dp" />
-        </shape>
-    </item>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+</shape>

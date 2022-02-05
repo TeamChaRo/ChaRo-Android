@@ -4,6 +4,7 @@ import com.example.charo_android.data.repository.repositoryimpl.home.HomeReposit
 import com.example.charo_android.data.repository.repositoryimpl.more.MoreNewViewRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.more.MoreViewInfiniteRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.more.MoreViewRepositoryImpl
+import com.example.charo_android.data.repository.repositoryimpl.mypage.MyPageRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.search.SearchViewRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.setting.SettingRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.signin.EmailSignInRepositoryImpl
@@ -17,6 +18,7 @@ import com.example.charo_android.domain.repository.home.HomeRepository
 import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewRepository
+import com.example.charo_android.domain.repository.mypage.MyPageRepository
 import com.example.charo_android.domain.repository.search.SearchViewRepository
 import com.example.charo_android.domain.repository.signin.EmailSignInRepository
 import com.example.charo_android.domain.repository.signin.KakaoSignInRepository
@@ -29,14 +31,16 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<HomeRepository> { HomeRepositoryImpl(get()) }
     single<SignUpRepository> { SignUpRepositoryImpl(get()) }
-    single<MoreViewInfiniteRepository>{ MoreViewInfiniteRepositoryImpl(get()) }
-    single<MoreViewRepository>{ MoreViewRepositoryImpl(get()) }
-    single<MoreNewViewRepository>{ MoreNewViewRepositoryImpl(get()) }
-    single<SignUpEmailCertificationRepository>{SignUpEmailCertificationRepositoryImpl(get())}
-    single<SignUpNickNameCheckRepository>{SignUpNickNameCheckRepositoryImpl(get())}
-    single<SignUpRegisterRepository>{SignUpRegisterRepositoryImpl(get())}
-    single<SearchViewRepository>{ SearchViewRepositoryImpl(get()) }
-    single<KakaoSignInRepository>{KakaoSignInRepositoryImpl(get())}
-    single<EmailSignInRepository>{EmailSignInRepositoryImpl(get())}
-    single<SettingRepository>{SettingRepositoryImpl(get())}
+    single<MoreViewInfiniteRepository> { MoreViewInfiniteRepositoryImpl(get()) }
+    single<MoreViewRepository> { MoreViewRepositoryImpl(get()) }
+    single<MoreNewViewRepository> { MoreNewViewRepositoryImpl(get()) }
+    single<SignUpEmailCertificationRepository> { SignUpEmailCertificationRepositoryImpl(get()) }
+    single<SignUpNickNameCheckRepository> { SignUpNickNameCheckRepositoryImpl(get()) }
+    single<SignUpRegisterRepository> { SignUpRegisterRepositoryImpl(get()) }
+    single<SearchViewRepository> { SearchViewRepositoryImpl(get()) }
+    single<KakaoSignInRepository> { KakaoSignInRepositoryImpl(get()) }
+    single<EmailSignInRepository> { EmailSignInRepositoryImpl(get()) }
+    single<SettingRepository> { SettingRepositoryImpl(get()) }
+    // SH
+    single<MyPageRepository> { MyPageRepositoryImpl(get()) }
 }
