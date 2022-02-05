@@ -16,11 +16,12 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWrittenPostBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class WrittenPostFragment : Fragment() {
     private var _binding: FragmentWrittenPostBinding? = null
     val binding get() = _binding ?: error("binding not initialized")
-    private val viewModel by activityViewModels<MyPageViewModel>()
+    val viewModel: MyPageViewModel by sharedViewModel()
     private lateinit var writtenPostAdapter: PostAdapter
     private var sort = LIKE
 
@@ -69,12 +70,11 @@ class WrittenPostFragment : Fragment() {
                     if (position == 0) {
                         Log.d("mlog: WrittenPostFragment::spinner handler", "onItemSelected - 0")
                         sort = LIKE
-                        changeRecyclerViewItemList(sort)
                     } else {
                         Log.d("mlog: WrittenPostFragment::spinner handler", "onItemSelected - 1")
                         sort = NEW
-                        changeRecyclerViewItemList(sort)
                     }
+                    changeRecyclerViewItemList(sort)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -125,10 +125,12 @@ class WrittenPostFragment : Fragment() {
                     LIKE -> {
                         // 서버에서 더 가져오는 로직
                         Log.d("mlog: WrittenPostFragment::endlessScroll", "인기순 작성한 게시글 더 불러오기")
+                        viewModel.getMoreWrittenLikePost()
                     }
                     NEW -> {
                         // 서버에서 더 가져오는 로직
                         Log.d("mlog: WrittenPostFragment::endlessScroll", "최신순 작성한 게시글 더 불러오기")
+                        viewModel.getMoreWrittenNewPost()
                     }
                 }
             }

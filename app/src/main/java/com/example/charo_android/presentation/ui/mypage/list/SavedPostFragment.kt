@@ -16,11 +16,12 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSavedPostBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SavedPostFragment : Fragment() {
     private var _binding: FragmentSavedPostBinding? = null
     val binding get() = _binding ?: error("binding not initiated")
-    val viewModel by activityViewModels<MyPageViewModel>()
+    val viewModel: MyPageViewModel by sharedViewModel()
     private lateinit var savedPostAdapter: PostAdapter
     private var sort = LIKE
 
@@ -64,12 +65,11 @@ class SavedPostFragment : Fragment() {
                     if (position == 0) {
                         Log.d("mlog: SavedPostFragment::spinner handler", "onItemSelected - 0")
                         sort = LIKE
-                        changeRecyclerViewItemList(sort)
                     } else {
                         Log.d("mlog: SavedPostFragment::spinner handler", "onItemSelected - 1")
                         sort = NEW
-                        changeRecyclerViewItemList(sort)
                     }
+                    changeRecyclerViewItemList(sort)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -120,10 +120,12 @@ class SavedPostFragment : Fragment() {
                     LIKE -> {
                         // 서버에서 더 가져오는 로직
                         Log.d("mlog: SavedPostFragment::endlessScroll", "인기순 저장한 게시글 더 불러오기")
+                        viewModel.getMoreSavedLikePost()
                     }
                     NEW -> {
                         // 서버에서 더 가져오는 로직
                         Log.d("mlog: SavedPostFragment::endlessScroll", "최신순 저장한 게시글 더 불러오기")
+                        viewModel.getMoreSavedNewPost()
                     }
                 }
             }

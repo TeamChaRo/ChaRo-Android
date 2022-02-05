@@ -3,24 +3,12 @@ package com.example.charo_android.data.mapper
 import com.example.charo_android.data.model.mypage.*
 
 object MyPageMapper {
-    fun mapperToUserInformation(responseMyPage: ResponseMyPage): UserInformation {
-        return responseMyPage.data.userInformation
+    fun mapperToLikePost(responseMyPage: ResponseMyPage): ResponseMyPage.Data {
+        return responseMyPage.data
     }
 
-    fun mapperToWrittenLikePost(responseMyPage: ResponseMyPage): PostInfo {
-        return responseMyPage.data.writtenPost
-    }
-
-    fun mapperToSavedLikePost(responseMyPage: ResponseMyPage): PostInfo {
-        return responseMyPage.data.savedPost
-    }
-
-    fun mapperToWrittenNewPost(responseMyPage: ResponseMyPage): PostInfo {
-        return responseMyPage.data.writtenPost
-    }
-
-    fun mapperToSavedNewPost(responseMyPage: ResponseMyPage): PostInfo {
-        return responseMyPage.data.savedPost
+    fun mapperToNewPost(responseMyPage: ResponseMyPage): ResponseMyPage.Data {
+        return responseMyPage.data
     }
 
     fun mapperToMoreWrittenLikePost(responseEndlessScroll: ResponseEndlessScroll): PostInfo {
