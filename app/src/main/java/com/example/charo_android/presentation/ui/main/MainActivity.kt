@@ -15,11 +15,12 @@ import com.example.charo_android.presentation.ui.charo.mypage.CharoFragment
 import com.example.charo_android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.example.charo_android.presentation.ui.home.HomeFragment
 import com.example.charo_android.presentation.ui.mypage.MyPageFragment
-import com.example.charo_android.presentation.util.replaceFragment
+import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.example.charo_android.presentation.ui.write.WriteFragment
 import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
+import com.example.charo_android.presentation.util.replaceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
     private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
     private val sharedViewModel : SharedViewModel by viewModel()
+    private val myPageViewModel: MyPageViewModel by viewModel()
     private lateinit var userEmail: String
     private lateinit var nickName: String
 

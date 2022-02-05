@@ -1,17 +1,16 @@
-package com.example.charo_android.data.repository.repositoryimpl.mypage
+package com.example.charo_android.data.repository.remote.mypage
 
+import com.example.charo_android.data.api.mypage.MyPageService
 import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
 import com.example.charo_android.data.model.mypage.ResponseMyPage
-import com.example.charo_android.data.repository.remote.mypage.RemoteMyPageDataSource
-import com.example.charo_android.domain.repository.mypage.MyPageRepository
 
-class MyPageRepositoryImpl(private val remoteDataSource: RemoteMyPageDataSource): MyPageRepository {
+class RemoteMyPageDataSourceImpl(private val service: MyPageService): RemoteMyPageDataSource {
     override suspend fun getLikePost(userEmail: String): ResponseMyPage {
-        return remoteDataSource.getLikePost(userEmail)
+        return service.getLikePost(userEmail)
     }
 
     override suspend fun getNewPost(userEmail: String): ResponseMyPage {
-        return remoteDataSource.getNewPost(userEmail)
+        return service.getNewPost(userEmail)
     }
 
     override suspend fun getMoreWrittenLikePost(
@@ -19,14 +18,14 @@ class MyPageRepositoryImpl(private val remoteDataSource: RemoteMyPageDataSource)
         lastId: Int,
         lastCount: Int
     ): ResponseEndlessScroll {
-        return remoteDataSource.getMoreWrittenLikePost(userEmail, lastId, lastCount)
+        return service.getMoreWrittenLikePost(userEmail, lastId, lastCount)
     }
 
     override suspend fun getMoreWrittenNewPost(
         userEmail: String,
         lastId: Int
     ): ResponseEndlessScroll {
-        return remoteDataSource.getMoreWrittenNewPost(userEmail, lastId)
+        return service.getMoreWrittenNewPost(userEmail, lastId)
     }
 
     override suspend fun getMoreSavedLikePost(
@@ -34,14 +33,13 @@ class MyPageRepositoryImpl(private val remoteDataSource: RemoteMyPageDataSource)
         lastId: Int,
         lastCount: Int
     ): ResponseEndlessScroll {
-        return remoteDataSource.getMoreSavedLikePost(userEmail, lastId, lastCount)
+        return service.getMoreSavedLikePost(userEmail, lastId, lastCount)
     }
 
     override suspend fun getMoreSavedNewPost(
         userEmail: String,
         lastId: Int
     ): ResponseEndlessScroll {
-        return remoteDataSource.getMoreSavedNewPost(userEmail, lastId)
+        return service.getMoreSavedNewPost(userEmail, lastId)
     }
-
 }
