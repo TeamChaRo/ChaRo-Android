@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.onBoarding
+package com.example.charo_android.presentation.ui.onboarding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.charo_android.databinding.ActivityOnBoardingBinding
 import com.example.charo_android.presentation.util.SharedInformation
-import kotlinx.android.synthetic.main.activity_on_boarding.*
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding
@@ -20,8 +19,8 @@ class OnBoardingActivity : AppCompatActivity() {
         Log.d("sharedOn", SharedInformation.getSocialId(this))
         Log.d("sharedOn", SharedInformation.getEmail(this))
 
-        val pagerAdater = OnBoardingPagerAdapter(this)
-        binding.vpOnboarding.adapter = pagerAdater
+        val pagerAdapter = OnBoardingPagerAdapter(this)
+        binding.vpOnboarding.adapter = pagerAdapter
         binding.dotsIndicator.setViewPager2(binding.vpOnboarding)
 
     }
