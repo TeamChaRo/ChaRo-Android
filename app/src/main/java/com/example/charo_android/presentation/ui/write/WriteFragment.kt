@@ -264,6 +264,7 @@ class WriteFragment : Fragment() {
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
         getSharedViewModelData()
+        observeThemeData()
 
         //이미지 추가 버튼
         binding.imgWriteAddImg.setOnClickListener {
@@ -275,32 +276,6 @@ class WriteFragment : Fragment() {
 
         //버튼 selected 상태 변화 함수
         setButtonClickEvent()
-
-        //테마 변경 실시간 적용
-        sharedViewModel.theme.observe(viewLifecycleOwner, Observer<ArrayList<String>> { newTheme ->
-            val textView = arrayOfNulls<TextView>(3)
-            var theme : Int
-
-            for(i in 0 until 3){
-                theme = resources.getIdentifier("btn_write_theme${i+1}","id", activity?.packageName)
-                textView[i] = view?.findViewById(theme)
-
-                //초기화   "테마${i+1}"
-                textView[i]?.text = getString(resources.getIdentifier("theme${i+1}","string", activity?.packageName))
-                textView[i]?.isSelected = false
-            }
-
-            for(i in 0 until newTheme.count()){
-                //재설정
-                textView[i]?.text = newTheme[i]
-                textView[i]?.isSelected = true
-            }
-        })
-
-
-
-
-
 
         // 지역(도 단위)
         binding.btnWriteRegion.setOnClickListener() {
@@ -415,25 +390,6 @@ class WriteFragment : Fragment() {
                 .show()
         }
 
-        // 테마
-        val ItemsTheme = arrayOf(
-            "산",
-            "바다",
-            "호수",
-            "강",
-            "봄",
-            "여름",
-            "가을",
-            "겨울",
-            "해안도로",
-            "벚꽃",
-            "단풍",
-            "여유",
-            "스피드",
-            "야경",
-            "도심"
-        )
-
         binding.btnWriteTheme1.setOnClickListener {
             openBottomSheetDialog()
         }
@@ -484,26 +440,12 @@ class WriteFragment : Fragment() {
                 warningList.add(MultipartBody.Part.createFormData("warning","mountainRoad"))
             }
             if(binding.btnWriteCautionDiffi.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning",""))
+                warningList.add(MultipartBody.Part.createFormData("warning","diffRoad"))
             }
             if(binding.btnWriteCautionPeople.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","p"))
+                warningList.add(MultipartBody.Part.createFormData("warning","hotPlace"))
             }
             sharedViewModel.warning.value = warningList
-
-            //테마
-            val themeList: ArrayList<String> = ArrayList()
-            if(binding.btnWriteTheme1.text.toString() != "테마1"){
-                themeList.add(binding.btnWriteTheme1.text.toString())
-            }
-            if(binding.btnWriteTheme2.text.toString() != "테마2"){
-                themeList.add(binding.btnWriteTheme2.text.toString())
-            }
-            if(binding.btnWriteTheme3.text.toString() != "테마3"){
-                themeList.add(binding.btnWriteTheme3.text.toString())
-            }
-            sharedViewModel.theme.value = themeList
-
 
             //제목
             sharedViewModel.title.value = binding.etWriteTitle.text.toString()
@@ -517,8 +459,31 @@ class WriteFragment : Fragment() {
             writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance(), "writeMap");
         }
 
-
         return root
+    }
+
+    private fun observeThemeData(){
+        //테마 변경 실시간 적용
+        sharedViewModel.theme.observe(viewLifecycleOwner, Observer<ArrayList<String>> { newTheme ->
+            val textView = arrayOfNulls<TextView>(3)
+            var theme : Int
+
+            for(i in 0 until 3){
+                theme = resources.getIdentifier("btn_write_theme${i+1}","id", activity?.packageName)
+                textView[i] = view?.findViewById(theme)
+
+                //초기화   "테마${i+1}"
+                textView[i]?.text = getString(resources.getIdentifier("theme${i+1}","string", activity?.packageName))
+                textView[i]?.isSelected = false
+            }
+
+            for(i in 0 until newTheme.count()){
+                //재설정
+                textView[i]?.text = newTheme[i]
+                textView[i]?.isSelected = true
+            }
+        })
+
     }
 
     private fun openBottomSheetDialog() {
@@ -771,9 +736,6 @@ class WriteFragment : Fragment() {
             binding.btnWriteLocation.text = sharedViewModel.region.value
             binding.btnWriteLocation.isSelected = true
         }
-
-        //테마
-
 
         //주차 있없
         if(sharedViewModel.isParking.value == true){
