@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.mypage.list
+package com.example.charo_android.presentation.ui.mypage.postlist
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSavedPostBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
