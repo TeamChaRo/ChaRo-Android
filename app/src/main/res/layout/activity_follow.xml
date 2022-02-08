@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.charo_android.presentation.ui.mypage.viewmodel.FollowViewModel" />
+            type="com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.mypage.follow.FollowActivity">
+        tools:context=".presentation.ui.follow.FollowActivity">
 
         <ImageView
             android:id="@+id/img_back"

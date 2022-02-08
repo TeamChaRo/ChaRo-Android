@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
-            android:name=".presentation.ui.mypage.follow.FollowActivity"
+            android:name=".presentation.ui.follow.FollowActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.charo.follow.CharoListActivity"

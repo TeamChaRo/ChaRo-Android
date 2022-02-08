@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.mypage.follow
+package com.example.charo_android.presentation.ui.follow
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentFollowingBinding
-import com.example.charo_android.presentation.ui.mypage.adapter.FollowAdapter
-import com.example.charo_android.presentation.ui.mypage.viewmodel.FollowViewModel
+import com.example.charo_android.databinding.FragmentFollowerBinding
+import com.example.charo_android.presentation.ui.follow.adapter.FollowAdapter
+import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class FollowingFragment : Fragment() {
-    private var _binding: FragmentFollowingBinding? = null
+class FollowerFragment : Fragment() {
+    private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
     private lateinit var adapter: FollowAdapter
     private val viewModel by sharedViewModel<FollowViewModel>()
@@ -23,7 +23,8 @@ class FollowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_following, container, false)
+        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_follower, container, false)
+
         return binding.root
     }
 
@@ -40,7 +41,7 @@ class FollowingFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initRecyclerView() {
         adapter = FollowAdapter()
-        viewModel.following.observe(viewLifecycleOwner) {
+        viewModel.follower.observe(viewLifecycleOwner) {
             adapter.itemList.addAll(it)
             adapter.notifyDataSetChanged()
         }

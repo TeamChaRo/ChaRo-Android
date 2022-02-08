@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMyTopBinding
-import com.example.charo_android.presentation.ui.mypage.follow.FollowActivity
+import com.example.charo_android.presentation.ui.follow.FollowActivity
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.mypage.viewmodel
+package com.example.charo_android.presentation.ui.follow.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
