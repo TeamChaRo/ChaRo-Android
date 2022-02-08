@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.di
 
+import com.example.charo_android.data.repository.repositoryimpl.follow.FollowRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.home.HomeRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.more.MoreNewViewRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.more.MoreViewInfiniteRepositoryImpl
@@ -13,6 +14,7 @@ import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpEma
 import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpNickNameCheckRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpRegisterRepositoryImpl
 import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpRepositoryImpl
+import com.example.charo_android.domain.repository.follow.FollowRepository
 import com.example.charo_android.domain.repository.setting.SettingRepository
 import com.example.charo_android.domain.repository.home.HomeRepository
 import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
@@ -43,4 +45,5 @@ val repositoryModule = module {
     single<SettingRepository> { SettingRepositoryImpl(get()) }
     // SH
     single<MyPageRepository> { MyPageRepositoryImpl(get()) }
+    single<FollowRepository> { FollowRepositoryImpl(get()) }
 }

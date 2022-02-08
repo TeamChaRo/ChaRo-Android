@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.di
 
+import com.example.charo_android.domain.usecase.follow.GetRemoteFollowListUseCase
 import com.example.charo_android.domain.usecase.home.*
 import com.example.charo_android.domain.usecase.more.GetRemoteMoreDriveUseCase
 import com.example.charo_android.domain.usecase.more.GetRemoteMoreLastIdUseCase
@@ -46,4 +47,5 @@ val useCaseModule = module {
     single { GetRemoteMoreWrittenNewPostUseCase(get()) }
     single { GetRemoteMoreSavedLikePostUseCase(get()) }
     single { GetRemoteMoreSavedNewPostUseCase(get()) }
+    single { GetRemoteFollowListUseCase(get()) }
 }

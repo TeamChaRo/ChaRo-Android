@@ -3,6 +3,7 @@ package com.example.charo_android.presentation.di
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
@@ -23,4 +24,5 @@ val viewModelModule = module {
     viewModel { EmailSignInViewModel(get()) }
     // SH
     viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { FollowViewModel(get()) }
 }

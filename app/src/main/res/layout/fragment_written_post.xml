@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.mypage.list.WrittenPostFragment">
+        tools:context=".presentation.ui.mypage.postlist.WrittenPostFragment">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_post_list"

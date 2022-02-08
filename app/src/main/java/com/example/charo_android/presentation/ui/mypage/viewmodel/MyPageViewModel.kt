@@ -18,8 +18,6 @@ class MyPageViewModel(
     private val getRemoteMoreSavedLikePostUseCase: GetRemoteMoreSavedLikePostUseCase,
     private val getRemoteMoreSavedNewPostUseCase: GetRemoteMoreSavedNewPostUseCase
 ) : ViewModel() {
-    // TODO: DI를 사용하면 뭔가 더 바꿔볼 수 있지 않을까?
-    // private val myPageRepositoryImpl = MyPageRepositoryImpl()
     private val TAG = "mlog: MyPageViewModel::"
     private val userEmail = "and@naver.com"
 
