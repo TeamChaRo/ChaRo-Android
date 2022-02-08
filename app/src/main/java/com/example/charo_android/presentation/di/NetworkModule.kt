@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.di
 
+import com.example.charo_android.data.api.follow.FollowService
 import com.example.charo_android.data.api.home.HomeViewService
 import com.example.charo_android.data.api.signin.KakaoSignInService
 import com.example.charo_android.data.api.more.MoreViewInfiniteService
@@ -81,8 +82,11 @@ val networkModule = module {
         get<Retrofit>().create(SettingViewService::class.java)
     }
     // SH
-    single<MyPageService> {
+    single {
         get<Retrofit>().create(MyPageService::class.java)
+    }
+    single {
+        get<Retrofit>().create(FollowService::class.java)
     }
 }
 
