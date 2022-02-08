@@ -9,8 +9,8 @@ import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMyBottomBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostViewPagerAdapter
-import com.example.charo_android.presentation.ui.mypage.list.SavedPostFragment
-import com.example.charo_android.presentation.ui.mypage.list.WrittenPostFragment
+import com.example.charo_android.presentation.ui.mypage.postlist.SavedPostFragment
+import com.example.charo_android.presentation.ui.mypage.postlist.WrittenPostFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MyBottomFragment : Fragment() {
