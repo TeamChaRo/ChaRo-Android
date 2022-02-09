@@ -195,7 +195,8 @@
     <string name="setting_notice_title">업데이트 실행 1.0 -> 2.0 업데이트 안내</string>
     <string name="setting_notice_date">2021.12.12</string>
     <string name="setting_notice_content">어쩌구 저쩌구가 업데이트 됨!어쩌구 저쩌구가 업데이트 됨!</string>
-
+    <string name="text_my_page_no_written_post">작성하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n작성해보는 것은 어떠신가요?</string>
+    <string name="text_my_page_no_saved_post">저장하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?</string>
 
     <!-- KaKao -->
     <string name="kakao_login">카카오 로그인</string>
