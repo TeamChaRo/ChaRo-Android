@@ -23,43 +23,44 @@ class AlarmViewModel : ViewModel() {
     val userInformation: LiveData<UserInformation>
         get() = _userInformation
 
-    private var _pushId = MutableLiveData<Int>(null)
+    var _pushId = MutableLiveData<Int>(null)
     val pushId: LiveData<Int>
         get() = _pushId
 
-    private var _pushCode = MutableLiveData<Int>(null)
+    var _pushCode = MutableLiveData<Int>(null)
     val pushCode: LiveData<Int>
         get() = _pushCode
 
-    private var _isRead = MutableLiveData<Int>(null)
+    var _isRead = MutableLiveData<Int>(null)
     val isRead: LiveData<Int>
         get() = _isRead
 
-    private var _token = MutableLiveData<String>(null)
+    var _token = MutableLiveData<String>(null)
     val token: LiveData<String>
         get() = _token
 
-    private var _image = MutableLiveData<String>(null)
+    var _image = MutableLiveData<String>(null)
     val image: LiveData<String>
         get() = _image
 
-    private var _title = MutableLiveData<String>(null)
+    var _title = MutableLiveData<String>(null)
     val title: LiveData<String>
         get() = _title
 
-    private var _body = MutableLiveData<String>(null)
+    var _body = MutableLiveData<String>(null)
     val body: LiveData<String>
         get() = _body
 
-    private var _month = MutableLiveData<String>(null)
+    var _month = MutableLiveData<String>(null)
     val month: LiveData<String>
         get() = _month
 
-    private var _day = MutableLiveData<String>(null)
+    var _day = MutableLiveData<String>(null)
     val day: LiveData<String>
         get() = _day
 
-    suspend fun getInitAlarmData() {
+    fun getInitAlarmData() {
+        Log.e("getAlarmList param","${Hidden.otherUserEmail}")
         val call: Call<ResponseAlarmListData> =
             ApiService.alarmViewService.getAlarmList(Hidden.otherUserEmail)
         call.enqueue(object : Callback<ResponseAlarmListData> {
@@ -67,8 +68,12 @@ class AlarmViewModel : ViewModel() {
                 call: Call<ResponseAlarmListData>,
                 response: Response<ResponseAlarmListData>
             ) {
+                Log.e("getAlarmList param111","${Hidden.otherUserEmail}")
+
                 if (response.isSuccessful) {
                     Log.d("server connect : Alarm", "success")
+                    Log.d("server connect : Alarm", "${response.body()}")
+
                     val pushList = response.body()?.pushList
                     _pushId.value = pushList?.pushId
                     _pushCode.value = pushList?.pushCode

@@ -98,6 +98,7 @@ class WriteSharedViewModel : ViewModel() {
         param["courseDesc"] = courseDescRB
 //        courseParam["course"] = course.value
 
+        Log.d("param", ""+warning.value + sendTheme + isParking.value + course.value + imageMultiPart.value + param)
         Log.d("from", "serveWriteData")
         val call = ApiService.writeViewService
             .writePost(warning.value, sendTheme, isParking.value, course.value, imageMultiPart.value, param

@@ -6,22 +6,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.databinding.ItemAlarmBinding
 
-class AlarmListAdapter(val itemClick: (AlarmViewModel) -> Unit) :
+class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewModel
     RecyclerView.Adapter<AlarmListAdapter.AlarmListViewHolder>() {
-    val itemList = mutableListOf<AlarmViewModel>()
+    val itemList = mutableListOf<AlarmListInfo>() //AlarmViewModel
 
-    class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (AlarmViewModel) -> Unit) :
+    class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (AlarmListInfo) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(alarmViewModel: AlarmViewModel) {
+        fun onBind(alarmListInfo: AlarmListInfo) { //alarmViewModel: AlarmViewModel
             Glide.with(binding.imgAlarmListProfile)
-                .load(alarmViewModel.image)
+                .load(alarmListInfo.image) //alarmViewModel.image
                 .circleCrop()
                 .into(binding.imgAlarmListProfile)
 
-            binding.tvAlarmStatus.text = alarmViewModel.title.value
+            binding.tvAlarmStatus.text = alarmListInfo.title
+//            binding.tvAlarmStatus.text = alarmViewModel.title.value
 
             binding.itemAlarmList.setOnClickListener {
-                itemClick(alarmViewModel)
+//                itemClick(alarmViewModel)
+                itemClick(alarmListInfo)
             }
         }
     }

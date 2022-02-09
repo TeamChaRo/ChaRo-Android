@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface AlarmViewService {
     @GET("/push/{userEmail}")
-    suspend fun getAlarmList(
+    fun getAlarmList(
         @Path("userEmail") userEmail : String
     ) : Call<ResponseAlarmListData>
 }
