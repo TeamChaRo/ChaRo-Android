@@ -14,5 +14,4 @@ class PostViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAda
     override fun createFragment(position: Int): Fragment {
         return fragmentList[position]
     }
-
 }

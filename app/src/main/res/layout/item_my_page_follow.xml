@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.example.charo_android.data.model.mypage.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_profile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_charo_profile_border"
+            android:backgroundTint="@color/blue_main_0f6fff"
+            android:padding="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                setCircleImageUrl="@{model.image}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@{model.nickname}"
+            android:textColor="@color/black_sub_212429"
+            android:textSize="14sp"
+            android:layout_marginEnd="21dp"
+            app:layout_constraintEnd_toStartOf="@id/tv_follow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cl_profile"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="@{model.follow ? `팔로잉` : `팔로우`}"
+            android:fontFamily="@font/noto_sans_cjkkr_regular"
+            android:textSize="13sp"
+            android:textColor="@{model.follow ? @color/blue_main_0f6fff : @color/gray3_sub_acb5bd}"
+            android:includeFontPadding="false"
+            android:background="@{model.follow ? @drawable/shape_charo_list_followed : @drawable/shape_charo_list_unfollowed}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_nickname"
+            app:layout_constraintBottom_toBottomOf="@id/tv_nickname"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -65,7 +65,6 @@ object BindingAdapter {
             Glide.with(imageView.context)
                 .load(imageUrl)
                 .circleCrop()
-                .placeholder(R.drawable.rectangle_radius_5)
                 .into(imageView)
         }
     }

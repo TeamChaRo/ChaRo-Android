@@ -1,22 +1,17 @@
 package com.example.charo_android.data.repository.repositoryimpl.mypage
 
-import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.mypage.*
-import com.example.charo_android.data.repository.remote.mypage.MyPageRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
+import com.example.charo_android.data.model.mypage.ResponseMyPage
+import com.example.charo_android.data.repository.remote.mypage.RemoteMyPageDataSource
+import com.example.charo_android.domain.repository.mypage.MyPageRepository
 
-class MyPageRepositoryImpl : MyPageRepository {
+class MyPageRepositoryImpl(private val remoteDataSource: RemoteMyPageDataSource): MyPageRepository {
     override suspend fun getLikePost(userEmail: String): ResponseMyPage {
-        return withContext(Dispatchers.IO) {
-            ApiService.myPageService.getLikePost(userEmail)
-        }
+        return remoteDataSource.getLikePost(userEmail)
     }
 
     override suspend fun getNewPost(userEmail: String): ResponseMyPage {
-        return withContext(Dispatchers.IO) {
-            ApiService.myPageService.getNewPost(userEmail)
-        }
+        return remoteDataSource.getNewPost(userEmail)
     }
 
     override suspend fun getMoreWrittenLikePost(
@@ -24,18 +19,14 @@ class MyPageRepositoryImpl : MyPageRepository {
         lastId: Int,
         lastCount: Int
     ): ResponseEndlessScroll {
-        return withContext(Dispatchers.IO) {
-            ApiService.myPageService.getMoreWrittenLikePost(userEmail, lastId, lastCount)
-        }
+        return remoteDataSource.getMoreWrittenLikePost(userEmail, lastId, lastCount)
     }
 
     override suspend fun getMoreWrittenNewPost(
         userEmail: String,
         lastId: Int
     ): ResponseEndlessScroll {
-        return withContext(Dispatchers.IO) {
-            ApiService.myPageService.getMoreWrittenNewPost(userEmail, lastId)
-        }
+        return remoteDataSource.getMoreWrittenNewPost(userEmail, lastId)
     }
 
     override suspend fun getMoreSavedLikePost(
@@ -43,17 +34,14 @@ class MyPageRepositoryImpl : MyPageRepository {
         lastId: Int,
         lastCount: Int
     ): ResponseEndlessScroll {
-        return withContext(Dispatchers.IO) {
-            ApiService.myPageService.getMoreSavedLikePost(userEmail, lastId, lastCount)
-        }
+        return remoteDataSource.getMoreSavedLikePost(userEmail, lastId, lastCount)
     }
 
     override suspend fun getMoreSavedNewPost(
         userEmail: String,
         lastId: Int
     ): ResponseEndlessScroll {
-        return withContext(Dispatchers.IO) {
-            ApiService.myPageService.getMoreSavedNewPost(userEmail, lastId)
-        }
+        return remoteDataSource.getMoreSavedNewPost(userEmail, lastId)
     }
+
 }

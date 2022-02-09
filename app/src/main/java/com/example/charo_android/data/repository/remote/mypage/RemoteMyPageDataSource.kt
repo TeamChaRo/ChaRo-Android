@@ -3,8 +3,9 @@ package com.example.charo_android.data.repository.remote.mypage
 import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
 import com.example.charo_android.data.model.mypage.ResponseMyPage
 
-interface MyPageRepository {
+interface RemoteMyPageDataSource {
     suspend fun getLikePost(userEmail: String): ResponseMyPage
+
     suspend fun getNewPost(userEmail: String): ResponseMyPage
 
     suspend fun getMoreWrittenLikePost(

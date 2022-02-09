@@ -66,7 +66,7 @@
                 android:id="@+id/img_profile_picture"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                setCircleImageUrl="@{viewModel.userInformation.profileImage}" />
+                setCircleImageUrl="@{viewModel.userInfo.profileImage}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -80,7 +80,7 @@
             android:fontFamily="@font/noto_sans_cjkkr_bold"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:text="@{viewModel.userInformation.nickname}"
+            android:text="@{viewModel.userInfo.nickname}"
             android:textColor="@color/white"
             android:layout_marginTop="5dp"
             android:textSize="18sp"
@@ -118,7 +118,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/noto_sans_cjkkr_regular"
                 android:includeFontPadding="false"
-                android:text="@{Integer.toString(viewModel.userInformation.following)}"
+                android:text="@{Integer.toString(viewModel.userInfo.following)}"
                 android:textColor="@color/white"
                 android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@id/tv_profile_following"
@@ -144,7 +144,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/noto_sans_cjkkr_regular"
                 android:includeFontPadding="false"
-                android:text="@{Integer.toString(viewModel.userInformation.follower)}"
+                android:text="@{Integer.toString(viewModel.userInfo.follower)}"
                 android:textColor="@color/white"
                 android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@id/tv_profile_follower"

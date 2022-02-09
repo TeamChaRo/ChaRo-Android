@@ -490,7 +490,7 @@ class WriteMapFragment : Fragment() {
             try {
                 val tMapPolyLine: TMapPolyLine = TMapData().findPathData(start, end)
                 tMapPolyLine.lineWidth = 3F
-//                tMapPolyLine.lineColor = getColor(activity, R.color.blue_main_0f6fff)
+//                tMapPolyLine.lineColor = getColor(activity, R.color.blue_main)
                 tMapView.addTMapPolyLine("tMapPolyLine$cnt", tMapPolyLine)
             } catch (e: Exception) {
                 e.printStackTrace()
