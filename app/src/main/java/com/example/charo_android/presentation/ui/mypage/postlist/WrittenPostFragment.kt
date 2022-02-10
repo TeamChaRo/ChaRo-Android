@@ -45,8 +45,6 @@ class WrittenPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPostListNotEmpty()
-//        initSpinner()
-//        initRecyclerView()
         endlessScroll()
     }
 
