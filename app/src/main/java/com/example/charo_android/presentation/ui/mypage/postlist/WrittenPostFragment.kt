@@ -12,12 +12,14 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
+import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.databinding.FragmentWrittenPostBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class WrittenPostFragment : Fragment() {
+    private val TAG = "mlog: WrittenPostFragment::"
     private var _binding: FragmentWrittenPostBinding? = null
     val binding get() = _binding ?: error("binding not initialized")
     val viewModel: MyPageViewModel by sharedViewModel()
@@ -35,19 +37,31 @@ class WrittenPostFragment : Fragment() {
                 container,
                 false
             )
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSpinner()
-        initRecyclerView()
+        checkPostListNotEmpty()
+//        initSpinner()
+//        initRecyclerView()
         endlessScroll()
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun checkPostListNotEmpty() {
+        viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                initSpinner()
+                initRecyclerView(it)
+            }
+        }
     }
 
     private fun initSpinner() {
@@ -83,13 +97,11 @@ class WrittenPostFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun initRecyclerView() {
+    private fun initRecyclerView(postList: MutableList<Post>) {
         writtenPostAdapter = PostAdapter()
         binding.rvPostList.adapter = writtenPostAdapter
-        viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
-            writtenPostAdapter.itemList.addAll(it)
-            writtenPostAdapter.notifyDataSetChanged()
-        }
+        writtenPostAdapter.itemList.addAll(postList)
+        writtenPostAdapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -116,6 +128,7 @@ class WrittenPostFragment : Fragment() {
         }
     }
 
+    // TODO: 서버에서 가져오는 코드까지는 작성하였으나 실제로 데이터를 가져온 후에 뷰를 업데이트하는 코드 작성 필요함
     private fun endlessScroll() {
         binding.nsvPostList.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
