@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <data>
+
+            <variable
+                name="alarmData"
+                type="com.example.charo_android.presentation.ui.alarm.AlarmViewModel" />
+
+            <import type="android.view.View" />
+        </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_alarm_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="22dp"
+            android:paddingVertical="25dp">
+
+            <ImageView
+                android:id="@+id/img_alarm_list_profile_border"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_detail_like_profile_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_alarm_list_profile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:layout_constraintBottom_toBottomOf="@id/img_alarm_list_profile_border"
+                app:layout_constraintEnd_toEndOf="@id/img_alarm_list_profile_border"
+                app:layout_constraintStart_toStartOf="@id/img_alarm_list_profile_border"
+                app:layout_constraintTop_toTopOf="@id/img_alarm_list_profile_border"
+                android:src="@drawable/ellipse_4" />
+
+            <TextView
+                android:id="@+id/tv_alarm_status"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/selector_charo_list_textbox"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:textColor="@color/selector_charo_list_text_color"
+                app:layout_constraintStart_toEndOf="@+id/img_alarm_list_profile"
+                app:layout_constraintTop_toTopOf="@+id/img_alarm_list_profile"
+                android:text="@{alarmData.title}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:textStyle="normal"
+                android:textSize="11sp"
+                android:textColor="#889098"
+                android:lineHeight="14sp"
+                android:includeFontPadding="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_alarm_status"
+                android:text="7월 9일"/>
+
+            <TextView
+                android:id="@+id/tv_alarm_context"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="20sp"
+                android:textColor="@color/black_sub_212429"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_alarm_status"
+                app:layout_constraintTop_toBottomOf="@+id/tv_alarm_status"
+                android:text="@{alarmData.body}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </layout>
