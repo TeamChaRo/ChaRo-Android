@@ -4,7 +4,9 @@
     package="com.example.charo_android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 갤러리 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 갤러리 권한 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -48,7 +50,9 @@
             android:exported="true" />
         <activity android:name=".presentation.ui.write.WriteShareActivity" />
         <activity android:name=".presentation.ui.alarm.AlarmActivity" />
-        <activity android:name=".presentation.ui.main.SplashActivity">
+        <activity
+            android:name=".presentation.ui.main.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -65,7 +69,9 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".presentation.ui.setting.SettingActivity" />
-        <activity android:name=".presentation.ui.onboarding.OnBoardingActivity">
+        <activity
+            android:name=".presentation.ui.onboarding.OnBoardingActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,7 +79,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.search.SearchActivity" />
-        <activity android:name=".presentation.ui.detail.DetailActivity">
+        <activity
+            android:name=".presentation.ui.detail.DetailActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -84,7 +92,7 @@
                     android:host="www.charo.com/detail/{postId}"
                     android:scheme="http"
                     tools:ignore="AppLinkUrlError" />
-                <!-- //www.example.com/detail/{postId} //www.example.com/detail?postId=postId -->
+                <!--//www.example.com/detail/{postId} //www.example.com/detail?postId=postId-->
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.signin.SignInActivity" />
