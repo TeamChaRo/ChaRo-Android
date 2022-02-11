@@ -25,7 +25,7 @@ class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewMode
 
 //            binding.tvAlarmStatus.text = alarmViewModel.title.value
 
-            binding.itemAlarmList.setOnClickListener {
+            binding.tvAlarmDelete.setOnClickListener {
 //                itemClick(alarmViewModel)
                 itemClick(alarmListInfo)
             }
@@ -44,5 +44,9 @@ class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewMode
 
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    fun removeItem(data: AlarmListInfo){ //AlarmViewModel
+        itemList.remove(data)
     }
 }

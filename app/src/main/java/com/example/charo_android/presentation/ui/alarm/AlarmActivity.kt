@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
 import com.example.charo_android.databinding.ActivityAlarmBinding
 import com.example.charo_android.hidden.Hidden
@@ -38,7 +39,8 @@ class AlarmActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         with(binding) {
             alarmAdapter = AlarmListAdapter(){
-                //itemClick 이벤트 구현
+                // delete itemClick 이벤트 구현
+                serveDeleteItem(it, it.pushId)
             }
 
             rcvAlarmList.adapter = alarmAdapter
@@ -146,6 +148,37 @@ class AlarmActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ResponseAlarmListData>, t: Throwable) {
+                Log.d("server connect : Alarm ", "error: ${t.message}")
+            }
+        })
+    }
+
+    private fun serveDeleteItem(it: AlarmListInfo, pushId: Int){ //AlarmViewModel
+        Log.e("postDeleteAlarm param", "$pushId")
+        val call: Call<ResponseAlarmDeleteData> =
+            ApiService.alarmViewService.postDeleteAlarm(pushId)
+        call.enqueue(object : Callback<ResponseAlarmDeleteData> {
+            override fun onResponse(
+                call: Call<ResponseAlarmDeleteData>,
+                response: Response<ResponseAlarmDeleteData>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("server connect : Alarm delete", "success")
+                    Log.d("server connect : Alarm delete", "${response.body()}")
+
+                    alarmAdapter.removeItem(it)
+                    alarmAdapter.notifyDataSetChanged()
+
+                } else {
+                    Log.d("server connect : Alarm delete", "error")
+                    Log.d("server connect : Alarm delete", "$response.errorBody()")
+                    Log.d("server connect : Alarm delete", response.message())
+                    Log.d("server connect : Alarm delete", "${response.code()}")
+                    Log.d("server connect : Alarm delete", "${response.raw().request.url}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
                 Log.d("server connect : Alarm ", "error: ${t.message}")
             }
         })
