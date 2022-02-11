@@ -12,6 +12,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.charo_android.R
+import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.databinding.FragmentSavedPostBinding
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
@@ -30,19 +31,29 @@ class SavedPostFragment : Fragment() {
     ): View? {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_saved_post, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSpinner()
-        initRecyclerView()
+        checkPostListNotEmpty()
         endlessScroll()
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun checkPostListNotEmpty() {
+        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                initSpinner()
+                initRecyclerView(it)
+            }
+        }
     }
 
     private fun initSpinner() {
@@ -78,18 +89,16 @@ class SavedPostFragment : Fragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun initRecyclerView() {
+    private fun initRecyclerView(postList: MutableList<Post>) {
         savedPostAdapter = PostAdapter()
         binding.rvPostList.adapter = savedPostAdapter
-        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
-            savedPostAdapter.itemList.addAll(it)
-            savedPostAdapter.notifyDataSetChanged()
-        }
+        savedPostAdapter.itemList.addAll(postList)
+        savedPostAdapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun changeRecyclerViewItemList(sort: Int) {
-        when(sort) {
+        when (sort) {
             LIKE -> {
                 viewModel.savedLikePostList.observe(viewLifecycleOwner) {
                     savedPostAdapter.apply {

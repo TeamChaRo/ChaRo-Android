@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +20,8 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_post_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -27,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="4dp"
+                    android:visibility="@{viewModel.savedLikePostList.empty ? View.GONE : View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,10 +41,40 @@
                     android:id="@+id/rv_post_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:overScrollMode="never"
+                    android:visibility="@{viewModel.savedLikePostList.empty ? View.GONE : View.VISIBLE}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spinner_post_list" />
+                    app:layout_constraintTop_toBottomOf="@id/spinner_post_list"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_my_page_post" />
+
+                <ImageView
+                    android:id="@+id/img_no_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/image_1"
+                    android:visibility="@{viewModel.savedLikePostList.empty ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_no_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:lineHeight="22sp"
+                    android:text="@string/text_my_page_no_written_post"
+                    android:textColor="@color/gray5_sub_495057"
+                    android:visibility="@{viewModel.savedLikePostList.empty ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_no_post" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

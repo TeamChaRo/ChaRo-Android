@@ -54,6 +54,7 @@ class MyPageViewModel(
             }.onSuccess {
                 _userInfo.value = it.userInformation
 
+                // 테스트 - 게시물 없는 경우에 대한 테스트
                 _writtenLikeLastId = it.writtenPost.lastId
                 _writtenLikeLastCount = it.writtenPost.lastCount
                 _writtenLikePostList.value = it.writtenPost.drive

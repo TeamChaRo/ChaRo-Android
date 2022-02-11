@@ -73,15 +73,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.search.SearchActivity" />
-        <activity android:name=".presentation.ui.detail.DetailActivity" >
+        <activity android:name=".presentation.ui.detail.DetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http"
+
+                <data
                     android:host="www.charo.com/detail/{postId}"
+                    android:scheme="http"
                     tools:ignore="AppLinkUrlError" />
-                <!--//www.example.com/detail/{postId} //www.example.com/detail?postId=postId-->
+                <!-- //www.example.com/detail/{postId} //www.example.com/detail?postId=postId -->
             </intent-filter>
         </activity>
         <activity android:name=".presentation.ui.signin.SignInActivity" />
