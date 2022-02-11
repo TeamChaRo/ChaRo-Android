@@ -19,6 +19,10 @@ class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewMode
                 .into(binding.imgAlarmListProfile)
 
             binding.tvAlarmStatus.text = alarmListInfo.title
+            binding.tvAlarmStatus.isSelected = true
+            binding.tvAlarmDate.text = "${alarmListInfo.month}월 ${alarmListInfo.day}일"
+            binding.tvAlarmContext.text = alarmListInfo.body
+
 //            binding.tvAlarmStatus.text = alarmViewModel.title.value
 
             binding.itemAlarmList.setOnClickListener {
