@@ -13,105 +13,10 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.detailpost.DetailPostActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="21dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/img_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back_1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tv_view_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:includeFontPadding="false"
-            android:text="구경하기 or 내가 작성한 글"
-            android:textColor="@color/black_sub_212429"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@id/cl_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cl_back" />
-
-        <LinearLayout
-            android:id="@+id/ll_1"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="9dp"
-            android:background="@color/gray2_sub_dde2e5"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/cl_back" />
-
-        <TextView
-            android:id="@+id/tv_post_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="21dp"
-            android:fontFamily="@font/noto_sans_cjkkr_bold"
-            android:includeFontPadding="false"
-            android:lineHeight="25sp"
-            android:text="글 제목입니다. 글 제목입니다. 글 제목입니다. 글 제목입니다. 글 제목입니다. 글 제목입니다. "
-            android:textColor="@color/black_sub_212429"
-            android:textSize="19sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_1" />
-
-        <ImageView
-            android:id="@+id/img_author"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/myimage"
-            app:layout_constraintBottom_toBottomOf="@id/tv_post_date"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_author_nickname" />
-
-        <TextView
-            android:id="@+id/tv_author_nickname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:includeFontPadding="false"
-            android:text="작성자 닉네임"
-            android:textColor="@color/black_sub_212429"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img_author"
-            app:layout_constraintTop_toBottomOf="@id/tv_post_title" />
-
-        <TextView
-            android:id="@+id/tv_post_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_cjkkr_regular"
-            android:includeFontPadding="false"
-            android:text="1999년 01월 01일"
-            android:textColor="@color/gray3_sub_acb5bd"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/tv_author_nickname"
-            app:layout_constraintTop_toBottomOf="@id/tv_author_nickname" />
-        
-
+            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,21 +14,22 @@
         <entry key="app/src/main/res/drawable/shape_charo_list_unfollowed.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/shape_charo_not_followed.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/shape_charo_profile_border.xml" value="0.3712820512820513" />
-        <entry key="app/src/main/res/layout/activity_alarm.xml" value="0.13425925925925927" />
+        <entry key="app/src/main/res/layout-v28/fragment_written_post.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/activity_follow.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/dialog_theme.xml" value="0.13425925925925927" />
+        <entry key="app/src/main/res/layout/fragment_detail_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_following.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_my_top.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_alarm.xml" value="0.171875" />
+        <entry key="app/src/main/res/layout/fragment_saved_post.xml" value="0.16893115942028986" />
+        <entry key="app/src/main/res/layout/fragment_written_post.xml" value="0.16893115942028986" />
         <entry key="app/src/main/res/layout/item_charo_list.xml" value="0.17553191489361702" />
-        <entry key="app/src/main/res/layout/item_chip_theme.xml" value="0.171875" />
         <entry key="app/src/main/res/layout/item_my_page_follow.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/item_my_page_post.xml" value="0.3233695652173913" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
