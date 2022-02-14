@@ -72,8 +72,6 @@ class MainActivity : AppCompatActivity() {
         initNavView()
         lookFor()
 
-        initFirebase()
-
     }
 
     override fun onBackPressed() {
@@ -213,22 +211,5 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-    }
-
-    private fun initFirebase(){
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(
-                    "FirebaseTAG",
-                    "Fetching FCM registration token failed",
-                    task.exception
-                )
-                return@OnCompleteListener
-            } else {
-                val token = task.result
-                val msg = getString(R.string.msg_token_fmt, token)
-                Log.d("Firebase Success", msg)
-            }
-        })
     }
 }

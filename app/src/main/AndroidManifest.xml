@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".presentation.ui.alarm.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
