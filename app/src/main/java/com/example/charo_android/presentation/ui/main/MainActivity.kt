@@ -21,6 +21,8 @@ import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.replaceFragment
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -70,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         initNavView()
         lookFor()
 
+        initFirebase()
 
     }
 
@@ -210,5 +213,22 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun initFirebase(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(
+                    "FirebaseTAG",
+                    "Fetching FCM registration token failed",
+                    task.exception
+                )
+                return@OnCompleteListener
+            } else {
+                val token = task.result
+                val msg = getString(R.string.msg_token_fmt, token)
+                Log.d("Firebase Success", msg)
+            }
+        })
     }
 }

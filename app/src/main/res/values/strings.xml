@@ -202,5 +202,6 @@
     <string name="detail_menu_edit">수정하기</string>
     <string name="detail_menu_delete">삭제하기</string>
     <string name="no_select">선택안함</string>
+    <string name="msg_token_fmt">fcm token: %s</string>
 
 </resources>

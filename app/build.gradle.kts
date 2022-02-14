@@ -79,6 +79,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation("com.google.firebase:firebase-common-ktx:20.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:21.0.1")
+    implementation("com.google.firebase:firebase-bom:29.1.0")
+//    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-messaging:22.0.0")
     kapt(KaptDependencies.hilt)
 
 // DataStore
