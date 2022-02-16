@@ -27,6 +27,15 @@
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
+        <service
+            android:name=".presentation.ui.alarm.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".presentation.ui.follow.FollowActivity"
             android:exported="false" />

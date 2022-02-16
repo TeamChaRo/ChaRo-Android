@@ -21,6 +21,8 @@ import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.replaceFragment
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -69,7 +71,6 @@ class MainActivity : AppCompatActivity() {
         }
         initNavView()
         lookFor()
-
 
     }
 

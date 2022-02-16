@@ -1,9 +1,16 @@
 package com.example.charo_android.presentation.ui.alarm
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.charo_android.R
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
@@ -24,6 +31,10 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //fcm test
+        sendFCM()
+
         goHome()
         alarmViewModel = AlarmViewModel()
 
@@ -182,6 +193,41 @@ class AlarmActivity : AppCompatActivity() {
                 Log.d("server connect : Alarm ", "error: ${t.message}")
             }
         })
+    }
+
+    private fun sendFCM(){
+        var NOTIFICATION_CHANNEL_ID = "0000"
+        var NOTIFICATION_CHANNEL_NAME = "ChaRo-Android"
+        var notificationManager = getSystemService(NotificationManager::class.java) as NotificationManager?
+
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val importance = NotificationManager.IMPORTANCE_LOW
+                    val notificationChannel = NotificationChannel(
+                        NOTIFICATION_CHANNEL_ID,
+                        NOTIFICATION_CHANNEL_NAME,
+                        importance
+                    )
+                    notificationChannel.enableLights(true)
+                    notificationChannel.lightColor = Color.RED
+                    notificationChannel.enableVibration(true)
+                    notificationChannel.vibrationPattern =
+                        longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+                    notificationManager?.createNotificationChannel(notificationChannel)
+                }
+
+                val mNotificationBuilder: NotificationCompat.Builder =
+                    NotificationCompat.Builder(applicationContext,NOTIFICATION_CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_main_logo_blue)
+                        .setContentTitle("ChaRo")
+                        .setContentText("새로운 드라이브 코스를 확인하세요!")
+                // .setAutoCancel(false)
+
+                notificationManager!!.notify(0, mNotificationBuilder.build())
+            }
+        }, 0)
     }
 
     private fun goHome() {
