@@ -1,6 +1,6 @@
 package com.example.charo_android.data.api.detail
 
-import com.example.charo_android.data.model.detail.*
+import com.example.charo_android.data.model.detailold.*
 import retrofit2.Call
 import retrofit2.http.*
 
