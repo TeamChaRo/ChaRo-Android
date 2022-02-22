@@ -55,7 +55,7 @@
             android:layout_marginVertical="3dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
-            android:text="관련 검색어"
+            android:text="@string/write_auto_search"
             android:textColor="@color/gray4_sub_889098"
             app:layout_constraintBottom_toTopOf="@id/recyclerview_write_map_search"
             app:layout_constraintStart_toStartOf="parent"

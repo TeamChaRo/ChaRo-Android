@@ -632,7 +632,7 @@ class WriteMapFragment : Fragment() {
 //                            val parkingDescRB : RequestBody = sharedViewModel.parkingDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
 //                            val courseDescRB : RequestBody = sharedViewModel.courseDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
 //
-//                            val call: Call<ResponseWriteData> =
+//                            val call: Call<ResponseStatusCode> =
 //                                ApiService.writeViewService.writePost(
 //                                    userEmailRB,
 //                                    titleRB,
@@ -647,10 +647,10 @@ class WriteMapFragment : Fragment() {
 //                                    sharedViewModel.imageMultiPart.value,
 //                                )
 //
-//                            call.enqueue(object : Callback<ResponseWriteData> {
+//                            call.enqueue(object : Callback<ResponseStatusCode> {
 //                                override fun onResponse(
-//                                    call: Call<ResponseWriteData>,
-//                                    response: Response<ResponseWriteData>
+//                                    call: Call<ResponseStatusCode>,
+//                                    response: Response<ResponseStatusCode>
 //                                ) {
 //                                    if (response.isSuccessful) {
 //                                        Log.d("server connect : Write ", "success")
@@ -674,7 +674,7 @@ class WriteMapFragment : Fragment() {
 //                                }
 //
 //                                override fun onFailure(
-//                                    call: Call<ResponseWriteData>,
+//                                    call: Call<ResponseStatusCode>,
 //                                    t: Throwable
 //                                ) {
 //                                    Log.d("server connect", "fail:${t.message}")

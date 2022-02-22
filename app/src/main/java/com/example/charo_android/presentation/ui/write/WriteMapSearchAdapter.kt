@@ -77,4 +77,8 @@ class WriteMapSearchAdapter(
 
         }
     }
+
+    fun clearItem(){
+        userList.clear()
+    }
 }

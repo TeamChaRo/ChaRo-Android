@@ -14,9 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import com.example.charo_android.R
 import com.example.charo_android.data.MapSearchInfo
+import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.response.ResponseWriteData
 import com.example.charo_android.databinding.FragmentWriteMapSearchBinding
+import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.TMapData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class WriteMapSearchFragment : Fragment() {
 
@@ -36,6 +43,7 @@ class WriteMapSearchFragment : Fragment() {
     lateinit var nickName: String
 
     private lateinit var locationFlag: String
+    var mapSearchList = mutableListOf<MapSearchInfo>()
 
     private val sharedViewModel: WriteSharedViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
@@ -114,6 +122,7 @@ class WriteMapSearchFragment : Fragment() {
 
         val tmapdata = TMapData()
 
+        getReadHistory(mapSearchList)
         binding.etWriteMapSearchStart.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 Log.d("myLog", "before")
@@ -125,29 +134,88 @@ class WriteMapSearchFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 Log.d("myLog", "after")
-                var list = mutableListOf<MapSearchInfo>()
                 Handler(Looper.getMainLooper()).postDelayed({
+                    // 관련 검색어
                     if(binding.etWriteMapSearchStart.text.isNotEmpty()) {
+                        binding.textResultSearch.text = getString(R.string.write_auto_search)
+
                         tmapdata.findTitlePOI(binding.etWriteMapSearchStart.text.toString()) { poiItem ->
+                            writeMapSearchAdapter.clearItem()
+
                             for (i in 0 until poiItem.size) {
                                 val item = poiItem[i]
 
-                                list.add(
+                                mapSearchList.add(
                                     MapSearchInfo(
                                         locationName = item.poiName,
-                                        locationAddress = item.poiAddress.replace("null", "")
+                                        locationAddress = item.poiAddress.replace("null", ""),
+                                        date = ""
                                     )
 
                                 )
                             }
-                            writeMapSearchAdapter.userList = list
+                            writeMapSearchAdapter.userList = mapSearchList
                         }
                         writeMapSearchAdapter.notifyDataSetChanged()
+
+                    // 최근 검색어
+                    }else{
+                        getReadHistory(mapSearchList)
                     }
                 }, 500)
             }
         })
 
         return root
+    }
+
+    fun getReadHistory(list: MutableList<MapSearchInfo>) {
+        binding.textResultSearch.text = getString(R.string.write_recent_search)
+
+        val call: Call<ResponseWriteData> =
+            ApiService.writeViewService.getReadHistory(Hidden.userEmail)
+        call.enqueue(object : Callback<ResponseWriteData> {
+            override fun onResponse(
+                call: Call<ResponseWriteData>,
+                response: Response<ResponseWriteData>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("server connect : WriteMap search", "success")
+
+                    writeMapSearchAdapter.clearItem()
+
+                    val data = response.body()?.data
+
+                    if (data != null) {
+                        for (i in 0 until data.size) {
+                            val item = data[i]
+
+                            list.add(
+                                MapSearchInfo(
+                                    locationName = item.title,
+                                    locationAddress = item.address,
+                                    date = "${item.month}.${item.day}"
+                                )
+                            )
+                        }
+                        writeMapSearchAdapter.userList = list
+                        writeMapSearchAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    Log.d("server connect : WriteMap search", "error")
+                    Log.d("server connect : WriteMap search", "$response.errorBody()")
+                    Log.d("server connect : WriteMap search", response.message())
+                    Log.d("server connect : WriteMap search", "${response.code()}")
+                    Log.d(
+                        "server connect : WriteMap search",
+                        "${response.raw().request.url}"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
+                Log.d("server connect : WriteMap search", "error: ${t.message}")
+            }
+        })
     }
 }
