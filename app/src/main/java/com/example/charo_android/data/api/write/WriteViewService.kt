@@ -1,5 +1,6 @@
 package com.example.charo_android.data.api.write
 
+import com.example.charo_android.data.model.request.RequestWriteHistoryData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.ResponseWriteData
 import okhttp3.MultipartBody
@@ -31,4 +32,8 @@ interface WriteViewService {
         @Path("userEmail") userEmail: String
     ): Call<ResponseWriteData>
 
+    @POST("/post/saveHistory")
+    fun postSaveHistory(
+        @Body body: RequestWriteHistoryData
+    ): Call<ResponseStatusCode>
 }
