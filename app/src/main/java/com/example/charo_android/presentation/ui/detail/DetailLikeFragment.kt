@@ -7,10 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
-import com.example.charo_android.data.model.detail.UserData
+import com.example.charo_android.data.model.detailold.UserData
 import com.example.charo_android.databinding.DialogDetailLikeBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.main.MainActivity

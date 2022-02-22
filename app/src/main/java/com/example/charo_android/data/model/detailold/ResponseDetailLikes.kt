@@ -1,4 +1,4 @@
-package com.example.charo_android.data.model.detail
+package com.example.charo_android.data.model.detailold
 
 data class ResponseDetailLikes(
     val success: Boolean,
