@@ -16,11 +16,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_icon_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search_start"
+            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/et_write_map_search_start"
+            android:id="@+id/et_write_map_search"
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:background="@android:color/transparent"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_map_search_close"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search_start"
+            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#DDE2E5"
-            app:layout_constraintTop_toBottomOf="@id/et_write_map_search_start" />
+            app:layout_constraintTop_toBottomOf="@id/et_write_map_search" />
 
         <TextView
             android:id="@+id/text_result_search"

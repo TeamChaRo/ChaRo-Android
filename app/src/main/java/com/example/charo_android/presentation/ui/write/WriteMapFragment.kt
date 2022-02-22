@@ -16,30 +16,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
-import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.response.ResponseWriteData
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.util.CustomToast
-import com.example.charo_android.presentation.util.ThemeUtil
 import com.skt.Tmap.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.lang.Exception
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -143,6 +132,8 @@ class WriteMapFragment : Fragment() {
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
                 )
+            }else{
+                Toast.makeText(requireContext(),getString(R.string.start),Toast.LENGTH_LONG).show()
             }
         }
 
@@ -368,7 +359,11 @@ class WriteMapFragment : Fragment() {
                     binding.imgWriteMapDelete2.visibility = View.VISIBLE
 
                     binding.etWriteMapMid2.text = mapData.mid2Address
+                }else{
+                    Toast.makeText(requireContext(),"경유지를 입력해주세요.",Toast.LENGTH_LONG).show()
                 }
+            }else{
+                Toast.makeText(requireContext(),"출발지와 도착지 모두 입력 후 추가 가능합니다.",Toast.LENGTH_LONG).show()
             }
         }
     }
