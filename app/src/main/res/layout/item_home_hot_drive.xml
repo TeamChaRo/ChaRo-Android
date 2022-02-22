@@ -72,7 +72,7 @@
                 app:chipBackgroundColor="@color/white"
                 android:paddingVertical="2dp"
                 android:paddingHorizontal="11dp"
-                android:background="@drawable/shape_charo_hashtag"
+                android:background="@drawable/rectangle_border_blue_radius_20"
                 android:includeFontPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/text_home_hot_drive_title"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -90,7 +90,7 @@
                 android:layout_marginStart="4dp"
                 android:paddingVertical="2dp"
                 android:paddingHorizontal="11dp"
-                android:background="@drawable/shape_charo_hashtag"
+                android:background="@drawable/rectangle_border_blue_radius_20"
                 android:includeFontPadding="false"
                 app:layout_constraintTop_toTopOf="@+id/chip_home_hot_drive_1"
                 app:layout_constraintStart_toEndOf="@id/chip_home_hot_drive_1" />
@@ -108,7 +108,7 @@
                 android:layout_marginStart="4dp"
                 android:paddingVertical="2dp"
                 android:paddingHorizontal="11dp"
-                android:background="@drawable/shape_charo_hashtag"
+                android:background="@drawable/rectangle_border_blue_radius_20"
                 android:includeFontPadding="false"
                 app:layout_constraintTop_toTopOf="@+id/chip_home_hot_drive_2"
                 app:layout_constraintStart_toEndOf="@id/chip_home_hot_drive_2" />
