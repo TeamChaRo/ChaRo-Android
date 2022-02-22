@@ -6,6 +6,15 @@
         <entry key="app/src/main/res/drawable/charo_icon.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/circle_theme.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/cl_detail_menu.xml" value="0.3712820512820513" />
+        <entry key="app/src/main/res/drawable/rectangle_blue_radius_10dp.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_border_blue_radius_20.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_border_blue_radius_21.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_border_gray_radius_21.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_kakao_yellow.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_12.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_40.xml" value="0.262037037037037" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_6.xml" value="0.262037037037037" />
+        <entry key="app/src/main/res/drawable/rectangle_radius_9dp.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/drawable/selector_charo_list_textbox.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/shape_charo_camera_border.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/shape_charo_followed.xml" value="0.3712820512820513" />
@@ -14,9 +23,13 @@
         <entry key="app/src/main/res/drawable/shape_charo_list_unfollowed.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/shape_charo_not_followed.xml" value="0.3712820512820513" />
         <entry key="app/src/main/res/drawable/shape_charo_profile_border.xml" value="0.3712820512820513" />
+        <entry key="app/src/main/res/drawable/shape_detail_address.xml" value="0.262037037037037" />
+        <entry key="app/src/main/res/drawable/shape_detail_map.xml" value="0.262037037037037" />
+        <entry key="app/src/main/res/font/font_family.xml" value="0.2824074074074074" />
         <entry key="app/src/main/res/layout-v28/fragment_written_post.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/activity_follow.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.17255434782608695" />
         <entry key="app/src/main/res/layout/fragment_detail_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_following.xml" value="0.19947916666666668" />

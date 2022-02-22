@@ -14,7 +14,7 @@
         tools:context=".presentation.ui.detailpost.DetailPostActivity">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fcv"
+            android:id="@+id/fcv_detail_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
