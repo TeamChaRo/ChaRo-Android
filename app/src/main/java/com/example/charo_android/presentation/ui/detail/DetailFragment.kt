@@ -17,7 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.charo_android.R
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.detail.RequestDetailDeleteData
+import com.example.charo_android.data.model.detailold.RequestDetailDeleteData
 import com.example.charo_android.databinding.FragmentDetailBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.main.MainActivity

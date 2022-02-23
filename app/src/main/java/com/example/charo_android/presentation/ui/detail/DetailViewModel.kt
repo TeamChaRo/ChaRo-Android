@@ -4,16 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.detail.*
+import com.example.charo_android.data.model.detailold.*
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.enqueueUtil
 import com.skt.Tmap.TMapInfo
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapPoint
 import com.skt.Tmap.TMapPolyLine
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
