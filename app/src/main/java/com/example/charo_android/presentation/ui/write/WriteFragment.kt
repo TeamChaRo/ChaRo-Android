@@ -3,7 +3,6 @@ package com.example.charo_android.presentation.ui.write
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -22,25 +21,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
-import com.example.charo_android.*
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.detail.DetailLikeFragment
 
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
-import java.io.File
 
 class WriteFragment : Fragment() {
 
