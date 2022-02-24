@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -50,8 +51,8 @@ class AlarmActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         with(binding) {
             alarmAdapter = AlarmListAdapter(){
-                // delete itemClick 이벤트 구현
-                serveDeleteItem(it, it.pushId)
+                //TODO: itemClick 이벤트 구현 (API 확인 후)
+                Toast.makeText(this@AlarmActivity, "알람 클릭 $it", Toast.LENGTH_LONG).show()
             }
 
             rcvAlarmList.adapter = alarmAdapter
@@ -164,7 +165,7 @@ class AlarmActivity : AppCompatActivity() {
         })
     }
 
-    private fun serveDeleteItem(it: AlarmListInfo, pushId: Int){ //AlarmViewModel
+    fun serveDeleteItem(it: AlarmListInfo, pushId: Int){ //AlarmViewModel
         Log.e("postDeleteAlarm param", "$pushId")
         val call: Call<ResponseAlarmDeleteData> =
             ApiService.alarmViewService.postDeleteAlarm(pushId)

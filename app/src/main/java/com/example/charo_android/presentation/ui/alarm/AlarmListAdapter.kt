@@ -6,12 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.databinding.ItemAlarmBinding
 
-class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewModel
-    RecyclerView.Adapter<AlarmListAdapter.AlarmListViewHolder>() {
+class AlarmListAdapter(
+    private val itemClick: (AlarmListInfo) -> Unit
+    ) : //AlarmViewModel
+    RecyclerView.Adapter<AlarmListAdapter.AlarmListViewHolder>(){
     val itemList = mutableListOf<AlarmListInfo>() //AlarmViewModel
 
     class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (AlarmListInfo) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
+        private val alarmActivity: AlarmActivity = AlarmActivity()
+
         fun onBind(alarmListInfo: AlarmListInfo) { //alarmViewModel: AlarmViewModel
             Glide.with(binding.imgAlarmListProfile)
                 .load(alarmListInfo.image) //alarmViewModel.image
@@ -25,9 +29,13 @@ class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewMode
 
 //            binding.tvAlarmStatus.text = alarmViewModel.title.value
 
-            binding.tvAlarmDelete.setOnClickListener {
-//                itemClick(alarmViewModel)
+            binding.itemAlarmList.setOnClickListener{
                 itemClick(alarmListInfo)
+                binding.itemAlarmList.isSelected = true
+            }
+
+            binding.tvAlarmDelete.setOnClickListener {
+                alarmActivity.serveDeleteItem(alarmListInfo, alarmListInfo.pushId)
             }
         }
     }
