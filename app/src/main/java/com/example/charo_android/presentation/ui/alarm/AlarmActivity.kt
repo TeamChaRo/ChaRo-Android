@@ -13,6 +13,8 @@ import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.charo_android.R
 import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.RequestReadPushData
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
 import com.example.charo_android.databinding.ActivityAlarmBinding
@@ -33,7 +35,7 @@ class AlarmActivity : AppCompatActivity() {
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //fcm test
+        //fcm test TODO: 서버에서 보내는 알람 test 필요
         sendFCM()
 
         goHome()
@@ -51,8 +53,8 @@ class AlarmActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         with(binding) {
             alarmAdapter = AlarmListAdapter(){
-                //TODO: itemClick 이벤트 구현 (API 확인 후)
-                Toast.makeText(this@AlarmActivity, "알람 클릭 $it", Toast.LENGTH_LONG).show()
+                //itemClick 이벤트 구현
+                postReadAlarm(it.pushId)
             }
 
             rcvAlarmList.adapter = alarmAdapter
@@ -191,7 +193,39 @@ class AlarmActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
-                Log.d("server connect : Alarm ", "error: ${t.message}")
+                Log.d("server connect : Alarm delete", "error: ${t.message}")
+            }
+        })
+    }
+
+    private fun postReadAlarm(pushId: Int){
+        Log.e("postReadAlarm param", "$pushId")
+        val call: Call<ResponseStatusCode> =
+            ApiService.alarmViewService.postReadAlarm(RequestReadPushData(pushId))
+        call.enqueue(object : Callback<ResponseStatusCode> {
+            override fun onResponse(
+                call: Call<ResponseStatusCode>,
+                response: Response<ResponseStatusCode>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d("server connect : Alarm read", "success")
+                    Log.d("server connect : Alarm read", "${response.body()}")
+
+                    //TODO: 알람 내용에 맞는 화면으로 이동 (API 확인 후)
+
+                    Toast.makeText(this@AlarmActivity, "알람 클릭 $response.body()", Toast.LENGTH_LONG).show()
+
+                } else {
+                    Log.d("server connect : Alarm read", "error")
+                    Log.d("server connect : Alarm read", "$response.errorBody()")
+                    Log.d("server connect : Alarm read", response.message())
+                    Log.d("server connect : Alarm read", "${response.code()}")
+                    Log.d("server connect : Alarm read", "${response.raw().request.url}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseStatusCode>, t: Throwable) {
+                Log.d("server connect : Alarm read", "error: ${t.message}")
             }
         })
     }

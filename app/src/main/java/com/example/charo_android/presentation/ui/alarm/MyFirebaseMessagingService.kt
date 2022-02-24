@@ -30,17 +30,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     //fcm token update api
     private fun sendRegistrationToServer(token : String) {
-        //TODO: otherUserEmail -> userEmail 수정
-        val requestFcmData: RequestFcmData = RequestFcmData(token, Hidden.otherUserEmail)
+        val requestFcmData: RequestFcmData = RequestFcmData(token, Hidden.userEmail)
 
         val call: Call<ResponseFcmData> =
-            ApiService.alarmViewService.postFcm(requestFcmData)
+            ApiService.alarmViewService.pushFcm(requestFcmData)
         call.enqueue(object : Callback<ResponseFcmData> {
             override fun onResponse(
                 call: Call<ResponseFcmData>,
                 response: Response<ResponseFcmData>
             ) {
-                Log.e("postFcm param","$requestFcmData")
+                Log.e("pushFcm param","$requestFcmData")
 
                 if (response.isSuccessful) {
                     Log.d("server connect : Alarm Fcm Update", "success")

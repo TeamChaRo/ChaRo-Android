@@ -1,6 +1,8 @@
 package com.example.charo_android.data.api.alarm
 
+import com.example.charo_android.data.model.RequestReadPushData
 import com.example.charo_android.data.model.request.alarm.RequestFcmData
+import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
 import com.example.charo_android.data.model.response.alarm.ResponseFcmData
@@ -21,8 +23,13 @@ interface AlarmViewService {
         @Path("pushId") pushId : Int
     ) : Call<ResponseAlarmDeleteData>
 
+    @POST("/push/read")
+    fun postReadAlarm(
+        @Body pushId: RequestReadPushData
+    ): Call<ResponseStatusCode>
+
     @POST("/push/fcm")
-    fun postFcm(
+    fun pushFcm(
         @Body body: RequestFcmData
     ): Call<ResponseFcmData>
 }
