@@ -23,14 +23,28 @@
 
         <TextView
             android:id="@+id/item_name_location"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/divider"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_search_date"
             android:textColor="@color/blue_main_0f6fff"
             android:textSize="15sp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
             android:text="@{mapData.locationName}"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp" />
+
+        <TextView
+            android:id="@+id/item_search_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/gray3_sub_acb5bd"
+            android:textSize="11sp"
+            android:fontFamily="@font/noto_sans_cjkkr_regular"
+            android:text="@{mapData.date}"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp" />
 

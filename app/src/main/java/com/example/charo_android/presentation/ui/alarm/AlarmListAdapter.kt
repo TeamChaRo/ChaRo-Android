@@ -6,12 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.charo_android.databinding.ItemAlarmBinding
 
-class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewModel
-    RecyclerView.Adapter<AlarmListAdapter.AlarmListViewHolder>() {
+class AlarmListAdapter(
+    private val itemClick: (AlarmListInfo) -> Unit
+    ) : //AlarmViewModel
+    RecyclerView.Adapter<AlarmListAdapter.AlarmListViewHolder>(){
     val itemList = mutableListOf<AlarmListInfo>() //AlarmViewModel
 
     class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (AlarmListInfo) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
+        private val alarmActivity: AlarmActivity = AlarmActivity()
+
         fun onBind(alarmListInfo: AlarmListInfo) { //alarmViewModel: AlarmViewModel
             Glide.with(binding.imgAlarmListProfile)
                 .load(alarmListInfo.image) //alarmViewModel.image
@@ -19,11 +23,19 @@ class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewMode
                 .into(binding.imgAlarmListProfile)
 
             binding.tvAlarmStatus.text = alarmListInfo.title
+            binding.tvAlarmStatus.isSelected = true
+            binding.tvAlarmDate.text = "${alarmListInfo.month}월 ${alarmListInfo.day}일"
+            binding.tvAlarmContext.text = alarmListInfo.body
+
 //            binding.tvAlarmStatus.text = alarmViewModel.title.value
 
-            binding.itemAlarmList.setOnClickListener {
-//                itemClick(alarmViewModel)
+            binding.itemAlarmList.setOnClickListener{
                 itemClick(alarmListInfo)
+                binding.itemAlarmList.isSelected = true
+            }
+
+            binding.tvAlarmDelete.setOnClickListener {
+                alarmActivity.serveDeleteItem(alarmListInfo, alarmListInfo.pushId)
             }
         }
     }
@@ -40,5 +52,9 @@ class AlarmListAdapter(val itemClick: (AlarmListInfo) -> Unit) : //AlarmViewMode
 
     override fun getItemCount(): Int {
         return itemList.size
+    }
+
+    fun removeItem(data: AlarmListInfo){ //AlarmViewModel
+        itemList.remove(data)
     }
 }

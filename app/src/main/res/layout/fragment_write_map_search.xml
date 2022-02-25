@@ -16,11 +16,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_icon_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search_start"
+            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/et_write_map_search_start"
+            android:id="@+id/et_write_map_search"
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:background="@android:color/transparent"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_map_search_close"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search_start"
+            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#DDE2E5"
-            app:layout_constraintTop_toBottomOf="@id/et_write_map_search_start" />
+            app:layout_constraintTop_toBottomOf="@id/et_write_map_search" />
 
         <TextView
             android:id="@+id/text_result_search"
@@ -55,7 +55,7 @@
             android:layout_marginVertical="3dp"
             android:layout_marginLeft="20dp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
-            android:text="관련 검색어"
+            android:text="@string/write_auto_search"
             android:textColor="@color/gray4_sub_889098"
             app:layout_constraintBottom_toTopOf="@id/recyclerview_write_map_search"
             app:layout_constraintStart_toStartOf="parent"

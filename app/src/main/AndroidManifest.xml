@@ -26,14 +26,18 @@
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
+        <service
+            android:name=".presentation.ui.alarm.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".presentation.ui.detailpost.DetailPostActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.ui.follow.FollowActivity"
@@ -61,6 +65,11 @@
         <activity
             android:name=".presentation.ui.main.SplashActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
