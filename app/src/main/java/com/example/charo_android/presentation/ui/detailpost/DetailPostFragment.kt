@@ -13,7 +13,6 @@ import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostVi
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.skt.Tmap.TMapView
 import android.graphics.PointF
 import com.skt.Tmap.TMapMarkerItem
