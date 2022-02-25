@@ -2,13 +2,9 @@ package com.example.charo_android.presentation.ui.setting
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.charo_android.R
-import com.example.charo_android.data.repository.local.setting.LocalSettingNoticeDataSource
-import com.example.charo_android.data.repository.local.setting.LocalSettingNoticeDataSourceImpl
+import com.example.charo_android.data.datasource.local.setting.LocalSettingNoticeDataSourceImpl
 import com.example.charo_android.databinding.FragmentSettingNoticeBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.setting.adapter.SettingNoticeAdapter

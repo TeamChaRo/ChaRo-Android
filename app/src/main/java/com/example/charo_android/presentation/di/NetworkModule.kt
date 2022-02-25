@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.di
 
+import com.example.charo_android.data.api.detailpost.DetailPostService
 import com.example.charo_android.data.api.follow.FollowService
 import com.example.charo_android.data.api.home.HomeViewService
 import com.example.charo_android.data.api.signin.KakaoSignInService
@@ -87,6 +88,9 @@ val networkModule = module {
     }
     single {
         get<Retrofit>().create(FollowService::class.java)
+    }
+    single {
+        get<Retrofit>().create(DetailPostService::class.java)
     }
 }
 

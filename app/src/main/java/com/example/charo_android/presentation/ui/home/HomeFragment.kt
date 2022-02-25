@@ -1,19 +1,13 @@
 package com.example.charo_android.presentation.ui.home
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.charo_android.R
 import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.data.repository.local.home.LocalHomeThemeDataSourceImpl
+import com.example.charo_android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
 import com.example.charo_android.databinding.FragmentHomeBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
@@ -21,7 +15,6 @@ import com.example.charo_android.presentation.ui.alarm.AlarmActivity
 import com.example.charo_android.presentation.ui.home.adapter.*
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
 import com.example.charo_android.presentation.ui.main.SharedViewModel
-import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import com.example.charo_android.presentation.ui.search.SearchActivity
 import com.example.charo_android.presentation.util.LocationUtil

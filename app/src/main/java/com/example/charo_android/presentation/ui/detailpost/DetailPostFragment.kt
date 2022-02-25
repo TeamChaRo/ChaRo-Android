@@ -9,34 +9,38 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailPostBinding
+import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
+import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.detail.DetailLikeFragment
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.skt.Tmap.TMapView
 import android.graphics.PointF
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapPOIItem
-
 import com.skt.Tmap.TMapPoint
 import com.skt.Tmap.TMapView.OnClickListenerCallback
-
 
 class DetailPostFragment : Fragment() {
     private var _binding: FragmentDetailPostBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
+    private val viewModel: DetailPostViewModel by viewModel()
+    private var imageList = mutableListOf<String>()
     private lateinit var viewPagerAdapter: DetailPostViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_detail_post, container, false)
+        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_detail_post, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getDetailPostData(0)
         initViewPager()
         initTMap()
     }
@@ -48,6 +52,10 @@ class DetailPostFragment : Fragment() {
 
     private fun initViewPager() {
         viewPagerAdapter = DetailPostViewPagerAdapter()
+        viewModel.detailPost.observe(viewLifecycleOwner) {
+            imageList = it.images.toMutableList()
+        }
+        viewPagerAdapter.itemList = imageList
         binding.vpPost.adapter = viewPagerAdapter
     }
 

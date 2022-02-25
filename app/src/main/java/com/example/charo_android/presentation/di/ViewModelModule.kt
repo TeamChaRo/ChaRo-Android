@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.di
 
+import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
@@ -25,4 +26,5 @@ val viewModelModule = module {
     // SH
     viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { FollowViewModel(get()) }
+    viewModel { DetailPostViewModel(get()) }
 }

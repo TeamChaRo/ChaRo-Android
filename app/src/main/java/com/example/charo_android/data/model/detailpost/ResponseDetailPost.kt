@@ -18,11 +18,11 @@ data class ResponseDetailPost(
         val isAuthor: Boolean,
         val profileImage: String,
         val likesCount: Int,
-        val isFavorite: Boolean,
-        val isStored: Boolean,
-        val course: List<Location>
+        val isFavorite: Int,
+        val isStored: Int,
+        val course: List<Course>
     ) {
-        data class Location(
+        data class Course(
             val address: String,
             val latitude: Double,
             val longitude: Double

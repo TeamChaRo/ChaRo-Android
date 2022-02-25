@@ -3,16 +3,20 @@ package com.example.charo_android.presentation.ui.detailpost.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ItemDetailPostBinding
+import com.example.charo_android.databinding.ItemMyPagePostBinding
 
-class DetailPostViewPagerAdapter: RecyclerView.Adapter<DetailPostViewPagerAdapter.DetailPostViewHolder>() {
-    val itemList = mutableListOf<String>()
+class DetailPostViewPagerAdapter :
+    RecyclerView.Adapter<DetailPostViewPagerAdapter.DetailPostViewHolder>() {
+    var itemList = mutableListOf<String>()
 
-    class DetailPostViewHolder(private val binding: ItemDetailPostBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-
+    class DetailPostViewHolder(private val binding: ItemDetailPostBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(image: String) {
+            binding.image = image
         }
     }
 
@@ -27,7 +31,7 @@ class DetailPostViewPagerAdapter: RecyclerView.Adapter<DetailPostViewPagerAdapte
     }
 
     override fun onBindViewHolder(holder: DetailPostViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(itemList[position])
     }
 
     override fun getItemCount(): Int {
