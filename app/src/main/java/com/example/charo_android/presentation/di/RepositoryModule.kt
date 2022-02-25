@@ -1,19 +1,21 @@
 package com.example.charo_android.presentation.di
 
-import com.example.charo_android.data.repository.repositoryimpl.follow.FollowRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.home.HomeRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.more.MoreNewViewRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.more.MoreViewInfiniteRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.more.MoreViewRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.mypage.MyPageRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.search.SearchViewRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.setting.SettingRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.signin.EmailSignInRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.signin.KakaoSignInRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpEmailCertificationRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpNickNameCheckRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpRegisterRepositoryImpl
-import com.example.charo_android.data.repository.repositoryimpl.signup.SignUpRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.detailpost.DetailPostRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.follow.FollowRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.home.HomeRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.more.MoreNewViewRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.more.MoreViewInfiniteRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.more.MoreViewRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.mypage.MyPageRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.search.SearchViewRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.setting.SettingRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.signin.EmailSignInRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.signin.KakaoSignInRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.signup.SignUpEmailCertificationRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.signup.SignUpNickNameCheckRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.signup.SignUpRegisterRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.signup.SignUpRepositoryImpl
+import com.example.charo_android.domain.repository.detailpost.DetailPostRepository
 import com.example.charo_android.domain.repository.follow.FollowRepository
 import com.example.charo_android.domain.repository.setting.SettingRepository
 import com.example.charo_android.domain.repository.home.HomeRepository
@@ -46,4 +48,5 @@ val repositoryModule = module {
     // SH
     single<MyPageRepository> { MyPageRepositoryImpl(get()) }
     single<FollowRepository> { FollowRepositoryImpl(get()) }
+    single<DetailPostRepository> { DetailPostRepositoryImpl(get()) }
 }

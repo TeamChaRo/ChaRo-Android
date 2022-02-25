@@ -80,6 +80,15 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("setCenterCropImageUrl")
+    fun setCenterCropImageUrl(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .centerCrop()
+            .into(imageView)
+    }
+
+    @JvmStatic
     @BindingAdapter("chipBind")
     fun setChip(chip: Chip, text: String?){
         if (text != null){
