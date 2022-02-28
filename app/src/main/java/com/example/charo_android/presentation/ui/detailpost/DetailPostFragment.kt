@@ -96,56 +96,65 @@ class DetailPostFragment : Fragment() {
     private fun drawPath(tMapView: TMapView, course: List<DetailPost.Course>) {
         CoroutineScope(Dispatchers.Main).launch {
             kotlin.runCatching {
-                val pointList = ArrayList<TMapPoint>()
-
                 // ArrayList<TMapPoint>로 변환
-                course.forEach {
-                    pointList.add(TMapPoint(it.latitude, it.longitude))
+                val pointList = course.map {
+                    TMapPoint(it.latitude, it.longitude)
                 }
+
+                // 지도 중앙 맞춰주기
+                val info: TMapInfo =
+                    tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
+                tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+                tMapView.zoomLevel = info.tMapZoomLevel
 
                 // Marker 생성
                 for (i in pointList.indices) {
                     val marker = TMapMarkerItem()
                     val bitmap: Bitmap = when (i) {
+                        // 출발지
                         0 -> BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
+                        // 도착지
                         pointList.size - 1 -> BitmapFactory.decodeResource(
                             resources,
                             R.drawable.ic_route_end
                         )
+                        // 경유지
                         else -> BitmapFactory.decodeResource(
                             resources,
                             R.drawable.ic_route_waypoint
                         )
                     }
-                    marker.icon = bitmap
-                    marker.setPosition(0.5F, 1.0F)
-                    marker.tMapPoint = pointList[i]
-                    marker.name = "marker$i"
-                    tMapView.addMarkerItem(marker.name, marker)
-                }
-
-                // Path 그리기
-                for (i in 0 until pointList.size - 1) {
-                    val from = pointList[i]
-                    val to = pointList[i + 1]
-                    var tMapPolyLine: TMapPolyLine
-                    withContext(Dispatchers.IO) {
-                        tMapPolyLine = TMapData().findPathData(from, to)
+                    marker.apply {
+                        icon = bitmap
+                        setPosition(0.5F, 1.0F)
+                        tMapPoint = pointList[i]
+                        name = "marker$i"
                     }
-                    tMapPolyLine.lineWidth = 3F
-                    tMapPolyLine.outLineColor =
-                        ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
-                    tMapPolyLine.lineColor =
-                        ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
-                    tMapView.addTMapPolyLine("tMapPolyLine$i", tMapPolyLine)
-                }
+                    tMapView.addMarkerItem(marker.name, marker)
 
-                // 지도 중앙 맞춰주기
-                val info: TMapInfo = tMapView.getDisplayTMapInfo(pointList)
-                tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                tMapView.zoomLevel = info.tMapZoomLevel
+                    // 경로 그리기
+                    if (i != pointList.size - 1) {
+                        val from = pointList[i]
+                        val to = pointList[i + 1]
+                        var tMapPolyLine: TMapPolyLine
+                        withContext(Dispatchers.IO) {
+                            tMapPolyLine = TMapData().findPathData(from, to)
+                        }
+                        tMapPolyLine.apply {
+                            lineWidth = 3F
+                            outLineColor =
+                                ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
+                            lineColor =
+                                ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
+                        }
+                        tMapView.addTMapPolyLine(
+                            "tMapPolyLine$i",
+                            tMapPolyLine
+                        )
+                    }
+                }
             }.onFailure {
-                // 실패 시 액티비티 종료
+                // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
                 requireActivity().finish()
                 Log.e("mlog: DetailPostFragment::Path 그리기", it.message.toString())
             }
