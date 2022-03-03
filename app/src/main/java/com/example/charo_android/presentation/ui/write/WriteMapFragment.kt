@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -77,14 +78,6 @@ class WriteMapFragment : Fragment() {
 
         Log.d("Created WriteMapFragment", "jjjjjjjj")
 
-        if (mapData.startAddress == "" || binding.etWriteMapStart.text == null || binding.etWriteMapStart.text == "") {
-//            AlertDialog.Builder(this)
-//                .setMessage("출발지와 목적지를 입력해 다녀온 드라이브 코스를 표현해주세요. 완성된 경로를 확인 후, 경유지를 초가해 원하는 경로로 수정이 가능합니다.")
-//                .setPositiveButton("예") { dialog, which ->
-//                }
-//                .show()
-        }
-
         userId = sharedViewModel.userId.value.toString()
         nickName = sharedViewModel.nickName.value.toString()
         locationFlag = sharedViewModel.locationFlag.value.toString()
@@ -150,6 +143,19 @@ class WriteMapFragment : Fragment() {
 
         return root
     }
+
+    override fun onResume() {
+        super.onResume()
+        isEditTextFill()
+    }
+
+    private fun isEditTextFill() {
+        binding.etWriteMapStart.isSelected = !TextUtils.isEmpty(binding.etWriteMapStart.text)
+        binding.etWriteMapMid1.isSelected = !TextUtils.isEmpty(binding.etWriteMapMid1.text)
+        binding.etWriteMapMid2.isSelected = !TextUtils.isEmpty(binding.etWriteMapMid2.text)
+        binding.etWriteMapEnd.isSelected = !TextUtils.isEmpty(binding.etWriteMapEnd.text)
+    }
+
     private fun fillTextView(
         locationFlag: String,
         tMapView: TMapView
