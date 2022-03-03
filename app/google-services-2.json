@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "273821551567",
+    "project_id": "charo-android",
+    "storage_bucket": "charo-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273821551567:android:71081779a86829e57660ba",
+        "android_client_info": {
+          "package_name": "com.example.charo_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273821551567-mu7ln5scos0nuffo78v50f161p70g66i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhg8XQiG_v3HUQTkv2N679CygRxcBb8UM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273821551567-mu7ln5scos0nuffo78v50f161p70g66i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273821551567:android:a3ce90298ee43dea7660ba",
+        "android_client_info": {
+          "package_name": "com.hjinhee.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273821551567-mu7ln5scos0nuffo78v50f161p70g66i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhg8XQiG_v3HUQTkv2N679CygRxcBb8UM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273821551567-mu7ln5scos0nuffo78v50f161p70g66i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

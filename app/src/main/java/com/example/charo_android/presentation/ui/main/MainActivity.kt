@@ -21,11 +21,15 @@ import com.example.charo_android.presentation.ui.write.WriteShareActivity
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.replaceFragment
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var analytics: FirebaseAnalytics
+
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
@@ -45,6 +49,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Obtain the FirebaseAnalytics instance.
+        analytics = Firebase.analytics
+
         userEmail = SharedInformation.getEmail(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
@@ -82,17 +90,31 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             userEmail = SharedInformation.getEmail(this@MainActivity)
             navView.setOnItemSelectedListener {
+                val parameters : Bundle  = Bundle().apply {
+                    this.putInt(FirebaseAnalytics.Param.ITEM_ID, it.itemId)
+                    this.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "fragment")
+                }
+
                 when (it.itemId) {
                     R.id.navigation_home -> {
+                        parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_home_kor))
+                        analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
+
                         replaceHomeFragment(userEmail, nickName)
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
+                        parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_write_kor))
+                        analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
+
                         startActivityWriteShare()
 //                        replaceWriteFragment(userId,nickName)
 //                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
+                        parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_charo_kor))
+                        analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
+
                         replaceCharoFragment(userEmail, nickName, isMyPage)
                         return@setOnItemSelectedListener true
                     }
@@ -101,6 +123,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             binding.btnWrite.setOnClickListener {
+                val parameters : Bundle  = Bundle().apply {
+                    this.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_write_kor))
+                    this.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "fragment")
+                }
+                analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
+
                 startActivityWriteShare()
             }
         }
