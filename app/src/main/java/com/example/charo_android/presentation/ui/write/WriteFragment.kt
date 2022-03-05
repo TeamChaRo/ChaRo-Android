@@ -252,6 +252,8 @@ class WriteFragment : Fragment() {
         Log.d("uuuwrite", userId)
         Log.d("uuuwrite", nickName)
 
+        initToolBar()
+
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeAdapter = WriteAdapter()
 
@@ -275,8 +277,6 @@ class WriteFragment : Fragment() {
         // 지역(도 단위)
         binding.btnWriteRegion.setOnClickListener() {
             val checkedItem = 0
-
-//            showDialogFragment()
 
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
                 .setTitle("지역")
@@ -412,17 +412,6 @@ class WriteFragment : Fragment() {
         binding.clWritePhoto.setOnClickListener {
             openGallery()
         }
-        binding.imgWriteBack.setOnClickListener {
-
-            AlertDialog.Builder(requireContext())
-                .setMessage("게시물 작성을 중단하시겠습니까?\n")
-                .setNeutralButton("이어서 작성") { dialog, which ->
-                }
-                .setPositiveButton("작성중단") { dialog, which ->
-                    writeShareActivity?.finish()
-                }
-                .show()
-        }
 
         binding.btnWriteBottomNext.setOnClickListener {
             //주의사항
@@ -455,6 +444,17 @@ class WriteFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun initToolBar() {
+        val toolbar = binding.toolbarWrite
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black)
+
+        setHasOptionsMenu(true)
     }
 
     private fun observeThemeData(){

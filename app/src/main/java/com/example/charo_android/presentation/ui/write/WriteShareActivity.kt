@@ -1,8 +1,10 @@
 package com.example.charo_android.presentation.ui.write
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.example.charo_android.R
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -60,6 +62,24 @@ class WriteShareActivity : AppCompatActivity() {
         sharedViewModel.longitude.value = 0.0
         sharedViewModel.locationName.value = ""
         sharedViewModel.locationAddress.value = ""
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                AlertDialog.Builder(this)
+                .setMessage("게시물 작성을 중단하시겠습니까?\n")
+                .setNeutralButton("이어서 작성") { dialog, which ->
+                }
+                .setPositiveButton("작성중단") { dialog, which ->
+                    finish()
+                }
+                .show()
+
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
