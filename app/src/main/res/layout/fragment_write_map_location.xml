@@ -16,8 +16,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_write_map_location_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:background="@color/gray_blue_d3e5ff">
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -25,8 +25,8 @@
                 android:id="@+id/img_write_map_location_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/back1_gray5_wth_circle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,10 +34,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_bottom_location"
                 android:layout_width="match_parent"
-                android:layout_height="167dp"
-                android:background="@drawable/background_bottom_sheet"
+                android:layout_height="wrap_content"
+                android:minHeight="167dp"
+                android:background="@drawable/background_radius_top_20"
+                android:elevation="10dp"
                 android:paddingHorizontal="20dp"
                 android:paddingBottom="28dp"
+                android:paddingTop="22dp"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
@@ -48,28 +51,35 @@
                     android:text="서울역 경부선 (고속철도)"
                     android:textColor="@color/gray5_sub_495057"
                     android:textSize="16sp"
+                    android:includeFontPadding="false"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/text_location_address"
+                    />
 
                 <TextView
                     android:id="@+id/text_location_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="27dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:text="서울특별시 중구 한강대로 405 서울역"
                     android:textColor="@color/gray4_sub_889098"
                     android:textSize="14sp"
+                    android:includeFontPadding="false"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toTopOf="@+id/btn_set_location"
+                    android:layout_marginBottom="18dp"
+                    />
 
                 <Button
                     android:id="@+id/btn_set_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="46dp"
                     android:background="@drawable/background_et_write"
                     android:backgroundTint="@color/blue_main_0f6fff"
                     android:text="설정"
+                    android:includeFontPadding="false"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent" />
 

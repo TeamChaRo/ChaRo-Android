@@ -11,11 +11,11 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -25,7 +25,6 @@ import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.detail.DetailLikeFragment
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType
@@ -33,6 +32,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.view.isVisible
+
 
 class WriteFragment : Fragment() {
 
@@ -249,6 +252,8 @@ class WriteFragment : Fragment() {
         Log.d("uuuwrite", userId)
         Log.d("uuuwrite", nickName)
 
+        initToolBar()
+
         // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeAdapter = WriteAdapter()
 
@@ -262,9 +267,9 @@ class WriteFragment : Fragment() {
         binding.imgWriteAddImg.setOnClickListener {
             openGallery()
         }
-        warningText(binding.etWriteTitle, 38)
-        warningText(binding.etWriteParkReview, 23)
-        warningText(binding.etWriteMyDrive, 280)
+        warningText(binding.etWriteTitle, binding.tvWarningTitle, 38)
+        warningText(binding.etWriteParkReview, binding.tvWarningParkReview, 23)
+        warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive,280)
 
         //버튼 selected 상태 변화 함수
         setButtonClickEvent()
@@ -272,8 +277,6 @@ class WriteFragment : Fragment() {
         // 지역(도 단위)
         binding.btnWriteRegion.setOnClickListener() {
             val checkedItem = 0
-
-//            showDialogFragment()
 
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
                 .setTitle("지역")
@@ -409,17 +412,6 @@ class WriteFragment : Fragment() {
         binding.clWritePhoto.setOnClickListener {
             openGallery()
         }
-        binding.imgWriteBack.setOnClickListener {
-
-            AlertDialog.Builder(requireContext())
-                .setMessage("게시물 작성을 중단하시겠습니까?\n")
-                .setNeutralButton("이어서 작성") { dialog, which ->
-                }
-                .setPositiveButton("작성중단") { dialog, which ->
-                    writeShareActivity?.finish()
-                }
-                .show()
-        }
 
         binding.btnWriteBottomNext.setOnClickListener {
             //주의사항
@@ -452,6 +444,17 @@ class WriteFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun initToolBar() {
+        val toolbar = binding.toolbarWrite
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black)
+
+        setHasOptionsMenu(true)
     }
 
     private fun observeThemeData(){
@@ -601,8 +604,31 @@ class WriteFragment : Fragment() {
         }
     }
 
-    private fun warningText(edt: EditText, i: Int) {
-        edt.isSelected = edt.text.length >= (i - 2)
+    private fun warningText(edt: EditText, warningTxt: TextView, len: Int) {
+        edt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+            override fun afterTextChanged(p0: Editable?) {
+                edt.removeTextChangedListener(this)
+
+                val textLength : Int = p0.toString().length
+                if(len > 200)
+                    binding.tvLenMyDrive.text = "${textLength}/${len}자"
+
+                if(textLength > len) {
+                    edt.setText(p0.toString().substring(0,textLength-1))
+                    edt.setSelection(textLength-1)
+                }
+                edt.isSelected = textLength > len
+                warningTxt.isVisible = textLength > len
+
+                edt.addTextChangedListener(this)
+            }
+        })
     }
 
     private fun setButtonClickEvent() {

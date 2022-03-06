@@ -14,15 +14,16 @@
             android:id="@+id/img_write_map_search_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_icon_back"
+            android:src="@drawable/ic_back_1_gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/et_write_map_search"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
 
         <EditText
             android:id="@+id/et_write_map_search"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:minHeight="72dp"
             android:background="@android:color/transparent"
             android:hint="@string/start"
             android:inputType="text"

@@ -1,11 +1,13 @@
 package com.example.charo_android.presentation.ui.write
 
 import android.content.Context
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
+import android.text.Spannable
 import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,6 +26,8 @@ import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 
 class WriteMapSearchFragment : Fragment() {
 
@@ -121,16 +125,15 @@ class WriteMapSearchFragment : Fragment() {
         val tmapdata = TMapData()
         binding.etWriteMapSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                Log.d("myLog", "before")
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.d("myLog", "changing")
+
             }
 
             override fun afterTextChanged(s: Editable?) {
-                Log.d("myLog", "after")
-                Handler(Looper.getMainLooper()).postDelayed({
+               Handler(Looper.getMainLooper()).postDelayed({
                     // 관련 검색어
                     if(binding.etWriteMapSearch.text.isNotEmpty()) {
                         binding.textResultSearch.text = getString(R.string.write_auto_search)
@@ -141,9 +144,20 @@ class WriteMapSearchFragment : Fragment() {
                             for (i in 0 until poiItem.size) {
                                 val item = poiItem[i]
 
+                                val inputText = binding.etWriteMapSearch.text.toString()
+                                val outputText = item.poiName
+                                val spannableString = SpannableString(outputText)
+
+                                val start: Int = outputText.indexOf(inputText)
+                                val end: Int = start + inputText.length
+
+                                if(start > -1 && end > start){
+                                    spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#0f6fff")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                                }
+
                                 mapSearchList.add(
                                     MapSearchInfo(
-                                        locationName = item.poiName,
+                                        locationName = spannableString,
                                         locationAddress = item.poiAddress.replace("null", ""),
                                         date = ""
                                     )
@@ -185,10 +199,11 @@ class WriteMapSearchFragment : Fragment() {
                     if (data != null) {
                         for (i in 0 until data.size) {
                             val item = data[i]
+                            val spannableString = SpannableString(item.title)
 
                             list.add(
                                 MapSearchInfo(
-                                    locationName = item.title,
+                                    locationName = spannableString,
                                     locationAddress = item.address,
                                     date = "${item.month}.${item.day}"
                                 )

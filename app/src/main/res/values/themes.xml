@@ -102,6 +102,7 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">17sp</item>
         <item name="android:lineSpacingExtra">7.1sp</item>
+        <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/black_sub_212429</item>
     </style>
 
