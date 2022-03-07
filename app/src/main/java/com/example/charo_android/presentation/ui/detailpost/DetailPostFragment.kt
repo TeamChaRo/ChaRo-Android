@@ -1,5 +1,8 @@
 package com.example.charo_android.presentation.ui.detailpost
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PointF
@@ -54,6 +57,8 @@ class DetailPostFragment : Fragment() {
             initViewPager(it.images)
             drawPath(tMapView, it.course)
         }
+        copyAddress()
+
     }
 
     override fun onDestroyView() {
@@ -159,5 +164,25 @@ class DetailPostFragment : Fragment() {
                 Log.e("mlog: DetailPostFragment::Path 그리기", it.message.toString())
             }
         }
+    }
+
+    private fun copyAddress() {
+        binding.clPostAddressCopyStart.setOnClickListener {
+            copyAddressToClipboard(binding.tvPostAddressStart.text.toString())
+        }
+        binding.clPostAddressCopyVia.setOnClickListener {
+            copyAddressToClipboard(binding.tvPostAddressVia.text.toString())
+        }
+        binding.clPostAddressCopyEnd.setOnClickListener {
+            copyAddressToClipboard(binding.tvPostAddressEnd.text.toString())
+        }
+    }
+
+    private fun copyAddressToClipboard(address: String) {
+        val clipboardManager =
+            requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText("Charo Address", address)
+        clipboardManager.setPrimaryClip(clip)
+        Toast.makeText(requireContext(), "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
     }
 }
