@@ -3,20 +3,20 @@ package com.example.charo_android.presentation.di
 import com.example.charo_android.data.api.detailpost.DetailPostService
 import com.example.charo_android.data.api.follow.FollowService
 import com.example.charo_android.data.api.home.HomeViewService
-import com.example.charo_android.data.api.signin.KakaoSignInService
-import com.example.charo_android.data.api.more.MoreViewInfiniteService
-
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
+import com.example.charo_android.data.api.interaction.InteractionService
 import com.example.charo_android.data.api.more.MoreNewViewService
+import com.example.charo_android.data.api.more.MoreViewInfiniteService
 import com.example.charo_android.data.api.more.MoreViewService
 import com.example.charo_android.data.api.mypage.MyPageService
 import com.example.charo_android.data.api.search.SearchViewService
 import com.example.charo_android.data.api.setting.SettingViewService
+import com.example.charo_android.data.api.signin.KakaoSignInService
 import com.example.charo_android.data.api.signin.SignInViewService
 import com.example.charo_android.data.api.signup.SignUpEmailCertificationViewService
+import com.example.charo_android.data.api.signup.SignUpEmailCheckViewService
 import com.example.charo_android.data.api.signup.SignUpNickNameCheckViewService
 import com.example.charo_android.data.api.signup.SignUpRegisterService
+import com.example.charo_android.hidden.Hidden
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -92,5 +92,6 @@ val networkModule = module {
     single {
         get<Retrofit>().create(DetailPostService::class.java)
     }
+    single { get<Retrofit>().create(InteractionService::class.java) }
 }
 

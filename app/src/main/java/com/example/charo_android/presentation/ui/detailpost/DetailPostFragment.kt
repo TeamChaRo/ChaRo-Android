@@ -1,8 +1,6 @@
 package com.example.charo_android.presentation.ui.detailpost
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PointF
@@ -19,6 +17,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailPostBinding
 import com.example.charo_android.domain.model.detailpost.DetailPost
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.skt.Tmap.*
@@ -27,12 +26,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPostFragment : Fragment() {
     private var _binding: FragmentDetailPostBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
-    private val viewModel: DetailPostViewModel by viewModel()
+    private val viewModel by sharedViewModel<DetailPostViewModel>()
     private lateinit var viewPagerAdapter: DetailPostViewPagerAdapter
 
     private lateinit var tMapView: TMapView
@@ -58,7 +58,10 @@ class DetailPostFragment : Fragment() {
             drawPath(tMapView, it.course)
         }
         copyAddress()
-
+        clickLike()
+        clickSave()
+        clickShare()
+        goBack()
     }
 
     override fun onDestroyView() {
@@ -82,7 +85,7 @@ class DetailPostFragment : Fragment() {
                 point: TMapPoint?,
                 pointf: PointF?
             ): Boolean {
-                Toast.makeText(requireContext(), "onPressUpEvent", Toast.LENGTH_SHORT).show()
+                clickMap()
                 return false
             }
 
@@ -184,5 +187,53 @@ class DetailPostFragment : Fragment() {
         val clip: ClipData = ClipData.newPlainText("Charo Address", address)
         clipboardManager.setPrimaryClip(clip)
         Toast.makeText(requireContext(), "클립보드에 복사되었습니다.", Toast.LENGTH_LONG).show()
+    }
+
+    private fun clickLike() {
+        binding.imgDetailLike.setOnClickListener {
+            viewModel.postLike(0)
+        }
+    }
+
+    private fun clickSave() {
+        binding.imgDetailSave.setOnClickListener {
+            viewModel.postSave(0)
+        }
+    }
+
+    private fun goBack() {
+        binding.clBack.setOnClickListener {
+            requireActivity().finish()
+        }
+    }
+
+    private fun clickShare() {
+        binding.imgDetailShare.setOnClickListener {
+            try {
+                // TODO: 나중에 postId 바꾸기
+//                val deepLink =
+//                    "http://www.charo.com/detail/${(activity as DetailPostActivity).postId}" //딥링크
+                val deepLink =
+                    "http://www.charo.com/detail/8" //딥링크
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "*/*"
+                intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
+
+                intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+
+                val chooser = Intent.createChooser(intent, "공유하기")
+                startActivity(chooser)
+
+            } catch (ignored: ActivityNotFoundException) {
+                Log.d("test", "ignored : $ignored")
+            }
+        }
+    }
+
+    private fun clickMap() {
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fcv_detail_post, DetailPostMapFragment())
+            .addToBackStack(null)
+            .commit()
     }
 }

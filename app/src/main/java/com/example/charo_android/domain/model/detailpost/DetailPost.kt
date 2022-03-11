@@ -13,8 +13,8 @@ data class DetailPost(
     val isAuthor: Boolean,
     val profileImage: String,
     val likesCount: Int,
-    val isFavorite: Int,
-    val isStored: Int,
+    var isFavorite: Int,
+    var isStored: Int,
     val course: List<Course>
 ) {
     data class Course(
