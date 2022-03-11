@@ -8,6 +8,8 @@ import com.example.charo_android.data.datasource.remote.follow.RemoteFollowDataS
 import com.example.charo_android.data.datasource.remote.follow.RemoteFollowDataSourceImpl
 import com.example.charo_android.data.datasource.remote.home.RemoteHomeDataSource
 import com.example.charo_android.data.datasource.remote.home.RemoteHomeDataSourceImpl
+import com.example.charo_android.data.datasource.remote.interaction.RemoteInteractionDataSource
+import com.example.charo_android.data.datasource.remote.interaction.RemoteInteractionDataSourceImpl
 import com.example.charo_android.data.datasource.remote.more.*
 import com.example.charo_android.data.datasource.remote.mypage.RemoteMyPageDataSource
 import com.example.charo_android.data.datasource.remote.mypage.RemoteMyPageDataSourceImpl
@@ -44,4 +46,5 @@ val dataSourceModule = module {
     single<RemoteMyPageDataSource> { RemoteMyPageDataSourceImpl(get()) }
     single<RemoteFollowDataSource> { RemoteFollowDataSourceImpl(get()) }
     single<RemoteDetailPostDataSource> { RemoteDetailPostDataSourceImpl(get()) }
+    single<RemoteInteractionDataSource> { RemoteInteractionDataSourceImpl(get()) }
 }

@@ -3,6 +3,7 @@ package com.example.charo_android.presentation.di
 import com.example.charo_android.data.datasource.repositoryimpl.detailpost.DetailPostRepositoryImpl
 import com.example.charo_android.data.datasource.repositoryimpl.follow.FollowRepositoryImpl
 import com.example.charo_android.data.datasource.repositoryimpl.home.HomeRepositoryImpl
+import com.example.charo_android.data.datasource.repositoryimpl.interaction.InteractionRepositoryImpl
 import com.example.charo_android.data.datasource.repositoryimpl.more.MoreNewViewRepositoryImpl
 import com.example.charo_android.data.datasource.repositoryimpl.more.MoreViewInfiniteRepositoryImpl
 import com.example.charo_android.data.datasource.repositoryimpl.more.MoreViewRepositoryImpl
@@ -19,6 +20,7 @@ import com.example.charo_android.domain.repository.detailpost.DetailPostReposito
 import com.example.charo_android.domain.repository.follow.FollowRepository
 import com.example.charo_android.domain.repository.setting.SettingRepository
 import com.example.charo_android.domain.repository.home.HomeRepository
+import com.example.charo_android.domain.repository.interaction.InteractionRepository
 import com.example.charo_android.domain.repository.moreview.MoreNewViewRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
 import com.example.charo_android.domain.repository.moreview.MoreViewRepository
@@ -49,4 +51,5 @@ val repositoryModule = module {
     single<MyPageRepository> { MyPageRepositoryImpl(get()) }
     single<FollowRepository> { FollowRepositoryImpl(get()) }
     single<DetailPostRepository> { DetailPostRepositoryImpl(get()) }
+    single<InteractionRepository> { InteractionRepositoryImpl(get()) }
 }
