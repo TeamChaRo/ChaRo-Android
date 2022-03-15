@@ -17,7 +17,7 @@ class DetailPostViewModel(
     private val postSaveUseCase: PostSaveUseCase
 ) : ViewModel() {
     private val userEmail = "and@naver.com"
-    private val postId = 8
+    var postId = 8
 
     private var _detailPost = MutableLiveData<DetailPost>()
     val detailPost: LiveData<DetailPost> get() = _detailPost
@@ -31,11 +31,11 @@ class DetailPostViewModel(
     private var _likesCount = MutableLiveData<Int>()
     val likesCount: LiveData<Int> get() = _likesCount
 
-    fun getDetailPostData(postId: Int) {
+    fun getDetailPostData() {
         viewModelScope.launch {
             kotlin.runCatching {
                 // TODO: 추후 postId 넣는 방식 수정요망
-                getRemoteDetailPostUseCase(userEmail, this@DetailPostViewModel.postId)
+                getRemoteDetailPostUseCase(userEmail, postId)
             }.onSuccess {
                 _detailPost.value = it
                 _isFavorite.value = it.isFavorite
@@ -47,11 +47,11 @@ class DetailPostViewModel(
         }
     }
 
-    fun postLike(postId: Int) {
+    fun postLike() {
         viewModelScope.launch {
             kotlin.runCatching {
                 // TODO: 추후 postId 넣는 방식 수정요망
-                postLikeUseCase(userEmail, this@DetailPostViewModel.postId)
+                postLikeUseCase(userEmail, postId)
             }.onSuccess {
                 if (it) {
                     _isFavorite.value = (isFavorite.value?.plus(1))?.rem(2)
@@ -63,10 +63,10 @@ class DetailPostViewModel(
         }
     }
 
-    fun postSave(postId: Int) {
+    fun postSave() {
         viewModelScope.launch {
             kotlin.runCatching {
-                postSaveUseCase(userEmail, this@DetailPostViewModel.postId)
+                postSaveUseCase(userEmail, postId)
             }.onSuccess {
                 if (it) {
                     _isStored.value = (isStored.value?.plus(1))?.rem(2)

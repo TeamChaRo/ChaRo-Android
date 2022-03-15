@@ -7,15 +7,16 @@ import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityDetailPostBinding
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPostActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPostBinding
-    private val viewModel by viewModels<DetailPostViewModel>()
+    private val viewModel by viewModel<DetailPostViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_post)
-
+        viewModel.postId = intent.getIntExtra("postId", -1)
         initFragmentContainerView()
     }
 
@@ -23,7 +24,6 @@ class DetailPostActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
 
         transaction.add(R.id.fcv_detail_post, DetailPostFragment())
-            .addToBackStack(null)
             .commit()
     }
 }
