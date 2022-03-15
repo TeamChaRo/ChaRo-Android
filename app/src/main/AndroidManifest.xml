@@ -26,6 +26,9 @@
         android:theme="@style/Theme.ChaRoAndroid"
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
+        <activity
+            android:name=".presentation.ui.mypage.other.OtherMyPageActivity"
+            android:exported="false" />
 
         <service
             android:name=".presentation.ui.alarm.MyFirebaseMessagingService"
@@ -38,13 +41,7 @@
 
         <activity
             android:name=".presentation.ui.detailpost.DetailPostActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".presentation.ui.follow.FollowActivity"
             android:exported="false" />
@@ -89,7 +86,13 @@
         <activity android:name=".presentation.ui.setting.SettingActivity" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.ui.search.SearchActivity" />
         <activity
             android:name=".presentation.ui.detail.DetailActivity"
