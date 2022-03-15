@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/rectangle_border_blue_radius_20.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/rectangle_border_blue_radius_21.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/rectangle_border_gray_radius_21.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle_border_white_radius_12.xml" value="0.262" />
         <entry key="app/src/main/res/drawable/rectangle_kakao_yellow.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/rectangle_radius_12.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/rectangle_radius_40.xml" value="0.262037037037037" />
@@ -30,11 +31,14 @@
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.3233695652173913" />
         <entry key="app/src/main/res/layout/activity_detail_post_map.xml" value="0.2866847826086957" />
         <entry key="app/src/main/res/layout/activity_follow.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_other_my_page.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.17255434782608695" />
         <entry key="app/src/main/res/layout/fragment_detail_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_detail_post_map.xml" value="0.2866847826086957" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_following.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/fragment_guest_bottom.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/fragment_guest_top.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/fragment_my_top.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_saved_post.xml" value="0.16893115942028986" />
         <entry key="app/src/main/res/layout/fragment_written_post.xml" value="0.16893115942028986" />
