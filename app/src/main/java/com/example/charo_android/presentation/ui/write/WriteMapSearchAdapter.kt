@@ -64,10 +64,13 @@ class WriteMapSearchAdapter(
                 , lat, lon
             )
 
-            sharedViewModel.locationName.value = userList[position].locationName.toString()
-            sharedViewModel.locationAddress.value = userList[position].locationAddress
+//            sharedViewModel.locationName.value = userList[position].locationName.toString()
+//            sharedViewModel.locationAddress.value = userList[position].locationAddress
 
-            writeShareActivity.replaceFragment(WriteMapLocationFragment.newInstance(), "writeMapLocation")
+            val locationName = userList[position].locationName.toString()
+            val locationAddress = userList[position].locationAddress
+
+            writeShareActivity.replaceAddStackFragment(WriteMapLocationFragment.newInstance(locationName, locationAddress), "writeMapLocation")
 
         }
     }

@@ -39,25 +39,13 @@ import androidx.core.view.isVisible
 
 class WriteFragment : Fragment() {
 
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
-        override fun contentType(): MediaType? = "image/jpeg".toMediaType()
-
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
-        }
-
-    }
-
     companion object {
         fun newInstance() = WriteFragment()
     }
     private var _binding: FragmentWriteBinding? = null
-    private lateinit var writeAdapter: WriteAdapter
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var writeAdapter: WriteAdapter
     private val sharedViewModel: WriteSharedViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
@@ -66,12 +54,9 @@ class WriteFragment : Fragment() {
     }
 
     var writeShareActivity: WriteShareActivity? = null
-    var dialogThemeFragment: DialogThemeFragment? = DialogThemeFragment()
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         writeShareActivity = context as WriteShareActivity
-//        dialogThemeFragment = context as DialogThemeFragment
     }
 
     val itemProvince =
@@ -440,7 +425,7 @@ class WriteFragment : Fragment() {
             //코스 설명
             sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
 
-            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance(), "writeMap");
+            writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
         }
 
         return root
@@ -724,7 +709,7 @@ class WriteFragment : Fragment() {
         WriteData.fileList = fileList
 
 //        startActivityWriteMap()
-//        writeShareActivity?.replaceFragment(WriteMapFragment, "writeMap");
+//        writeShareActivity?.replaceAddStackFragment(WriteMapFragment, "writeMap");
 
     }
 
@@ -764,24 +749,15 @@ class WriteFragment : Fragment() {
             binding.btnWriteParkYes.isSelected = false
             binding.btnWriteParkNo.isSelected = true
         }
-
-        //주의사항
-//        sharedViewModel.warning.value?.forEach { warning ->
-//            when (warning) {
-//                ("warning","highway") -> {
-//                    binding.btnWriteCautionHighway.isSelected = true
-//                }
-//                "mountainRoad" -> {
-//                    binding.btnWriteCautionMoun.isSelected = true
-//                }
-//                "" -> {
-//                    binding.btnWriteCautionDiffi.isSelected = true
-//                }
-//                "p" -> {
-//                    binding.btnWriteCautionPeople.isSelected = true
-//                }
-//            }
-//        }
     }
 
+    //이미지 보내기
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
+        }
+
+    }
 }

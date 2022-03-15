@@ -40,14 +40,18 @@ class WriteShareActivity : AppCompatActivity() {
         writeFragment = WriteFragment()
 
         //writeFragment에서는 뒤로가기 안되게 하기 위해 .addToBackStack 제외
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.write_share_layout, writeFragment)
-            .commit()
+        replaceFragment(writeFragment)
 
     }
 
-    fun replaceFragment(fragment: Fragment, tag: String) {
+    fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.write_share_layout, fragment)
+            .commit()
+    }
+
+    fun replaceAddStackFragment(fragment: Fragment, tag: String) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.write_share_layout, fragment, tag)
@@ -60,8 +64,8 @@ class WriteShareActivity : AppCompatActivity() {
         supportFragmentManager.popBackStack();
         sharedViewModel.latitude.value = 0.0
         sharedViewModel.longitude.value = 0.0
-        sharedViewModel.locationName.value = ""
-        sharedViewModel.locationAddress.value = ""
+//        sharedViewModel.locationName.value = ""
+//        sharedViewModel.locationAddress.value = ""
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

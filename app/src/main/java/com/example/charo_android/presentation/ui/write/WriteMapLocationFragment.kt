@@ -20,12 +20,17 @@ import com.skt.Tmap.TMapData
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapView
 
-class WriteMapLocationFragment : Fragment() {
+private const val LOCATION_NAME = "locationName"
+private const val LOCATION_ADDRESS = "locationAddress"
 
-    private lateinit var locationAddress: String
-    private lateinit var locationName: String
+class WriteMapLocationFragment : Fragment() {
+    private var locationName: String? = null
+    private var locationAddress: String? = null
+
+//    private lateinit var locationAddress: String
+//    private lateinit var locationName: String
     private lateinit var locationFlag: String
-    private lateinit var resultLocation: String
+//    private lateinit var resultLocation: String
     private lateinit var address: TMapAddressInfo
     private lateinit var userId: String
     private lateinit var nickName: String
@@ -36,6 +41,15 @@ class WriteMapLocationFragment : Fragment() {
 
     companion object {
         fun newInstance() = WriteMapLocationFragment()
+
+        @JvmStatic
+        fun newInstance(locationName: String, locationAddress: String) =
+            WriteMapLocationFragment().apply {
+                arguments = Bundle().apply {
+                    putString(LOCATION_NAME, locationName)
+                    putString(LOCATION_ADDRESS, locationAddress)
+                }
+            }
     }
 
     private var _binding: FragmentWriteMapLocationBinding? = null
@@ -68,17 +82,23 @@ class WriteMapLocationFragment : Fragment() {
         userId = sharedViewModel.userId.value.toString()
         nickName = sharedViewModel.nickName.value.toString()
         locationFlag = sharedViewModel.locationFlag.value.toString()
-        locationName = sharedViewModel.locationName.value.toString()
-        locationAddress = sharedViewModel.locationAddress.value.toString()
-        resultLocation = sharedViewModel.resultLocation.value.toString()
 
-        Log.d("uuuwriteloca", userId)
-        Log.d("uuuwriteloca", nickName)
-        Log.d("uuuwriteloca", locationFlag)
-        Log.d("uuuwritelocalocationnmae", locationName)
-        Log.d("uuuwriteloca", locationAddress)
+        arguments?.let {
+            locationName = it.getString(LOCATION_NAME)
+            locationAddress = it.getString(LOCATION_ADDRESS)
+        }
 
-        binding.btnSetLocation.text = resultLocation
+//        locationName = sharedViewModel.locationName.value.toString()
+//        locationAddress = sharedViewModel.locationAddress.value.toString()
+//        resultLocation = sharedViewModel.resultLocation.value.toString()
+
+//        Log.d("uuuwriteloca", userId)
+//        Log.d("uuuwriteloca", nickName)
+//        Log.d("uuuwriteloca", locationFlag)
+//        Log.d("uuuwritelocalocationnmae", locationName)
+//        Log.d("uuuwriteloca", locationAddress)
+
+//        binding.btnSetLocation.text = resultLocation
 
         binding.imgWriteMapLocationBack.setOnClickListener {
             writeShareActivity?.onBackPressed()
@@ -92,6 +112,8 @@ class WriteMapLocationFragment : Fragment() {
 
         val tmapdata = TMapData()
         if (locationFlag == "1") {
+            binding.btnSetLocation.text = "출발지로 설정"
+
             tmapdata.findAllPOI(locationName) { poiItem ->
                 Log.d("poi", poiItem[0].poiPoint.toString())
                 val marker = TMapMarkerItem()
@@ -105,6 +127,8 @@ class WriteMapLocationFragment : Fragment() {
                 tMapView.addMarkerItem(marker.name, marker)
             }
         } else if (locationFlag == "4") {
+            binding.btnSetLocation.text = "도착지로 설정"
+
             tmapdata.findAllPOI(locationName) { poiItem ->
                 Log.d("poi", poiItem[0].poiPoint.toString())
                 val marker = TMapMarkerItem()
@@ -118,6 +142,8 @@ class WriteMapLocationFragment : Fragment() {
                 tMapView.addMarkerItem(marker.name, marker)
             }
         } else {
+            binding.btnSetLocation.text = "경유지로 설정"
+
             tmapdata.findAllPOI(locationName) { poiItem ->
                 Log.d("poi", poiItem[0].poiPoint.toString())
                 val marker = TMapMarkerItem()
@@ -220,9 +246,9 @@ class WriteMapLocationFragment : Fragment() {
 //                    sharedViewModel.locationAddress.value = locationAddress
                 }
                 else -> {
-                    sharedViewModel.mid1Lat.value = tMapView.centerPoint.latitude
-                    sharedViewModel.mid1Long.value = tMapView.centerPoint.longitude
-                    sharedViewModel.mid1Address.value = locationName
+                    sharedViewModel.midFrstLat.value = tMapView.centerPoint.latitude
+                    sharedViewModel.midFrstLong.value = tMapView.centerPoint.longitude
+                    sharedViewModel.midFrstAddress.value = locationName
 //                    sharedViewModel.locationAddress.value = locationAddress
                 }
             }
@@ -230,7 +256,7 @@ class WriteMapLocationFragment : Fragment() {
             Log.d("test lat", lat.toString())
             Log.d("test lon", lon.toString())
 
-            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance(), "writeMap");
+            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance())
 
         }
 

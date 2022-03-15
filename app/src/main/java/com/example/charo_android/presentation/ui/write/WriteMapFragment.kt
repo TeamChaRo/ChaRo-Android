@@ -50,7 +50,7 @@ class WriteMapFragment : Fragment() {
     var path = arrayListOf<TMapPoint>()
 
     private lateinit var locationFlag: String
-    private lateinit var locationName: String
+//    private lateinit var locationName: String
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private lateinit var userId: String
@@ -81,7 +81,7 @@ class WriteMapFragment : Fragment() {
         userId = sharedViewModel.userId.value.toString()
         nickName = sharedViewModel.nickName.value.toString()
         locationFlag = sharedViewModel.locationFlag.value.toString()
-        locationName = sharedViewModel.locationName.value.toString()
+//        locationName = sharedViewModel.locationName.value.toString()
         latitude = sharedViewModel.latitude.value!!
         longitude = sharedViewModel.longitude.value!!
 
@@ -95,7 +95,7 @@ class WriteMapFragment : Fragment() {
         // 출발지 누르면 검색창으로 감
         binding.etWriteMapStart.setOnClickListener {
             sharedViewModel.locationFlag.value = "1"
-            writeShareActivity!!.replaceFragment(
+            writeShareActivity!!.replaceAddStackFragment(
                 WriteMapSearchFragment.newInstance(),
                 "writeMapSearch"
             )
@@ -104,7 +104,7 @@ class WriteMapFragment : Fragment() {
         // 경유지1 누르면 검색창으로 감
         binding.etWriteMapMid1.setOnClickListener {
             sharedViewModel.locationFlag.value = "2"
-            writeShareActivity!!.replaceFragment(
+            writeShareActivity!!.replaceAddStackFragment(
                 WriteMapSearchFragment.newInstance(),
                 "writeMapSearch"
             )
@@ -112,7 +112,7 @@ class WriteMapFragment : Fragment() {
         // 경유지2 누르면 검색창으로 감
         binding.etWriteMapMid2.setOnClickListener {
             sharedViewModel.locationFlag.value = "3"
-            writeShareActivity!!.replaceFragment(
+            writeShareActivity!!.replaceAddStackFragment(
                 WriteMapSearchFragment.newInstance(),
                 "writeMapSearch"
             )
@@ -121,7 +121,7 @@ class WriteMapFragment : Fragment() {
         binding.etWriteMapEnd.setOnClickListener {
             if (mapData.startAddress != "") {
                 sharedViewModel.locationFlag.value = "4"
-                writeShareActivity!!.replaceFragment(
+                writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
                 )
@@ -182,9 +182,9 @@ class WriteMapFragment : Fragment() {
             binding.etWriteMapMid1.visibility = View.VISIBLE
             binding.imgWriteMapDelete1.visibility = View.VISIBLE
 
-            mapData.mid1Address = sharedViewModel.mid1Address.value.toString()
-            mapData.mid1Lat = sharedViewModel.mid1Lat.value!!
-            mapData.mid1Long = sharedViewModel.mid1Long.value!!
+            mapData.mid1Address = sharedViewModel.midFrstAddress.value.toString()
+            mapData.mid1Lat = sharedViewModel.midFrstLat.value!!
+            mapData.mid1Long = sharedViewModel.midFrstLong.value!!
 
             binding.etWriteMapStart.text = mapData.startAddress
             binding.etWriteMapMid1.text = mapData.mid1Address
@@ -532,7 +532,7 @@ class WriteMapFragment : Fragment() {
         }
 
     fun blackOut(){
-        var isShowBlackout = sharedViewModel.startAddress.value == "" && sharedViewModel.mid1Address.value == "" && sharedViewModel.mid2Address.value == ""
+        var isShowBlackout = sharedViewModel.startAddress.value == "" && sharedViewModel.midFrstAddress.value == "" && sharedViewModel.midSecAddress.value == ""
 //        var isShowBlackout = sharedViewModel.locationName.value == "" || sharedViewModel.locationName.value == null
 
         if(isShowBlackout){
@@ -555,9 +555,9 @@ class WriteMapFragment : Fragment() {
                 sharedViewModel.startAddress.value = mapData.startAddress
                 sharedViewModel.startLat.value = mapData.startLat
                 sharedViewModel.startLong.value = mapData.startLong
-                sharedViewModel.mid1Address.value = mapData.mid1Address
-                sharedViewModel.mid1Lat.value = mapData.mid1Lat
-                sharedViewModel.mid1Long.value = mapData.mid1Long
+                sharedViewModel.midFrstAddress.value = mapData.mid1Address
+                sharedViewModel.midFrstLat.value = mapData.mid1Lat
+                sharedViewModel.midFrstLong.value = mapData.mid1Long
                 sharedViewModel.endAddress.value = mapData.endAddress
                 sharedViewModel.endLat.value = mapData.endLat
                 sharedViewModel.endLong.value = mapData.endLong
@@ -577,15 +577,15 @@ class WriteMapFragment : Fragment() {
                 val startCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.startAddress.value.toString(),
                     "longtitude" to sharedViewModel.startLong.value.toString(),
                     "latitude" to sharedViewModel.startLat.value.toString())
-                val middleCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.mid1Address.value.toString(),
-                    "longtitude" to sharedViewModel.mid1Long.value.toString(),
-                    "latitude" to sharedViewModel.mid1Lat.value.toString())
+                val middleCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.midFrstAddress.value.toString(),
+                    "longtitude" to sharedViewModel.midFrstLong.value.toString(),
+                    "latitude" to sharedViewModel.midFrstLat.value.toString())
                 val endCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.endAddress.value.toString(),
                     "longtitude" to sharedViewModel.endLong.value.toString(),
                     "latitude" to sharedViewModel.endLat.value.toString())
 
                 course.add(startCourse)
-                if(sharedViewModel.mid1Address.value !== ""){
+                if(sharedViewModel.midFrstAddress.value !== ""){
                     course.add(middleCourse)
                 }
                 course.add(endCourse)
