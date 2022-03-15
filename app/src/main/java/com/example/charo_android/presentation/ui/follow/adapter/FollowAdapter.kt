@@ -10,14 +10,22 @@ import com.example.charo_android.R
 import com.example.charo_android.data.model.mypage.User
 import com.example.charo_android.databinding.ItemMyPageFollowBinding
 
-class FollowAdapter : RecyclerView.Adapter<FollowAdapter.FollowViewHolder>() {
+class FollowAdapter(private val itemClick: (User) -> Unit) :
+    RecyclerView.Adapter<FollowAdapter.FollowViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
-    class FollowViewHolder(private val binding: ItemMyPageFollowBinding) :
+    class FollowViewHolder(
+        private val binding: ItemMyPageFollowBinding,
+        private val itemClick: (User) -> Unit
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: User) {
             binding.model = model
             binding.executePendingBindings()
+
+            binding.root.setOnClickListener {
+                itemClick(model)
+            }
         }
     }
 
@@ -28,7 +36,7 @@ class FollowAdapter : RecyclerView.Adapter<FollowAdapter.FollowViewHolder>() {
             parent,
             false
         )
-        return FollowViewHolder(binding)
+        return FollowViewHolder(binding, itemClick)
     }
 
     override fun onBindViewHolder(holder: FollowViewHolder, position: Int) {
