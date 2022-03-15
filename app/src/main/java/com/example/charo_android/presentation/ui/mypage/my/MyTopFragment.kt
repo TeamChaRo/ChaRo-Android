@@ -12,6 +12,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMyTopBinding
 import com.example.charo_android.presentation.ui.follow.FollowActivity
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.example.charo_android.presentation.ui.setting.SettingActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MyTopFragment : Fragment() {
@@ -36,6 +37,7 @@ class MyTopFragment : Fragment() {
             Log.d("mlog: MyTopFragment::onViewCreated", it.nickname)
         }
         showFollowList()
+        clickSetting()
     }
 
     override fun onDestroyView() {
@@ -46,6 +48,13 @@ class MyTopFragment : Fragment() {
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
             val intent = Intent(requireContext(), FollowActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun clickSetting() {
+        binding.imgProfileSetting.setOnClickListener {
+            val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
         }
     }
