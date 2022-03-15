@@ -20,6 +20,7 @@ class FollowActivity : AppCompatActivity() {
 
         initViewPager()
         getFollowList()
+        clickBack()
     }
 
     private fun initViewPager() {
@@ -36,6 +37,12 @@ class FollowActivity : AppCompatActivity() {
 
     private fun getFollowList() {
         viewModel.getFollowList()
+    }
+
+    private fun clickBack() {
+        binding.imgBack.setOnClickListener {
+            finish()
+        }
     }
 
     companion object {
