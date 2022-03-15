@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/blue_main_0f6fff"
         android:paddingBottom="20dp"
-        tools:context=".presentation.ui.mypage.mine.MyTopFragment">
+        tools:context=".presentation.ui.mypage.my.MyTopFragment">
 
         <TextView
             android:id="@+id/tv_profile_title"

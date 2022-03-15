@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.mypage.mine
+package com.example.charo_android.presentation.ui.mypage.my
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
