@@ -1,6 +1,6 @@
 package com.example.charo_android.presentation.ui.mypage.postlist
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.databinding.FragmentSavedPostBinding
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -89,7 +90,11 @@ class SavedPostFragment : Fragment() {
     }
 
     private fun initRecyclerView(postList: MutableList<Post>) {
-        savedPostAdapter = PostAdapter()
+        savedPostAdapter = PostAdapter {
+            val intent = Intent(requireContext(), DetailPostActivity::class.java)
+            intent.putExtra("postId", it.postId)
+            startActivity(intent)
+        }
         binding.rvPostList.adapter = savedPostAdapter
         savedPostAdapter.replaceItem(postList)
     }

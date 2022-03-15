@@ -12,6 +12,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityOtherMyPageBinding
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.follow.FollowActivity
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.postlist.WrittenPostFragment
@@ -20,7 +21,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtherMyPageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOtherMyPageBinding
-    private val adapter = PostAdapter()
+    private val adapter = PostAdapter {
+        val intent = Intent(this, DetailPostActivity::class.java)
+        intent.putExtra("postId", it.postId)
+        startActivity(intent)
+    }
     private val viewModel by viewModel<OtherMyPageViewModel>()
     private var sort = LIKE
     private lateinit var otherUserEmail: String

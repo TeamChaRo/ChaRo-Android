@@ -10,13 +10,21 @@ import com.example.charo_android.R
 import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.databinding.ItemMyPagePostBinding
 
-class PostAdapter: RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
+class PostAdapter(private val itemClick: (Post) -> Unit) :
+    RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
-    class WrittenPostViewHolder(private val binding: ItemMyPagePostBinding): RecyclerView.ViewHolder(binding.root) {
+    class WrittenPostViewHolder(
+        private val binding: ItemMyPagePostBinding,
+        private val itemClick: (Post) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: Post) {
             binding.model = model
             binding.executePendingBindings()
+
+            binding.root.setOnClickListener {
+                itemClick(model)
+            }
         }
     }
 
@@ -27,7 +35,7 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
             parent,
             false
         )
-        return WrittenPostViewHolder(binding)
+        return WrittenPostViewHolder(binding, itemClick)
     }
 
     override fun onBindViewHolder(holder: WrittenPostViewHolder, position: Int) {

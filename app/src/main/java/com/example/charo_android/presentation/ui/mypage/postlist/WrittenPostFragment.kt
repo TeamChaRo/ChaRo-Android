@@ -1,9 +1,8 @@
 package com.example.charo_android.presentation.ui.mypage.postlist
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.databinding.FragmentWrittenPostBinding
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -95,7 +96,11 @@ class WrittenPostFragment : Fragment() {
     }
 
     private fun initRecyclerView(postList: MutableList<Post>) {
-        writtenPostAdapter = PostAdapter()
+        writtenPostAdapter = PostAdapter {
+            val intent = Intent(requireContext(), DetailPostActivity::class.java)
+            intent.putExtra("postId", it.postId)
+            startActivity(intent)
+        }
         binding.rvPostList.adapter = writtenPostAdapter
         writtenPostAdapter.replaceItem(postList)
     }
