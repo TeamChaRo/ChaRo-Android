@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.more.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,17 +11,19 @@ import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
+import okhttp3.internal.notify
 
 class MoreViewAdapter(
     val userId: String,
     var links: MoreViewFragment.DataToMoreLike,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var moreData : MutableList<MoreDrive> = mutableListOf()
+    var moreData : MutableList<MoreDrive> = mutableListOf()
 
     var postId: Int = 0
     var select = true
 
+    //position
     //무한 스크롤 뷰타입
     private val VIEW_TYPE = 0
     private val VIEW_TYPE_LOADING = 1
@@ -99,10 +102,13 @@ class MoreViewAdapter(
     fun setHomeTrendDrive(moreData: MutableList<MoreDrive>) {
         this.moreData.addAll(moreData)
         notifyDataSetChanged()
-        if(moreData.size > 0){
-            addLoading()
-        }
 
+    }
+
+    fun removeHomeTrendDrive(){
+        Log.d("moreDataRemove", "삭제되는 중")
+        this.moreData.clear()
+        notifyDataSetChanged()
 
     }
 
@@ -115,7 +121,7 @@ class MoreViewAdapter(
 
     fun removeLoading() {
         if(moreData.last() == MoreDrive("","",false,"",0,"","","","","")) {
-            moreData.removeLast()
+            moreData.removeAt(moreData.lastIndex)
         }
     }
 

@@ -24,4 +24,18 @@ class MoreViewInfiniteRepositoryImpl(private val dataSource: RemoteMoreViewInfin
             )
         )
     }
+
+
+    override suspend fun getNewPreview(
+        userId: String,
+        identifer: String,
+        postId: Int,
+        value: String
+    ): MoreView {
+        return MoreViewMapper.mapperToInfiniteMoreView(
+            dataSource.getNewPreview(
+                userId, identifer, postId, value
+            )
+        )
+    }
 }

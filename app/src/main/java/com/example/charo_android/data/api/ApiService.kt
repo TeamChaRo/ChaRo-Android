@@ -9,12 +9,14 @@ import com.example.charo_android.data.api.charo.MyPageViewNewService
 import com.example.charo_android.data.api.mypage.MyPageService
 import com.example.charo_android.data.api.write.WriteViewService
 import com.example.charo_android.hidden.Hidden
+import okhttp3.logging.HttpLoggingInterceptor
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
     private const val BASE_URL = Hidden.baseUrl
+
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

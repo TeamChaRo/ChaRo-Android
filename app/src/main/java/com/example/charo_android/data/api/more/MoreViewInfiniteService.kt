@@ -16,4 +16,13 @@ interface MoreViewInfiniteService {
         @Query("value") value:String
     ) : ResponseMoreViewInfiniteData
 
+
+
+    @GET("/post/preview/new/{userEmail}/{identifier}/{postId}")
+    suspend fun getNewPreview(
+        @Path("userEmail") userEmail: String,
+        @Path("identifier") identifier: String,
+        @Path("postId") postId: Int,
+        @Query("value") value: String
+    ) : ResponseMoreViewInfiniteData
 }

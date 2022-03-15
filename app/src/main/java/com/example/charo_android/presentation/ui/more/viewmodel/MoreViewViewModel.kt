@@ -9,22 +9,26 @@ import com.example.charo_android.data.model.request.home.RequestHomeLikeData
 import com.example.charo_android.domain.model.StatusCode
 import com.example.charo_android.domain.model.more.LastId
 import com.example.charo_android.domain.model.more.MoreDrive
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreDriveUseCase
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreLastIdUseCase
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreNewDriveUseCase
 import com.example.charo_android.domain.usecase.home.PostRemoteHomeLikeUseCase
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreViewInfiniteUseCase
+import com.example.charo_android.domain.usecase.more.*
 import kotlinx.coroutines.launch
 
 class MoreViewViewModel(
     private val getRemoteMoreDriveUseCase: GetRemoteMoreDriveUseCase,
     //인기순 LastId 받아오는 거
     private val getRemoteMoreLastIdUseCase: GetRemoteMoreLastIdUseCase,
+
+    //최신순 LastId 받아오는 거
+    private val getRemoteMoreNewLastIdUseCase : GetRemoteMoreNewLastIdUseCase,
+
     private val getRemoteMoreNewDriveViewUseCase: GetRemoteMoreNewDriveUseCase,
     private val postRemoteHomeLikeUseCase: PostRemoteHomeLikeUseCase,
 
     //인기순 무한 스크롤
-    private val getRemoteMoreViewInfiniteUseCase: GetRemoteMoreViewInfiniteUseCase
+    private val getRemoteMoreViewInfiniteUseCase: GetRemoteMoreViewInfiniteUseCase,
+
+    //최신순 무한 스크롤
+    private val getRemoteMoreNewViewInfiniteUseCase: GetRemoteMoreNewViewInfiniteUseCase
 ) : ViewModel() {
     //인기순
     var drive = MutableLiveData<List<MoreDrive>>()
@@ -33,9 +37,14 @@ class MoreViewViewModel(
     private val _lastId = MutableLiveData<LastId>()
     val lastId: LiveData<LastId>
         get() = _lastId
+
+
     //최신순
     var newDrive = MutableLiveData<List<MoreDrive>>()
 
+
+    //스피넌 position
+    var position = MutableLiveData<Int>()
 
     private val _statusCode = MutableLiveData<StatusCode>()
     val statusCode : LiveData<StatusCode>
@@ -105,6 +114,22 @@ class MoreViewViewModel(
         }
     }
 
+    //최신순 마지막 ID 및 count
+    fun getMoreNewViewLastId(userEmail:String, identifier: String, value : String){
+        viewModelScope.launch {
+            runCatching { getRemoteMoreNewLastIdUseCase.execute(userEmail, identifier, value) }
+                .onSuccess {
+                    _lastId.value = it
+                    Log.d("moreNewViewLastId", "서버 통신 성공")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("moreNewViewLastId", "서버 통신 실패")
+                }
+        }
+
+    }
+
     //인기순 무한 스크롤
     fun getPreview(userEmail: String, identifer: String, postId : Int, count : Int, value: String){
         viewModelScope.launch {
@@ -119,5 +144,23 @@ class MoreViewViewModel(
                     Log.d("moreViewInfinite", "서버 통신 실패!")
                 }
         }
+    }
+
+    //최신순 무한 스크롤
+    fun getNewPreview(userEmail: String, identifer: String, postId : Int, value: String){
+        viewModelScope.launch {
+            runCatching { getRemoteMoreNewViewInfiniteUseCase.execute(userEmail, identifer, postId, value) }
+                .onSuccess {
+                    _lastId.value = LastId(it.lastCount, it.lastId)
+                    newDrive.value = it.drive
+                    Log.d("moreNewViewInfinite", "서버 통신 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("moreNewViewInfinite", "서버 통신 실패!")
+                }
+        }
+
+
     }
 }

@@ -154,6 +154,7 @@
     <string name="account">계정</string>
     <string name="profile_update">프로필 수정</string>
     <string name="password_update">비밀번호 수정</string>
+    <string name="password_search">비밀번호 찾기</string>
     <string name="email">이메일</string>
     <string name="information">정보</string>
     <string name="notice">공지사항</string>

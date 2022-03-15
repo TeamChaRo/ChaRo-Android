@@ -184,7 +184,7 @@
             android:layout_marginBottom="27dp"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:lineHeight="21sp"
-            android:text="@string/signin_signup"
+            android:text="@string/password_search"
             android:textAlignment="center"
             android:textColor="@color/gray3_sub_acb5bd"
             android:textSize="14sp"

@@ -10,6 +10,7 @@ import com.example.charo_android.domain.usecase.more.GetRemoteMoreLastIdUseCase
 import com.example.charo_android.domain.usecase.more.GetRemoteMoreNewDriveUseCase
 import com.example.charo_android.domain.usecase.more.GetRemoteMoreViewInfiniteUseCase
 import com.example.charo_android.domain.usecase.mypage.*
+import com.example.charo_android.domain.usecase.more.*
 import com.example.charo_android.domain.usecase.search.GetRemoteSearchUseCase
 import com.example.charo_android.domain.usecase.setting.*
 import com.example.charo_android.domain.usecase.signin.GetRemoteEmailLoginUseCase
@@ -39,6 +40,8 @@ val useCaseModule = module {
     single { WithdrawalUserUseCase(get()) }
     single { ProfilePasswordCheckUseCase(get()) }
     single { NewPasswordRegisterUseCase(get()) }
+
+
     single { PostRemoteHomeLikeUseCase(get()) }
     single { PostRemoteSocialSignUpRegisterUseCase(get()) }
     single { PostRemoteKaKaoSignUpRegisterUseCase(get()) }
@@ -54,4 +57,8 @@ val useCaseModule = module {
     single { GetRemoteDetailPostUseCase(get()) }
     single { PostLikeUseCase(get()) }
     single { PostSaveUseCase(get()) }
+
+    single{ GetRemoteMoreNewViewInfiniteUseCase(get()) }
+    single{GetRemoteMoreNewLastIdUseCase(get())}
+
 }
