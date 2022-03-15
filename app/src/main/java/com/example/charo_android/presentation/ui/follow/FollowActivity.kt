@@ -17,6 +17,8 @@ class FollowActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_follow)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         initViewPager()
         getFollowList()
