@@ -13,12 +13,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FollowActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFollowBinding
     private val viewModel: FollowViewModel by viewModel()
+    private lateinit var myPageEmail: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_follow)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        myPageEmail = intent.getStringExtra("userEmail") ?: error(finish())
+        viewModel.nickname.value = intent.getStringExtra("nickname") ?: error(finish())
 
         initViewPager()
         getFollowList()
@@ -38,7 +41,7 @@ class FollowActivity : AppCompatActivity() {
     }
 
     private fun getFollowList() {
-        viewModel.getFollowList()
+        viewModel.getFollowList(myPageEmail)
     }
 
     private fun clickBack() {
