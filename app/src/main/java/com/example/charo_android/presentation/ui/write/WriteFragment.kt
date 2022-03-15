@@ -35,6 +35,7 @@ import okio.BufferedSink
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.view.isVisible
+import com.example.charo_android.presentation.util.LocationUtil
 
 
 class WriteFragment : Fragment() {
@@ -59,170 +60,10 @@ class WriteFragment : Fragment() {
         writeShareActivity = context as WriteShareActivity
     }
 
-    val itemProvince =
-        arrayOf("특별시", "광역시", "경기도", "강원도", "충청남도", "충청북도", "경상북도", "경상남도", "전라북도", "전라남도")
-    val itemSpecial = arrayOf("서울", "제주")
-    val itemMetroPolitan = arrayOf("부산", "대구", "인천", "울산", "대전", "광주")
-    val itemGyounGi = arrayOf(
-        "가평",
-        "고양",
-        "과천",
-        "광명",
-        "광주",
-        "구리",
-        "군포",
-        "김포",
-        "남양주",
-        "동두천",
-        "부천",
-        "성남",
-        "수원",
-        "시흥",
-        "안산",
-        "안성",
-        "안양",
-        "양주",
-        "양평",
-        "여주",
-        "연천",
-        "오산",
-        "용인",
-        "의왕",
-        "의정부",
-        "이천",
-        "파주",
-        "평택",
-        "포천",
-        "하남",
-        "화성"
-    )
-    val itemGangWon = arrayOf(
-        "고성",
-        "강릉",
-        "동해",
-        "삼척",
-        "속초",
-        "양구",
-        "양양",
-        "영월",
-        "인제",
-        "정선",
-        "철원",
-        "춘천",
-        "태백",
-        "평창",
-        "홍천",
-        "화천",
-        "횡성"
-    )
-    val itemChoongNam = arrayOf(
-        "계룡",
-        "공주",
-        "금산",
-        "논산",
-        "당진",
-        "보령",
-        "부여",
-        "서산",
-        "서천",
-        "아산",
-        "예산",
-        "천안",
-        "청양",
-        "태안",
-        "홍성"
-    )
-    val itemChoongBuk =
-        arrayOf("괴산", "단양", "보은", "영동", "옥천", "음성", "제천", "증평", "진천", "청주", "충주")
-    val itemGyungBuk = arrayOf(
-        "경산",
-        "경주",
-        "고령",
-        "구미",
-        "군위",
-        "김천",
-        "독도",
-        "문경",
-        "봉화",
-        "상주",
-        "성주",
-        "안동",
-        "영덕",
-        "영양",
-        "영주",
-        "영천",
-        "예천",
-        "울릉",
-        "울진",
-        "의성",
-        "청도",
-        "청송",
-        "칠곡",
-        "포항"
-    )
-    val itemGyungNam = arrayOf(
-        "거제",
-        "거창",
-        "고성",
-        "김해",
-        "남해",
-        "밀양",
-        "사천",
-        "산청",
-        "양산",
-        "의령",
-        "진주",
-        "창녕",
-        "창원",
-        "통영",
-        "하동",
-        "함안",
-        "함양",
-        "합천"
-    )
-    val itemJunBuk = arrayOf(
-        "고창",
-        "군산",
-        "김제",
-        "남원",
-        "무주",
-        "부안",
-        "순창",
-        "완주",
-        "익산",
-        "임실",
-        "장수",
-        "전주",
-        "정읍",
-        "진안"
-    )
-    val itemJunNam = arrayOf(
-        "강진",
-        "고흥",
-        "곡성",
-        "광양",
-        "구례",
-        "나주",
-        "담양",
-        "목포",
-        "무안",
-        "보성",
-        "순천",
-        "신안",
-        "여수",
-        "영광",
-        "영암",
-        "완도",
-        "장성",
-        "장흥",
-        "진도",
-        "함평",
-        "해남",
-        "화순"
-    )
-
     private lateinit var userId: String
     private lateinit var nickName: String
+
+    private var locationUtil = LocationUtil()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -278,10 +119,10 @@ class WriteFragment : Fragment() {
                     it.isSelected = true
                 }
                 // Single-choice items (initialized with checked item)
-                .setSingleChoiceItems(itemProvince, checkedItem) { dialog, which ->
+                .setSingleChoiceItems(locationUtil.itemProvince, checkedItem) { dialog, which ->
                     //which : index
-                    binding.btnWriteRegion.text = itemProvince[which]
-                    if(itemProvince[which] !=  sharedViewModel.province.value){
+                    binding.btnWriteRegion.text = locationUtil.itemProvince[which]
+                    if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
                         binding.btnWriteLocation.text = resources.getString(R.string.city)
                         binding.btnWriteLocation.isSelected = false
                     }
@@ -310,16 +151,16 @@ class WriteFragment : Fragment() {
                 }
                 // Single-choice items (initialized with checked item)
                 .setSingleChoiceItems(
-                    if (binding.btnWriteRegion.text == "특별시") itemSpecial
-                    else if (binding.btnWriteRegion.text == "광역시") itemMetroPolitan
-                    else if (binding.btnWriteRegion.text == "경기도") itemGyounGi
-                    else if (binding.btnWriteRegion.text == "강원도") itemGangWon
-                    else if (binding.btnWriteRegion.text == "충청남도") itemChoongNam
-                    else if (binding.btnWriteRegion.text == "충청북도") itemChoongBuk
-                    else if (binding.btnWriteRegion.text == "경상북도") itemGyungBuk
-                    else if (binding.btnWriteRegion.text == "경상남도") itemGyungNam
-                    else if (binding.btnWriteRegion.text == "전라북도") itemJunBuk
-                    else itemJunNam, checkedItem
+                    if (binding.btnWriteRegion.text == "특별시") locationUtil.itemSpecial
+                    else if (binding.btnWriteRegion.text == "광역시") locationUtil.itemMetroPolitan
+                    else if (binding.btnWriteRegion.text == "경기도") locationUtil.itemGyounGi
+                    else if (binding.btnWriteRegion.text == "강원도") locationUtil.itemGangWon
+                    else if (binding.btnWriteRegion.text == "충청남도") locationUtil.itemChoongNam
+                    else if (binding.btnWriteRegion.text == "충청북도") locationUtil.itemChoongBuk
+                    else if (binding.btnWriteRegion.text == "경상북도") locationUtil.itemGyungBuk
+                    else if (binding.btnWriteRegion.text == "경상남도") locationUtil.itemGyungNam
+                    else if (binding.btnWriteRegion.text == "전라북도") locationUtil.itemJunBuk
+                    else locationUtil.itemJunNam, checkedItem
                 ) { dialog, which ->
                     //which : index
                     fun setRegionForProvince(province:Array<String>){
@@ -332,34 +173,34 @@ class WriteFragment : Fragment() {
 
                     when(binding.btnWriteRegion.text){
                         "특별시" -> {
-                            setRegionForProvince(itemSpecial)
+                            setRegionForProvince(locationUtil.itemSpecial)
                         }
                         "광역시" -> {
-                            setRegionForProvince(itemMetroPolitan)
+                            setRegionForProvince(locationUtil.itemMetroPolitan)
                         }
                         "경기도" -> {
-                            setRegionForProvince(itemGyounGi)
+                            setRegionForProvince(locationUtil.itemGyounGi)
                         }
                         "강원도" -> {
-                            setRegionForProvince(itemGangWon)
+                            setRegionForProvince(locationUtil.itemGangWon)
                         }
                         "충청남도" -> {
-                            setRegionForProvince(itemChoongNam)
+                            setRegionForProvince(locationUtil.itemChoongNam)
                         }
                         "충청북도" -> {
-                            setRegionForProvince(itemChoongBuk)
+                            setRegionForProvince(locationUtil.itemChoongBuk)
                         }
                         "경상북도" -> {
-                            setRegionForProvince(itemGyungBuk)
+                            setRegionForProvince(locationUtil.itemGyungBuk)
                         }
                         "경상남도" -> {
-                            setRegionForProvince(itemGyungNam)
+                            setRegionForProvince(locationUtil.itemGyungNam)
                         }
                         "전라북도" -> {
-                            setRegionForProvince(itemJunBuk)
+                            setRegionForProvince(locationUtil.itemJunBuk)
                         }
                         else -> {
-                            setRegionForProvince(itemJunNam)
+                            setRegionForProvince(locationUtil.itemJunNam)
                         }
                     }
 
