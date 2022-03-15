@@ -48,6 +48,9 @@ class MyTopFragment : Fragment() {
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
             val intent = Intent(requireContext(), FollowActivity::class.java)
+            // TODO: 추후 and@naver.com 말고 실제 유저 이메일 넣어야 함
+            intent.putExtra("userEmail", "and@naver.com")
+            intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
             startActivity(intent)
         }
     }
