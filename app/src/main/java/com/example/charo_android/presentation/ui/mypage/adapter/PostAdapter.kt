@@ -11,7 +11,6 @@ import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.databinding.ItemMyPagePostBinding
 
 class PostAdapter: RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
-//    val itemList = mutableListOf<Post>()
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
     class WrittenPostViewHolder(private val binding: ItemMyPagePostBinding): RecyclerView.ViewHolder(binding.root) {

@@ -41,8 +41,7 @@ class FollowingFragment : Fragment() {
     private fun initRecyclerView() {
         adapter = FollowAdapter()
         viewModel.following.observe(viewLifecycleOwner) {
-            adapter.itemList.addAll(it)
-            adapter.notifyDataSetChanged()
+            adapter.replaceItem(it)
         }
         binding.rv.adapter = adapter
     }

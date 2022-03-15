@@ -38,12 +38,10 @@ class FollowerFragment : Fragment() {
         super.onDestroyView()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun initRecyclerView() {
         adapter = FollowAdapter()
         viewModel.follower.observe(viewLifecycleOwner) {
-            adapter.itemList.addAll(it)
-            adapter.notifyDataSetChanged()
+            adapter.replaceItem(it)
         }
         binding.rv.adapter = adapter
     }
