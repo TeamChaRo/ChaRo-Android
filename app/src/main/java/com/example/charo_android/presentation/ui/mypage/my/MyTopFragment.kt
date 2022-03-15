@@ -33,9 +33,6 @@ class MyTopFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.userInfo.observe(viewLifecycleOwner) {
-            Log.d("mlog: MyTopFragment::onViewCreated", it.nickname)
-        }
         showFollowList()
         clickSetting()
     }
