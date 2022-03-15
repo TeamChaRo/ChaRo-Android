@@ -1,6 +1,6 @@
 package com.example.charo_android.presentation.ui.follow
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +11,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentFollowerBinding
 import com.example.charo_android.presentation.ui.follow.adapter.FollowAdapter
 import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
+import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FollowerFragment : Fragment() {
@@ -39,7 +40,11 @@ class FollowerFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = FollowAdapter()
+        adapter = FollowAdapter {
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
+            intent.putExtra("userEmail", it.userEmail)
+            startActivity(intent)
+        }
         viewModel.follower.observe(viewLifecycleOwner) {
             adapter.replaceItem(it)
         }
