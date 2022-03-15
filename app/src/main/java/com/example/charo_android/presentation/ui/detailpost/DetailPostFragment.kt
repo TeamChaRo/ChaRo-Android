@@ -62,6 +62,7 @@ class DetailPostFragment : Fragment() {
         clickSave()
         clickShare()
         goBack()
+        clickAuthor()
     }
 
     override fun onDestroyView() {
@@ -235,5 +236,18 @@ class DetailPostFragment : Fragment() {
         transaction.replace(R.id.fcv_detail_post, DetailPostMapFragment())
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun clickAuthor() {
+        binding.imgAuthor.setOnClickListener {
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
+            intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
+            startActivity(intent)
+        }
+        binding.tvAuthorNickname.setOnClickListener {
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
+            intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
+            startActivity(intent)
+        }
     }
 }
