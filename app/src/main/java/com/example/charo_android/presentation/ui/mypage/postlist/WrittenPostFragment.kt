@@ -98,7 +98,6 @@ class WrittenPostFragment : Fragment() {
         writtenPostAdapter = PostAdapter()
         binding.rvPostList.adapter = writtenPostAdapter
         writtenPostAdapter.replaceItem(postList)
-        writtenPostAdapter.notifyDataSetChanged()
     }
 
     private fun changeRecyclerViewItemList(sort: Int) {

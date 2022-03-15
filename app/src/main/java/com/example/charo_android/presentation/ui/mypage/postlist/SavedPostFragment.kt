@@ -92,7 +92,6 @@ class SavedPostFragment : Fragment() {
         savedPostAdapter = PostAdapter()
         binding.rvPostList.adapter = savedPostAdapter
         savedPostAdapter.replaceItem(postList)
-        savedPostAdapter.notifyDataSetChanged()
     }
 
     private fun changeRecyclerViewItemList(sort: Int) {
