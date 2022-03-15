@@ -17,9 +17,9 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailPostBinding
 import com.example.charo_android.domain.model.detailpost.DetailPost
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.skt.Tmap.*
 import com.skt.Tmap.TMapView.OnClickListenerCallback
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +27,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPostFragment : Fragment() {
     private var _binding: FragmentDetailPostBinding? = null
@@ -51,7 +50,7 @@ class DetailPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tMapView = TMapView(requireContext())
-        viewModel.getDetailPostData(0)
+        viewModel.getDetailPostData()
         initTMap(tMapView)
         viewModel.detailPost.observe(viewLifecycleOwner) {
             initViewPager(it.images)
@@ -62,6 +61,7 @@ class DetailPostFragment : Fragment() {
         clickSave()
         clickShare()
         goBack()
+        clickAuthor()
     }
 
     override fun onDestroyView() {
@@ -191,13 +191,13 @@ class DetailPostFragment : Fragment() {
 
     private fun clickLike() {
         binding.imgDetailLike.setOnClickListener {
-            viewModel.postLike(0)
+            viewModel.postLike()
         }
     }
 
     private fun clickSave() {
         binding.imgDetailSave.setOnClickListener {
-            viewModel.postSave(0)
+            viewModel.postSave()
         }
     }
 
@@ -235,5 +235,18 @@ class DetailPostFragment : Fragment() {
         transaction.replace(R.id.fcv_detail_post, DetailPostMapFragment())
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun clickAuthor() {
+        binding.imgAuthor.setOnClickListener {
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
+            intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
+            startActivity(intent)
+        }
+        binding.tvAuthorNickname.setOnClickListener {
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
+            intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
+            startActivity(intent)
+        }
     }
 }

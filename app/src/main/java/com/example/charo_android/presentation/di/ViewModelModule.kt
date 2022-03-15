@@ -6,6 +6,7 @@ import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.example.charo_android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
 import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.example.charo_android.presentation.ui.signin.viewmodel.EmailSignInViewModel
@@ -27,4 +28,5 @@ val viewModelModule = module {
     viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { FollowViewModel(get()) }
     viewModel { DetailPostViewModel(get(), get(), get()) }
+    viewModel { OtherMyPageViewModel(get(), get(), get(), get()) }
 }

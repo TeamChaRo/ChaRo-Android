@@ -9,11 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentMyPageBinding
-import com.example.charo_android.presentation.ui.mypage.mine.MyBottomFragment
-import com.example.charo_android.presentation.ui.mypage.mine.MyTopFragment
+import com.example.charo_android.presentation.ui.mypage.my.MyBottomFragment
+import com.example.charo_android.presentation.ui.mypage.my.MyTopFragment
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 // 마이페이지 프래그먼트(본체)
 class MyPageFragment : Fragment() {
