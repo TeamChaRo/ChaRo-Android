@@ -92,7 +92,7 @@ class SavedPostFragment : Fragment() {
     private fun initRecyclerView(postList: MutableList<Post>) {
         savedPostAdapter = PostAdapter()
         binding.rvPostList.adapter = savedPostAdapter
-        savedPostAdapter.itemList.addAll(postList)
+        savedPostAdapter.replaceItem(postList)
         savedPostAdapter.notifyDataSetChanged()
     }
 
@@ -102,18 +102,14 @@ class SavedPostFragment : Fragment() {
             LIKE -> {
                 viewModel.savedLikePostList.observe(viewLifecycleOwner) {
                     savedPostAdapter.apply {
-                        this.itemList.clear()
-                        this.itemList.addAll(it)
-                        this.notifyDataSetChanged()
+                        this.replaceItem(it)
                     }
                 }
             }
             NEW -> {
                 viewModel.savedNewPostList.observe(viewLifecycleOwner) {
                     savedPostAdapter.apply {
-                        this.itemList.clear()
-                        this.itemList.addAll(it)
-                        this.notifyDataSetChanged()
+                        this.replaceItem(it)
                     }
                 }
             }

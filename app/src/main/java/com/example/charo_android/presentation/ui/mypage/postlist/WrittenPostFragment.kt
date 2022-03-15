@@ -98,7 +98,7 @@ class WrittenPostFragment : Fragment() {
     private fun initRecyclerView(postList: MutableList<Post>) {
         writtenPostAdapter = PostAdapter()
         binding.rvPostList.adapter = writtenPostAdapter
-        writtenPostAdapter.itemList.addAll(postList)
+        writtenPostAdapter.replaceItem(postList)
         writtenPostAdapter.notifyDataSetChanged()
     }
 
@@ -108,18 +108,14 @@ class WrittenPostFragment : Fragment() {
             LIKE -> {
                 viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
                     writtenPostAdapter.apply {
-                        this.itemList.clear()
-                        this.itemList.addAll(it)
-                        this.notifyDataSetChanged()
+                        this.replaceItem(it)
                     }
                 }
             }
             NEW -> {
                 viewModel.writtenNewPostList.observe(viewLifecycleOwner) {
                     writtenPostAdapter.apply {
-                        this.itemList.clear()
-                        this.itemList.addAll(it)
-                        this.notifyDataSetChanged()
+                        this.replaceItem(it)
                     }
                 }
             }
