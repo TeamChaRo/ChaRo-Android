@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.charo_android.R
+import com.example.charo_android.data.model.mypage.UserInformation
 import com.example.charo_android.databinding.FragmentMyPageBinding
 import com.example.charo_android.presentation.ui.mypage.my.MyBottomFragment
 import com.example.charo_android.presentation.ui.mypage.my.MyTopFragment
@@ -35,11 +37,6 @@ class MyPageFragment : Fragment() {
         // 내 마이페이지 보는 경우
         viewModel.getLikePost()
         viewModel.getNewPost()
-        viewModel.userInfo.observe(viewLifecycleOwner) {
-            Log.d("mlog: MyPageFragment::onViewCreated", it.nickname)
-        }
-//        viewModel.getLikePost()
-//        viewModel.getNewPost()
     }
 
     override fun onDestroyView() {
@@ -56,5 +53,11 @@ class MyPageFragment : Fragment() {
         transaction.add(R.id.fcv_top, MyTopFragment())
             .add(R.id.fcv_bottom, MyBottomFragment())
             .commit()
+    }
+
+    class MyObserver: Observer<UserInformation> {
+        override fun onChanged(t: UserInformation?) {
+            Log.d("mlog: ㅎㅇㅎㅇ", t?.nickname.toString())
+        }
     }
 }
