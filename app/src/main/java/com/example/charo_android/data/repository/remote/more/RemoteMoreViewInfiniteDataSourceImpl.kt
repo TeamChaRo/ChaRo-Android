@@ -15,4 +15,17 @@ class RemoteMoreViewInfiniteDataSourceImpl(private val service: MoreViewInfinite
         postId,
         count,
         value)
+
+    override suspend fun getNewPreview(
+        userId: String,
+        identifer: String,
+        postId: Int,
+        value: String
+    ): ResponseMoreViewInfiniteData {
+        return service.getNewPreview(userId,
+            identifer,
+            postId,
+            value
+        )
+    }
 }

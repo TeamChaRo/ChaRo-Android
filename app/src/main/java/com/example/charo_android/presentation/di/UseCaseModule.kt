@@ -1,10 +1,7 @@
 package com.example.charo_android.presentation.di
 
 import com.example.charo_android.domain.usecase.home.*
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreDriveUseCase
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreLastIdUseCase
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreNewDriveUseCase
-import com.example.charo_android.domain.usecase.more.GetRemoteMoreViewInfiniteUseCase
+import com.example.charo_android.domain.usecase.more.*
 import com.example.charo_android.domain.usecase.search.GetRemoteSearchUseCase
 import com.example.charo_android.domain.usecase.setting.*
 import com.example.charo_android.domain.usecase.signin.GetRemoteEmailLoginUseCase
@@ -38,4 +35,6 @@ val useCaseModule = module{
     single{ PostRemoteSocialSignUpRegisterUseCase(get()) }
     single{PostRemoteKaKaoSignUpRegisterUseCase(get())}
     single{GetRemoteMoreViewInfiniteUseCase(get())}
+    single{ GetRemoteMoreNewViewInfiniteUseCase(get()) }
+    single{GetRemoteMoreNewLastIdUseCase(get())}
 }

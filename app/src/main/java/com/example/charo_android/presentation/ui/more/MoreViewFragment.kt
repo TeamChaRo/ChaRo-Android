@@ -42,7 +42,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         initSpinner()
         clickBackButton(userId)
         clickSpinner()
-        moreViewInfiniteScroll()
+        removeData()
     }
 
 
@@ -54,6 +54,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
+                Log.d("스피드확인", "얘는 데이터 추가")
                 moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
             }
 
@@ -85,14 +86,17 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         val userEmail = SharedInformation.getEmail(requireActivity())
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreNewView(userEmail, "0", "")
+            moreViewModel.getMoreNewViewLastId(userEmail, "0", "")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
+                Log.d("스피드확인", "얘는 데이터 추가")
                 moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
             }
 
         } else if (sharedViewModel.num.value == 2) {
             moreViewModel.getMoreNewView(userEmail, "2", "busan")
+            moreViewModel.getMoreNewViewLastId(userEmail, "2", "busan")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
@@ -101,6 +105,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             }
         } else {
             moreViewModel.getMoreNewView(userEmail, "3", "")
+            moreViewModel.getMoreNewViewLastId(userEmail, "3", "")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
@@ -132,13 +137,19 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                     id: Long
                 ) {
                     if (position == 0) {
-                        moreViewLoadData()
-
+                        if(moreViewAdapter.moreData.isNotEmpty()){
+                            moreViewAdapter.removeHomeTrendDrive()
+                        }
+                            moreViewLoadData()
                     } else {
+                        if(moreViewAdapter.moreData.isNotEmpty()){
+                            moreViewAdapter.removeHomeTrendDrive()
+                        }
+                            moreNewViewData()
 
-                        moreNewViewData()
+
                     }
-
+                    moreViewInfiniteScroll(position)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -148,7 +159,13 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             }
 
     }
+    //스피너 position에 따라 데이터 초기화
+    private fun removeData(){
+        moreViewModel.position.observe(viewLifecycleOwner){
+            Log.d("스피드확인", "얘는 데이터 삭제")
 
+        }
+    }
 
     private fun clickBackButton(userId: String) {
         binding.imgBackHome.setOnClickListener {
@@ -175,7 +192,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     }
 
 
-    private fun moreViewInfiniteScroll() {
+    private fun moreViewInfiniteScroll(spinnerPosition: Int) {
         binding.recyclerviewMoreView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -184,10 +201,21 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                     (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
                 val itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (!binding.recyclerviewMoreView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
-                    Log.d("infinite", "무한 스크롤 완")
-                    moreViewAdapter.removeLoading()
-                    moreViewInfiniteLoadData()
-
+                    if(moreViewAdapter.moreData.isNotEmpty()){
+                        moreViewAdapter.addLoading()
+                        when (spinnerPosition) {
+                            0 ->{
+                                moreViewAdapter.removeLoading()
+                                moreViewInfiniteLoadData()
+                            }
+                            1 -> {
+                                moreViewAdapter.removeLoading()
+                                moreNewViewInfiniteLoadData()
+                            }
+                        }
+                        moreViewAdapter.removeLoading()
+                        Log.d("infinite", "무한 스크롤 완")
+                    }
                 }
             }
         })
@@ -199,32 +227,34 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         val lastId = moreViewModel.lastId.value!!.lastId
         val lastCount = moreViewModel.lastId.value!!.lastCount
         if (sharedViewModel.num.value == 0) {
-            if(lastId == 0 && lastCount == 0){
-                moreViewAdapter.removeLoading()
-            }else{
+
                 moreViewModel.getPreview(userEmail, "0", lastId, lastCount, "")
-            }
-
-
 
         } else if (sharedViewModel.num.value == 2) {
-            if(lastId == 0 && lastCount == 0){
-                moreViewAdapter.removeLoading()
-            }else{
                 moreViewModel.getPreview(userEmail, "2", lastId, lastCount, "busan")
-            }
+        } else {
+                moreViewModel.getPreview(userEmail, "3", lastId, lastCount, "")
+        }
+    }
 
+
+    private fun moreNewViewInfiniteLoadData() {
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        Log.d("userEmailss", userEmail)
+        val lastId = moreViewModel.lastId.value!!.lastId
+        val lastCount = moreViewModel.lastId.value!!.lastCount
+        if (sharedViewModel.num.value == 0) {
+                moreViewModel.getNewPreview(userEmail, "0", lastId, "")
+
+        } else if (sharedViewModel.num.value == 2) {
+                moreViewModel.getNewPreview(userEmail, "2", lastId, "busan")
 
         } else {
-            if(lastId == 0 && lastCount == 0){
-                moreViewAdapter.removeLoading()
-            }else{
-                moreViewModel.getPreview(userEmail, "3", lastId, lastCount, "")
-            }
-
+                moreViewModel.getNewPreview(userEmail, "3", lastId, "")
 
         }
     }
+
 }
 
 
