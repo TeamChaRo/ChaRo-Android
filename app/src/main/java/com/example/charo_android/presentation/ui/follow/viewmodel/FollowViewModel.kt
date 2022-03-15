@@ -13,8 +13,8 @@ class FollowViewModel(private val getRemoteFollowListUseCase: GetRemoteFollowLis
     ViewModel() {
     private val TAG = "mlog: FollowViewModel::"
     var userEmail = "and@naver.com"
-    var myPageEmail = "and@naver.com"
-    var nickname = "and@naver.com의 닉네임"
+
+    var nickname = MutableLiveData<String>()
 
     // 팔로워 정보
     private var _follower = MutableLiveData<List<User>>()
@@ -24,7 +24,7 @@ class FollowViewModel(private val getRemoteFollowListUseCase: GetRemoteFollowLis
     private var _following = MutableLiveData<List<User>>()
     val following: LiveData<List<User>> get() =_following
 
-    fun getFollowList() {
+    fun getFollowList(myPageEmail: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 getRemoteFollowListUseCase(userEmail, myPageEmail)
