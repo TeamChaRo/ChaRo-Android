@@ -94,7 +94,6 @@ class WrittenPostFragment : Fragment() {
             }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun initRecyclerView(postList: MutableList<Post>) {
         writtenPostAdapter = PostAdapter()
         binding.rvPostList.adapter = writtenPostAdapter
@@ -102,7 +101,6 @@ class WrittenPostFragment : Fragment() {
         writtenPostAdapter.notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun changeRecyclerViewItemList(sort: Int) {
         when (sort) {
             LIKE -> {
