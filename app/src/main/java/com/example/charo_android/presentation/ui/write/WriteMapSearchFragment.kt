@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
-import android.text.Spannable
-import android.text.TextWatcher
+import android.text.*
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,7 +24,6 @@ import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 
 class WriteMapSearchFragment : Fragment() {
@@ -77,31 +74,36 @@ class WriteMapSearchFragment : Fragment() {
         nickName = sharedViewModel.nickName.value.toString()
         locationFlag = sharedViewModel.locationFlag.value.toString()
 
-        Log.d("uuuwritesear", userId)
-        Log.d("uuuwritesear", nickName)
-        Log.d("uuuwritesear", locationFlag)
+        Log.d("uuuwritesear", "locationFlag $locationFlag")
 
 
         when (locationFlag) {
             "1" -> {
-                sharedViewModel.resultLocation.value = "출발지로 설정"
-                when (sharedViewModel.startAddress.value){
-                    "" -> { binding.etWriteMapSearch.hint = getString(R.string.start)}
-                    else -> {binding.etWriteMapSearch.setText(sharedViewModel.startAddress.value)}
+//                sharedViewModel.resultLocation.value = "출발지로 설정"
+
+                binding.etWriteMapSearch.hint = getString(R.string.start)
+                if (!TextUtils.isEmpty(sharedViewModel.startAddress.value)){
+                    binding.etWriteMapSearch.setText(sharedViewModel.startAddress.value)
+                }
+            }
+            "2" -> {
+                binding.etWriteMapSearch.hint = getString(R.string.middle)
+                if (!TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)){
+                    binding.etWriteMapSearch.setText(sharedViewModel.midFrstAddress.value)
+                }
+            }
+            "3" -> {
+                binding.etWriteMapSearch.hint = getString(R.string.middle)
+                if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)){
+                    binding.etWriteMapSearch.setText(sharedViewModel.midSecAddress.value)
                 }
             }
             "4" -> {
-                sharedViewModel.resultLocation.value = "도착지로 설정"
-                when (sharedViewModel.endAddress.value){
-                    "" -> { binding.etWriteMapSearch.hint = getString(R.string.end)}
-                    else -> {binding.etWriteMapSearch.setText(sharedViewModel.endAddress.value)}
-                }
-            }
-            else -> {
-                sharedViewModel.resultLocation.value = "경유지로 설정"
-                when (sharedViewModel.mid1Address.value){
-                    "" -> { binding.etWriteMapSearch.hint = "경유지를 입력해주세요"}
-                    else -> {binding.etWriteMapSearch.setText(sharedViewModel.mid1Address.value)}
+//                sharedViewModel.resultLocation.value = "도착지로 설정"
+
+                binding.etWriteMapSearch.hint = getString(R.string.end)
+                if (!TextUtils.isEmpty(sharedViewModel.endAddress.value)){
+                    binding.etWriteMapSearch.setText(sharedViewModel.endAddress.value)
                 }
             }
         }

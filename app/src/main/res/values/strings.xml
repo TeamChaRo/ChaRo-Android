@@ -96,6 +96,7 @@
     <string name="signin_signup">회원가입</string>
     <string name="start">출발지를 입력해주세요.</string>
     <string name="end">도착지를 입력해주세요.</string>
+    <string name="middle">경유지를 입력해주세요.</string>
     <string name="auto_search">검색어를 입력해주세요</string>
     <string name="skip">SKIP</string>
     <string name="looking">구경해요!</string>
@@ -198,7 +199,7 @@
 
     <string name="write_recent_search">최근 검색어</string>
     <string name="write_auto_search">관련 검색어</string>
-  
+
     <string name="text_my_page_no_written_post">작성하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n작성해보는 것은 어떠신가요?</string>
     <string name="text_my_page_no_saved_post">저장하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?</string>
 
