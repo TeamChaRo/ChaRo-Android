@@ -220,20 +220,26 @@ class WriteFragment : Fragment() {
         binding.btnWriteBottomNext.setOnClickListener {
             //주의사항
             val warningList: ArrayList<MultipartBody.Part> = ArrayList()
+            val warningUIList: ArrayList<String> = ArrayList()
 
             if(binding.btnWriteCautionHighway.isSelected) {
                 warningList.add(MultipartBody.Part.createFormData("warning","highway"))
+                warningUIList.add(binding.btnWriteCautionHighway.text.toString())
             }
             if(binding.btnWriteCautionMoun.isSelected){
                 warningList.add(MultipartBody.Part.createFormData("warning","mountainRoad"))
+                warningUIList.add(binding.btnWriteCautionMoun.text.toString())
             }
             if(binding.btnWriteCautionDiffi.isSelected){
                 warningList.add(MultipartBody.Part.createFormData("warning","diffRoad"))
+                warningUIList.add(binding.btnWriteCautionDiffi.text.toString())
             }
             if(binding.btnWriteCautionPeople.isSelected){
                 warningList.add(MultipartBody.Part.createFormData("warning","hotPlace"))
+                warningUIList.add(binding.btnWriteCautionPeople.text.toString())
             }
             sharedViewModel.warning.value = warningList
+            sharedViewModel.warningUI.value = warningUIList
 
             //제목
             sharedViewModel.title.value = binding.etWriteTitle.text.toString()
@@ -568,6 +574,19 @@ class WriteFragment : Fragment() {
             binding.btnWriteParkYes.isSelected = false
             binding.btnWriteParkNo.isSelected = true
         }
+
+        //주의사항
+        if(sharedViewModel.warningUI.value != null){
+            for(warningData in sharedViewModel.warningUI.value!!){
+                when(warningData){
+                    binding.btnWriteCautionHighway.text -> binding.btnWriteCautionHighway.isSelected = true
+                    binding.btnWriteCautionDiffi.text -> binding.btnWriteCautionDiffi.isSelected = true
+                    binding.btnWriteCautionMoun.text -> binding.btnWriteCautionMoun.isSelected = true
+                    binding.btnWriteCautionPeople.text -> binding.btnWriteCautionPeople.isSelected = true
+                }
+            }
+        }
+
     }
 
     //이미지 보내기

@@ -25,7 +25,8 @@ class WriteSharedViewModel : ViewModel() {
     val title = MutableLiveData<String>().default("")
     val province = MutableLiveData<String>().default("")            //경기도
     val region = MutableLiveData<String>().default("")              //수원
-    val warning = MutableLiveData<ArrayList<MultipartBody.Part>>()            //["highway", "mountainRoad"]
+    val warning = MutableLiveData<ArrayList<MultipartBody.Part>>()
+    val warningUI = MutableLiveData<ArrayList<String>>()            //["highway", "mountainRoad"]
     val theme = MutableLiveData<ArrayList<String>>()                          //["summer", "sea"]
     val isParking = MutableLiveData<Boolean>().default(false)       //true
     val parkingDesc = MutableLiveData<String>().default("")
