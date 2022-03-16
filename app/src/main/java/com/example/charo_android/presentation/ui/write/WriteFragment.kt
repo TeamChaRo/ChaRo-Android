@@ -36,6 +36,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.view.isVisible
 import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.ThemeUtil
 
 
 class WriteFragment : Fragment() {
@@ -300,7 +301,7 @@ class WriteFragment : Fragment() {
 
             for(i in 0 until newTheme.count()){
                 //재설정
-                textView[i]?.text = newTheme[i]
+                textView[i]?.text = ThemeUtil().themeMap.entries.find { it.value == newTheme[i] }?.key
                 textView[i]?.isSelected = true
             }
         })

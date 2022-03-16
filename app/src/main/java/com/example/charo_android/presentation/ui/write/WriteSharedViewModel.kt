@@ -75,12 +75,8 @@ class WriteSharedViewModel : ViewModel() {
 //
 
         val sendTheme : ArrayList<MultipartBody.Part> = ArrayList()
-        val themeUtil = ThemeUtil()
-
         for(sharedTheme in theme.value!!){
-            themeUtil.themeMap[sharedTheme]?.let { it1 ->
-                sendTheme.add(MultipartBody.Part.createFormData("theme",it1))
-            }
+            sendTheme.add(MultipartBody.Part.createFormData("theme",sharedTheme))
         }
 
         val userEmailRB : RequestBody = userEmail.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
