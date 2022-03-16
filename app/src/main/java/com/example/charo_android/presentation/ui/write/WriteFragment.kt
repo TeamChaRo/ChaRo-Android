@@ -33,6 +33,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import androidx.core.view.isVisible
 import com.example.charo_android.presentation.util.LocationUtil
@@ -65,6 +66,9 @@ class WriteFragment : Fragment() {
     private lateinit var nickName: String
 
     private var locationUtil = LocationUtil()
+
+    private var preCheckProvince = 0
+    private var preCheckedRegion = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,9 +106,7 @@ class WriteFragment : Fragment() {
         setButtonClickEvent()
 
         // 지역(도 단위)
-        binding.btnWriteRegion.setOnClickListener() {
-            val checkedItem = 0
-
+        binding.btnWriteRegion.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
                 .setTitle("지역")
                 .setNeutralButton("취소") { dialog, which ->
@@ -112,45 +114,59 @@ class WriteFragment : Fragment() {
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     binding.btnWriteLocation.isSelected = false
                     it.isSelected = false
+                    preCheckProvince = 0
                 }
                 .setPositiveButton("확인") { dialog, which ->
-                    if (binding.btnWriteRegion.text.toString() == resources.getString(R.string.region)) {
-                        it.isSelected = false
-                    }
                     it.isSelected = true
+                    binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
+                    sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
                 }
-                // Single-choice items (initialized with checked item)
-                .setSingleChoiceItems(locationUtil.itemProvince, checkedItem) { dialog, which ->
+                .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
                     //which : index
-                    binding.btnWriteRegion.text = locationUtil.itemProvince[which]
+                    preCheckProvince = which
+
+                    //이전 선택값과 다를 때
                     if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
                         binding.btnWriteLocation.text = resources.getString(R.string.city)
                         binding.btnWriteLocation.isSelected = false
+                        sharedViewModel.region.value = ""
                     }
-
-                    sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
-
                 }
+                .setCancelable(false)
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
         }
 
         binding.btnWriteLocation.setOnClickListener() {
-            val checkedItem = 0
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
                 .setTitle("지역")
                 .setNeutralButton("취소") { dialog, which ->
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     it.isSelected = false
+                    preCheckedRegion = 0
+                    sharedViewModel.region.value = ""
                 }
                 .setPositiveButton("확인") { dialog, which ->
-                    if (binding.btnWriteLocation.text.toString() == resources.getString(R.string.city)
-                    ) {
-                        it.isSelected = false
-                    }
                     it.isSelected = true
+                    when(binding.btnWriteRegion.text){
+                        "특별시" -> binding.btnWriteLocation.text = locationUtil.itemSpecial[preCheckedRegion]
+                        "광역시" -> binding.btnWriteLocation.text = locationUtil.itemMetroPolitan[preCheckedRegion]
+                        "경기도" -> binding.btnWriteLocation.text = locationUtil.itemGyounGi[preCheckedRegion]
+                        "강원도" -> binding.btnWriteLocation.text = locationUtil.itemGangWon[preCheckedRegion]
+                        "충청남도" -> binding.btnWriteLocation.text = locationUtil.itemChoongNam[preCheckedRegion]
+                        "충청북도" -> binding.btnWriteLocation.text = locationUtil.itemChoongBuk[preCheckedRegion]
+                        "경상북도" -> binding.btnWriteLocation.text = locationUtil.itemGyungBuk[preCheckedRegion]
+                        "경상남도" -> binding.btnWriteLocation.text = locationUtil.itemGyungNam[preCheckedRegion]
+                        "전라북도" -> binding.btnWriteLocation.text = locationUtil.itemJunBuk[preCheckedRegion]
+                        "전라남도" -> binding.btnWriteLocation.text = locationUtil.itemJunNam[preCheckedRegion]
+                        else -> {
+                            binding.btnWriteLocation.text = resources.getString(R.string.city)
+                            it.isSelected = false
+                        }
+                    }
+
+                    sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
                 }
-                // Single-choice items (initialized with checked item)
                 .setSingleChoiceItems(
                     if (binding.btnWriteRegion.text == "특별시") locationUtil.itemSpecial
                     else if (binding.btnWriteRegion.text == "광역시") locationUtil.itemMetroPolitan
@@ -161,53 +177,14 @@ class WriteFragment : Fragment() {
                     else if (binding.btnWriteRegion.text == "경상북도") locationUtil.itemGyungBuk
                     else if (binding.btnWriteRegion.text == "경상남도") locationUtil.itemGyungNam
                     else if (binding.btnWriteRegion.text == "전라북도") locationUtil.itemJunBuk
-                    else locationUtil.itemJunNam, checkedItem
+                    else if (binding.btnWriteRegion.text == "전라남도") locationUtil.itemJunNam
+                    else arrayOf("도 단위를 선택해주세요.")
+                    , preCheckedRegion
                 ) { dialog, which ->
                     //which : index
-                    fun setRegionForProvince(province:Array<String>){
-                        if(which == -1){
-                            binding.btnWriteLocation.text = province[0]
-                        }else{
-                            binding.btnWriteLocation.text = province[which]
-                        }
-                    }
-
-                    when(binding.btnWriteRegion.text){
-                        "특별시" -> {
-                            setRegionForProvince(locationUtil.itemSpecial)
-                        }
-                        "광역시" -> {
-                            setRegionForProvince(locationUtil.itemMetroPolitan)
-                        }
-                        "경기도" -> {
-                            setRegionForProvince(locationUtil.itemGyounGi)
-                        }
-                        "강원도" -> {
-                            setRegionForProvince(locationUtil.itemGangWon)
-                        }
-                        "충청남도" -> {
-                            setRegionForProvince(locationUtil.itemChoongNam)
-                        }
-                        "충청북도" -> {
-                            setRegionForProvince(locationUtil.itemChoongBuk)
-                        }
-                        "경상북도" -> {
-                            setRegionForProvince(locationUtil.itemGyungBuk)
-                        }
-                        "경상남도" -> {
-                            setRegionForProvince(locationUtil.itemGyungNam)
-                        }
-                        "전라북도" -> {
-                            setRegionForProvince(locationUtil.itemJunBuk)
-                        }
-                        else -> {
-                            setRegionForProvince(locationUtil.itemJunNam)
-                        }
-                    }
-
-                    sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
-
+                    preCheckedRegion = which
                 }
+                .setCancelable(false)
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
         }
