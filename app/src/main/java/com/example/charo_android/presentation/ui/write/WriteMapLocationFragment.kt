@@ -26,14 +26,8 @@ private const val LOCATION_ADDRESS = "locationAddress"
 class WriteMapLocationFragment : Fragment() {
     private var locationName: String? = null
     private var locationAddress: String? = null
-
-//    private lateinit var locationAddress: String
-//    private lateinit var locationName: String
     private lateinit var locationFlag: String
-//    private lateinit var resultLocation: String
     private lateinit var address: TMapAddressInfo
-    private lateinit var userId: String
-    private lateinit var nickName: String
     private var lat = 0.0
     private var lon = 0.0
 
@@ -77,12 +71,7 @@ class WriteMapLocationFragment : Fragment() {
         _binding = FragmentWriteMapLocationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        Log.d("Created WriteMapLocationFragment", "jjjjjjjj")
-
-        userId = sharedViewModel.userId.value.toString()
-        nickName = sharedViewModel.nickName.value.toString()
         locationFlag = sharedViewModel.locationFlag.value.toString()
-
         arguments?.let {
             locationName = it.getString(LOCATION_NAME)
             locationAddress = it.getString(LOCATION_ADDRESS)

@@ -39,9 +39,10 @@ class WriteMapSearchFragment : Fragment() {
         fun newInstance() = WriteMapSearchFragment()
     }
 
+    private var _binding: FragmentWriteMapSearchBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var writeMapSearchAdapter: WriteMapSearchAdapter
-    lateinit var userId: String
-    lateinit var nickName: String
 
     private lateinit var locationFlag: String
     var mapSearchList = mutableListOf<MapSearchInfo>()
@@ -52,9 +53,6 @@ class WriteMapSearchFragment : Fragment() {
                 WriteSharedViewModel() as T
         }
     }
-    private var _binding: FragmentWriteMapSearchBinding? = null
-
-    private val binding get() = _binding!!
 
     var writeShareActivity: WriteShareActivity? = null
     override fun onAttach(context: Context) {
@@ -68,14 +66,8 @@ class WriteMapSearchFragment : Fragment() {
     ): View? {
         _binding = FragmentWriteMapSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        Log.d("jjj", "success go searchActivity")
 
-        userId = sharedViewModel.userId.value.toString()
-        nickName = sharedViewModel.nickName.value.toString()
         locationFlag = sharedViewModel.locationFlag.value.toString()
-
-        Log.d("uuuwritesear", "locationFlag $locationFlag")
-
 
         when (locationFlag) {
             "1" -> {

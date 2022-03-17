@@ -1,7 +1,6 @@
 package com.example.charo_android.presentation.ui.write
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -24,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
-import com.example.charo_android.hidden.Hidden
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType
@@ -62,9 +60,6 @@ class WriteFragment : Fragment() {
         writeShareActivity = context as WriteShareActivity
     }
 
-    private lateinit var userId: String
-    private lateinit var nickName: String
-
     private var locationUtil = LocationUtil()
 
     private var preCheckProvince = 0
@@ -77,27 +72,20 @@ class WriteFragment : Fragment() {
         _binding = FragmentWriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        userId = sharedViewModel.userId.value.toString()
-        nickName = sharedViewModel.nickName.value.toString()
-
-        Log.d("uuuwrite", userId)
-        Log.d("uuuwrite", nickName)
-
         initToolBar()
 
-        // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeAdapter = WriteAdapter()
-
-        // 2. RecyclerView 에 어뎁터를 우리가 만든 어뎁터로 만들기
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
-        getSharedViewModelData()
+        initWriteData()
         observeThemeData()
 
         //이미지 추가 버튼
         binding.imgWriteAddImg.setOnClickListener {
             openGallery()
         }
+
+        //글자수 제한
         warningText(binding.etWriteTitle, binding.tvWarningTitle, 38)
         warningText(binding.etWriteParkReview, binding.tvWarningParkReview, 23)
         warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive,280)
@@ -199,7 +187,7 @@ class WriteFragment : Fragment() {
             openBottomSheetDialog()
         }
 
-        //주차 - 둘 중 하나만 선택 가능하도록 하기
+        //주차 - 둘 중 하나만 선택 가능
         binding.btnWriteParkYes.setOnClickListener() {
             binding.btnWriteParkYes.isSelected = true
             binding.btnWriteParkNo.isSelected = false
@@ -217,6 +205,7 @@ class WriteFragment : Fragment() {
             openGallery()
         }
 
+        // 다음 버튼
         binding.btnWriteBottomNext.setOnClickListener {
             //주의사항
             val warningList: ArrayList<MultipartBody.Part> = ArrayList()
@@ -250,7 +239,23 @@ class WriteFragment : Fragment() {
             //코스 설명
             sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
 
-            writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
+            Log.e("check","title ${sharedViewModel.title.value} \n" +
+                    "courseDesc ${sharedViewModel.courseDesc.value} \n" +
+                    "warningList ${warningList} \n imageMultiPart ${sharedViewModel.imageMultiPart.value} \n" +
+                    "province ${sharedViewModel.province.value} \n region ${sharedViewModel.region.value} \n" +
+                    "theme ${sharedViewModel.theme.value} ")
+            //빈값 확인
+            if(TextUtils.isEmpty(sharedViewModel.title.value)
+                || TextUtils.isEmpty(sharedViewModel.province.value)
+                || ("선택안함" != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
+                || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
+                || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
+                || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
+
+                    Toast.makeText(requireContext(),"모든 값을 입력/선택 해주세요.",Toast.LENGTH_LONG).show()
+            }else{
+                writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
+            }
         }
 
         return root
@@ -467,79 +472,10 @@ class WriteFragment : Fragment() {
         binding.btnWriteParkYes.setOnClickListener {
             it.isSelected = !it.isSelected
         }
-        binding.btnWriteTheme1.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteTheme2.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteTheme3.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-    }
-
-    private fun insertDataToCompanionObject() {
-        WriteData.courseDesc = binding.etWriteMyDrive.text.toString()
-        WriteData.isParking = binding.btnWriteParkYes.isSelected
-        WriteData.parkingDesc = binding.etWriteParkReview.text.toString()
-        if(binding.btnWriteRegion.text != "도 단위")
-            WriteData.province = binding.btnWriteRegion.text.toString()
-        if(binding.btnWriteLocation.text != "시 단위")
-            WriteData.province = binding.btnWriteLocation.text.toString()
-        var themeList = mutableListOf<String>()
-        if(binding.btnWriteTheme1.text != "테마1") {
-            themeList.add(binding.btnWriteTheme1.text.toString())
-        } else {
-            themeList.add("")
-        }
-        if(binding.btnWriteTheme2.text != "테마2") {
-            themeList.add(binding.btnWriteTheme2.text.toString())
-        } else {
-            themeList.add("")
-        }
-        if(binding.btnWriteTheme3.text != "테마3") {
-            themeList.add(binding.btnWriteTheme3.text.toString())
-        } else {
-            themeList.add("")
-        }
-        WriteData.theme = themeList
-        WriteData.title = binding.etWriteTitle.text.toString()
-        WriteData.userId = Hidden.userId
-        var warningList = mutableListOf<Boolean>()
-        if(binding.btnWriteCautionHighway.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        if(binding.btnWriteCautionMoun.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        if(binding.btnWriteCautionDiffi.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        if(binding.btnWriteCautionPeople.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        WriteData.warning = warningList
-        var fileList = mutableListOf<Uri>()
-        for(i in writeAdapter.imgList.indices) {
-            WriteData.fileList.add(writeAdapter.imgList[i].imgUri)
-        }
-        WriteData.fileList = fileList
-
-//        startActivityWriteMap()
-//        writeShareActivity?.replaceAddStackFragment(WriteMapFragment, "writeMap");
-
     }
 
     //돌아왔을 때 값 유지
-    fun getSharedViewModelData() {
+    fun initWriteData() {
         //사진
         if (sharedViewModel.imageMultiPart.value != null) {
             binding.clWritePhoto.visibility = View.GONE

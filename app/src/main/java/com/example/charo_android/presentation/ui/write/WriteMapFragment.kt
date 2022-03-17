@@ -2,7 +2,6 @@ package com.example.charo_android.presentation.ui.write
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModelProvider
@@ -15,25 +14,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.util.CustomToast
 import com.skt.Tmap.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withTimeout
 import java.lang.Exception
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class WriteMapFragment : Fragment() {
+class WriteMapFragment : Fragment(), View.OnClickListener {
 
     companion object {
         fun newInstance() = WriteMapFragment()
@@ -50,17 +43,8 @@ class WriteMapFragment : Fragment() {
     var path = arrayListOf<TMapPoint>()
 
     private lateinit var locationFlag: String
-//    private lateinit var locationName: String
-    private var latitude: Double = 0.0
-    private var longitude: Double = 0.0
-    private lateinit var userId: String
-    private lateinit var nickName: String
-
-    private var mapData = WriteData
-
 
     private var _binding: FragmentWriteMapBinding? = null
-
     private val binding get() = _binding!!
 
     var writeShareActivity: WriteShareActivity? = null
@@ -76,70 +60,23 @@ class WriteMapFragment : Fragment() {
         _binding = FragmentWriteMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        Log.d("Created WriteMapFragment", "jjjjjjjj")
-
-        userId = sharedViewModel.userId.value.toString()
-        nickName = sharedViewModel.nickName.value.toString()
-        locationFlag = sharedViewModel.locationFlag.value.toString()
-//        locationName = sharedViewModel.locationName.value.toString()
-        latitude = sharedViewModel.latitude.value!!
-        longitude = sharedViewModel.longitude.value!!
-
         blackOut()
 
-        // 뒤로가기 image click
-        binding.imgWriteMapBack.setOnClickListener {
-            writeShareActivity?.onBackPressed()
-        }
-
-        // 출발지 누르면 검색창으로 감
-        binding.etWriteMapStart.setOnClickListener {
-            sharedViewModel.locationFlag.value = "1"
-            writeShareActivity!!.replaceAddStackFragment(
-                WriteMapSearchFragment.newInstance(),
-                "writeMapSearch"
-            )
-        }
-
-        // 경유지1 누르면 검색창으로 감
-        binding.etWriteMapMid1.setOnClickListener {
-            sharedViewModel.locationFlag.value = "2"
-            writeShareActivity!!.replaceAddStackFragment(
-                WriteMapSearchFragment.newInstance(),
-                "writeMapSearch"
-            )
-        }
-        // 경유지2 누르면 검색창으로 감
-        binding.etWriteMapMid2.setOnClickListener {
-            sharedViewModel.locationFlag.value = "3"
-            writeShareActivity!!.replaceAddStackFragment(
-                WriteMapSearchFragment.newInstance(),
-                "writeMapSearch"
-            )
-        }
-        // 도착지 누르면 검색창으로 감
-        binding.etWriteMapEnd.setOnClickListener {
-            if (mapData.startAddress != "") {
-                sharedViewModel.locationFlag.value = "4"
-                writeShareActivity!!.replaceAddStackFragment(
-                    WriteMapSearchFragment.newInstance(),
-                    "writeMapSearch"
-                )
-            }else{
-                Toast.makeText(requireContext(),getString(R.string.start),Toast.LENGTH_LONG).show()
-            }
-        }
+        locationFlag = sharedViewModel.locationFlag.value.toString()
 
         val tMapView = TMapView(context)
 
-        /*************커밋 푸시 머지할 때 키 삭제************/
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteTmapView.addView(tMapView)
 
-//        fillTextView(locationFlag, locationName, latitude, longitude, tMapView)
         fillTextView(locationFlag, tMapView)
 
-        btnWriteCompleteOnClickEvent()
+        binding.imgWriteMapBack.setOnClickListener(this)      // 뒤로가기 click
+        binding.etWriteMapStart.setOnClickListener(this)
+        binding.etWriteMapMid1.setOnClickListener(this)
+        binding.etWriteMapMid2.setOnClickListener(this)
+        binding.etWriteMapEnd.setOnClickListener(this)
+        binding.btnWriteComplete.setOnClickListener(this)
 
         return root
     }
@@ -160,274 +97,121 @@ class WriteMapFragment : Fragment() {
         locationFlag: String,
         tMapView: TMapView
     ) {
-        if (locationFlag == "1") { // 출발지인 경우
-            mapData.startAddress = sharedViewModel.startAddress.value.toString()
-            mapData.startLat = sharedViewModel.startLat.value!!
-            mapData.startLong = sharedViewModel.startLong.value!!
-
-            binding.etWriteMapStart.text = mapData.startAddress
-            binding.etWriteMapMid1.text = mapData.mid1Address
-            binding.etWriteMapMid2.text = mapData.mid2Address
-            binding.etWriteMapEnd.text = mapData.endAddress
-
-            if (mapData.mid1Address != "") {
+        when(locationFlag){
+            "2" -> { // 경유지1인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            if (mapData.mid2Address != "") {
-                binding.etWriteMapMid2.visibility = View.VISIBLE
-                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-            }
-        } else if (locationFlag == "2") { // 경유지1인 경우
-            binding.etWriteMapMid1.visibility = View.VISIBLE
-            binding.imgWriteMapDelete1.visibility = View.VISIBLE
-
-            mapData.mid1Address = sharedViewModel.midFrstAddress.value.toString()
-            mapData.mid1Lat = sharedViewModel.midFrstLat.value!!
-            mapData.mid1Long = sharedViewModel.midFrstLong.value!!
-
-            binding.etWriteMapStart.text = mapData.startAddress
-            binding.etWriteMapMid1.text = mapData.mid1Address
-            binding.etWriteMapMid2.text = mapData.mid2Address
-            binding.etWriteMapEnd.text = mapData.endAddress
-
-            if (mapData.mid1Address != "") {
+            "3" -> { // 경유지2인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
-            }
-            if (mapData.mid2Address != "") {
                 binding.etWriteMapMid2.visibility = View.VISIBLE
                 binding.imgWriteMapDelete2.visibility = View.VISIBLE
             }
-//        } else if (locationFlag == "3") { // 경유지2인 경우
-//            binding.etWriteMapMid1.visibility = View.VISIBLE
-//            binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            binding.etWriteMapMid2.visibility = View.VISIBLE
-//            binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//
-//            mapData.mid2Address = locationName
-//            mapData.mid2Lat = latitude
-//            mapData.mid2Long = longitude
-//
-//            binding.etWriteMapStart.text = mapData.startAddress
-//            binding.etWriteMapMid1.text = mapData.mid1Address
-//            binding.etWriteMapMid2.text = mapData.mid2Address
-//            binding.etWriteMapEnd.text = mapData.endAddress
-//
-//            if (mapData.mid1Address != "") {
-//                binding.etWriteMapMid1.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            }
-//            if (mapData.mid2Address != "") {
-//                binding.etWriteMapMid2.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//            }
-        } else if (locationFlag == "4") { // 도착지인 경우
-            mapData.endAddress = sharedViewModel.endAddress.value.toString()
-            mapData.endLat = sharedViewModel.endLat.value!!
-            mapData.endLong = sharedViewModel.endLong.value!!
-
-            binding.etWriteMapStart.text = mapData.startAddress
-            binding.etWriteMapMid1.text = mapData.mid1Address
-            binding.etWriteMapMid2.text = mapData.mid2Address
-            binding.etWriteMapEnd.text = mapData.endAddress
-
-            if (mapData.mid1Address != "") {
-                binding.etWriteMapMid1.visibility = View.VISIBLE
-                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-            }
-            if (mapData.mid2Address != "") {
-                binding.etWriteMapMid2.visibility = View.VISIBLE
-                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-            }
+            else -> { }
         }
 
-        if (mapData.endAddress != "") {
+        if (!TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) {
+            binding.etWriteMapMid1.visibility = View.VISIBLE
+            binding.imgWriteMapDelete1.visibility = View.VISIBLE
+        }
+        if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)) {
+            binding.etWriteMapMid2.visibility = View.VISIBLE
+            binding.imgWriteMapDelete2.visibility = View.VISIBLE
+        }
+        if (!TextUtils.isEmpty(sharedViewModel.endAddress.value)) {
             binding.btnWriteComplete.visibility = View.VISIBLE
         }
 
-        imgWriteMapAddAddressOnClickEvent()
-        imgWriteMapDelete1OnClickEvent(tMapView)
-        imgWriteMapDelete2OnClickEvent(tMapView)
+        binding.etWriteMapStart.text = sharedViewModel.startAddress.value
+        binding.etWriteMapMid1.text = sharedViewModel.midFrstAddress.value
+        binding.etWriteMapMid2.text = sharedViewModel.midSecAddress.value
+        binding.etWriteMapEnd.text = sharedViewModel.endAddress.value
+
+        binding.imgWriteMapAddAdress.setOnClickListener{
+            clickAddAddress()
+        }
+        binding.imgWriteMapDelete1.setOnClickListener {
+            clickWriteMapDelete1(tMapView)
+        }
+        binding.imgWriteMapDelete2.setOnClickListener {
+            clickWriteMapDelete2(tMapView)
+        }
+        
         addList(tMapView)
     }
 
-//    private fun fillTextView(
-//        locationFlag: String,
-//        locationName: String,
-//        latitude: Double,
-//        longitude: Double,
-//        tMapView: TMapView
-//    ) {
-//        if (locationFlag == "1") { // 출발지인 경우
-//            mapData.startAddress = locationName
-//            mapData.startLat = latitude
-//            mapData.startLong = longitude
-//
-//            binding.etWriteMapStart.text = mapData.startAddress
-//            binding.etWriteMapMid1.text = mapData.mid1Address
-//            binding.etWriteMapMid2.text = mapData.mid2Address
-//            binding.etWriteMapEnd.text = mapData.endAddress
-//
-//            if (mapData.mid1Address != "") {
-//                binding.etWriteMapMid1.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            }
-//            if (mapData.mid2Address != "") {
-//                binding.etWriteMapMid2.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//            }
-//        } else if (locationFlag == "2") { // 경유지1인 경우
-//            binding.etWriteMapMid1.visibility = View.VISIBLE
-//            binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//
-//            mapData.mid1Address = locationName
-//            mapData.mid1Lat = latitude
-//            mapData.mid1Long = longitude
-//
-//            binding.etWriteMapStart.text = mapData.startAddress
-//            binding.etWriteMapMid1.text = mapData.mid1Address
-//            binding.etWriteMapMid2.text = mapData.mid2Address
-//            binding.etWriteMapEnd.text = mapData.endAddress
-//
-//            if (mapData.mid1Address != "") {
-//                binding.etWriteMapMid1.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            }
-//            if (mapData.mid2Address != "") {
-//                binding.etWriteMapMid2.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//            }
-//        } else if (locationFlag == "3") { // 경유지2인 경우
-//            binding.etWriteMapMid1.visibility = View.VISIBLE
-//            binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            binding.etWriteMapMid2.visibility = View.VISIBLE
-//            binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//
-//            mapData.mid2Address = locationName
-//            mapData.mid2Lat = latitude
-//            mapData.mid2Long = longitude
-//
-//            binding.etWriteMapStart.text = mapData.startAddress
-//            binding.etWriteMapMid1.text = mapData.mid1Address
-//            binding.etWriteMapMid2.text = mapData.mid2Address
-//            binding.etWriteMapEnd.text = mapData.endAddress
-//
-//            if (mapData.mid1Address != "") {
-//                binding.etWriteMapMid1.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            }
-//            if (mapData.mid2Address != "") {
-//                binding.etWriteMapMid2.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//            }
-//        } else if (locationFlag == "4") { // 도착지인 경우
-//            mapData.endAddress = locationName
-//            mapData.endLat = latitude
-//            mapData.endLong = longitude
-//
-//            binding.etWriteMapStart.text = mapData.startAddress
-//            binding.etWriteMapMid1.text = mapData.mid1Address
-//            binding.etWriteMapMid2.text = mapData.mid2Address
-//            binding.etWriteMapEnd.text = mapData.endAddress
-//
-//            if (mapData.mid1Address != "") {
-//                binding.etWriteMapMid1.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-//            }
-//            if (mapData.mid2Address != "") {
-//                binding.etWriteMapMid2.visibility = View.VISIBLE
-//                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-//            }
-//        }
-//
-//        if (mapData.endAddress != "") {
-//            binding.btnWriteComplete.visibility = View.VISIBLE
-//        }
-//
-//        imgWriteMapAddAddressOnClickEvent()
-//        imgWriteMapDelete1OnClickEvent(tMapView)
-//        imgWriteMapDelete2OnClickEvent(tMapView)
-//        addList(tMapView)
-//    }
+    private fun clickAddAddress(){
+        if (!TextUtils.isEmpty(sharedViewModel.startAddress.value) && !TextUtils.isEmpty(sharedViewModel.endAddress.value)) {
+            if (binding.etWriteMapMid1.visibility == View.GONE) {
+                binding.etWriteMapMid1.visibility = View.VISIBLE
+                binding.imgWriteMapDelete1.visibility = View.VISIBLE
 
-    private fun imgWriteMapAddAddressOnClickEvent() {
-        binding.imgWriteMapAddAdress.setOnClickListener() {
-            if (mapData.startAddress != "" && mapData.endAddress != "") {
-                if (binding.etWriteMapMid1.visibility == View.GONE) {
-                    binding.etWriteMapMid1.visibility = View.VISIBLE
-                    binding.imgWriteMapDelete1.visibility = View.VISIBLE
+                binding.etWriteMapMid1.text = sharedViewModel.midFrstAddress.value
+            }
+            if (binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) {
+                binding.etWriteMapMid2.visibility = View.VISIBLE
+                binding.imgWriteMapDelete2.visibility = View.VISIBLE
 
-                    binding.etWriteMapMid1.text = mapData.mid1Address
-                }
-                if (binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address != "") {
-                    binding.etWriteMapMid2.visibility = View.VISIBLE
-                    binding.imgWriteMapDelete2.visibility = View.VISIBLE
-
-                    binding.etWriteMapMid2.text = mapData.mid2Address
-                }else{
-                    Toast.makeText(requireContext(),"경유지를 입력해주세요.",Toast.LENGTH_LONG).show()
-                }
+                binding.etWriteMapMid2.text = sharedViewModel.midSecAddress.value
             }else{
-                Toast.makeText(requireContext(),"출발지와 도착지 모두 입력 후 추가 가능합니다.",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"경유지를 입력해주세요.",Toast.LENGTH_LONG).show()
             }
+        }else{
+            Toast.makeText(requireContext(),"출발지와 도착지 모두 입력 후 추가 가능합니다.",Toast.LENGTH_LONG).show()
         }
     }
-
-    private fun imgWriteMapDelete1OnClickEvent(tMapView: TMapView) {
-        binding.imgWriteMapDelete1.setOnClickListener() {
-            if (mapData.mid2Address != "") {
-                binding.etWriteMapMid2.visibility = View.GONE
-                binding.imgWriteMapDelete2.visibility = View.GONE
-
-                mapData.mid1Address = mapData.mid2Address
-                mapData.mid1Lat = mapData.mid2Lat
-                mapData.mid1Long = mapData.mid2Long
-
-                mapData.mid2Address = ""
-                mapData.mid2Lat = 0.0
-                mapData.mid2Long = 0.0
-
-                binding.etWriteMapMid1.text = mapData.mid1Address
-            } else {
-                binding.etWriteMapMid1.visibility = View.GONE
-                binding.imgWriteMapDelete1.visibility = View.GONE
-
-                mapData.mid1Address = ""
-                mapData.mid1Lat = 0.0
-                mapData.mid1Long = 0.0
-            }
-            path.clear()
-            addList(tMapView)
-        }
-    }
-
-    private fun imgWriteMapDelete2OnClickEvent(tMapView: TMapView) {
-        binding.imgWriteMapDelete2.setOnClickListener() {
+    
+    private fun clickWriteMapDelete1(tMapView: TMapView) {
+        if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)) {
             binding.etWriteMapMid2.visibility = View.GONE
             binding.imgWriteMapDelete2.visibility = View.GONE
 
-            mapData.mid2Address = ""
-            mapData.mid2Lat = 0.0
-            mapData.mid2Long = 0.0
+            sharedViewModel.midFrstAddress = sharedViewModel.midSecAddress
+            sharedViewModel.midFrstLat = sharedViewModel.midSecLat
+            sharedViewModel.midFrstLong = sharedViewModel.midSecLong
 
-            path.clear()
-            addList(tMapView)
+            sharedViewModel.midSecAddress.value = ""
+            sharedViewModel.midSecLat.value = 0.0
+            sharedViewModel.midSecLong.value = 0.0
+
+            binding.etWriteMapMid1.text = sharedViewModel.midFrstAddress.value
+        } else {
+            binding.etWriteMapMid1.visibility = View.GONE
+            binding.imgWriteMapDelete1.visibility = View.GONE
+
+            sharedViewModel.midFrstAddress.value = ""
+            sharedViewModel.midFrstLat.value = 0.0
+            sharedViewModel.midFrstLong.value = 0.0
         }
+        path.clear()
+        addList(tMapView)
+    }
+
+    private fun clickWriteMapDelete2(tMapView: TMapView) {
+        binding.etWriteMapMid2.visibility = View.GONE
+        binding.imgWriteMapDelete2.visibility = View.GONE
+
+        sharedViewModel.midSecAddress.value = ""
+        sharedViewModel.midSecLat.value = 0.0
+        sharedViewModel.midSecLong.value = 0.0
+
+        path.clear()
+        addList(tMapView)
     }
 
     private fun addList(tMapView: TMapView) {
-        if (mapData.startLat != 0.0) {
-            path.add(TMapPoint(mapData.startLat, mapData.startLong))
+        if (sharedViewModel.startLat.value != 0.0) {
+            path.add(TMapPoint(sharedViewModel.startLat.value!!, sharedViewModel.startLong.value!!))
         }
-        if (mapData.mid1Lat != 0.0) {
-            path.add(TMapPoint(mapData.mid1Lat, mapData.mid1Long))
+        if (sharedViewModel.midFrstLat.value != 0.0) {
+            path.add(TMapPoint(sharedViewModel.midFrstLat.value!!, sharedViewModel.midFrstLong.value!!))
         }
-        if (mapData.mid2Lat != 0.0) {
-            path.add(TMapPoint(mapData.mid2Lat, mapData.mid2Long))
+        if (sharedViewModel.midSecLat.value != 0.0) {
+            path.add(TMapPoint(sharedViewModel.midSecLat.value!!, sharedViewModel.midSecLong.value!!))
         }
-        if (mapData.endLat != 0.0) {
-            path.add(TMapPoint(mapData.endLat, mapData.endLong))
+        if (sharedViewModel.endLat.value != 0.0) {
+            path.add(TMapPoint(sharedViewModel.endLat.value!!, sharedViewModel.endLong.value!!))
         }
 
         if (path.isNotEmpty()) {
@@ -485,8 +269,6 @@ class WriteMapFragment : Fragment() {
         cnt: Int,
         flag: Boolean
     ) {
-
-
         val thread: Thread = Thread() {
             try {
                 val tMapPolyLine: TMapPolyLine = TMapData().findPathData(start, end)
@@ -510,30 +292,8 @@ class WriteMapFragment : Fragment() {
         }
     }
 
-    fun customDialog() = runBlocking<Unit> {
-        withTimeout(1300L) {
-            launch {
-                CustomToast.createDialog(requireContext())
-            }
-        }
-    }
-
-    lateinit var fadeoutAnim : Animation
-    fun customToast() = runBlocking<Unit>{
-        fadeoutAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
-
-        binding.grayBackgroundForToast.visibility = View.VISIBLE
-        CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
-        //ToastMessage 사라질 때 회색화면도 같이 사라짐
-//        Handler().postDelayed({
-//            binding.grayBackgroundForToast.startAnimation(fadeoutAnim)
-//            binding.grayBackgroundForToast.visibility = View.GONE
-//        },3800L)
-        }
-
     fun blackOut(){
-        var isShowBlackout = sharedViewModel.startAddress.value == "" && sharedViewModel.midFrstAddress.value == "" && sharedViewModel.midSecAddress.value == ""
-//        var isShowBlackout = sharedViewModel.locationName.value == "" || sharedViewModel.locationName.value == null
+        val isShowBlackout = sharedViewModel.startAddress.value == "" && sharedViewModel.midFrstAddress.value == "" && sharedViewModel.midSecAddress.value == ""
 
         if(isShowBlackout){
             binding.grayBackgroundForToast.visibility = View.VISIBLE
@@ -544,31 +304,20 @@ class WriteMapFragment : Fragment() {
         }
     }
 
-    private fun btnWriteCompleteOnClickEvent() {
-        binding.btnWriteComplete.setOnClickListener() {
-            if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
-            ) {
+    private fun clickWriteComplete() {
+        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) ||
+            binding.etWriteMapMid2.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midSecAddress.value)
+        ) {
 //                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-            } else {
-
-                sharedViewModel.startAddress.value = mapData.startAddress
-                sharedViewModel.startLat.value = mapData.startLat
-                sharedViewModel.startLong.value = mapData.startLong
-                sharedViewModel.midFrstAddress.value = mapData.mid1Address
-                sharedViewModel.midFrstLat.value = mapData.mid1Lat
-                sharedViewModel.midFrstLong.value = mapData.mid1Long
-                sharedViewModel.endAddress.value = mapData.endAddress
-                sharedViewModel.endLat.value = mapData.endLat
-                sharedViewModel.endLong.value = mapData.endLong
+        } else {
 
 //                val course = ArrayList<HashMap<String, RequestBody>>()
 //                val startCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.startAddress.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
 //                    "longtitude" to sharedViewModel.startLong.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
 //                    "latitude" to sharedViewModel.startLat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
-//                val middleCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.mid1Address.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "longtitude" to sharedViewModel.mid1Long.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "latitude" to sharedViewModel.mid1Lat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
+//                val middleCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.midFrstAddress.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+//                    "longtitude" to sharedViewModel.midFrstLong.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
+//                    "latitude" to sharedViewModel.midFrstLat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
 //                val endCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.endAddress.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
 //                    "longtitude" to sharedViewModel.endLong.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
 //                    "latitude" to sharedViewModel.endLat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
@@ -584,35 +333,26 @@ class WriteMapFragment : Fragment() {
                     "longtitude" to sharedViewModel.endLong.value.toString(),
                     "latitude" to sharedViewModel.endLat.value.toString())
 
-                course.add(startCourse)
-                if(sharedViewModel.midFrstAddress.value !== ""){
-                    course.add(middleCourse)
+            course.add(startCourse)
+            if(sharedViewModel.midFrstAddress.value !== ""){
+                course.add(middleCourse)
+            }
+            course.add(endCourse)
+
+            sharedViewModel.course.value = course
+
+            AlertDialog.Builder(requireContext())
+                .setMessage("게시물 작성을 완료하시겠습니까??")
+                .setNeutralButton("아니오") { dialog, which ->
                 }
-                course.add(endCourse)
-
-                if(startCourse is HashMap){
-                    Log.e("startCHash", startCourse.toString())
-                }else{
-                    Log.e("elseeeee", startCourse.toString())
-
-                }
-
-
-
-                sharedViewModel.course.value = course
-
-                AlertDialog.Builder(requireContext())
-                    .setMessage("게시물 작성을 완료하시겠습니까??")
-                    .setNeutralButton("아니오") { dialog, which ->
-                    }
-                    .setPositiveButton("예") { dialog, which ->
-                        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && mapData.mid1Address == "") ||
-                            binding.etWriteMapMid2.visibility == View.VISIBLE && mapData.mid2Address == ""
-                        ) {
+                .setPositiveButton("예") { dialog, which ->
+                    if ((binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) ||
+                        binding.etWriteMapMid2.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midSecAddress.value)
+                    ) {
 ////                            Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-                        } else {
+                    } else {
 
-                            sharedViewModel.serveWriteData()
+                        sharedViewModel.serveWriteData()
 ////
 //                            //서버에 값 보내기
 //                            val sendTheme : ArrayList<MultipartBody.Part> = ArrayList()
@@ -681,11 +421,52 @@ class WriteMapFragment : Fragment() {
 //                                    Log.d("server connect", "fail:${t.message}")
 //                                }
 //                            })
-                        }
                     }
-                    .show()
+                }
+                .show()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v){
+            binding.imgWriteMapBack -> {
+                writeShareActivity?.onBackPressed()
+            }
+            binding.etWriteMapStart -> {
+                sharedViewModel.locationFlag.value = "1"
+                writeShareActivity!!.replaceAddStackFragment(
+                    WriteMapSearchFragment.newInstance(),
+                    "writeMapSearch"
+                )
+            }
+            binding.etWriteMapMid1 -> {
+                sharedViewModel.locationFlag.value = "2"
+                writeShareActivity!!.replaceAddStackFragment(
+                    WriteMapSearchFragment.newInstance(),
+                    "writeMapSearch"
+                )
+            }
+            binding.etWriteMapMid2 -> {
+                sharedViewModel.locationFlag.value = "3"
+                writeShareActivity!!.replaceAddStackFragment(
+                    WriteMapSearchFragment.newInstance(),
+                    "writeMapSearch"
+                )
+            }
+            binding.etWriteMapEnd -> {
+                if (!TextUtils.isEmpty(sharedViewModel.startAddress.value)) {
+                    sharedViewModel.locationFlag.value = "4"
+                    writeShareActivity!!.replaceAddStackFragment(
+                        WriteMapSearchFragment.newInstance(),
+                        "writeMapSearch"
+                    )
+                }else{
+                    Toast.makeText(requireContext(),getString(R.string.start),Toast.LENGTH_LONG).show()
+                }
+            }
+            binding.btnWriteComplete -> {
+                clickWriteComplete()
             }
         }
-
     }
 }

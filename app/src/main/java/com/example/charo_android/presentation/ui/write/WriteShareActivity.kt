@@ -11,15 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.charo_android.databinding.ActivityWriteShareBinding
 
 class WriteShareActivity : AppCompatActivity() {
-    private lateinit var writeFragment : WriteFragment
 
-    private lateinit var userId: String
-    private lateinit var nickName: String
     private lateinit var binding: ActivityWriteShareBinding
-
     private lateinit var sharedViewModel: WriteSharedViewModel
-//    private val sharedViewModel: WriteSharedViewModel by viewModels()
 
+    private lateinit var writeFragment : WriteFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +24,7 @@ class WriteShareActivity : AppCompatActivity() {
 
         sharedViewModel = ViewModelProvider(this@WriteShareActivity).get(WriteSharedViewModel::class.java)
 
-        userId = intent.getStringExtra("userId").toString()
-        nickName = intent.getStringExtra("nickName").toString()
-
-//        sharedViewModel.userId.value = "진희"
-//        sharedViewModel.nickName.value = "지니"
-
-        Log.d("uuuuuu", userId)
-        Log.d("uuuuuu", sharedViewModel.userId.value.toString())
-
         writeFragment = WriteFragment()
-
-        //writeFragment에서는 뒤로가기 안되게 하기 위해 .addToBackStack 제외
         replaceFragment(writeFragment)
 
     }
@@ -64,8 +49,6 @@ class WriteShareActivity : AppCompatActivity() {
         supportFragmentManager.popBackStack();
         sharedViewModel.latitude.value = 0.0
         sharedViewModel.longitude.value = 0.0
-//        sharedViewModel.locationName.value = ""
-//        sharedViewModel.locationAddress.value = ""
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

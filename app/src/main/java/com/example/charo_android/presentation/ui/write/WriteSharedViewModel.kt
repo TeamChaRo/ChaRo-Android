@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.presentation.util.ThemeUtil
 import com.example.charo_android.presentation.util.enqueueUtil
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -16,9 +15,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 class WriteSharedViewModel : ViewModel() {
     // TODO: Implement the ViewModel
     fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
-
-    val userId = MutableLiveData<String>().default("And\'s Rabbit")
-    val nickName = MutableLiveData<String>().default("안드네 토끼양")
 
     //WriteFragment
     val userEmail = MutableLiveData<String>().default("")     //"and@naver.com"
@@ -53,15 +49,6 @@ class WriteSharedViewModel : ViewModel() {
     var midSecLong = MutableLiveData<Double>().default(0.0)
     var endLat = MutableLiveData<Double>().default(0.0)
     var endLong = MutableLiveData<Double>().default(0.0)
-
-    //writeMapLocationFragment
-//    val locationName = MutableLiveData<String>().default("")
-//    val locationAddress = MutableLiveData<String>().default("")
-//    val resultLocation = MutableLiveData<String>().default("")
-
-
-//    private val _userId = MutableLiveData<String>()
-//    val userId: LiveData<String> get() = _userId
 
     fun serveWriteData() {
         val param : HashMap<String, RequestBody> = HashMap()
@@ -146,9 +133,5 @@ class WriteSharedViewModel : ViewModel() {
         endLat.value = 0.0
         endLong.value = 0.0
 
-        //writeMapLocationFragment
-//        locationName.value = ""
-//        locationAddress.value = ""
-//        resultLocation.value = ""
     }
 }

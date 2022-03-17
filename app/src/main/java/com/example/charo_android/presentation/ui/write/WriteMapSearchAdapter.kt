@@ -36,12 +36,6 @@ class WriteMapSearchAdapter(
 
     override fun getItemCount(): Int = userList.size
 
-//    lateinit var mainActivity: MainActivity
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        mainActivity = context as MainActivity
-//    }
-
     override fun onBindViewHolder(holder: MapSearchViewHolder, position: Int) {
         holder.onBind(userList[position])
 
