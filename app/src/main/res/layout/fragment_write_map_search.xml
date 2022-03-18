@@ -8,7 +8,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
 
         <ImageView
             android:id="@+id/img_write_map_search_back"
@@ -25,7 +27,7 @@
             android:layout_height="wrap_content"
             android:minHeight="72dp"
             android:background="@android:color/transparent"
-            android:hint="@string/start"
+            tools:hint="@string/start"
             android:inputType="text"
             android:maxLines="1"
             android:textSize="14sp"

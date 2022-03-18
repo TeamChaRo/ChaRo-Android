@@ -96,6 +96,7 @@
     <string name="signin_signup">회원가입</string>
     <string name="start">출발지를 입력해주세요.</string>
     <string name="end">도착지를 입력해주세요.</string>
+    <string name="middle">경유지를 입력해주세요.</string>
     <string name="auto_search">검색어를 입력해주세요</string>
     <string name="skip">SKIP</string>
     <string name="looking">구경해요!</string>
