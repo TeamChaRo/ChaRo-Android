@@ -252,7 +252,7 @@ class DetailPostFragment : Fragment() {
     }
 
     private fun showLikeList() {
-        binding.clDetailBottomLike.setOnClickListener {
+        binding.tvDetailLike.setOnClickListener {
             if(childFragmentManager.findFragmentByTag("Dialog") == null) {
                 DetailPostLikeListFragment().show(childFragmentManager, "Dialog")
             }

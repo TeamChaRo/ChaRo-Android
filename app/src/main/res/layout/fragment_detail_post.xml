@@ -716,6 +716,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_detail_like"
                     android:src="@{viewModel.isFavorite == 1 ? @drawable/ic_bigheart_active : @drawable/ic_bigheart_inactive}"
+                    android:clickable="@{viewModel.detailPost.isAuthor ? false : true}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_detail_like"
                     app:layout_constraintStart_toStartOf="parent"
