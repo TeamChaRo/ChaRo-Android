@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.enqueueUtil
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -17,7 +18,6 @@ class WriteSharedViewModel : ViewModel() {
     fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 
     //WriteFragment
-    val userEmail = MutableLiveData<String>().default("")     //"and@naver.com"
     val title = MutableLiveData<String>().default("")
     val province = MutableLiveData<String>().default("")            //경기도
     val region = MutableLiveData<String>().default("")              //수원
@@ -67,7 +67,7 @@ class WriteSharedViewModel : ViewModel() {
             sendTheme.add(MultipartBody.Part.createFormData("theme",sharedTheme))
         }
 
-        val userEmailRB : RequestBody = userEmail.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val userEmailRB : RequestBody = Hidden.userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
         val titleRB : RequestBody = title.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
         val provinceRB : RequestBody = province.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
         val regionRB : RequestBody = region.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -104,7 +104,6 @@ class WriteSharedViewModel : ViewModel() {
     }
 
     fun initData() {
-        userEmail.value = "and@naver.com"
         title.value = ""
         province.value = ""            //경기도
         region.value = ""            //수원

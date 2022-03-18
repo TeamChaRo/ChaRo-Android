@@ -128,7 +128,7 @@ class DetailPostFragment : Fragment() {
                         icon = bitmap
                         setPosition(0.5F, 1.0F)
                         tMapPoint = pointList[i]
-                        name = "marker$i"
+                        name = "marker_location_flag_$i"
                     }
                     tMapView.addMarkerItem(marker.name, marker)
 

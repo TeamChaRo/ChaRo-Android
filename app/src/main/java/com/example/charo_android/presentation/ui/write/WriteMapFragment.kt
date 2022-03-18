@@ -21,6 +21,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.CustomToast
+import com.example.charo_android.presentation.util.Define
 import com.skt.Tmap.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
@@ -98,11 +99,11 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         tMapView: TMapView
     ) {
         when(locationFlag){
-            "2" -> { // 경유지1인 경우
+            Define().LOCATION_FLAG_MID_FRST -> { // 경유지1인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            "3" -> { // 경유지2인 경우
+            Define().LOCATION_FLAG_MID_SEC -> { // 경유지2인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
                 binding.etWriteMapMid2.visibility = View.VISIBLE
@@ -243,7 +244,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             marker.icon = bitmap
             marker.setPosition(0.5F, 1.0F)
             marker.tMapPoint = mapPoint
-            marker.name = "marker$i"
+            marker.name = "marker_location_flag_$i"
             tMapView.addMarkerItem(marker.name, marker)
         }
 
@@ -433,21 +434,21 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 writeShareActivity?.onBackPressed()
             }
             binding.etWriteMapStart -> {
-                sharedViewModel.locationFlag.value = "1"
+                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_START
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
                 )
             }
             binding.etWriteMapMid1 -> {
-                sharedViewModel.locationFlag.value = "2"
+                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_MID_FRST
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
                 )
             }
             binding.etWriteMapMid2 -> {
-                sharedViewModel.locationFlag.value = "3"
+                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_MID_SEC
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
@@ -455,7 +456,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             }
             binding.etWriteMapEnd -> {
                 if (!TextUtils.isEmpty(sharedViewModel.startAddress.value)) {
-                    sharedViewModel.locationFlag.value = "4"
+                    sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_END
                     writeShareActivity!!.replaceAddStackFragment(
                         WriteMapSearchFragment.newInstance(),
                         "writeMapSearch"

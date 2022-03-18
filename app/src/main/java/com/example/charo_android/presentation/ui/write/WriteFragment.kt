@@ -34,6 +34,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import androidx.core.view.isVisible
+import com.example.charo_android.presentation.util.Define
 import com.example.charo_android.presentation.util.LocationUtil
 import com.example.charo_android.presentation.util.ThemeUtil
 
@@ -212,20 +213,20 @@ class WriteFragment : Fragment() {
             val warningUIList: ArrayList<String> = ArrayList()
 
             if(binding.btnWriteCautionHighway.isSelected) {
-                warningList.add(MultipartBody.Part.createFormData("warning","highway"))
-                warningUIList.add(binding.btnWriteCautionHighway.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_HIGH_WAY))
+                warningUIList.add(Define().WARNING_HIGH_WAY)
             }
             if(binding.btnWriteCautionMoun.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","mountainRoad"))
-                warningUIList.add(binding.btnWriteCautionMoun.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_MOUNTAIN_ROAD))
+                warningUIList.add(Define().WARNING_MOUNTAIN_ROAD)
             }
             if(binding.btnWriteCautionDiffi.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","diffRoad"))
-                warningUIList.add(binding.btnWriteCautionDiffi.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_DIFF_ROAD))
+                warningUIList.add(Define().WARNING_DIFF_ROAD)
             }
             if(binding.btnWriteCautionPeople.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","hotPlace"))
-                warningUIList.add(binding.btnWriteCautionPeople.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning",Define().WARNING_HOT_PLACE))
+                warningUIList.add(Define().WARNING_HOT_PLACE)
             }
             sharedViewModel.warning.value = warningList
             sharedViewModel.warningUI.value = warningUIList
@@ -508,10 +509,10 @@ class WriteFragment : Fragment() {
         if(sharedViewModel.warningUI.value != null){
             for(warningData in sharedViewModel.warningUI.value!!){
                 when(warningData){
-                    binding.btnWriteCautionHighway.text -> binding.btnWriteCautionHighway.isSelected = true
-                    binding.btnWriteCautionDiffi.text -> binding.btnWriteCautionDiffi.isSelected = true
-                    binding.btnWriteCautionMoun.text -> binding.btnWriteCautionMoun.isSelected = true
-                    binding.btnWriteCautionPeople.text -> binding.btnWriteCautionPeople.isSelected = true
+                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected = true
+                    Define().WARNING_DIFF_ROAD -> binding.btnWriteCautionDiffi.isSelected = true
+                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected = true
+                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected = true
                 }
             }
         }

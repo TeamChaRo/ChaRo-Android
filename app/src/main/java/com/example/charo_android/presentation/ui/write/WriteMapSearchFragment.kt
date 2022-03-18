@@ -25,6 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.text.style.ForegroundColorSpan
+import com.example.charo_android.presentation.util.Define
 
 class WriteMapSearchFragment : Fragment() {
 
@@ -70,37 +71,31 @@ class WriteMapSearchFragment : Fragment() {
         locationFlag = sharedViewModel.locationFlag.value.toString()
 
         when (locationFlag) {
-            "1" -> {
-//                sharedViewModel.resultLocation.value = "출발지로 설정"
-
+            Define().LOCATION_FLAG_START -> {
                 binding.etWriteMapSearch.hint = getString(R.string.start)
                 if (!TextUtils.isEmpty(sharedViewModel.startAddress.value)){
                     binding.etWriteMapSearch.setText(sharedViewModel.startAddress.value)
                 }
             }
-            "2" -> {
+            Define().LOCATION_FLAG_MID_FRST -> {
                 binding.etWriteMapSearch.hint = getString(R.string.middle)
                 if (!TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)){
                     binding.etWriteMapSearch.setText(sharedViewModel.midFrstAddress.value)
                 }
             }
-            "3" -> {
+            Define().LOCATION_FLAG_MID_SEC -> {
                 binding.etWriteMapSearch.hint = getString(R.string.middle)
                 if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)){
                     binding.etWriteMapSearch.setText(sharedViewModel.midSecAddress.value)
                 }
             }
-            "4" -> {
-//                sharedViewModel.resultLocation.value = "도착지로 설정"
-
+            Define().LOCATION_FLAG_END -> {
                 binding.etWriteMapSearch.hint = getString(R.string.end)
                 if (!TextUtils.isEmpty(sharedViewModel.endAddress.value)){
                     binding.etWriteMapSearch.setText(sharedViewModel.endAddress.value)
                 }
             }
         }
-//        binding.etWriteMapSearchStart.hint = text
-//        sharedViewModel.resultLocation.value = text
 
         binding.imgWriteMapSearchBack.setOnClickListener {
             writeShareActivity?.onBackPressed()
@@ -177,7 +172,7 @@ class WriteMapSearchFragment : Fragment() {
         binding.textResultSearch.text = getString(R.string.write_recent_search)
 
         val call: Call<ResponseWriteData> =
-            ApiService.writeViewService.getReadHistory(Hidden.otherUserEmail)
+            ApiService.writeViewService.getReadHistory(Hidden.userEmail)
         call.enqueue(object : Callback<ResponseWriteData> {
             override fun onResponse(
                 call: Call<ResponseWriteData>,
