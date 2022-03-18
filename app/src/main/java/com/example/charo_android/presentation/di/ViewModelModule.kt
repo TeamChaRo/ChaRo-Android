@@ -27,7 +27,6 @@ val viewModelModule = module {
     // SH
     viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { FollowViewModel(get()) }
-    viewModel { DetailPostViewModel(get(), get(), get()) }
+    viewModel { DetailPostViewModel(get(), get(), get(), get()) }
     viewModel { OtherMyPageViewModel(get(), get(), get(), get()) }
-
 }

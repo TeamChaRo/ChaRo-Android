@@ -12,14 +12,17 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.DialogDetailLikeBinding
 import com.example.charo_android.domain.model.detailpost.User
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
+import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     private var _binding: DialogDetailLikeBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
     private lateinit var adapter: DetailPostLikeListAdapter
+    private val viewModel by sharedViewModel<DetailPostViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +38,8 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         initDialog()
         initRecyclerView()
+        getDetailPostLikeUserList()
+        updateRecyclerView()
         clickClose()
     }
 
@@ -66,14 +71,16 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     private fun initRecyclerView() {
         adapter = DetailPostLikeListAdapter()
         binding.rcvDetailDialog.adapter = adapter
+    }
 
-        val itemList = listOf(
-            User("한진희", "email", "", true),
-            User("곽호택", "email", "", true),
-            User("장혜령", "email", "", false),
-            User("박익범", "email", "", false),
-        )
-        adapter.replaceItem(itemList)
+    private fun getDetailPostLikeUserList() {
+        viewModel.getDetailPostLikeUserListData()
+    }
+
+    private fun updateRecyclerView() {
+        viewModel.likeUserList.observe(viewLifecycleOwner) {
+            adapter.replaceItem(it)
+        }
     }
 
     private fun clickClose() {
