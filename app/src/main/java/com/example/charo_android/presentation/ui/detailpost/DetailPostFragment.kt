@@ -62,6 +62,7 @@ class DetailPostFragment : Fragment() {
         clickShare()
         goBack()
         clickAuthor()
+        showLikeList()
     }
 
     override fun onDestroyView() {
@@ -247,6 +248,14 @@ class DetailPostFragment : Fragment() {
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
             intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
             startActivity(intent)
+        }
+    }
+
+    private fun showLikeList() {
+        binding.clDetailBottomLike.setOnClickListener {
+            if(childFragmentManager.findFragmentByTag("Dialog") == null) {
+                DetailPostLikeListFragment().show(childFragmentManager, "Dialog")
+            }
         }
     }
 }

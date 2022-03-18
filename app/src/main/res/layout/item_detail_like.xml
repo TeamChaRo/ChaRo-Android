@@ -1,58 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="11dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:id="@+id/img_detail_like_image_border"
-        android:background="@drawable/shape_detail_like_profile_border"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <data>
+        <variable
+            name="model"
+            type="com.example.charo_android.domain.model.detailpost.User" />
+    </data>
 
-    <ImageView
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:id="@+id/img_detail_like_image"
-        tools:src="@drawable/myimage"
-        app:layout_constraintStart_toStartOf="@id/img_detail_like_image_border"
-        app:layout_constraintEnd_toEndOf="@id/img_detail_like_image_border"
-        app:layout_constraintTop_toTopOf="@id/img_detail_like_image_border"
-        app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_detail_like_nickname"
-        tools:text="userName"
-        android:fontFamily="@font/notosanscjkkr_medium"
-        android:textColor="@color/black_sub_212429"
-        android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@id/img_detail_like_image_border"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="@id/img_detail_like_image_border"
-        app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
-        android:layout_marginTop="2dp"
-        android:includeFontPadding="false"/>
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="11dp">
 
-    <TextView
-        android:layout_width="56dp"
-        android:layout_height="22dp"
-        android:id="@+id/tv_detail_like_follow"
-        android:background="@drawable/selector_detail_like_isfollow"
-        android:text="팔로우"
-        android:fontFamily="@font/noto_sans_cjkkr_regular"
-        android:includeFontPadding="false"
-        android:textAlignment="center"
-        android:textColor="@color/selector_detail_like_text_color"
-        app:layout_constraintTop_toTopOf="@id/img_detail_like_image_border"
-        app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <ImageView
+            android:id="@+id/img_detail_like_image_border"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:background="@drawable/shape_detail_like_profile_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/img_detail_like_image"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            setCircleImageUrl="@{model.image}"
+            app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
+            app:layout_constraintEnd_toEndOf="@id/img_detail_like_image_border"
+            app:layout_constraintStart_toStartOf="@id/img_detail_like_image_border"
+            app:layout_constraintTop_toTopOf="@id/img_detail_like_image_border"
+            tools:src="@drawable/myimage" />
+
+        <TextView
+            android:id="@+id/tv_detail_like_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:textColor="@color/black_sub_212429"
+            android:textSize="13sp"
+            android:text="@{model.nickname}"
+            app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
+            app:layout_constraintStart_toEndOf="@id/img_detail_like_image_border"
+            app:layout_constraintTop_toTopOf="@id/img_detail_like_image_border"
+            tools:text="userName" />
+
+        <TextView
+            android:id="@+id/tv_detail_like_follow"
+            android:layout_width="56dp"
+            android:layout_height="22dp"
+            android:background="@{model.isFollow ? @drawable/shape_detail_like_isfollow_unchecked : @drawable/shape_detail_like_isfollow_checked}"
+            android:fontFamily="@font/noto_sans_cjkkr_regular"
+            android:includeFontPadding="false"
+            android:text="@{model.isFollow ? `팔로잉` : `팔로우`}"
+            android:textAlignment="center"
+            android:textColor="@{model.isFollow ? @color/black_sub_212429 : @color/white}"
+            app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_detail_like_image_border" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
