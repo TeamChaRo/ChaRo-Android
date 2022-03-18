@@ -1,6 +1,7 @@
 package com.example.charo_android.presentation.ui.detailpost
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.example.charo_android.databinding.DialogDetailLikeBinding
 import com.example.charo_android.domain.model.detailpost.User
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -69,7 +71,11 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = DetailPostLikeListAdapter()
+        adapter = DetailPostLikeListAdapter {
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
+            intent.putExtra("userEmail", it.userEmail)
+            startActivity(intent)
+        }
         binding.rcvDetailDialog.adapter = adapter
     }
 
