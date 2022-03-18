@@ -77,25 +77,12 @@ class WriteMapLocationFragment : Fragment() {
             locationAddress = it.getString(LOCATION_ADDRESS)
         }
 
-//        locationName = sharedViewModel.locationName.value.toString()
-//        locationAddress = sharedViewModel.locationAddress.value.toString()
-//        resultLocation = sharedViewModel.resultLocation.value.toString()
-
-//        Log.d("uuuwriteloca", userId)
-//        Log.d("uuuwriteloca", nickName)
-//        Log.d("uuuwriteloca", locationFlag)
-//        Log.d("uuuwritelocalocationnmae", locationName)
-//        Log.d("uuuwriteloca", locationAddress)
-
-//        binding.btnSetLocation.text = resultLocation
-
         binding.imgWriteMapLocationBack.setOnClickListener {
             writeShareActivity?.onBackPressed()
         }
 
         val tMapView = TMapView(context)
 
-        /*************커밋 푸시 머지할 때 키 삭제************/
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteMapLocationView.addView(tMapView)
 

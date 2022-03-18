@@ -96,15 +96,15 @@ class WriteFragment : Fragment() {
         // 지역(도 단위)
         binding.btnWriteRegion.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle("지역")
-                .setNeutralButton("취소") { dialog, which ->
+                .setTitle(R.string.area)
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnWriteRegion.text = resources.getString(R.string.region)
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     binding.btnWriteLocation.isSelected = false
                     it.isSelected = false
                     preCheckProvince = 0
                 }
-                .setPositiveButton("확인") { dialog, which ->
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
                     binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
                     sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
@@ -127,14 +127,14 @@ class WriteFragment : Fragment() {
 
         binding.btnWriteLocation.setOnClickListener() {
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle("지역")
-                .setNeutralButton("취소") { dialog, which ->
+                .setTitle(R.string.area)
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     it.isSelected = false
                     preCheckedRegion = 0
                     sharedViewModel.region.value = ""
                 }
-                .setPositiveButton("확인") { dialog, which ->
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
                     when(binding.btnWriteRegion.text){
                         "특별시" -> binding.btnWriteLocation.text = locationUtil.itemSpecial[preCheckedRegion]
@@ -247,12 +247,12 @@ class WriteFragment : Fragment() {
             //빈값 확인
             if(TextUtils.isEmpty(sharedViewModel.title.value)
                 || TextUtils.isEmpty(sharedViewModel.province.value)
-                || ("선택안함" != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
+                || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
                 || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
                 || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
                 || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
 
-                    Toast.makeText(requireContext(),"모든 값을 입력/선택 해주세요.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),getString(R.string.txt_check_all_input),Toast.LENGTH_LONG).show()
             }else{
                 writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
             }
@@ -300,13 +300,6 @@ class WriteFragment : Fragment() {
         val bottomSheetDialogFragment = DialogThemeFragment()
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        sharedViewModel = ViewModelProvider(this).get(WriteSharedViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)  //ACTION_PICK   //ACTION_GET_CONTENT
