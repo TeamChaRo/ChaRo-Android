@@ -34,6 +34,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import androidx.core.view.isVisible
+import com.example.charo_android.presentation.util.Define
 import com.example.charo_android.presentation.util.LocationUtil
 import com.example.charo_android.presentation.util.ThemeUtil
 
@@ -96,15 +97,15 @@ class WriteFragment : Fragment() {
         // 지역(도 단위)
         binding.btnWriteRegion.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle("지역")
-                .setNeutralButton("취소") { dialog, which ->
+                .setTitle(R.string.area)
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnWriteRegion.text = resources.getString(R.string.region)
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     binding.btnWriteLocation.isSelected = false
                     it.isSelected = false
                     preCheckProvince = 0
                 }
-                .setPositiveButton("확인") { dialog, which ->
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
                     binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
                     sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
@@ -127,14 +128,14 @@ class WriteFragment : Fragment() {
 
         binding.btnWriteLocation.setOnClickListener() {
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle("지역")
-                .setNeutralButton("취소") { dialog, which ->
+                .setTitle(R.string.area)
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     it.isSelected = false
                     preCheckedRegion = 0
                     sharedViewModel.region.value = ""
                 }
-                .setPositiveButton("확인") { dialog, which ->
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
                     when(binding.btnWriteRegion.text){
                         "특별시" -> binding.btnWriteLocation.text = locationUtil.itemSpecial[preCheckedRegion]
@@ -212,20 +213,20 @@ class WriteFragment : Fragment() {
             val warningUIList: ArrayList<String> = ArrayList()
 
             if(binding.btnWriteCautionHighway.isSelected) {
-                warningList.add(MultipartBody.Part.createFormData("warning","highway"))
-                warningUIList.add(binding.btnWriteCautionHighway.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_HIGH_WAY))
+                warningUIList.add(Define().WARNING_HIGH_WAY)
             }
             if(binding.btnWriteCautionMoun.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","mountainRoad"))
-                warningUIList.add(binding.btnWriteCautionMoun.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_MOUNTAIN_ROAD))
+                warningUIList.add(Define().WARNING_MOUNTAIN_ROAD)
             }
             if(binding.btnWriteCautionDiffi.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","diffRoad"))
-                warningUIList.add(binding.btnWriteCautionDiffi.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_DIFF_ROAD))
+                warningUIList.add(Define().WARNING_DIFF_ROAD)
             }
             if(binding.btnWriteCautionPeople.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","hotPlace"))
-                warningUIList.add(binding.btnWriteCautionPeople.text.toString())
+                warningList.add(MultipartBody.Part.createFormData("warning",Define().WARNING_HOT_PLACE))
+                warningUIList.add(Define().WARNING_HOT_PLACE)
             }
             sharedViewModel.warning.value = warningList
             sharedViewModel.warningUI.value = warningUIList
@@ -247,12 +248,12 @@ class WriteFragment : Fragment() {
             //빈값 확인
             if(TextUtils.isEmpty(sharedViewModel.title.value)
                 || TextUtils.isEmpty(sharedViewModel.province.value)
-                || ("선택안함" != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
+                || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
                 || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
                 || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
                 || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
 
-                    Toast.makeText(requireContext(),"모든 값을 입력/선택 해주세요.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),getString(R.string.txt_check_all_input),Toast.LENGTH_LONG).show()
             }else{
                 writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
             }
@@ -300,13 +301,6 @@ class WriteFragment : Fragment() {
         val bottomSheetDialogFragment = DialogThemeFragment()
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        sharedViewModel = ViewModelProvider(this).get(WriteSharedViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)  //ACTION_PICK   //ACTION_GET_CONTENT
@@ -515,10 +509,10 @@ class WriteFragment : Fragment() {
         if(sharedViewModel.warningUI.value != null){
             for(warningData in sharedViewModel.warningUI.value!!){
                 when(warningData){
-                    binding.btnWriteCautionHighway.text -> binding.btnWriteCautionHighway.isSelected = true
-                    binding.btnWriteCautionDiffi.text -> binding.btnWriteCautionDiffi.isSelected = true
-                    binding.btnWriteCautionMoun.text -> binding.btnWriteCautionMoun.isSelected = true
-                    binding.btnWriteCautionPeople.text -> binding.btnWriteCautionPeople.isSelected = true
+                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected = true
+                    Define().WARNING_DIFF_ROAD -> binding.btnWriteCautionDiffi.isSelected = true
+                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected = true
+                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected = true
                 }
             }
         }

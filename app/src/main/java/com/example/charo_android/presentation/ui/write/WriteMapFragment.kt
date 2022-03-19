@@ -21,6 +21,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.CustomToast
+import com.example.charo_android.presentation.util.Define
 import com.skt.Tmap.*
 import java.lang.Exception
 import kotlin.collections.ArrayList
@@ -98,11 +99,11 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         tMapView: TMapView
     ) {
         when(locationFlag){
-            "2" -> { // 경유지1인 경우
+            Define().LOCATION_FLAG_MID_FRST -> { // 경유지1인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
             }
-            "3" -> { // 경유지2인 경우
+            Define().LOCATION_FLAG_MID_SEC -> { // 경유지2인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
                 binding.etWriteMapMid2.visibility = View.VISIBLE
@@ -155,10 +156,10 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
                 binding.etWriteMapMid2.text = sharedViewModel.midSecAddress.value
             }else{
-                Toast.makeText(requireContext(),"경유지를 입력해주세요.",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),getString(R.string.middle),Toast.LENGTH_LONG).show()
             }
         }else{
-            Toast.makeText(requireContext(),"출발지와 도착지 모두 입력 후 추가 가능합니다.",Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(),getString(R.string.txt_check_input_start_end),Toast.LENGTH_LONG).show()
         }
     }
     
@@ -243,7 +244,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             marker.icon = bitmap
             marker.setPosition(0.5F, 1.0F)
             marker.tMapPoint = mapPoint
-            marker.name = "marker$i"
+            marker.name = "marker_location_flag_$i"
             tMapView.addMarkerItem(marker.name, marker)
         }
 
@@ -297,7 +298,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
         if(isShowBlackout){
             binding.grayBackgroundForToast.visibility = View.VISIBLE
-            CustomToast.createToast(requireContext(), "출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.")?.show()
+            CustomToast.createToast(requireContext(), getString(R.string.noti_write_map))?.show()
 
         }else{
             binding.grayBackgroundForToast.visibility = View.GONE
@@ -342,10 +343,10 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             sharedViewModel.course.value = course
 
             AlertDialog.Builder(requireContext())
-                .setMessage("게시물 작성을 완료하시겠습니까??")
-                .setNeutralButton("아니오") { dialog, which ->
+                .setMessage(getString(R.string.noti_complete_write))
+                .setNeutralButton(getString(R.string.word_no)) { dialog, which ->
                 }
-                .setPositiveButton("예") { dialog, which ->
+                .setPositiveButton(getString(R.string.word_yes)) { dialog, which ->
                     if ((binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) ||
                         binding.etWriteMapMid2.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midSecAddress.value)
                     ) {
@@ -433,21 +434,21 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 writeShareActivity?.onBackPressed()
             }
             binding.etWriteMapStart -> {
-                sharedViewModel.locationFlag.value = "1"
+                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_START
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
                 )
             }
             binding.etWriteMapMid1 -> {
-                sharedViewModel.locationFlag.value = "2"
+                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_MID_FRST
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
                 )
             }
             binding.etWriteMapMid2 -> {
-                sharedViewModel.locationFlag.value = "3"
+                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_MID_SEC
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"
@@ -455,7 +456,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             }
             binding.etWriteMapEnd -> {
                 if (!TextUtils.isEmpty(sharedViewModel.startAddress.value)) {
-                    sharedViewModel.locationFlag.value = "4"
+                    sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_END
                     writeShareActivity!!.replaceAddStackFragment(
                         WriteMapSearchFragment.newInstance(),
                         "writeMapSearch"

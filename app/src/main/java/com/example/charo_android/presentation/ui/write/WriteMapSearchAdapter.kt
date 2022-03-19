@@ -58,9 +58,6 @@ class WriteMapSearchAdapter(
                 , lat, lon
             )
 
-//            sharedViewModel.locationName.value = userList[position].locationName.toString()
-//            sharedViewModel.locationAddress.value = userList[position].locationAddress
-
             val locationName = userList[position].locationName.toString()
             val locationAddress = userList[position].locationAddress
 

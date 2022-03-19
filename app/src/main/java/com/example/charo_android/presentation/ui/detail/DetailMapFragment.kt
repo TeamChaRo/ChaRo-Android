@@ -76,7 +76,7 @@ class DetailMapFragment : Fragment() {
             marker.icon = bitmap
             marker.setPosition(0.5F, 1.0F)
             marker.tMapPoint = pointList[i]
-            marker.name = "marker$i"
+            marker.name = "marker_location_flag_$i"
             tMapView.addMarkerItem(marker.name, marker)
         }
         findPath(tMapView)

@@ -204,6 +204,23 @@
     <string name="text_my_page_no_written_post">작성하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n작성해보는 것은 어떠신가요?</string>
     <string name="text_my_page_no_saved_post">저장하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?</string>
 
+    <string name="set_start_point">출발지로 설정</string>
+    <string name="set_via_point">경유지로 설정</string>
+    <string name="set_end_point">도착지로 설정</string>
+
+    <string name="txt_max_theme_cnt">테마는 3개까지만 선택할 수 있습니다.</string>
+    <string name="txt_again_add_theme">테마를 추가로 선택하려면 \'선택안함\'을 취소 후 다시 선택해 주세요.</string>
+
+    <string name="txt_check_all_input">모든 값을 입력/선택 해주세요.</string>
+    <string name="txt_check_input_start_end">출발지와 도착지 모두 입력 후 추가 가능합니다.</string>
+    <string name="noti_write_map">출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.</string>
+    <string name="noti_cancel_write">게시물 작성을 중단하시겠습니까?</string>
+    <string name="write_continue">이어서 작성</string>
+    <string name="write_cancel">작성중단</string>
+    <string name="word_no">아니오</string>
+    <string name="word_yes">예</string>
+    <string name="noti_complete_write">게시물 작성을 완료하시겠습니까??</string>
+
     <!-- KaKao -->
     <string name="kakao_login">카카오 로그인</string>
     <string name="detail_menu_edit">수정하기</string>

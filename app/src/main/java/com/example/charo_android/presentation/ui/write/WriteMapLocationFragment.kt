@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteMapLocationBinding
 import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.Define
 import com.skt.Tmap.TMapAddressInfo
 import com.skt.Tmap.TMapData
 import com.skt.Tmap.TMapMarkerItem
@@ -77,77 +78,40 @@ class WriteMapLocationFragment : Fragment() {
             locationAddress = it.getString(LOCATION_ADDRESS)
         }
 
-//        locationName = sharedViewModel.locationName.value.toString()
-//        locationAddress = sharedViewModel.locationAddress.value.toString()
-//        resultLocation = sharedViewModel.resultLocation.value.toString()
-
-//        Log.d("uuuwriteloca", userId)
-//        Log.d("uuuwriteloca", nickName)
-//        Log.d("uuuwriteloca", locationFlag)
-//        Log.d("uuuwritelocalocationnmae", locationName)
-//        Log.d("uuuwriteloca", locationAddress)
-
-//        binding.btnSetLocation.text = resultLocation
-
         binding.imgWriteMapLocationBack.setOnClickListener {
             writeShareActivity?.onBackPressed()
         }
 
         val tMapView = TMapView(context)
 
-        /*************커밋 푸시 머지할 때 키 삭제************/
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteMapLocationView.addView(tMapView)
 
         val tmapdata = TMapData()
-        if (locationFlag == "1") {
-            binding.btnSetLocation.text = "출발지로 설정"
+        lateinit var bitmap: Bitmap
+        if (locationFlag == Define().LOCATION_FLAG_START) {
+            binding.btnSetLocation.text = getString(R.string.set_start_point)
+            bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
 
-            tmapdata.findAllPOI(locationName) { poiItem ->
-                Log.d("poi", poiItem[0].poiPoint.toString())
-                val marker = TMapMarkerItem()
-                val mapPoint = poiItem[0].poiPoint
-                val bitmap: Bitmap =
-                    BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
-                marker.icon = bitmap
-                marker.setPosition(0.5F, 1.0F)
-                marker.tMapPoint = mapPoint
-                marker.name = "marker${locationFlag}"
-                tMapView.addMarkerItem(marker.name, marker)
-            }
-        } else if (locationFlag == "4") {
-            binding.btnSetLocation.text = "도착지로 설정"
+        } else if (locationFlag == Define().LOCATION_FLAG_END) {
+            binding.btnSetLocation.text = getString(R.string.set_end_point)
+            bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_route_end)
 
-            tmapdata.findAllPOI(locationName) { poiItem ->
-                Log.d("poi", poiItem[0].poiPoint.toString())
-                val marker = TMapMarkerItem()
-                val mapPoint = poiItem[0].poiPoint
-                val bitmap: Bitmap =
-                    BitmapFactory.decodeResource(resources, R.drawable.ic_route_end)
-                marker.icon = bitmap
-                marker.setPosition(0.5F, 1.0F)
-                marker.tMapPoint = mapPoint
-                marker.name = "marker${locationFlag}"
-                tMapView.addMarkerItem(marker.name, marker)
-            }
         } else {
-            binding.btnSetLocation.text = "경유지로 설정"
-
-            tmapdata.findAllPOI(locationName) { poiItem ->
-                Log.d("poi", poiItem[0].poiPoint.toString())
-                val marker = TMapMarkerItem()
-                val mapPoint = poiItem[0].poiPoint
-                val bitmap: Bitmap =
-                    BitmapFactory.decodeResource(resources, R.drawable.ic_route_waypoint)
-                marker.icon = bitmap
-                marker.setPosition(0.5F, 1.0F)
-                marker.tMapPoint = mapPoint
-                marker.name = "marker${locationFlag}"
-                tMapView.addMarkerItem(marker.name, marker)
-            }
+            binding.btnSetLocation.text = getString(R.string.set_via_point)
+            bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_route_waypoint)
         }
 
-        //    var location = intent.getStringExtra("location")
+        tmapdata.findAllPOI(locationName) { poiItem ->
+            Log.d("poi", poiItem[0].poiPoint.toString())
+            val marker = TMapMarkerItem()
+            val mapPoint = poiItem[0].poiPoint
+            marker.icon = bitmap
+            marker.setPosition(0.5F, 1.0F)
+            marker.tMapPoint = mapPoint
+            marker.name = "marker_${locationFlag}"
+            tMapView.addMarkerItem(marker.name, marker)
+        }
 
         binding.textLocationName.text = locationName
         binding.textLocationAddress.text = locationAddress
@@ -181,69 +145,32 @@ class WriteMapLocationFragment : Fragment() {
                 Log.d("address secondNo", poiItem[0].secondNo)
             }
             tMapView.setCenterPoint(tmapPointCurrentSpot.longitude, tmapPointCurrentSpot.latitude)
-//            binding.textLocationAddress.text = locationAddress
             lat = tmapPointCurrentSpot.latitude
             lon = tmapPointCurrentSpot.longitude
             address = tmapdata.reverseGeocoding(lat, lon, "A10")
         }
 
-//        val tmr = timer(period = 1000, initialDelay = 0) {
-//            lat = tMapView.centerPoint.latitude
-//            lon = tMapView.centerPoint.longitude
-//            if (tmapdata.reverseGeocoding(lat, lon, "A00") != null) {
-//                tmapdata.findAllPOI(
-//                    tmapdata.reverseGeocoding(
-//                        lat,
-//                        lon,
-//                        "A00"
-//                    ).strFullAddress
-//                ) { poiItem ->
-//                    if (poiItem.size != 0) {
-//                        locationAddress = poiItem[0].name
-//                    }
-//                }
-//                if (tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName != null) {
-//                    locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strRoadName
-//                    Log.d("myLog", locationName)
-//                }
-//                if (tmapdata.reverseGeocoding(lat, lon, "A10").strBuildingName != null) {
-//                    locationName = tmapdata.reverseGeocoding(lat, lon, "A10").strBuildingName
-//                    Log.d("myLog", locationName)
-//                }
-//            }
-//            runOnUiThread {
-//                setLocationInfo()
-//            }
-//        }
-
         binding.btnSetLocation.setOnClickListener {
-//            tmr.cancel()
             lat = tMapView.centerPoint.latitude
             lon = tMapView.centerPoint.longitude
 
             when(sharedViewModel.locationFlag.value){
-                "1" -> {
+                Define().LOCATION_FLAG_START -> {
                     sharedViewModel.startLat.value = tMapView.centerPoint.latitude
                     sharedViewModel.startLong.value = tMapView.centerPoint.longitude
                     sharedViewModel.startAddress.value = locationName
-//                    sharedViewModel.locationAddress.value = locationAddress
                 }
-                "4" -> {
+                Define().LOCATION_FLAG_END -> {
                     sharedViewModel.endLat.value = tMapView.centerPoint.latitude
                     sharedViewModel.endLong.value = tMapView.centerPoint.longitude
                     sharedViewModel.endAddress.value = locationName
-//                    sharedViewModel.locationAddress.value = locationAddress
                 }
                 else -> {
                     sharedViewModel.midFrstLat.value = tMapView.centerPoint.latitude
                     sharedViewModel.midFrstLong.value = tMapView.centerPoint.longitude
                     sharedViewModel.midFrstAddress.value = locationName
-//                    sharedViewModel.locationAddress.value = locationAddress
                 }
             }
-
-            Log.d("test lat", lat.toString())
-            Log.d("test lon", lon.toString())
 
             writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance())
 

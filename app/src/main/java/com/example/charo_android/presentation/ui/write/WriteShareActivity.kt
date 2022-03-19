@@ -55,10 +55,10 @@ class WriteShareActivity : AppCompatActivity() {
         when(item.itemId){
             android.R.id.home -> {
                 AlertDialog.Builder(this)
-                .setMessage("게시물 작성을 중단하시겠습니까?\n")
-                .setNeutralButton("이어서 작성") { dialog, which ->
+                .setMessage(R.string.noti_cancel_write)
+                .setNeutralButton(R.string.write_continue) { dialog, which ->
                 }
-                .setPositiveButton("작성중단") { dialog, which ->
+                .setPositiveButton(R.string.write_cancel) { dialog, which ->
                     finish()
                 }
                 .show()
