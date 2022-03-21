@@ -36,12 +36,6 @@ class WriteMapSearchAdapter(
 
     override fun getItemCount(): Int = userList.size
 
-//    lateinit var mainActivity: MainActivity
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        mainActivity = context as MainActivity
-//    }
-
     override fun onBindViewHolder(holder: MapSearchViewHolder, position: Int) {
         holder.onBind(userList[position])
 
@@ -64,10 +58,10 @@ class WriteMapSearchAdapter(
                 , lat, lon
             )
 
-            sharedViewModel.locationName.value = userList[position].locationName.toString()
-            sharedViewModel.locationAddress.value = userList[position].locationAddress
+            val locationName = userList[position].locationName.toString()
+            val locationAddress = userList[position].locationAddress
 
-            writeShareActivity.replaceFragment(WriteMapLocationFragment.newInstance(), "writeMapLocation")
+            writeShareActivity.replaceAddStackFragment(WriteMapLocationFragment.newInstance(locationName, locationAddress), "writeMapLocation")
 
         }
     }

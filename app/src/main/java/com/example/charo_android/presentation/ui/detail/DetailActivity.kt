@@ -474,7 +474,7 @@ class DetailActivity : AppCompatActivity() {
 //            marker.icon = bitmap
 //            marker.setPosition(0.5F, 1.0F)
 //            marker.tMapPoint = mapPoint
-//            marker.name = "marker$i"
+//            marker.name = "marker_location_flag_$i"
 //            tMapView.addMarkerItem(marker.name, marker)
 //        }
     }

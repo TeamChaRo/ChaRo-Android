@@ -33,7 +33,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="55dp"
                 android:layout_marginEnd="28dp"
-                android:text="출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다." />
+                android:text="@string/noti_write_map" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->

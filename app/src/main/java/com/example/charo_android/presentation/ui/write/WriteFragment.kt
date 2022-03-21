@@ -1,7 +1,6 @@
 package com.example.charo_android.presentation.ui.write
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -24,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.charo_android.data.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
-import com.example.charo_android.hidden.Hidden
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType
@@ -33,31 +31,23 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import androidx.core.view.isVisible
+import com.example.charo_android.presentation.util.Define
+import com.example.charo_android.presentation.util.LocationUtil
+import com.example.charo_android.presentation.util.ThemeUtil
 
 
 class WriteFragment : Fragment() {
-
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
-        override fun contentType(): MediaType? = "image/jpeg".toMediaType()
-
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
-        }
-
-    }
 
     companion object {
         fun newInstance() = WriteFragment()
     }
     private var _binding: FragmentWriteBinding? = null
-    private lateinit var writeAdapter: WriteAdapter
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var writeAdapter: WriteAdapter
     private val sharedViewModel: WriteSharedViewModel by activityViewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
@@ -66,178 +56,15 @@ class WriteFragment : Fragment() {
     }
 
     var writeShareActivity: WriteShareActivity? = null
-    var dialogThemeFragment: DialogThemeFragment? = DialogThemeFragment()
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         writeShareActivity = context as WriteShareActivity
-//        dialogThemeFragment = context as DialogThemeFragment
     }
 
-    val itemProvince =
-        arrayOf("특별시", "광역시", "경기도", "강원도", "충청남도", "충청북도", "경상북도", "경상남도", "전라북도", "전라남도")
-    val itemSpecial = arrayOf("서울", "제주")
-    val itemMetroPolitan = arrayOf("부산", "대구", "인천", "울산", "대전", "광주")
-    val itemGyounGi = arrayOf(
-        "가평",
-        "고양",
-        "과천",
-        "광명",
-        "광주",
-        "구리",
-        "군포",
-        "김포",
-        "남양주",
-        "동두천",
-        "부천",
-        "성남",
-        "수원",
-        "시흥",
-        "안산",
-        "안성",
-        "안양",
-        "양주",
-        "양평",
-        "여주",
-        "연천",
-        "오산",
-        "용인",
-        "의왕",
-        "의정부",
-        "이천",
-        "파주",
-        "평택",
-        "포천",
-        "하남",
-        "화성"
-    )
-    val itemGangWon = arrayOf(
-        "고성",
-        "강릉",
-        "동해",
-        "삼척",
-        "속초",
-        "양구",
-        "양양",
-        "영월",
-        "인제",
-        "정선",
-        "철원",
-        "춘천",
-        "태백",
-        "평창",
-        "홍천",
-        "화천",
-        "횡성"
-    )
-    val itemChoongNam = arrayOf(
-        "계룡",
-        "공주",
-        "금산",
-        "논산",
-        "당진",
-        "보령",
-        "부여",
-        "서산",
-        "서천",
-        "아산",
-        "예산",
-        "천안",
-        "청양",
-        "태안",
-        "홍성"
-    )
-    val itemChoongBuk =
-        arrayOf("괴산", "단양", "보은", "영동", "옥천", "음성", "제천", "증평", "진천", "청주", "충주")
-    val itemGyungBuk = arrayOf(
-        "경산",
-        "경주",
-        "고령",
-        "구미",
-        "군위",
-        "김천",
-        "독도",
-        "문경",
-        "봉화",
-        "상주",
-        "성주",
-        "안동",
-        "영덕",
-        "영양",
-        "영주",
-        "영천",
-        "예천",
-        "울릉",
-        "울진",
-        "의성",
-        "청도",
-        "청송",
-        "칠곡",
-        "포항"
-    )
-    val itemGyungNam = arrayOf(
-        "거제",
-        "거창",
-        "고성",
-        "김해",
-        "남해",
-        "밀양",
-        "사천",
-        "산청",
-        "양산",
-        "의령",
-        "진주",
-        "창녕",
-        "창원",
-        "통영",
-        "하동",
-        "함안",
-        "함양",
-        "합천"
-    )
-    val itemJunBuk = arrayOf(
-        "고창",
-        "군산",
-        "김제",
-        "남원",
-        "무주",
-        "부안",
-        "순창",
-        "완주",
-        "익산",
-        "임실",
-        "장수",
-        "전주",
-        "정읍",
-        "진안"
-    )
-    val itemJunNam = arrayOf(
-        "강진",
-        "고흥",
-        "곡성",
-        "광양",
-        "구례",
-        "나주",
-        "담양",
-        "목포",
-        "무안",
-        "보성",
-        "순천",
-        "신안",
-        "여수",
-        "영광",
-        "영암",
-        "완도",
-        "장성",
-        "장흥",
-        "진도",
-        "함평",
-        "해남",
-        "화순"
-    )
+    private var locationUtil = LocationUtil()
 
-    private lateinit var userId: String
-    private lateinit var nickName: String
+    private var preCheckProvince = 0
+    private var preCheckedRegion = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -246,27 +73,20 @@ class WriteFragment : Fragment() {
         _binding = FragmentWriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        userId = sharedViewModel.userId.value.toString()
-        nickName = sharedViewModel.nickName.value.toString()
-
-        Log.d("uuuwrite", userId)
-        Log.d("uuuwrite", nickName)
-
         initToolBar()
 
-        // 1. 우리가 사용할 어뎁터의 초기 값을 넣어준다
         writeAdapter = WriteAdapter()
-
-        // 2. RecyclerView 에 어뎁터를 우리가 만든 어뎁터로 만들기
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
-        getSharedViewModelData()
+        initWriteData()
         observeThemeData()
 
         //이미지 추가 버튼
         binding.imgWriteAddImg.setOnClickListener {
             openGallery()
         }
+
+        //글자수 제한
         warningText(binding.etWriteTitle, binding.tvWarningTitle, 38)
         warningText(binding.etWriteParkReview, binding.tvWarningParkReview, 23)
         warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive,280)
@@ -275,112 +95,85 @@ class WriteFragment : Fragment() {
         setButtonClickEvent()
 
         // 지역(도 단위)
-        binding.btnWriteRegion.setOnClickListener() {
-            val checkedItem = 0
-
+        binding.btnWriteRegion.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle("지역")
-                .setNeutralButton("취소") { dialog, which ->
+                .setTitle(R.string.area)
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnWriteRegion.text = resources.getString(R.string.region)
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     binding.btnWriteLocation.isSelected = false
                     it.isSelected = false
+                    preCheckProvince = 0
                 }
-                .setPositiveButton("확인") { dialog, which ->
-                    if (binding.btnWriteRegion.text.toString() == resources.getString(R.string.region)) {
-                        it.isSelected = false
-                    }
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
+                    binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
+                    sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
                 }
-                // Single-choice items (initialized with checked item)
-                .setSingleChoiceItems(itemProvince, checkedItem) { dialog, which ->
+                .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
                     //which : index
-                    binding.btnWriteRegion.text = itemProvince[which]
-                    if(itemProvince[which] !=  sharedViewModel.province.value){
+                    preCheckProvince = which
+
+                    //이전 선택값과 다를 때
+                    if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
                         binding.btnWriteLocation.text = resources.getString(R.string.city)
                         binding.btnWriteLocation.isSelected = false
+                        sharedViewModel.region.value = ""
                     }
-
-                    sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
-
                 }
+                .setCancelable(false)
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
         }
 
         binding.btnWriteLocation.setOnClickListener() {
-            val checkedItem = 0
             MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle("지역")
-                .setNeutralButton("취소") { dialog, which ->
+                .setTitle(R.string.area)
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnWriteLocation.text = resources.getString(R.string.city)
                     it.isSelected = false
+                    preCheckedRegion = 0
+                    sharedViewModel.region.value = ""
                 }
-                .setPositiveButton("확인") { dialog, which ->
-                    if (binding.btnWriteLocation.text.toString() == resources.getString(R.string.city)
-                    ) {
-                        it.isSelected = false
-                    }
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
-                }
-                // Single-choice items (initialized with checked item)
-                .setSingleChoiceItems(
-                    if (binding.btnWriteRegion.text == "특별시") itemSpecial
-                    else if (binding.btnWriteRegion.text == "광역시") itemMetroPolitan
-                    else if (binding.btnWriteRegion.text == "경기도") itemGyounGi
-                    else if (binding.btnWriteRegion.text == "강원도") itemGangWon
-                    else if (binding.btnWriteRegion.text == "충청남도") itemChoongNam
-                    else if (binding.btnWriteRegion.text == "충청북도") itemChoongBuk
-                    else if (binding.btnWriteRegion.text == "경상북도") itemGyungBuk
-                    else if (binding.btnWriteRegion.text == "경상남도") itemGyungNam
-                    else if (binding.btnWriteRegion.text == "전라북도") itemJunBuk
-                    else itemJunNam, checkedItem
-                ) { dialog, which ->
-                    //which : index
-                    fun setRegionForProvince(province:Array<String>){
-                        if(which == -1){
-                            binding.btnWriteLocation.text = province[0]
-                        }else{
-                            binding.btnWriteLocation.text = province[which]
-                        }
-                    }
-
                     when(binding.btnWriteRegion.text){
-                        "특별시" -> {
-                            setRegionForProvince(itemSpecial)
-                        }
-                        "광역시" -> {
-                            setRegionForProvince(itemMetroPolitan)
-                        }
-                        "경기도" -> {
-                            setRegionForProvince(itemGyounGi)
-                        }
-                        "강원도" -> {
-                            setRegionForProvince(itemGangWon)
-                        }
-                        "충청남도" -> {
-                            setRegionForProvince(itemChoongNam)
-                        }
-                        "충청북도" -> {
-                            setRegionForProvince(itemChoongBuk)
-                        }
-                        "경상북도" -> {
-                            setRegionForProvince(itemGyungBuk)
-                        }
-                        "경상남도" -> {
-                            setRegionForProvince(itemGyungNam)
-                        }
-                        "전라북도" -> {
-                            setRegionForProvince(itemJunBuk)
-                        }
+                        "특별시" -> binding.btnWriteLocation.text = locationUtil.itemSpecial[preCheckedRegion]
+                        "광역시" -> binding.btnWriteLocation.text = locationUtil.itemMetroPolitan[preCheckedRegion]
+                        "경기도" -> binding.btnWriteLocation.text = locationUtil.itemGyounGi[preCheckedRegion]
+                        "강원도" -> binding.btnWriteLocation.text = locationUtil.itemGangWon[preCheckedRegion]
+                        "충청남도" -> binding.btnWriteLocation.text = locationUtil.itemChoongNam[preCheckedRegion]
+                        "충청북도" -> binding.btnWriteLocation.text = locationUtil.itemChoongBuk[preCheckedRegion]
+                        "경상북도" -> binding.btnWriteLocation.text = locationUtil.itemGyungBuk[preCheckedRegion]
+                        "경상남도" -> binding.btnWriteLocation.text = locationUtil.itemGyungNam[preCheckedRegion]
+                        "전라북도" -> binding.btnWriteLocation.text = locationUtil.itemJunBuk[preCheckedRegion]
+                        "전라남도" -> binding.btnWriteLocation.text = locationUtil.itemJunNam[preCheckedRegion]
                         else -> {
-                            setRegionForProvince(itemJunNam)
+                            binding.btnWriteLocation.text = resources.getString(R.string.city)
+                            it.isSelected = false
                         }
                     }
 
                     sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
-
                 }
+                .setSingleChoiceItems(
+                    if (binding.btnWriteRegion.text == "특별시") locationUtil.itemSpecial
+                    else if (binding.btnWriteRegion.text == "광역시") locationUtil.itemMetroPolitan
+                    else if (binding.btnWriteRegion.text == "경기도") locationUtil.itemGyounGi
+                    else if (binding.btnWriteRegion.text == "강원도") locationUtil.itemGangWon
+                    else if (binding.btnWriteRegion.text == "충청남도") locationUtil.itemChoongNam
+                    else if (binding.btnWriteRegion.text == "충청북도") locationUtil.itemChoongBuk
+                    else if (binding.btnWriteRegion.text == "경상북도") locationUtil.itemGyungBuk
+                    else if (binding.btnWriteRegion.text == "경상남도") locationUtil.itemGyungNam
+                    else if (binding.btnWriteRegion.text == "전라북도") locationUtil.itemJunBuk
+                    else if (binding.btnWriteRegion.text == "전라남도") locationUtil.itemJunNam
+                    else arrayOf("도 단위를 선택해주세요.")
+                    , preCheckedRegion
+                ) { dialog, which ->
+                    //which : index
+                    preCheckedRegion = which
+                }
+                .setCancelable(false)
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
                 .show()
         }
@@ -395,7 +188,7 @@ class WriteFragment : Fragment() {
             openBottomSheetDialog()
         }
 
-        //주차 - 둘 중 하나만 선택 가능하도록 하기
+        //주차 - 둘 중 하나만 선택 가능
         binding.btnWriteParkYes.setOnClickListener() {
             binding.btnWriteParkYes.isSelected = true
             binding.btnWriteParkNo.isSelected = false
@@ -413,23 +206,30 @@ class WriteFragment : Fragment() {
             openGallery()
         }
 
+        // 다음 버튼
         binding.btnWriteBottomNext.setOnClickListener {
             //주의사항
             val warningList: ArrayList<MultipartBody.Part> = ArrayList()
+            val warningUIList: ArrayList<String> = ArrayList()
 
             if(binding.btnWriteCautionHighway.isSelected) {
-                warningList.add(MultipartBody.Part.createFormData("warning","highway"))
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_HIGH_WAY))
+                warningUIList.add(Define().WARNING_HIGH_WAY)
             }
             if(binding.btnWriteCautionMoun.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","mountainRoad"))
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_MOUNTAIN_ROAD))
+                warningUIList.add(Define().WARNING_MOUNTAIN_ROAD)
             }
             if(binding.btnWriteCautionDiffi.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","diffRoad"))
+                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_DIFF_ROAD))
+                warningUIList.add(Define().WARNING_DIFF_ROAD)
             }
             if(binding.btnWriteCautionPeople.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning","hotPlace"))
+                warningList.add(MultipartBody.Part.createFormData("warning",Define().WARNING_HOT_PLACE))
+                warningUIList.add(Define().WARNING_HOT_PLACE)
             }
             sharedViewModel.warning.value = warningList
+            sharedViewModel.warningUI.value = warningUIList
 
             //제목
             sharedViewModel.title.value = binding.etWriteTitle.text.toString()
@@ -440,7 +240,23 @@ class WriteFragment : Fragment() {
             //코스 설명
             sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
 
-            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance(), "writeMap");
+            Log.e("check","title ${sharedViewModel.title.value} \n" +
+                    "courseDesc ${sharedViewModel.courseDesc.value} \n" +
+                    "warningList ${warningList} \n imageMultiPart ${sharedViewModel.imageMultiPart.value} \n" +
+                    "province ${sharedViewModel.province.value} \n region ${sharedViewModel.region.value} \n" +
+                    "theme ${sharedViewModel.theme.value} ")
+            //빈값 확인
+            if(TextUtils.isEmpty(sharedViewModel.title.value)
+                || TextUtils.isEmpty(sharedViewModel.province.value)
+                || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
+                || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
+                || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
+                || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
+
+                    Toast.makeText(requireContext(),getString(R.string.txt_check_all_input),Toast.LENGTH_LONG).show()
+            }else{
+                writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
+            }
         }
 
         return root
@@ -474,7 +290,7 @@ class WriteFragment : Fragment() {
 
             for(i in 0 until newTheme.count()){
                 //재설정
-                textView[i]?.text = newTheme[i]
+                textView[i]?.text = ThemeUtil().themeMap.entries.find { it.value == newTheme[i] }?.key
                 textView[i]?.isSelected = true
             }
         })
@@ -485,13 +301,6 @@ class WriteFragment : Fragment() {
         val bottomSheetDialogFragment = DialogThemeFragment()
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-//        sharedViewModel = ViewModelProvider(this).get(WriteSharedViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)  //ACTION_PICK   //ACTION_GET_CONTENT
@@ -657,79 +466,10 @@ class WriteFragment : Fragment() {
         binding.btnWriteParkYes.setOnClickListener {
             it.isSelected = !it.isSelected
         }
-        binding.btnWriteTheme1.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteTheme2.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteTheme3.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-    }
-
-    private fun insertDataToCompanionObject() {
-        WriteData.courseDesc = binding.etWriteMyDrive.text.toString()
-        WriteData.isParking = binding.btnWriteParkYes.isSelected
-        WriteData.parkingDesc = binding.etWriteParkReview.text.toString()
-        if(binding.btnWriteRegion.text != "도 단위")
-            WriteData.province = binding.btnWriteRegion.text.toString()
-        if(binding.btnWriteLocation.text != "시 단위")
-            WriteData.province = binding.btnWriteLocation.text.toString()
-        var themeList = mutableListOf<String>()
-        if(binding.btnWriteTheme1.text != "테마1") {
-            themeList.add(binding.btnWriteTheme1.text.toString())
-        } else {
-            themeList.add("")
-        }
-        if(binding.btnWriteTheme2.text != "테마2") {
-            themeList.add(binding.btnWriteTheme2.text.toString())
-        } else {
-            themeList.add("")
-        }
-        if(binding.btnWriteTheme3.text != "테마3") {
-            themeList.add(binding.btnWriteTheme3.text.toString())
-        } else {
-            themeList.add("")
-        }
-        WriteData.theme = themeList
-        WriteData.title = binding.etWriteTitle.text.toString()
-        WriteData.userId = Hidden.userId
-        var warningList = mutableListOf<Boolean>()
-        if(binding.btnWriteCautionHighway.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        if(binding.btnWriteCautionMoun.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        if(binding.btnWriteCautionDiffi.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        if(binding.btnWriteCautionPeople.isSelected){
-            warningList.add(true)
-        } else {
-            warningList.add(false)
-        }
-        WriteData.warning = warningList
-        var fileList = mutableListOf<Uri>()
-        for(i in writeAdapter.imgList.indices) {
-            WriteData.fileList.add(writeAdapter.imgList[i].imgUri)
-        }
-        WriteData.fileList = fileList
-
-//        startActivityWriteMap()
-//        writeShareActivity?.replaceFragment(WriteMapFragment, "writeMap");
-
     }
 
     //돌아왔을 때 값 유지
-    fun getSharedViewModelData() {
+    fun initWriteData() {
         //사진
         if (sharedViewModel.imageMultiPart.value != null) {
             binding.clWritePhoto.visibility = View.GONE
@@ -766,22 +506,26 @@ class WriteFragment : Fragment() {
         }
 
         //주의사항
-//        sharedViewModel.warning.value?.forEach { warning ->
-//            when (warning) {
-//                ("warning","highway") -> {
-//                    binding.btnWriteCautionHighway.isSelected = true
-//                }
-//                "mountainRoad" -> {
-//                    binding.btnWriteCautionMoun.isSelected = true
-//                }
-//                "" -> {
-//                    binding.btnWriteCautionDiffi.isSelected = true
-//                }
-//                "p" -> {
-//                    binding.btnWriteCautionPeople.isSelected = true
-//                }
-//            }
-//        }
+        if(sharedViewModel.warningUI.value != null){
+            for(warningData in sharedViewModel.warningUI.value!!){
+                when(warningData){
+                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected = true
+                    Define().WARNING_DIFF_ROAD -> binding.btnWriteCautionDiffi.isSelected = true
+                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected = true
+                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected = true
+                }
+            }
+        }
+
     }
 
+    //이미지 보내기
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
+        }
+
+    }
 }

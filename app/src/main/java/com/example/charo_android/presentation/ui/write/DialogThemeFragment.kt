@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.charo_android.R
 import com.example.charo_android.databinding.DialogThemeBinding
+import com.example.charo_android.presentation.util.ThemeUtil
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -93,13 +94,13 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
     private fun isPossibleSelect(themeData : WriteThemeData){
         //선택안함 선택 후 다른 테마 선택 불가
         val noSelect : String = getString(R.string.no_select)
-        if(themeData.textView.text != noSelect && selectedThemeList.contains(noSelect)){
+        if(themeData.textView.text != noSelect && selectedThemeList.contains(ThemeUtil().themeMap[noSelect])){
             AlertDialog.Builder(requireContext())
-                .setMessage("테마를 추가로 선택하려면 '선택안함'을 취소 후 다시 선택해 주세요.")
+                .setMessage(getString(R.string.txt_again_add_theme))
                 .setPositiveButton(R.string.agreement) { dialog, which -> }
                 .show()
 
-            selectedThemeList.remove(themeData.textView.text as String)
+            selectedThemeList.remove(ThemeUtil().themeMap[themeData.textView.text] as String)
             themeData.seqView.visibility = View.GONE
             themeData.layout.isSelected = false
             return
@@ -108,11 +109,11 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         //최대 선택 가능 테마 3개
         if(selectedThemeList.size > 3){
             AlertDialog.Builder(requireContext())
-                .setMessage("테마는 3개까지만 선택할 수 있습니다.")
+                .setMessage(getString(R.string.txt_max_theme_cnt))
                 .setPositiveButton(R.string.agreement) { dialog, which -> }
                 .show()
 
-            selectedThemeList.remove(themeData.textView.text as String)
+            selectedThemeList.remove(ThemeUtil().themeMap[themeData.textView.text] as String)
             themeData.seqView.visibility = View.GONE
             themeData.layout.isSelected = false
         }
@@ -120,19 +121,19 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
 
     //선택한 테마 표시
     private fun clickTheme(themeData : WriteThemeData){
-        chipTextMap[themeData.textView.text as String] = themeData.textView
-        chipSeqMap[themeData.textView.text as String] = themeData.seqView
+        chipTextMap[ThemeUtil().themeMap[themeData.textView.text] as String] = themeData.textView
+        chipSeqMap[ThemeUtil().themeMap[themeData.textView.text] as String] = themeData.seqView
         isSelectMap[themeData.seqView] = themeData.layout
 
         themeData.layout.setOnClickListener{
             it.isSelected = !it.isSelected
 
             if(it.isSelected){
-                selectedThemeList.add(themeData.textView.text as String)
+                selectedThemeList.add(ThemeUtil().themeMap[themeData.textView.text] as String)
                 themeData.textView.isSelected = true
                 isPossibleSelect(themeData)
             }else{
-                selectedThemeList.remove(themeData.textView.text as String)
+                selectedThemeList.remove(ThemeUtil().themeMap[themeData.textView.text] as String)
                 themeData.seqView.visibility = View.GONE
                 themeData.textView.isSelected = false
             }

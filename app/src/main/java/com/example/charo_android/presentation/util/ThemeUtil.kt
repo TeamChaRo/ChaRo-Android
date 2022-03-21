@@ -17,8 +17,8 @@ class ThemeUtil {
         "여유" to "relax",
         "스피드" to "speed",
         "야경" to "nightView",
-        "도심" to "cityView"
-
+        "도심" to "cityView",
+        "선택안함" to "nothing"
     )
 
     val cautionMap = hashMapOf(
