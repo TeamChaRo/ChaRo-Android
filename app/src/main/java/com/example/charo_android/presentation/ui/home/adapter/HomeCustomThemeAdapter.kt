@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeNightDriveBinding
 import com.example.charo_android.domain.model.home.CustomThemeDrive
-import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.home.HomeFragment
 
 class HomeCustomThemeAdapter(val userId: String,
@@ -48,7 +48,7 @@ class HomeCustomThemeAdapter(val userId: String,
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
             intent.putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
