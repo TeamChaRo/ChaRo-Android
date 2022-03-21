@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.more.MoreThemeContentViewFragment
 
 class MoreThemeContentAdapter(
@@ -45,7 +46,7 @@ class MoreThemeContentAdapter(
         }
 
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
             intent.putExtra("postId", moreData[position].morePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
