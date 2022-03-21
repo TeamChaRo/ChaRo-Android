@@ -39,6 +39,8 @@ class DetailPostViewModel(
     private var _likeUserList = MutableLiveData<List<User>>()
     val likeUserList: LiveData<List<User>> get() = _likeUserList
 
+    var imageIndex = 0
+
     fun getDetailPostData() {
         viewModelScope.launch {
             kotlin.runCatching {

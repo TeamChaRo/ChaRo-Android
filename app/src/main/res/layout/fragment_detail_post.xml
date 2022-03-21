@@ -150,7 +150,7 @@
                     android:paddingHorizontal="11dp"
                     android:paddingTop="1dp"
                     android:paddingBottom="2dp"
-                    android:text="1/n"
+                    android:text="@{`1/` + viewModel.detailPost.images.size()}"
                     android:textColor="@color/white"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="@id/vp_post"
