@@ -71,11 +71,13 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = DetailPostLikeListAdapter {
+        adapter = DetailPostLikeListAdapter({
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
             intent.putExtra("userEmail", it.userEmail)
             startActivity(intent)
-        }
+        }, {
+            viewModel.postFollow(it.userEmail)
+        })
         binding.rcvDetailDialog.adapter = adapter
     }
 

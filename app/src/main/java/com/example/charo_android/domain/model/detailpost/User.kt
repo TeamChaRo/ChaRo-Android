@@ -4,5 +4,5 @@ data class User(
     val nickname: String,
     val userEmail: String,
     val image: String,
-    val isFollow: Boolean
+    var isFollow: Boolean
 )

@@ -10,13 +10,17 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.ItemDetailLikeBinding
 import com.example.charo_android.domain.model.detailpost.User
 
-class DetailPostLikeListAdapter(private val itemClick: (User) -> Unit) :
+class DetailPostLikeListAdapter(
+    private val itemClick: (User) -> Unit,
+    private val followClick: (User) -> Unit
+) :
     RecyclerView.Adapter<DetailPostLikeListAdapter.DetailPostLikeListViewHolder>() {
     val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
     class DetailPostLikeListViewHolder(
         private val binding: ItemDetailLikeBinding,
-        private val itemClick: (User) -> Unit
+        private val itemClick: (User) -> Unit,
+        private val followClick: (User) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: User) {
@@ -25,6 +29,11 @@ class DetailPostLikeListAdapter(private val itemClick: (User) -> Unit) :
 
             binding.root.setOnClickListener {
                 itemClick(model)
+            }
+            binding.tvDetailLikeFollow.setOnClickListener {
+                followClick(model)
+                model.isFollow = !model.isFollow
+                binding.model = model
             }
         }
     }
@@ -39,7 +48,7 @@ class DetailPostLikeListAdapter(private val itemClick: (User) -> Unit) :
             parent,
             false
         )
-        return DetailPostLikeListViewHolder(binding, itemClick)
+        return DetailPostLikeListViewHolder(binding, itemClick, followClick)
     }
 
     override fun onBindViewHolder(holder: DetailPostLikeListViewHolder, position: Int) {

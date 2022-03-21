@@ -30,7 +30,4 @@ object ApiService {
     val myPageViewFollowService = retrofit.create(MyPageViewFollowService::class.java)
     val writeViewService: WriteViewService = retrofit.create(WriteViewService::class.java)
     val alarmViewService: AlarmViewService = retrofit.create(AlarmViewService::class.java)
-
-    // 마이페이지 리팩토링 버전
-    val myPageService: MyPageService = retrofit.create(MyPageService::class.java)
 }

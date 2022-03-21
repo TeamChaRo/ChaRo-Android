@@ -7,5 +7,5 @@ data class User(
     val userEmail: String,
     val image: String,
     @SerializedName("is_follow")
-    val isFollow: Boolean
+    var isFollow: Boolean
 )

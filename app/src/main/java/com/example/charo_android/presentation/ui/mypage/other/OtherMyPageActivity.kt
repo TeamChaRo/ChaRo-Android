@@ -136,7 +136,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickFollow() {
         binding.tvFollow.setOnClickListener {
-            Toast.makeText(this, "구현예정입니다", Toast.LENGTH_SHORT).show()
+            viewModel.postFollow(otherUserEmail)
         }
     }
 

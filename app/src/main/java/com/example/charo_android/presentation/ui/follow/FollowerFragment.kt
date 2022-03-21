@@ -24,7 +24,8 @@ class FollowerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_follower, container, false)
+        _binding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_follower, container, false)
 
         return binding.root
     }
@@ -40,11 +41,13 @@ class FollowerFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = FollowAdapter {
+        adapter = FollowAdapter({
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
             intent.putExtra("userEmail", it.userEmail)
             startActivity(intent)
-        }
+        }, {
+            viewModel.postFollow(it.userEmail)
+        })
         viewModel.follower.observe(viewLifecycleOwner) {
             adapter.replaceItem(it)
         }
