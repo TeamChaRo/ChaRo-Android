@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeHotDriveBinding
 import com.example.charo_android.domain.model.home.TrendDrive
-import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.home.HomeFragment
 
 class HomeTrendDriveAdapter(val userId: String,
@@ -48,9 +48,8 @@ class HomeTrendDriveAdapter(val userId: String,
             links.getPostId(postId)
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", userId)
-            // intent.putExtra("postId", hotData[position].postId)
+            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
+            intent.putExtra("postId", trendDrive[position].homeTrendDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
 
         }

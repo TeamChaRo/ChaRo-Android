@@ -22,6 +22,7 @@ class OnBoardingOneFragment : Fragment() {
         binding.btnSkips.setOnClickListener {
             val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
         }
 
         return binding.root

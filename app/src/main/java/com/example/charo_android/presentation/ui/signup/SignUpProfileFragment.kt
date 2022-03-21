@@ -19,6 +19,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpProfileBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
@@ -83,8 +84,8 @@ class SignUpProfileFragment :
                                 signUpViewModel.nickName.value = etSignUpNickname.text.toString()
 
                                 imgSignUpNicknameNext.setOnClickListener {
-                                    val transaction =
-                                        activity?.supportFragmentManager?.beginTransaction()
+                                    SharedInformation.setNickName(requireActivity(), s.toString())
+                                    val transaction = activity?.supportFragmentManager?.beginTransaction()
                                     transaction?.apply {
                                         replace(R.id.fragment_container_email, SignUpTermFragment())
                                         commit()

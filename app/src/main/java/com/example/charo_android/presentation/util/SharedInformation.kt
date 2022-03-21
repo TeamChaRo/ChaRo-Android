@@ -11,8 +11,9 @@ object SharedInformation {
     private const val SIGN_UP = "SIGN_UP"
     private const val LOG_OUT = "LOG_OUT"
     private const val APP_PASSWORD = "APP_PASSWORD"
+    private const val NICKNAME = "NICK_NAME"
 
-    // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 0)
+    // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 3)
     fun getSocialId(context: Context): String{
         val sharedPreferences = context.getSharedPreferences(SOCIAL_KEY, Context.MODE_PRIVATE)
         return sharedPreferences.getString(SOCIAL_KEY, "") ?: ""
@@ -52,6 +53,28 @@ object SharedInformation {
             .remove(APP_EMAIL)
             .apply()
     }
+    //닉네임 저장
+    fun setNickName(context : Context, nickName : String){
+        val sharedPreferences = context.getSharedPreferences(NICKNAME,  Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .putString(NICKNAME, nickName)
+            .apply()
+    }
+    
+    fun getNickName(context : Context) : String{
+        val sharedPreferences = context.getSharedPreferences(NICKNAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(NICKNAME, "") ?: ""
+    }
+
+    fun removeNickName(context : Context){
+        val sharedPreferences = context.getSharedPreferences(NICKNAME, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .remove(NICKNAME)
+            .apply()
+
+    }
+    
+    
     //패스워드 저장
     fun getPassword(context: Context) : String{
         val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
@@ -108,7 +131,7 @@ object SharedInformation {
     }
 
 
-    //카카오,구글, 일반 로그인 회원가입
+    //카카오,구글(1), 일반 로그인 회원가입
     fun setSignUp(context: Context, signUp : Int){
         val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
         sharedPreferences.edit()
@@ -119,7 +142,7 @@ object SharedInformation {
         val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
         return sharedPreferences.getInt(SIGN_UP,  999)
     }
-
+    
 
     //로그아웃
     fun setLogout(context: Context, logout : String ){

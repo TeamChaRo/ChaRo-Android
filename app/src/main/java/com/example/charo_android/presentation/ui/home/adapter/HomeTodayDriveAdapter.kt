@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeTodayDriveBinding
 import com.example.charo_android.domain.model.home.TodayCharoDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.home.HomeFragment
 
 class HomeTodayDriveAdapter(
@@ -52,9 +53,8 @@ class HomeTodayDriveAdapter(
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", userId)
-            // intent.putExtra("postId", driveData[position].postId)
+            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
+            intent.putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

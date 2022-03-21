@@ -53,9 +53,9 @@ class SignInActivity : AppCompatActivity() {
                 emailSignInViewModel.getEmailSignInData(requestSignInData)
                 emailSignInViewModel.emailSignInData.observe(this, Observer {
                     if(it.success) {
+                        SharedInformation.setNickName(this, it.data.nickname.toString())
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
-
                         //로그인 후 firebase init
                         initFirebase()
                     }

@@ -29,10 +29,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         selectTheme()
         selectCatution()
         selectarea()
-        binding.textUserId.text = "복덩이님의"
+        nickName()
     }
     private fun nickName(){
-
+        val userNickName = SharedInformation.getNickName(requireActivity())
+        binding.textUserId.text = userNickName
 
     }
 

@@ -137,6 +137,7 @@ class SettingMainFragment :
                                     ).show()
                                 } else {
                                     SharedInformation.setLogout(requireActivity(), "Logout")
+                                    SharedInformation.removeNickName(requireActivity())
                                     SharedInformation.removeEmail(requireActivity())
                                     SharedInformation.removeSocialId(requireActivity())
                                     Toast.makeText(requireActivity(), "카카오 로그아웃 성공", Toast.LENGTH_SHORT)
@@ -186,6 +187,9 @@ class SettingMainFragment :
                         settingViewModel.withdrawalUser("test@naver.com")
                         settingViewModel.withdrawalStatus.observe(viewLifecycleOwner) {
                             if (it) {
+                                SharedInformation.removeNickName(requireActivity())
+                                SharedInformation.removeEmail(requireActivity())
+                                SharedInformation.removeSocialId(requireActivity())
                                 Toast.makeText(requireActivity(), "회원 탈퇴 성공", Toast.LENGTH_SHORT)
                                     .show()
                                 ActivityCompat.finishAffinity(requireActivity())
