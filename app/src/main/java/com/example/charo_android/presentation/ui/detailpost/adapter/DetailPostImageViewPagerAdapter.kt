@@ -7,36 +7,30 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
-import com.example.charo_android.databinding.ItemDetailPostBinding
-import com.example.charo_android.databinding.ItemMyPagePostBinding
+import com.example.charo_android.databinding.ItemDetailPostImageBinding
 
-class DetailPostViewPagerAdapter(private val itemClick: (Int) -> Unit) :
-    RecyclerView.Adapter<DetailPostViewPagerAdapter.DetailPostViewHolder>() {
-    private val asyncDiffer = AsyncListDiffer(this, diffCallback)
+class DetailPostImageViewPagerAdapter :
+    RecyclerView.Adapter<DetailPostImageViewPagerAdapter.DetailPostImageViewHolder>() {
+    private val asyncDiffer = AsyncListDiffer<String>(this, diffCallback)
 
-    class DetailPostViewHolder(private val binding: ItemDetailPostBinding,
-    private val itemClick: (Int) -> Unit) :
+    class DetailPostImageViewHolder(private val binding: ItemDetailPostImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(image: String) {
             binding.image = image
-
-            binding.root.setOnClickListener {
-                itemClick(bindingAdapterPosition)
-            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailPostViewHolder {
-        val binding = DataBindingUtil.inflate<ItemDetailPostBinding>(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailPostImageViewHolder {
+        val binding = DataBindingUtil.inflate<ItemDetailPostImageBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_detail_post,
+            R.layout.item_detail_post_image,
             parent,
             false
         )
-        return DetailPostViewHolder(binding, itemClick)
+        return DetailPostImageViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DetailPostViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailPostImageViewHolder, position: Int) {
         holder.bind(asyncDiffer.currentList[position])
     }
 
@@ -47,7 +41,7 @@ class DetailPostViewPagerAdapter(private val itemClick: (Int) -> Unit) :
     fun replaceItem(itemList: List<String>) {
         asyncDiffer.submitList(itemList)
     }
-    
+
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<String>() {
             override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {

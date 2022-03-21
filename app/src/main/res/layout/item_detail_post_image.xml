@@ -5,22 +5,21 @@
 
     <data>
 
-
+        <variable
+            name="image"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ui.follow.FollowingFragment">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <ImageView
+            android:id="@+id/img_detail_post"
+            imgNoRoundBind="@{image}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:paddingHorizontal="22dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:scaleType="fitCenter" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

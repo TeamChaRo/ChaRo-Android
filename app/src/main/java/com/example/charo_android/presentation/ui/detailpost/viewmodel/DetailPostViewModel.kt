@@ -6,18 +6,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.charo_android.domain.model.detailpost.DetailPost
-import com.example.charo_android.domain.usecase.detailpost.GetRemoteDetailPostUseCase
+import com.example.charo_android.domain.model.detailpost.User
+import com.example.charo_android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
+import com.example.charo_android.domain.usecase.detailpost.GetDetailPostUseCase
+import com.example.charo_android.domain.usecase.follow.PostFollowUseCase
 import com.example.charo_android.domain.usecase.interaction.PostLikeUseCase
 import com.example.charo_android.domain.usecase.interaction.PostSaveUseCase
 import kotlinx.coroutines.launch
 
 class DetailPostViewModel(
-    private val getRemoteDetailPostUseCase: GetRemoteDetailPostUseCase,
+    private val getDetailPostUseCase: GetDetailPostUseCase,
     private val postLikeUseCase: PostLikeUseCase,
-    private val postSaveUseCase: PostSaveUseCase
+    private val postSaveUseCase: PostSaveUseCase,
+    private val getDetailPostLikeUserListUseCase: GetDetailPostLikeUserListUseCase,
+    private val postFollowUseCase: PostFollowUseCase
 ) : ViewModel() {
     private val userEmail = "and@naver.com"
-    var postId = 8
+    var postId = -1
 
     private var _detailPost = MutableLiveData<DetailPost>()
     val detailPost: LiveData<DetailPost> get() = _detailPost
@@ -31,11 +36,16 @@ class DetailPostViewModel(
     private var _likesCount = MutableLiveData<Int>()
     val likesCount: LiveData<Int> get() = _likesCount
 
+    private var _likeUserList = MutableLiveData<List<User>>()
+    val likeUserList: LiveData<List<User>> get() = _likeUserList
+
+    var imageIndex = 0
+
     fun getDetailPostData() {
         viewModelScope.launch {
             kotlin.runCatching {
                 // TODO: 추후 postId 넣는 방식 수정요망
-                getRemoteDetailPostUseCase(userEmail, postId)
+                getDetailPostUseCase(userEmail, postId)
             }.onSuccess {
                 _detailPost.value = it
                 _isFavorite.value = it.isFavorite
@@ -81,6 +91,28 @@ class DetailPostViewModel(
         when(isFavorite.value) {
             0 -> _likesCount.value = likesCount.value?.minus(1)
             else -> _likesCount.value = likesCount.value?.plus(1)
+        }
+    }
+
+    fun getDetailPostLikeUserListData() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getDetailPostLikeUserListUseCase(postId, userEmail)
+            }.onSuccess {
+                _likeUserList.value = it
+            }.onFailure {
+                Log.e("mlog: DetailPostViewModel::getDetailPostLikeUserListData()", it.message.toString())
+            }
+        }
+    }
+
+    fun postFollow(otherUserEmail: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postFollowUseCase(userEmail, otherUserEmail)
+            }.onFailure {
+                Log.e("mlog: DetailPostViewModel::postFollow", it.message.toString())
+            }
         }
     }
 }
