@@ -12,7 +12,7 @@ object SharedInformation {
     private const val LOG_OUT = "LOG_OUT"
     private const val APP_PASSWORD = "APP_PASSWORD"
 
-    // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 0)
+    // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 3)
     fun getSocialId(context: Context): String{
         val sharedPreferences = context.getSharedPreferences(SOCIAL_KEY, Context.MODE_PRIVATE)
         return sharedPreferences.getString(SOCIAL_KEY, "") ?: ""
@@ -108,7 +108,7 @@ object SharedInformation {
     }
 
 
-    //카카오,구글, 일반 로그인 회원가입
+    //카카오,구글(1), 일반 로그인 회원가입
     fun setSignUp(context: Context, signUp : Int){
         val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
         sharedPreferences.edit()

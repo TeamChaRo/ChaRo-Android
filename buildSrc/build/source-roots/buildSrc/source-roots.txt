@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-src/main/resources
-src/main/java
-src/main/groovy
-src/main/kotlin
-src/test/resources
-src/test/java
-src/test/groovy
-src/test/kotlin
-=======
 src\main\resources
 src\main\java
 src\main\groovy
@@ -16,4 +6,3 @@ src\test\resources
 src\test\java
 src\test\groovy
 src\test\kotlin
->>>>>>> fix/175_infinite_scroll
