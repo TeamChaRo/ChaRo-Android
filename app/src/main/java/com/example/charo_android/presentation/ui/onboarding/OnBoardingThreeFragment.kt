@@ -23,6 +23,7 @@ class OnBoardingThreeFragment : Fragment() {
         binding.btnOnboard.setOnClickListener {
             val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
         }
 
 
