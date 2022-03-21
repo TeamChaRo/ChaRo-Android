@@ -130,9 +130,10 @@ class SocialSignInActivity() :
     private fun goKaKaoMain() {
         if(SharedInformation.getLogout(this) != "Logout"){
             socialSignInViewModel.kakaoSuccess.observe(this, Observer {
-                if (it) {
+                if (socialSignInViewModel.socialStatus.value != 404) {
                     SharedInformation.setLogout(this, "LogIn")
                     Toast.makeText(this, "카카오 로그인 성공", Toast.LENGTH_SHORT).show()
+                    SharedInformation.setNickName(this, it?.nickname.toString())
                     SharedInformation.saveSocialId(this@SocialSignInActivity, "1")
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -193,7 +194,7 @@ class SocialSignInActivity() :
                     // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     socialSignInViewModel.googleSuccess.observe(this, Observer {
-                        if (it ) {
+                        if (socialSignInViewModel.socialStatus.value == 404) {
                             SharedInformation.setSignUp(this, 1)
                             Toast.makeText(
                                 this@SocialSignInActivity, "약관 동의가 필요합니다.",
@@ -215,6 +216,7 @@ class SocialSignInActivity() :
                                     this@SocialSignInActivity, "구글 로그인에 성공하였습니다.",
                                     Toast.LENGTH_SHORT
                                 ).show()
+                                SharedInformation.setNickName(this, it?.nickname.toString())
                                 SharedInformation.setEmail(this, email.toString())
                                 SharedInformation.saveSocialId(this, "2")
                                 val intent =
