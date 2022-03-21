@@ -21,7 +21,7 @@ class SocialSignInViewModel(
     var kakaoSuccess : MutableLiveData<SocialLoginData?> = MutableLiveData()
 
     //구글 로그인 성공
-    var googleSuccess : MutableLiveData<SocialLoginData> = MutableLiveData()
+    var googleSuccess : MutableLiveData<SocialLoginData?> = MutableLiveData()
 
     //소셜 로그인 status
     var socialStatus : MutableLiveData<Int> = MutableLiveData()
@@ -49,20 +49,24 @@ class SocialSignInViewModel(
         }
     }
 
-    
+
     fun googleLoginSuccess(requestSocialData: RequestSocialData){
         viewModelScope.launch {
-            runCatching { getRemoteSocialLoginData.execute(requestSocialData) }
-                .onSuccess {
-                    googleSuccess.value = it
-
+            when (val googleData =
+                safeApiCall(Dispatchers.IO) {getRemoteSocialLoginData.execute(requestSocialData) }){
+                is ResultWrapper.Success -> {
+                    googleSuccess.value = googleData.data
                     Log.d("google", "서버 통신 성공")
                 }
-                .onFailure {
-                    googleSuccess.value = false
-                    it.printStackTrace()
-
+                is ResultWrapper.NetworkError -> {
+                    Log.d("google", "서버 통신 실패")
                 }
+                is ResultWrapper.GenericError -> {
+                    Log.d("google", "사용자 에러")
+                    socialStatus.value = googleData.code ?: 0
+                }
+
+            }
         }
     }
 }

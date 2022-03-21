@@ -193,7 +193,7 @@ class SocialSignInActivity() :
                     // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     socialSignInViewModel.googleSuccess.observe(this, Observer {
-                        if (it == false) {
+                        if (it ) {
                             SharedInformation.setSignUp(this, 1)
                             Toast.makeText(
                                 this@SocialSignInActivity, "약관 동의가 필요합니다.",
