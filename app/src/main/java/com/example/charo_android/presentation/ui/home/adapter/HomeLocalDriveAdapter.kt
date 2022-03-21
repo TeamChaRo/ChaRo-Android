@@ -48,7 +48,7 @@ class HomeLocalDriveAdapter(val userId: String,
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
             intent.putExtra("userId", userId)
-            //intent.putExtra("postId", locationData[position].postId)
+            intent.putExtra("postId", localDrive[position].homeLocationDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

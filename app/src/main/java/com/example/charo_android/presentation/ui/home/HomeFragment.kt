@@ -61,25 +61,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initHomeTitle()
         initThemeDrive()
     }
-   /*
-    private fun deleteKakao(){
-        binding.btnSocialKakaoLogout.setOnClickListener {
-            UserApiClient.instance.logout { error ->
-                if (error != null) {
-                    Toast.makeText(requireActivity(), "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
-                }else {
-                    Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
-                }
-                val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
-                startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
-                requireActivity().finish()
-            }
-        }
-
-    } */
-
-
-
 
     private fun initToolBar() {
         val toolbar = binding.toolbarMain
@@ -96,9 +77,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.banner.observe(viewLifecycleOwner) {
             homeViewPagerAdapter.setHomeBanner(it, homeViewModel.getBannerRoad())
         }
-
-
-
     }
 
     private fun initTrendDrive(){

@@ -49,8 +49,7 @@ class HomeTrendDriveAdapter(val userId: String,
         }
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", userId)
-            // intent.putExtra("postId", hotData[position].postId)
+            intent.putExtra("postId", trendDrive[position].homeTrendDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
 
         }

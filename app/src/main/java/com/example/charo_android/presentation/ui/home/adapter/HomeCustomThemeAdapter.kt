@@ -49,8 +49,7 @@ class HomeCustomThemeAdapter(val userId: String,
         }
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
-            intent.putExtra("userId", userId)
-            // intent.putExtra("postId", nightData[position].postId)
+            intent.putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
