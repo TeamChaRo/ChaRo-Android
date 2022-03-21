@@ -25,7 +25,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.android.synthetic.main.activity_social_sign_in.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SocialSignInActivity() :
