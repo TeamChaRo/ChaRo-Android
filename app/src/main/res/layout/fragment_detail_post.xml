@@ -20,6 +20,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toTopOf="@id/cl_detail_bottom"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -149,7 +150,7 @@
                     android:paddingHorizontal="11dp"
                     android:paddingTop="1dp"
                     android:paddingBottom="2dp"
-                    android:text="1/n"
+                    android:text="@{`1/` + viewModel.detailPost.images.size()}"
                     android:textColor="@color/white"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="@id/vp_post"
@@ -715,6 +716,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_detail_like"
                     android:src="@{viewModel.isFavorite == 1 ? @drawable/ic_bigheart_active : @drawable/ic_bigheart_inactive}"
+                    android:clickable="@{viewModel.detailPost.isAuthor ? false : true}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_detail_like"
                     app:layout_constraintStart_toStartOf="parent"

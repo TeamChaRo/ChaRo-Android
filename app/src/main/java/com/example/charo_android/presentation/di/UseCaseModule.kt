@@ -1,7 +1,9 @@
 package com.example.charo_android.presentation.di
 
-import com.example.charo_android.domain.usecase.detailpost.GetRemoteDetailPostUseCase
+import com.example.charo_android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
+import com.example.charo_android.domain.usecase.detailpost.GetDetailPostUseCase
 import com.example.charo_android.domain.usecase.follow.GetRemoteFollowListUseCase
+import com.example.charo_android.domain.usecase.follow.PostFollowUseCase
 import com.example.charo_android.domain.usecase.home.*
 import com.example.charo_android.domain.usecase.interaction.PostLikeUseCase
 import com.example.charo_android.domain.usecase.interaction.PostSaveUseCase
@@ -54,11 +56,13 @@ val useCaseModule = module {
     single { GetRemoteMoreSavedLikePostUseCase(get()) }
     single { GetRemoteMoreSavedNewPostUseCase(get()) }
     single { GetRemoteFollowListUseCase(get()) }
-    single { GetRemoteDetailPostUseCase(get()) }
+    single { GetDetailPostUseCase(get()) }
     single { PostLikeUseCase(get()) }
     single { PostSaveUseCase(get()) }
+    single { GetDetailPostLikeUserListUseCase(get()) }
+    single { PostFollowUseCase(get()) }
 
-    single{ GetRemoteMoreNewViewInfiniteUseCase(get()) }
-    single{GetRemoteMoreNewLastIdUseCase(get())}
+    single { GetRemoteMoreNewViewInfiniteUseCase(get()) }
+    single { GetRemoteMoreNewLastIdUseCase(get()) }
 
 }

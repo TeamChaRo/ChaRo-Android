@@ -1,4 +1,4 @@
-package com.example.charo_android.presentation.ui.follow.adapter
+package com.example.charo_android.presentation.ui.detailpost.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,18 +7,18 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
-import com.example.charo_android.data.model.mypage.User
-import com.example.charo_android.databinding.ItemMyPageFollowBinding
+import com.example.charo_android.databinding.ItemDetailLikeBinding
+import com.example.charo_android.domain.model.detailpost.User
 
-class FollowAdapter(
+class DetailPostLikeListAdapter(
     private val itemClick: (User) -> Unit,
     private val followClick: (User) -> Unit
 ) :
-    RecyclerView.Adapter<FollowAdapter.FollowViewHolder>() {
-    private val asyncDiffer = AsyncListDiffer(this, diffCallback)
+    RecyclerView.Adapter<DetailPostLikeListAdapter.DetailPostLikeListViewHolder>() {
+    val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
-    class FollowViewHolder(
-        private val binding: ItemMyPageFollowBinding,
+    class DetailPostLikeListViewHolder(
+        private val binding: ItemDetailLikeBinding,
         private val itemClick: (User) -> Unit,
         private val followClick: (User) -> Unit
     ) :
@@ -30,8 +30,7 @@ class FollowAdapter(
             binding.root.setOnClickListener {
                 itemClick(model)
             }
-
-            binding.tvFollow.setOnClickListener {
+            binding.tvDetailLikeFollow.setOnClickListener {
                 followClick(model)
                 model.isFollow = !model.isFollow
                 binding.model = model
@@ -39,17 +38,20 @@ class FollowAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowViewHolder {
-        val binding = DataBindingUtil.inflate<ItemMyPageFollowBinding>(
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): DetailPostLikeListViewHolder {
+        val binding = DataBindingUtil.inflate<ItemDetailLikeBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.item_my_page_follow,
+            R.layout.item_detail_like,
             parent,
             false
         )
-        return FollowViewHolder(binding, itemClick, followClick)
+        return DetailPostLikeListViewHolder(binding, itemClick, followClick)
     }
 
-    override fun onBindViewHolder(holder: FollowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailPostLikeListViewHolder, position: Int) {
         holder.bind(asyncDiffer.currentList[position])
     }
 
@@ -70,7 +72,6 @@ class FollowAdapter(
             override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }

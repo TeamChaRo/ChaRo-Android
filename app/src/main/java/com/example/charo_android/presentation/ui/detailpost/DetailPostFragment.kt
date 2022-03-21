@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.detailpost
 
+import android.annotation.SuppressLint
 import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailPostBinding
 import com.example.charo_android.domain.model.detailpost.DetailPost
@@ -62,6 +64,7 @@ class DetailPostFragment : Fragment() {
         clickShare()
         goBack()
         clickAuthor()
+        showLikeList()
     }
 
     override fun onDestroyView() {
@@ -70,8 +73,23 @@ class DetailPostFragment : Fragment() {
     }
 
     private fun initViewPager(imageList: List<String>) {
-        viewPagerAdapter = DetailPostViewPagerAdapter()
+        viewPagerAdapter = DetailPostViewPagerAdapter {
+            viewModel.imageIndex = it
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fcv_detail_post, DetailPostImageFragment())
+                .addToBackStack(null)
+                .commit()
+        }
         viewPagerAdapter.replaceItem(imageList)
+        binding.vpPost.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            @SuppressLint("SetTextI18n")
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                Log.e("Selected_Page", position.toString())
+                binding.tvPostOrder.text =
+                    "${position + 1}/${viewPagerAdapter.itemCount}"
+            }
+        })
         binding.vpPost.adapter = viewPagerAdapter
     }
 
@@ -247,6 +265,14 @@ class DetailPostFragment : Fragment() {
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
             intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
             startActivity(intent)
+        }
+    }
+
+    private fun showLikeList() {
+        binding.tvDetailLike.setOnClickListener {
+            if(childFragmentManager.findFragmentByTag("Dialog") == null) {
+                DetailPostLikeListFragment().show(childFragmentManager, "Dialog")
+            }
         }
     }
 }

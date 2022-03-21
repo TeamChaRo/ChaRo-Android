@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.model.mypage.Post
 import com.example.charo_android.data.model.mypage.UserInformation
+import com.example.charo_android.domain.usecase.follow.PostFollowUseCase
 import com.example.charo_android.domain.usecase.mypage.*
 import kotlinx.coroutines.launch
 
@@ -14,9 +15,10 @@ class OtherMyPageViewModel(
     private val getRemoteLikePostUseCase: GetRemoteLikePostUseCase,
     private val getRemoteNewPostUseCase: GetRemoteNewPostUseCase,
     private val getRemoteMoreWrittenLikePostUseCase: GetRemoteMoreWrittenLikePostUseCase,
-    private val getRemoteMoreWrittenNewPostUseCase: GetRemoteMoreWrittenNewPostUseCase
-): ViewModel() {
-    private val TAG = "mlog: MyPageViewModel::"
+    private val getRemoteMoreWrittenNewPostUseCase: GetRemoteMoreWrittenNewPostUseCase,
+    private val postFollowUseCase: PostFollowUseCase
+) : ViewModel() {
+    private val TAG = "mlog: OtherPageViewModel::"
 //    private val userEmail = "and@naver.com"
 
     // 유저 정보
@@ -35,7 +37,7 @@ class OtherMyPageViewModel(
     val writtenNewPostList: LiveData<MutableList<Post>> get() = _writtenNewPostList
 
     // 마이페이지 주인 팔로우 여부
-    private var _isFollow = MutableLiveData<Boolean>()
+    private var _isFollow = MutableLiveData<Boolean>(false)
     val isFollow: LiveData<Boolean> get() = _isFollow
 
     fun getLikePost(userEmail: String) {
@@ -59,7 +61,6 @@ class OtherMyPageViewModel(
                 getRemoteNewPostUseCase(userEmail)
             }.onSuccess {
                 _userInfo.value = it.userInformation
-
                 _writtenNewLastId = it.writtenPost.lastId
                 _writtenNewPostList.value = it.writtenPost.drive
             }.onFailure {
@@ -95,6 +96,18 @@ class OtherMyPageViewModel(
                 _writtenNewPostList.value?.addAll(it.drive)
             }.onFailure {
                 Log.d(TAG + "getMoreWrittenNewPost()", it.message.toString())
+            }
+        }
+    }
+
+    fun postFollow(otherUserEmail: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postFollowUseCase("and@naver.com", otherUserEmail)
+            }.onSuccess {
+                _isFollow.value = it
+            }.onFailure {
+                Log.e(TAG + "postFollow()", it.message.toString())
             }
         }
     }

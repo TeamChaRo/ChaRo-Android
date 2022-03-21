@@ -40,11 +40,13 @@ class FollowingFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = FollowAdapter {
+        adapter = FollowAdapter({
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
             intent.putExtra("userEmail", it.userEmail)
             startActivity(intent)
-        }
+        }, {
+            viewModel.postFollow(it.userEmail)
+        })
         viewModel.following.observe(viewLifecycleOwner) {
             adapter.replaceItem(it)
         }

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.charo_android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel" />
@@ -99,16 +101,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/rectangle_border_white_radius_12"
+                android:background="@{viewModel.isFollow ? @drawable/rectangle_white_radius_12 : @drawable/rectangle_border_white_radius_12}"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="9dp"
                 android:paddingVertical="5dp"
-                android:text="팔로우"
-                android:textColor="@color/white"
+                android:text="@{viewModel.isFollow ? `팔로잉` : `팔로우`}"
+                android:textColor="@{viewModel.isFollow ? @color/blue_main_0f6fff : @color/white}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_profile_nickname"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_profile_nickname" />
+
+            <!--            android:background="@{viewModel.isFollow ? @drawable/rectangle_radius_12 : @drawable/rectangle_border_white_radius_12}"
+                            android:backgroundTint="@{viewModel.isFollow ? @color/white : null}"
+                            android:text="@{viewModel.isFollow ? `팔로잉` : `팔로우`}"
+                            android:textColor="@{viewModel.isFollow ? @color/blue_main_0f6fff : @color/white}"-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_profile_follow"
