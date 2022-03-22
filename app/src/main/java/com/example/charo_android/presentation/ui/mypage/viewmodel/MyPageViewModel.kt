@@ -19,7 +19,9 @@ class MyPageViewModel(
     private val getRemoteMoreSavedNewPostUseCase: GetRemoteMoreSavedNewPostUseCase
 ) : ViewModel() {
     private val TAG = "mlog: MyPageViewModel::"
-    private val userEmail = "and@naver.com"
+
+    private var _userEmail: String = "@"
+    val userEmail get() = _userEmail
 
     // 유저 정보
     private var _userInfo = MutableLiveData<UserInformation>()
@@ -46,6 +48,10 @@ class MyPageViewModel(
     private var _savedNewLastId = -1
     private var _savedNewPostList = MutableLiveData<MutableList<Post>>()
     val savedNewPostList: LiveData<MutableList<Post>> get() = _savedNewPostList
+
+    fun setUserEmail(userEmail: String) {
+        _userEmail = userEmail
+    }
 
     fun getLikePost() {
         viewModelScope.launch {
