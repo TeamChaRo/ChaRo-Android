@@ -1,8 +1,10 @@
 package com.example.charo_android.presentation.ui.write
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -33,6 +35,8 @@ import okio.BufferedSink
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.charo_android.presentation.util.Define
 import com.example.charo_android.presentation.util.LocationUtil
@@ -75,7 +79,11 @@ class WriteFragment : Fragment() {
 
         initToolBar()
 
-        writeAdapter = WriteAdapter()
+        writeAdapter = WriteAdapter(){
+            //delete image
+            writeAdapter.imgList.removeAt(it)
+            writeAdapter.notifyDataSetChanged()
+        }
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
         initWriteData()
@@ -303,13 +311,26 @@ class WriteFragment : Fragment() {
     }
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK)  //ACTION_PICK   //ACTION_GET_CONTENT
-        intent.type = "image/*"
-        //다중 선택 막아놓기
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
+        if(writeAdapter.itemCount > 6){
+            Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
+            return
+        }
 
-        intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI //데이터를 Uri로 받는다
-        startActivityForResult(intent, 1)   //1 OPEN_GALLERY //200 GET_GALLERY_IMAGE
+        var writePermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        var readPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        // 권한 없어서 요청
+        if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) {
+             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
+
+        } else { // 권한 있음
+            val intent = Intent(Intent.ACTION_GET_CONTENT)  //ACTION_PICK   //ACTION_GET_CONTENT
+            intent.type = "image/*"
+            //다중 선택 가능
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+
+            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI //데이터를 Uri로 받는다
+            startActivityForResult(Intent.createChooser(intent, "Get Album"), 200)   //1 OPEN_GALLERY //200 GET_GALLERY_IMAGE
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -318,99 +339,70 @@ class WriteFragment : Fragment() {
         var imgPath: Uri
         var image = ArrayList<MultipartBody.Part>()
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1) {
+//            if (requestCode == 1) {
                 if (data?.clipData == null) {
-                    Log.d("errorimg", "null")
+                    Log.d("error img", "null or not image")
 
                 } else {
-                    var clipData = data.clipData
-                    var imageUriList = ArrayList<Uri>()
+                    val clipData = data.clipData
                     when {
                         clipData?.itemCount!! > 6 -> {
-//                            Toast.makeText(this, "사진은 6개까지 선택 가능", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
                         }
-                        clipData.getItemCount() == 1 -> {
+                        clipData.itemCount in 1..6 -> {
                             binding.clWritePhoto.visibility = View.GONE
-                            imgPath = clipData.getItemAt(0).uri
-
-                            //리사이클러뷰에 사진 추가
-                            writeAdapter.imgList.add(
-                                WriteImgInfo(
-                                    imgUri = imgPath,
-                                )
-                            )
-                            sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
-
-
-                            //UriList 에 추가
-                            imageUriList.add(imgPath)
-
-
-                            writeAdapter.notifyItemInserted(0)
-                            writeAdapter.notifyDataSetChanged()
-
-//                            //uri -> file -> multipartform
-//                            for (index in 0..writeAdapter.imgList.size - 1) {
-//                                val file = File(writeAdapter.imgList[index].imgUri.path)
-//                                val MEDIA_TYPE_IMAGE = "image/*".toMediaTypeOrNull()
-//                                val surveyBody = RequestBody.create(MEDIA_TYPE_IMAGE, file)
-//                                image.add(MultipartBody.Part.createFormData("image", "file.png", surveyBody))
-//                            }
-//                            sharedViewModel.imageMultiPart.value = image
-//
-//                            Log.e("image",image.toString())
-//                            Log.e("sharedViewModel.imageUriRecyclerView.value",sharedViewModel.imageUriRecyclerView.value.toString())
-//                            Log.e("sharedViewModel.imageMultiPart.value",sharedViewModel.imageMultiPart.value.toString())
-//                            Log.e("imgPath",imgPath.toString())
-
-                            //uri -> Bitmap -> multipartform
-                            val bitmap : Bitmap
-
-                            if(Build.VERSION.SDK_INT < 28) {
-                                bitmap = MediaStore.Images.Media.getBitmap(
-                                    context?.contentResolver,
-                                    imgPath
-                                )
-                            } else {
-                                val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
-                                bitmap = ImageDecoder.decodeBitmap(source)
-                            }
-
-                            val imageRequestBody = bitmap?.let {
-                                BitmapRequestBody(it)
-                            }
-                            val imageData: MultipartBody.Part =
-                                MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
-
-                            image.add(imageData)
-                            sharedViewModel.imageMultiPart.value = image
-
-                        }
-                        clipData.itemCount in 2..5 -> {
-                            binding.clWritePhoto.visibility = View.GONE
-                            var imgmoreList = mutableListOf<WriteImgInfo>()
-                            for (i: Int in 0..clipData.itemCount) {
-                                Log.d("clipData", clipData.getItemAt(i).uri.toString())
+                            val imgMoreList = mutableListOf<WriteImgInfo>()
+                            for (i: Int in 0 until clipData.itemCount) {
                                 imgPath = clipData.getItemAt(i).uri
-                                imgmoreList.add(
+
+                                //recyclerView 에 저장
+                                imgMoreList.add(
                                     0,
                                     WriteImgInfo(
                                         imgUri = imgPath,
                                     )
                                 )
+
+                                //이미지 멀티파트로 저장
+                                convertImgToMultiPart(imgPath, image)
                             }
-                            writeAdapter.imgList.addAll(imgmoreList)
-                            writeAdapter.notifyItemInserted(0)
-                            writeAdapter.notifyDataSetChanged()
+
+                            val position = writeAdapter.itemCount
+                            val newCount = position + imgMoreList.size
+                            if(newCount > 6){
+                                Toast.makeText(context, "사진은 6개까지 선택 가능합니다. \n다시 선택해주세요.", Toast.LENGTH_LONG).show()
+                            }else{
+                                writeAdapter.imgList.addAll(imgMoreList)
+                                writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
+
+                                sharedViewModel.imageMultiPart.value?.addAll(image)
+                            }
                         }
                     }
-
                 }
-            }
+//            }
         } else {
             Log.d("ActivityResult", "something wrong")
-
         }
+    }
+
+    private fun convertImgToMultiPart(imgPath : Uri, list : ArrayList<MultipartBody.Part>){
+        //uri -> Bitmap -> multipartform
+        val bitmap : Bitmap = if(Build.VERSION.SDK_INT < 28) {
+            MediaStore.Images.Media.getBitmap(
+                context?.contentResolver,
+                imgPath
+            )
+        } else {
+            val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
+            ImageDecoder.decodeBitmap(source)
+        }
+
+        val imageRequestBody = BitmapRequestBody(bitmap)
+        val imageData: MultipartBody.Part =
+            MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
+
+        list.add(imageData)
     }
 
     private fun warningText(edt: EditText, warningTxt: TextView, len: Int) {
