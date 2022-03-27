@@ -64,21 +64,6 @@ class MainActivity : AppCompatActivity() {
         otherUserEmail = intent.getStringExtra("otherUserEmail")
         otherUserNickname = intent.getStringExtra("otherUserNickname")
         isMyPage = intent.getBooleanExtra("isMyPage", true)
-        isFromOtherPage = intent.getBooleanExtra("isFromOtherPage", false)
-        Log.d("otherUserEmail", otherUserEmail.toString())
-        Log.d("otherUserNickname", otherUserNickname.toString())
-        Log.d("isMyPage", isMyPage.toString())
-        Log.d("isFromOtherPage", isFromOtherPage.toString())
-        when (isFromOtherPage) {
-            true -> {
-                binding.navView.selectedItemId = R.id.navigation_charo
-                when (isMyPage) {
-                    true -> replaceCharoFragment(userEmail, nickName, isMyPage)
-                    false -> replaceCharoFragment(otherUserEmail!!, otherUserNickname!!, isMyPage)
-                }
-            }
-            false -> replaceHomeFragment(userEmail, nickName)
-        }
         initNavView()
         lookFor()
 

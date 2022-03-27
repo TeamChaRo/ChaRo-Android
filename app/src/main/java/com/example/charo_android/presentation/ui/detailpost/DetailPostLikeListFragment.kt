@@ -15,6 +15,7 @@ import com.example.charo_android.domain.model.detailpost.User
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.example.charo_android.presentation.util.LoginUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -76,7 +77,11 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
             intent.putExtra("userEmail", it.userEmail)
             startActivity(intent)
         }, {
-            viewModel.postFollow(it.userEmail)
+            if(viewModel.userEmail != "@") {
+                viewModel.postFollow(it.userEmail)
+            } else {
+                LoginUtil.loginPrompt(requireContext())
+            }
         })
         binding.rcvDetailDialog.adapter = adapter
     }

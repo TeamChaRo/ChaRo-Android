@@ -13,6 +13,7 @@ import com.example.charo_android.databinding.FragmentFollowingBinding
 import com.example.charo_android.presentation.ui.follow.adapter.FollowAdapter
 import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.example.charo_android.presentation.util.LoginUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FollowingFragment : Fragment() {
@@ -46,7 +47,11 @@ class FollowingFragment : Fragment() {
             intent.putExtra("userEmail", it.userEmail)
             startActivity(intent)
         }, {
-            viewModel.postFollow(it.userEmail)
+            if(viewModel.userEmail != "@") {
+                viewModel.postFollow(it.userEmail)
+            } else {
+                LoginUtil.loginPrompt(requireContext())
+            }
         }, viewModel.userEmail
         )
         viewModel.following.observe(viewLifecycleOwner) {
