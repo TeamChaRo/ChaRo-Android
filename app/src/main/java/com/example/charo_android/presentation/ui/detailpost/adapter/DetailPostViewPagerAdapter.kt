@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ItemDetailPostBinding
-import com.example.charo_android.databinding.ItemMyPagePostBinding
 
 class DetailPostViewPagerAdapter(private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<DetailPostViewPagerAdapter.DetailPostViewHolder>() {
