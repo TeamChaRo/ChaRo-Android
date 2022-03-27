@@ -13,6 +13,7 @@ import com.example.charo_android.databinding.FragmentMyTopBinding
 import com.example.charo_android.presentation.ui.follow.FollowActivity
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.example.charo_android.presentation.ui.setting.SettingActivity
+import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MyTopFragment : Fragment() {
@@ -45,8 +46,7 @@ class MyTopFragment : Fragment() {
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
             val intent = Intent(requireContext(), FollowActivity::class.java)
-            // TODO: 추후 and@naver.com 말고 실제 유저 이메일 넣어야 함
-            intent.putExtra("userEmail", "and@naver.com")
+            intent.putExtra("userEmail", SharedInformation.getEmail(requireContext()))
             intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
             startActivity(intent)
         }
