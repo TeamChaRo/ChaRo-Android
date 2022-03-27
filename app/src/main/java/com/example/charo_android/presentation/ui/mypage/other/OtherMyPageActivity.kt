@@ -17,6 +17,7 @@ import com.example.charo_android.presentation.ui.follow.FollowActivity
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.postlist.WrittenPostFragment
 import com.example.charo_android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
+import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,7 +47,6 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickFollow()
         showFollowList()
 
-        // TODO: 추후 email 넣는 방식 수정
         viewModel.getLikePost()
         viewModel.getNewPost()
     }
@@ -138,7 +138,11 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickFollow() {
         binding.tvFollow.setOnClickListener {
-            viewModel.postFollow()
+            if(viewModel.userEmail != "@") {
+                viewModel.postFollow()
+            } else {
+                LoginUtil.loginPrompt(this)
+            }
         }
     }
 

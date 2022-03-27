@@ -22,6 +22,7 @@ import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.example.charo_android.presentation.util.LoginUtil
 import com.skt.Tmap.*
 import com.skt.Tmap.TMapView.OnClickListenerCallback
 import kotlinx.coroutines.CoroutineScope
@@ -209,13 +210,21 @@ class DetailPostFragment : Fragment() {
 
     private fun clickLike() {
         binding.imgDetailLike.setOnClickListener {
-            viewModel.postLike()
+            if (viewModel.userEmail != "@") {
+                viewModel.postLike()
+            } else {
+                LoginUtil.loginPrompt(requireContext())
+            }
         }
     }
 
     private fun clickSave() {
         binding.imgDetailSave.setOnClickListener {
-            viewModel.postSave()
+            if (viewModel.userEmail != "@") {
+                viewModel.postSave()
+            } else {
+                LoginUtil.loginPrompt(requireContext())
+            }
         }
     }
 
@@ -232,7 +241,7 @@ class DetailPostFragment : Fragment() {
 //                val deepLink =
 //                    "http://www.charo.com/detail/${(activity as DetailPostActivity).postId}" //딥링크
                 val deepLink =
-                    "http://www.charo.com/detail/8" //딥링크
+                    "http://www.charo.com/detail/${viewModel.postId}" //딥링크
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "*/*"
                 intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
@@ -270,7 +279,7 @@ class DetailPostFragment : Fragment() {
 
     private fun showLikeList() {
         binding.tvDetailLike.setOnClickListener {
-            if(childFragmentManager.findFragmentByTag("Dialog") == null) {
+            if (childFragmentManager.findFragmentByTag("Dialog") == null) {
                 DetailPostLikeListFragment().show(childFragmentManager, "Dialog")
             }
         }
