@@ -2,9 +2,9 @@ package com.example.charo_android.data.model.request
 
 import com.google.gson.annotations.SerializedName
 
-data class RequestWriteData(
+ class RequestWriteData(
     @SerializedName("course")
-    val course: ArrayList<HashMap<String, String>>,
+    val course: ArrayList<Course>,
     @SerializedName("courseDesc")
     val courseDesc: String,
     @SerializedName("isParking")
@@ -24,17 +24,9 @@ data class RequestWriteData(
     @SerializedName("warning")
     val warning: ArrayList<String>
 ) {
-    object Course{
-        val startCourse = mapOf<String,String>("address" to "", "latitude" to "", "longtitude" to "")
-        val middleCourse = mapOf<String,String>("address" to "", "latitude" to "", "longtitude" to "")
-        val endCourse = mapOf<String,String>("address" to "", "latitude" to "", "longtitude" to "")
-
-    }
-//        @SerializedName("address")
-//        val address: List<String>,
-//        @SerializedName("latitude")
-//        val latitude: List<String>,
-//        @SerializedName("longtitude")
-//        val longtitude: List<String>
-
+    data class Course(
+        val address : String,
+        val longitude : String,
+        val latitude : String,
+    )
 }
