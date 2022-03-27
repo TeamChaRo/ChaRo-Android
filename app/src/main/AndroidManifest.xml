@@ -67,6 +67,10 @@
         <activity android:name=".presentation.ui.alarm.AlarmActivity" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

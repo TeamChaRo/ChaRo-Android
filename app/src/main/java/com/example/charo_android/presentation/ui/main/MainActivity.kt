@@ -75,14 +75,14 @@ class MainActivity : AppCompatActivity() {
                     false -> replaceCharoFragment(otherUserEmail!!, otherUserNickname!!, isMyPage)
                 }
             }
-            false -> replaceHomeFragment(userEmail, nickName)
+            false ->  replaceHomeFragment(userEmail, nickName)
         }
         initNavView()
         lookFor()
 
     }
 
-    override fun onBackPressed() {
+   override fun onBackPressed() {
         finish()
     }
 
@@ -99,7 +99,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_home -> {
                         parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_home_kor))
                         analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
-
                         replaceHomeFragment(userEmail, nickName)
                         return@setOnItemSelectedListener true
                     }
