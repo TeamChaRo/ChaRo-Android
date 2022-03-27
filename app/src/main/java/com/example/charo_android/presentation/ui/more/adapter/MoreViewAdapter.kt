@@ -10,6 +10,7 @@ import com.example.charo_android.databinding.ItemCharoLoadingBinding
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
 import okhttp3.internal.notify
 
@@ -72,7 +73,7 @@ class MoreViewAdapter(
             }
 
             holder.binding.root.setOnClickListener() {
-                val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+                val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
                 intent.putExtra("userId", userId)
                 intent.putExtra("postId", moreData[position].morePostId)
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
