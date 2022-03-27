@@ -1,56 +1,56 @@
 package com.example.charo_android.presentation.ui.mypage.guest
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.charo_android.R
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.charo_android.databinding.FragmentGuestBottomBinding
+import com.example.charo_android.presentation.ui.mypage.adapter.PostViewPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GuestBottomFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GuestBottomFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentGuestBottomBinding? = null
+    private val binding get() = _binding ?: error("binding not initialized")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.fragment_guest_bottom,
+            container,
+            false
+        )
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViewPager()
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
+    private fun initViewPager() {
+        // ViewPager 초기화
+        val postViewPagerAdapter = PostViewPagerAdapter(requireActivity())
+        postViewPagerAdapter.fragmentList = listOf(GuestPostListFragment(), GuestPostListFragment())
+        with(binding.vpProfile) {
+            adapter = postViewPagerAdapter
+            isUserInputEnabled = false
         }
-    }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_guest_bottom, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GuestBottomFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                GuestBottomFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+        // TabLayout 초기화 및 ViewPager와 연결
+        val tabIconList = arrayListOf(R.drawable.ic_write_active, R.drawable.ic_save_5_active)
+        TabLayoutMediator(binding.tabProfile, binding.vpProfile) { tab, position ->
+            tab.setIcon(tabIconList[position])
+        }.attach()
     }
 }
