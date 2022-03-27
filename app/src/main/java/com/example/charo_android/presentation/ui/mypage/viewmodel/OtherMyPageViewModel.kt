@@ -21,6 +21,12 @@ class OtherMyPageViewModel(
     private val TAG = "mlog: OtherPageViewModel::"
 //    private val userEmail = "and@naver.com"
 
+    private var _userEmail: String = "@"
+    val userEmail get() = _userEmail
+
+    private var _otherUserEmail: String = ""
+    val otherUserEmail get() = _otherUserEmail
+
     // 유저 정보
     private var _userInfo = MutableLiveData<UserInformation>()
     val userInfo: LiveData<UserInformation> get() = _userInfo
@@ -40,10 +46,18 @@ class OtherMyPageViewModel(
     private var _isFollow = MutableLiveData<Boolean>(false)
     val isFollow: LiveData<Boolean> get() = _isFollow
 
-    fun getLikePost(userEmail: String) {
+    fun setUserEmail(userEmail: String) {
+        _userEmail = userEmail
+    }
+
+    fun setOtherUserEmail(otherUserEmail: String) {
+        _otherUserEmail = otherUserEmail
+    }
+
+    fun getLikePost() {
         viewModelScope.launch {
             kotlin.runCatching {
-                getRemoteLikePostUseCase(userEmail)
+                getRemoteLikePostUseCase(otherUserEmail)
             }.onSuccess {
                 _userInfo.value = it.userInformation
                 _writtenLikeLastId = it.writtenPost.lastId
@@ -55,10 +69,10 @@ class OtherMyPageViewModel(
         }
     }
 
-    fun getNewPost(userEmail: String) {
+    fun getNewPost() {
         viewModelScope.launch {
             kotlin.runCatching {
-                getRemoteNewPostUseCase(userEmail)
+                getRemoteNewPostUseCase(otherUserEmail)
             }.onSuccess {
                 _userInfo.value = it.userInformation
                 _writtenNewLastId = it.writtenPost.lastId
@@ -69,11 +83,11 @@ class OtherMyPageViewModel(
         }
     }
 
-    fun getMoreWrittenLikePost(userEmail: String) {
+    fun getMoreWrittenLikePost() {
         viewModelScope.launch {
             kotlin.runCatching {
                 getRemoteMoreWrittenLikePostUseCase(
-                    userEmail,
+                    otherUserEmail,
                     _writtenLikeLastId,
                     _writtenLikeLastCount
                 )
@@ -87,10 +101,10 @@ class OtherMyPageViewModel(
         }
     }
 
-    fun getMoreWrittenNewPost(userEmail: String) {
+    fun getMoreWrittenNewPost() {
         viewModelScope.launch {
             kotlin.runCatching {
-                getRemoteMoreWrittenNewPostUseCase(userEmail, _writtenNewLastId)
+                getRemoteMoreWrittenNewPostUseCase(otherUserEmail, _writtenNewLastId)
             }.onSuccess {
                 _writtenNewLastId = it.lastId
                 _writtenNewPostList.value?.addAll(it.drive)
@@ -100,10 +114,10 @@ class OtherMyPageViewModel(
         }
     }
 
-    fun postFollow(otherUserEmail: String) {
+    fun postFollow() {
         viewModelScope.launch {
             kotlin.runCatching {
-                postFollowUseCase("and@naver.com", otherUserEmail)
+                postFollowUseCase(userEmail, otherUserEmail)
             }.onSuccess {
                 _isFollow.value = it
             }.onFailure {

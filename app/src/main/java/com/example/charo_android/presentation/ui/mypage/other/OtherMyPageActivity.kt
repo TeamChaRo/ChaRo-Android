@@ -17,6 +17,7 @@ import com.example.charo_android.presentation.ui.follow.FollowActivity
 import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
 import com.example.charo_android.presentation.ui.mypage.postlist.WrittenPostFragment
 import com.example.charo_android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtherMyPageActivity : AppCompatActivity() {
@@ -28,14 +29,15 @@ class OtherMyPageActivity : AppCompatActivity() {
     }
     private val viewModel by viewModel<OtherMyPageViewModel>()
     private var sort = LIKE
-    private lateinit var otherUserEmail: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_other_my_page)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        otherUserEmail = intent.getStringExtra("userEmail") ?: error(finish())
+
+        viewModel.setUserEmail(SharedInformation.getEmail(this))
+        viewModel.setOtherUserEmail(intent.getStringExtra("userEmail") ?: error(finish()))
 
         initRecyclerView()
         initSpinner()
@@ -45,8 +47,8 @@ class OtherMyPageActivity : AppCompatActivity() {
         showFollowList()
 
         // TODO: 추후 email 넣는 방식 수정
-        viewModel.getLikePost(otherUserEmail)
-        viewModel.getNewPost(otherUserEmail)
+        viewModel.getLikePost()
+        viewModel.getNewPost()
     }
 
     private fun initRecyclerView() {
@@ -116,12 +118,12 @@ class OtherMyPageActivity : AppCompatActivity() {
                     LIKE -> {
                         // 서버에서 더 가져오는 로직
                         Log.d("mlog: OtherMyPageActivity::endlessScroll", "인기순 작성한 게시글 더 불러오기")
-                        viewModel.getMoreWrittenLikePost(otherUserEmail)
+                        viewModel.getMoreWrittenLikePost()
                     }
                     NEW -> {
                         // 서버에서 더 가져오는 로직
                         Log.d("mlog: OtherMyPageActivity::endlessScroll", "최신순 작성한 게시글 더 불러오기")
-                        viewModel.getMoreWrittenNewPost(otherUserEmail)
+                        viewModel.getMoreWrittenNewPost()
                     }
                 }
             }
@@ -136,14 +138,14 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickFollow() {
         binding.tvFollow.setOnClickListener {
-            viewModel.postFollow(otherUserEmail)
+            viewModel.postFollow()
         }
     }
 
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
             val intent = Intent(this, FollowActivity::class.java)
-            intent.putExtra("userEmail", otherUserEmail)
+            intent.putExtra("userEmail", viewModel.otherUserEmail)
             intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
             startActivity(intent)
         }
