@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,13 +40,12 @@ class SocialSignInActivity() :
         autoLogin()
         initKakaoLogin()
         initGoogleLogin()
-        clickGoogleSignIn()
         googleSignIn()
+        clickGoogleSignIn()
         lookForMain()
         goEmailLogin()
         goEmailSignUp()
         goKaKaoMain()
-
     }
 
     //자동 로그인
@@ -74,7 +74,6 @@ class SocialSignInActivity() :
         binding.imgSocialKakao.setOnClickListener {
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
                 UserApiClient.instance.loginWithKakaoTalk(this, callback = callback)
-
             } else {
                 UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
             }
@@ -111,7 +110,7 @@ class SocialSignInActivity() :
                     finish()
 
                 } else if (SharedInformation.getKaKaoSignUp(this) == 2) {
-                    SharedInformation.setEmail(this, user.kakaoAccount?.email!!)
+                    SharedInformation.setEmail(this, user.kakaoAccount?.email)
                     Log.i(
                         "kakaoUser", "사용자 정보 요청 성공" +
                                 "\n이메일: ${user.kakaoAccount?.email}"
@@ -164,10 +163,10 @@ class SocialSignInActivity() :
                     val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     try {
                         val account = task.getResult(ApiException::class.java)
-                        Log.d("google", account.id)
+                        Log.d("구글", account.id)
                         firebaseAuthWithGoogle(account.idToken)
                     } catch (e: ApiException) {
-                        Log.w("google", "Google sign in failed", e)
+                        Log.w("구글", "Google sign in failed", e)
                     }
                 }
             }
@@ -190,7 +189,7 @@ class SocialSignInActivity() :
                     val user = auth.currentUser
                     val email = user?.email
                     val profileImage = user?.photoUrl
-                    Log.d("googles", email.toString())
+                    Log.d("구글", email.toString())
                     // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     socialSignInViewModel.googleSuccess.observe(this, Observer {

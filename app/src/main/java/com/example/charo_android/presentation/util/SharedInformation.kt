@@ -40,7 +40,7 @@ object SharedInformation {
         return sharedPreferences.getString(APP_EMAIL,  "@") ?: ""
     }
 
-    fun setEmail(context: Context, appEmail : String){
+    fun setEmail(context: Context, appEmail : String?){
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putString(APP_EMAIL, appEmail)
