@@ -7,6 +7,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityFollowBinding
 import com.example.charo_android.presentation.ui.follow.adapter.FollowViewPagerAdapter
 import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,8 +21,9 @@ class FollowActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_follow)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        myPageEmail = intent.getStringExtra("userEmail") ?: error(finish())
-        viewModel.nickname.value = intent.getStringExtra("nickname") ?: error(finish())
+        viewModel.setUserEmail(SharedInformation.getEmail(this))
+        viewModel.setMyPageEmail(intent.getStringExtra("userEmail") ?: error(finish()))
+        viewModel.setNickname(intent.getStringExtra("nickname") ?: error(finish()))
 
         initViewPager()
         getFollowList()
@@ -41,7 +43,7 @@ class FollowActivity : AppCompatActivity() {
     }
 
     private fun getFollowList() {
-        viewModel.getFollowList(myPageEmail)
+        viewModel.getFollowList()
     }
 
     private fun clickBack() {

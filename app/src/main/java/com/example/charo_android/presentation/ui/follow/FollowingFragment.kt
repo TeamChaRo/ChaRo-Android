@@ -25,7 +25,8 @@ class FollowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_following, container, false)
+        _binding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_following, container, false)
         return binding.root
     }
 
@@ -46,7 +47,8 @@ class FollowingFragment : Fragment() {
             startActivity(intent)
         }, {
             viewModel.postFollow(it.userEmail)
-        })
+        }, viewModel.userEmail
+        )
         viewModel.following.observe(viewLifecycleOwner) {
             adapter.replaceItem(it)
         }

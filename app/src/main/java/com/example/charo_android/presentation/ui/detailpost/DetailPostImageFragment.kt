@@ -1,11 +1,10 @@
 package com.example.charo_android.presentation.ui.detailpost
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.charo_android.R
+import androidx.fragment.app.Fragment
 import com.example.charo_android.databinding.FragmentDetailPostImageBinding
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostImageViewPagerAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
@@ -39,8 +38,8 @@ class DetailPostImageFragment : Fragment() {
         viewPagerAdapter = DetailPostImageViewPagerAdapter()
         viewModel.detailPost.observe(viewLifecycleOwner) {
             viewPagerAdapter.replaceItem(it.images)
+            binding.vpImg.setCurrentItem(viewModel.imageIndex, false)
         }
         binding.vpImg.adapter = viewPagerAdapter
-        binding.vpImg.setCurrentItem(viewModel.imageIndex, false)
     }
 }

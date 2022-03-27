@@ -12,7 +12,8 @@ import com.example.charo_android.databinding.ItemMyPageFollowBinding
 
 class FollowAdapter(
     private val itemClick: (User) -> Unit,
-    private val followClick: (User) -> Unit
+    private val followClick: (User) -> Unit,
+    private val userEmail: String
 ) :
     RecyclerView.Adapter<FollowAdapter.FollowViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
@@ -20,11 +21,13 @@ class FollowAdapter(
     class FollowViewHolder(
         private val binding: ItemMyPageFollowBinding,
         private val itemClick: (User) -> Unit,
-        private val followClick: (User) -> Unit
+        private val followClick: (User) -> Unit,
+        private val userEmail: String
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: User) {
             binding.model = model
+            binding.isMe = model.userEmail == userEmail
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
@@ -46,7 +49,7 @@ class FollowAdapter(
             parent,
             false
         )
-        return FollowViewHolder(binding, itemClick, followClick)
+        return FollowViewHolder(binding, itemClick, followClick, userEmail)
     }
 
     override fun onBindViewHolder(holder: FollowViewHolder, position: Int) {

@@ -4,7 +4,7 @@ data class DetailPost(
     val images: List<String>,
     val province: String,
     val isParking: Boolean,
-    val parkingDesc: String,
+    val parkingDesc: String?,
     val courseDesc: String,
     val themes: List<String>,
     val warnings: List<Boolean>,

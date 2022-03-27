@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import com.example.charo_android.R
 import com.example.charo_android.data.model.mypage.UserInformation
 import com.example.charo_android.databinding.FragmentMyPageBinding
+import com.example.charo_android.presentation.ui.mypage.guest.GuestBottomFragment
+import com.example.charo_android.presentation.ui.mypage.guest.GuestTopFragment
 import com.example.charo_android.presentation.ui.mypage.my.MyBottomFragment
 import com.example.charo_android.presentation.ui.mypage.my.MyTopFragment
 import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
@@ -34,9 +36,11 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // 내 마이페이지 보는 경우
-        viewModel.getLikePost()
-        viewModel.getNewPost()
+        if(viewModel.userEmail != "@") {
+            // 내 마이페이지 보는 경우
+            viewModel.getLikePost()
+            viewModel.getNewPost()
+        }
     }
 
     override fun onDestroyView() {
@@ -47,12 +51,15 @@ class MyPageFragment : Fragment() {
     private fun initFragmentContainerView() {
         val transaction = childFragmentManager.beginTransaction()
 
-        // TODO: 분기처리 필요
-        // 내 마이페이지, 다른 유저의 마이페이지, 비로그인 유저의 마이페이지 3가지로 분기처리
-        // TEST: 내 마이페이지로 일단 처리, 추후 분기처리할 것
-        transaction.add(R.id.fcv_top, MyTopFragment())
-            .add(R.id.fcv_bottom, MyBottomFragment())
-            .commit()
+        if(viewModel.userEmail == "@") {
+            transaction.add(R.id.fcv_top, GuestTopFragment())
+                .add(R.id.fcv_bottom, GuestBottomFragment())
+                .commit()
+        } else {
+            transaction.add(R.id.fcv_top, MyTopFragment())
+                .add(R.id.fcv_bottom, MyBottomFragment())
+                .commit()
+        }
     }
 
     class MyObserver: Observer<UserInformation> {
