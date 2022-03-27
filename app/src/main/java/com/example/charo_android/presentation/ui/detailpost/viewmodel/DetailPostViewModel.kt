@@ -21,7 +21,9 @@ class DetailPostViewModel(
     private val getDetailPostLikeUserListUseCase: GetDetailPostLikeUserListUseCase,
     private val postFollowUseCase: PostFollowUseCase
 ) : ViewModel() {
-    private val userEmail = "and@naver.com"
+    private var _userEmail: String = "and@naver.com"
+    val userEmail get() = _userEmail
+
     var postId = -1
 
     private var _detailPost = MutableLiveData<DetailPost>()
@@ -40,6 +42,10 @@ class DetailPostViewModel(
     val likeUserList: LiveData<List<User>> get() = _likeUserList
 
     var imageIndex = 0
+
+    fun setUserEmail(userEmail: String) {
+        _userEmail = userEmail
+    }
 
     fun getDetailPostData() {
         viewModelScope.launch {

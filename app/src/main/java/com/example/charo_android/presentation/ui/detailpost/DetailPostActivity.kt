@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivityDetailPostBinding
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.example.charo_android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPostActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class DetailPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_post)
         viewModel.postId = intent.getIntExtra("postId", -1)
+        viewModel.setUserEmail(SharedInformation.getEmail(this))
         initFragmentContainerView()
     }
 
