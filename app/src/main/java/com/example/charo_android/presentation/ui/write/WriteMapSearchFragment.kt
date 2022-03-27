@@ -26,6 +26,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.text.style.ForegroundColorSpan
 import com.example.charo_android.presentation.util.Define
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class WriteMapSearchFragment : Fragment() {
 
@@ -112,9 +115,11 @@ class WriteMapSearchFragment : Fragment() {
         getReadHistory(mapSearchList)
 
         val tmapdata = TMapData()
+        var preText : String = ""
+
         binding.etWriteMapSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
+                preText = s.toString()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -122,46 +127,49 @@ class WriteMapSearchFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-               Handler(Looper.getMainLooper()).postDelayed({
-                    // 관련 검색어
-                    if(binding.etWriteMapSearch.text.isNotEmpty()) {
-                        binding.textResultSearch.text = getString(R.string.write_auto_search)
+                if(preText == s.toString()){
+                    return
+                }
+                val inputText = s.toString()
+                // 관련 검색어
+                if(inputText.isNotEmpty()) {
+                    binding.textResultSearch.text = getString(R.string.write_auto_search)
 
-                        tmapdata.findTitlePOI(binding.etWriteMapSearch.text.toString()) { poiItem ->
-                            writeMapSearchAdapter.clearItem()
+                    tmapdata.findTitlePOI(inputText) { poiItem ->
+                        writeMapSearchAdapter.clearItem()
 
-                            for (i in 0 until poiItem.size) {
-                                val item = poiItem[i]
+                        for (i in 0 until poiItem.size) {
+                            val item = poiItem[i]
 
-                                val inputText = binding.etWriteMapSearch.text.toString()
-                                val outputText = item.poiName
-                                val spannableString = SpannableString(outputText)
+                            val outputText = item.poiName
+                            val spannableString = SpannableString(outputText)
 
-                                val start: Int = outputText.indexOf(inputText)
-                                val end: Int = start + inputText.length
+                            val start: Int = outputText.indexOf(inputText)
+                            val end: Int = start + inputText.length
 
-                                if(start > -1 && end > start){
-                                    spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#0f6fff")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                                }
-
-                                mapSearchList.add(
-                                    MapSearchInfo(
-                                        locationName = spannableString,
-                                        locationAddress = item.poiAddress.replace("null", ""),
-                                        date = ""
-                                    )
-
-                                )
+                            if(start > -1 && end > start){
+                                spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#0f6fff")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                             }
-                            writeMapSearchAdapter.userList = mapSearchList
-                        }
-                        writeMapSearchAdapter.notifyDataSetChanged()
 
-                    // 최근 검색어
-                    }else{
-                        getReadHistory(mapSearchList)
+                            mapSearchList.add(
+                                MapSearchInfo(
+                                    locationName = spannableString,
+                                    locationAddress = item.poiAddress.replace("null", ""),
+                                    date = ""
+                                )
+                            )
+                        }
+                        writeMapSearchAdapter.userList = mapSearchList
+
+                        GlobalScope.launch(Dispatchers.Main) {
+                            writeMapSearchAdapter.notifyDataSetChanged()
+                        }
                     }
-                }, 500)
+
+                // 최근 검색어
+                }else{
+                    getReadHistory(mapSearchList)
+                }
             }
         })
 
