@@ -87,6 +87,8 @@ class WriteFragment : Fragment() {
             //delete image
             writeAdapter.imgList.removeAt(it)
             writeAdapter.notifyDataSetChanged()
+
+            sharedViewModel.imageMultiPart.value!!.removeAt(it)
         }
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
@@ -361,7 +363,11 @@ class WriteFragment : Fragment() {
                             writeAdapter.imgList.addAll(imgMoreList)
                             writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
 
-                            sharedViewModel.imageMultiPart.value?.addAll(image)
+                            if(sharedViewModel.imageMultiPart.value == null){
+                                sharedViewModel.imageMultiPart.value = image
+                            }else{
+                                sharedViewModel.imageMultiPart.value!!.addAll(image)
+                            }
                         }
                     }
                 }
