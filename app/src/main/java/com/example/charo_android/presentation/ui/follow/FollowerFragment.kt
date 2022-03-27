@@ -47,7 +47,8 @@ class FollowerFragment : Fragment() {
             startActivity(intent)
         }, {
             viewModel.postFollow(it.userEmail)
-        })
+        }, viewModel.userEmail
+        )
         viewModel.follower.observe(viewLifecycleOwner) {
             adapter.replaceItem(it)
         }
