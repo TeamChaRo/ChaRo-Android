@@ -24,6 +24,7 @@ import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.CustomToast
 import com.example.charo_android.presentation.util.Define
+import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.enqueueUtil
 import com.google.gson.Gson
 import com.skt.Tmap.*
@@ -374,7 +375,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             sendCourse["course[$i]"] = sharedViewModel.course.value!![i]
         }
 
-        val userEmailRB : RequestBody = Hidden.userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        val userEmailRB : RequestBody = userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
         val titleRB : RequestBody = sharedViewModel.title.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
         val provinceRB : RequestBody = sharedViewModel.province.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
         val regionRB : RequestBody = sharedViewModel.region.value!!.toRequestBody("text/plain".toMediaTypeOrNull())

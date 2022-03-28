@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.*
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,13 +17,13 @@ import com.example.charo_android.data.MapSearchInfo
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.response.ResponseWriteData
 import com.example.charo_android.databinding.FragmentWriteMapSearchBinding
-import com.example.charo_android.hidden.Hidden
 import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.text.style.ForegroundColorSpan
 import com.example.charo_android.presentation.util.Define
+import com.example.charo_android.presentation.util.SharedInformation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -179,8 +177,9 @@ class WriteMapSearchFragment : Fragment() {
     fun getReadHistory(list: MutableList<MapSearchInfo>) {
         binding.textResultSearch.text = getString(R.string.write_recent_search)
 
+        val userEmail = SharedInformation.getEmail(requireActivity())
         val call: Call<ResponseWriteData> =
-            ApiService.writeViewService.getReadHistory(Hidden.userEmail)
+            ApiService.writeViewService.getReadHistory(userEmail)
         call.enqueue(object : Callback<ResponseWriteData> {
             override fun onResponse(
                 call: Call<ResponseWriteData>,

@@ -13,7 +13,7 @@ import com.example.charo_android.R
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.request.alarm.RequestFcmData
 import com.example.charo_android.data.model.response.alarm.ResponseFcmData
-import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.SharedInformation
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import retrofit2.Call
@@ -30,7 +30,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     //fcm token update api
     private fun sendRegistrationToServer(token : String) {
-        val requestFcmData: RequestFcmData = RequestFcmData(token, Hidden.userEmail)
+        val userEmail = SharedInformation.getEmail(this)
+        val requestFcmData: RequestFcmData = RequestFcmData(token, userEmail)
 
         val call: Call<ResponseFcmData> =
             ApiService.alarmViewService.pushFcm(requestFcmData)
