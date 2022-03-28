@@ -47,7 +47,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password_update"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
+                android:padding="12dp"
                 android:fontFamily="@font/noto_sans_cjkkr_regular"
                 android:hint="@string/password_update_hint"
                 android:includeFontPadding="false"
@@ -115,7 +116,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_new_password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
+                    android:padding="12dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:hint="@string/input_password_hint"
                     android:includeFontPadding="false"
@@ -145,7 +147,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_new_password_reconfirm"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
+                    android:padding="12dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:hint="@string/input_password_reconfirm_hint"
                     android:includeFontPadding="false"
