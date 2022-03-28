@@ -15,6 +15,8 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpEmailBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
+import com.example.charo_android.presentation.util.dpToPx
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.properties.Delegates
 
@@ -23,13 +25,14 @@ class SignUpEmailFragment :
     BaseFragment<FragmentSignUpEmailBinding>(R.layout.fragment_sign_up_email) {
     var pass = false
     private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
-
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         signUpNum()
         certificationEmail()
+        keyBoardChange()
     }
     //이메일 포함 되어있는지 확인
     private fun initView() {
@@ -96,7 +99,14 @@ class SignUpEmailFragment :
                             textInputEmailNum.isHelperTextEnabled = true
                             textInputEmailNum.helperText = "인증되었습니다."
 
-                            imgSignUpNext.setOnClickListener {
+                            textSignUpNext.setOnClickListener {
+                                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                                transaction?.apply {
+                                    replace(R.id.fragment_container_email, SignUpPassWordFragment())
+                                    commit()
+                                }
+                            }
+                            textSignUpNextFocus.setOnClickListener {
                                 val transaction = activity?.supportFragmentManager?.beginTransaction()
                                 transaction?.apply {
                                     replace(R.id.fragment_container_email, SignUpPassWordFragment())
@@ -108,9 +118,8 @@ class SignUpEmailFragment :
                 }
             })
         }
-
-
     }
+
 
     //이메일 중복 체크
     private fun observeSuccess(pass : Boolean) {
@@ -122,7 +131,13 @@ class SignUpEmailFragment :
                     textInputSignUp.isHelperTextEnabled = true
                     textInputSignUp.helperText = "사용 가능한 이메일 형식입니다."
 
-                        imgSignUpNext.setOnClickListener {
+                        textSignUpNext.setOnClickListener {
+                            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
+                            signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
+                            Log.d("되라",etSignUpBlank.text.toString())
+                            clEmailNum.isVisible = true
+                        }
+                        textSignUpNextFocus.setOnClickListener {
                             signUpViewModel.emailCertification(etSignUpBlank.text.toString())
                             signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
                             Log.d("되라",etSignUpBlank.text.toString())
@@ -132,6 +147,7 @@ class SignUpEmailFragment :
                         signUpViewModel.emailCertification(etSignUpBlank.text.toString())
                         Toast.makeText(requireContext(), "재전송 했습니다",Toast.LENGTH_SHORT).show()
                     }
+
                 } else {
                     if (pass){
                         textInputSignUp.error = "중복된 이메일 형식입니다."
@@ -143,10 +159,33 @@ class SignUpEmailFragment :
     }
 
     //키보드 올라올 때 버튼 뷰 변경
+    private fun keyBoardChange(){
+        keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
+        onShowKeyboard = {keyBoardHeight ->
+            scrollUpToMyWantedPosition()
+            binding.textSignUpNext.visibility = View.GONE
+            binding.textSignUpNextFocus.visibility = View.VISIBLE
 
+        },
+        onHideKeyboard = {
+            binding.textSignUpNext.visibility = View.VISIBLE
+            binding.textSignUpNextFocus.visibility = View.GONE
+        })
+
+
+    }
     //일반 회원가입 번호
     private fun signUpNum(){
         signUpViewModel.socialLoginNum.value = 0
     }
+
+    //키보드 스크롤
+    private fun scrollUpToMyWantedPosition() =
+        with(binding.nsSignUpEmail) {
+            postDelayed({
+                smoothScrollBy(0, binding.textSignUpNextFocus.y.toInt() + 38)
+                binding.textInputEmailNum.setPadding(0,0,0,38.dpToPx)
+            }, 200)
+        }
 
 }
