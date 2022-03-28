@@ -19,6 +19,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpProfileBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
 import com.example.charo_android.presentation.util.SharedInformation
 import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -39,10 +40,12 @@ class SignUpProfileFragment :
                 .into(binding.imgSignUpProfile)
 
         }
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         checkNickName()
         registerProfile()
+        keyBoardChange()
     }
 
 
@@ -83,7 +86,15 @@ class SignUpProfileFragment :
                                 textInputNickname.helperText = "사용 가능한 닉네임입니다"
                                 signUpViewModel.nickName.value = etSignUpNickname.text.toString()
 
-                                imgSignUpNicknameNext.setOnClickListener {
+                                textSignUpNicknameNext.setOnClickListener {
+                                    SharedInformation.setNickName(requireActivity(), s.toString())
+                                    val transaction = activity?.supportFragmentManager?.beginTransaction()
+                                    transaction?.apply {
+                                        replace(R.id.fragment_container_email, SignUpTermFragment())
+                                        commit()
+                                    }
+                                }
+                                textSignUpNicknameNextFocus.setOnClickListener {
                                     SharedInformation.setNickName(requireActivity(), s.toString())
                                     val transaction = activity?.supportFragmentManager?.beginTransaction()
                                     transaction?.apply {
@@ -171,7 +182,21 @@ class SignUpProfileFragment :
         }
     }
 
+    //키보드 올라올 때 버튼 뷰 변경
+    private fun keyBoardChange(){
+        keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
+            onShowKeyboard = {keyBoardHeight ->
+                binding.textSignUpNicknameNext.visibility = View.GONE
+                binding.textSignUpNicknameNextFocus.visibility = View.VISIBLE
 
+            },
+            onHideKeyboard = {
+                binding.textSignUpNicknameNext.visibility = View.VISIBLE
+                binding.textSignUpNicknameNextFocus.visibility = View.GONE
+            })
+
+
+    }
 
 
 }
