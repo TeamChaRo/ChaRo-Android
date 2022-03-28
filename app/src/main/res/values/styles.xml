@@ -3,6 +3,7 @@
     <style name="signUpBlankChange" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name= "boxStrokeErrorColor">@color/red_sign_up_ff826e</item>
         <item name= "boxStrokeColor">@color/selector_text_input_color</item>
+        <item name="background">@drawable/rectangle_gray1_12_blue</item>
     </style>
 
     <style name="charoListTabText" parent="TextAppearance.Design.Tab">

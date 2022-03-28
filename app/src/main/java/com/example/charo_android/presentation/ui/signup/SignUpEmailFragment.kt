@@ -8,6 +8,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpEmailBinding
@@ -88,7 +90,6 @@ class SignUpEmailFragment :
                         Log.d("certification", it.toString())
                         if (s.toString() != it) {
                             textInputEmailNum.error = "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요."
-
                         } else {
                             textInputEmailNum.error = null
                             textInputEmailNum.isErrorEnabled = false

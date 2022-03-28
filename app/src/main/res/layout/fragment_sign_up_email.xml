@@ -86,7 +86,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_sign_up_blank"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
+                    android:padding="12dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:hint="@string/email_hint"
                     android:includeFontPadding="false"
@@ -95,17 +96,16 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <ImageView
                 android:id="@+id/img_delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_map_search_close"
                 app:layout_constraintEnd_toEndOf="@+id/text_input_sign_up"
-                app:layout_constraintTop_toTopOf="@+id/text_input_sign_up" />
+                app:layout_constraintTop_toTopOf="@+id/text_input_sign_up"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,10 +148,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/resend"
+                android:includeFontPadding="false"
+                android:padding="7dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"
-                android:padding="10dp"
+                android:gravity="center"
                 android:background="@drawable/resend"
                 />
 
@@ -176,7 +178,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_input_email_num"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
+                    android:padding="12dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:hint="@string/email_hint"
                     android:includeFontPadding="false"
@@ -190,7 +193,6 @@
                 android:id="@+id/img_email_delete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_map_search_close"
