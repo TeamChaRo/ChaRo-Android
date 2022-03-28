@@ -9,6 +9,7 @@ import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentSignUpPassWordBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.regex.Pattern
 
@@ -16,11 +17,12 @@ class SignUpPassWordFragment :
     BaseFragment<FragmentSignUpPassWordBinding>(R.layout.fragment_sign_up_pass_word) {
 
     private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
-
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initPasswordView()
         checkPassword()
+        keyBoardChange()
     }
 
     private fun initPasswordView() {
@@ -82,13 +84,21 @@ class SignUpPassWordFragment :
                         textPasswordReconfirm.error = null
                         textPasswordReconfirm.isErrorEnabled = false
                         signUpViewModel.password.value = etSignUpPassword.text.toString()
-                        imgSignUpPasswordNext.setOnClickListener {
+                        textSignUpPasswordNext.setOnClickListener {
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
                             transaction?.apply {
                                 replace(R.id.fragment_container_email, SignUpProfileFragment())
                                 commit()
                             }
                         }
+                        textSignUpPasswordNextFocus.setOnClickListener {
+                            val transaction = activity?.supportFragmentManager?.beginTransaction()
+                            transaction?.apply {
+                                replace(R.id.fragment_container_email, SignUpProfileFragment())
+                                commit()
+                            }
+                        }
+
                     }
                 }
             })
@@ -97,5 +107,19 @@ class SignUpPassWordFragment :
 
     }
 
+    private fun keyBoardChange(){
+        keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
+            onShowKeyboard = {keyBoardHeight ->
 
+                binding.textSignUpPasswordNext.visibility = View.GONE
+                binding.textSignUpPasswordNextFocus.visibility = View.VISIBLE
+
+            },
+            onHideKeyboard = {
+                binding.textSignUpPasswordNext.visibility = View.VISIBLE
+                binding.textSignUpPasswordNextFocus.visibility = View.GONE
+            })
+
+
+    }
 }
