@@ -129,25 +129,22 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     private fun clickSpinner() {
         binding.spinnerMoreView.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
-                @SuppressLint("NotifyDataSetChanged")
+
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
                     id: Long
                 ) {
+                    moreViewAdapter.removeHomeTrendDrive()
                     if (position == 0) {
-                        if(moreViewAdapter.moreData.isNotEmpty()){
-                            moreViewAdapter.removeHomeTrendDrive()
-                        }
+                        if(moreViewAdapter.moreData.isEmpty()){
                             moreViewLoadData()
-                    } else {
-                        if(moreViewAdapter.moreData.isNotEmpty()){
-                            moreViewAdapter.removeHomeTrendDrive()
                         }
+                    } else {
+                        if(moreViewAdapter.moreData.isEmpty()){
                             moreNewViewData()
-
-
+                        }
                     }
                     moreViewInfiniteScroll(position)
                 }
