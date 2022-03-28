@@ -18,14 +18,21 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
+import com.example.charo_android.data.api.ApiService
+import com.example.charo_android.data.model.request.RequestWriteData
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.CustomToast
 import com.example.charo_android.presentation.util.Define
+import com.example.charo_android.presentation.util.SharedInformation
+import com.example.charo_android.presentation.util.enqueueUtil
+import com.google.gson.Gson
 import com.skt.Tmap.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.lang.Exception
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class WriteMapFragment : Fragment(), View.OnClickListener {
 
@@ -309,123 +316,101 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         if ((binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) ||
             binding.etWriteMapMid2.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midSecAddress.value)
         ) {
-//                Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-        } else {
-
-//                val course = ArrayList<HashMap<String, RequestBody>>()
-//                val startCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.startAddress.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "longtitude" to sharedViewModel.startLong.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "latitude" to sharedViewModel.startLat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
-//                val middleCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.midFrstAddress.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "longtitude" to sharedViewModel.midFrstLong.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "latitude" to sharedViewModel.midFrstLat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
-//                val endCourse : HashMap<String, RequestBody> = hashMapOf<String, RequestBody>("address" to sharedViewModel.endAddress.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "longtitude" to sharedViewModel.endLong.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()),
-//                    "latitude" to sharedViewModel.endLat.value.toString().toRequestBody("text/plain".toMediaTypeOrNull()))
-
-                val course = ArrayList<HashMap<String, String>>()
-                val startCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.startAddress.value.toString(),
-                    "longtitude" to sharedViewModel.startLong.value.toString(),
-                    "latitude" to sharedViewModel.startLat.value.toString())
-                val middleCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.midFrstAddress.value.toString(),
-                    "longtitude" to sharedViewModel.midFrstLong.value.toString(),
-                    "latitude" to sharedViewModel.midFrstLat.value.toString())
-                val endCourse : HashMap<String, String> = hashMapOf<String, String>("address" to sharedViewModel.endAddress.value.toString(),
-                    "longtitude" to sharedViewModel.endLong.value.toString(),
-                    "latitude" to sharedViewModel.endLat.value.toString())
-
-            course.add(startCourse)
-            if(sharedViewModel.midFrstAddress.value !== ""){
-                course.add(middleCourse)
-            }
-            course.add(endCourse)
-
-            sharedViewModel.course.value = course
-
-            AlertDialog.Builder(requireContext())
-                .setMessage(getString(R.string.noti_complete_write))
-                .setNeutralButton(getString(R.string.word_no)) { dialog, which ->
-                }
-                .setPositiveButton(getString(R.string.word_yes)) { dialog, which ->
-                    if ((binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) ||
-                        binding.etWriteMapMid2.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midSecAddress.value)
-                    ) {
-////                            Toast.makeText(this, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
-                    } else {
-
-                        sharedViewModel.serveWriteData()
-////
-//                            //서버에 값 보내기
-//                            val sendTheme : ArrayList<MultipartBody.Part> = ArrayList()
-//                            val themeUtil = ThemeUtil()
-//
-//                            for(sharedTheme in sharedViewModel.theme.value!!){
-//                                themeUtil.themeMap[sharedTheme]?.let { it1 ->
-//                                    sendTheme.add(MultipartBody.Part.createFormData("theme",it1))
-//
-////                                    sendTheme.add(it1)
-//                                }
-//                            }
-//
-//                            val userEmailRB : RequestBody = sharedViewModel.userEmail.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
-//                            val titleRB : RequestBody = sharedViewModel.title.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
-//                            val provinceRB : RequestBody = sharedViewModel.province.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
-//                            val regionRB : RequestBody = sharedViewModel.region.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
-//                            val parkingDescRB : RequestBody = sharedViewModel.parkingDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
-//                            val courseDescRB : RequestBody = sharedViewModel.courseDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
-//
-//                            val call: Call<ResponseStatusCode> =
-//                                ApiService.writeViewService.writePost(
-//                                    userEmailRB,
-//                                    titleRB,
-//                                    provinceRB,
-//                                    regionRB,
-//                                    sharedViewModel.warning.value,
-//                                    sendTheme,
-//                                    sharedViewModel.isParking.value,
-//                                    parkingDescRB,
-//                                    courseDescRB,
-//                                    sharedViewModel.course.value,
-//                                    sharedViewModel.imageMultiPart.value,
-//                                )
-//
-//                            call.enqueue(object : Callback<ResponseStatusCode> {
-//                                override fun onResponse(
-//                                    call: Call<ResponseStatusCode>,
-//                                    response: Response<ResponseStatusCode>
-//                                ) {
-//                                    if (response.isSuccessful) {
-//                                        Log.d("server connect : Write ", "success")
-//
-//                                        //sharedViewMoel 값 초기화(다 지우기)
-//                                        sharedViewModel.initData()
-//
-//                                        //상세보기로 이동
-//                                        activity?.let{
-//                                            val intent = Intent(context, DetailActivity::class.java)
-//                                            startActivity(intent)
-//                                        }
-//
-//                                    }else{
-//                                        Log.d("server connect : Write ", "error")
-//                                        Log.d("server connect : Write ", "$response.errorBody()")
-//                                        Log.d("server connect : Write ", response.message())
-//                                        Log.d("server connect : Write ", "${response.code()}")
-//                                        Log.d("server connect : Write ", "${response.raw().request.url}")
-//                                    }
-//                                }
-//
-//                                override fun onFailure(
-//                                    call: Call<ResponseStatusCode>,
-//                                    t: Throwable
-//                                ) {
-//                                    Log.d("server connect", "fail:${t.message}")
-//                                }
-//                            })
-                    }
-                }
-                .show()
+            Toast.makeText(context, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
+            return
         }
+
+        val course = ArrayList<RequestBody>()
+
+        val startCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.startAddress.value.toString(), sharedViewModel.startLong.value.toString(), sharedViewModel.startLat.value.toString())
+        val midFrstCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.midFrstAddress.value.toString(), sharedViewModel.midFrstLong.value.toString(), sharedViewModel.midFrstLat.value.toString())
+        val midSecCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.midSecAddress.value.toString(), sharedViewModel.midSecLong.value.toString(), sharedViewModel.midSecLat.value.toString())
+        val endCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.endAddress.value.toString(), sharedViewModel.endLong.value.toString(), sharedViewModel.endLat.value.toString())
+
+        val startJson = Gson().toJson(startCourse)
+        val startCourseRb: RequestBody = startJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val midFrstJson = Gson().toJson(midFrstCourse)
+        val midFrstCourseRb: RequestBody = midFrstJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val midSecJson = Gson().toJson(midSecCourse)
+        val midSecCourseRb: RequestBody = midSecJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        val endJson = Gson().toJson(endCourse)
+        val endCourseRb: RequestBody = endJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+        course.add(startCourseRb)
+        if(sharedViewModel.midFrstAddress.value !== ""){
+            course.add(midFrstCourseRb)
+        }
+        if(sharedViewModel.midSecAddress.value !== ""){
+            course.add(midSecCourseRb)
+        }
+        course.add(endCourseRb)
+
+        sharedViewModel.course.value = course
+
+        AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.noti_complete_write))
+            .setNeutralButton(getString(R.string.word_no)) { dialog, which ->
+            }
+            .setPositiveButton(getString(R.string.word_yes)) { dialog, which ->
+                serveWriteData()
+            }
+            .show()
+    }
+
+    fun serveWriteData() {
+        val param : HashMap<String, RequestBody> = HashMap()
+
+        val sendTheme : HashMap<String,RequestBody> = HashMap()
+        for (i in sharedViewModel.theme.value!!.indices) {
+            sendTheme["theme[$i]"] = sharedViewModel.theme.value!![i].toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        }
+
+        val sendWarning : HashMap<String,RequestBody> = HashMap()
+        for (i in sharedViewModel.warningUI.value!!.indices) {
+            sendWarning["warning[$i]"] = sharedViewModel.warningUI.value!![i].toRequestBody("multipart/form-data".toMediaTypeOrNull())
+        }
+
+        val sendCourse : HashMap<String,RequestBody> = HashMap()
+        for (i in sharedViewModel.course.value!!.indices) {
+            sendCourse["course[$i]"] = sharedViewModel.course.value!![i]
+        }
+
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        val userEmailRB : RequestBody = userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
+        val titleRB : RequestBody = sharedViewModel.title.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val provinceRB : RequestBody = sharedViewModel.province.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val regionRB : RequestBody = sharedViewModel.region.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val parkingDescRB : RequestBody = sharedViewModel.parkingDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val courseDescRB : RequestBody = sharedViewModel.courseDesc.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
+        val isParkingRB : RequestBody = sharedViewModel.isParking.value!!.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+
+        param["userEmail"] = userEmailRB
+        param["title"] = titleRB
+        param["province"] = provinceRB
+        param["region"] = regionRB
+        param["parkingDesc"] = parkingDescRB
+        param["isParking"] = isParkingRB
+        param["courseDesc"] = courseDescRB
+
+        val call = ApiService.writeViewService
+            .writePost(sendWarning, sendTheme, sendCourse, sharedViewModel.imageMultiPart.value!!, param)
+        call.enqueueUtil(
+            onSuccess = {
+                Log.d("serveWriteData", "success")
+                Log.d("serveWriteData", it.toString())
+
+                writeShareActivity!!.finish()
+            },
+            onError = {
+                Log.d("serveWriteData", "failed")
+                Log.d("serveWriteData", call.request().body.toString())
+                Log.d("serveWriteData",param.toString())
+                Log.d("serveWriteData ", "sendWarning $sendWarning")
+                Log.d("serveWriteData", "sendTheme $sendTheme")
+                Log.d("serveWriteData","course $sendTheme")
+                Log.d("serveWriteData","image ${sharedViewModel.imageMultiPart.value!!}")
+            },
+        )
     }
 
     override fun onClick(v: View?) {

@@ -1,5 +1,6 @@
 package com.example.charo_android.presentation.ui.write
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.request.RequestWriteHistoryData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.databinding.ItemAutoSearchBinding
-import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.SharedInformation
 import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,7 +56,7 @@ class WriteMapSearchAdapter(
             }
             //검색어 저장
             postSaveHistory(userList[position].locationName.toString(), userList[position].locationAddress
-                , lat, lon
+                , lat, lon, writeShareActivity
             )
 
             val locationName = userList[position].locationName.toString()
@@ -78,13 +79,14 @@ class WriteMapSearchAdapter(
         userList.clear()
     }
 
-    private fun postSaveHistory(title: String, address: String, latitude: Double, longitude: Double){
+    private fun postSaveHistory(title: String, address: String, latitude: Double, longitude: Double, context: Context){
 
         val searchHistory : ArrayList<RequestWriteHistoryData.SearchHistory> = ArrayList()
         searchHistory.add(RequestWriteHistoryData.SearchHistory(title, address, latitude, longitude))
 
+        val userEmail = SharedInformation.getEmail(context)
         val requestWriteHistoryData: RequestWriteHistoryData
-            = RequestWriteHistoryData(Hidden.userEmail, searchHistory)
+            = RequestWriteHistoryData(userEmail, searchHistory)
 
         val call: Call<ResponseStatusCode> =
             ApiService.writeViewService.postSaveHistory(requestWriteHistoryData)

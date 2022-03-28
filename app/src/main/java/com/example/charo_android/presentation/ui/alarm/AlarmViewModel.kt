@@ -6,12 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.data.api.ApiService
 import com.example.charo_android.data.model.mypage.*
-import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
-import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.util.enqueueUtil
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class AlarmViewModel : ViewModel() {
 
@@ -58,46 +53,6 @@ class AlarmViewModel : ViewModel() {
     var _day = MutableLiveData<String>(null)
     val day: LiveData<String>
         get() = _day
-
-    fun getInitAlarmData() {
-        Log.e("getAlarmList param","${Hidden.otherUserEmail}")
-        val call: Call<ResponseAlarmListData> =
-            ApiService.alarmViewService.getAlarmList(Hidden.otherUserEmail)
-        call.enqueue(object : Callback<ResponseAlarmListData> {
-            override fun onResponse(
-                call: Call<ResponseAlarmListData>,
-                response: Response<ResponseAlarmListData>
-            ) {
-                Log.e("getAlarmList param111","${Hidden.otherUserEmail}")
-
-                if (response.isSuccessful) {
-                    Log.d("server connect : Alarm", "success")
-                    Log.d("server connect : Alarm", "${response.body()}")
-
-                    val pushList = response.body()?.pushList
-                    _pushId.value = pushList?.pushId
-                    _pushCode.value = pushList?.pushCode
-                    _isRead.value = pushList?.isRead
-                    _token.value = pushList?.token
-                    _image.value = pushList?.image
-                    _title.value = pushList?.title
-                    _body.value = pushList?.body
-                    _month.value = pushList?.month
-                    _day.value = pushList?.day
-                } else {
-                    Log.d("server connect : Alarm ", "error")
-                    Log.d("server connect : Alarm ", "$response.errorBody()")
-                    Log.d("server connect : Alarm ", response.message())
-                    Log.d("server connect : Alarm ", "${response.code()}")
-                    Log.d("server connect : Alarm ", "${response.raw().request.url}")
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseAlarmListData>, t: Throwable) {
-                Log.d("server connect : Alarm ", "error: ${t.message}")
-            }
-        })
-    }
 
     suspend fun getInitOtherAlarmData(userEmail: String) {
         _isServerConnecting.value = true

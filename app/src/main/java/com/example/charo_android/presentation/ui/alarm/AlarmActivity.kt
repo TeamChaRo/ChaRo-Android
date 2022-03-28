@@ -18,7 +18,7 @@ import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
 import com.example.charo_android.databinding.ActivityAlarmBinding
-import com.example.charo_android.hidden.Hidden
+import com.example.charo_android.presentation.util.SharedInformation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,15 +69,17 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun getInitAlarmData(){
-        Log.e("getAlarmList param", "${Hidden.otherUserEmail}")
+        val userEmail = SharedInformation.getEmail(this)
+
+        Log.e("getAlarmList param", userEmail)
         val call: Call<ResponseAlarmListData> =
-            ApiService.alarmViewService.getAlarmList(Hidden.otherUserEmail)
+            ApiService.alarmViewService.getAlarmList(userEmail)
         call.enqueue(object : Callback<ResponseAlarmListData> {
             override fun onResponse(
                 call: Call<ResponseAlarmListData>,
                 response: Response<ResponseAlarmListData>
             ) {
-                Log.e("getAlarmList param111", "${Hidden.otherUserEmail}")
+                Log.e("getAlarmList param111", userEmail)
 
                 if (response.isSuccessful) {
                     Log.d("server connect : Alarm", "success")
