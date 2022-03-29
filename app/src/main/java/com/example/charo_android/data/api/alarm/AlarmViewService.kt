@@ -1,6 +1,6 @@
 package com.example.charo_android.data.api.alarm
 
-import com.example.charo_android.data.model.RequestReadPushData
+import com.example.charo_android.data.model.request.alarm.RequestReadPushData
 import com.example.charo_android.data.model.request.alarm.RequestFcmData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData

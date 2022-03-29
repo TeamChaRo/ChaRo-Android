@@ -452,4 +452,17 @@ class LocationUtil {
         "해남",
         "화순"
     )
+    
+    val matchRegionToProvince = hashMapOf(
+        "특별시" to itemSpecial,
+        "광역시" to itemMetroPolitan,
+        "경기도" to itemGyounGi,
+        "강원도" to itemGangWon,
+        "충청남도" to itemChoongNam,
+        "충청북도" to itemChoongBuk,
+        "경상북도" to itemGyungBuk,
+        "경상남도" to itemGyungNam,
+        "전라북도" to itemJunBuk,
+        "전라남도" to itemJunNam
+    )
 }

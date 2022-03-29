@@ -1,27 +1,27 @@
-package com.example.charo_android.data.model.request
+package com.example.charo_android.data.model.request.write
 
 import com.google.gson.annotations.SerializedName
 
  class RequestWriteData(
-    @SerializedName("course")
+     @SerializedName("course")
     val course: ArrayList<Course>,
-    @SerializedName("courseDesc")
+     @SerializedName("courseDesc")
     val courseDesc: String,
-    @SerializedName("isParking")
+     @SerializedName("isParking")
     val isParking: Boolean,
-    @SerializedName("parkingDesc")
+     @SerializedName("parkingDesc")
     val parkingDesc: String,
-    @SerializedName("province")
+     @SerializedName("province")
     val province: String,
-    @SerializedName("region")
+     @SerializedName("region")
     val region: String,
-    @SerializedName("theme")
+     @SerializedName("theme")
     val theme: ArrayList<String>,
-    @SerializedName("title")
+     @SerializedName("title")
     val title: String,
-    @SerializedName("userEmail")
+     @SerializedName("userEmail")
     val userEmail: String,
-    @SerializedName("warning")
+     @SerializedName("warning")
     val warning: ArrayList<String>
 ) {
     data class Course(

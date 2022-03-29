@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.data.MapSearchInfo
+import com.example.charo_android.data.model.write.MapSearchInfo
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.request.RequestWriteHistoryData
+import com.example.charo_android.data.model.request.write.RequestWriteHistoryData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.databinding.ItemAutoSearchBinding
 import com.example.charo_android.presentation.util.SharedInformation
@@ -48,7 +48,6 @@ class WriteMapSearchAdapter(
             var lon = 0.0
             val tmapdata = TMapData()
             tmapdata.findAllPOI(userList[position].locationName.toString()) { poiItem ->
-                Log.d("poi", poiItem[0].poiPoint.toString())
                 var tmapPointCurrentSpot = poiItem[0].poiPoint
 
                 lat = tmapPointCurrentSpot.latitude

@@ -22,7 +22,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.charo_android.data.WriteImgInfo
+import com.example.charo_android.data.model.write.WriteImgInfo
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentWriteBinding
 
@@ -45,7 +45,7 @@ import com.example.charo_android.presentation.util.LocationUtil
 import com.example.charo_android.presentation.util.ThemeUtil
 
 
-class WriteFragment : Fragment() {
+class WriteFragment : Fragment(), View.OnClickListener {
 
     companion object {
         fun newInstance() = WriteFragment()
@@ -92,187 +92,16 @@ class WriteFragment : Fragment() {
         }
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
+        initListener()
         initWriteData()
         observeThemeData()
 
         galleryLauncher()
-        //이미지 추가 버튼
-        binding.imgWriteAddImg.setOnClickListener {
-            openGallery()
-        }
-        binding.clWritePhoto.setOnClickListener {
-            openGallery()
-        }
 
         //글자수 제한
         warningText(binding.etWriteTitle, binding.tvWarningTitle, 38)
         warningText(binding.etWriteParkReview, binding.tvWarningParkReview, 23)
         warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive,280)
-
-        //버튼 selected 상태 변화 함수
-        setButtonClickEvent()
-
-        // 지역(도 단위)
-        binding.btnWriteRegion.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle(R.string.area)
-                .setNeutralButton(R.string.cancel) { dialog, which ->
-                    binding.btnWriteRegion.text = resources.getString(R.string.region)
-                    binding.btnWriteLocation.text = resources.getString(R.string.city)
-                    binding.btnWriteLocation.isSelected = false
-                    it.isSelected = false
-                    preCheckProvince = 0
-                }
-                .setPositiveButton(R.string.agreement) { dialog, which ->
-                    it.isSelected = true
-                    binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
-                    sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
-                }
-                .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
-                    //which : index
-                    preCheckProvince = which
-
-                    //이전 선택값과 다를 때
-                    if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
-                        binding.btnWriteLocation.text = resources.getString(R.string.city)
-                        binding.btnWriteLocation.isSelected = false
-                        sharedViewModel.region.value = ""
-                    }
-                }
-                .setCancelable(false)
-                .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
-                .show()
-        }
-
-        binding.btnWriteLocation.setOnClickListener() {
-            MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
-                .setTitle(R.string.area)
-                .setNeutralButton(R.string.cancel) { dialog, which ->
-                    binding.btnWriteLocation.text = resources.getString(R.string.city)
-                    it.isSelected = false
-                    preCheckedRegion = 0
-                    sharedViewModel.region.value = ""
-                }
-                .setPositiveButton(R.string.agreement) { dialog, which ->
-                    it.isSelected = true
-                    when(binding.btnWriteRegion.text){
-                        "특별시" -> binding.btnWriteLocation.text = locationUtil.itemSpecial[preCheckedRegion]
-                        "광역시" -> binding.btnWriteLocation.text = locationUtil.itemMetroPolitan[preCheckedRegion]
-                        "경기도" -> binding.btnWriteLocation.text = locationUtil.itemGyounGi[preCheckedRegion]
-                        "강원도" -> binding.btnWriteLocation.text = locationUtil.itemGangWon[preCheckedRegion]
-                        "충청남도" -> binding.btnWriteLocation.text = locationUtil.itemChoongNam[preCheckedRegion]
-                        "충청북도" -> binding.btnWriteLocation.text = locationUtil.itemChoongBuk[preCheckedRegion]
-                        "경상북도" -> binding.btnWriteLocation.text = locationUtil.itemGyungBuk[preCheckedRegion]
-                        "경상남도" -> binding.btnWriteLocation.text = locationUtil.itemGyungNam[preCheckedRegion]
-                        "전라북도" -> binding.btnWriteLocation.text = locationUtil.itemJunBuk[preCheckedRegion]
-                        "전라남도" -> binding.btnWriteLocation.text = locationUtil.itemJunNam[preCheckedRegion]
-                        else -> {
-                            binding.btnWriteLocation.text = resources.getString(R.string.city)
-                            it.isSelected = false
-                        }
-                    }
-
-                    sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
-                }
-                .setSingleChoiceItems(
-                    if (binding.btnWriteRegion.text == "특별시") locationUtil.itemSpecial
-                    else if (binding.btnWriteRegion.text == "광역시") locationUtil.itemMetroPolitan
-                    else if (binding.btnWriteRegion.text == "경기도") locationUtil.itemGyounGi
-                    else if (binding.btnWriteRegion.text == "강원도") locationUtil.itemGangWon
-                    else if (binding.btnWriteRegion.text == "충청남도") locationUtil.itemChoongNam
-                    else if (binding.btnWriteRegion.text == "충청북도") locationUtil.itemChoongBuk
-                    else if (binding.btnWriteRegion.text == "경상북도") locationUtil.itemGyungBuk
-                    else if (binding.btnWriteRegion.text == "경상남도") locationUtil.itemGyungNam
-                    else if (binding.btnWriteRegion.text == "전라북도") locationUtil.itemJunBuk
-                    else if (binding.btnWriteRegion.text == "전라남도") locationUtil.itemJunNam
-                    else arrayOf("도 단위를 선택해주세요.")
-                    , preCheckedRegion
-                ) { dialog, which ->
-                    //which : index
-                    preCheckedRegion = which
-                }
-                .setCancelable(false)
-                .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
-                .show()
-        }
-
-        binding.btnWriteTheme1.setOnClickListener {
-            openBottomSheetDialog()
-        }
-        binding.btnWriteTheme2.setOnClickListener {
-            openBottomSheetDialog()
-        }
-        binding.btnWriteTheme3.setOnClickListener {
-            openBottomSheetDialog()
-        }
-
-        //주차 - 둘 중 하나만 선택 가능
-        binding.btnWriteParkYes.setOnClickListener() {
-            binding.btnWriteParkYes.isSelected = true
-            binding.btnWriteParkNo.isSelected = false
-
-            sharedViewModel.isParking.value = true
-        }
-        binding.btnWriteParkNo.setOnClickListener() {
-            binding.btnWriteParkNo.isSelected = true
-            binding.btnWriteParkYes.isSelected = false
-
-            sharedViewModel.isParking.value = false
-        }
-
-        // 다음 버튼
-        binding.btnWriteBottomNext.setOnClickListener {
-            //주의사항
-            val warningList: ArrayList<MultipartBody.Part> = ArrayList()
-            val warningUIList: ArrayList<String> = ArrayList()
-
-            if(binding.btnWriteCautionHighway.isSelected) {
-                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_HIGH_WAY))
-                warningUIList.add(Define().WARNING_HIGH_WAY)
-            }
-            if(binding.btnWriteCautionMoun.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_MOUNTAIN_ROAD))
-                warningUIList.add(Define().WARNING_MOUNTAIN_ROAD)
-            }
-            if(binding.btnWriteCautionDiffi.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_DIFF_ROAD))
-                warningUIList.add(Define().WARNING_DIFF_ROAD)
-            }
-            if(binding.btnWriteCautionPeople.isSelected){
-                warningList.add(MultipartBody.Part.createFormData("warning",Define().WARNING_HOT_PLACE))
-                warningUIList.add(Define().WARNING_HOT_PLACE)
-            }
-            sharedViewModel.warning.value = warningList
-            sharedViewModel.warningUI.value = warningUIList
-
-            //제목
-            sharedViewModel.title.value = binding.etWriteTitle.text.toString()
-
-            //주차 설명
-            sharedViewModel.parkingDesc.value = binding.etWriteParkReview.text.toString()
-
-            //코스 설명
-            sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
-
-            Log.e("check","title ${sharedViewModel.title.value} \n" +
-                    "courseDesc ${sharedViewModel.courseDesc.value} \n" +
-                    "warningList ${warningList} \n imageMultiPart ${sharedViewModel.imageMultiPart.value} \n" +
-                    "province ${sharedViewModel.province.value} \n region ${sharedViewModel.region.value} \n" +
-                    "theme ${sharedViewModel.theme.value} ")
-            //빈값 확인
-            if(TextUtils.isEmpty(sharedViewModel.title.value)
-                || TextUtils.isEmpty(sharedViewModel.province.value)
-                || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
-                || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
-                || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
-                || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
-
-                    Toast.makeText(requireContext(),getString(R.string.txt_check_all_input),Toast.LENGTH_LONG).show()
-            }else{
-                writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
-            }
-        }
-
 
         return root
     }
@@ -286,6 +115,121 @@ class WriteFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black)
 
         setHasOptionsMenu(true)
+    }
+
+    private fun initListener(){
+        binding.imgWriteAddImg.setOnClickListener(this)
+        binding.clWritePhoto.setOnClickListener(this)
+        binding.btnWriteCautionHighway.setOnClickListener(this)
+        binding.btnWriteCautionPeople.setOnClickListener(this)
+        binding.btnWriteCautionDiffi.setOnClickListener(this)
+        binding.btnWriteCautionMoun.setOnClickListener(this)
+        binding.btnWriteLocation.setOnClickListener(this)
+        binding.btnWriteRegion.setOnClickListener(this)
+        binding.btnWriteParkNo.setOnClickListener(this)
+        binding.btnWriteParkYes.setOnClickListener(this)
+        binding.btnWriteTheme1.setOnClickListener(this)
+        binding.btnWriteTheme2.setOnClickListener(this)
+        binding.btnWriteTheme3.setOnClickListener(this)
+        binding.btnWriteParkYes.setOnClickListener(this)
+        binding.btnWriteParkNo.setOnClickListener(this)
+        binding.btnWriteBottomNext.setOnClickListener(this)
+        binding.btnWriteRegion.setOnClickListener(this)
+        binding.btnWriteLocation.setOnClickListener(this)
+    }
+
+    private fun warningText(edt: EditText, warningTxt: TextView, len: Int) {
+        edt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+            override fun afterTextChanged(p0: Editable?) {
+                edt.removeTextChangedListener(this)
+
+                val textLength : Int = p0.toString().length
+                if(len > 200)
+                    binding.tvLenMyDrive.text = "${textLength}/${len}자"
+
+                if(textLength > len) {
+                    edt.setText(p0.toString().substring(0,textLength-1))
+                    edt.setSelection(textLength-1)
+                }
+                edt.isSelected = textLength > len
+                warningTxt.isVisible = textLength > len
+
+                edt.addTextChangedListener(this)
+            }
+        })
+    }
+
+    //지역 (도 단위)
+    private fun selectRegion(it: View){
+        MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
+            .setTitle(R.string.area)
+            .setNeutralButton(R.string.cancel) { dialog, which ->
+                binding.btnWriteRegion.text = resources.getString(R.string.region)
+                binding.btnWriteLocation.text = resources.getString(R.string.city)
+                binding.btnWriteLocation.isSelected = false
+                it.isSelected = false
+                preCheckProvince = 0
+            }
+            .setPositiveButton(R.string.agreement) { dialog, which ->
+                it.isSelected = true
+                binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
+                sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
+            }
+            .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
+                //which : index
+                preCheckProvince = which
+
+                //이전 선택값과 다를 때
+                if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
+                    binding.btnWriteLocation.text = resources.getString(R.string.city)
+                    binding.btnWriteLocation.isSelected = false
+                    sharedViewModel.region.value = ""
+                }
+            }
+            .setCancelable(false)
+            .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
+            .show()
+    }
+
+    //지역 (시 단위)
+    private fun selectProvince(it: View){
+        MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
+            .setTitle(R.string.area)
+            .setNeutralButton(R.string.cancel) { dialog, which ->
+                binding.btnWriteLocation.text = resources.getString(R.string.city)
+                it.isSelected = false
+                preCheckedRegion = 0
+                sharedViewModel.region.value = ""
+            }
+            .setPositiveButton(R.string.agreement) { dialog, which ->
+                it.isSelected = true
+
+                if(locationUtil.matchRegionToProvince[binding.btnWriteRegion.text] == null){
+                    binding.btnWriteLocation.text = resources.getString(R.string.city)
+                    it.isSelected = false
+                }else{
+                    binding.btnWriteLocation.text = locationUtil.matchRegionToProvince[binding.btnWriteRegion.text]?.get(preCheckedRegion)
+                        ?: resources.getString(R.string.city)
+
+                    sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
+                }
+            }
+            .setSingleChoiceItems(
+                locationUtil.matchRegionToProvince[binding.btnWriteRegion.text] ?: arrayOf("도 단위를 선택해주세요.")
+                , preCheckedRegion
+            ) { dialog, which ->
+                //which : index
+                preCheckedRegion = which
+            }
+            .setCancelable(false)
+            .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
+            .show()
     }
 
     private fun observeThemeData(){
@@ -312,9 +256,28 @@ class WriteFragment : Fragment() {
 
     }
 
-    private fun openBottomSheetDialog() {
+    private fun openThemeDialog() {
         val bottomSheetDialogFragment = DialogThemeFragment()
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
+    }
+
+    private fun convertImgToMultiPart(imgPath : Uri, list : ArrayList<MultipartBody.Part>){
+        //uri -> Bitmap -> multipartform
+        val bitmap : Bitmap = if(Build.VERSION.SDK_INT < 28) {
+            MediaStore.Images.Media.getBitmap(
+                context?.contentResolver,
+                imgPath
+            )
+        } else {
+            val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
+            ImageDecoder.decodeBitmap(source)
+        }
+
+        val imageRequestBody = BitmapRequestBody(bitmap)
+        val imageData: MultipartBody.Part =
+            MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
+
+        list.add(imageData)
     }
 
     private fun galleryLauncher(){
@@ -381,7 +344,7 @@ class WriteFragment : Fragment() {
         var readPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
         // 권한 없어서 요청
         if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) {
-             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
 
         } else { // 권한 있음
             if(writeAdapter.itemCount >= 6){
@@ -399,77 +362,65 @@ class WriteFragment : Fragment() {
         }
     }
 
-    private fun convertImgToMultiPart(imgPath : Uri, list : ArrayList<MultipartBody.Part>){
-        //uri -> Bitmap -> multipartform
-        val bitmap : Bitmap = if(Build.VERSION.SDK_INT < 28) {
-            MediaStore.Images.Media.getBitmap(
-                context?.contentResolver,
-                imgPath
-            )
-        } else {
-            val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
-            ImageDecoder.decodeBitmap(source)
+    //이미지 보내기
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
         }
 
-        val imageRequestBody = BitmapRequestBody(bitmap)
-        val imageData: MultipartBody.Part =
-            MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
-
-        list.add(imageData)
     }
 
-    private fun warningText(edt: EditText, warningTxt: TextView, len: Int) {
-        edt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    private fun nextButtonToMap(){
+        //주의사항
+        val warningList: ArrayList<MultipartBody.Part> = ArrayList()
+        val warningUIList: ArrayList<String> = ArrayList()
 
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        if(binding.btnWriteCautionHighway.isSelected) {
+            warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_HIGH_WAY))
+            warningUIList.add(Define().WARNING_HIGH_WAY)
+        }
+        if(binding.btnWriteCautionMoun.isSelected){
+            warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_MOUNTAIN_ROAD))
+            warningUIList.add(Define().WARNING_MOUNTAIN_ROAD)
+        }
+        if(binding.btnWriteCautionDiffi.isSelected){
+            warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_DIFF_ROAD))
+            warningUIList.add(Define().WARNING_DIFF_ROAD)
+        }
+        if(binding.btnWriteCautionPeople.isSelected){
+            warningList.add(MultipartBody.Part.createFormData("warning",Define().WARNING_HOT_PLACE))
+            warningUIList.add(Define().WARNING_HOT_PLACE)
+        }
+        sharedViewModel.warning.value = warningList
+        sharedViewModel.warningUI.value = warningUIList
 
-            }
-            override fun afterTextChanged(p0: Editable?) {
-                edt.removeTextChangedListener(this)
+        //제목
+        sharedViewModel.title.value = binding.etWriteTitle.text.toString()
 
-                val textLength : Int = p0.toString().length
-                if(len > 200)
-                    binding.tvLenMyDrive.text = "${textLength}/${len}자"
+        //주차 설명
+        sharedViewModel.parkingDesc.value = binding.etWriteParkReview.text.toString()
 
-                if(textLength > len) {
-                    edt.setText(p0.toString().substring(0,textLength-1))
-                    edt.setSelection(textLength-1)
-                }
-                edt.isSelected = textLength > len
-                warningTxt.isVisible = textLength > len
+        //코스 설명
+        sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
 
-                edt.addTextChangedListener(this)
-            }
-        })
-    }
+        Log.d("check","title ${sharedViewModel.title.value} \n" +
+                "courseDesc ${sharedViewModel.courseDesc.value} \n" +
+                "warningList ${warningList} \n imageMultiPart ${sharedViewModel.imageMultiPart.value} \n" +
+                "province ${sharedViewModel.province.value} \n region ${sharedViewModel.region.value} \n" +
+                "theme ${sharedViewModel.theme.value} ")
+        //빈값 확인
+        if(TextUtils.isEmpty(sharedViewModel.title.value)
+            || TextUtils.isEmpty(sharedViewModel.province.value)
+            || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
+            || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
+            || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
+            || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
 
-    private fun setButtonClickEvent() {
-
-        binding.btnWriteCautionHighway.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteCautionPeople.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteCautionDiffi.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteCautionMoun.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteLocation.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteRegion.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteParkNo.setOnClickListener {
-            it.isSelected = !it.isSelected
-        }
-        binding.btnWriteParkYes.setOnClickListener {
-            it.isSelected = !it.isSelected
+            Toast.makeText(requireContext(),getString(R.string.txt_check_all_input),Toast.LENGTH_LONG).show()
+        }else{
+            writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
         }
     }
 
@@ -524,13 +475,43 @@ class WriteFragment : Fragment() {
 
     }
 
-    //이미지 보내기
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
-        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+    override fun onClick(v: View?) {
+        when(v){
+            //갤러리 이미지
+            binding.imgWriteAddImg
+                , binding.clWritePhoto -> { openGallery() }
 
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
+            //버튼 selected
+            binding.btnWriteParkYes, binding.btnWriteCautionHighway, binding.btnWriteCautionPeople
+                , binding.btnWriteCautionDiffi, binding.btnWriteCautionMoun, binding.btnWriteParkNo, binding.btnWriteParkYes
+                    -> { v.isSelected = !v.isSelected }
+
+            //테마
+            binding.btnWriteTheme1
+                , binding.btnWriteTheme2
+                , binding.btnWriteTheme3 -> {openThemeDialog() }
+
+            //주차 - 둘 중 하나만 선택 가능
+            binding.btnWriteParkYes -> {
+                binding.btnWriteParkYes.isSelected = true
+                binding.btnWriteParkNo.isSelected = false
+
+                sharedViewModel.isParking.value = true
+                }
+            binding.btnWriteParkNo -> {
+                binding.btnWriteParkNo.isSelected = true
+                binding.btnWriteParkYes.isSelected = false
+
+                sharedViewModel.isParking.value = false
+                }
+
+            //다음 버튼
+            binding.btnWriteBottomNext -> nextButtonToMap()
+
+            //지역 선택
+            binding.btnWriteRegion -> selectRegion(v)
+            binding.btnWriteLocation -> selectProvince(v)
+
         }
-
     }
 }

@@ -13,9 +13,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
-import com.example.charo_android.data.MapSearchInfo
+import com.example.charo_android.data.model.write.MapSearchInfo
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.response.ResponseWriteData
+import com.example.charo_android.data.model.response.write.ResponseWriteData
 import com.example.charo_android.databinding.FragmentWriteMapSearchBinding
 import com.skt.Tmap.TMapData
 import retrofit2.Call
@@ -29,13 +29,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class WriteMapSearchFragment : Fragment() {
-
-
-//    inner class addressListAdapterToList{
-//        fun getAddressId(address: Room){
-//
-//        }
-//    }
 
     companion object {
         fun newInstance() = WriteMapSearchFragment()

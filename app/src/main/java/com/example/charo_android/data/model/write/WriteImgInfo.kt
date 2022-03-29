@@ -1,4 +1,4 @@
-package com.example.charo_android.data
+package com.example.charo_android.data.model.write
 
 import android.net.Uri
 

@@ -1,4 +1,4 @@
-package com.example.charo_android.data.model.request
+package com.example.charo_android.data.model.request.write
 
 data class RequestWriteHistoryData(
     val userEmail : String,

@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.charo_android.R
 import com.example.charo_android.data.api.ApiService
-import com.example.charo_android.data.model.RequestReadPushData
+import com.example.charo_android.data.model.request.alarm.RequestReadPushData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData

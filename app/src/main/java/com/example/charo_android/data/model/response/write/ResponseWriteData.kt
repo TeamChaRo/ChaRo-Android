@@ -1,4 +1,4 @@
-package com.example.charo_android.data.model.response
+package com.example.charo_android.data.model.response.write
 
 data class ResponseWriteData(
     val success: Boolean,
