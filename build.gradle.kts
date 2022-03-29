@@ -23,7 +23,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
         maven("https://plugins.gradle.org/m2/")
         maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
         maven("https://maven.google.com")
