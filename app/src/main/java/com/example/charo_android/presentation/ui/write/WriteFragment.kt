@@ -124,8 +124,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
         binding.btnWriteCautionPeople.setOnClickListener(this)
         binding.btnWriteCautionDiffi.setOnClickListener(this)
         binding.btnWriteCautionMoun.setOnClickListener(this)
-        binding.btnWriteLocation.setOnClickListener(this)
         binding.btnWriteRegion.setOnClickListener(this)
+        binding.btnWriteProvince.setOnClickListener(this)
         binding.btnWriteParkNo.setOnClickListener(this)
         binding.btnWriteParkYes.setOnClickListener(this)
         binding.btnWriteTheme1.setOnClickListener(this)
@@ -134,8 +134,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
         binding.btnWriteParkYes.setOnClickListener(this)
         binding.btnWriteParkNo.setOnClickListener(this)
         binding.btnWriteBottomNext.setOnClickListener(this)
+        binding.btnWriteProvince.setOnClickListener(this)
         binding.btnWriteRegion.setOnClickListener(this)
-        binding.btnWriteLocation.setOnClickListener(this)
     }
 
     private fun warningText(edt: EditText, warningTxt: TextView, len: Int) {
@@ -170,16 +170,16 @@ class WriteFragment : Fragment(), View.OnClickListener {
         MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
             .setTitle(R.string.area)
             .setNeutralButton(R.string.cancel) { dialog, which ->
-                binding.btnWriteRegion.text = resources.getString(R.string.region)
-                binding.btnWriteLocation.text = resources.getString(R.string.city)
-                binding.btnWriteLocation.isSelected = false
+                binding.btnWriteProvince.text = resources.getString(R.string.region)
+                binding.btnWriteRegion.text = resources.getString(R.string.city)
+                binding.btnWriteRegion.isSelected = false
                 it.isSelected = false
                 preCheckProvince = 0
             }
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
-                binding.btnWriteRegion.text = locationUtil.itemProvince[preCheckProvince]
-                sharedViewModel.province.value = binding.btnWriteRegion.text.toString()
+                binding.btnWriteProvince.text = locationUtil.itemProvince[preCheckProvince]
+                sharedViewModel.province.value = binding.btnWriteProvince.text.toString()
             }
             .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
                 //which : index
@@ -187,8 +187,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
 
                 //이전 선택값과 다를 때
                 if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
-                    binding.btnWriteLocation.text = resources.getString(R.string.city)
-                    binding.btnWriteLocation.isSelected = false
+                    binding.btnWriteRegion.text = resources.getString(R.string.city)
+                    binding.btnWriteRegion.isSelected = false
                     sharedViewModel.region.value = ""
                 }
             }
@@ -202,7 +202,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
         MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
             .setTitle(R.string.area)
             .setNeutralButton(R.string.cancel) { dialog, which ->
-                binding.btnWriteLocation.text = resources.getString(R.string.city)
+                binding.btnWriteRegion.text = resources.getString(R.string.city)
                 it.isSelected = false
                 preCheckedRegion = 0
                 sharedViewModel.region.value = ""
@@ -210,18 +210,18 @@ class WriteFragment : Fragment(), View.OnClickListener {
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
 
-                if(locationUtil.matchRegionToProvince[binding.btnWriteRegion.text] == null){
-                    binding.btnWriteLocation.text = resources.getString(R.string.city)
+                if(locationUtil.matchRegionToProvince[binding.btnWriteProvince.text] == null){
+                    binding.btnWriteRegion.text = resources.getString(R.string.city)
                     it.isSelected = false
                 }else{
-                    binding.btnWriteLocation.text = locationUtil.matchRegionToProvince[binding.btnWriteRegion.text]?.get(preCheckedRegion)
+                    binding.btnWriteRegion.text = locationUtil.matchRegionToProvince[binding.btnWriteProvince.text]?.get(preCheckedRegion)
                         ?: resources.getString(R.string.city)
 
-                    sharedViewModel.region.value = binding.btnWriteLocation.text.toString()
+                    sharedViewModel.region.value = binding.btnWriteRegion.text.toString()
                 }
             }
             .setSingleChoiceItems(
-                locationUtil.matchRegionToProvince[binding.btnWriteRegion.text] ?: arrayOf("도 단위를 선택해주세요.")
+                locationUtil.matchRegionToProvince[binding.btnWriteProvince.text] ?: arrayOf("도 단위를 선택해주세요.")
                 , preCheckedRegion
             ) { dialog, which ->
                 //which : index
@@ -405,6 +405,9 @@ class WriteFragment : Fragment(), View.OnClickListener {
         //코스 설명
         sharedViewModel.courseDesc.value = binding.etWriteMyDrive.text.toString()
 
+        //보여지는 이미지
+        sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
+
         Log.d("check","title ${sharedViewModel.title.value} \n" +
                 "courseDesc ${sharedViewModel.courseDesc.value} \n" +
                 "warningList ${warningList} \n imageMultiPart ${sharedViewModel.imageMultiPart.value} \n" +
@@ -425,30 +428,29 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     //돌아왔을 때 값 유지
-    fun initWriteData() {
+    private fun initWriteData() {
         //사진
         if (sharedViewModel.imageMultiPart.value != null) {
             binding.clWritePhoto.visibility = View.GONE
 
-            var imgmoreList = mutableListOf<WriteImgInfo>()
+            val imgMoreList = sharedViewModel.imageUriRecyclerView.value ?: mutableListOf<WriteImgInfo>()
 
-            sharedViewModel.imageUriRecyclerView.value?.forEach { imageUri ->
-                writeAdapter.imgList = sharedViewModel.imageUriRecyclerView.value!!
+            imgMoreList.forEach { imageUri ->
+                writeAdapter.imgList = imgMoreList
             }
-            Log.e("imgmoreList", imgmoreList.toString())
-            writeAdapter.notifyItemInserted(0)
+
             writeAdapter.notifyDataSetChanged()
 
         }
 
         //지역 도 시
         if(sharedViewModel.province.value != ""){
-            binding.btnWriteRegion.text = sharedViewModel.province.value
-            binding.btnWriteRegion.isSelected = true
+            binding.btnWriteProvince.text = sharedViewModel.province.value
+            binding.btnWriteProvince.isSelected = true
         }
         if(sharedViewModel.region.value != "") {
-            binding.btnWriteLocation.text = sharedViewModel.region.value
-            binding.btnWriteLocation.isSelected = true
+            binding.btnWriteRegion.text = sharedViewModel.region.value
+            binding.btnWriteRegion.isSelected = true
         }
 
         //주차 있없
@@ -481,9 +483,9 @@ class WriteFragment : Fragment(), View.OnClickListener {
             binding.imgWriteAddImg
                 , binding.clWritePhoto -> { openGallery() }
 
-            //버튼 selected
-            binding.btnWriteParkYes, binding.btnWriteCautionHighway, binding.btnWriteCautionPeople
-                , binding.btnWriteCautionDiffi, binding.btnWriteCautionMoun, binding.btnWriteParkNo, binding.btnWriteParkYes
+            //주의사항
+            binding.btnWriteCautionHighway, binding.btnWriteCautionPeople
+                , binding.btnWriteCautionDiffi, binding.btnWriteCautionMoun
                     -> { v.isSelected = !v.isSelected }
 
             //테마
@@ -509,8 +511,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
             binding.btnWriteBottomNext -> nextButtonToMap()
 
             //지역 선택
-            binding.btnWriteRegion -> selectRegion(v)
-            binding.btnWriteLocation -> selectProvince(v)
+            binding.btnWriteProvince -> selectRegion(v)
+            binding.btnWriteRegion -> selectProvince(v)
 
         }
     }

@@ -175,7 +175,7 @@
                         app:layout_constraintTop_toTopOf="@id/text_write_qa_location" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_write_region"
+                        android:id="@+id/btn_write_province"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:minHeight="42dp"
@@ -188,11 +188,11 @@
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_write_location"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_write_region"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_write_location"
+                        android:id="@+id/btn_write_region"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:minHeight="42dp"
@@ -206,7 +206,7 @@
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toStartOf="@+id/btn_write_location_empty"
-                        app:layout_constraintStart_toEndOf="@+id/btn_write_region"
+                        app:layout_constraintStart_toEndOf="@+id/btn_write_province"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -220,7 +220,7 @@
                         android:paddingRight="10dp"
                         android:layout_marginLeft="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/btn_write_location"
+                        app:layout_constraintStart_toEndOf="@+id/btn_write_region"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
