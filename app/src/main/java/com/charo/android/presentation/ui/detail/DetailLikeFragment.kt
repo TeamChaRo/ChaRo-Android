@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
-import com.example.charo_android.data.model.detailold.UserData
-import com.example.charo_android.databinding.DialogDetailLikeBinding
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.main.MainActivity
+import com.charo.android.data.model.detailold.UserData
+import com.charo.android.databinding.DialogDetailLikeBinding
+import com.charo.android.hidden.Hidden
+import com.charo.android.presentation.ui.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

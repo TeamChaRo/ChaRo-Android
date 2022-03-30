@@ -6,9 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ItemDetailLikeBinding
-import com.example.charo_android.domain.model.detailpost.User
+import com.charo.android.R
+import com.charo.android.databinding.ItemDetailLikeBinding
+import com.charo.android.domain.model.detailpost.User
 
 class DetailPostLikeListAdapter(
     private val itemClick: (User) -> Unit,

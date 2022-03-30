@@ -1,11 +1,11 @@
 package com.charo.android.presentation.ui.detail
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.charo_android.databinding.ActivityDetailImageBinding
+import com.charo.android.databinding.ActivityDetailImageBinding
 
 class DetailImageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailImageBinding

@@ -2,16 +2,16 @@ package com.charo.android.presentation.ui.charo.otherpage
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentOtherCharoBinding
-import com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel
-import com.example.charo_android.presentation.ui.charo.follow.CharoListActivity
+import com.charo.android.R
+import com.charo.android.databinding.FragmentOtherCharoBinding
+import com.charo.android.presentation.ui.charo.follow.CharoListActivity
+import com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel
 
 class OtherCharoFragment : Fragment() {
     private val charoViewModel: CharoViewModel by activityViewModels()

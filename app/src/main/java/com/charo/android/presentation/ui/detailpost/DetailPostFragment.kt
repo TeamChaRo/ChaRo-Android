@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.charo.android.databinding.FragmentDetailPostBinding
 import com.example.charo_android.R
 import com.example.charo_android.databinding.FragmentDetailPostBinding
 import com.example.charo_android.domain.model.detailpost.DetailPost

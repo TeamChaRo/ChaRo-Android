@@ -3,10 +3,10 @@ package com.charo.android.presentation.ui.detailpost
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityDetailPostBinding
-import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.databinding.ActivityDetailPostBinding
+import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPostActivity : AppCompatActivity() {

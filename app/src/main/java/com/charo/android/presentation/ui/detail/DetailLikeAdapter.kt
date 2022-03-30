@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.charo_android.R
-import com.example.charo_android.data.model.detailold.UserData
-import com.example.charo_android.databinding.ItemDetailLikeBinding
+import com.charo.android.R
+import com.charo.android.data.model.detailold.UserData
+import com.charo.android.databinding.ItemDetailLikeBinding
 
 class DetailLikeAdapter(private val itemClick: (UserData) -> Unit) :
     RecyclerView.Adapter<DetailLikeAdapter.DetailLikeViewHolder>() {

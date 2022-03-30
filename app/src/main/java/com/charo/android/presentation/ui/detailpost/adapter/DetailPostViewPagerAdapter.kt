@@ -6,15 +6,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ItemDetailPostBinding
+import com.charo.android.R
+import com.charo.android.databinding.ItemDetailPostBinding
 
 class DetailPostViewPagerAdapter(private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<DetailPostViewPagerAdapter.DetailPostViewHolder>() {
     private val asyncDiffer = AsyncListDiffer(this, diffCallback)
 
     class DetailPostViewHolder(private val binding: ItemDetailPostBinding,
-    private val itemClick: (Int) -> Unit) :
+                               private val itemClick: (Int) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(image: String) {
             binding.image = image

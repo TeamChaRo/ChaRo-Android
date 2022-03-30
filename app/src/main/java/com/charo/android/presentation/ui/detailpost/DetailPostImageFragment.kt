@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.charo.android.databinding.FragmentDetailPostImageBinding
+import com.charo.android.presentation.ui.detailpost.adapter.DetailPostImageViewPagerAdapter
 import com.example.charo_android.databinding.FragmentDetailPostImageBinding
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostImageViewPagerAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel

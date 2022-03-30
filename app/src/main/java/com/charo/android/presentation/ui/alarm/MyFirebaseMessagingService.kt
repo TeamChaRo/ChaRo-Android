@@ -9,10 +9,10 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.alarm.RequestFcmData
-import com.example.charo_android.data.model.response.alarm.ResponseFcmData
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.data.model.request.alarm.RequestFcmData
+import com.charo.android.data.model.response.alarm.ResponseFcmData
+import com.charo.android.presentation.util.SharedInformation
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import retrofit2.Call

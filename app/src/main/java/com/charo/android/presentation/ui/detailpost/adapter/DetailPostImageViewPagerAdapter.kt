@@ -6,8 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ItemDetailPostImageBinding
+import com.charo.android.R
+import com.charo.android.databinding.ItemDetailPostImageBinding
 
 class DetailPostImageViewPagerAdapter :
     RecyclerView.Adapter<DetailPostImageViewPagerAdapter.DetailPostImageViewHolder>() {

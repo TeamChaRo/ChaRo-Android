@@ -2,14 +2,15 @@ package com.charo.android.presentation.ui.detail
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityDetailBinding
-import com.skt.Tmap.*
+import androidx.appcompat.app.AppCompatActivity
+import com.charo.android.R
+import com.charo.android.databinding.ActivityDetailBinding
+import com.skt.Tmap.TMapPoint
+import com.skt.Tmap.TMapView
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding

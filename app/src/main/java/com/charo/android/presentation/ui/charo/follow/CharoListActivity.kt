@@ -1,10 +1,10 @@
 package com.charo.android.presentation.ui.charo.follow
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityCharoListBinding
-import com.example.charo_android.hidden.Hidden
+import androidx.appcompat.app.AppCompatActivity
+import com.charo.android.R
+import com.charo.android.databinding.ActivityCharoListBinding
+import com.charo.android.hidden.Hidden
 
 class CharoListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharoListBinding

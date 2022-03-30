@@ -4,15 +4,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentDetailMapBinding
-import com.example.charo_android.hidden.Hidden
+import com.charo.android.R
+import com.charo.android.databinding.FragmentDetailMapBinding
+import com.charo.android.hidden.Hidden
 import com.skt.Tmap.*
 
 class DetailMapFragment : Fragment() {

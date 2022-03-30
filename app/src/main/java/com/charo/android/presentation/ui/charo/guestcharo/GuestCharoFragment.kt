@@ -2,14 +2,14 @@ package com.charo.android.presentation.ui.charo.guestcharo
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentGuestCharoBinding
-import com.example.charo_android.presentation.ui.charo.adapter.CharoFragmentStateAdapter
-import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
+import androidx.fragment.app.Fragment
+import com.charo.android.R
+import com.charo.android.databinding.FragmentGuestCharoBinding
+import com.charo.android.presentation.ui.charo.adapter.CharoFragmentStateAdapter
+import com.charo.android.presentation.ui.signin.SocialSignInActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class GuestCharoFragment : Fragment() {

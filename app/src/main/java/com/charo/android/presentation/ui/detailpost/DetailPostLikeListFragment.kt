@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import com.charo.android.databinding.DialogDetailLikeBinding
 import com.example.charo_android.R
 import com.example.charo_android.databinding.DialogDetailLikeBinding
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
