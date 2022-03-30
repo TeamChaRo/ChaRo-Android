@@ -6,8 +6,9 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.charo_android.databinding.ActivityOnBoardingBinding
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.databinding.ActivityOnBoardingBinding
+import com.charo.android.presentation.util.SharedInformation
+
 
 class OnBoardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingBinding

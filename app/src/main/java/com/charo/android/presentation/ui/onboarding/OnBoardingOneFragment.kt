@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.charo_android.databinding.FragmentOnBoarding1Binding
-import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
+import com.charo.android.databinding.FragmentOnBoarding1Binding
+import com.charo.android.presentation.ui.signin.SocialSignInActivity
 
 
 class OnBoardingOneFragment : Fragment() {
