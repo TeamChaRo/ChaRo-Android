@@ -6,7 +6,6 @@ import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.example.charo_android.R
 import com.example.charo_android.databinding.ActivitySignUpBinding
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.changeFragment
 
