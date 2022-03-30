@@ -4,13 +4,17 @@ package com.charo.android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentSignUpEmailBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
-import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
-import com.example.charo_android.presentation.util.dpToPx
+import android.widget.Toast
+import androidx.core.view.isVisible
+import com.charo.android.R
+import com.charo.android.databinding.FragmentSignUpEmailBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.charo.android.presentation.util.KeyboardVisibilityUtils
+import com.charo.android.presentation.util.dpToPx
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SignUpEmailFragment :

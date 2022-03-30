@@ -11,12 +11,13 @@ import android.widget.ArrayAdapter
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.charo_android.R
-import com.example.charo_android.data.model.mypage.Post
-import com.example.charo_android.databinding.FragmentSavedPostBinding
-import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
-import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
-import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.charo.android.R
+import com.charo.android.data.model.mypage.Post
+import com.charo.android.databinding.FragmentSavedPostBinding
+import com.charo.android.presentation.ui.detailpost.DetailPostActivity
+import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
+import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
+
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SavedPostFragment : Fragment() {

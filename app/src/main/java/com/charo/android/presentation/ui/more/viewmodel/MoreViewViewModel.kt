@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.more.LastId
-import com.example.charo_android.domain.model.more.MoreDrive
-import com.example.charo_android.domain.usecase.home.PostRemoteHomeLikeUseCase
-import com.example.charo_android.domain.usecase.more.*
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.model.more.LastId
+import com.charo.android.domain.model.more.MoreDrive
+import com.charo.android.domain.usecase.home.PostRemoteHomeLikeUseCase
+import com.charo.android.domain.usecase.more.*
 import kotlinx.coroutines.launch
 
 class MoreViewViewModel(

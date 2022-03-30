@@ -1,11 +1,12 @@
 package com.charo.android.data.api.alarm
 
-import com.example.charo_android.data.model.request.alarm.RequestReadPushData
-import com.example.charo_android.data.model.request.alarm.RequestFcmData
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.data.model.response.alarm.ResponseAlarmDeleteData
-import com.example.charo_android.data.model.response.alarm.ResponseAlarmListData
-import com.example.charo_android.data.model.response.alarm.ResponseFcmData
+
+import com.charo.android.data.model.request.alarm.RequestFcmData
+import com.charo.android.data.model.request.alarm.RequestReadPushData
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.response.alarm.ResponseAlarmDeleteData
+import com.charo.android.data.model.response.alarm.ResponseAlarmListData
+import com.charo.android.data.model.response.alarm.ResponseFcmData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

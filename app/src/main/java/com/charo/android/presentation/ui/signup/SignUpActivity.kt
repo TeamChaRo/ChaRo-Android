@@ -2,12 +2,14 @@ package com.charo.android.presentation.ui.signup
 
 import android.os.Bundle
 import android.util.Log
+import com.charo.android.R
+import com.charo.android.databinding.ActivitySignUpBinding
 import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivitySignUpBinding
-import com.example.charo_android.presentation.util.SharedInformation
-import com.example.charo_android.presentation.util.changeFragment
+import com.charo.android.presentation.util.SharedInformation
+import com.charo.android.presentation.util.changeFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
     private val signUpViewModel: SignUpEmailViewModel by viewModel()

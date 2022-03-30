@@ -2,16 +2,19 @@ package com.charo.android.presentation.ui.more
 
 import android.os.Bundle
 import android.view.View
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.RequestThemeViewData
-import com.example.charo_android.databinding.FragmentMoreThemeViewBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.home.HomeFragment
-import com.example.charo_android.presentation.ui.main.SharedViewModel
-import com.example.charo_android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
-import com.example.charo_android.presentation.util.SharedInformation
+import androidx.core.view.doOnAttach
+import com.charo.android.R
+import com.charo.android.data.model.request.RequestThemeViewData
+import com.charo.android.databinding.FragmentMoreThemeViewBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.ui.main.SharedViewModel
+import com.charo.android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
+import com.charo.android.presentation.util.SharedInformation
+
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class MoreThemeViewFragment :

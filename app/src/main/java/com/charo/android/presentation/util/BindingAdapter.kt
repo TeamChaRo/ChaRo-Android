@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.R
+import com.charo.android.R
 import com.google.android.material.chip.Chip
 
 object BindingAdapter {

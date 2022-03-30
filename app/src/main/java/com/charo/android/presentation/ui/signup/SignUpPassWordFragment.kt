@@ -3,12 +3,16 @@ package com.charo.android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentSignUpPassWordBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
-import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
+import com.charo.android.R
+import com.charo.android.databinding.FragmentSignUpPassWordBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.charo.android.presentation.util.KeyboardVisibilityUtils
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.regex.Pattern
+
 
 class SignUpPassWordFragment :
     BaseFragment<FragmentSignUpPassWordBinding>(R.layout.fragment_sign_up_pass_word) {

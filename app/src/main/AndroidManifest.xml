@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.charo.android">
+        package="com.charo.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -27,11 +27,11 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity"
+            android:name="com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity"
             android:exported="false" />
 
         <service
-            android:name="com.charo.com.charo.android.presentation.ui.alarm.MyFirebaseMessagingService"
+            android:name="com.charo.android.presentation.ui.alarm.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -40,33 +40,33 @@
         </service>
 
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.detailpost.DetailPostActivity"
+            android:name="com.charo.android.presentation.ui.detailpost.DetailPostActivity"
             android:exported="true"/>
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.follow.FollowActivity"
+            android:name="com.charo.android.presentation.ui.follow.FollowActivity"
             android:exported="false" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.charo.follow.CharoListActivity"
+            android:name="com.charo.android.presentation.ui.charo.follow.CharoListActivity"
             android:exported="false" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.detail.DetailImageActivity"
+            android:name="com.charo.android.presentation.ui.detail.DetailImageActivity"
             android:exported="false" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.setting.SettingServiceTermActivity"
+            android:name="com.charo.android.presentation.ui.setting.SettingServiceTermActivity"
             android:exported="false" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.setting.SettingPrivacyActivity"
+            android:name="com.charo.android.presentation.ui.setting.SettingPrivacyActivity"
             android:exported="false" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.setting.SettingCsActivity"
+            android:name="com.charo.android.presentation.ui.setting.SettingCsActivity"
             android:exported="false" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.signin.SocialSignInActivity"
+            android:name="com.charo.android.presentation.ui.signin.SocialSignInActivity"
             android:exported="true" />
-        <activity android:name="com.charo.com.charo.android.presentation.ui.write.WriteShareActivity" />
-        <activity android:name="com.charo.com.charo.android.presentation.ui.alarm.AlarmActivity" />
+        <activity android:name="com.charo.android.presentation.ui.write.WriteShareActivity" />
+        <activity android:name="com.charo.android.presentation.ui.alarm.AlarmActivity" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.main.SplashActivity"
+            android:name="com.charo.android.presentation.ui.main.SplashActivity"
             android:exported="true"/>
 
         <activity
@@ -84,12 +84,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.signup.SignUpActivity"
+            android:name="com.charo.android.presentation.ui.signup.SignUpActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.charo.com.charo.android.presentation.ui.setting.SettingActivity" />
+        <activity android:name="com.charo.android.presentation.ui.setting.SettingActivity" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.onboarding.OnBoardingActivity"
+            android:name="com.charo.android.presentation.ui.onboarding.OnBoardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,9 +97,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.charo.com.charo.android.presentation.ui.search.SearchActivity" />
+        <activity android:name="com.charo.android.presentation.ui.search.SearchActivity" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.detail.DetailActivity"
+            android:name="com.charo.android.presentation.ui.detail.DetailActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -114,9 +114,9 @@
                 <!-- //www.example.com/detail/{postId} //www.example.com/detail?postId=postId -->
             </intent-filter>
         </activity>
-        <activity android:name="com.charo.com.charo.android.presentation.ui.signin.SignInActivity" />
+        <activity android:name="com.charo.android.presentation.ui.signin.SignInActivity" />
         <activity
-            android:name="com.charo.com.charo.android.presentation.ui.main.MainActivity"
+            android:name="com.charo.android.presentation.ui.main.MainActivity"
             android:label="@string/app_name" />
     </application>
 

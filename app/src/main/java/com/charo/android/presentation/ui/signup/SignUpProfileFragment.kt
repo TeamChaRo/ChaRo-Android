@@ -14,13 +14,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentSignUpProfileBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
-import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.databinding.FragmentSignUpProfileBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.charo.android.presentation.util.KeyboardVisibilityUtils
+import com.charo.android.presentation.util.SharedInformation
+
 import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.regex.Pattern
 
 
 class SignUpProfileFragment :
