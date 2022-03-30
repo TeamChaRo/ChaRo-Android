@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.domain.usecase.home.GetRemoteHomeTitle
+import com.charo.android.domain.usecase.home.GetRemoteHomeTitle
 import kotlinx.coroutines.launch
 
 class SharedViewModel(

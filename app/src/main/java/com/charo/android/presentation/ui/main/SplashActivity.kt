@@ -1,12 +1,12 @@
 package com.charo.android.presentation.ui.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivitySplashBinding
-import com.example.charo_android.presentation.ui.onboarding.OnBoardingActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.charo.android.R
+import com.charo.android.databinding.ActivitySplashBinding
+import com.charo.android.presentation.ui.onboarding.OnBoardingActivity
 
 class SplashActivity : AppCompatActivity() {
     private val time: Long = 2000
