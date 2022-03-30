@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentFollowerBinding
-import com.example.charo_android.presentation.ui.follow.adapter.FollowAdapter
-import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
-import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity
-import com.example.charo_android.presentation.util.LoginUtil
+import com.charo.android.R
+import com.charo.android.databinding.FragmentFollowerBinding
+import com.charo.android.presentation.ui.follow.adapter.FollowAdapter
+import com.charo.android.presentation.ui.follow.viewmodel.FollowViewModel
+import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.charo.android.presentation.util.LoginUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FollowerFragment : Fragment() {

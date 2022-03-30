@@ -3,12 +3,13 @@ package com.charo.android.presentation.ui.follow
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityFollowBinding
-import com.example.charo_android.presentation.ui.follow.adapter.FollowViewPagerAdapter
-import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.databinding.ActivityFollowBinding
+import com.charo.android.presentation.ui.follow.adapter.FollowViewPagerAdapter
+import com.charo.android.presentation.ui.follow.viewmodel.FollowViewModel
+import com.charo.android.presentation.util.SharedInformation
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FollowActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFollowBinding

@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.mypage.User
-import com.example.charo_android.domain.usecase.follow.GetRemoteFollowListUseCase
-import com.example.charo_android.domain.usecase.follow.PostFollowUseCase
+import com.charo.android.data.model.mypage.User
+import com.charo.android.domain.usecase.follow.GetRemoteFollowListUseCase
+import com.charo.android.domain.usecase.follow.PostFollowUseCase
 import kotlinx.coroutines.launch
 
 class FollowViewModel(

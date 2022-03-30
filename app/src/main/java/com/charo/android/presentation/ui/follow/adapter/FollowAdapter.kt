@@ -6,9 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.data.model.mypage.User
-import com.example.charo_android.databinding.ItemMyPageFollowBinding
+import com.charo.android.R
+import com.charo.android.data.model.mypage.User
+import com.charo.android.databinding.ItemMyPageFollowBinding
 
 class FollowAdapter(
     private val itemClick: (User) -> Unit,
