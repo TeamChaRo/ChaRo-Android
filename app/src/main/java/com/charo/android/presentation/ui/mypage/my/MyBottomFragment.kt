@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentMyBottomBinding
-import com.example.charo_android.presentation.ui.mypage.adapter.PostViewPagerAdapter
-import com.example.charo_android.presentation.ui.mypage.postlist.SavedPostFragment
-import com.example.charo_android.presentation.ui.mypage.postlist.WrittenPostFragment
+import com.charo.android.R
+import com.charo.android.databinding.FragmentMyBottomBinding
+import com.charo.android.presentation.ui.mypage.adapter.PostViewPagerAdapter
+import com.charo.android.presentation.ui.mypage.postlist.SavedPostFragment
+import com.charo.android.presentation.ui.mypage.postlist.WrittenPostFragment
+
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MyBottomFragment : Fragment() {

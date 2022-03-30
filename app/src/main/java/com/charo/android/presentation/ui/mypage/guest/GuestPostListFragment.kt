@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentGuestPostListBinding
+import com.charo.android.R
+import com.charo.android.databinding.FragmentGuestPostListBinding
+
 
 class GuestPostListFragment : Fragment() {
     private var _binding: FragmentGuestPostListBinding? = null

@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentMyTopBinding
-import com.example.charo_android.presentation.ui.follow.FollowActivity
-import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
-import com.example.charo_android.presentation.ui.setting.SettingActivity
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.databinding.FragmentMyTopBinding
+import com.charo.android.presentation.ui.follow.FollowActivity
+import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.charo.android.presentation.ui.setting.SettingActivity
+import com.charo.android.presentation.util.SharedInformation
+
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MyTopFragment : Fragment() {

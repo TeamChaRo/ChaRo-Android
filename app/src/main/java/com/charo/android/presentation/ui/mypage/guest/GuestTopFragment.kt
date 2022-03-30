@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentGuestTopBinding
-import com.example.charo_android.presentation.ui.setting.SettingActivity
+import com.charo.android.R
+import com.charo.android.databinding.FragmentGuestTopBinding
+import com.charo.android.presentation.ui.setting.SettingActivity
+
 
 class GuestTopFragment : Fragment() {
     private var _binding: FragmentGuestTopBinding? = null

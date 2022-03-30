@@ -6,9 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.data.model.mypage.Post
-import com.example.charo_android.databinding.ItemMyPagePostBinding
+import com.charo.android.R
+import com.charo.android.data.model.mypage.Post
+import com.charo.android.databinding.ItemMyPagePostBinding
+
 
 class PostAdapter(private val itemClick: (Post) -> Unit) :
     RecyclerView.Adapter<PostAdapter.WrittenPostViewHolder>() {
