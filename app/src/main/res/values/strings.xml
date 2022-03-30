@@ -34,8 +34,8 @@
     <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
     <string name="search_start">찾아보기</string>
     <string name="et_title">제목을 입력해주세요</string>
-    <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요? 사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
-    <string name="which_location">드라이브 코스</string>
+    <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요? \n사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
+    <string name="which_location">드라이브 코스 지역</string>
     <string name="select_location">도/광역시, 시 단위로 선택해주세요</string>
     <string name="unit_do">도 단위</string>
     <string name="unit_si">시 단위</string>
@@ -55,7 +55,7 @@
     <string name="warning_difficult">초보힘듦</string>
     <string name="warning_mountain">산길포함</string>
     <string name="warning_highway">고속도로</string>
-    <string name="course_description">코스 소개</string>
+    <string name="course_description">코스 설명</string>
     <string name="hint_my_drive">앞서 담지 못한 드라이브 코스에 대한 소개 및 표현을 자유롭게 해주세요.</string>
     <string name="prev">이전</string>
     <string name="next">다음</string>
@@ -198,7 +198,7 @@
     <string name="setting_notice_date">2021.12.12</string>
     <string name="setting_notice_content">어쩌구 저쩌구가 업데이트 됨!어쩌구 저쩌구가 업데이트 됨!</string>
 
-    <string name="write_recent_search">최근 검색어</string>
+    <string name="write_recent_search">최근 검색</string>
     <string name="write_auto_search">관련 검색어</string>
 
     <string name="text_my_page_no_written_post">작성하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n작성해보는 것은 어떠신가요?</string>

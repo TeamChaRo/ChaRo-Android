@@ -357,7 +357,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             .show()
     }
 
-    fun serveWriteData() {
+    private fun serveWriteData() {
         val param : HashMap<String, RequestBody> = HashMap()
 
         val sendTheme : HashMap<String,RequestBody> = HashMap()

@@ -35,6 +35,7 @@ import okio.BufferedSink
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.widget.GridLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -89,6 +90,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
             writeAdapter.notifyDataSetChanged()
 
             sharedViewModel.imageMultiPart.value!!.removeAt(it)
+
+            setPlusIconLoc()
         }
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
@@ -334,6 +337,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
                         }
                     }
                 }
+
+                setPlusIconLoc()
             }
         }
     }
@@ -370,6 +375,47 @@ class WriteFragment : Fragment(), View.OnClickListener {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
         }
 
+    }
+
+    private fun setPlusIconLoc(){
+        var rowSpec : GridLayout.Spec = GridLayout.spec(0)
+        var columnSpec : GridLayout.Spec = GridLayout.spec(0)
+
+        binding.clWritePhoto.visibility = View.GONE
+        binding.gridImgPlus.visibility = View.VISIBLE
+        when(writeAdapter.imgList.size){
+            0 -> {
+                binding.clWritePhoto.visibility = View.VISIBLE
+                binding.gridImgPlus.visibility = View.GONE
+            }
+            1 -> {
+                rowSpec = GridLayout.spec(0)
+                columnSpec = GridLayout.spec(0,GridLayout.CENTER,1f)
+            }
+            2 -> {
+                rowSpec = GridLayout.spec(0)
+                columnSpec = GridLayout.spec(2)
+            }
+            3 -> {
+                rowSpec = GridLayout.spec(1)
+                columnSpec = GridLayout.spec(0)
+            }
+            4 -> {
+                rowSpec = GridLayout.spec(1)
+                columnSpec = GridLayout.spec(0,GridLayout.CENTER,1f)
+            }
+            5 -> {
+                rowSpec = GridLayout.spec(1)
+                columnSpec = GridLayout.spec(2)
+            }
+            6 -> {
+                binding.gridImgPlus.visibility = View.GONE
+            }
+        }
+
+        if(binding.imgWriteAddImg.parent != null)
+            (binding.imgWriteAddImg.parent as ViewGroup).removeView(binding.imgWriteAddImg)
+        binding.gridImgPlus.addView(binding.imgWriteAddImg, GridLayout.LayoutParams(rowSpec,columnSpec))
     }
 
     private fun nextButtonToMap(){

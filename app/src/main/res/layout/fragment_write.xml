@@ -95,23 +95,36 @@
                     android:visibility="visible"
                     >
                 </androidx.recyclerview.widget.RecyclerView>
-                <ImageView
-                    android:id="@+id/img_write_add_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_write_add_img"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/recyclerview_write_img"
-                    />
 
+                <GridLayout
+                    android:id="@+id/grid_img_plus"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@+id/recyclerview_write_img"
+                    app:layout_constraintBottom_toBottomOf="@id/recyclerview_write_img"
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
+                    android:orientation="horizontal"
+                    android:columnCount="3"
+                    android:rowCount="2"
+                    android:visibility="gone"
+                    >
+                    <ImageView
+                        android:id="@+id/img_write_add_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ui_write_img_plus"
+                        />
+                </GridLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_write_photo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/rectangle_244"
                     app:layout_constraintTop_toBottomOf="@id/et_write_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerview_write_img"
                     android:visibility="visible">
 
                     <ImageView
@@ -135,6 +148,7 @@
                         android:text="@string/how_your_drive"
                         android:textColor="@color/gray4_sub_889098"
                         android:textSize="14sp"
+                        android:gravity="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -145,8 +159,8 @@
                     android:id="@+id/cl_write_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="333dp"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="33dp"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_write_img"
                     >
 
                     <TextView
@@ -154,6 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:textStyle="bold"
                         android:text="@string/which_location"
                         android:textColor="@color/black_sub_212429"
                         android:textSize="16sp"
@@ -237,6 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:textStyle="bold"
                         android:text="@string/which_theme"
                         android:textColor="@color/black_sub_212429"
                         android:textSize="16sp"
@@ -323,6 +339,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:textStyle="bold"
                         android:text="@string/is_parking"
                         android:textColor="@color/black_sub_212429"
                         android:textSize="16sp"
@@ -406,6 +423,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:textStyle="bold"
                         android:text="@string/warning"
                         android:textColor="@color/black_sub_212429"
                         android:textSize="16sp"
@@ -506,6 +524,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:textStyle="bold"
                         android:text="@string/course_description"
                         android:textColor="@color/black_sub_212429"
                         android:textSize="16sp"
