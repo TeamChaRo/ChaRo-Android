@@ -3,9 +3,9 @@ package com.charo.android.presentation.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.databinding.ItemHomeViewpagerBinding
-import com.example.charo_android.domain.model.home.Banner
-import com.example.charo_android.domain.model.home.BannerRoad
+import com.charo.android.databinding.ItemHomeViewpagerBinding
+import com.charo.android.domain.model.home.Banner
+import com.charo.android.domain.model.home.BannerRoad
 
 class HomeViewPagerAdapter() :
     RecyclerView.Adapter<HomeViewPagerAdapter.HomeViewPagerViewHolder>() {

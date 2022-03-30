@@ -2,11 +2,11 @@ package com.charo.android.presentation.ui.home.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.home.*
-import com.example.charo_android.domain.usecase.home.*
+import com.charo.android.R
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.model.home.*
+import com.charo.android.domain.usecase.home.*
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -138,7 +138,7 @@ class HomeViewModel(
     fun getTrendDrive(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteTrendDrive.execute(userEmail) }
-                .onSuccess { it ->
+                .onSuccess {
                     _trendDrive.value = it
                     Log.d("trend", "서버 통신 성공!")
 

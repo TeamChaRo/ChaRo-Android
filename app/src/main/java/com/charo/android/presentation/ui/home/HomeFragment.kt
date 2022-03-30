@@ -5,26 +5,28 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSnapHelper
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
-import com.example.charo_android.databinding.FragmentHomeBinding
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.alarm.AlarmActivity
-import com.example.charo_android.presentation.ui.home.adapter.*
-import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
-import com.example.charo_android.presentation.ui.main.SharedViewModel
-import com.example.charo_android.presentation.ui.more.MoreViewFragment
-import com.example.charo_android.presentation.ui.search.SearchActivity
-import com.example.charo_android.presentation.util.LocationUtil
-import com.example.charo_android.presentation.util.LoginUtil
-import com.example.charo_android.presentation.util.SharedInformation
-import com.example.charo_android.presentation.util.ThemeUtil
+import com.charo.android.R
+import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.databinding.FragmentHomeBinding
+import com.charo.android.hidden.Hidden
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.alarm.AlarmActivity
+import com.charo.android.presentation.ui.home.adapter.*
+import com.charo.android.presentation.ui.home.viewmodel.HomeViewModel
+import com.charo.android.presentation.ui.main.SharedViewModel
+import com.charo.android.presentation.ui.more.MoreViewFragment
+import com.charo.android.presentation.ui.search.SearchActivity
+import com.charo.android.presentation.util.LocationUtil
+import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.SharedInformation
+import com.charo.android.presentation.util.ThemeUtil
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-    private val sharedViewModel : SharedViewModel by sharedViewModel()
+    private val sharedViewModel : SharedViewModel by sharedViewMode()
     private val homeViewModel: HomeViewModel by viewModel()
     private var theme = ThemeUtil()
     private var location = LocationUtil()

@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ItemHomeThemeBinding
-import com.example.charo_android.data.model.entity.HomeThemeInfo
-import com.example.charo_android.presentation.ui.more.MoreThemeViewFragment
-import com.example.charo_android.presentation.util.SharedInformation
+import com.bumptech.glide.Glide
+import com.charo.android.R
+import com.charo.android.data.model.entity.HomeThemeInfo
+import com.charo.android.databinding.ItemHomeThemeBinding
+import com.charo.android.presentation.ui.more.MoreThemeViewFragment
+import com.charo.android.presentation.util.SharedInformation
 
 
 class HomeThemeAdapter(

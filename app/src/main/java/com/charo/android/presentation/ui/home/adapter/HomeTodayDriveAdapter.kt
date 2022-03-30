@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.databinding.ItemHomeTodayDriveBinding
-import com.example.charo_android.domain.model.home.TodayCharoDrive
-import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
-import com.example.charo_android.presentation.ui.home.HomeFragment
+import com.charo.android.databinding.ItemHomeTodayDriveBinding
+import com.charo.android.presentation.ui.detailpost.DetailPostActivity
+import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.domain.model.home.TodayCharoDrive
 
 class HomeTodayDriveAdapter(
     val userId: String,

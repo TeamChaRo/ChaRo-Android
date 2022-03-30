@@ -1,11 +1,11 @@
 package com.charo.android.domain.usecase.home
 
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.repository.home.HomeRepository
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.repository.home.HomeRepository
 
 class PostRemoteHomeLikeUseCase(private val repository : HomeRepository) {
-    suspend fun execute(requestHomeLikeData: RequestHomeLikeData) : StatusCode{
+    suspend fun execute(requestHomeLikeData: RequestHomeLikeData) : StatusCode {
         return repository.postLike(requestHomeLikeData)
     }
 }
