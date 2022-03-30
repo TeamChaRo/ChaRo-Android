@@ -11,10 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.request.signup.RequestSignUpGoogleData
-import com.example.charo_android.data.model.request.signup.RequestSignUpKaKaoData
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.usecase.signup.*
+import com.charo.android.data.model.request.signup.RequestSignUpGoogleData
+import com.charo.android.data.model.request.signup.RequestSignUpKaKaoData
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.usecase.signup.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -187,7 +187,8 @@ class SignUpEmailViewModel(
     fun signUpGoogle(userEmail: String, googleProfileImage:String, pushAgree : Boolean, emailAgree: Boolean){
         viewModelScope.launch {
             runCatching { PostRemoteSocialSIgnUpRegisterUseCase.execute(
-                RequestSignUpGoogleData(userEmail, googleProfileImage, pushAgree, emailAgree))
+                RequestSignUpGoogleData(userEmail, googleProfileImage, pushAgree, emailAgree)
+            )
             }
                 .onSuccess {
                     _googleRegisterSuccess.value = it

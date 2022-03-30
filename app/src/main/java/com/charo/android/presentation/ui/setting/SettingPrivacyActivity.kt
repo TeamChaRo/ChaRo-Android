@@ -3,10 +3,11 @@ package com.charo.android.presentation.ui.setting
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
+import com.charo.android.R
+import com.charo.android.databinding.ActivitySettingPrivacyBinding
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseActivity
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivitySettingPrivacyBinding
+
 
 class SettingPrivacyActivity : BaseActivity<ActivitySettingPrivacyBinding>(R.layout.activity_setting_privacy) {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -3,13 +3,16 @@ package com.charo.android.presentation.ui.setting
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentSettingPassWordUpdateBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
-import com.example.charo_android.presentation.util.CustomToast
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.databinding.FragmentSettingPassWordUpdateBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.charo.android.presentation.util.CustomToast
+import com.charo.android.presentation.util.SharedInformation
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.regex.Pattern
 
 
 class SettingPasswordUpdateFragment :

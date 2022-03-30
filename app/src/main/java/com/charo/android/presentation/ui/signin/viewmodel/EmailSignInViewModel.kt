@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.request.signin.RequestSignInData
-import com.example.charo_android.domain.model.signin.EmailSignInData
-import com.example.charo_android.domain.usecase.signin.GetRemoteEmailLoginUseCase
+import com.charo.android.data.model.request.signin.RequestSignInData
+import com.charo.android.domain.model.signin.EmailSignInData
+import com.charo.android.domain.usecase.signin.GetRemoteEmailLoginUseCase
+
 import kotlinx.coroutines.launch
+import java.util.Arrays.toString
 
 class EmailSignInViewModel(
     private val getRemoteEmailLoginUseCase: GetRemoteEmailLoginUseCase

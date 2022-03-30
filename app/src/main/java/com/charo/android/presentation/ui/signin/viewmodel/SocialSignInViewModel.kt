@@ -5,11 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.request.signin.RequestSocialData
-import com.example.charo_android.domain.model.signin.SocialLoginData
-import com.example.charo_android.domain.usecase.signin.GetRemoteSocialLoginData
-import com.example.charo_android.presentation.util.ResultWrapper
-import com.example.charo_android.presentation.util.safeApiCall
+import com.charo.android.data.model.request.signin.RequestSocialData
+import com.charo.android.domain.model.signin.SocialLoginData
+import com.charo.android.domain.usecase.signin.GetRemoteSocialLoginData
+import com.charo.android.presentation.util.ResultWrapper
+import com.charo.android.presentation.util.safeApiCall
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

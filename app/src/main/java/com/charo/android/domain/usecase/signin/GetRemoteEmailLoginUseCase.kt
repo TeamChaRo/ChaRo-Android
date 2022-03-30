@@ -1,11 +1,11 @@
 package com.charo.android.domain.usecase.signin
 
-import com.example.charo_android.data.model.request.signin.RequestSignInData
-import com.example.charo_android.domain.model.signin.EmailSignInData
-import com.example.charo_android.domain.repository.signin.EmailSignInRepository
+import com.charo.android.data.model.request.signin.RequestSignInData
+import com.charo.android.domain.model.signin.EmailSignInData
+import com.charo.android.domain.repository.signin.EmailSignInRepository
 
 class GetRemoteEmailLoginUseCase(private val repository : EmailSignInRepository) {
-    suspend fun execute(requestSignInData: RequestSignInData) : EmailSignInData{
+    suspend fun execute(requestSignInData: RequestSignInData) : EmailSignInData {
         return repository.postSignIn(requestSignInData)
     }
 }

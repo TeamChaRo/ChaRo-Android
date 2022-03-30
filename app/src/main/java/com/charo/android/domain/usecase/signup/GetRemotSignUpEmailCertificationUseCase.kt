@@ -1,8 +1,9 @@
 package com.charo.android.domain.usecase.signup
 
-import com.example.charo_android.data.mapper.SignUpMapper
-import com.example.charo_android.data.model.request.RequestCertificationData
-import com.example.charo_android.domain.repository.signup.SignUpEmailCertificationRepository
+import com.charo.android.data.mapper.SignUpMapper
+import com.charo.android.data.model.request.RequestCertificationData
+import com.charo.android.domain.repository.signup.SignUpEmailCertificationRepository
+
 
 class GetRemoteSignUpEmailCertificationUseCase(private val repository: SignUpEmailCertificationRepository) {
 

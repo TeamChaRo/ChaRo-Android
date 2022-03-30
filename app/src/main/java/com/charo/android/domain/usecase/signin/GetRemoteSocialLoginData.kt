@@ -1,9 +1,10 @@
 package com.charo.android.domain.usecase.signin
 
-import com.example.charo_android.data.mapper.SignInMapper
-import com.example.charo_android.data.model.request.signin.RequestSocialData
-import com.example.charo_android.domain.model.signin.SocialLoginData
-import com.example.charo_android.domain.repository.signin.KakaoSignInRepository
+import com.charo.android.data.mapper.SignInMapper
+import com.charo.android.data.model.request.signin.RequestSocialData
+import com.charo.android.domain.model.signin.SocialLoginData
+import com.charo.android.domain.repository.signin.KakaoSignInRepository
+
 
 class GetRemoteSocialLoginData(private val repository : KakaoSignInRepository) {
 

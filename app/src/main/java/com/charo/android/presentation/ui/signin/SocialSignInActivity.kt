@@ -7,14 +7,15 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
+import com.charo.android.R
+import com.charo.android.data.model.request.signin.RequestSocialData
+import com.charo.android.databinding.ActivitySocialSignInBinding
 import com.charo.android.presentation.base.BaseActivity
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.signin.RequestSocialData
-import com.example.charo_android.databinding.ActivitySocialSignInBinding
-import com.example.charo_android.presentation.ui.main.MainActivity
-import com.example.charo_android.presentation.ui.signup.SignUpActivity
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.presentation.ui.signup.SignUpActivity
+import com.charo.android.presentation.util.SharedInformation
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -24,6 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SocialSignInActivity() :
     BaseActivity<ActivitySocialSignInBinding>(R.layout.activity_social_sign_in) {

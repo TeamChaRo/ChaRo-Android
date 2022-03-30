@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.signin.RequestSignInData
-import com.example.charo_android.databinding.ActivitySignInBinding
-import com.example.charo_android.presentation.ui.main.MainActivity
-import com.example.charo_android.presentation.ui.signin.viewmodel.EmailSignInViewModel
-import com.example.charo_android.presentation.ui.signup.SignUpActivity
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.data.model.request.signin.RequestSignInData
+import com.charo.android.databinding.ActivitySignInBinding
+import com.charo.android.presentation.ui.main.MainActivity
+import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
+import com.charo.android.presentation.ui.signup.SignUpActivity
+import com.charo.android.presentation.util.SharedInformation
+
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
