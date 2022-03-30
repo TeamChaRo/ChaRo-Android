@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.charo.android.data.api.ApiService
 import com.example.charo_android.data.model.mypage.*
 import com.example.charo_android.presentation.util.enqueueUtil
 

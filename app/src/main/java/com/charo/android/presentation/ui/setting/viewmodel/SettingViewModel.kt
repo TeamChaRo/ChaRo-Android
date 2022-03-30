@@ -9,12 +9,8 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.charo_android.domain.model.setting.ProfileChangeData
-import com.example.charo_android.domain.model.setting.ProfileRequestChangeData
 import com.example.charo_android.domain.usecase.setting.*
 import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
-import com.example.charo_android.presentation.util.NonNullLiveData
-import com.example.charo_android.presentation.util.NonNullMutableLiveData
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType

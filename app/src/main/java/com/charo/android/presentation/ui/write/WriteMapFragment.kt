@@ -18,7 +18,6 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
-import com.charo.android.data.api.ApiService
 import com.example.charo_android.data.model.request.write.RequestWriteData
 import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.hidden.Hidden

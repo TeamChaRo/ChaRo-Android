@@ -1,7 +1,6 @@
 package com.charo.android.domain.usecase
 
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 abstract class CoroutineUseCase<P, R>(

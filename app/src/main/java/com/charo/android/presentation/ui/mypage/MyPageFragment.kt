@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.charo_android.R
-import com.example.charo_android.data.model.mypage.UserInformation
-import com.example.charo_android.databinding.FragmentMyPageBinding
-import com.example.charo_android.presentation.ui.mypage.guest.GuestBottomFragment
-import com.example.charo_android.presentation.ui.mypage.guest.GuestTopFragment
-import com.example.charo_android.presentation.ui.mypage.my.MyBottomFragment
-import com.example.charo_android.presentation.ui.mypage.my.MyTopFragment
-import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.charo.android.R
+import com.charo.android.data.model.mypage.UserInformation
+import com.charo.android.databinding.FragmentMyPageBinding
+import com.charo.android.presentation.ui.mypage.guest.GuestBottomFragment
+import com.charo.android.presentation.ui.mypage.guest.GuestTopFragment
+import com.charo.android.presentation.ui.mypage.my.MyBottomFragment
+import com.charo.android.presentation.ui.mypage.my.MyTopFragment
+import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 // 마이페이지 프래그먼트(본체)

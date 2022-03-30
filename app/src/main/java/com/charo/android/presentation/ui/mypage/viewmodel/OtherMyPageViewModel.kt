@@ -5,10 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.mypage.Post
-import com.example.charo_android.data.model.mypage.UserInformation
-import com.example.charo_android.domain.usecase.follow.PostFollowUseCase
-import com.example.charo_android.domain.usecase.mypage.*
+import com.charo.android.data.model.mypage.Post
+import com.charo.android.data.model.mypage.UserInformation
+import com.charo.android.domain.usecase.follow.PostFollowUseCase
+import com.charo.android.domain.usecase.mypage.GetRemoteLikePostUseCase
+import com.charo.android.domain.usecase.mypage.GetRemoteMoreWrittenLikePostUseCase
+import com.charo.android.domain.usecase.mypage.GetRemoteMoreWrittenNewPostUseCase
+import com.charo.android.domain.usecase.mypage.GetRemoteNewPostUseCase
 import kotlinx.coroutines.launch
 
 class OtherMyPageViewModel(

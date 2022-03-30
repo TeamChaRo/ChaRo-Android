@@ -21,8 +21,6 @@ import com.example.charo_android.presentation.util.LocationUtil
 import com.example.charo_android.presentation.util.LoginUtil
 import com.example.charo_android.presentation.util.SharedInformation
 import com.example.charo_android.presentation.util.ThemeUtil
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {

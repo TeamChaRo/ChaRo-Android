@@ -5,7 +5,7 @@
     <data>
         <variable
             name="settingNoticeData"
-            type="com.example.charo_android.domain.model.setting.SettingNoticeData" />
+            type="com.charo.android.domain.model.setting.SettingNoticeData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemCharoLoadingBinding
 import com.example.charo_android.databinding.ItemMoreViewBinding
 import com.example.charo_android.domain.model.more.MoreDrive
-import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.more.MoreViewFragment
-import okhttp3.internal.notify
 
 class MoreViewAdapter(
     val userId: String,

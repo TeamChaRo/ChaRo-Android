@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.data.model.write.MapSearchInfo
-import com.charo.android.data.api.ApiService
 import com.example.charo_android.data.model.request.write.RequestWriteHistoryData
 import com.example.charo_android.data.model.response.ResponseStatusCode
 import com.example.charo_android.databinding.ItemAutoSearchBinding

@@ -6,19 +6,18 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
-import com.example.charo_android.R
-import com.example.charo_android.databinding.ActivityOtherMyPageBinding
-import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
-import com.example.charo_android.presentation.ui.follow.FollowActivity
-import com.example.charo_android.presentation.ui.mypage.adapter.PostAdapter
-import com.example.charo_android.presentation.ui.mypage.postlist.WrittenPostFragment
-import com.example.charo_android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
-import com.example.charo_android.presentation.util.LoginUtil
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.databinding.ActivityOtherMyPageBinding
+import com.charo.android.presentation.ui.detailpost.DetailPostActivity
+import com.charo.android.presentation.ui.follow.FollowActivity
+import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
+import com.charo.android.presentation.ui.mypage.postlist.WrittenPostFragment
+import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
+import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtherMyPageActivity : AppCompatActivity() {

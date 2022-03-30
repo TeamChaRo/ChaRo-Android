@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.domain.model.detailpost.DetailPost
-import com.example.charo_android.domain.model.detailpost.User
-import com.example.charo_android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
-import com.example.charo_android.domain.usecase.detailpost.GetDetailPostUseCase
-import com.example.charo_android.domain.usecase.follow.PostFollowUseCase
-import com.example.charo_android.domain.usecase.interaction.PostLikeUseCase
-import com.example.charo_android.domain.usecase.interaction.PostSaveUseCase
+import com.charo.android.domain.model.detailpost.DetailPost
+import com.charo.android.domain.model.detailpost.User
+import com.charo.android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
+import com.charo.android.domain.usecase.detailpost.GetDetailPostUseCase
+import com.charo.android.domain.usecase.follow.PostFollowUseCase
+import com.charo.android.domain.usecase.interaction.PostLikeUseCase
+import com.charo.android.domain.usecase.interaction.PostSaveUseCase
 import kotlinx.coroutines.launch
 
 class DetailPostViewModel(

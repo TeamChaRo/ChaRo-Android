@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.detailpost
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -11,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R
 import com.example.charo_android.databinding.DialogDetailLikeBinding
-import com.example.charo_android.domain.model.detailpost.User
 import com.example.charo_android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
 import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.example.charo_android.presentation.ui.mypage.other.OtherMyPageActivity

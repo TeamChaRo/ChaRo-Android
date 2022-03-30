@@ -9,7 +9,6 @@ import com.example.charo_android.presentation.ui.follow.adapter.FollowViewPagerA
 import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.example.charo_android.presentation.util.SharedInformation
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FollowActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFollowBinding

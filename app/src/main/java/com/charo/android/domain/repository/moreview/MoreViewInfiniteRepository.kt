@@ -1,6 +1,5 @@
 package com.charo.android.domain.repository.moreview
 
-import com.example.charo_android.data.model.response.more.ResponseMoreViewInfiniteData
 import com.example.charo_android.domain.model.more.MoreView
 
 interface MoreViewInfiniteRepository {

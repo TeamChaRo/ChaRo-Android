@@ -1,6 +1,8 @@
 package com.charo.android.data.mapper
 
-import com.example.charo_android.data.model.mypage.*
+import com.charo.android.data.model.mypage.PostInfo
+import com.charo.android.data.model.mypage.ResponseEndlessScroll
+import com.charo.android.data.model.mypage.ResponseMyPage
 
 object MyPageMapper {
     fun mapperToLikePost(responseMyPage: ResponseMyPage): ResponseMyPage.Data {

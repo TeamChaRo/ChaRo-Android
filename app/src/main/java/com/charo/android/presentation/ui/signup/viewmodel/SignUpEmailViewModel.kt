@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.charo_android.data.model.request.signup.RequestSignUpGoogleData
 import com.example.charo_android.data.model.request.signup.RequestSignUpKaKaoData
-import com.example.charo_android.data.model.response.signup.ResponseSocialSignUpData
 import com.example.charo_android.domain.model.StatusCode
 import com.example.charo_android.domain.usecase.signup.*
 import kotlinx.coroutines.launch

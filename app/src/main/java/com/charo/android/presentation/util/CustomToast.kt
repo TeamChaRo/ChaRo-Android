@@ -2,17 +2,13 @@ package com.charo.android.presentation.util
 
 import android.app.Dialog
 import android.content.Context
-import android.content.res.Resources
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentWriteMapBinding
 import com.example.charo_android.databinding.ToastMapCustomBinding
 import com.example.charo_android.databinding.ToastPasswordUpdateCustomBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 object CustomToast {
     fun createToast(context: Context, message: String): Toast? {

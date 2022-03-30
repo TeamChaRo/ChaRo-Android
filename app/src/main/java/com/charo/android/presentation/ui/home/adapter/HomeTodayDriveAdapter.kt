@@ -1,14 +1,12 @@
 package com.charo.android.presentation.ui.home.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemHomeTodayDriveBinding
 import com.example.charo_android.domain.model.home.TodayCharoDrive
-import com.example.charo_android.presentation.ui.detail.DetailActivity
 import com.example.charo_android.presentation.ui.detailpost.DetailPostActivity
 import com.example.charo_android.presentation.ui.home.HomeFragment
 

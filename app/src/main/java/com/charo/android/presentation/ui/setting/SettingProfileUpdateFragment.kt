@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.setting
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextUtils.replace
 import android.text.TextWatcher
 import android.util.Log
@@ -14,9 +13,6 @@ import com.example.charo_android.databinding.FragmentSettingProfileUpdateBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
 import kotlinx.android.synthetic.main.fragment_setting_profile_update.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.util.regex.Pattern
-import kotlin.properties.Delegates
 
 
 class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBinding>

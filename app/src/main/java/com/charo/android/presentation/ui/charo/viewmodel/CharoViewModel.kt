@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.charo.android.data.api.ApiService
-import com.example.charo_android.data.model.charo.*
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.util.enqueueUtil
+import com.charo.android.data.model.charo.*
+import com.charo.android.hidden.Hidden
+import com.charo.android.presentation.util.enqueueUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -261,7 +261,7 @@ class CharoViewModel : ViewModel() {
     fun getMoreSavedNewData() {
         _isServerConnecting.value = true
         val call: Call<ResponseMyPageMoreData> =
-            com.charo.android.data.api.ApiService.myPageViewMoreService.getMoreSavedNewData(
+            ApiService.myPageViewMoreService.getMoreSavedNewData(
                 Hidden.userId,
                 savedNewData.value!!.lastId
             )
@@ -301,7 +301,7 @@ class CharoViewModel : ViewModel() {
     fun getInitOtherLikeData(userEmail: String) {
         _isServerConnecting.value = true
         Log.d("from", "CharoViewModel.getInitOtherLikeData")
-        val call = com.charo.android.data.api.ApiService.myPageViewLikeService.getMyPage(userEmail)
+        val call = ApiService.myPageViewLikeService.getMyPage(userEmail)
         call.enqueueUtil(
             onSuccess = {
                 _otherInformation.value = it.data.userInformation
@@ -314,7 +314,7 @@ class CharoViewModel : ViewModel() {
     fun getInitOtherNewData(userEmail: String) {
         _isServerConnecting.value = true
         Log.d("from", "CharoViewModel.getInitOtherNewData")
-        val call = com.charo.android.data.api.ApiService.myPageViewNewService.getMyPage(userEmail)
+        val call = ApiService.myPageViewNewService.getMyPage(userEmail)
         call.enqueueUtil(
             onSuccess = {
                 _otherInformation.value = it.data.userInformation
@@ -327,7 +327,7 @@ class CharoViewModel : ViewModel() {
     fun getMoreOtherWrittenLikeData(userEmail: String) {
         _isServerConnecting.value = true
         Log.d("from", "getMoreOtherWrittenLikeData")
-        val call = com.charo.android.data.api.ApiService.myPageViewMoreService.getMoreWrittenLikeData(
+        val call = ApiService.myPageViewMoreService.getMoreWrittenLikeData(
             userEmail,
             otherWrittenLikeData.value!!.lastId,
             otherWrittenLikeData.value!!.lastCount

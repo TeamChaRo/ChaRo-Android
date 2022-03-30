@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat.getColor
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.search.RequestSearchViewData
-import com.example.charo_android.databinding.FragmentSearchBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.main.MainActivity
-import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
-import com.example.charo_android.presentation.util.LocationUtil
-import com.example.charo_android.presentation.util.SharedInformation
-import com.example.charo_android.presentation.util.ThemeUtil
+import com.charo.android.R
+import com.charo.android.data.model.request.search.RequestSearchViewData
+import com.charo.android.databinding.FragmentSearchBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.main.MainActivity
+import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
+import com.charo.android.presentation.util.LocationUtil
+import com.charo.android.presentation.util.SharedInformation
+import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

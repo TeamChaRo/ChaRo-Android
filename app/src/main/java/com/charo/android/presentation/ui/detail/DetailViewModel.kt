@@ -4,10 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.charo.android.data.api.ApiService
-import com.example.charo_android.data.model.detailold.*
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.util.enqueueUtil
+import com.charo.android.data.model.detailold.*
+import com.charo.android.hidden.Hidden
+import com.charo.android.presentation.util.enqueueUtil
 import com.skt.Tmap.TMapInfo
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapPoint

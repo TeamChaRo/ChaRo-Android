@@ -1,7 +1,6 @@
 package com.charo.android.presentation.util
 
 import android.content.Context
-import androidx.core.content.ContextCompat
 
 object SharedInformation {
     private const val SOCIAL_KEY = "SOCIAL_KEY"

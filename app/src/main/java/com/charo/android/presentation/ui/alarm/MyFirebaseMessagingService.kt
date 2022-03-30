@@ -10,7 +10,6 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.charo_android.R
-import com.charo.android.data.api.ApiService
 import com.example.charo_android.data.model.request.alarm.RequestFcmData
 import com.example.charo_android.data.model.response.alarm.ResponseFcmData
 import com.example.charo_android.presentation.util.SharedInformation

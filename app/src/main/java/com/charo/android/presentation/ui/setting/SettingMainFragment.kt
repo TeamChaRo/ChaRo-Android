@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,7 +20,6 @@ import com.example.charo_android.presentation.util.SharedInformation
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.user.UserApiClient
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SettingMainFragment :

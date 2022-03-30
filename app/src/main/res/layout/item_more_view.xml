@@ -5,7 +5,7 @@
     <data>
         <variable
             name="moreDrive"
-            type="com.example.charo_android.domain.model.more.MoreDrive" />
+            type="com.charo.android.domain.model.more.MoreDrive" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

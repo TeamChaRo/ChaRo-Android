@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.databinding.ItemResultSearchBinding
-import com.example.charo_android.domain.model.more.MoreDrive
 import com.example.charo_android.domain.model.search.SearchDrive
 import com.example.charo_android.presentation.ui.detail.DetailActivity
 

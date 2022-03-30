@@ -14,7 +14,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.example.charo_android.R
 import com.example.charo_android.data.model.write.MapSearchInfo
-import com.charo.android.data.api.ApiService
 import com.example.charo_android.data.model.response.write.ResponseWriteData
 import com.example.charo_android.databinding.FragmentWriteMapSearchBinding
 import com.skt.Tmap.TMapData

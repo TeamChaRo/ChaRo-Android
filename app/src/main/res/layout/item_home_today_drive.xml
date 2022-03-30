@@ -5,7 +5,7 @@
     <data>
     <variable
         name="todayCharoDrive"
-        type="com.example.charo_android.domain.model.home.TodayCharoDrive" />
+        type="com.charo.android.domain.model.home.TodayCharoDrive" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

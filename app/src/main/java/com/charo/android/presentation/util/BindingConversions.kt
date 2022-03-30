@@ -1,14 +1,12 @@
 package com.charo.android.presentation.util
 
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.R
 
 object BindingConversions {
     @BindingAdapter("profileImageUrl")

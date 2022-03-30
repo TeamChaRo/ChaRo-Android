@@ -9,7 +9,6 @@ import com.example.charo_android.databinding.FragmentSettingNoticeBinding
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.setting.adapter.SettingNoticeAdapter
 import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SettingNoticeFragment : BaseFragment<FragmentSettingNoticeBinding>(R.layout.fragment_setting_notice) {

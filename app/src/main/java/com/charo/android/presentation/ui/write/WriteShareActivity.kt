@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.write
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import com.example.charo_android.R
 import androidx.fragment.app.Fragment

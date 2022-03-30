@@ -2,15 +2,12 @@ package com.charo.android.presentation.ui.search
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentResultSearchBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
+import com.charo.android.R
+import com.charo.android.databinding.FragmentResultSearchBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 

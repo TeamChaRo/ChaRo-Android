@@ -8,15 +8,11 @@ import android.widget.ArrayAdapter
 import com.example.charo_android.R
 import com.example.charo_android.data.model.request.home.RequestHomeLikeData
 import com.example.charo_android.databinding.FragmentMoreThemeContentViewBinding
-import com.example.charo_android.hidden.Hidden
 import com.example.charo_android.presentation.base.BaseFragment
 import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.adapter.MoreThemeContentAdapter
-import com.example.charo_android.presentation.ui.more.adapter.MoreViewAdapter
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.example.charo_android.presentation.util.SharedInformation
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MoreThemeContentViewFragment(val userId: String, val identifier: String, val value: String) :

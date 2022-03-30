@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
 
 class MoreThemeViewPagerAdapter(fm: FragmentActivity ) : FragmentStateAdapter(fm) {
 

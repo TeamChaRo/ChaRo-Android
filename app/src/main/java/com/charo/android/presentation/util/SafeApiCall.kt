@@ -1,6 +1,5 @@
 package com.charo.android.presentation.util
 
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

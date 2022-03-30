@@ -1,12 +1,10 @@
 package com.charo.android.presentation.ui.more
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.charo_android.R
@@ -19,8 +17,6 @@ import com.example.charo_android.presentation.ui.main.SharedViewModel
 import com.example.charo_android.presentation.ui.more.adapter.MoreViewAdapter
 import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.example.charo_android.presentation.util.SharedInformation
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {

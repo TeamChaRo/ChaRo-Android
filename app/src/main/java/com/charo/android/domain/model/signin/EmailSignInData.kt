@@ -1,7 +1,5 @@
 package com.charo.android.domain.model.signin
 
-import android.provider.ContactsContract
-
 data class EmailSignInData(
     val success: Boolean,
     val data: EmailSignIn

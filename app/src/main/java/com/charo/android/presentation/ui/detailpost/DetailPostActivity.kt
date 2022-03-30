@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.detailpost
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.charo_android.R

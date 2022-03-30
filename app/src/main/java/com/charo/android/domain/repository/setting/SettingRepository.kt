@@ -1,6 +1,5 @@
 package com.charo.android.domain.repository.setting
 
-import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
 import com.example.charo_android.domain.model.StatusCode
 import com.example.charo_android.domain.model.setting.ProfileChangeData
 import okhttp3.MultipartBody

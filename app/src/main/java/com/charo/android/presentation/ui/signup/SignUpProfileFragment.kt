@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.signup
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -22,8 +21,6 @@ import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailVie
 import com.example.charo_android.presentation.util.KeyboardVisibilityUtils
 import com.example.charo_android.presentation.util.SharedInformation
 import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.util.regex.Pattern
 
 
 class SignUpProfileFragment :

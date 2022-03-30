@@ -3,9 +3,9 @@ package com.charo.android.presentation.ui.charo.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.data.model.charo.Drive
-import com.example.charo_android.databinding.ItemCharoLoadingBinding
-import com.example.charo_android.databinding.ItemCharoMyCharoBinding
+import com.charo.android.data.model.charo.Drive
+import com.charo.android.databinding.ItemCharoLoadingBinding
+import com.charo.android.databinding.ItemCharoMyCharoBinding
 
 class CharoAdapter(
     val userId: String,
