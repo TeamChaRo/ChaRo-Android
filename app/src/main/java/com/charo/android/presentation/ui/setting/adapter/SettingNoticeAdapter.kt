@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.databinding.ItemSettingNoticeBinding
-import com.example.charo_android.domain.model.setting.SettingNoticeData
+import com.charo.android.databinding.ItemSettingNoticeBinding
+import com.charo.android.domain.model.setting.SettingNoticeData
+
 
 class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNoticeViewHolder>() {
     var settingNotice : MutableList<SettingNoticeData> = mutableListOf()

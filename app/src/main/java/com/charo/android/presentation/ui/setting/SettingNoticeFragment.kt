@@ -3,12 +3,13 @@ package com.charo.android.presentation.ui.setting
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.charo_android.R
-import com.example.charo_android.data.datasource.local.setting.LocalSettingNoticeDataSourceImpl
-import com.example.charo_android.databinding.FragmentSettingNoticeBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.setting.adapter.SettingNoticeAdapter
-import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.charo.android.R
+import com.charo.android.data.datasource.local.setting.LocalSettingNoticeDataSourceImpl
+import com.charo.android.databinding.FragmentSettingNoticeBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.setting.adapter.SettingNoticeAdapter
+import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SettingNoticeFragment : BaseFragment<FragmentSettingNoticeBinding>(R.layout.fragment_setting_notice) {

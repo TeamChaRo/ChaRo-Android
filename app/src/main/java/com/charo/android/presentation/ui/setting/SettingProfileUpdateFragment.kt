@@ -8,11 +8,14 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentSettingProfileUpdateBinding
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.charo.android.R
+import com.charo.android.databinding.FragmentSettingProfileUpdateBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
+
 import kotlinx.android.synthetic.main.fragment_setting_profile_update.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.regex.Pattern
 
 
 class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBinding>

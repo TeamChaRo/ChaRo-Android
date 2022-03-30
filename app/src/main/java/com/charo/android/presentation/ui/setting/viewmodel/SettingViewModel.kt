@@ -8,9 +8,10 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.charo_android.domain.model.setting.ProfileChangeData
-import com.example.charo_android.domain.usecase.setting.*
-import com.example.charo_android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
+import com.charo.android.domain.model.setting.ProfileChangeData
+import com.charo.android.domain.usecase.setting.*
+import com.charo.android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
+
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType

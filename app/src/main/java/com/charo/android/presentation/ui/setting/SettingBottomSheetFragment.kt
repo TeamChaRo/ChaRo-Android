@@ -11,15 +11,16 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentSettingBottomSheetBinding
-import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.charo.android.R
+import com.charo.android.databinding.FragmentSettingBottomSheetBinding
+import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SettingBottomSheetFragment : BottomSheetDialogFragment() {
-    private var _binding : FragmentSettingBottomSheetBinding ? = null
+    private var _binding : FragmentSettingBottomSheetBinding? = null
     val binding get() = _binding!!
     private val settingViewModel: SettingViewModel by sharedViewModel()
 

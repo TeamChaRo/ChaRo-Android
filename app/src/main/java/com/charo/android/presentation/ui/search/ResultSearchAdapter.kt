@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.databinding.ItemResultSearchBinding
-import com.example.charo_android.domain.model.search.SearchDrive
-import com.example.charo_android.presentation.ui.detail.DetailActivity
+import com.charo.android.databinding.ItemResultSearchBinding
+import com.charo.android.domain.model.search.SearchDrive
+import com.charo.android.presentation.ui.detail.DetailActivity
 
 class ResultSearchAdapter() :
     RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {

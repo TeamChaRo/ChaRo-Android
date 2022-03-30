@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.charo_android.data.model.request.search.RequestSearchViewData
-import com.example.charo_android.domain.model.search.SearchDrive
-import com.example.charo_android.domain.usecase.search.GetRemoteSearchUseCase
+import com.charo.android.data.model.request.search.RequestSearchViewData
+import com.charo.android.domain.model.search.SearchDrive
+import com.charo.android.domain.usecase.search.GetRemoteSearchUseCase
+
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
