@@ -1,7 +1,8 @@
 package com.charo.android.data.datasource.local.home
 
-import com.example.charo_android.R
-import com.example.charo_android.domain.model.home.BannerRoad
+import com.charo.android.R
+import com.charo.android.domain.model.home.BannerRoad
+
 
 class LocalHomeBannerRoadDataSourceImpl() : LocalHomeBannerRoadDataSource {
     override fun fetchData(): List<BannerRoad> {

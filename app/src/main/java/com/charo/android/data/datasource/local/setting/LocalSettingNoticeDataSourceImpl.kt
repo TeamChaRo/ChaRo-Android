@@ -1,6 +1,7 @@
 package com.charo.android.data.datasource.local.setting
 
-import com.example.charo_android.domain.model.setting.SettingNoticeData
+import com.charo.android.domain.model.setting.SettingNoticeData
+
 
 class LocalSettingNoticeDataSourceImpl : LocalSettingNoticeDataSource {
     override fun fetchData(): MutableList<SettingNoticeData> {

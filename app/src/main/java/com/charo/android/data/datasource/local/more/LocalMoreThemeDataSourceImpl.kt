@@ -1,7 +1,8 @@
 package com.charo.android.data.datasource.local.more
 
-import com.example.charo_android.R
-import com.example.charo_android.presentation.ui.more.MoreThemeInfo
+import com.charo.android.R
+import com.charo.android.presentation.ui.more.MoreThemeInfo
+
 
 class LocalMoreThemeDataSourceImpl : LocalMoreThemeDataSource {
     override fun fetchData(): MutableList<MoreThemeInfo> {

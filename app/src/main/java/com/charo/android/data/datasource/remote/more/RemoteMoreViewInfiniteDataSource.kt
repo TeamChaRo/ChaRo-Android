@@ -1,6 +1,7 @@
 package com.charo.android.data.datasource.remote.more
 
-import com.example.charo_android.data.model.response.more.ResponseMoreViewInfiniteData
+import com.charo.android.data.model.response.more.ResponseMoreViewInfiniteData
+
 
 interface RemoteMoreViewInfiniteDataSource {
     suspend fun getPreview(

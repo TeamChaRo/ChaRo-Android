@@ -1,8 +1,9 @@
 package com.charo.android.data.datasource.remote.interaction
 
-import com.example.charo_android.data.api.interaction.InteractionService
-import com.example.charo_android.data.model.interaction.RequestInteractionData
-import com.example.charo_android.data.model.interaction.ResponseInteractionData
+import com.charo.android.data.api.interaction.InteractionService
+import com.charo.android.data.model.interaction.RequestInteractionData
+import com.charo.android.data.model.interaction.ResponseInteractionData
+
 
 class RemoteInteractionDataSourceImpl(private val service: InteractionService): RemoteInteractionDataSource {
     override suspend fun postLike(requestInteractionData: RequestInteractionData): ResponseInteractionData {

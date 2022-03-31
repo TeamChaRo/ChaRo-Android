@@ -1,8 +1,10 @@
 package com.charo.android.data.datasource.remote.setting
 
-import com.example.charo_android.data.api.setting.SettingViewService
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
+
+
+import com.charo.android.data.api.setting.SettingViewService
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.response.setting.ResponseProfileUpdateData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

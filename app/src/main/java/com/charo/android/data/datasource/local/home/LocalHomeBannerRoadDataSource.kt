@@ -1,6 +1,7 @@
 package com.charo.android.data.datasource.local.home
 
-import com.example.charo_android.domain.model.home.BannerRoad
+import com.charo.android.domain.model.home.BannerRoad
+
 
 interface LocalHomeBannerRoadDataSource {
 

@@ -1,8 +1,9 @@
 package com.charo.android.data.datasource.remote.signin
 
-import com.example.charo_android.data.api.signin.KakaoSignInService
-import com.example.charo_android.data.model.request.signin.RequestSocialData
-import com.example.charo_android.data.model.response.signin.ResponseSocialData
+import com.charo.android.data.api.signin.KakaoSignInService
+import com.charo.android.data.model.request.signin.RequestSocialData
+import com.charo.android.data.model.response.signin.ResponseSocialData
+
 
 class RemoteKakaoSignInDataSourceImpl(private val service : KakaoSignInService)
     : RemoteKakaoSignInDataSource{
