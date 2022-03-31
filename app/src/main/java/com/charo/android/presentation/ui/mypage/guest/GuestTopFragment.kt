@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.FragmentGuestTopBinding
 import com.charo.android.presentation.ui.setting.SettingActivity
+import com.charo.android.presentation.ui.signin.SocialSignInActivity
 
 
 class GuestTopFragment : Fragment() {
@@ -28,6 +29,7 @@ class GuestTopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         clickSetting()
+        clickLogin()
     }
 
     override fun onDestroyView() {
@@ -39,6 +41,20 @@ class GuestTopFragment : Fragment() {
         binding.imgProfileSetting.setOnClickListener {
             val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun clickLogin() {
+        binding.tvProfileNickname.setOnClickListener {
+            val intent = Intent(requireContext(), SocialSignInActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
+        binding.imgLogin.setOnClickListener {
+            val intent = Intent(requireContext(), SocialSignInActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
     }
 }
