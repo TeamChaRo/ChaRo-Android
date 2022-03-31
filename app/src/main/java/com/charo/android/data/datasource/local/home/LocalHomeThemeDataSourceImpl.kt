@@ -1,7 +1,8 @@
 package com.charo.android.data.datasource.local.home
 
-import com.example.charo_android.R
-import com.example.charo_android.data.model.entity.HomeThemeInfo
+import com.charo.android.R
+import com.charo.android.data.model.entity.HomeThemeInfo
+
 
 class LocalHomeThemeDataSourceImpl: LocalHomeThemeDataSource {
     override fun fetchData(): MutableList<HomeThemeInfo> {

@@ -1,7 +1,8 @@
 package com.charo.android.data.datasource.remote.more
 
-import com.example.charo_android.data.api.more.MoreNewViewService
-import com.example.charo_android.data.model.response.more.ResponseMoreViewData
+import com.charo.android.data.api.more.MoreNewViewService
+import com.charo.android.data.model.response.more.ResponseMoreViewData
+
 
 class RemoteMoreNewViewDataSourceImpl(private val service: MoreNewViewService) : RemoteMoreNewViewDataSource {
     override suspend fun getMoreNewView(

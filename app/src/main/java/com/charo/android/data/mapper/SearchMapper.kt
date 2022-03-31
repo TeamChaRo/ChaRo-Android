@@ -1,7 +1,8 @@
 package com.charo.android.data.mapper
 
-import com.example.charo_android.data.model.response.search.ResponseSearchViewData
-import com.example.charo_android.domain.model.search.SearchDrive
+import com.charo.android.data.model.response.search.ResponseSearchViewData
+import com.charo.android.domain.model.search.SearchDrive
+
 
 object SearchMapper {
     fun mapperToSearch(responseSearchViewData: ResponseSearchViewData) : List<SearchDrive>{

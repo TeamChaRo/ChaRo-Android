@@ -1,11 +1,12 @@
 package com.charo.android.data.mapper
 
-import com.example.charo_android.data.model.request.signin.RequestSocialData
-import com.example.charo_android.data.model.response.signin.ResponseSignInData
-import com.example.charo_android.data.model.response.signin.ResponseSocialData
-import com.example.charo_android.domain.model.signin.EmailSignInData
-import com.example.charo_android.domain.model.signin.SocialLoginData
-import com.example.charo_android.domain.model.signin.SocialUserEmail
+import com.charo.android.data.model.request.signin.RequestSocialData
+import com.charo.android.data.model.response.signin.ResponseSignInData
+import com.charo.android.data.model.response.signin.ResponseSocialData
+import com.charo.android.domain.model.signin.EmailSignInData
+import com.charo.android.domain.model.signin.SocialLoginData
+import com.charo.android.domain.model.signin.SocialUserEmail
+
 
 object SignInMapper {
     fun mapperToSocialUserEmail(requestSocialData: RequestSocialData) : SocialUserEmail {

@@ -1,9 +1,10 @@
 package com.charo.android.data.mapper
 
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.data.model.response.home.ResponseHomeViewData
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.home.*
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.response.home.ResponseHomeViewData
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.model.home.*
+
 
 object HomeMapper {
 
@@ -97,7 +98,7 @@ object HomeMapper {
         )
     }
 
-    fun mapperToHomeLike(responseStatusCode : ResponseStatusCode) : StatusCode{
+    fun mapperToHomeLike(responseStatusCode : ResponseStatusCode) : StatusCode {
         return StatusCode(responseStatusCode.success)
     }
 }

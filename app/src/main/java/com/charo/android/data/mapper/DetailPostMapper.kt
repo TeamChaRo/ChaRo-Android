@@ -1,7 +1,8 @@
 package com.charo.android.data.mapper
 
-import com.example.charo_android.data.model.detailpost.ResponseDetailPost
-import com.example.charo_android.domain.model.detailpost.DetailPost
+import com.charo.android.data.model.detailpost.ResponseDetailPost
+import com.charo.android.domain.model.detailpost.DetailPost
+
 
 object DetailPostMapper {
     fun mapperToDetailPost(responseDetailPost: ResponseDetailPost): DetailPost {

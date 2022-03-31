@@ -1,7 +1,8 @@
 package com.charo.android.data.datasource.remote.more
 
-import com.example.charo_android.data.api.more.MoreViewInfiniteService
-import com.example.charo_android.data.model.response.more.ResponseMoreViewInfiniteData
+import com.charo.android.data.api.more.MoreViewInfiniteService
+import com.charo.android.data.model.response.more.ResponseMoreViewInfiniteData
+
 
 class RemoteMoreViewInfiniteDataSourceImpl(private val service: MoreViewInfiniteService): RemoteMoreViewInfiniteDataSource {
     override suspend fun getPreview(
