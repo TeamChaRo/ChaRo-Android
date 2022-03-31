@@ -1,11 +1,11 @@
 package com.charo.android.data.datasource.repositoryimpl.home
 
-import com.example.charo_android.data.mapper.HomeMapper
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.data.model.response.home.ResponseHomeViewData
-import com.example.charo_android.data.datasource.remote.home.RemoteHomeDataSource
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.repository.home.HomeRepository
+import com.charo.android.data.datasource.remote.home.RemoteHomeDataSource
+import com.charo.android.data.mapper.HomeMapper
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.data.model.response.home.ResponseHomeViewData
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.repository.home.HomeRepository
 
 class HomeRepositoryImpl(private val remoteDataSource : RemoteHomeDataSource): HomeRepository {
     override suspend fun getMain(userEmail: String): ResponseHomeViewData {

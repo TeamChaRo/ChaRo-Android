@@ -1,17 +1,18 @@
 package com.charo.android.presentation.di
 
-import com.example.charo_android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
-import com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel
-import com.example.charo_android.presentation.ui.main.SharedViewModel
-import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
-import com.example.charo_android.presentation.ui.follow.viewmodel.FollowViewModel
-import com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel
-import com.example.charo_android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
-import com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel
-import com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel
-import com.example.charo_android.presentation.ui.signin.viewmodel.EmailSignInViewModel
-import com.example.charo_android.presentation.ui.signin.viewmodel.SocialSignInViewModel
-import com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+
+import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.charo.android.presentation.ui.follow.viewmodel.FollowViewModel
+import com.charo.android.presentation.ui.home.viewmodel.HomeViewModel
+import com.charo.android.presentation.ui.main.SharedViewModel
+import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
+import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
+import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
+import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
+import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

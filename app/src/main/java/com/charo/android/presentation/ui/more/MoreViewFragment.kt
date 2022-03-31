@@ -7,16 +7,18 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.R
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.databinding.FragmentMoreViewBinding
-import com.example.charo_android.domain.model.more.MoreDrive
-import com.example.charo_android.presentation.base.BaseFragment
-import com.example.charo_android.presentation.ui.home.HomeFragment
-import com.example.charo_android.presentation.ui.main.SharedViewModel
-import com.example.charo_android.presentation.ui.more.adapter.MoreViewAdapter
-import com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.databinding.FragmentMoreViewBinding
+import com.charo.android.domain.model.more.MoreDrive
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.ui.main.SharedViewModel
+import com.charo.android.presentation.ui.more.adapter.MoreViewAdapter
+import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.charo.android.presentation.util.SharedInformation
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {

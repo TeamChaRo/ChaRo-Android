@@ -88,4 +88,10 @@ object BindingConversions {
             }
         }
     }
+
+    @BindingAdapter("intToText")
+    @JvmStatic
+    fun intText(textView:TextView, num : Int){
+        textView.text = num.toString()
+    }
 }

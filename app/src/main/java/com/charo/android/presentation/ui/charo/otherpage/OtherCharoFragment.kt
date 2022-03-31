@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.charo.android.R
 import com.charo.android.databinding.FragmentOtherCharoBinding
 import com.charo.android.presentation.ui.charo.follow.CharoListActivity
 import com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtherCharoFragment : Fragment() {
-    private val charoViewModel: CharoViewModel by activityViewModels()
+    private val charoViewModel: CharoViewModel by viewModel()
     private var _binding: FragmentOtherCharoBinding? = null
     private val binding get() = _binding!!
     private lateinit var otherUserEmail: String
@@ -48,8 +48,8 @@ class OtherCharoFragment : Fragment() {
 
     private fun getUserInfo() {
         charoViewModel.getInitOtherLikeData(otherUserEmail)
-        charoViewModel.otherInformation.observe(viewLifecycleOwner, {
+        charoViewModel.otherInformation.observe(viewLifecycleOwner) {
             binding.otherPageData = charoViewModel
-        })
+        }
     }
 }

@@ -1,8 +1,9 @@
 package com.charo.android.data.datasource.remote.mypage
 
-import com.example.charo_android.data.api.mypage.MyPageService
-import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
-import com.example.charo_android.data.model.mypage.ResponseMyPage
+import com.charo.android.data.api.mypage.MyPageService
+import com.charo.android.data.model.mypage.ResponseEndlessScroll
+import com.charo.android.data.model.mypage.ResponseMyPage
+
 
 class RemoteMyPageDataSourceImpl(private val service: MyPageService): RemoteMyPageDataSource {
     override suspend fun getLikePost(userEmail: String): ResponseMyPage {
