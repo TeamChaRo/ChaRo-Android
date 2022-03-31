@@ -3,7 +3,8 @@ package com.charo.android.presentation.util
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.charo_android.R
+import com.charo.android.R
+
 
 fun AppCompatActivity.replaceFragment(fragment: Fragment, userId : String, nickName: String){
     val bundle = Bundle()

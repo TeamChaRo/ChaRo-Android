@@ -1,6 +1,7 @@
 package com.charo.android.domain.repository.moreview
 
-import com.example.charo_android.domain.model.more.MoreView
+import com.charo.android.domain.model.more.MoreView
+
 
 interface MoreViewInfiniteRepository {
     suspend fun getPreview(userId:String, identifer: String, postId : Int, count: Int, value : String)

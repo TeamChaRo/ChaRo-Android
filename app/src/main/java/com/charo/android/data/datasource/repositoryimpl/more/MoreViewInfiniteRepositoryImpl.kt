@@ -1,9 +1,10 @@
 package com.charo.android.data.datasource.repositoryimpl.more
 
-import com.example.charo_android.data.mapper.MoreViewMapper
-import com.example.charo_android.data.datasource.remote.more.RemoteMoreViewInfiniteDataSource
-import com.example.charo_android.domain.model.more.MoreView
-import com.example.charo_android.domain.repository.moreview.MoreViewInfiniteRepository
+import com.charo.android.data.datasource.remote.more.RemoteMoreViewInfiniteDataSource
+import com.charo.android.data.mapper.MoreViewMapper
+import com.charo.android.domain.model.more.MoreView
+import com.charo.android.domain.repository.moreview.MoreViewInfiniteRepository
+
 
 class MoreViewInfiniteRepositoryImpl(private val dataSource: RemoteMoreViewInfiniteDataSource) :
     MoreViewInfiniteRepository {

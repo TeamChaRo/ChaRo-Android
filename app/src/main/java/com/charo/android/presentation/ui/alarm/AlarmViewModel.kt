@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.charo_android.data.model.mypage.*
-import com.example.charo_android.presentation.util.enqueueUtil
+import com.charo.android.data.model.mypage.UserInformation
+import com.charo.android.presentation.util.enqueueUtil
+
 
 class AlarmViewModel : ViewModel() {
 

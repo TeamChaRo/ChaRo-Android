@@ -1,7 +1,8 @@
 package com.charo.android.domain.repository.setting
 
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.setting.ProfileChangeData
+
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.model.setting.ProfileChangeData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

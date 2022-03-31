@@ -15,13 +15,14 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.example.charo_android.R
-import com.example.charo_android.data.model.detailold.RequestDetailDeleteData
-import com.example.charo_android.databinding.FragmentDetailBinding
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.ui.main.MainActivity
-import com.example.charo_android.presentation.util.CustomDialog
-import com.example.charo_android.presentation.util.enqueueUtil
+import com.charo.android.R
+import com.charo.android.data.model.detailold.RequestDetailDeleteData
+import com.charo.android.databinding.FragmentDetailBinding
+import com.charo.android.hidden.Hidden
+import com.charo.android.presentation.ui.main.MainActivity
+import com.charo.android.presentation.util.CustomDialog
+import com.charo.android.presentation.util.enqueueUtil
+
 import com.skt.Tmap.*
 
 class DetailFragment : Fragment() {

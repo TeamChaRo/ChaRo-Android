@@ -12,17 +12,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
-import com.example.charo_android.R
-import com.example.charo_android.data.model.write.MapSearchInfo
-import com.example.charo_android.data.model.response.write.ResponseWriteData
-import com.example.charo_android.databinding.FragmentWriteMapSearchBinding
+
 import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.text.style.ForegroundColorSpan
-import com.example.charo_android.presentation.util.Define
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.R
+import com.charo.android.data.model.response.write.ResponseWriteData
+import com.charo.android.data.model.write.MapSearchInfo
+import com.charo.android.databinding.FragmentWriteMapSearchBinding
+import com.charo.android.presentation.util.Define
+import com.charo.android.presentation.util.SharedInformation
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

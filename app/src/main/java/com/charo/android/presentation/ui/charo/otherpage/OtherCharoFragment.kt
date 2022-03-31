@@ -49,7 +49,7 @@ class OtherCharoFragment : Fragment() {
     private fun getUserInfo() {
         charoViewModel.getInitOtherLikeData(otherUserEmail)
         charoViewModel.otherInformation.observe(viewLifecycleOwner) {
-
+            binding.otherPageData = charoViewModel
         }
     }
 }

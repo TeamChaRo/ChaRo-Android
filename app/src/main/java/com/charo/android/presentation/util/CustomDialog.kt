@@ -4,7 +4,8 @@ import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
-import com.example.charo_android.R
+import com.charo.android.R
+
 import kotlinx.android.synthetic.main.custom_dialog_log_out.*
 import kotlinx.android.synthetic.main.custom_dialog_withdrawal.*
 

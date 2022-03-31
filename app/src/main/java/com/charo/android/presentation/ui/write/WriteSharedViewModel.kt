@@ -2,7 +2,8 @@ package com.charo.android.presentation.ui.write
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.charo_android.data.WriteImgInfo
+import com.charo.android.data.model.write.WriteImgInfo
+
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

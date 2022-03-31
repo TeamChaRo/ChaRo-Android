@@ -94,8 +94,8 @@ dependencies {
     implementation(AndroidXDependencies.dataStore)
     implementation(AndroidXDependencies.dataStoreCore)
 
-    implementation("org.jetbrains:annotations:15.0")
-    implementation("androidx.annotation:annotation:1.2.0")
+    implementation("org.jetbrains:annotations:16.0.1")
+    implementation("androidx.annotation:annotation:1.3.0")
 
 // Android KTX
     implementation(AndroidXDependencies.fragmentKtx)
@@ -154,9 +154,6 @@ dependencies {
 //recyclerview
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-
-//annotation
-    implementation("org.jetbrains:annotations:15.0")
 
 
 //koin

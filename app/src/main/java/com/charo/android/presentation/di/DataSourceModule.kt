@@ -4,10 +4,13 @@ package com.charo.android.presentation.di
 import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSource
 import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
 import com.charo.android.data.datasource.remote.detailpost.RemoteDetailPostDataSource
+import com.charo.android.data.datasource.remote.detailpost.RemoteDetailPostDataSourceImpl
 import com.charo.android.data.datasource.remote.follow.RemoteFollowDataSource
 import com.charo.android.data.datasource.remote.follow.RemoteFollowDataSourceImpl
 import com.charo.android.data.datasource.remote.home.RemoteHomeDataSource
 import com.charo.android.data.datasource.remote.home.RemoteHomeDataSourceImpl
+import com.charo.android.data.datasource.remote.interaction.RemoteInteractionDataSource
+import com.charo.android.data.datasource.remote.interaction.RemoteInteractionDataSourceImpl
 import com.charo.android.data.datasource.remote.more.*
 import com.charo.android.data.datasource.remote.mypage.RemoteMyPageDataSource
 import com.charo.android.data.datasource.remote.mypage.RemoteMyPageDataSourceImpl

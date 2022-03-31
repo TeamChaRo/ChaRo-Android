@@ -12,10 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentWriteMapLocationBinding
-import com.example.charo_android.hidden.Hidden
-import com.example.charo_android.presentation.util.Define
+import com.charo.android.R
+import com.charo.android.databinding.FragmentWriteMapLocationBinding
+import com.charo.android.hidden.Hidden
+import com.charo.android.presentation.util.Define
+
 import com.skt.Tmap.TMapAddressInfo
 import com.skt.Tmap.TMapData
 import com.skt.Tmap.TMapMarkerItem

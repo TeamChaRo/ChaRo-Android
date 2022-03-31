@@ -1,10 +1,10 @@
 package com.charo.android.data.datasource.repositoryimpl.setting
 
-import com.example.charo_android.data.mapper.SettingMapper
-import com.example.charo_android.data.datasource.remote.setting.RemoteSettingDataSource
-import com.example.charo_android.domain.model.StatusCode
-import com.example.charo_android.domain.model.setting.ProfileChangeData
-import com.example.charo_android.domain.repository.setting.SettingRepository
+import com.charo.android.data.datasource.remote.setting.RemoteSettingDataSource
+import com.charo.android.data.mapper.SettingMapper
+import com.charo.android.domain.model.StatusCode
+import com.charo.android.domain.model.setting.ProfileChangeData
+import com.charo.android.domain.repository.setting.SettingRepository
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 

@@ -4,10 +4,12 @@ import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import com.example.charo_android.R
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.charo_android.databinding.ActivityWriteShareBinding
+import com.charo.android.R
+import com.charo.android.databinding.ActivityWriteShareBinding
+
 
 class WriteShareActivity : AppCompatActivity() {
 

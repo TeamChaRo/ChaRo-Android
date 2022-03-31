@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charo_android.data.model.write.MapSearchInfo
-import com.example.charo_android.data.model.request.write.RequestWriteHistoryData
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.databinding.ItemAutoSearchBinding
-import com.example.charo_android.presentation.util.SharedInformation
+import com.charo.android.data.model.request.write.RequestWriteHistoryData
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.write.MapSearchInfo
+import com.charo.android.databinding.ItemAutoSearchBinding
+import com.charo.android.presentation.util.SharedInformation
+
 import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback

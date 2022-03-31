@@ -3,7 +3,8 @@ package com.charo.android.presentation.util
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import com.example.charo_android.presentation.ui.signin.SocialSignInActivity
+import com.charo.android.presentation.ui.signin.SocialSignInActivity
+
 
 object LoginUtil{
 

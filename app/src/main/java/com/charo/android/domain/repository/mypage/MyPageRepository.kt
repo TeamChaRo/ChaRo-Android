@@ -1,7 +1,8 @@
 package com.charo.android.domain.repository.mypage
 
-import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
-import com.example.charo_android.data.model.mypage.ResponseMyPage
+import com.charo.android.data.model.mypage.ResponseEndlessScroll
+import com.charo.android.data.model.mypage.ResponseMyPage
+
 
 interface MyPageRepository {
     suspend fun getLikePost(userEmail: String): ResponseMyPage

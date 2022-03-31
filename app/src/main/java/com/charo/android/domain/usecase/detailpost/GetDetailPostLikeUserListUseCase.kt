@@ -1,7 +1,7 @@
 package com.charo.android.domain.usecase.detailpost
 
-import com.example.charo_android.domain.model.detailpost.User
-import com.example.charo_android.domain.repository.detailpost.DetailPostRepository
+import com.charo.android.domain.model.detailpost.User
+import com.charo.android.domain.repository.detailpost.DetailPostRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

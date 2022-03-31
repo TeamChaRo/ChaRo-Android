@@ -11,9 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.charo_android.R
-import com.example.charo_android.databinding.DialogThemeBinding
-import com.example.charo_android.presentation.util.ThemeUtil
+import com.charo.android.R
+import com.charo.android.databinding.DialogThemeBinding
+import com.charo.android.presentation.util.ThemeUtil
+
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

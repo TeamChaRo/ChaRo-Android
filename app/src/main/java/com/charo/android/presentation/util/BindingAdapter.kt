@@ -5,11 +5,12 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.charo.android.R
 import com.google.android.material.chip.Chip
+import androidx.databinding.BindingAdapter
+
 
 object BindingAdapter {
     @JvmStatic

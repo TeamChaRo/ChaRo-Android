@@ -1,10 +1,11 @@
 package com.charo.android.data.datasource.repositoryimpl.detailpost
 
-import com.example.charo_android.data.datasource.remote.detailpost.RemoteDetailPostDataSource
-import com.example.charo_android.data.mapper.DetailPostMapper
-import com.example.charo_android.domain.model.detailpost.DetailPost
-import com.example.charo_android.domain.model.detailpost.User
-import com.example.charo_android.domain.repository.detailpost.DetailPostRepository
+import com.charo.android.data.datasource.remote.detailpost.RemoteDetailPostDataSource
+import com.charo.android.data.mapper.DetailPostMapper
+import com.charo.android.domain.model.detailpost.DetailPost
+import com.charo.android.domain.model.detailpost.User
+import com.charo.android.domain.repository.detailpost.DetailPostRepository
+
 
 class DetailPostRepositoryImpl(private val dataSource: RemoteDetailPostDataSource) :
     DetailPostRepository {

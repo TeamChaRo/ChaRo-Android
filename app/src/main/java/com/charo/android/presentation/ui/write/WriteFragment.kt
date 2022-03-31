@@ -11,38 +11,39 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.charo_android.data.model.write.WriteImgInfo
-import com.example.charo_android.R
-import com.example.charo_android.databinding.FragmentWriteBinding
-
+import com.charo.android.R
+import com.charo.android.data.model.write.WriteImgInfo
+import com.charo.android.databinding.FragmentWriteBinding
+import com.charo.android.presentation.util.Define
+import com.charo.android.presentation.util.LocationUtil
+import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
-import com.example.charo_android.presentation.util.Define
-import com.example.charo_android.presentation.util.LocationUtil
-import com.example.charo_android.presentation.util.ThemeUtil
 
 
 class WriteFragment : Fragment(), View.OnClickListener {

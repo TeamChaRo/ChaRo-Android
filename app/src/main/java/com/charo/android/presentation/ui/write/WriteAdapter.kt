@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.charo_android.data.model.write.WriteImgInfo
-import com.example.charo_android.databinding.ItemWriteImgBinding
+import com.charo.android.data.model.write.WriteImgInfo
+import com.charo.android.databinding.ItemWriteImgBinding
 
 class WriteAdapter(private val itemClick: (Int) -> Unit) : RecyclerView.Adapter<WriteAdapter.WriteImgViewHolder>() {
 
