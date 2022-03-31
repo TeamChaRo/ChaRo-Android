@@ -18,16 +18,16 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import com.charo.android.R
-import com.charo.android.data.model.request.write.RequestWriteData
+import com.charo.android.data.api.ApiService
 import com.charo.android.databinding.FragmentWriteMapBinding
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.util.CustomToast
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.enqueueUtil
-import com.google.gson.Gson
 import com.skt.Tmap.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.lang.Exception
@@ -144,7 +144,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         binding.imgWriteMapDelete2.setOnClickListener {
             clickWriteMapDelete2(tMapView)
         }
-        
+
         addList(tMapView)
     }
 
@@ -168,7 +168,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             Toast.makeText(requireContext(),getString(R.string.txt_check_input_start_end),Toast.LENGTH_LONG).show()
         }
     }
-    
+
     private fun clickWriteMapDelete1(tMapView: TMapView) {
         if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)) {
             binding.etWriteMapMid2.visibility = View.GONE
@@ -319,30 +319,28 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             return
         }
 
-        val course = ArrayList<RequestBody>()
+        val course = ArrayList<MultipartBody.Part>()
 
-        val startCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.startAddress.value.toString(), sharedViewModel.startLong.value.toString(), sharedViewModel.startLat.value.toString())
-        val midFrstCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.midFrstAddress.value.toString(), sharedViewModel.midFrstLong.value.toString(), sharedViewModel.midFrstLat.value.toString())
-        val midSecCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.midSecAddress.value.toString(), sharedViewModel.midSecLong.value.toString(), sharedViewModel.midSecLat.value.toString())
-        val endCourse : RequestWriteData.Course = RequestWriteData.Course(sharedViewModel.endAddress.value.toString(), sharedViewModel.endLong.value.toString(), sharedViewModel.endLat.value.toString())
+        course.add(MultipartBody.Part.createFormData("course[0][address]",sharedViewModel.startAddress.value.toString()))
+        course.add(MultipartBody.Part.createFormData("course[0][longitude]",sharedViewModel.startLong.value.toString()))
+        course.add(MultipartBody.Part.createFormData("course[0][latitude]",sharedViewModel.startLat.value.toString()))
 
-        val startJson = Gson().toJson(startCourse)
-        val startCourseRb: RequestBody = startJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val midFrstJson = Gson().toJson(midFrstCourse)
-        val midFrstCourseRb: RequestBody = midFrstJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val midSecJson = Gson().toJson(midSecCourse)
-        val midSecCourseRb: RequestBody = midSecJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val endJson = Gson().toJson(endCourse)
-        val endCourseRb: RequestBody = endJson.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-
-        course.add(startCourseRb)
+        //경유지 유
         if(sharedViewModel.midFrstAddress.value !== ""){
-            course.add(midFrstCourseRb)
+            course.add(MultipartBody.Part.createFormData("course[1][address]",sharedViewModel.midFrstAddress.value.toString()))
+            course.add(MultipartBody.Part.createFormData("course[1][longitude]",sharedViewModel.midFrstLong.value.toString()))
+            course.add(MultipartBody.Part.createFormData("course[1][latitude]",sharedViewModel.midFrstLat.value.toString()))
+
+            course.add(MultipartBody.Part.createFormData("course[2][address]",sharedViewModel.endAddress.value.toString()))
+            course.add(MultipartBody.Part.createFormData("course[2][longitude]",sharedViewModel.endLong.value.toString()))
+            course.add(MultipartBody.Part.createFormData("course[2][latitude]",sharedViewModel.endLat.value.toString()))
+
+            //경유지 무
+        }else{
+            course.add(MultipartBody.Part.createFormData("course[1][address]",sharedViewModel.endAddress.value.toString()))
+            course.add(MultipartBody.Part.createFormData("course[1][longitude]",sharedViewModel.endLong.value.toString()))
+            course.add(MultipartBody.Part.createFormData("course[1][latitude]",sharedViewModel.endLat.value.toString()))
         }
-        if(sharedViewModel.midSecAddress.value !== ""){
-            course.add(midSecCourseRb)
-        }
-        course.add(endCourseRb)
 
         sharedViewModel.course.value = course
 
@@ -369,11 +367,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             sendWarning["warning[$i]"] = sharedViewModel.warningUI.value!![i].toRequestBody("multipart/form-data".toMediaTypeOrNull())
         }
 
-        val sendCourse : HashMap<String,RequestBody> = HashMap()
-        for (i in sharedViewModel.course.value!!.indices) {
-            sendCourse["course[$i]"] = sharedViewModel.course.value!![i]
-        }
-
         val userEmail = SharedInformation.getEmail(requireActivity())
         val userEmailRB : RequestBody = userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
         val titleRB : RequestBody = sharedViewModel.title.value!!.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -391,8 +384,9 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         param["isParking"] = isParkingRB
         param["courseDesc"] = courseDescRB
 
-        val call = com.charo.android.data.api.ApiService.writeViewService
-            .writePost(sendWarning, sendTheme, sendCourse, sharedViewModel.imageMultiPart.value!!, param)
+        val call = ApiService.writeViewService
+//            .writePost(sendWarning, sendTheme, sendCourse, sharedViewModel.imageMultiPart.value!!, param)
+            .writePost(sendWarning, sendTheme, sharedViewModel.course.value!!, sharedViewModel.imageMultiPart.value!!, param)
         call.enqueueUtil(
             onSuccess = {
                 Log.d("serveWriteData", "success")

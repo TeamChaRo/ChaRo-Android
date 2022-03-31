@@ -28,7 +28,7 @@ class WriteSharedViewModel : ViewModel() {
     val latitude = MutableLiveData<Double>().default(0.0)     //위도
     val longitude = MutableLiveData<Double>().default(0.0)    //경도
 
-    val course = MutableLiveData<ArrayList<RequestBody>>()    //서버에 보낼 경로
+    val course = MutableLiveData<ArrayList<MultipartBody.Part>>()   //서버에 보낼 경로
     var startAddress = MutableLiveData<String>().default("")
     var midFrstAddress = MutableLiveData<String>().default("")
     var midSecAddress = MutableLiveData<String>().default("")
