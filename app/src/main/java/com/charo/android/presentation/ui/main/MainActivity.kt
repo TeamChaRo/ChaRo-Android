@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.charo.android.R
 import com.charo.android.databinding.ActivityMainBinding
+import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.charo.mypage.CharoFragment
 import com.charo.android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.charo.android.presentation.ui.home.HomeFragment
@@ -26,7 +27,7 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private lateinit var analytics: FirebaseAnalytics
 
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
     var otherUserNickname: String? = null
     private var isMyPage: Boolean = true
     private var isFromOtherPage: Boolean = false
-    private lateinit var binding: ActivityMainBinding
     private lateinit var lookFor : String
 
 
@@ -55,10 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         userEmail = SharedInformation.getEmail(this)
         myPageViewModel.setUserEmail(userEmail)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
         requestPermissions()
-        setContentView(binding.root)
         nickName = intent.getStringExtra("nickName").toString()
         otherUserEmail = intent.getStringExtra("otherUserEmail")
         otherUserNickname = intent.getStringExtra("otherUserNickname")

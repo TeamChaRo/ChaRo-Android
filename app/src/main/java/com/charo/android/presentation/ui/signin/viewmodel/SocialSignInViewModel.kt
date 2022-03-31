@@ -24,9 +24,11 @@ class SocialSignInViewModel(
     //구글 로그인 성공
     var googleSuccess : MutableLiveData<SocialLoginData?> = MutableLiveData()
 
-    //소셜 로그인 status
+    //카카오 로그인 status
     var socialStatus : MutableLiveData<Int> = MutableLiveData()
 
+    //구글 로그인 status
+    var googleSocialStatus : MutableLiveData<Int> = MutableLiveData()
     private val _userNickName = MutableLiveData<String>()
     val userNickName : LiveData<String>
         get() = _userNickName
@@ -64,7 +66,7 @@ class SocialSignInViewModel(
                 }
                 is ResultWrapper.GenericError -> {
                     Log.d("google", "사용자 에러")
-                    socialStatus.value = googleData.code ?: 0
+                    googleSocialStatus.value = googleData.code ?: 0
                 }
 
             }

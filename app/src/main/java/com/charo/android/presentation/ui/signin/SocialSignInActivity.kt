@@ -1,6 +1,7 @@
 package com.charo.android.presentation.ui.signin
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -196,24 +197,8 @@ class SocialSignInActivity() :
                     Log.d("구글", email.toString())
                     // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
-                    socialSignInViewModel.googleSuccess.observe(this, Observer {
-                        if (socialSignInViewModel.socialStatus.value == 404) {
-                            SharedInformation.setSignUp(this, 1)
-                            Toast.makeText(
-                                this@SocialSignInActivity, "약관 동의가 필요합니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            val intent =
-                                Intent(this@SocialSignInActivity, SignUpActivity::class.java)
-                            intent.apply {
-                                putExtra("googleProfileImage", profileImage.toString())
-                                putExtra("googleSignUpEmail", email)
-                                putExtra("googleSignUp", 1)
-                            }
-                            startActivity(intent)
-                            finish()
-
-                        } else {
+                    checkGoogleLoginError(profileImage, email)
+                    socialSignInViewModel.googleSuccess.observe(this) {
                             if (SharedInformation.getLogout(this) != "Logout") {
                                 Toast.makeText(
                                     this@SocialSignInActivity, "구글 로그인에 성공하였습니다.",
@@ -228,16 +213,32 @@ class SocialSignInActivity() :
                                 finish()
                             }
                         }
-                    })
-
-
-                } else {
-                    Toast.makeText(this, "잠시후 다시 시작하세요", Toast.LENGTH_SHORT).show()
-
+                    }
                 }
             }
-    }
 
+
+    //구글 로그인 분기처리(회원이 없을 경우 또는 있을 경우)
+    private fun checkGoogleLoginError(profileImage : Uri?, email : String?){
+        socialSignInViewModel.googleSocialStatus.observe(this){
+            if(it==404){
+                SharedInformation.setSignUp(this, 1)
+                Toast.makeText(
+                    this@SocialSignInActivity, "약관 동의가 필요합니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                val intent =
+                    Intent(this@SocialSignInActivity, SignUpActivity::class.java)
+                intent.apply {
+                    putExtra("googleProfileImage", profileImage.toString())
+                    putExtra("googleSignUpEmail", email)
+                    putExtra("googleSignUp", 1)
+                }
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
     //둘러보기
     private fun lookForMain() {
         binding.textSocialLook.setOnClickListener {

@@ -23,6 +23,7 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
         googleSignUp()
         kakaoSignUp()
         kakaoSignUpSuccess()
+        completeGoogle()
     }
 
 
@@ -116,6 +117,22 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
             }
         }
     }
+    //구글 로그인 회원가입 완료
+    fun completeGoogle(){
+        signUpViewModel.googleRegisterSuccess.observe(viewLifecycleOwner){
+            if(it.success){
+                SharedInformation.saveSocialId(requireActivity(), "2")
+                SharedInformation.setEmail(requireActivity(), signUpViewModel.userEmail.value.toString())
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+
+        }
+
+
+    }
+
     //카카오 회원가입
     fun kakaoSignUp(){
         if(SharedInformation.getSignUp(requireActivity()) == 2){
@@ -137,6 +154,7 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
     private fun kakaoSignUpSuccess(){
         signUpViewModel.kakaoRegisterSuccess.observe(viewLifecycleOwner){
             if(it.success){
+                SharedInformation.setEmail(requireActivity(), signUpViewModel.userEmail.value.toString())
                 SharedInformation.saveSocialId(requireActivity(), "1")
                 SharedInformation.setKaKaoSignUp(requireActivity(), 2)
                 val intent = Intent(requireActivity(), MainActivity::class.java)
