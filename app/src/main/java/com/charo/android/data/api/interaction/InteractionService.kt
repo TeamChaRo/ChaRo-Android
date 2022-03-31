@@ -1,7 +1,8 @@
 package com.charo.android.data.api.interaction
 
-import com.example.charo_android.data.model.interaction.RequestInteractionData
-import com.example.charo_android.data.model.interaction.ResponseInteractionData
+
+import com.charo.android.data.model.interaction.RequestInteractionData
+import com.charo.android.data.model.interaction.ResponseInteractionData
 import retrofit2.http.Body
 import retrofit2.http.POST
 

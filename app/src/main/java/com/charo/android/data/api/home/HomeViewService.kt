@@ -1,8 +1,9 @@
 package com.charo.android.data.api.home
 
-import com.example.charo_android.data.model.request.home.RequestHomeLikeData
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.data.model.response.home.ResponseHomeViewData
+
+import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.response.home.ResponseHomeViewData
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

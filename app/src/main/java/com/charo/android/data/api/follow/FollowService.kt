@@ -1,8 +1,9 @@
 package com.charo.android.data.api.follow
 
-import com.example.charo_android.data.model.mypage.ResponseFollowList
-import com.example.charo_android.data.model.request.follow.RequestPostFollowData
-import com.example.charo_android.data.model.response.follow.ResponsePostFollowData
+
+import com.charo.android.data.model.mypage.ResponseFollowList
+import com.charo.android.data.model.request.follow.RequestPostFollowData
+import com.charo.android.data.model.response.follow.ResponsePostFollowData
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

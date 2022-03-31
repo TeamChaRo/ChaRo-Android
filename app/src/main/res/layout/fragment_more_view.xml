@@ -6,7 +6,7 @@
     <data>
         <variable
             name="moreViewModel"
-            type="com.example.charo_android.presentation.ui.more.viewmodel.MoreViewViewModel" />
+            type="com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

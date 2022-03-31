@@ -1,7 +1,8 @@
 package com.charo.android.data.api.detailpost
 
-import com.example.charo_android.data.model.detailpost.ResponseDetailPost
-import com.example.charo_android.data.model.detailpost.ResponseDetailPostLikeUserList
+
+import com.charo.android.data.model.detailpost.ResponseDetailPost
+import com.charo.android.data.model.detailpost.ResponseDetailPostLikeUserList
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

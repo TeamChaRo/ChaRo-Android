@@ -1,9 +1,10 @@
 package com.charo.android.data.api.signup
 
-import com.example.charo_android.data.model.request.signup.RequestSignUpGoogleData
-import com.example.charo_android.data.model.request.signup.RequestSignUpKaKaoData
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.data.model.response.signup.ResponseRegisterData
+
+import com.charo.android.data.model.request.signup.RequestSignUpGoogleData
+import com.charo.android.data.model.request.signup.RequestSignUpKaKaoData
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.response.signup.ResponseRegisterData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Body

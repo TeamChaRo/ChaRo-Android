@@ -1,6 +1,7 @@
 package com.charo.android.data.api.signup
 
-import com.example.charo_android.data.model.response.signup.ResponseNickNameCheckData
+
+import com.charo.android.data.model.response.signup.ResponseNickNameCheckData
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,7 +1,8 @@
 package com.charo.android.data.api.mypage
 
-import com.example.charo_android.data.model.mypage.ResponseEndlessScroll
-import com.example.charo_android.data.model.mypage.ResponseMyPage
+
+import com.charo.android.data.model.mypage.ResponseEndlessScroll
+import com.charo.android.data.model.mypage.ResponseMyPage
 import retrofit2.http.GET
 import retrofit2.http.Path
 

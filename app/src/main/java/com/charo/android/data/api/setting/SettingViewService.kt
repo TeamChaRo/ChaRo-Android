@@ -1,7 +1,8 @@
 package com.charo.android.data.api.setting
 
-import com.example.charo_android.data.model.response.ResponseStatusCode
-import com.example.charo_android.data.model.response.setting.ResponseProfileUpdateData
+
+import com.charo.android.data.model.response.ResponseStatusCode
+import com.charo.android.data.model.response.setting.ResponseProfileUpdateData
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*

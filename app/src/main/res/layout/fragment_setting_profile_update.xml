@@ -6,7 +6,7 @@
     <data>
     <variable
         name="profileViewModel"
-        type="com.example.charo_android.presentation.ui.setting.viewmodel.SettingViewModel" />
+        type="com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
