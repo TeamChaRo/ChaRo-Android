@@ -1,0 +1,134 @@
+package com.charo.android.presentation.ui.more
+
+import android.os.Bundle
+import android.view.View
+import androidx.core.view.doOnAttach
+import com.charo.android.R
+import com.charo.android.data.model.request.RequestThemeViewData
+import com.charo.android.databinding.FragmentMoreThemeViewBinding
+import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.ui.main.SharedViewModel
+import com.charo.android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
+import com.charo.android.presentation.util.SharedInformation
+
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
+
+class MoreThemeViewFragment :
+    BaseFragment<FragmentMoreThemeViewBinding>(R.layout.fragment_more_theme_view) {
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
+    var requestThemeData = mutableListOf<RequestThemeViewData>()
+    private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
+    private lateinit var userId: String
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        userId = arguments?.getString("userId").toString()
+
+
+        initMoreThemeViewPager(userId)
+        clickBackButton()
+        clickTab()
+    }
+
+
+    private fun initMoreThemeViewPager(userId: String) {
+        binding.apply {
+
+            moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
+            viewPagerMoreTheme.adapter = moreThemeViewPagerAdapter
+
+
+
+            with(moreThemeViewPagerAdapter) {
+                fragments = listOf(
+                    MoreThemeContentViewFragment(userId, "1", "spring"),
+                    MoreThemeContentViewFragment(userId, "1", "summer"),
+                    MoreThemeContentViewFragment(userId, "1", "fall"),
+                    MoreThemeContentViewFragment(userId, "1", "winter"),
+                    MoreThemeContentViewFragment(userId, "1", "mountain"),
+                    MoreThemeContentViewFragment(userId, "1", "sea"),
+                    MoreThemeContentViewFragment(userId, "1", "lake"),
+                    MoreThemeContentViewFragment(userId, "1", "river"),
+                    MoreThemeContentViewFragment(userId, "1", "oceanRoad"),
+                    MoreThemeContentViewFragment(userId, "1", "blossom"),
+                    MoreThemeContentViewFragment(userId, "1", "maple"),
+                    MoreThemeContentViewFragment(userId, "1", "relax"),
+                    MoreThemeContentViewFragment(userId, "1", "speed"),
+                    MoreThemeContentViewFragment(userId, "1", "nightView"),
+                    MoreThemeContentViewFragment(userId, "1", "cityView")
+                )
+            }
+
+            val themeNum = SharedInformation.getThemeNum(requireActivity())
+            tabMoreThemeTab.getTabAt(themeNum)?.select()
+            viewPagerMoreTheme.doOnAttach {
+                    viewPagerMoreTheme.setCurrentItem(themeNum, false)
+                }
+
+
+            TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
+                when (position) {
+                    0 -> tab.setCustomView(R.layout.tablayout_spring)
+                    1 -> tab.setCustomView(R.layout.tablayout_summer)
+                    2 -> tab.setCustomView(R.layout.tablayout_fall)
+                    3 -> tab.setCustomView(R.layout.tablayout_winter)
+                    4 -> tab.setCustomView(R.layout.tablayout_mountain)
+                    5 -> tab.setCustomView(R.layout.tablayout_sea)
+                    6 -> tab.setCustomView(R.layout.tablayout_lake)
+                    7 -> tab.setCustomView(R.layout.tablayout_river)
+                    8 -> tab.setCustomView(R.layout.tablayout_ocean_drive)
+                    9 -> tab.setCustomView(R.layout.tablayout_blossom)
+                    10 -> tab.setCustomView(R.layout.tablayout_maple)
+                    11 -> tab.setCustomView(R.layout.tablayout_relax)
+                    12 -> tab.setCustomView(R.layout.tablayout_speed)
+                    13 -> tab.setCustomView(R.layout.tablayout_night_view)
+                    14 -> tab.setCustomView(R.layout.tablayout_city)
+                }
+            }.attach()
+
+
+
+        }
+    }
+
+    private fun clickBackButton() {
+        binding.imgBackTheme.setOnClickListener {
+            SharedInformation.removeThemeNum(requireActivity())
+            val fragmentManager = activity?.supportFragmentManager
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
+                ?.commit()
+        }
+    }
+
+
+    fun clickTab() {
+        binding.tabMoreThemeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+
+
+                }
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+    }
+
+}
+
+
+
+

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="alarmData"
-            type="com.example.charo_android.presentation.ui.alarm.AlarmViewModel" />
+            type="com.charo.android.presentation.ui.alarm.AlarmViewModel" />
 
         <import type="android.view.View" />
     </data>

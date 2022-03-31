@@ -8,11 +8,11 @@
 
         <variable
             name="homeViewModel"
-            type="com.example.charo_android.presentation.ui.home.viewmodel.HomeViewModel" />
+            type="com.charo.android.presentation.ui.home.viewmodel.HomeViewModel" />
 
         <variable
             name="sharedViewModel"
-            type="com.example.charo_android.presentation.ui.main.SharedViewModel"/>
+            type="com.charo.android.presentation.ui.main.SharedViewModel"/>
 
     </data>
 

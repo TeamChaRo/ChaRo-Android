@@ -6,7 +6,7 @@
     <data>
         <variable
             name="searchViewModel"
-            type="com.example.charo_android.presentation.ui.search.viewmodel.SearchViewModel" />
+            type="com.charo.android.presentation.ui.search.viewmodel.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

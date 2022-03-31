@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="myPageData"
-            type="com.example.charo_android.presentation.ui.charo.viewmodel.CharoViewModel" />
+            type="com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

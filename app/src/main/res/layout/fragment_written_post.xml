@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.charo_android.presentation.ui.mypage.viewmodel.MyPageViewModel" />
+            type="com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -10,7 +10,7 @@
 
         <variable
             name="detailData"
-            type="com.example.charo_android.presentation.ui.detail.DetailViewModel" />
+            type="com.charo.android.presentation.ui.detail.DetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

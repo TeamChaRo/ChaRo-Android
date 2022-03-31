@@ -178,7 +178,6 @@
     <string name="drive_mate">당신의 드라이브 메이트</string>
     <string name="email_login">이메일 로그인</string>
     <string name="email_sign_up">이메일로 가입</string>
-    <string name="firebase_web_client_id">273821551567-mu7ln5scos0nuffo78v50f161p70g66i.apps.googleusercontent.com</string>
     <string name="google_sign_in">Google 로그인</string>
     <string name="like">좋아요</string>
     <string name="log_out">로그아웃 하시겠습니까?</string>
@@ -188,6 +187,7 @@
     사용자에게 보여집니다.)</string>
     <string name="cancel">취소</string>
     <string name="agreement">확인</string>
+    <string name="firebase_auth_id">273821551567-b6hf2a71g95dvvmfbcua17u8enre95rt.apps.googleusercontent.com</string>
     <string name="origin_password">기존 비밀번호</string>
     <string name="password_update_hint">5이상 15자 이내의 영문과 숫자</string>
     <string name="new_password_update">새 비밀번호</string>

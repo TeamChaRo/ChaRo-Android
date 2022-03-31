@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="com.example.charo_android.data.model.mypage.User" />
+            type="com.charo.android.data.model.mypage.User" />
 
         <variable
             name="isMe"

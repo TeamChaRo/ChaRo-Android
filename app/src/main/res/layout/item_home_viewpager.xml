@@ -4,11 +4,11 @@
     <data>
         <variable
             name="banner"
-            type="com.example.charo_android.domain.model.home.Banner" />
+            type="com.charo.android.domain.model.home.Banner" />
 
         <variable
             name="bannerRoad"
-            type="com.example.charo_android.domain.model.home.BannerRoad" />
+            type="com.charo.android.domain.model.home.BannerRoad" />
     </data>
         
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

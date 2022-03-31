@@ -6,7 +6,7 @@
     <data>
         <variable
             name="signupViewModel"
-            type="com.example.charo_android.presentation.ui.signup.viewmodel.SignUpEmailViewModel" />
+            type="com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -77,21 +77,25 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
-    implementation("com.google.firebase:firebase-common-ktx:20.0.0")
-    implementation("com.google.firebase:firebase-auth-ktx:21.0.1")
-    implementation("com.google.firebase:firebase-bom:29.1.0")
+    implementation("com.google.firebase:firebase-common-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-auth-ktx:21.0.3")
+    implementation("com.google.firebase:firebase-bom:29.3.0")
+
 //    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-messaging:22.0.0")
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
     implementation("com.google.firebase:firebase-analytics-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-auth:21.0.3")
+    implementation("com.firebaseui:firebase-ui-auth:4.3.2")
+    implementation("com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2")
     kapt(KaptDependencies.hilt)
 
 // DataStore
     implementation(AndroidXDependencies.dataStore)
     implementation(AndroidXDependencies.dataStoreCore)
 
-    implementation("org.jetbrains:annotations:15.0")
-    implementation("androidx.annotation:annotation:1.2.0")
+    implementation("org.jetbrains:annotations:16.0.1")
+    implementation("androidx.annotation:annotation:1.3.0")
 
 // Android KTX
     implementation(AndroidXDependencies.fragmentKtx)
@@ -151,9 +155,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
-//annotation
-    implementation("org.jetbrains:annotations:15.0")
-
 
 //koin
     implementation("io.insert-koin:koin-core:3.1.2")
@@ -165,7 +166,6 @@ dependencies {
     implementation("com.kakao.sdk:v2-user:2.8.2")
 
 //google
-    implementation("com.google.android.gms:play-services-auth:19.2.0")
-
+    implementation("com.google.android.gms:play-services-auth:20.1.0")
 
 }

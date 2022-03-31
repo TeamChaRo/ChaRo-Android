@@ -5,7 +5,7 @@
     <data>
     <variable
         name="trendDrive"
-        type="com.example.charo_android.domain.model.home.TrendDrive" />
+        type="com.charo.android.domain.model.home.TrendDrive" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
