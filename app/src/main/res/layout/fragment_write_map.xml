@@ -94,6 +94,7 @@
                     app:layout_constraintEnd_toEndOf="@id/et_write_map_mid1"
                     app:layout_constraintTop_toTopOf="@id/et_write_map_mid1" />
 
+                <!--
                 <TextView
                     android:id="@+id/et_write_map_mid2"
                     android:layout_width="0dp"
@@ -122,7 +123,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/et_write_map_mid2"
                     app:layout_constraintEnd_toEndOf="@id/et_write_map_mid2"
                     app:layout_constraintTop_toTopOf="@id/et_write_map_mid2" />
-
+-->
                 <TextView
                     android:id="@+id/et_write_map_end"
                     android:layout_width="0dp"
@@ -140,14 +141,14 @@
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/img_write_map_back"
-                    app:layout_constraintTop_toBottomOf="@id/et_write_map_mid2"
+                    app:layout_constraintTop_toBottomOf="@id/et_write_map_mid1"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <ImageView
                     android:id="@+id/img_write_map_add_adress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_waypoint_plus_48px_inactive"
+                    android:src="@drawable/selector_plus_address"
                     app:layout_constraintBottom_toBottomOf="@id/et_write_map_end"
                     app:layout_constraintEnd_toEndOf="@id/et_write_map_end"
                     app:layout_constraintTop_toTopOf="@id/et_write_map_end" />

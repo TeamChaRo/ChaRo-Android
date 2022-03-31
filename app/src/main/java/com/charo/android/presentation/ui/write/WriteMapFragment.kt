@@ -81,7 +81,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         binding.imgWriteMapBack.setOnClickListener(this)      // 뒤로가기 click
         binding.etWriteMapStart.setOnClickListener(this)
         binding.etWriteMapMid1.setOnClickListener(this)
-        binding.etWriteMapMid2.setOnClickListener(this)
         binding.etWriteMapEnd.setOnClickListener(this)
         binding.btnWriteComplete.setOnClickListener(this)
 
@@ -96,7 +95,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
     private fun isEditTextFill() {
         binding.etWriteMapStart.isSelected = !TextUtils.isEmpty(binding.etWriteMapStart.text)
         binding.etWriteMapMid1.isSelected = !TextUtils.isEmpty(binding.etWriteMapMid1.text)
-        binding.etWriteMapMid2.isSelected = !TextUtils.isEmpty(binding.etWriteMapMid2.text)
         binding.etWriteMapEnd.isSelected = !TextUtils.isEmpty(binding.etWriteMapEnd.text)
     }
 
@@ -108,31 +106,33 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             Define().LOCATION_FLAG_MID_FRST -> { // 경유지1인 경우
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
+                binding.imgWriteMapAddAdress.visibility = View.GONE
             }
-            Define().LOCATION_FLAG_MID_SEC -> { // 경유지2인 경우
-                binding.etWriteMapMid1.visibility = View.VISIBLE
-                binding.imgWriteMapDelete1.visibility = View.VISIBLE
-                binding.etWriteMapMid2.visibility = View.VISIBLE
-                binding.imgWriteMapDelete2.visibility = View.VISIBLE
+            else -> {
+                binding.imgWriteMapAddAdress.visibility = View.VISIBLE
             }
-            else -> { }
+        }
+
+        if (!TextUtils.isEmpty(sharedViewModel.startAddress.value)) {
+            binding.imgWriteMapAddAdress.visibility = View.VISIBLE
+            binding.imgWriteMapAddAdress.isEnabled = true
+        }else{
+            binding.imgWriteMapAddAdress.visibility = View.VISIBLE
+            binding.imgWriteMapAddAdress.isEnabled = false
         }
 
         if (!TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) {
             binding.etWriteMapMid1.visibility = View.VISIBLE
             binding.imgWriteMapDelete1.visibility = View.VISIBLE
+            binding.imgWriteMapAddAdress.visibility = View.GONE
         }
-        if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)) {
-            binding.etWriteMapMid2.visibility = View.VISIBLE
-            binding.imgWriteMapDelete2.visibility = View.VISIBLE
-        }
+
         if (!TextUtils.isEmpty(sharedViewModel.endAddress.value)) {
             binding.btnWriteComplete.visibility = View.VISIBLE
         }
 
         binding.etWriteMapStart.text = sharedViewModel.startAddress.value
         binding.etWriteMapMid1.text = sharedViewModel.midFrstAddress.value
-        binding.etWriteMapMid2.text = sharedViewModel.midSecAddress.value
         binding.etWriteMapEnd.text = sharedViewModel.endAddress.value
 
         binding.imgWriteMapAddAdress.setOnClickListener{
@@ -140,9 +140,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         }
         binding.imgWriteMapDelete1.setOnClickListener {
             clickWriteMapDelete1(tMapView)
-        }
-        binding.imgWriteMapDelete2.setOnClickListener {
-            clickWriteMapDelete2(tMapView)
         }
 
         addList(tMapView)
@@ -153,16 +150,9 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             if (binding.etWriteMapMid1.visibility == View.GONE) {
                 binding.etWriteMapMid1.visibility = View.VISIBLE
                 binding.imgWriteMapDelete1.visibility = View.VISIBLE
+                binding.imgWriteMapAddAdress.visibility = View.GONE
 
                 binding.etWriteMapMid1.text = sharedViewModel.midFrstAddress.value
-            }
-            if (binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) {
-                binding.etWriteMapMid2.visibility = View.VISIBLE
-                binding.imgWriteMapDelete2.visibility = View.VISIBLE
-
-                binding.etWriteMapMid2.text = sharedViewModel.midSecAddress.value
-            }else{
-                Toast.makeText(requireContext(),getString(R.string.middle),Toast.LENGTH_LONG).show()
             }
         }else{
             Toast.makeText(requireContext(),getString(R.string.txt_check_input_start_end),Toast.LENGTH_LONG).show()
@@ -170,38 +160,14 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
     }
 
     private fun clickWriteMapDelete1(tMapView: TMapView) {
-        if (!TextUtils.isEmpty(sharedViewModel.midSecAddress.value)) {
-            binding.etWriteMapMid2.visibility = View.GONE
-            binding.imgWriteMapDelete2.visibility = View.GONE
+        binding.etWriteMapMid1.visibility = View.GONE
+        binding.imgWriteMapDelete1.visibility = View.GONE
+        binding.imgWriteMapAddAdress.visibility = View.VISIBLE
+        binding.imgWriteMapAddAdress.isEnabled = true
 
-            sharedViewModel.midFrstAddress = sharedViewModel.midSecAddress
-            sharedViewModel.midFrstLat = sharedViewModel.midSecLat
-            sharedViewModel.midFrstLong = sharedViewModel.midSecLong
-
-            sharedViewModel.midSecAddress.value = ""
-            sharedViewModel.midSecLat.value = 0.0
-            sharedViewModel.midSecLong.value = 0.0
-
-            binding.etWriteMapMid1.text = sharedViewModel.midFrstAddress.value
-        } else {
-            binding.etWriteMapMid1.visibility = View.GONE
-            binding.imgWriteMapDelete1.visibility = View.GONE
-
-            sharedViewModel.midFrstAddress.value = ""
-            sharedViewModel.midFrstLat.value = 0.0
-            sharedViewModel.midFrstLong.value = 0.0
-        }
-        path.clear()
-        addList(tMapView)
-    }
-
-    private fun clickWriteMapDelete2(tMapView: TMapView) {
-        binding.etWriteMapMid2.visibility = View.GONE
-        binding.imgWriteMapDelete2.visibility = View.GONE
-
-        sharedViewModel.midSecAddress.value = ""
-        sharedViewModel.midSecLat.value = 0.0
-        sharedViewModel.midSecLong.value = 0.0
+        sharedViewModel.midFrstAddress.value = ""
+        sharedViewModel.midFrstLat.value = 0.0
+        sharedViewModel.midFrstLong.value = 0.0
 
         path.clear()
         addList(tMapView)
@@ -213,9 +179,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         }
         if (sharedViewModel.midFrstLat.value != 0.0) {
             path.add(TMapPoint(sharedViewModel.midFrstLat.value!!, sharedViewModel.midFrstLong.value!!))
-        }
-        if (sharedViewModel.midSecLat.value != 0.0) {
-            path.add(TMapPoint(sharedViewModel.midSecLat.value!!, sharedViewModel.midSecLong.value!!))
         }
         if (sharedViewModel.endLat.value != 0.0) {
             path.add(TMapPoint(sharedViewModel.endLat.value!!, sharedViewModel.endLong.value!!))
@@ -299,8 +262,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun blackOut(){
-        val isShowBlackout = sharedViewModel.startAddress.value == "" && sharedViewModel.midFrstAddress.value == "" && sharedViewModel.midSecAddress.value == ""
+    private fun blackOut(){
+        val isShowBlackout = sharedViewModel.startAddress.value == "" && sharedViewModel.midFrstAddress.value == "" && sharedViewModel.endAddress.value == ""
 
         if(isShowBlackout){
             binding.grayBackgroundForToast.visibility = View.VISIBLE
@@ -312,9 +275,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
     }
 
     private fun clickWriteComplete() {
-        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midFrstAddress.value)) ||
-            binding.etWriteMapMid2.visibility == View.VISIBLE && !TextUtils.isEmpty(sharedViewModel.midSecAddress.value)
-        ) {
+        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && TextUtils.isEmpty(sharedViewModel.midFrstAddress.value))) {
             Toast.makeText(context, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
             return
         }
@@ -385,13 +346,13 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         param["courseDesc"] = courseDescRB
 
         val call = ApiService.writeViewService
-//            .writePost(sendWarning, sendTheme, sendCourse, sharedViewModel.imageMultiPart.value!!, param)
             .writePost(sendWarning, sendTheme, sharedViewModel.course.value!!, sharedViewModel.imageMultiPart.value!!, param)
         call.enqueueUtil(
             onSuccess = {
                 Log.d("serveWriteData", "success")
                 Log.d("serveWriteData", it.toString())
 
+                Toast.makeText(context,"게시물이 등록되었습니다.", Toast.LENGTH_LONG).show()
                 writeShareActivity!!.finish()
             },
             onError = {
@@ -420,13 +381,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             }
             binding.etWriteMapMid1 -> {
                 sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_MID_FRST
-                writeShareActivity!!.replaceAddStackFragment(
-                    WriteMapSearchFragment.newInstance(),
-                    "writeMapSearch"
-                )
-            }
-            binding.etWriteMapMid2 -> {
-                sharedViewModel.locationFlag.value = Define().LOCATION_FLAG_MID_SEC
                 writeShareActivity!!.replaceAddStackFragment(
                     WriteMapSearchFragment.newInstance(),
                     "writeMapSearch"

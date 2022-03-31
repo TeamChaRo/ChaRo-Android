@@ -16,7 +16,7 @@ interface WriteViewService {
     fun writePost(
         @PartMap warning: HashMap<String, RequestBody>,
         @PartMap theme: HashMap<String, RequestBody>,
-        @PartMap course: ArrayList<MultipartBody.Part>,
+        @Part course: ArrayList<MultipartBody.Part>,
         @Part image: ArrayList<MultipartBody.Part>,
         @PartMap stringData: HashMap<String, RequestBody>,
         ): Call<ResponseStatusCode>
