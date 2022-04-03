@@ -9,6 +9,4 @@ fun AppCompatActivity.changeFragment( layoutRes: Int, fragment: Fragment ) {
     val transaction = fragmentManager.beginTransaction()
     transaction.replace(layoutRes, fragment)
     .commit()
-
-
 }

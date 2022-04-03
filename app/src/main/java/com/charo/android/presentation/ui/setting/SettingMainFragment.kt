@@ -41,7 +41,13 @@ class SettingMainFragment :
         allowAccess()
         clickPrivacy()
         clickServiceTerm()
+        backBtn()
     }
+    //뒤로가기
+    private fun backBtn(){
+        settingViewModel.settingFragmentBackStack.value = true
+    }
+
 
     // 알림, 사진 접근 허용
     private fun allowAccess() {
@@ -91,7 +97,6 @@ class SettingMainFragment :
             }
         }
     }
-
 
     // 공지사항
     private fun clickNotice() {
@@ -214,4 +219,6 @@ class SettingMainFragment :
             commit()
         }
     }
+
+
 }

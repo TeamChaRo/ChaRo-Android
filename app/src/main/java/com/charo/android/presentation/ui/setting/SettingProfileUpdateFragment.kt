@@ -31,6 +31,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         changeTabText()
         editTextFocusRemove()
         changeProfileImage()
+        backBtn()
     }
     // isProfileUpdate 초기화
 
@@ -39,7 +40,10 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         settingViewModel.nickName.value = false
         settingViewModel.buttonClick.value = false
     }
-
+    //뒤로가기 버튼
+    private fun backBtn(){
+        settingViewModel.settingFragmentBackStack.value = false
+    }
 
     private fun profileCheckNickName() {
         val nickNamePattern = "^[가-힣ㄱ-ㅎ]{0,5}$"

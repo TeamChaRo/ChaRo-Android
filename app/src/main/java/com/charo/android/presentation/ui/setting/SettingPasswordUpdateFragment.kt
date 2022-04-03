@@ -29,6 +29,11 @@ class SettingPasswordUpdateFragment :
         changeTabText()
         inVisibleNewPassword()
         newPasswordReconfirm()
+        backBtn()
+    }
+    //뒤로가기 버튼
+    private fun backBtn(){
+        settingViewModel.settingFragmentBackStack.value = false
     }
 
 

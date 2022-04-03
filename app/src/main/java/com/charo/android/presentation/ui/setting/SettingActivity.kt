@@ -13,28 +13,35 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_setting) {
 
-    private val settingViewModel : SettingViewModel by viewModel()
+    private val settingViewModel: SettingViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         clickBackBtn()
         changeTabText()
         changeFragment(R.id.fragment_container_setting, SettingMainFragment())
-
     }
 
-    private fun changeTabText(){
+    private fun changeTabText() {
         settingViewModel.updateTabText.observe(this, Observer {
             binding.tvSettingUp.text = it
         })
     }
 
     //뒤로가기
-    private fun clickBackBtn(){
+    private fun clickBackBtn() {
         binding.btnSettingBack.setOnClickListener {
-            finish()
+            val fragmentChange = settingViewModel.settingFragmentBackStack.value ?: false
+            if (fragmentChange) {
+                finish()
+            } else {
+                changeFragment(R.id.fragment_container_setting, SettingMainFragment())
+            }
+
         }
-
     }
-
 }
+
+
+
+

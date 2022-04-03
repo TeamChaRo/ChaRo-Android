@@ -53,6 +53,9 @@ class SettingViewModel(
         }
     }
 
+    //프래그먼트 백스택 관리
+    var settingFragmentBackStack = MutableLiveData<Boolean>(false)
+
 
     //기존 비밀번호 확인
     private val _passwordCheck : MutableLiveData<Boolean> = MutableLiveData()
