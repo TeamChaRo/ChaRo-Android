@@ -215,7 +215,6 @@ class SettingMainFragment :
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.apply {
             replace(R.id.fragment_container_setting, fragment)
-            addToBackStack(null)
             commit()
         }
     }
