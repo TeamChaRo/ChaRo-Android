@@ -19,6 +19,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
         super.onCreate(savedInstanceState)
         initSignUpEmailFragment()
         changeGoogleSignUpFragment()
+        clickBackBtn()
     }
 
 
@@ -40,12 +41,15 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             Log.d("google", "왜 니가 되는 거냐")
         }
 
-
+        //카카오 회원가입시에
         if(SharedInformation.getSignUp(this) == 2){
             signUpViewModel.userEmail.value = intent.getStringExtra("kakaoSignUpEmail")
-
             changeFragment(R.id.fragment_container_email, SignUpProfileFragment())
         }
     }
 
+    //뒤로가기
+    private fun clickBackBtn(){
+        binding.btnSignupBack.setOnClickListener { finish() }
+    }
 }
