@@ -17,7 +17,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        clickBackBtn()
         changeTabText()
         changeFragment(R.id.fragment_container_setting, SettingMainFragment())
 
@@ -29,5 +29,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         })
     }
 
+    //뒤로가기
+    private fun clickBackBtn(){
+        binding.btnSettingBack.setOnClickListener {
+            finish()
+        }
+
+    }
 
 }
