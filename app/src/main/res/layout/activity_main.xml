@@ -25,11 +25,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:itemBackground="@color/fui_transparent"
             app:menu="@menu/bottom_nav_menu" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment_activity_main"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
