@@ -188,7 +188,7 @@
 
                 <TextView
                     android:id="@+id/text_setting_email"
-                    android:layout_width="29dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginTop="18dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
@@ -201,11 +201,12 @@
 
                 <TextView
                     android:id="@+id/text_setting_user_email"
-                    android:layout_width="0dp"
-                    android:layout_height="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:textColor="@color/black_sub_212429"
                     android:textSize="14sp"
+                    android:includeFontPadding="false"
                     app:layout_constraintEnd_toEndOf="@+id/switch_email_agree"
                     app:layout_constraintTop_toTopOf="@+id/text_setting_email" />
 
