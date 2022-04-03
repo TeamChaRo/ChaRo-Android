@@ -5,14 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.data.model.request.search.RequestSearchViewData
+import com.charo.android.domain.model.StatusCode
 import com.charo.android.domain.model.search.SearchDrive
+import com.charo.android.domain.usecase.home.PostRemoteHomeLikeUseCase
 import com.charo.android.domain.usecase.search.GetRemoteSearchUseCase
 
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val getRemoteSearchUseCase: GetRemoteSearchUseCase
+    private val getRemoteSearchUseCase: GetRemoteSearchUseCase,
+    private val postRemoteHomeLikeUseCase: PostRemoteHomeLikeUseCase
 ): ViewModel() {
 
     val city = MutableLiveData<String>()
@@ -27,11 +31,11 @@ class SearchViewModel(
 
 
     private var _search = MutableLiveData<List<SearchDrive>>()
-    val search : LiveData<List<SearchDrive>>
+    val search: LiveData<List<SearchDrive>>
         get() = _search
 
 
-    fun getSearch(requestSearchViewData : RequestSearchViewData){
+    fun getSearch(requestSearchViewData: RequestSearchViewData) {
         viewModelScope.launch {
             runCatching { getRemoteSearchUseCase.execute(requestSearchViewData) }
                 .onSuccess {
@@ -47,4 +51,19 @@ class SearchViewModel(
     }
 
 
+    //Post 좋아요
+    fun postLike(requestHomeLikeData: RequestHomeLikeData) {
+        viewModelScope.launch {
+            runCatching { postRemoteHomeLikeUseCase.execute(requestHomeLikeData) }
+                .onSuccess {
+                    Log.d("searchLike", "서버 통신 성공!")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Log.d("searchLike", "서버 통신 실패패!")
+                }
+        }
+
+
+    }
 }

@@ -10,11 +10,14 @@ import com.charo.android.domain.model.search.SearchDrive
 import com.charo.android.presentation.ui.detail.DetailActivity
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 
-class ResultSearchAdapter() :
+class ResultSearchAdapter(
+    var links : ResultSearchFragment.DataToSearchLike
+) :
     RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {
     private val _searchData = mutableListOf<SearchDrive>()
     private var searchData: List<SearchDrive> = _searchData
-
+    var postId = 0
+    var select = true
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -30,6 +33,18 @@ class ResultSearchAdapter() :
         position: Int
     ) {
         holder.onBind(searchData[position])
+        holder.binding.imgResultSearchHeart.setOnClickListener {
+            postId = searchData[position].postId
+            if(select){
+                it.isSelected = !searchData[position].isFavorite
+                select = false
+            }else{
+                it.isSelected = searchData[position].isFavorite
+            }
+
+            links.getPostId(postId)
+        }
+
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
             intent.putExtra("postId", searchData[position].postId)

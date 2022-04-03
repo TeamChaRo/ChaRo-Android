@@ -5,16 +5,18 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import com.charo.android.R
+import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentResultSearchBinding
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
+import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.fragment_result_search) {
     private val searchViewModel: SearchViewModel by sharedViewModel()
     private lateinit var resultSearchAdapter: ResultSearchAdapter
-
+    var links = DataToSearchLike()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadSearchData()
@@ -55,7 +57,7 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
     }
 
     private fun initResultSearchView() {
-        resultSearchAdapter = ResultSearchAdapter()
+        resultSearchAdapter = ResultSearchAdapter(links)
         binding.recyclerviewResultSearch.adapter = resultSearchAdapter
         searchViewModel.search.observe(viewLifecycleOwner) {
             resultSearchAdapter.setSearchDrive(it)
@@ -98,5 +100,13 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
             R.layout.custom_spinner_item
         )
         binding.spinnerResultSearch.adapter = adapter
+    }
+
+    inner class DataToSearchLike(){
+        fun getPostId(postId : Int){
+            val userEmail = SharedInformation.getEmail(requireActivity())
+                searchViewModel.postLike(RequestHomeLikeData(userEmail,postId))
+        }
+
     }
 }

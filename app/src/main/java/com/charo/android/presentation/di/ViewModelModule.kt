@@ -22,7 +22,7 @@ val viewModelModule = module {
     viewModel { MoreViewViewModel(get(), get(), get(), get(), get(),get(),get()) }
     viewModel { SharedViewModel(get()) }
     viewModel { SettingViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { SearchViewModel(get()) }
+    viewModel { SearchViewModel(get(),get()) }
     viewModel { SocialSignInViewModel(get()) }
     viewModel { EmailSignInViewModel(get()) }
     // SH
