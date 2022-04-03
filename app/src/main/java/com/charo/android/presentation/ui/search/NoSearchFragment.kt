@@ -17,8 +17,14 @@ class NoSearchFragment : BaseFragment<FragmentNoSearchBinding>(R.layout.fragment
 
     private fun backSearch(){
         binding.imgBackHome.setOnClickListener {
-            val intent = Intent(requireActivity(), SearchActivity::class.java)
-            startActivity(intent)
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.apply {
+                replace(
+                    R.id.fragment_container_search,
+                    SearchFragment()
+                )
+                commit()
+            }
         }
 
 

@@ -25,7 +25,7 @@
     <string name="main_charo_viewpager_text">차로와 함께 \n즐기는 \n드라이브 코스</string>
     <string name="main_charo_viewpager_hashtag">#날씨도좋은데#바다와함께라면</string>
     <string name="main_charo_more_view_title">요즘 뜨는 드라이브 코스</string>
-    <string name="main_charo_more_view_count">전체 6개 게시물</string>
+    <string name="main_charo_more_view_count">전체 %d개 게시물</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="main_charo_more_filter">인기순</string>
     <string name="main_charo_more_title">해얀도로 정복할 수 있는 포항 드라이브 코스</string>

@@ -19,6 +19,7 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         loadSearchData()
         initSpinner()
         initResultSearchView()
+        clickBackBtn()
         Log.d("searchViewModel", searchViewModel.province.value.toString())
         Log.d("searchViewModel", searchViewModel.city.value.toString())
         Log.d("searchViewModel", searchViewModel.theme.value.toString())
@@ -47,6 +48,7 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
             binding.chipResultSearch4.visibility = View.GONE
         } else {
             binding.chipResultSearch4.text = "${searchViewModel.caution.value}"+"x"
+
         }
     }
 
@@ -55,9 +57,24 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         binding.recyclerviewResultSearch.adapter = resultSearchAdapter
         searchViewModel.search.observe(viewLifecycleOwner) {
             resultSearchAdapter.setSearchDrive(it)
+            binding.textResultSearchCount.text = String.format(getString(R.string.main_charo_more_view_count), it.size)
         }
     }
 
+    //뒤로가기
+    private fun clickBackBtn(){
+        binding.imgBackSearchView.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.apply {
+                replace(
+                    R.id.fragment_container_search,
+                    SearchFragment()
+                )
+                commit()
+            }
+        }
+
+    }
 
 
     private fun initSpinner() {
