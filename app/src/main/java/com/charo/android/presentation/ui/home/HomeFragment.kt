@@ -9,6 +9,8 @@ import com.charo.android.R
 import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentHomeBinding
+import com.charo.android.domain.model.home.Banner
+import com.charo.android.domain.model.home.BannerLocal
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.alarm.AlarmActivity
@@ -31,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var theme = ThemeUtil()
     private var location = LocationUtil()
     private lateinit var homeViewPagerAdapter: HomeViewPagerAdapter
+    private lateinit var homeViewPagerLocalAdapter: HomeViewPagerLocalAdapter
     private lateinit var homeTodayDriveAdapter: HomeTodayDriveAdapter
     private lateinit var homeThemeAdapter: HomeThemeAdapter
     private lateinit var homeHotDriveAdapter: HomeTrendDriveAdapter
@@ -53,7 +56,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         goAlarm()
         initToolBar()
         replaceMoreViewFragment(Hidden.userId)
-        initBanner()
+        initBannerLocal()
+//        initBanner()
         initTrendDrive()
         initLocalDrive()
         initTodayCharoDrive()
@@ -67,6 +71,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
+    //배너 디지인
+    private fun initBannerLocal() {
+        val bannerLocal : List<BannerLocal>
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        homeViewModel.getBanner(userEmail)
+        homeViewPagerLocalAdapter = HomeViewPagerLocalAdapter()
+        binding.vpMain.adapter = homeViewPagerLocalAdapter
+
+        val Banner1 : BannerLocal = BannerLocal(R.drawable.banner_img_one,"강릉 해변 \n드라이브 코스와 맛집","강릉 8년차가 소개해주는",0,28f,false)
+        val Banner2 : BannerLocal = BannerLocal(R.drawable.banner_img_two,"봄의 선선한 바람 \n플레이리스트","",R.drawable.spring_playlist,28f,false)
+        val Banner3 : BannerLocal = BannerLocal(R.drawable.banner_img_three,"자동차 극장\n드라이브 코스","",R.drawable.drive_in_theater,28f,false)
+        val Banner4 : BannerLocal = BannerLocal(R.drawable.banner_img_four,"차에서의 \n오늘이 최고가 될 수 있게\n당신의 드라이브 메이트","",0,22f,true)
+        bannerLocal = listOf(Banner1,Banner2,Banner3,Banner4)
+
+        homeViewPagerLocalAdapter.setHomeBanner(bannerLocal, homeViewModel.getBannerRoad())
+    }
 
     //배너 설정
     private fun initBanner() {

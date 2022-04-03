@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="banner"
+            type="com.charo.android.domain.model.home.BannerLocal" />
+
+        <variable
+            name="bannerRoad"
+            type="com.charo.android.domain.model.home.BannerRoad" />
+    </data>
+        
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_viewpager"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/main_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#63000000"
+            />
+
+        <ImageView
+            android:id="@+id/text_viewpager_sub_title_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/text_viewpager_title"
+            app:layout_constraintStart_toStartOf="@+id/text_viewpager_title"
+            />
+
+        <TextView
+            android:id="@+id/text_viewpager_sub_title"
+            style="@style/HeaderH2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/white"
+            android:text="@{banner.homeViewPagerSubTitle}"
+            app:layout_constraintBottom_toTopOf="@id/text_viewpager_title"
+            app:layout_constraintStart_toStartOf="@+id/text_viewpager_title"
+            />
+
+        <TextView
+            android:id="@+id/text_viewpager_title"
+            style="@style/HeaderH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintVertical_bias="0.55"
+            android:text="@{banner.homeViewPagerTitle}"
+            tools:text="차에서의\n오늘이 최고가 될 수 있게\n당신의 드라이브 메이트"
+            android:lineSpacingExtra="1sp"
+            android:includeFontPadding="false"
+            app:layout_constraintBottom_toBottomOf="@+id/img_viewpager"
+            app:layout_constraintStart_toStartOf="@+id/img_viewpager"
+            app:layout_constraintTop_toTopOf="@+id/img_viewpager"
+            app:layout_constraintEnd_toStartOf="@+id/img_viewpager_charo"/>
+
+        <ImageView
+            android:id="@+id/img_viewpager_charo"
+            android:layout_width="0dp"
+            android:scaleType="fitStart"
+            android:layout_height="wrap_content"
+            android:src="@drawable/banner_charo"
+            app:layout_constraintStart_toEndOf="@id/text_viewpager_title"
+            app:layout_constraintBottom_toBottomOf="@id/text_viewpager_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/img_viewpager_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            imgIntBind="@{bannerRoad.bannerRoadImg}"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
