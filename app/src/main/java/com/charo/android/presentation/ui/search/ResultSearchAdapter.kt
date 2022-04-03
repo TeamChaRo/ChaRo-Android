@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemResultSearchBinding
 import com.charo.android.domain.model.search.SearchDrive
 import com.charo.android.presentation.ui.detail.DetailActivity
+import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 
 class ResultSearchAdapter() :
     RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {
@@ -30,7 +31,7 @@ class ResultSearchAdapter() :
     ) {
         holder.onBind(searchData[position])
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailActivity::class.java)
+            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
             intent.putExtra("postId", searchData[position].postId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
