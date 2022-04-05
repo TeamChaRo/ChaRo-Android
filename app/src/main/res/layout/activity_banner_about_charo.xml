@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.home.BannerAboutCharoActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nscv_banner_about_charo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="34dp"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:minHeight="78dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About 차로"
+                    android:textAppearance="@style/HeaderH4"
+                    android:layout_gravity="center"
+                    />
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/iv_main_about_charo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
+                android:background="@drawable/banner_img_four"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@+id/iv_main_about_charo"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_main_about_charo"
+                app:layout_constraintStart_toStartOf="@+id/iv_main_about_charo"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="#3a37384f">
+            </View>
+
+            <TextView
+                android:id="@+id/tv_sl_about_charo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/iv_main_about_charo"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_main_about_charo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.25"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:textStyle="bold"
+                android:textSize="19sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="5.7sp"
+                android:gravity="end"
+                android:text="차에서의 오늘이 최고가 될 수 있게\n당신의 드라이브 메이트"/>
+
+            <ImageView
+                android:id="@+id/iv_about_charo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="148dp"
+                android:minHeight="51dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sl_about_charo"
+                app:layout_constraintEnd_toEndOf="@+id/tv_sl_about_charo"
+                android:background="@drawable/banner_charo"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_banner_start_charo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/iv_main_about_charo"
+                android:layout_marginTop="33dp"
+                android:layout_marginHorizontal="8dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_road_start_charo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/road_main_animation"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_car_start_charo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginStart="7dp"
+                    android:background="@drawable/car_main_animation_blue"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_banner_title_start_charo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="@color/blue_main_0f6fff"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="차로의 시작"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_road_start_charo"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="13dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="#495057"
+                    android:lineSpacingExtra="8.4sp"
+                    android:text="차로는 어떻게 하면\n드라이브를 더 재미있게 즐길 수 있을까? 라는\n고민에서 시작되었어요.\n\n드라이브 코스를 찾는 과정에서의 어려움,\n드라이브를 직접 하는 동안에의 어려움,\n\n이를 해결하기 위해 저희는\n경험한 자들의 새로운 드라이브 코스 이야기를\n들을 수 있는 공간이 되고자 합니다."
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_banner_about_charo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/cl_banner_start_charo"
+                android:layout_marginTop="44dp"
+                android:layout_marginHorizontal="8dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_road_about_charo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/road_main_animation"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_car_about_charo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_banner_title_about_charo"
+                    app:layout_constraintHorizontal_bias="0.4"
+                    android:layout_marginTop="11dp"
+                    android:background="@drawable/car_main_animation_blue"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_banner_title_about_charo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="@color/blue_main_0f6fff"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="차로에서 여러분은"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_vp_banner_about_charo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_road_about_charo"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="8dp"
+                    android:paddingTop="37dp"
+                    android:paddingBottom="30dp"
+                    android:background="@drawable/background_radius_all_20"
+                    android:elevation="12dp"
+                    android:outlineSpotShadowColor="#50aaaacc"
+                    android:layout_margin="12dp"
+                    >
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp_banner_about_charo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                        android:id="@+id/dots_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:dotsColor="#c4c4c4"
+                        app:selectedDotColor="@color/gray4_sub_889098"
+                        app:dotsSize="10dp"
+                        android:layout_marginTop="35dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/vp_banner_about_charo"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_vp_banner_about_charo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    android:layout_marginTop="58dp"
+                    android:layout_marginHorizontal="21dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="#495057"
+                    android:lineSpacingExtra="8.4sp"
+                    android:text="이를 통해\n
+여러분의 오늘 드라이브가\n
+최고가 될 수 있도록 하는 것이\n\n
+
+저희 차로의 목표이자 이유에요.\n\n
+
+차로가 더 나은 서비스가 될 수 있도록\n
+앞으로 더 노력할게요.\n\n
+
+여러분의 드라이브 이야기를\n
+기다리고 있겠습니다."
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_banner_team_charo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/cl_banner_about_charo"
+                android:layout_marginTop="48dp"
+                android:layout_marginHorizontal="8dp"
+                >
+                <ImageView
+                    android:id="@+id/iv_road_team_charo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/road_main_animation"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_car_team_charo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_banner_title_team_charo"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/car_main_animation_blue"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_banner_title_team_charo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="@color/blue_main_0f6fff"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="TEAM CHARO"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_banner_team_charo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_road_team_charo"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:orientation="vertical"
+                    >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_banner_team_charo_plan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/tv_banner_team_charo_plan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:includeFontPadding="false"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:gravity="center_horizontal"
+                            android:text="Plan"/>
+
+                        <TextView
+                            android:id="@+id/tv_plan_heejin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_plan"
+                            android:layout_marginTop="6dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="배희진"/>
+
+                        <TextView
+                            android:id="@+id/tv_plan_dabin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_plan"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_plan_heejin"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="고다빈"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_banner_team_charo_design"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        >
+                        <TextView
+                            android:id="@+id/tv_banner_team_charo_design"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:includeFontPadding="false"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:gravity="center_horizontal"
+                            android:text="Design"/>
+
+                        <TextView
+                            android:id="@+id/tv_design_seonghyeon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_design"
+                            android:layout_marginTop="6dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="이성현"/>
+
+                        <TextView
+                            android:id="@+id/tv_design_soohyeon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_design"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_design_seonghyeon"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="고수현"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_banner_team_charo_ios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        >
+                        <TextView
+                            android:id="@+id/tv_banner_team_charo_ios"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:includeFontPadding="false"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:gravity="center_horizontal"
+                            android:text="iOS Dev"/>
+
+                        <TextView
+                            android:id="@+id/tv_ios_hyeryeong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
+                            android:layout_marginTop="6dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="장혜령"/>
+
+                        <TextView
+                            android:id="@+id/tv_ios_injeong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_ios_hyeryeong"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="최인정"/>
+
+                        <TextView
+                            android:id="@+id/tv_ios_ikbum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_ios_injeong"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="박익범"/>
+
+                        <TextView
+                            android:id="@+id/tv_ios_jiwon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_ios_ikbum"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="이지원"/>
+
+                        <TextView
+                            android:id="@+id/tv_ios_jieun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_ios_jiwon"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="황지은"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_banner_team_charo_android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        >
+                        <TextView
+                            android:id="@+id/tv_banner_team_charo_android"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/notosanscjkkr_regular"
+                            android:includeFontPadding="false"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:gravity="center_horizontal"
+                            android:text="Android Dev"/>
+
+                        <TextView
+                            android:id="@+id/tv_android_jinhee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_android"
+                            android:layout_marginTop="6dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="한진희"/>
+
+                        <TextView
+                            android:id="@+id/tv_android_hotaek"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_android"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_android_jinhee"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="곽호택"/>
+
+                        <TextView
+                            android:id="@+id/tv_android_seunghyun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_android"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginStart="22dp"
+                            app:layout_constraintStart_toEndOf="@+id/tv_android_hotaek"
+                            android:fontFamily="@font/noto_sans_cjkkr_medium"
+                            android:includeFontPadding="false"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:lineSpacingExtra="8.4sp"
+                            android:text="한승현"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_banner_team_charo_server"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        >
+                    <TextView
+                        android:id="@+id/tv_banner_team_charo_server"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:includeFontPadding="false"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="#495057"
+                        android:lineSpacingExtra="8.4sp"
+                        android:gravity="center_horizontal"
+                        android:text="Server"/>
+
+                    <TextView
+                        android:id="@+id/tv_server_yeawon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_server"
+                        android:layout_marginTop="6dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#495057"
+                        android:lineSpacingExtra="8.4sp"
+                        android:text="오예원"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_banner_insta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/cl_banner_team_charo"
+                android:layout_marginTop="34dp"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_insta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/img_insta"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_insta_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_insta"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="#495057"
+                    android:lineSpacingExtra="8.4sp"
+                    android:text="\ufeff@charo_official_2021"/>
+
+                <TextView
+                    android:id="@+id/tv_insta_context"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_insta_id"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="#889098"
+                    android:lineSpacingExtra="8.4sp"
+                    android:gravity="center_horizontal"
+                    android:text="차로 공식 인스타그램 계정에서\n차로 서비스에 대한 소개, 이벤트 등을 확인하실 수 있어요."/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

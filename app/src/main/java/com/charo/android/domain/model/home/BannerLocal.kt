@@ -1,7 +1,5 @@
 package com.charo.android.domain.model.home
 
-import android.graphics.fonts.Font
-
 data class BannerLocal(
     val homeViewPagerRoadImage: Int,
     val homeViewPagerTitle: String,

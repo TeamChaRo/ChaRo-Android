@@ -1,16 +1,18 @@
 package com.charo.android.presentation.ui.home.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.charo.android.databinding.ItemHomeViewpagerLocalBinding
 import com.charo.android.domain.model.home.BannerLocal
 import com.charo.android.domain.model.home.BannerRoad
+import com.charo.android.presentation.ui.home.BannerAboutCharoActivity
 
-class HomeViewPagerLocalAdapter() :
-    RecyclerView.Adapter<HomeViewPagerLocalAdapter.HomeViewPagerViewHolder>() {
+class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapter.HomeViewPagerViewHolder>() {
     private val _banner = mutableListOf<BannerLocal>()
     var banner: List<BannerLocal> = _banner
 
@@ -35,6 +37,24 @@ class HomeViewPagerLocalAdapter() :
     ) {
         holder.onBind(banner[position], bannerRoad[position])
 
+        holder.itemView.setOnClickListener {
+            val activity = it.context as AppCompatActivity
+
+            when(position){
+                0->{
+
+                }
+                1->{
+
+                }
+                2->{
+
+                }
+                3->{
+                    activity.startActivity(Intent(activity, BannerAboutCharoActivity::class.java))
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
