@@ -38,7 +38,7 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
         holder: HomeViewPagerViewHolder,
         position: Int
     ) {
-        holder.onBind(banner[position], bannerRoad[position])
+        holder.onBind(banner[position])
 
         holder.itemView.setOnClickListener {
             val activity = it.context as AppCompatActivity
@@ -67,7 +67,7 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
     class HomeViewPagerViewHolder(
         private val binding: ItemHomeViewpagerLocalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(banner : BannerLocal, bannerRoad: BannerRoad){
+        fun onBind(banner : BannerLocal){
 
             Glide.with(binding.imgViewpager)
                 .load(banner.homeViewPagerRoadImage)
@@ -87,14 +87,12 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
             }
             binding.textViewpagerTitle.textSize = banner.titleFontSize
             binding.banner = banner
-            binding.bannerRoad = bannerRoad
             binding.executePendingBindings()
         }
     }
 
-    fun setHomeBanner(banner: List<BannerLocal>, bannerRoad: List<BannerRoad>){
+    fun setHomeBanner(banner: List<BannerLocal>){
         this.banner = banner
-        this.bannerRoad = bannerRoad
         notifyDataSetChanged()
     }
 

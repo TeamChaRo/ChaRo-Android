@@ -1,15 +1,17 @@
 package com.charo.android.presentation.ui.home
 
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.viewpager2.widget.ViewPager2
 import com.charo.android.R
 import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentHomeBinding
-import com.charo.android.domain.model.home.Banner
 import com.charo.android.domain.model.home.BannerLocal
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseFragment
@@ -25,6 +27,7 @@ import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.util.DisplayMetrics
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -56,8 +59,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         goAlarm()
         initToolBar()
         replaceMoreViewFragment(Hidden.userId)
+
         initBannerLocal()
 //        initBanner()
+        carAnimation()
+
         initTrendDrive()
         initLocalDrive()
         initTodayCharoDrive()
@@ -71,6 +77,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
+    private fun carAnimation(){
+        binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                val displayMetrics = DisplayMetrics()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    requireContext().display!!.getRealMetrics(displayMetrics)
+                } else {
+                    requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+                    displayMetrics.widthPixels
+                }
+
+                val width = displayMetrics.widthPixels
+
+                val xValues: Float = (width * (position.toFloat()/4))
+                val anim : ObjectAnimator = ObjectAnimator.ofFloat(view, "translationX", xValues)
+
+                anim.target = binding.ivHomeCharoCar
+                anim.duration = 700
+                anim.start()
+            }
+        })
+    }
     //배너 디지인
     private fun initBannerLocal() {
         val bannerLocal : List<BannerLocal>
@@ -85,7 +115,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val Banner4 : BannerLocal = BannerLocal(R.drawable.banner_img_four,"차에서의 \n오늘이 최고가 될 수 있게\n당신의 드라이브 메이트","",0,22f,true)
         bannerLocal = listOf(Banner1,Banner2,Banner3,Banner4)
 
-        homeViewPagerLocalAdapter.setHomeBanner(bannerLocal, homeViewModel.getBannerRoad())
+        homeViewPagerLocalAdapter.setHomeBanner(bannerLocal)
     }
 
     //배너 설정
