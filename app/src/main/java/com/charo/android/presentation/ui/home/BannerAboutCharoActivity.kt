@@ -29,9 +29,9 @@ class BannerAboutCharoActivity : AppCompatActivity() {
 
         override fun createFragment(position: Int): Fragment {
             return when(position){
-                0 -> BannerAboutCharoFragment(BannerAboutCharo(R.drawable.onboarding_background_1_android, "구경하고","사람들의 드라이브 경험을\n자유롭게 구경해보세요."))
-                1 -> BannerAboutCharoFragment(BannerAboutCharo(R.drawable.onboarding_background_2_android, "검색하고","원하는 지역과 테마로\n맞춤 드라이브 코스를 찾아보세요."))
-                else -> BannerAboutCharoFragment(BannerAboutCharo(R.drawable.onboarding_background_3_android, "작성하고","나만의 드라이브 코스를\n기록하고 공유해보세요."))
+                0 -> BannerAboutCharoFragment(BannerAboutCharo(R.drawable.banner_charo_look, "구경하고","사람들의 드라이브 경험을\n자유롭게 구경해보세요."))
+                1 -> BannerAboutCharoFragment(BannerAboutCharo(R.drawable.banner_charo_search, "검색하고","원하는 지역과 테마로\n맞춤 드라이브 코스를 찾아보세요."))
+                else -> BannerAboutCharoFragment(BannerAboutCharo(R.drawable.banner_charo_write, "작성하고","나만의 드라이브 코스를\n기록하고 공유해보세요."))
             }
         }
     }
