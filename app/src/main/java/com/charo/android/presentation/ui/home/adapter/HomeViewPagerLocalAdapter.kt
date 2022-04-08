@@ -12,6 +12,7 @@ import com.charo.android.domain.model.home.BannerLocal
 import com.charo.android.domain.model.home.BannerRoad
 import com.charo.android.presentation.ui.home.BannerAboutCharoActivity
 import com.charo.android.presentation.ui.home.BannerDriveTheaterActivity
+import com.charo.android.presentation.ui.home.BannerSpringPlaylistActivity
 
 class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapter.HomeViewPagerViewHolder>() {
     private val _banner = mutableListOf<BannerLocal>()
@@ -46,7 +47,7 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
 
                 }
                 1->{
-
+                    activity.startActivity(Intent(activity, BannerSpringPlaylistActivity::class.java))
                 }
                 2->{
                     activity.startActivity(Intent(activity, BannerDriveTheaterActivity::class.java))

@@ -27,6 +27,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
+            android:name=".presentation.ui.home.BannerSpringPlaylistActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.ui.home.BannerDriveTheaterActivity"
             android:exported="true" />
         <activity

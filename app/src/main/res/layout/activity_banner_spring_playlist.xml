@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.home.BannerSpringPlaylistActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nscv_banner_spring_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="25dp"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:minHeight="78dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="봄 신선한 바람 플레이리스트"
+                    android:textAppearance="@style/HeaderH4"
+                    android:layout_gravity="center"
+                    />
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/iv_main_spring_playlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
+                android:background="@drawable/banner_img_two_detail"
+                />
+
+            <TextView
+                android:id="@+id/tv_spring_playlist_context"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/iv_main_spring_playlist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="17dp"
+                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/jejugothic_regular"
+                android:textStyle="normal"
+                android:textSize="13sp"
+                android:textColor="#495057"
+                android:lineSpacingExtra="6sp"
+                android:text="드라이브와 잘 어울리는 계절인 봄이 찾아왔습니다. \n\n
+양옆 창문 열어놓고 선선한 바람 맞으며 드라이브 하는 \n
+낭만, 다들 가지고 계시죠? 드라이브 하면서 빠질 수 없는게 음악인데요, 음악 고르는데 시간쏟지 마시고 차로가 \n
+봄 바람과 잘 어울리는 플레이리스트를 준비했습니다. \n
+선곡한 15곡은 밤에 드라이브할 때 어울리는 노래입니다.\n
+너무 신나지 않지만 조용하지 않은 노래로 골라봤습니다. 🔈"/>
+
+            <TextView
+                android:id="@+id/tv_guide_go_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_spring_playlist_context"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="40dp"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#495057"
+                android:gravity="center_horizontal"
+                android:text="아래 버튼을 누르면\n전체 플레이리스트로 이동해요."/>
+
+            <TextView
+                android:id="@+id/tv_btn_go_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_go_playlist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/btn_signin_login"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:elevation="15dp"
+                android:outlineSpotShadowColor="#91000000"
+                android:paddingTop="6dp"
+                android:paddingBottom="5dp"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:text="유튜브 플레이리스트로 이동하기"
+                />
+
+            <TextView
+                android:id="@+id/tv_guide_individual_playlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_btn_go_playlist"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:textColor="#495057"
+                android:gravity="center_horizontal"
+                android:text="개별 음원을 선택하고 싶으면\n아래 앨범 커버를 클릭해주세요."/>
+
+            <LinearLayout
+                android:id="@+id/ll_banner_individual_playlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_individual_playlist"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_poolside"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_poolside"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_poolside"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_poolside"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_poolside"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Baynk - Poolside"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_openseason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_openseason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_openseason"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_openseason"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_openseason"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Josef Salvat - Open Season"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_lastnightonearth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_lastnightonearth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_lastnightonearth"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_lastnightonearth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_lastnightonearth"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Green Day - Last Night On Earth"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_malibu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_malibu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_malibu"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_malibu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_malibu"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Virginia To Vegas &amp; NOTD  - Malibu"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_thing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_thing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_thing"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_thing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_thing"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Oliver Nelson - Ain&apos;t A Thing"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_pride"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_pride"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_pride"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_pride"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_pride"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Brahny - Pride"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_yellowhearts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_yellowhearts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_yellowhearts"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_yellowhearts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_yellowhearts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Ant Saunders - Yellow Hearts"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_sayyou"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_sayyou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_sayyou"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_sayyou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_sayyou"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="James Arthur - Say You Won’t Let Go"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_tomorrowtonight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_tomorrowtonight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_tomorrowtonight"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_tomorrowtonight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_tomorrowtonight"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Loote - tomorrow tonight"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_speechless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_speechless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_speechless"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_speechless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_speechless"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Dan&amp;Shay - Speechless"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_1245"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_1245"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_1245"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_1245"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_1245"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Etham - 12:45 (Stripped)"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_thickandthin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_thickandthin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_thickandthin"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_thickandthin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_thickandthin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="LANY - Thick And Thin"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_someonethat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_someonethat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_someonethat"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_someonethat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_someonethat"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text=" HONNE &amp; Izzy Bizu - Someone That Loves You"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_ilysb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_ilysb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_ilysb"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_ilysb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_ilysb"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Lany - ILYSB"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_playlist_noises"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_playlist_noises"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/img_playlist_noises"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_playlist_noises"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_playlist_noises"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginVertical="16dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="13sp"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:text="Pale Waves - Noises"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
