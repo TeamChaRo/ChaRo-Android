@@ -120,8 +120,9 @@
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_poolside"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_poolside"
@@ -154,8 +155,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_openseason"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_openseason"
@@ -188,8 +190,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_lastnightonearth"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_lastnightonearth"
@@ -222,8 +225,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_malibu"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_malibu"
@@ -256,8 +260,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_thing"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_thing"
@@ -290,8 +295,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_pride"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_pride"
@@ -324,8 +330,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_yellowhearts"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_yellowhearts"
@@ -358,8 +365,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_sayyou"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_sayyou"
@@ -392,8 +400,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_tomorrowtonight"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_tomorrowtonight"
@@ -426,8 +435,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_speechless"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_speechless"
@@ -460,8 +470,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_1245"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_1245"
@@ -494,8 +505,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_thickandthin"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_thickandthin"
@@ -528,8 +540,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_someonethat"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_someonethat"
@@ -562,8 +575,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_ilysb"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_ilysb"
@@ -596,8 +610,9 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_playlist_noises"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     >
                     <ImageView
                         android:id="@+id/iv_playlist_noises"
