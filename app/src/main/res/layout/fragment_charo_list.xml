@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
-            android:fontFamily="@font/notosanscjkkr_medium"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
             android:includeFontPadding="false"
             android:textColor="@color/black_sub_212429"
             android:textSize="17sp"

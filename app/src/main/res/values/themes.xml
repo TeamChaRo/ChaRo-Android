@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
 
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-        <item name="fontFamily">@font/notosanscjkkr_medium</item>
+        <item name="fontFamily">@font/noto_sans_cjkkr_medium</item>
     </style>
 
     <style name="HeaderH6">

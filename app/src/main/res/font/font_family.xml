@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <font
             android:fontStyle="normal"
             android:fontWeight="700"
-            android:font="@font/noto_sans_cjkkr_bold" />
+            android:font="@font/noto_sans_cjkkr_bold"
+            app:fontStyle="normal"
+            app:fontWeight="700"
+            app:font="@font/noto_sans_cjkkr_bold"
+            />
         <font
             android:fontStyle="normal"
             android:fontWeight="400"
-            android:font="@font/noto_sans_cjkkr_regular" />
+            android:font="@font/noto_sans_cjkkr_regular"
+            app:fontStyle="normal"
+            app:fontWeight="400"
+            app:font="@font/noto_sans_cjkkr_regular" />
         <font
             android:fontStyle="normal"
             android:fontWeight="500"
-            android:font="@font/noto_sans_cjkkr_medium" />
-
-
+            android:font="@font/noto_sans_cjkkr_medium"
+            app:fontStyle="normal"
+            app:fontWeight="500"
+            app:font="@font/noto_sans_cjkkr_medium" />
+        <font
+            android:fontStyle="normal"
+            android:fontWeight="600"
+            android:font="@font/jejugothic_regular"
+            app:fontStyle="normal"
+            app:fontWeight="600"
+            app:font="@font/jejugothic_regular"/>
 </font-family>

@@ -33,6 +33,7 @@
             android:textColor="@color/gray5_sub_495057"
             android:textSize="15sp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
+            app:fontFamily="@font/noto_sans_cjkkr_regular"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@{mapData.locationName}"
@@ -48,6 +49,7 @@
             android:textColor="@color/gray3_sub_acb5bd"
             android:textSize="11sp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
+            app:fontFamily="@font/noto_sans_cjkkr_regular"
             android:text="@{mapData.date}"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp" />
@@ -63,6 +65,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
+            app:fontFamily="@font/noto_sans_cjkkr_regular"
             android:text="@{mapData.locationAddress}"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="25dp" />

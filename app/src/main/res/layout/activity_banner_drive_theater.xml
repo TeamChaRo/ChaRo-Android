@@ -85,6 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/iv_main_drive_theater"
                 app:layout_constraintVertical_bias="0.2"
                 android:fontFamily="@font/jejugothic_regular"
+                app:fontFamily="@font/jejugothic_regular"
                 android:textStyle="normal"
                 android:textSize="29sp"
                 android:textColor="@color/white"
@@ -103,6 +104,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/iv_main_drive_theater"
                 app:layout_constraintVertical_bias="0.8"
                 android:fontFamily="@font/jejugothic_regular"
+                app:fontFamily="@font/jejugothic_regular"
                 android:textStyle="normal"
                 android:textSize="13sp"
                 android:textColor="#ffffff"
@@ -134,7 +136,6 @@
                     android:textStyle="normal"
                     android:textSize="14sp"
                     android:textColor="#495057"
-                    android:includeFontPadding="false"
                     android:lineSpacingExtra="7sp"
                     android:text="@string/txt_banner_theater_paju_address"
                     android:drawablePadding="6dp"
@@ -149,7 +150,9 @@
                     android:textSize="17sp"
                     android:textColor="#212429"
                     android:gravity="center_horizontal"
+                    android:layout_marginBottom="13dp"
                     android:fontFamily="@font/jejugothic_regular"
+                    app:fontFamily="@font/jejugothic_regular"
                     android:text="@string/txt_banner_theater_paju_title"/>
 
                 <LinearLayout
@@ -251,6 +254,7 @@
                     android:layout_marginHorizontal="28dp"
                     android:layout_marginTop="22dp"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    app:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:textStyle="normal"
                     android:textSize="14sp"
                     android:textColor="#495057"
@@ -263,7 +267,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_signin_login"
                     android:layout_gravity="center"
-                    android:includeFontPadding="false"
                     android:elevation="15dp"
                     android:outlineSpotShadowColor="#91000000"
                     android:paddingTop="6dp"
@@ -271,6 +274,7 @@
                     android:paddingHorizontal="20dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="32dp"
+                    android:includeFontPadding="false"
                     android:textColor="@color/white"
                     android:text="@string/txt_go_post"
                     />
@@ -299,7 +303,6 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:includeFontPadding="false"
                     android:lineSpacingExtra="7sp"
                     android:text="@string/txt_banner_theater_gang_address"
                     android:textColor="#495057"
@@ -319,6 +322,8 @@
                     android:textSize="17sp"
                     android:textStyle="normal"
                     android:fontFamily="@font/jejugothic_regular"
+                    app:fontFamily="@font/jejugothic_regular"
+                    android:layout_marginBottom="13dp"
                     android:text="@string/txt_banner_theater_gang_title" />
 
                 <LinearLayout
@@ -405,6 +410,7 @@
                     android:layout_marginHorizontal="28dp"
                     android:layout_marginTop="22dp"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    app:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:lineSpacingExtra="8.4sp"
                     android:textColor="#495057"
                     android:textSize="14sp"
@@ -417,7 +423,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_signin_login"
                     android:layout_gravity="center"
-                    android:includeFontPadding="false"
                     android:elevation="15dp"
                     android:outlineSpotShadowColor="#91000000"
                     android:paddingTop="6dp"
@@ -425,6 +430,7 @@
                     android:paddingHorizontal="20dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="32dp"
+                    android:includeFontPadding="false"
                     android:textColor="@color/white"
                     android:text="@string/txt_go_post"
                     />
@@ -438,6 +444,7 @@
                 android:layout_marginTop="64dp"
                 android:layout_marginHorizontal="20dp"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:textStyle="normal"
                 android:textSize="14sp"
                 android:textColor="#495057"
@@ -456,12 +463,14 @@
                     android:id="@+id/tv_banner_theater_num_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
                     android:textStyle="normal"
                     android:textSize="17sp"
                     android:textColor="#212429"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
+                    app:fontFamily="@font/jejugothic_regular"
                     android:text="@string/num_one"/>
                 <TextView
                     android:id="@+id/tv_banner_theater_cgv_title"
@@ -470,10 +479,10 @@
                     android:textStyle="normal"
                     android:textSize="17sp"
                     android:textColor="#212429"
-                    android:includeFontPadding="false"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
+                    app:fontFamily="@font/jejugothic_regular"
                     android:text="@string/txt_banner_theater_cgv_title"/>
 
                 <ImageView
@@ -492,6 +501,7 @@
                     android:layout_marginTop="22dp"
                     android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    app:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:textStyle="normal"
                     android:textSize="14sp"
                     android:textColor="#495057"
@@ -511,12 +521,14 @@
                     android:id="@+id/tv_banner_theater_num_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
                     android:textStyle="normal"
                     android:textSize="17sp"
                     android:textColor="#212429"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
+                    app:fontFamily="@font/jejugothic_regular"
                     android:text="@string/num_two"/>
                 <TextView
                     android:id="@+id/tv_banner_theater_osiria_title"
@@ -525,10 +537,10 @@
                     android:textStyle="normal"
                     android:textSize="17sp"
                     android:textColor="#212429"
-                    android:includeFontPadding="false"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
+                    app:fontFamily="@font/jejugothic_regular"
                     android:text="@string/txt_banner_theater_osiria_title"/>
 
                 <ImageView
@@ -548,6 +560,7 @@
                     android:layout_marginTop="22dp"
                     android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    app:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:textStyle="normal"
                     android:textSize="14sp"
                     android:textColor="#495057"
@@ -565,6 +578,7 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="36dp"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:textStyle="normal"
                 android:textSize="14sp"
                 android:textColor="#495057"
