@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/banner_img_one_detail"
+                android:contentDescription="@string/img_description"
                 />
 
             <androidx.appcompat.widget.Toolbar
@@ -35,7 +36,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="강릉 해변 드라이브 코스와 맛집"
+                    android:text="@string/txt_banner_gangneung"
                     android:textAppearance="@style/HeaderH4"
                     android:layout_gravity="center"
                     />
@@ -57,7 +58,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/blue_main_0f6fff"
                 android:includeFontPadding="false"
-                android:text="강릉 8년차가 소개시켜주는"
+                android:text="@string/txt_sub_title_gangneung"
                 />
             <TextView
                 android:id="@+id/tv_banner_title_gangneung"
@@ -72,7 +73,7 @@
                 android:textSize="26sp"
                 android:textColor="@color/blue_main_0f6fff"
                 android:includeFontPadding="false"
-                android:text="강릉 해변 \n드라이브 코스와 맛집"
+                android:text="@string/txt_banner_title_gangneung"
                 />
 
 
@@ -88,36 +89,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_charo_car_blue"
+                    android:contentDescription="@string/img_description"
                     />
 
-                <LinearLayout
-                    android:id="@+id/ll_banner_gangneung_address"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_banner_gangneung_address"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    >
-                    <ImageView
-                        android:id="@+id/iv_banner_gangneung_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_banner_map_start"
-                        android:layout_marginEnd="6dp"
-                        />
-                    <TextView
-                        android:id="@+id/tv_banner_gangneung_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="normal"
-                        android:textSize="14sp"
-                        android:textColor="#495057"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="7sp"
-                        android:text="강원도 강릉"
-                        />
-                </LinearLayout>
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="#495057"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@string/txt_banner_gangneung_address"
+                    android:drawablePadding="6dp"
+                    app:drawableStartCompat="@drawable/ic_banner_map_start" />
+
                 <TextView
                     android:id="@+id/tv_banner_introduce_gangneung"
                     android:layout_width="wrap_content"
@@ -128,16 +118,7 @@
                     android:textStyle="normal"
                     android:textSize="14sp"
                     android:textColor="#495057"
-                    android:text="안녕하세요! \n저는 강릉 8년째 살고 있는데요. 강릉하면 바다가 가장 먼저 떠오르시지 않나요? \n같은 바다라도 지역마다 특색이 다른데요. 안목부터 시작해서 송정, 강문, 경포, 사천을 잇는 해안 드라이브 코스와 맛집을 소개시켜 드릴게요!😁 "/>
-
-                <ImageView
-                    android:id="@+id/iv_banner_introduce_gangneung"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/img_banner_gangneung_map"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="14dp"
-                    />
+                    android:text="@string/txt_banner_introduce_gangneung"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_banner_context_gangneung"
@@ -161,6 +142,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="15dp"
                         android:background="@drawable/road_main_animation"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <ImageView
@@ -174,6 +156,7 @@
                         android:layout_marginTop="11dp"
                         android:layout_marginStart="20dp"
                         android:background="@drawable/car_main_animation_blue"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -191,7 +174,7 @@
                         android:layout_marginEnd="31dp"
                         android:layout_marginTop="9dp"
                         android:layout_marginBottom="20dp"
-                        android:text="안목"/>
+                        android:text="@string/txt_anmok"/>
 
                     <ImageView
                         android:id="@+id/iv_anmok"
@@ -199,6 +182,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/iv_road_anmok"
                         android:background="@drawable/image_anmok"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -212,15 +196,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="안목은 커피거리로 유명하죠.\n
-카페가 바다를 둘러싸고 있어 어떤 곳에 들어가도\n
-오션뷰~를 보면서 즐길 수 있다는 것이 \n
-장점입니다. \n
-또한 바다 앞에 벤치, 그네 등 앉을 수 있는 곳도 \n
-마련되어 있고 캠핑용 의자나 돗자리를 가지고\n
-바다 앞에 앉아 계시는 분들도 계시답니다!\n
-많이 덥지 않은 날씨에 가면 시간 가는 줄 모르고\n
-있다가 오는 것 같아요"/>
+                        android:text="@string/txt_anmok_context"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -241,46 +217,36 @@
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:textColor="#212429"
-                        android:text="[뤼미에르]"
+                        android:text="@string/txt_title_anmok_lumiere"
                         />
 
-                    <LinearLayout
-                        android:id="@+id/ll_banner_anmok_lumiere_address"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tv_banner_anmok_lumiere_address"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_anmok_lumiere"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_title_anmok_lumiere"
                         android:layout_marginTop="4dp"
-                        android:orientation="horizontal"
-                        >
-                        <ImageView
-                            android:id="@+id/iv_banner_anmok_lumiere_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_banner_map_start"
-                            android:layout_marginEnd="6dp"
-                            />
-                        <TextView
-                            android:id="@+id/tv_banner_anmok_lumiere_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="normal"
-                            android:textSize="14sp"
-                            android:textColor="#495057"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="7sp"
-                            android:text="강원도 강릉시 창해로14번길 18"
-                            />
-                    </LinearLayout>
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#495057"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="7sp"
+                        android:text="@string/txt_banner_anmok_lumiere_address"
+                        android:drawablePadding="6dp"
+                        app:drawableStartCompat="@drawable/ic_banner_map_start" />
 
                     <ImageView
                         android:id="@+id/iv_anmok_lumiere"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_banner_anmok_lumiere_address"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_banner_anmok_lumiere_address"
                         android:layout_margin="20dp"
                         android:background="@drawable/image_anmok_lumiere"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -294,11 +260,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="카페 거리 앞쪽에 위치한 르미에르 카페 입니다.\n
-여긴 음료가 다양하고 정말 맛있어서 추천합니다.\n
-특히 딸기라떼랑 아몬드크림라떼를 추천해요!\n
-3층까지 있어 자리도 넉넉하고\n
-탁 트인 창문이 있어 바다가 잘 보인답니다~"/>
+                        android:text="@string/txt_banner_anmok_lumiere_context"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -319,46 +281,36 @@
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:textColor="#212429"
-                        android:text="[롱브레드]"
+                        android:text="@string/txt_title_anmok_longbread"
                         />
 
-                    <LinearLayout
-                        android:id="@+id/ll_banner_anmok_longbread_address"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tv_banner_anmok_longbread_address"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_title_anmok_longbread"
                         android:layout_marginTop="4dp"
-                        android:orientation="horizontal"
-                        >
-                        <ImageView
-                            android:id="@+id/iv_banner_anmok_longbread_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_banner_map_start"
-                            android:layout_marginEnd="6dp"
-                            />
-                        <TextView
-                            android:id="@+id/tv_banner_anmok_longbread_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="normal"
-                            android:textSize="14sp"
-                            android:textColor="#495057"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="7sp"
-                            android:text="강원도 강릉시 창해로14번길 10 롱브레드"
-                            />
-                    </LinearLayout>
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#495057"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="7sp"
+                        android:text="@string/txt_banner_anmok_longbread_address"
+                        android:drawablePadding="6dp"
+                        app:drawableStartCompat="@drawable/ic_banner_map_start" />
 
                     <ImageView
                         android:id="@+id/iv_anmok_longbread"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_banner_anmok_longbread_address"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_banner_anmok_longbread_address"
                         android:layout_margin="20dp"
                         android:background="@drawable/image_anmok_longbread"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -372,12 +324,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="카페 거리에 자리잡은 브런치카페입니다. \n
-아침 일찍 오픈한다는 점이 좋아요! \n
-음식도 너무 맛있습니다. \n
-특히 에그베네딕트가 맛있습니다.\n
-안목에는 상대적으로 밥집이 적은 편인데\n
-롱브레드에서 간단한 브런치 추천드립니다. "/>
+                        android:text="@string/txt_anmok_longbread_context"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -398,46 +345,37 @@
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:textColor="#212429"
-                        android:text="[피앤비코]"
+                        android:text="@string/txt_title_anmok_pandbco"
                         />
 
-                    <LinearLayout
-                        android:id="@+id/ll_banner_anmok_pandbco_address"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tv_banner_anmok_pandbco_address"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_anmok_pandbco"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_title_anmok_pandbco"
                         android:layout_marginTop="4dp"
-                        android:orientation="horizontal"
-                        >
-                        <ImageView
-                            android:id="@+id/iv_banner_anmok_pandbco_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_banner_map_start"
-                            android:layout_marginEnd="6dp"
-                            />
-                        <TextView
-                            android:id="@+id/tv_banner_anmok_pandbco_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="normal"
-                            android:textSize="14sp"
-                            android:textColor="#495057"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="7sp"
-                            android:text="강원도 강릉시 창해로14번길 18"
-                            />
-                    </LinearLayout>
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#495057"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="7sp"
+                        android:text="@string/txt_banner_anmok_pandbco_address"
+                        android:drawablePadding="6dp"
+                        app:drawableStartCompat="@drawable/ic_banner_map_start" />
+
 
                     <ImageView
                         android:id="@+id/iv_anmok_pandbco"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_banner_anmok_pandbco_address"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_banner_anmok_pandbco_address"
                         android:layout_margin="20dp"
                         android:background="@drawable/image_anmok_pandbco"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -451,12 +389,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="피자&amp;비어라는 의미의 피앤비코 입니다. \n
-솔직히 관광지의 경우 가격에 비해 맛이 없는 경우가 \n
-많은데 피앤비코는 물론 가격이 조금 있는 편이지만\n
-정말 맛있는 피자라고 생각합니다. \n
-반반피자 주문해서 여러가지 맛 드셔보시길 바라요.\n
-제가 피맥하러 자주 가는 곳입니다."/>
+                        android:text="@string/txt_anmok_pandbco_context"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
@@ -480,6 +413,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="15dp"
                         android:background="@drawable/road_main_animation"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <ImageView
@@ -495,6 +429,7 @@
                         android:layout_marginStart="20dp"
                         app:layout_constraintHorizontal_bias="0.25"
                         android:background="@drawable/car_main_animation_blue"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -512,7 +447,7 @@
                         android:layout_marginEnd="31dp"
                         android:layout_marginTop="9dp"
                         android:layout_marginBottom="20dp"
-                        android:text="송정"/>
+                        android:text="@string/txt_songjeong"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -521,6 +456,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/img_songjeong_1"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -533,17 +469,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="송정 솔밭길을 소개해 드릴게요. \n
-여기는 로컬아니면 잘 모르실 수도 있어요!\n
-안목에서 좀 가다보면 송정이라는 곳이 있는데\n
-여기 솔밭과 함께 바다가 있는데 \n
-여기도 너무 예뻐서 추천드립니다. \n
-강릉하면 바다가 떠오르지만 솔향 강릉이라는 말\n
-들어보셨나요?\n
-소나무가 많아 솔향강릉이라는 슬로건을\n
-사용하기도 한답니다.\n
-빼곡히 있는 솔밭길을 걸어보세요!\n
-가다보면 바다를 발견하실 수 있습니다. "/>
+                        android:text="@string/txt_songjeong_context_1"/>
 
                     <ImageView
                         android:id="@+id/iv_songjeong_2"
@@ -552,6 +478,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_marginHorizontal="20dp"
                         android:background="@drawable/img_songjeong_2"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -564,12 +491,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="강릉으로 드라이브 오시는 경우
-캠핑의자를 가지고 오시는 것을 추천드립니다. \n
-먹을 것을 사서 바다 앞에서 먹는 것만큼\n
-맛있는 건 없는 것 같아요. \n
-예쁜 바다 보이면 의자 꺼내서 앉아 있으면\n
-좋을 것 같지 않으신가요? ㅎㅎ"/>
+                        android:text="@string/txt_songjeong_context_2"/>
 
                 </LinearLayout>
 
@@ -594,6 +516,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/road_main_animation"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <ImageView
@@ -609,6 +532,7 @@
                             android:layout_marginStart="20dp"
                             app:layout_constraintHorizontal_bias="0.5"
                             android:background="@drawable/car_main_animation_blue"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -626,7 +550,7 @@
                             android:layout_marginEnd="31dp"
                             android:layout_marginTop="9dp"
                             android:layout_marginBottom="20dp"
-                            android:text="강문"/>
+                            android:text="@string/txt_gangmoon"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -635,6 +559,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/img_gangmoon"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -647,9 +572,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="안목과 경포 사이에는 강문이라는 곳이 있답니다. \n
-두 지역 보다는 비교적 작은 곳인데 \n
-가는 길에 들리면 좋을 것 같아서 소개해드립니다."/>
+                        android:text="@string/txt_gangmoon_context"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_banner_gangmoon_duckcafe"
@@ -669,46 +592,36 @@
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="#212429"
-                            android:text="[오리카페]"
+                            android:text="@string/txt_title_gangmoon_duckcafe"
                             />
 
-                        <LinearLayout
-                            android:id="@+id/ll_banner_gangmoon_duckcafe_address"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_banner_gangmoon_duckcafe_address"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_title_gangmoon_duckcafe"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_title_gangmoon_duckcafe"
                             android:layout_marginTop="4dp"
-                            android:orientation="horizontal"
-                            >
-                            <ImageView
-                                android:id="@+id/iv_banner_gangmoon_duckcafe_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_banner_map_start"
-                                android:layout_marginEnd="6dp"
-                                />
-                            <TextView
-                                android:id="@+id/tv_banner_gangmoon_duckcafe_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="normal"
-                                android:textSize="14sp"
-                                android:textColor="#495057"
-                                android:includeFontPadding="false"
-                                android:lineSpacingExtra="7sp"
-                                android:text="강원도 강릉시 창해로350번길 23-1"
-                                />
-                        </LinearLayout>
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="@string/txt_banner_gangmoon_duckcafe_address"
+                            android:drawablePadding="6dp"
+                            app:drawableStartCompat="@drawable/ic_banner_map_start" />
 
                         <ImageView
                             android:id="@+id/iv_gangmoon_duckcafe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/ll_banner_gangmoon_duckcafe_address"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_gangmoon_duckcafe_address"
                             android:layout_margin="20dp"
                             android:background="@drawable/image_gangmoon_duckcafe"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -722,10 +635,7 @@
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="#495057"
-                            android:text="오리카페에 오리가 살지는 않지만\n
-곳곳에 오리로 장식되어 있어요!\n
-아기자기 소품이 많아 구경하기 좋았답니다.\n
-와플도 드셔보세요~ "/>
+                            android:text="@string/txt_gangmoon_duckcafe_context"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -746,46 +656,36 @@
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="#212429"
-                            android:text="[포이푸]"
+                            android:text="@string/txt_title_gangmoon_poipoo"
                             />
 
-                        <LinearLayout
-                            android:id="@+id/ll_banner_gangmoon_poipoo_address"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_banner_gangmoon_poipoo_address"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_title_gangmoon_poipoo"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_title_gangmoon_poipoo"
                             android:layout_marginTop="4dp"
-                            android:orientation="horizontal"
-                            >
-                            <ImageView
-                                android:id="@+id/iv_banner_gangmoon_poipoo_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_banner_map_start"
-                                android:layout_marginEnd="6dp"
-                                />
-                            <TextView
-                                android:id="@+id/tv_banner_gangmoon_poipoo_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="normal"
-                                android:textSize="14sp"
-                                android:textColor="#495057"
-                                android:includeFontPadding="false"
-                                android:lineSpacingExtra="7sp"
-                                android:text="강원도 강릉시 강문동 1-1"
-                                />
-                        </LinearLayout>
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="@string/txt_banner_gangmoon_poipoo_address"
+                            android:drawablePadding="6dp"
+                            app:drawableStartCompat="@drawable/ic_banner_map_start" />
 
                         <ImageView
                             android:id="@+id/iv_gangmoon_poipoo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/ll_banner_gangmoon_poipoo_address"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_gangmoon_poipoo_address"
                             android:layout_margin="20dp"
                             android:background="@drawable/image_gangmoon_poipoo"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -799,13 +699,9 @@
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="#495057"
-                            android:text="세인트 존스 호텔 안에 위치한 포이푸입니다. \n
-펍이라 맥주도 팔고 맛있는 안주도 많이 팔아요!\n
-저는 간단하게 핫도그를 먹었습니다. \n
-이 곳은 분위기가 너무 좋아서 추천드립니다.\n
-국내에서 몰디브 느낌의 휴양지 분위기를 \n
-느낄 수 있답니다. "/>
+                            android:text="@string/txt_gangmoon_poipoo_context"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/ll_gangmoon_sea_beer"
                         android:layout_width="match_parent"
@@ -813,41 +709,39 @@
                         >
 
                         <ImageView
-                            android:id="@+id/iv_gangmoon_sea_breer_1"
+                            android:id="@+id/iv_gangmoon_sea_beer_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             android:layout_marginTop="30dp"
                             android:src="@drawable/image_gangmoon_sea_1"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <ImageView
-                            android:id="@+id/iv_gangmoon_sea_breer_2"
+                            android:id="@+id/iv_gangmoon_sea_beer_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/iv_gangmoon_sea_breer_1"
+                            app:layout_constraintTop_toBottomOf="@id/iv_gangmoon_sea_beer_1"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginTop="12dp"
                             android:src="@drawable/image_gangmoon_sea_2"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
+                            android:id="@+id/tv_gangmoon_sea_beer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/iv_gangmoon_sea_breer_2"
-                            app:layout_constraintStart_toStartOf="@+id/iv_gangmoon_sea_breer_2"
+                            app:layout_constraintTop_toBottomOf="@id/iv_gangmoon_sea_beer_2"
+                            app:layout_constraintStart_toStartOf="@+id/iv_gangmoon_sea_beer_2"
                             android:layout_marginTop="18dp"
                             android:fontFamily="@font/noto_sans_cjkkr_medium"
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="#495057"
-                            android:text="세인트 존스 호텔  주변에 세계맥주집이 있어요.\n
-맥주 병으로 사서 앞에 있는 바다에 가서\n
-마시면 정말 분위기 좋답니다. \n
-노을이 지는 시간에 맞춰 가면\n
-예쁜 하늘을 보실 수 있습니다. \n
-예쁜 사진 남기기에 너무 좋은 곳 입니다. "/>
+                            android:text="@string/txt_gangmoon_sea_beer"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
@@ -873,6 +767,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/road_main_animation"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <ImageView
@@ -888,6 +783,7 @@
                             android:layout_marginStart="20dp"
                             app:layout_constraintHorizontal_bias="0.75"
                             android:background="@drawable/car_main_animation_blue"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -905,7 +801,7 @@
                             android:layout_marginEnd="31dp"
                             android:layout_marginTop="9dp"
                             android:layout_marginBottom="20dp"
-                            android:text="경포"/>
+                            android:text="@string/txt_kyungpo"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -923,6 +819,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/iv_kyungpo_2"
                             android:background="@drawable/img_kyungpo_1"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <ImageView
@@ -936,6 +833,7 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginHorizontal="20dp"
                             android:background="@drawable/img_kyungpo_2"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -948,11 +846,7 @@
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="#495057"
-                            android:text="경포는 바다도 예쁘지만 경포호를 소개해드릴게요.\n
-선선한 날씨에 자전거 타기에 좋습니다.\n
-1인용부터 6인용까지 다양하니 친구와 연인, 가족과\n
-함께 오신다면 들리는 것을 추천드려요.\n
-드라이브 하면서 잠깐 들리기도 좋은 곳입니다. "/>
+                            android:text="@string/txt_kyungpo_context"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
@@ -977,6 +871,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginEnd="15dp"
                             android:background="@drawable/road_main_animation"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <ImageView
@@ -990,6 +885,7 @@
                             android:layout_marginTop="11dp"
                             android:layout_marginEnd="10dp"
                             android:background="@drawable/car_main_animation_blue"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -1007,7 +903,7 @@
                             android:layout_marginEnd="31dp"
                             android:layout_marginTop="9dp"
                             android:layout_marginBottom="20dp"
-                            android:text="사천"/>
+                            android:text="@string/txt_sacheon"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -1016,6 +912,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/img_sacheon"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -1028,10 +925,7 @@
                         android:textStyle="normal"
                         android:textSize="14sp"
                         android:textColor="#495057"
-                        android:text="사천은 다른 바다와 달리 짙다는 생각이 들어요. \n
-갈때마다 바람도 많이 불고\n
-파도도 많이 치는 느낌입니다.\n
-거센파도를 보는 것도 색다르답니다. "/>
+                        android:text="@string/txt_sacheon_context"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_banner_sacheon_placecoffee"
@@ -1051,46 +945,36 @@
                             android:textStyle="bold"
                             android:textSize="18sp"
                             android:textColor="#212429"
-                            android:text="[곳]"
+                            android:text="@string/txt_title_sacheon_placecoffee"
                             />
 
-                        <LinearLayout
-                            android:id="@+id/ll_banner_sacheon_placecoffee_address"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_banner_sacheon_placecoffee_address"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_title_sacheon_placecoffee"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_title_sacheon_placecoffee"
                             android:layout_marginTop="4dp"
-                            android:orientation="horizontal"
-                            >
-                            <ImageView
-                                android:id="@+id/iv_banner_sacheon_placecoffee_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_banner_map_start"
-                                android:layout_marginEnd="6dp"
-                                />
-                            <TextView
-                                android:id="@+id/tv_banner_sacheon_placecoffee_address"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="normal"
-                                android:textSize="14sp"
-                                android:textColor="#495057"
-                                android:includeFontPadding="false"
-                                android:lineSpacingExtra="7sp"
-                                android:text="강원도 강릉시 사천면 진리해변길 143"
-                                />
-                        </LinearLayout>
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#495057"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:text="@string/txt_banner_sacheon_placecoffee_address"
+                            android:drawablePadding="6dp"
+                            app:drawableStartCompat="@drawable/ic_banner_map_start" />
 
                         <ImageView
                             android:id="@+id/iv_sacheon_placecoffee"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/ll_banner_sacheon_placecoffee_address"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_banner_sacheon_placecoffee_address"
                             android:layout_margin="20dp"
                             android:background="@drawable/image_sacheon_placecoffee"
+                            android:contentDescription="@string/img_description"
                             />
 
                         <TextView
@@ -1104,49 +988,24 @@
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="#495057"
-                            android:text="카페 곳입니다. 하늘 계단으로 유명한 카페죠?\n
-항상 가면 사람들이 매우 많습니다. \n
-넓은 주차장이 있어 주차하기도 편리합니다.\n
-사진 찍는 곳으로 유명하지만 커피와 빵도 맛있습니다.\n
-빵 종류도 다양합니다. "/>
+                            android:text="@string/txt_sacheon_placecoffee_context"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
-                        android:id="@+id/ll_finish_coment"
+                    <TextView
+                        android:id="@+id/tv_finish_coment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="72dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="75dp"
                         android:layout_marginHorizontal="20dp"
-                        >
-
-                        <ImageView
-                            android:id="@+id/iv_mimoji"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/mimoji"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/noto_sans_cjkkr_medium"
-                            android:textStyle="normal"
-                            android:textSize="14sp"
-                            android:textColor="#889098"
-                            android:gravity="center_horizontal"
-                            android:text="제가 준비한 것은 여기까지 입니다. \n
-8년 경험을 꾹꾹 담아봤는데 괜찮으셨나요? \n
-글을 써보니 강릉에 바다가 많다는 것을 \n
-다시 한번 느낍니다. \n
-그만큼 매력적인 것 같아요.\n
-제 글을 보시고 드라이브 하는데\n
-도움이 되셨으면 좋겠습니다 !"/>
-
-                    </LinearLayout>
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:textColor="#889098"
+                        android:gravity="center_horizontal"
+                        android:text="@string/txt_banner_gangneung_finish_coment"
+                        android:drawablePadding="12dp"
+                        app:drawableTopCompat="@drawable/mimoji" />
 
                 </LinearLayout>
 

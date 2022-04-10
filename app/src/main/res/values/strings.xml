@@ -11,7 +11,7 @@
     <string name="main_charo_notice">알림</string>
     <string name="main_charo_pick">이번주 차로\'S PICK</string>
     <string name="main_charo_today_drive">차로의 \'오늘 드라이브\'</string>
-    <string name="main_charo_today_drive_title">해안 도로 정복할 수 있는\n 포항 드라이브 코스 다같이\n 지금 바로 출발해요</string>
+    <string name="main_charo_today_drive_title">해안 도로 정복할 수 있는\n포항 드라이브 코스 다같이\n지금 바로 출발해요</string>
     <string name="main_charo_today_drive_chip">#7번 국도</string>
     <string name="main_charo_today_drive_chip_2">#바다</string>
     <string name="main_charo_today_drive_chip_3">#포항</string>
@@ -22,7 +22,7 @@
     <string name="main_charo_hot_drive_title">해안도로 정복할 수있는 포항 드라이브 코스</string>
     <string name="main_charo_night_dirve">여름 맞이 야간 드라이브</string>
     <string name="main_charo_locaion_dirve">경기도 드라이브 코스</string>
-    <string name="main_charo_viewpager_text">차로와 함께 \n즐기는 \n드라이브 코스</string>
+    <string name="main_charo_viewpager_text">차로와 함께\n즐기는\n드라이브 코스</string>
     <string name="main_charo_viewpager_hashtag">#날씨도좋은데#바다와함께라면</string>
     <string name="main_charo_more_view_title">요즘 뜨는 드라이브 코스</string>
     <string name="main_charo_more_view_count">전체 %d개 게시물</string>
@@ -34,7 +34,7 @@
     <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
     <string name="search_start">찾아보기</string>
     <string name="et_title">제목을 입력해주세요</string>
-    <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요? \n사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
+    <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
     <string name="which_location">드라이브 코스 지역</string>
     <string name="select_location">도/광역시, 시 단위로 선택해주세요</string>
     <string name="unit_do">도 단위</string>
@@ -90,7 +90,7 @@
     <string name="blossom">#벚꽃</string>
     <string name="title_activity_no_search">NoSearchActivity</string>
     <string name="search_activity">드라이브 맞춤 검색 결과</string>
-    <string name="search_mention">검색하신 드라이브 코스가 아직 없습니다.\n 직접 나만의 드라이브 코스를 \n 만들어보는 것은 어떠신가요?</string>
+    <string name="search_mention">검색하신 드라이브 코스가 아직 없습니다.\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?</string>
     <string name="search_write">드라이브 코스 작성하기</string>
     <string name="signin_login">로그인</string>
     <string name="signin_signup">회원가입</string>
@@ -100,11 +100,11 @@
     <string name="auto_search">검색어를 입력해주세요</string>
     <string name="skip">SKIP</string>
     <string name="looking">구경해요!</string>
-    <string name="on_boarding_1">   사람들의 드라이브 경험을 \n  자유롭게 구경해보세요</string>
+    <string name="on_boarding_1">   사람들의 드라이브 경험을\n자유롭게 구경해보세요</string>
     <string name="searching"> 검색해요!</string>
-    <string name="on_boarding_2">원하는 지역과 테마로 \n 맞춤 드라이브 코스를 찾아보세요</string>
+    <string name="on_boarding_2">원하는 지역과 테마로\n맞춤 드라이브 코스를 찾아보세요</string>
     <string name="writing">작성해요!</string>
-    <string name="on_boarding_3">나만의 드라이브 코스를 \n 기록하고 공유해보세요.</string>
+    <string name="on_boarding_3">나만의 드라이브 코스를\n기록하고 공유해보세요.</string>
     <string name="theme_mountain">산</string>
     <string name="theme_sea">바다</string>
     <string name="theme_lake">호수</string>
@@ -183,7 +183,7 @@
     <string name="log_out">로그아웃 하시겠습니까?</string>
     <string name="ok">예</string>
     <string name="no">아니요</string>
-    <string name="withdrawal">계정을 삭제하시겠습니까? \n회원 탈퇴시 계정이 모두 삭제됩니다.\n (단,작성하신 글은 익명의 형태로 남아
+    <string name="withdrawal">계정을 삭제하시겠습니까?\n회원 탈퇴시 계정이 모두 삭제됩니다.\n(단,작성하신 글은 익명의 형태로 남아
     사용자에게 보여집니다.)</string>
     <string name="cancel">취소</string>
     <string name="agreement">확인</string>
@@ -213,7 +213,7 @@
 
     <string name="txt_check_all_input">모든 값을 입력/선택 해주세요.</string>
     <string name="txt_check_input_start_end">출발지와 도착지 모두 입력 후 추가 가능합니다.</string>
-    <string name="noti_write_map">출발지와 목적지를 입력하여 경로를 확인 후, \n경유지를 추가해 경로를 수정할 수 있습니다.</string>
+    <string name="noti_write_map">출발지와 목적지를 입력하여 경로를 확인 후,\n경유지를 추가해 경로를 수정할 수 있습니다.</string>
     <string name="noti_cancel_write">게시물 작성을 중단하시겠습니까?</string>
     <string name="write_continue">이어서 작성</string>
     <string name="write_cancel">작성중단</string>
@@ -228,5 +228,115 @@
     <string name="no_select">선택안함</string>
     <string name="msg_token_fmt">fcm token: %s</string>
     <string name="txt_require_login">로그인 해주세요</string>
+
+    <string name="img_description">이미지</string>
+
+    <!--banner-->
+    <string name="txt_banner_about_charo">About 차로</string>
+    <string name="txt_banner_sl_about_charo">차에서의 오늘이 최고가 될 수 있게\n당신의 드라이브 메이트</string>
+    <string name="txt_banner_charo_start">차로의 시작</string>
+    <string name="txt_banner_charo_start_context">차로는 어떻게 하면\n드라이브를 더 재미있게 즐길 수 있을까? 라는\n고민에서 시작되었어요.\n\n드라이브 코스를 찾는 과정에서의 어려움,\n드라이브를 직접 하는 동안에의 어려움,\n\n이를 해결하기 위해 저희는\n경험한 자들의 새로운 드라이브 코스 이야기를\n들을 수 있는 공간이 되고자 합니다.</string>
+    <string name="txt_banner_title_charo_for_you">차로에서 여러분은</string>
+    <string name="txt_banner_context_charo_for_you">이를 통해\n여러분의 오늘 드라이브가\n최고가 될 수 있도록 하는 것이\n\n저희 차로의 목표이자 이유에요.\n\n차로가 더 나은 서비스가 될 수 있도록\n앞으로 더 노력할게요.\n\n여러분의 드라이브 이야기를\n기다리고 있겠습니다.</string>
+    <string name="txt_banner_team_charo">TEAM CHARO</string>
+    <string name="text_banner_team_plan">Plan</string>
+    <string name="text_banner_team_design">Design</string>
+    <string name="text_banner_team_ios_dev">iOS Dev</string>
+    <string name="text_banner_team_android_dev">Android Dev</string>
+    <string name="text_banner_team_server">Server</string>
+    <string name="text_banner_charo_official">\ufeff@charo_official</string>
+    <string name="text_banner_insta">차로 공식 인스타그램 계정에서\n차로 서비스에 대한 소개, 이벤트 등을 확인하실 수 있어요.</string>
+    <string name="yaeoni">오예원</string>
+    <string name="seunghyeon">한승현</string>
+    <string name="hotaek">곽호택</string>
+    <string name="jinhee">한진희</string>
+    <string name="hyeryeong">장혜령</string>
+    <string name="ikbum">박익범</string>
+    <string name="injeong">최인정</string>
+    <string name="jione">이지원</string>
+    <string name="jieun">황지은</string>
+    <string name="soohyun">고수현</string>
+    <string name="seonghyeon">이성현</string>
+    <string name="dabean">고다빈</string>
+    <string name="heejin">배희진</string>
+
+    <string name="txt_banner_title_theater">자동차 극장\n드라이브 코스</string>
+    <string name="txt_banner_context_theater">여러분, 영화 좋아하시나요?\n\n코로나로 인해 영화도 맘놓고 볼 수 없는 요즘\n자동차 극장 어떠신가요?\n\n차에서 자유롭게 영화도 보고,\n자동차극장 주변 드라이브도 즐기고,\n\n차로가 추천하는\n자동차 극장 드라이브 코스\n이번 주말에 다녀오시는 것은 어떨까요?</string>
+    <string name="txt_banner_theater_paju_address">경기도 파주시</string>
+    <string name="txt_banner_theater_paju_title">자유로 따라, 파주 자동차 극장!</string>
+    <string name="txt_banner_theater_paju_context">자유로 끝에 위치한 자동차 극장으로,\n상영 영화는 홈페이지에서 확인이 가능하다고 하네요!\n1시간 전에 여유롭게 도착해,\n별도 구경하고, 재밌게 영화도 보고, 한강 따라\n드라이브까지 가능한 드라이브 코스입니다:)</string>
+    <string name="txt_banner_theater_paju_recommend">윤블리 드라이버님이 다녀온\n파주 자동차 극장 코스!\n“자유로 극장”으로 검색하셔서,\n미리 영화 시간표 확인하시구,\n여유로운 드라이브 즐겨보시는 것은 어떨까요?</string>
+    <string name="txt_go_post">드라이브 코스 바로 가기</string>
+    <string name="txt_banner_theater_gang_address">강원도 강릉시</string>
+    <string name="txt_banner_theater_gang_title">강릉 자동차 극장는 코스</string>
+    <string name="txt_banner_theater">자동차 극장 드라이브 코스</string>
+    <string name="txt_banner_theater_gang_context">드라이브도 하면서 극장에서 영화도 볼 수 있는 데이터 코스로 딱 알맞은 드라이브 코스라고 하네요.\n요즘 시기에 너무 좋은 데이트 코스인 것 같아요.\n근처 편의점에서 영화 보면서 먹을 간식도 미리 사서 간다면 너무 좋을 것 같아요.</string>
+    <string name="txt_banner_theater_gang_recommend">임쏘 드라이버님이 다녀온\n강릉 자동차 극장 코스입니다.\n극장에서 보는 영화도 좋지만\n프라이빗 한 공간에서\n연인, 친구, 가족과 색다른 경험을 만끽해 보세요.</string>
+    <string name="txt_banner_teather_etc_introduce">이외에도 전국 곳곳에\n자동차 극장이 많은데요!\n\n아직 다녀오지 못해 아쉬운\n자동차 극장 차로가 소개해드립니다!</string>
+    <string name="num_one">1</string>
+    <string name="txt_banner_theater_cgv_title">CGV DRIVE IN 스퀘어원 (인천광역시)</string>
+    <string name="txt_banner_theater_cgv_context">인천 동춘역에 위치해 있으며,\nCGV에서 운영하는 자동차 극장입니다!\n\n미리 CGV 어플을 통해 예약하실 수 있다고 하네요!\n자리는 선착순이니 참고 부탁드립니다!\n\n또한 주변 마트와 딜리버리 서비스가 가능하기 때문에\n먹을거리 역시 풍족하게 즐길 수 있다고 하네요!</string>
+    <string name="num_two">2</string>
+    <string name="txt_banner_theater_osiria_title">드라이브 오시리아 (부산광역시)</string>
+    <string name="txt_banner_theater_osiria_context">이번에는 부산입니다!\n롯데시네마에서 운영하고 있는 곳으로, 기장에 위치해있습니다!\n역시 예약은 롯데시네마 앱을 통해 가능하며,\n1일 2회의 상영이 이루어진다고 합니다!\n시작 시간은 매일 달라지니 꼭 확인하세요!</string>
+    <string name="txt_banner_theater_osiria_finish">차로가 추천해 준 자동차 극장\n드라이브 코스,\n\n코로나 시국에 안전하게 영화와, 드라이브 모두\n즐겨보는 것은 어떨까요?\n다녀온 후 여러분의 드라이브 이야기도 들려주세요!</string>
+
+    <string name="txt_banner_spring_playlisr">봄 신선한 바람 플레이리스트</string>
+    <string name="txt_banner_spring_playlist_context">드라이브와 잘 어울리는 계절인 봄이 찾아왔습니다.\n\n양옆 창문 열어놓고 선선한 바람 맞으며 드라이브 하는\n낭만, 다들 가지고 계시죠? 드라이브 하면서 빠질 수 없는게 음악인데요, 음악 고르는데 시간쏟지 마시고 차로가\n봄 바람과 잘 어울리는 플레이리스트를 준비했습니다.\n선곡한 15곡은 밤에 드라이브할 때 어울리는 노래입니다.\n너무 신나지 않지만 조용하지 않은 노래로 골라봤습니다. 🔈</string>
+    <string name="txt_guide_go_playlist">아래 버튼을 누르면\n전체 플레이리스트로 이동해요.</string>
+    <string name="txt_go_playlist">유튜브 플레이리스트로 이동하기</string>
+    <string name="txt_guide_individual_playlist">개별 음원을 선택하고 싶으면\n아래 앨범 커버를 클릭해주세요.</string>
+    <string name="txt_playlist_baynk_poolside">Baynk - Poolside</string>
+    <string name="txt_playlist_open_season">Josef Salvat - Open Season</string>
+    <string name="txt_playlist_last_night_on_earth">Green Day - Last Night On Earth</string>
+    <string name="txt_playlist_malibu"><![CDATA[Virginia To Vegas & NOTD - Malibu]]></string>
+    <string name="txt_playlist_thing">Oliver Nelson - Ain\'t A Thing</string>
+    <string name="txt_playlist_pride">Brahny - Pride</string>
+    <string name="txt_playlist_yellow_hearts">Ant Saunders - Yellow Hearts</string>
+    <string name="txt_playlist_say_you_won_t_let_go">James Arthur - Say You Won’t Let Go</string>
+    <string name="txt_playlist_tomorrow_tonight">Loote - tomorrow tonight</string>
+    <string name="txt_playlist_speechless"><![CDATA[Dan&Shay - Speechless]]></string>
+    <string name="txt_playlist_1245">Etham - 12:45 (Stripped)</string>
+    <string name="txt_playlist_thick_and_thin">LANY - Thick And Thin</string>
+    <string name="txt_playlist_someone_that_loves_you"><![CDATA[HONNE & Izzy Bizu - Someone That Loves You]]></string>
+    <string name="txt_playlist_ilysb">Lany - ILYSB</string>
+    <string name="txt_playlist_noises">Pale Waves - Noises</string>
+
+    <string name="txt_banner_gangneung">강릉 해변 드라이브 코스와 맛집</string>
+    <string name="txt_sub_title_gangneung">강릉 8년차가 소개시켜주는</string>
+    <string name="txt_banner_title_gangneung">강릉 해변\n드라이브 코스와 맛집</string>
+    <string name="txt_banner_gangneung_address">강원도 강릉</string>
+    <string name="txt_banner_introduce_gangneung">안녕하세요!\n저는 강릉 8년째 살고 있는데요. 강릉하면 바다가 가장 먼저 떠오르시지 않나요?\n같은 바다라도 지역마다 특색이 다른데요. 안목부터 시작해서 송정, 강문, 경포, 사천을 잇는 해안 드라이브 코스와 맛집을 소개시켜 드릴게요!😁</string>
+    <string name="txt_anmok">안목</string>
+    <string name="txt_anmok_context">안목은 커피거리로 유명하죠.\n카페가 바다를 둘러싸고 있어 어떤 곳에 들어가도\n오션뷰~를 보면서 즐길 수 있다는 것이\n장점입니다.\n또한 바다 앞에 벤치, 그네 등 앉을 수 있는 곳도\n마련되어 있고 캠핑용 의자나 돗자리를 가지고\n바다 앞에 앉아 계시는 분들도 계시답니다!\n많이 덥지 않은 날씨에 가면 시간 가는 줄 모르고\n있다가 오는 것 같아요.</string>
+    <string name="txt_title_anmok_lumiere">[뤼미에르]</string>
+    <string name="txt_banner_anmok_lumiere_address">강원도 강릉시 창해로14번길 18</string>
+    <string name="txt_banner_anmok_lumiere_context">카페 거리 앞쪽에 위치한 르미에르 카페 입니다.\n여긴 음료가 다양하고 정말 맛있어서 추천합니다.\n특히 딸기라떼랑 아몬드크림라떼를 추천해요!\n3층까지 있어 자리도 넉넉하고\n탁 트인 창문이 있어 바다가 잘 보인답니다~</string>
+    <string name="txt_title_anmok_longbread">[롱브레드]</string>
+    <string name="txt_banner_anmok_longbread_address">강원도 강릉시 창해로14번길 10 롱브레드</string>
+    <string name="txt_anmok_longbread_context">카페 거리에 자리잡은 브런치카페입니다.\n아침 일찍 오픈한다는 점이 좋아요!\n음식도 너무 맛있습니다.\n특히 에그베네딕트가 맛있습니다.\n안목에는 상대적으로 밥집이 적은 편인데\n롱브레드에서 간단한 브런치 추천드립니다.</string>
+    <string name="txt_title_anmok_pandbco">[피앤비코]</string>
+    <string name="txt_banner_anmok_pandbco_address">강원도 강릉시 창해로14번길 18</string>
+    <string name="txt_anmok_pandbco_context"><![CDATA[피자&비어라는 의미의 피앤비코 입니다.\n솔직히 관광지의 경우 가격에 비해 맛이 없는 경우가\n많은데 피앤비코는 물론 가격이 조금 있는 편이지만\n정말 맛있는 피자라고 생각합니다.\n반반피자 주문해서 여러가지 맛 드셔보시길 바라요.\n제가 피맥하러 자주 가는 곳입니다.]]></string>
+    <string name="txt_songjeong">송정</string>
+    <string name="txt_songjeong_context_1">송정 솔밭길을 소개해 드릴게요.\n여기는 로컬아니면 잘 모르실 수도 있어요!\n안목에서 좀 가다보면 송정이라는 곳이 있는데\n여기 솔밭과 함께 바다가 있는데\n여기도 너무 예뻐서 추천드립니다.\n강릉하면 바다가 떠오르지만 솔향 강릉이라는 말\n들어보셨나요?\n소나무가 많아 솔향강릉이라는 슬로건을\n사용하기도 한답니다.\n빼곡히 있는 솔밭길을 걸어보세요!\n가다보면 바다를 발견하실 수 있습니다.</string>
+    <string name="txt_songjeong_context_2">강릉으로 드라이브 오시는 경우캠핑의자를 가지고 오시는 것을 추천드립니다.\n먹을 것을 사서 바다 앞에서 먹는 것만큼\n맛있는 건 없는 것 같아요.\n예쁜 바다 보이면 의자 꺼내서 앉아 있으면\n좋을 것 같지 않으신가요? ㅎㅎ</string>
+    <string name="txt_gangmoon">강문</string>
+    <string name="txt_gangmoon_context">안목과 경포 사이에는 강문이라는 곳이 있답니다.\n두 지역 보다는 비교적 작은 곳인데\n가는 길에 들리면 좋을 것 같아서 소개해드립니다.</string>
+    <string name="txt_title_gangmoon_duckcafe">[오리카페]</string>
+    <string name="txt_banner_gangmoon_duckcafe_address">강원도 강릉시 창해로350번길 23-1</string>
+    <string name="txt_gangmoon_duckcafe_context">오리카페에 오리가 살지는 않지만\n곳곳에 오리로 장식되어 있어요!\n아기자기 소품이 많아 구경하기 좋았답니다.\n와플도 드셔보세요~</string>
+    <string name="txt_title_gangmoon_poipoo">[포이푸]</string>
+    <string name="txt_banner_gangmoon_poipoo_address">강원도 강릉시 강문동 1-1</string>
+    <string name="txt_gangmoon_poipoo_context">세인트 존스 호텔 안에 위치한 포이푸입니다.\n펍이라 맥주도 팔고 맛있는 안주도 많이 팔아요!\n저는 간단하게 핫도그를 먹었습니다.\n이 곳은 분위기가 너무 좋아서 추천드립니다.\n국내에서 몰디브 느낌의 휴양지 분위기를\n느낄 수 있답니다.</string>
+    <string name="txt_gangmoon_sea_beer">세인트 존스 호텔 주변에 세계맥주집이 있어요.\n맥주 병으로 사서 앞에 있는 바다에 가서\n마시면 정말 분위기 좋답니다.\n노을이 지는 시간에 맞춰 가면\n예쁜 하늘을 보실 수 있습니다.\n예쁜 사진 남기기에 너무 좋은 곳 입니다.</string>
+    <string name="txt_kyungpo">경포</string>
+    <string name="txt_kyungpo_context">경포는 바다도 예쁘지만 경포호를 소개해드릴게요.\n선선한 날씨에 자전거 타기에 좋습니다.\n1인용부터 6인용까지 다양하니 친구와 연인, 가족과\n함께 오신다면 들리는 것을 추천드려요.\n드라이브 하면서 잠깐 들리기도 좋은 곳입니다.</string>
+    <string name="txt_sacheon">사천</string>
+    <string name="txt_sacheon_context">사천은 다른 바다와 달리 짙다는 생각이 들어요.\n갈때마다 바람도 많이 불고\n파도도 많이 치는 느낌입니다.\n거센파도를 보는 것도 색다르답니다.</string>
+    <string name="txt_title_sacheon_placecoffee">[곳]</string>
+    <string name="txt_banner_sacheon_placecoffee_address">강원도 강릉시 사천면 진리해변길 143</string>
+    <string name="txt_sacheon_placecoffee_context">카페 곳입니다. 하늘 계단으로 유명한 카페죠?\n항상 가면 사람들이 매우 많습니다.\n넓은 주차장이 있어 주차하기도 편리합니다.\n사진 찍는 곳으로 유명하지만 커피와 빵도 맛있습니다.\n빵 종류도 다양합니다.</string>
+    <string name="txt_banner_gangneung_finish_coment">제가 준비한 것은 여기까지 입니다.\n8년 경험을 꾹꾹 담아봤는데 괜찮으셨나요?\n글을 써보니 강릉에 바다가 많다는 것을\n다시 한번 느낍니다.\n그만큼 매력적인 것 같아요.\n제 글을 보시고 드라이브 하는데\n도움이 되셨으면 좋겠습니다 !</string>
 
 </resources>

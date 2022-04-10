@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="봄 신선한 바람 플레이리스트"
+                    android:text="@string/txt_banner_spring_playlisr"
                     android:textAppearance="@style/HeaderH4"
                     android:layout_gravity="center"
                     />
@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
                 android:background="@drawable/banner_img_two_detail"
+                android:contentDescription="@string/img_description"
                 />
 
             <TextView
@@ -54,12 +55,7 @@
                 android:textSize="13sp"
                 android:textColor="#495057"
                 android:lineSpacingExtra="6sp"
-                android:text="드라이브와 잘 어울리는 계절인 봄이 찾아왔습니다. \n\n
-양옆 창문 열어놓고 선선한 바람 맞으며 드라이브 하는 \n
-낭만, 다들 가지고 계시죠? 드라이브 하면서 빠질 수 없는게 음악인데요, 음악 고르는데 시간쏟지 마시고 차로가 \n
-봄 바람과 잘 어울리는 플레이리스트를 준비했습니다. \n
-선곡한 15곡은 밤에 드라이브할 때 어울리는 노래입니다.\n
-너무 신나지 않지만 조용하지 않은 노래로 골라봤습니다. 🔈"/>
+                android:text="@string/txt_banner_spring_playlist_context"/>
 
             <TextView
                 android:id="@+id/tv_guide_go_playlist"
@@ -75,7 +71,7 @@
                 android:textSize="14sp"
                 android:textColor="#495057"
                 android:gravity="center_horizontal"
-                android:text="아래 버튼을 누르면\n전체 플레이리스트로 이동해요."/>
+                android:text="@string/txt_guide_go_playlist"/>
 
             <TextView
                 android:id="@+id/tv_btn_go_playlist"
@@ -94,7 +90,7 @@
                 android:paddingHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
-                android:text="유튜브 플레이리스트로 이동하기"
+                android:text="@string/txt_go_playlist"
                 />
 
             <TextView
@@ -108,7 +104,7 @@
                 android:textSize="14sp"
                 android:textColor="#495057"
                 android:gravity="center_horizontal"
-                android:text="개별 음원을 선택하고 싶으면\n아래 앨범 커버를 클릭해주세요."/>
+                android:text="@string/txt_guide_individual_playlist"/>
 
             <LinearLayout
                 android:id="@+id/ll_banner_individual_playlist"
@@ -132,6 +128,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_poolside"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -149,7 +146,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Baynk - Poolside"
+                        android:text="@string/txt_playlist_baynk_poolside"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,6 +164,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_openseason"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -184,7 +182,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Josef Salvat - Open Season"
+                        android:text="@string/txt_playlist_open_season"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -202,6 +200,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_lastnightonearth"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -219,7 +218,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Green Day - Last Night On Earth"
+                        android:text="@string/txt_playlist_last_night_on_earth"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -237,6 +236,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_malibu"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -254,7 +254,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Virginia To Vegas &amp; NOTD  - Malibu"
+                        android:text="@string/txt_playlist_malibu"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -272,6 +272,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_thing"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -289,7 +290,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Oliver Nelson - Ain&apos;t A Thing"
+                        android:text="@string/txt_playlist_thing"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -307,6 +308,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_pride"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -324,7 +326,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Brahny - Pride"
+                        android:text="@string/txt_playlist_pride"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -342,6 +344,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_yellowhearts"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -359,7 +362,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Ant Saunders - Yellow Hearts"
+                        android:text="@string/txt_playlist_yellow_hearts"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -377,6 +380,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_sayyou"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -394,7 +398,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="James Arthur - Say You Won’t Let Go"
+                        android:text="@string/txt_playlist_say_you_won_t_let_go"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -412,6 +416,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_tomorrowtonight"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -429,7 +434,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Loote - tomorrow tonight"
+                        android:text="@string/txt_playlist_tomorrow_tonight"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -447,6 +452,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_speechless"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -464,7 +470,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Dan&amp;Shay - Speechless"
+                        android:text="@string/txt_playlist_speechless"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -482,6 +488,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_1245"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -499,7 +506,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Etham - 12:45 (Stripped)"
+                        android:text="@string/txt_playlist_1245"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -517,6 +524,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_thickandthin"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -534,7 +542,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="LANY - Thick And Thin"
+                        android:text="@string/txt_playlist_thick_and_thin"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -552,6 +560,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_someonethat"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -569,7 +578,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text=" HONNE &amp; Izzy Bizu - Someone That Loves You"
+                        android:text="@string/txt_playlist_someone_that_loves_you"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -587,6 +596,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_ilysb"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -604,7 +614,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Lany - ILYSB"
+                        android:text="@string/txt_playlist_ilysb"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -622,6 +632,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:src="@drawable/img_playlist_noises"
+                        android:contentDescription="@string/img_description"
                         />
 
                     <TextView
@@ -639,7 +650,7 @@
                         android:textSize="13sp"
                         android:textColor="@color/black"
                         android:gravity="center_horizontal"
-                        android:text="Pale Waves - Noises"
+                        android:text="@string/txt_playlist_noises"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="About 차로"
+                    android:text="@string/txt_banner_about_charo"
                     android:textAppearance="@style/HeaderH4"
                     android:layout_gravity="center"
                     />
@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
                 android:background="@drawable/banner_img_four_detail"
+                android:contentDescription="@string/img_description"
                 />
             <View
                 android:layout_width="0dp"
@@ -65,7 +66,7 @@
                 android:textColor="#ffffff"
                 android:lineSpacingExtra="5.7sp"
                 android:gravity="end"
-                android:text="차에서의 오늘이 최고가 될 수 있게\n당신의 드라이브 메이트"/>
+                android:text="@string/txt_banner_sl_about_charo"/>
 
             <ImageView
                 android:id="@+id/iv_about_charo"
@@ -76,6 +77,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_sl_about_charo"
                 app:layout_constraintEnd_toEndOf="@+id/tv_sl_about_charo"
                 android:background="@drawable/banner_charo"
+                android:contentDescription="@string/img_description"
                 />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,6 +96,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/road_main_animation"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <ImageView
@@ -105,6 +108,7 @@
                     android:layout_marginTop="11dp"
                     android:layout_marginStart="7dp"
                     android:background="@drawable/car_main_animation_blue"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <TextView
@@ -121,7 +125,7 @@
                     android:layout_marginEnd="19dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="16dp"
-                    android:text="차로의 시작"/>
+                    android:text="@string/txt_banner_charo_start"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -134,7 +138,7 @@
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="차로는 어떻게 하면\n드라이브를 더 재미있게 즐길 수 있을까? 라는\n고민에서 시작되었어요.\n\n드라이브 코스를 찾는 과정에서의 어려움,\n드라이브를 직접 하는 동안에의 어려움,\n\n이를 해결하기 위해 저희는\n경험한 자들의 새로운 드라이브 코스 이야기를\n들을 수 있는 공간이 되고자 합니다."
+                    android:text="@string/txt_banner_charo_start_context"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,6 +158,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/road_main_animation"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <ImageView
@@ -166,6 +171,7 @@
                     app:layout_constraintHorizontal_bias="0.4"
                     android:layout_marginTop="11dp"
                     android:background="@drawable/car_main_animation_blue"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <TextView
@@ -182,7 +188,7 @@
                     android:layout_marginEnd="19dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="16dp"
-                    android:text="차로에서 여러분은"/>
+                    android:text="@string/txt_banner_title_charo_for_you"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_vp_banner_about_charo"
@@ -232,17 +238,7 @@
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="이를 통해\n
-여러분의 오늘 드라이브가\n
-최고가 될 수 있도록 하는 것이\n\n
-
-저희 차로의 목표이자 이유에요.\n\n
-
-차로가 더 나은 서비스가 될 수 있도록\n
-앞으로 더 노력할게요.\n\n
-
-여러분의 드라이브 이야기를\n
-기다리고 있겠습니다."
+                    android:text="@string/txt_banner_context_charo_for_you"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,6 +258,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/road_main_animation"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <ImageView
@@ -273,6 +270,7 @@
                     android:layout_marginTop="11dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/car_main_animation_blue"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <TextView
@@ -289,7 +287,7 @@
                     android:layout_marginEnd="19dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="16dp"
-                    android:text="TEAM CHARO"/>
+                    android:text="@string/txt_banner_team_charo"/>
 
                 <LinearLayout
                     android:id="@+id/ll_banner_team_charo"
@@ -318,7 +316,7 @@
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
                             android:gravity="center_horizontal"
-                            android:text="Plan"/>
+                            android:text="@string/text_banner_team_plan"/>
 
                         <TextView
                             android:id="@+id/tv_plan_heejin"
@@ -333,10 +331,10 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="배희진"/>
+                            android:text="@string/heejin"/>
 
                         <TextView
-                            android:id="@+id/tv_plan_dabin"
+                            android:id="@+id/tv_plan_dabean"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_plan"
@@ -349,7 +347,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="고다빈"/>
+                            android:text="@string/dabean"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -371,7 +369,7 @@
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
                             android:gravity="center_horizontal"
-                            android:text="Design"/>
+                            android:text="@string/text_banner_team_design"/>
 
                         <TextView
                             android:id="@+id/tv_design_seonghyeon"
@@ -386,10 +384,10 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="이성현"/>
+                            android:text="@string/seonghyeon"/>
 
                         <TextView
-                            android:id="@+id/tv_design_soohyeon"
+                            android:id="@+id/tv_design_soohyun"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_design"
@@ -402,7 +400,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="고수현"/>
+                            android:text="@string/soohyun"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -424,7 +422,7 @@
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
                             android:gravity="center_horizontal"
-                            android:text="iOS Dev"/>
+                            android:text="@string/text_banner_team_ios_dev"/>
 
                         <TextView
                             android:id="@+id/tv_ios_hyeryeong"
@@ -439,7 +437,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="장혜령"/>
+                            android:text="@string/hyeryeong"/>
 
                         <TextView
                             android:id="@+id/tv_ios_injeong"
@@ -455,7 +453,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="최인정"/>
+                            android:text="@string/injeong"/>
 
                         <TextView
                             android:id="@+id/tv_ios_ikbum"
@@ -471,10 +469,10 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="박익범"/>
+                            android:text="@string/ikbum"/>
 
                         <TextView
-                            android:id="@+id/tv_ios_jiwon"
+                            android:id="@+id/tv_ios_jione"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
@@ -487,7 +485,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="이지원"/>
+                            android:text="@string/jione"/>
 
                         <TextView
                             android:id="@+id/tv_ios_jieun"
@@ -496,14 +494,14 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_ios"
                             android:layout_marginTop="6dp"
                             android:layout_marginStart="22dp"
-                            app:layout_constraintStart_toEndOf="@+id/tv_ios_jiwon"
+                            app:layout_constraintStart_toEndOf="@+id/tv_ios_jione"
                             android:fontFamily="@font/noto_sans_cjkkr_medium"
                             android:includeFontPadding="false"
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="황지은"/>
+                            android:text="@string/jieun"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -526,7 +524,7 @@
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
                             android:gravity="center_horizontal"
-                            android:text="Android Dev"/>
+                            android:text="@string/text_banner_team_android_dev"/>
 
                         <TextView
                             android:id="@+id/tv_android_jinhee"
@@ -541,7 +539,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="한진희"/>
+                            android:text="@string/jinhee"/>
 
                         <TextView
                             android:id="@+id/tv_android_hotaek"
@@ -557,10 +555,10 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="곽호택"/>
+                            android:text="@string/hotaek"/>
 
                         <TextView
-                            android:id="@+id/tv_android_seunghyun"
+                            android:id="@+id/tv_android_seunghyeon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_android"
@@ -573,7 +571,7 @@
                             android:textSize="14sp"
                             android:textColor="#495057"
                             android:lineSpacingExtra="8.4sp"
-                            android:text="한승현"/>
+                            android:text="@string/seunghyeon"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -596,10 +594,10 @@
                         android:textColor="#495057"
                         android:lineSpacingExtra="8.4sp"
                         android:gravity="center_horizontal"
-                        android:text="Server"/>
+                        android:text="@string/text_banner_team_server"/>
 
                     <TextView
-                        android:id="@+id/tv_server_yeawon"
+                        android:id="@+id/tv_server_yaeoni"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/tv_banner_team_charo_server"
@@ -611,7 +609,7 @@
                         android:textSize="14sp"
                         android:textColor="#495057"
                         android:lineSpacingExtra="8.4sp"
-                        android:text="오예원"/>
+                        android:text="@string/yaeoni"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
@@ -633,6 +631,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/img_insta"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <TextView
@@ -647,7 +646,7 @@
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="\ufeff@charo_official_2021"/>
+                    android:text="@string/text_banner_charo_official"/>
 
                 <TextView
                     android:id="@+id/tv_insta_context"
@@ -662,7 +661,7 @@
                     android:textColor="#889098"
                     android:lineSpacingExtra="8.4sp"
                     android:gravity="center_horizontal"
-                    android:text="차로 공식 인스타그램 계정에서\n차로 서비스에 대한 소개, 이벤트 등을 확인하실 수 있어요."/>
+                    android:text="@string/text_banner_insta"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

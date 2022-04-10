@@ -26,7 +26,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="자동차 극장 드라이브 코스"
+                    android:text="@string/txt_banner_theater"
                     android:textAppearance="@style/HeaderH4"
                     android:layout_gravity="center"
                     />
@@ -40,6 +40,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/ll_banner_theater_cgv"
                 android:layout_marginBottom="80dp"
                 android:background="@drawable/banner_back_1"
+                android:contentDescription="@string/img_description"
                 />
 
             <ImageView
@@ -50,6 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="85dp"
                 android:background="@drawable/banner_back_2"
+                android:contentDescription="@string/img_description"
                 />
 
             <ImageView
@@ -58,6 +60,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
                 android:background="@drawable/banner_img_three_detail"
+                android:contentDescription="@string/img_description"
                 />
 
             <ImageView
@@ -70,6 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/tv_banner_title_theater"
                 android:src="@drawable/drive_in_theater"
+                android:contentDescription="@string/img_description"
                 />
             <TextView
                 android:id="@+id/tv_banner_title_theater"
@@ -87,7 +91,7 @@
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="8.7sp"
                 android:gravity="center_horizontal"
-                android:text="자동차 극장\n드라이브 코스"
+                android:text="@string/txt_banner_title_theater"
                 />
 
             <TextView
@@ -103,15 +107,7 @@
                 android:textSize="13sp"
                 android:textColor="#ffffff"
                 android:lineSpacingExtra="6sp"
-                android:text="여러분, 영화 좋아하시나요?\n\n
-코로나로 인해 영화도 맘놓고 볼 수 없는 요즘\n
-자동차 극장 어떠신가요?\n\n
-차에서 자유롭게 영화도 보고,\n
-자동차극장 주변 드라이브도 즐기고,\n\n
-차로가 추천하는\n
-자동차 극장 드라이브 코스\n
-이번 주말에 다녀오시는 것은 어떨까요?"/>
-
+                android:text="@string/txt_banner_context_theater"/>
 
             <LinearLayout
                 android:id="@+id/ll_banner_theater_paju"
@@ -125,36 +121,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_charo_car_blue"
+                    android:contentDescription="@string/img_description"
                     />
 
-                <LinearLayout
-                    android:id="@+id/ll_banner_theater_paju_address"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_banner_theater_paju_address"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    >
-                    <ImageView
-                        android:id="@+id/iv_banner_theater_paju_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_banner_map_start"
-                        android:layout_marginEnd="6dp"
-                        />
-                    <TextView
-                        android:id="@+id/tv_banner_theater_paju_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="normal"
-                        android:textSize="14sp"
-                        android:textColor="#495057"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="7sp"
-                        android:text="경기도 파주시"
-                        />
-                </LinearLayout>
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textColor="#495057"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@string/txt_banner_theater_paju_address"
+                    android:drawablePadding="6dp"
+                    app:drawableStartCompat="@drawable/ic_banner_map_start" />
+
                 <TextView
                     android:id="@+id/tv_banner_theater_paju_title"
                     android:layout_width="wrap_content"
@@ -165,7 +150,7 @@
                     android:textColor="#212429"
                     android:gravity="center_horizontal"
                     android:fontFamily="@font/jejugothic_regular"
-                    android:text="자유로 따라, 파주 자동차 극장!"/>
+                    android:text="@string/txt_banner_theater_paju_title"/>
 
                 <LinearLayout
                     android:id="@+id/ll_banner_theater_paju_keyword"
@@ -191,7 +176,7 @@
                         android:includeFontPadding="false"
                         android:paddingVertical="3dp"
                         android:layout_marginEnd="5dp"
-                        android:text="스피드"/>
+                        android:text="@string/theme_speed"/>
                     <TextView
                         android:id="@+id/tv_banner_theater_paju_keyword_2"
                         android:layout_width="wrap_content"
@@ -207,7 +192,7 @@
                         android:paddingHorizontal="18dp"
                         android:includeFontPadding="false"
                         android:paddingVertical="3dp"
-                        android:text="도심"/>
+                        android:text="@string/theme_city"/>
 
                 </LinearLayout>
 
@@ -228,7 +213,9 @@
                         android:minHeight="155dp"
                         android:layout_weight="1"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/image_placeholder"/>
+                        android:background="@drawable/image_placeholder"
+                        android:contentDescription="@string/img_description"
+                        />
                     <ImageView
                         android:id="@+id/iv_paju_2"
                         android:layout_width="match_parent"
@@ -236,7 +223,9 @@
                         android:minHeight="155dp"
                         android:layout_weight="1"
                         android:layout_marginHorizontal="5dp"
-                        android:background="@drawable/image_placeholder"/>
+                        android:background="@drawable/image_placeholder"
+                        android:contentDescription="@string/img_description"
+                        />
                 </LinearLayout>
 
                 <TextView
@@ -253,11 +242,7 @@
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="자유로 끝에 위치한 자동차 극장으로,\n
-상영 영화는 홈페이지에서 확인이 가능하다고 하네요!\n
-1시간 전에 여유롭게 도착해, \n
-별도 구경하고, 재밌게 영화도 보고, 한강 따라\n
-드라이브까지 가능한 드라이브 코스입니다:)"/>
+                    android:text="@string/txt_banner_theater_paju_context"/>
 
                 <TextView
                     android:id="@+id/tv_banner_theater_paju_recommend"
@@ -270,11 +255,7 @@
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="윤블리 드라이버님이 다녀온\n
-파주 자동차 극장 코스! \n
-“자유로 극장”으로 검색하셔서,\n
-미리 영화 시간표 확인하시구, \n
-여유로운 드라이브 즐겨보시는 것은 어떨까요?"/>
+                    android:text="@string/txt_banner_theater_paju_recommend"/>
 
                 <TextView
                     android:id="@+id/tv_btn_banner_theater_paju_post"
@@ -291,7 +272,7 @@
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="32dp"
                     android:textColor="@color/white"
-                    android:text="드라이브 코스 바로 가기"
+                    android:text="@string/txt_go_post"
                     />
 
             </LinearLayout>
@@ -307,35 +288,26 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_charo_car_blue" />
+                    android:src="@drawable/ic_charo_car_blue"
+                    android:contentDescription="@string/img_description"
+                    />
 
-                <LinearLayout
-                    android:id="@+id/ll_banner_theater_gang_address"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_banner_theater_gang_address"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@string/txt_banner_theater_gang_address"
+                    android:textColor="#495057"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:drawablePadding="6dp"
+                    app:drawableStartCompat="@drawable/ic_banner_map_start" />
 
-                    <ImageView
-                        android:id="@+id/iv_banner_theater_gang_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:src="@drawable/ic_banner_map_start" />
-
-                    <TextView
-                        android:id="@+id/tv_banner_theater_gang_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="7sp"
-                        android:text="강원도 강릉시"
-                        android:textColor="#495057"
-                        android:textSize="14sp"
-                        android:textStyle="normal" />
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_banner_theater_gang_title"
@@ -347,7 +319,7 @@
                     android:textSize="17sp"
                     android:textStyle="normal"
                     android:fontFamily="@font/jejugothic_regular"
-                    android:text="강릉 자동차 극장과 함께하는 드라이브" />
+                    android:text="@string/txt_banner_theater_gang_title" />
 
                 <LinearLayout
                     android:id="@+id/ll_banner_theater_gang_keywword"
@@ -370,7 +342,7 @@
                         android:minWidth="69dp"
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="3dp"
-                        android:text="여유"
+                        android:text="@string/theme_relax"
                         android:textColor="#495057"
                         android:textSize="13sp"
                         android:textStyle="normal" />
@@ -394,7 +366,9 @@
                         android:minHeight="155dp"
                         android:layout_marginHorizontal="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/image_placeholder" />
+                        android:background="@drawable/image_placeholder"
+                        android:contentDescription="@string/img_description"
+                        />
 
                     <ImageView
                         android:id="@+id/iv_gang_2"
@@ -403,7 +377,9 @@
                         android:minHeight="155dp"
                         android:layout_marginHorizontal="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/image_placeholder" />
+                        android:background="@drawable/image_placeholder"
+                        android:contentDescription="@string/img_description"
+                        />
                 </LinearLayout>
 
                 <TextView
@@ -420,9 +396,7 @@
                     android:textColor="#495057"
                     android:textSize="14sp"
                     android:textStyle="normal"
-                    android:text="드라이브도 하면서 극장에서 영화도 볼 수 있는 데이터 코스로 딱 알맞은 드라이브 코스라고 하네요.\n
-요즘 시기에 너무 좋은 데이트 코스인 것 같아요.\n
-근처 편의점에서 영화 보면서 먹을 간식도 미리 사서 간다면 너무 좋을 것 같아요." />
+                    android:text="@string/txt_banner_theater_gang_context" />
 
                 <TextView
                     android:id="@+id/tv_banner_theater_gang_recommend"
@@ -435,9 +409,7 @@
                     android:textColor="#495057"
                     android:textSize="14sp"
                     android:textStyle="normal"
-                    android:text="임쏘 드라이버님이 다녀온\n
-강릉 자동차 극장 코스입니다.\n
-극장에서 보는 영화도 좋지만 \n프라이빗 한 공간에서 \n연인, 친구, 가족과 색다른 경험을 만끽해 보세요." />
+                    android:text="@string/txt_banner_theater_gang_recommend" />
 
                 <TextView
                     android:id="@+id/tv_btn_banner_theater_gang_post"
@@ -454,7 +426,7 @@
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="32dp"
                     android:textColor="@color/white"
-                    android:text="드라이브 코스 바로 가기"
+                    android:text="@string/txt_go_post"
                     />
             </LinearLayout>
 
@@ -470,10 +442,7 @@
                 android:textSize="14sp"
                 android:textColor="#495057"
                 android:lineSpacingExtra="8.4sp"
-                android:text="이외에도 전국 곳곳에\n
-자동차 극장이 많은데요!\n\n
-아직 다녀오지 못해 아쉬운\n
-자동차 극장 차로가 소개해드립니다!"/>
+                android:text="@string/txt_banner_teather_etc_introduce"/>
 
             <LinearLayout
                 android:id="@+id/ll_banner_theater_cgv"
@@ -493,7 +462,7 @@
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
-                    android:text="1"/>
+                    android:text="@string/num_one"/>
                 <TextView
                     android:id="@+id/tv_banner_theater_cgv_title"
                     android:layout_width="wrap_content"
@@ -505,7 +474,7 @@
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
-                    android:text="CGV DRIVE IN 스퀘어원 (인천광역시)"/>
+                    android:text="@string/txt_banner_theater_cgv_title"/>
 
                 <ImageView
                     android:id="@+id/iv_banner_theater_cgv_img"
@@ -513,6 +482,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="22dp"
                     android:background="@drawable/image_cgv"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <TextView
@@ -526,12 +496,7 @@
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="인천 동춘역에 위치해 있으며,\n
-CGV에서 운영하는 자동차 극장입니다!\n\n
-미리 CGV 어플을 통해 예약하실 수 있다고 하네요!\n
-자리는 선착순이니 참고 부탁드립니다!\n\n
-또한 주변 마트와 딜리버리 서비스가 가능하기 때문에 \n
-먹을거리 역시 풍족하게 즐길 수 있다고 하네요!"/>
+                    android:text="@string/txt_banner_theater_cgv_context"/>
             </LinearLayout>
 
             <LinearLayout
@@ -552,7 +517,7 @@ CGV에서 운영하는 자동차 극장입니다!\n\n
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
-                    android:text="2"/>
+                    android:text="@string/num_two"/>
                 <TextView
                     android:id="@+id/tv_banner_theater_osiria_title"
                     android:layout_width="wrap_content"
@@ -564,7 +529,7 @@ CGV에서 운영하는 자동차 극장입니다!\n\n
                     android:gravity="center_horizontal"
                     android:layout_gravity="center"
                     android:fontFamily="@font/jejugothic_regular"
-                    android:text="드라이브 오시리아 (부산광역시)"/>
+                    android:text="@string/txt_banner_theater_osiria_title"/>
 
                 <ImageView
                     android:id="@+id/iv_banner_theater_osiria_img"
@@ -573,6 +538,7 @@ CGV에서 운영하는 자동차 극장입니다!\n\n
                     android:layout_marginTop="22dp"
                     android:layout_marginHorizontal="20dp"
                     android:src="@drawable/image_osiria"
+                    android:contentDescription="@string/img_description"
                     />
 
                 <TextView
@@ -586,12 +552,7 @@ CGV에서 운영하는 자동차 극장입니다!\n\n
                     android:textSize="14sp"
                     android:textColor="#495057"
                     android:lineSpacingExtra="8.4sp"
-                    android:text="인천 동춘역에 위치해 있으며,\n
-CGV에서 운영하는 자동차 극장입니다!\n\n
-미리 CGV 어플을 통해 예약하실 수 있다고 하네요!\n
-자리는 선착순이니 참고 부탁드립니다!\n\n
-또한 주변 마트와 딜리버리 서비스가 가능하기 때문에 \n
-먹을거리 역시 풍족하게 즐길 수 있다고 하네요!"/>
+                    android:text="@string/txt_banner_theater_osiria_context"/>
             </LinearLayout>
 
             <TextView
@@ -608,11 +569,7 @@ CGV에서 운영하는 자동차 극장입니다!\n\n
                 android:textSize="14sp"
                 android:textColor="#495057"
                 android:lineSpacingExtra="8.4sp"
-                android:text="차로가 추천해 준 자동차 극장\n
-드라이브 코스,\n\n
-코로나 시국에 안전하게 영화와, 드라이브 모두\n
-즐겨보는 것은 어떨까요?\n
-다녀온 후 여러분의 드라이브 이야기도 들려주세요!"/>
+                android:text="@string/txt_banner_theater_osiria_finish"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
