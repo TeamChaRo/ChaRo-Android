@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-    <variable
-        name="todayCharoDrive"
-        type="com.charo.android.domain.model.home.TodayCharoDrive" />
+        <variable
+            name="todayCharoDrive"
+            type="com.charo.android.domain.model.home.TodayCharoDrive" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,24 +13,26 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="21dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
+            >
 
             <ImageView
                 android:id="@+id/img_home_today_drive"
-                android:layout_width="360dp"
-                android:layout_height="220dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:minWidth="320dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/today_drive_shape"
                 app:layout_constraintDimensionRatio="13:9"
                 android:layout_marginBottom="7dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 imgBind="@{todayCharoDrive.homeTodayDriveImage}"
                 app:layout_constraintBottom_toTopOf="@id/text_home_today_drive_title" />
