@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import com.charo.android.R
 import com.charo.android.databinding.ActivityBannerSpringPlaylistBinding
 import com.charo.android.presentation.util.Define
 
@@ -17,10 +19,20 @@ class BannerSpringPlaylistActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityBannerSpringPlaylistBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initToolbar()
 
         define = Define()
         initListener()
 
+    }
+
+    private fun initToolbar(){
+        val toolbar = binding.toolbarBanner
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
     }
 
     private fun initListener(){
@@ -76,4 +88,13 @@ class BannerSpringPlaylistActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

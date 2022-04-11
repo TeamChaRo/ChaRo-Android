@@ -1,10 +1,10 @@
 package com.charo.android.presentation.ui.home
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -22,6 +22,7 @@ class BannerAboutCharoActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityBannerAboutCharoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initToolbar()
 
         binding.vpBannerAboutCharo.adapter = BannerViewPagerAdapter(this)
         binding.vpBannerAboutCharo.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -30,6 +31,16 @@ class BannerAboutCharoActivity : AppCompatActivity(), View.OnClickListener {
         binding.ivInsta.setOnClickListener(this)
         binding.tvInstaId.setOnClickListener(this)
         binding.tvInstaContext.setOnClickListener(this)
+
+    }
+
+    private fun initToolbar(){
+        val toolbar = binding.toolbarBanner
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
     }
 
     private fun openInsta(){
@@ -52,6 +63,16 @@ class BannerAboutCharoActivity : AppCompatActivity(), View.OnClickListener {
                 openInsta()
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private inner class BannerViewPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa){
