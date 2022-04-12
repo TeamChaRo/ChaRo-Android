@@ -3,6 +3,7 @@ package com.charo.android.presentation.ui.home
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -20,6 +21,7 @@ class BannerDriveTheaterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBannerDriveTheaterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initToolbar()
 
         requestManager = Glide.with(this)
         glideImg(resources.getDrawable(R.drawable.image_121), binding.ivPaju1)
@@ -30,5 +32,24 @@ class BannerDriveTheaterActivity : AppCompatActivity() {
         requestManager.load(img)
             .transform(CenterCrop(), RoundedCorners(20))
             .into(imageView)
+    }
+
+    private fun initToolbar(){
+        val toolbar = binding.toolbarBanner
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
