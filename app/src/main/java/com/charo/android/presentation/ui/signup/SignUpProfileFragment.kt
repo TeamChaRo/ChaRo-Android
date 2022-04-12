@@ -197,6 +197,9 @@ class SignUpProfileFragment :
 
 
     }
-
+    override fun onPause() {
+        super.onPause()
+        keyboardVisibilityUtils.detachKeyboardListeners()
+    }
 
 }

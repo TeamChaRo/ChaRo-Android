@@ -9,6 +9,8 @@ import com.charo.android.databinding.ItemHomeTodayDriveBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.TodayCharoDrive
+import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.LoginUtil.email
 
 class HomeTodayDriveAdapter(
     val userId: String,
@@ -37,17 +39,21 @@ class HomeTodayDriveAdapter(
     ) {
         holder.onBind(todayCharoDrive[position])
         holder.binding.imgHomeTodayDriveHeart.setOnClickListener {
-            if (select){
-                it.isSelected = !todayCharoDrive[position].homeTodayDriveHeart
-
-                select =false
+            if(email == "@"){
+                LoginUtil.loginPrompt(holder.itemView.context)
             }else{
-                it.isSelected = todayCharoDrive[position].homeTodayDriveHeart
-                select = true
-            }
-            postId = todayCharoDrive[position].homeTodayDrivePostId
+                if (select){
+                    it.isSelected = !todayCharoDrive[position].homeTodayDriveHeart
 
-            links.getPostId(postId)
+                    select =false
+                }else{
+                    it.isSelected = todayCharoDrive[position].homeTodayDriveHeart
+                    select = true
+                }
+                postId = todayCharoDrive[position].homeTodayDrivePostId
+                links.getPostId(postId)
+            }
+
 
         }
         holder.binding.root.setOnClickListener() {
@@ -55,6 +61,7 @@ class HomeTodayDriveAdapter(
             intent.putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
+
     }
 
     override fun getItemCount(): Int {

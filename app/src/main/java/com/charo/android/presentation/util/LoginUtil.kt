@@ -7,6 +7,8 @@ import com.charo.android.presentation.ui.signin.SocialSignInActivity
 
 
 object LoginUtil{
+    var email = ""
+
 
     fun loginPrompt(mContext: Context) {
         val builder = AlertDialog.Builder(mContext)

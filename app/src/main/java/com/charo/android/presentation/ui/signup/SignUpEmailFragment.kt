@@ -32,8 +32,6 @@ class SignUpEmailFragment :
     }
     //이메일 포함 되어있는지 확인
     private fun initView() {
-        val naver = "@naver.com"
-        val gmail = "@gmail.com"
         with(binding) {
 
 
@@ -184,4 +182,8 @@ class SignUpEmailFragment :
             }, 200)
         }
 
+    override fun onPause() {
+        super.onPause()
+        keyboardVisibilityUtils.detachKeyboardListeners()
+    }
 }
