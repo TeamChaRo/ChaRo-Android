@@ -186,22 +186,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.sharedViewModel = sharedViewModel
     }
 
-
     //검색 뷰 이동
     private fun goSearchView(nickName: String) {
-        val userEmail = SharedInformation.getEmail(requireActivity())
         binding.imgMainSearch.setOnClickListener {
-            if(userEmail == null || userEmail == "@"){
-                //로그인 유도 필요한 곳에 작성
-                LoginUtil.loginPrompt(requireActivity())
-            }else{
-                val intent = Intent(activity, SearchActivity::class.java)
-                intent.apply {
-                    putExtra("nickName", nickName)
-                }
-                startActivity(intent)
+            val intent = Intent(activity, SearchActivity::class.java)
+            intent.apply {
+                putExtra("nickName", nickName)
             }
-
+            startActivity(intent)
         }
     }
 
@@ -209,16 +201,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val userEmail = SharedInformation.getEmail(requireActivity())
         binding.imgMainAlarm.setOnClickListener {
             if(userEmail == null || userEmail == "@"){
-                //로그인 유도 필요한 곳에 작성
                 LoginUtil.loginPrompt(requireActivity())
+
             }else{
                 val intent = Intent(activity, AlarmActivity::class.java)
                 startActivity(intent)
             }
-
         }
     }
-
 
     private fun replaceMoreViewFragment(userId: String) {
         binding.textHomeHotDrivePlus.setOnClickListener {
