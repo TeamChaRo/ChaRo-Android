@@ -120,7 +120,9 @@ class SignUpPassWordFragment :
                 binding.textSignUpPasswordNext.visibility = View.VISIBLE
                 binding.textSignUpPasswordNextFocus.visibility = View.GONE
             })
-
-
+    }
+    override fun onPause() {
+        super.onPause()
+        keyboardVisibilityUtils.detachKeyboardListeners()
     }
 }
