@@ -9,6 +9,8 @@ import com.charo.android.databinding.ItemHomeLocationDriveBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.LocalDrive
+import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.LoginUtil.email
 
 class HomeLocalDriveAdapter(val userId: String,
                             var links: HomeFragment.DataToHomeLike) :
@@ -35,15 +37,20 @@ class HomeLocalDriveAdapter(val userId: String,
     ) {
         holder.onBind(localDrive[position])
         holder.binding.imgHomeLocationDriveHeart.setOnClickListener{
-            postId = localDrive[position].homeLocationDrivePostId
-            if(select){
-                it.isSelected = !localDrive[position].homeLocationDriveHeart
-                select = false
+            if(email=="@"){
+                LoginUtil.loginPrompt(holder.itemView.context)
             }else{
-                it.isSelected = localDrive[position].homeLocationDriveHeart
+                postId = localDrive[position].homeLocationDrivePostId
+                if(select){
+                    it.isSelected = !localDrive[position].homeLocationDriveHeart
+                    select = false
+                }else{
+                    it.isSelected = localDrive[position].homeLocationDriveHeart
+                }
+
+                links.getPostId(postId)
             }
 
-            links.getPostId(postId)
         }
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)

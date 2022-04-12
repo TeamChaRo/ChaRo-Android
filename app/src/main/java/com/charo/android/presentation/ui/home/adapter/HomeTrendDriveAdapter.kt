@@ -9,6 +9,8 @@ import com.charo.android.databinding.ItemHomeHotDriveBinding
 import com.charo.android.domain.model.home.TrendDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.LoginUtil.email
 
 class HomeTrendDriveAdapter(val userId: String,
                             var links: HomeFragment.DataToHomeLike) :
@@ -36,16 +38,21 @@ class HomeTrendDriveAdapter(val userId: String,
 
         holder.onBind(trendDrive[position])
         holder.binding.imgHomeHotDriveHeart.setOnClickListener{
-            postId = trendDrive[position].homeTrendDrivePostId
-            if(select){
-                it.isSelected = !trendDrive[position].homeTrendDriveHeart
-                select = false
+            if(email == "@"){
+                LoginUtil.loginPrompt(holder.itemView.context)
             }else{
-                it.isSelected = trendDrive[position].homeTrendDriveHeart
-                select = true
+                postId = trendDrive[position].homeTrendDrivePostId
+                if(select){
+                    it.isSelected = !trendDrive[position].homeTrendDriveHeart
+                    select = false
+                }else{
+                    it.isSelected = trendDrive[position].homeTrendDriveHeart
+                    select = true
+                }
+
+                links.getPostId(postId)
             }
 
-            links.getPostId(postId)
         }
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
