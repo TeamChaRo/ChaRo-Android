@@ -24,13 +24,14 @@
 
             <ImageView
                 android:id="@+id/img_home_today_drive"
-                android:layout_width="360dp"
+                android:layout_width="0dp"
                 android:layout_height="220dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/today_drive_shape"
                 app:layout_constraintDimensionRatio="13:9"
                 android:layout_marginBottom="7dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 imgBind="@{todayCharoDrive.homeTodayDriveImage}"
                 app:layout_constraintBottom_toTopOf="@id/text_home_today_drive_title" />
