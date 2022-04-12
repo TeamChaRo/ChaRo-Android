@@ -67,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:lineHeight="22sp"
                     android:text="@string/text_my_page_no_written_post"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/withdrawal"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
+        app:fontFamily="@font/noto_sans_cjkkr_medium"
         android:textSize="14sp"
         android:textColor="#454545"
         android:includeFontPadding="false"

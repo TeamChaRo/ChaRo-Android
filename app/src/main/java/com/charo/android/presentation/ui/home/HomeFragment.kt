@@ -1,15 +1,19 @@
 package com.charo.android.presentation.ui.home
 
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.viewpager2.widget.ViewPager2
 import com.charo.android.R
 import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentHomeBinding
+import com.charo.android.domain.model.home.BannerLocal
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.alarm.AlarmActivity
@@ -25,6 +29,7 @@ import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.util.DisplayMetrics
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -33,6 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private var theme = ThemeUtil()
     private var location = LocationUtil()
     private lateinit var homeViewPagerAdapter: HomeViewPagerAdapter
+    private lateinit var homeViewPagerLocalAdapter: HomeViewPagerLocalAdapter
     private lateinit var homeTodayDriveAdapter: HomeTodayDriveAdapter
     private lateinit var homeThemeAdapter: HomeThemeAdapter
     private lateinit var homeHotDriveAdapter: HomeTrendDriveAdapter
@@ -54,7 +60,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         goAlarm()
         initToolBar()
         replaceMoreViewFragment(Hidden.userId)
-        initBanner()
+
+        initBannerLocal()
+//        initBanner()
+        carAnimation()
+
         initTrendDrive()
         initLocalDrive()
         initTodayCharoDrive()
@@ -68,6 +78,46 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
+    private fun carAnimation(){
+        binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                val displayMetrics = DisplayMetrics()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    requireContext().display!!.getRealMetrics(displayMetrics)
+                } else {
+                    requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+                    displayMetrics.widthPixels
+                }
+
+                val width = displayMetrics.widthPixels
+
+                val xValues: Float = (width * (position.toFloat()/4))
+                val anim : ObjectAnimator = ObjectAnimator.ofFloat(view, "translationX", xValues)
+
+                anim.target = binding.ivHomeCharoCar
+                anim.duration = 700
+                anim.start()
+            }
+        })
+    }
+    //배너 디지인
+    private fun initBannerLocal() {
+        val bannerLocal : List<BannerLocal>
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        homeViewModel.getBanner(userEmail)
+        homeViewPagerLocalAdapter = HomeViewPagerLocalAdapter()
+        binding.vpMain.adapter = homeViewPagerLocalAdapter
+
+        val Banner1 : BannerLocal = BannerLocal(R.drawable.banner_img_one,"강릉 해변 \n드라이브 코스와 맛집","강릉 8년차가 소개해주는",0,28f,false)
+        val Banner2 : BannerLocal = BannerLocal(R.drawable.banner_img_two,"봄의 선선한 바람 \n플레이리스트","",R.drawable.spring_playlist,28f,false)
+        val Banner3 : BannerLocal = BannerLocal(R.drawable.banner_img_three,"자동차 극장\n드라이브 코스","",R.drawable.drive_in_theater,28f,false)
+        val Banner4 : BannerLocal = BannerLocal(R.drawable.banner_img_four,"차에서의 \n오늘이 최고가 될 수 있게\n당신의 드라이브 메이트","",0,22f,true)
+        bannerLocal = listOf(Banner1,Banner2,Banner3,Banner4)
+
+        homeViewPagerLocalAdapter.setHomeBanner(bannerLocal)
+    }
 
     //배너 설정
     private fun initBanner() {

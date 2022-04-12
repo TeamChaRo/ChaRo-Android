@@ -8,6 +8,6 @@
 
     <style name="charoListTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/notosanscjkkr_medium</item>
+        <item name="fontFamily">@font/noto_sans_cjkkr_medium</item>
     </style>
 </resources>

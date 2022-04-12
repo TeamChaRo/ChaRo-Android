@@ -23,6 +23,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
+            app:fontFamily="@font/noto_sans_cjkkr_regular"
             android:gravity="center_horizontal"
             android:includeFontPadding="false"
             android:lineSpacingExtra="5sp"

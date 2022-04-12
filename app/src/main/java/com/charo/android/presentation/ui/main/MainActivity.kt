@@ -88,6 +88,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initNavView() {
+        binding.navView.itemIconTintList = null
         binding.apply {
             userEmail = SharedInformation.getEmail(this@MainActivity)
             navView.setOnItemSelectedListener {

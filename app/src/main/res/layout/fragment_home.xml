@@ -44,6 +44,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
+                    <ImageView
+                        android:id="@+id/iv_home_car_road"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="17dp"
+                        android:background="@drawable/move_charo_road"
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_home_charo_car"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="25dp"
+                        android:background="@drawable/car_main_animation"
+                        />
+
                 </FrameLayout>
 
                 <androidx.appcompat.widget.Toolbar
@@ -144,13 +164,9 @@
                         android:id="@+id/recyclerview_home_today_drive"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="4dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive" />
 
                     <ImageView
@@ -377,4 +393,3 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
-

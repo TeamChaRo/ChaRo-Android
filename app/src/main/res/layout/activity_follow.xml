@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_cjkkr_medium"
+            app:fontFamily="@font/noto_sans_cjkkr_medium"
             android:includeFontPadding="false"
             android:text="@{viewModel.nickname}"
             android:textColor="@color/black_sub_212429"
