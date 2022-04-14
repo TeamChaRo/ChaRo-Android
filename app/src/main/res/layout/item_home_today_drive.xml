@@ -24,8 +24,9 @@
 
             <ImageView
                 android:id="@+id/img_home_today_drive"
-                android:layout_width="0dp"
-                android:layout_height="220dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:minWidth="320dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/today_drive_shape"
                 app:layout_constraintDimensionRatio="13:9"
