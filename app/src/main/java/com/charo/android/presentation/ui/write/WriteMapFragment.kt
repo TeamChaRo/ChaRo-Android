@@ -4,19 +4,18 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.data.api.ApiService
 import com.charo.android.databinding.FragmentWriteMapBinding
@@ -30,8 +29,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.lang.Exception
-import kotlin.collections.ArrayList
+import timber.log.Timber
 
 class WriteMapFragment : Fragment(), View.OnClickListener {
 
@@ -349,20 +347,20 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             .writePost(sendWarning, sendTheme, sharedViewModel.course.value!!, sharedViewModel.imageMultiPart.value!!, param)
         call.enqueueUtil(
             onSuccess = {
-                Log.d("serveWriteData", "success")
-                Log.d("serveWriteData", it.toString())
+                Timber.d("serveWriteData success")
+                Timber.d("serveWriteData $it")
 
                 Toast.makeText(context,"게시물이 등록되었습니다.", Toast.LENGTH_LONG).show()
                 writeShareActivity!!.finish()
             },
             onError = {
-                Log.d("serveWriteData", "failed")
-                Log.d("serveWriteData", call.request().body.toString())
-                Log.d("serveWriteData",param.toString())
-                Log.d("serveWriteData ", "sendWarning $sendWarning")
-                Log.d("serveWriteData", "sendTheme $sendTheme")
-                Log.d("serveWriteData","course $sendTheme")
-                Log.d("serveWriteData","image ${sharedViewModel.imageMultiPart.value!!}")
+                Timber.d("serveWriteData failed")
+                Timber.d("serveWriteData ${call.request().body.toString()}")
+                Timber.d("serveWriteData $param")
+                Timber.d("serveWriteData  sendWarning $sendWarning")
+                Timber.d("serveWriteData sendTheme $sendTheme")
+                Timber.d("serveWriteData course $sendTheme")
+                Timber.d("serveWriteData image ${sharedViewModel.imageMultiPart.value!!}")
             },
         )
     }

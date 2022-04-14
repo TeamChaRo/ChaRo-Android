@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.charo.mypage
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.charo.adapter.CharoAdapter
 import com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel
 import com.charo.android.presentation.ui.detail.DetailActivity
+import timber.log.Timber
 
 class MyCharoFragment : Fragment() {
     private val myCharoViewModel: CharoViewModel by activityViewModels()
@@ -43,7 +43,7 @@ class MyCharoFragment : Fragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_charo, container, false)
         val root: View = binding.root
 
-        Log.d("MyCharoFragment", "created!")
+        Timber.d("MyCharoFragment created!")
 
         binding.recyclerviewMyCharo.adapter = charoAdapter
         setUpSpinner()
@@ -141,7 +141,7 @@ class MyCharoFragment : Fragment() {
                 if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
                     scrollY > oldScrollY
                 ) {
-                    Log.d("무한스크롤 최하단 도달", "도달완료")
+                    Timber.d("무한스크롤 최하단 도달 완료")
                     if (myCharoViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
                         charoAdapter.addLoading()
                         when (spinnerPosition) {

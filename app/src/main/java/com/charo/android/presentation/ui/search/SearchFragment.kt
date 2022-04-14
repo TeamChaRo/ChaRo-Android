@@ -2,7 +2,6 @@ package com.charo.android.presentation.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat.getColor
 import com.charo.android.R
@@ -16,6 +15,7 @@ import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val themeUtil = ThemeUtil()
@@ -62,10 +62,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 } else {
                     binding.btnSearchCaution.text.toString()
                 }
-            Log.d("hu", searchViewModel.province.value.toString())
-            Log.d("hu", searchViewModel.city.value.toString())
-            Log.d("hu", searchViewModel.theme.value.toString())
-            Log.d("hu", searchViewModel.caution.value.toString())
+            Timber.d("hu ${searchViewModel.province.value.toString()}")
+            Timber.d("hu ${searchViewModel.city.value.toString()}")
+            Timber.d("hu ${searchViewModel.theme.value.toString()}")
+            Timber.d("hu ${searchViewModel.caution.value.toString()}")
 
             val requestSearchViewData = RequestSearchViewData(
                 region = searchViewModel.city.value.toString(),

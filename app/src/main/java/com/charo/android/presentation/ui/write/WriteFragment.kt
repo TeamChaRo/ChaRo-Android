@@ -14,7 +14,6 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,9 +44,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
-
-
-
+import timber.log.Timber
 
 
 class WriteFragment : Fragment(), View.OnClickListener {
@@ -293,7 +290,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
             val image = ArrayList<MultipartBody.Part>()
             if (it.resultCode == Activity.RESULT_OK) {
                 if(it.data == null){
-                    Log.d("error img", "data null")
+                    Timber.d("error img data null")
                     return@registerForActivityResult
                 }
 
@@ -458,11 +455,6 @@ class WriteFragment : Fragment(), View.OnClickListener {
         //보여지는 이미지
         sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
 
-        Log.d("check","title ${sharedViewModel.title.value} \n" +
-                "courseDesc ${sharedViewModel.courseDesc.value} \n" +
-                "warningList ${warningList} \n imageMultiPart ${sharedViewModel.imageMultiPart.value} \n" +
-                "province ${sharedViewModel.province.value} \n region ${sharedViewModel.region.value} \n" +
-                "theme ${sharedViewModel.theme.value} ")
         //빈값 확인
         if(TextUtils.isEmpty(sharedViewModel.title.value)
             || TextUtils.isEmpty(sharedViewModel.province.value)

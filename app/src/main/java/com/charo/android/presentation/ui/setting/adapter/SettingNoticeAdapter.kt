@@ -1,12 +1,12 @@
 package com.charo.android.presentation.ui.setting.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemSettingNoticeBinding
 import com.charo.android.domain.model.setting.SettingNoticeData
+import timber.log.Timber
 
 
 class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNoticeViewHolder>() {
@@ -33,7 +33,7 @@ class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNo
     }
 
     override fun getItemCount(): Int {
-        Log.d("settingNotice", settingNotice.size.toString())
+        Timber.d("settingNotice ${settingNotice.size}")
         return settingNotice.size
     }
 

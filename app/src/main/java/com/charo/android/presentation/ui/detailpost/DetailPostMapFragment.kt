@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.detailpost
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class DetailPostMapFragment : Fragment() {
     private var _binding: FragmentDetailPostMapBinding? = null
@@ -114,7 +114,7 @@ class DetailPostMapFragment : Fragment() {
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
                 requireActivity().finish()
-                Log.e("mlog: DetailPostFragment::Path 그리기", it.message.toString())
+                Timber.e("mlog: DetailPostFragment::Path 그리기 ${it.message.toString()}")
             }
         }
     }

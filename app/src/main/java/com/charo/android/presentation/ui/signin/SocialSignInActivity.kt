@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.signin
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,7 +15,6 @@ import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.charo.android.presentation.ui.signup.SignUpActivity
 import com.charo.android.presentation.util.SharedInformation
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -27,6 +25,7 @@ import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class SocialSignInActivity() :
     BaseActivity<ActivitySocialSignInBinding>(R.layout.activity_social_sign_in) {
@@ -51,9 +50,9 @@ class SocialSignInActivity() :
     //자동 로그인
     private fun autoLogin() {
         val autoEmail = SharedInformation.getEmail(this)
-        Log.d("autoEmail", autoEmail)
+        Timber.d("autoEmail $autoEmail")
         if (autoEmail != "@") {
-            Log.d("autoEmail", autoEmail)
+            Timber.d("autoEmail $autoEmail")
             Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -65,9 +64,9 @@ class SocialSignInActivity() :
     private fun initKakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Log.e("kakao", "로그인 실패", error)
+                Timber.e("kakao 로그인 실패", error)
             } else if (token != null) {
-                Log.i("kakao", "로그인 성공 ${token.accessToken}")
+                Timber.i("kakao 로그인 성공 ${token.accessToken}")
                 kakaoUserEmail()
             }
         }
@@ -82,7 +81,7 @@ class SocialSignInActivity() :
         if (AuthApiClient.instance.hasToken()) {
             UserApiClient.instance.accessTokenInfo { _, error ->
                 if (error != null) {
-                    Log.d("kakao", "토큰 정보 보기 실패")
+                    Timber.d("kakao 토큰 정보 보기 실패")
                 } else {
                     kakaoUserEmail()
 
@@ -94,10 +93,10 @@ class SocialSignInActivity() :
 
 
     fun kakaoUserEmail() {
-        Log.d("yeeee", SharedInformation.getKaKaoSignUp(this).toString())
+        Timber.d("yeeee ${SharedInformation.getKaKaoSignUp(this)}")
         UserApiClient.instance.me { user, error ->
             if (error != null) {
-                Log.e("kakao", "사용자 정보 요청 실패", error)
+                Timber.e("kakao 사용자 정보 요청 실패 $error")
             } else if (user != null) {
                 if (SharedInformation.getKaKaoSignUp(this) == 999) {
                     Toast.makeText(this, "동의가 필요합니다.", Toast.LENGTH_SHORT).show()
@@ -111,8 +110,8 @@ class SocialSignInActivity() :
 
                 } else if (SharedInformation.getKaKaoSignUp(this) == 2) {
                     SharedInformation.setEmail(this, user.kakaoAccount?.email)
-                    Log.i(
-                        "kakaoUser", "사용자 정보 요청 성공" +
+                    Timber.i(
+                        "kakaoUser 사용자 정보 요청 성공" +
                                 "\n이메일: ${user.kakaoAccount?.email}"
                     )
                     socialSignInViewModel.kakaoLoginSuccess(
@@ -164,14 +163,14 @@ class SocialSignInActivity() :
                     val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     try {
                         val account = task.getResult(ApiException::class.java)
-                        Log.d("구글", account.id.toString())
+                        Timber.d("구글 ${account.id.toString()}")
                         firebaseAuthWithGoogle(account.idToken)
                     } catch (e: ApiException) {
-                        Log.d("구글", "Google sign in failed")
+                        Timber.d("구글 Google sign in failed")
                     }
                 }else{
-                    Log.d("구글", result.resultCode.toString() + "+" + RESULT_OK.toString())
-                    Log.e("구글", "진짜 제발 야!")
+                    Timber.d("구글 ${result.resultCode.toString() + "+" + RESULT_OK.toString()}")
+                    Timber.e("구글 진짜 제발 야!")
                 }
             }
     }
@@ -194,7 +193,7 @@ class SocialSignInActivity() :
                     val user = auth.currentUser
                     val email = user?.email
                     val profileImage = user?.photoUrl
-                    Log.d("구글", email.toString())
+                    Timber.d("구글 ${email.toString()}")
                     // 첫 회원가입 vs 로그인
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     checkGoogleLoginError(profileImage, email)

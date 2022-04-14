@@ -4,7 +4,6 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,9 @@ import androidx.databinding.DataBindingUtil
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingBottomSheetBinding
 import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
-
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class SettingBottomSheetFragment : BottomSheetDialogFragment() {
@@ -28,7 +27,7 @@ class SettingBottomSheetFragment : BottomSheetDialogFragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == RESULT_OK){
                 settingViewModel.profileChangeUri.value = it.data?.data
-                Log.d("yam",settingViewModel.profileChangeUri.value.toString() )
+                Timber.d("yam ${settingViewModel.profileChangeUri.value.toString()}")
             }
         }
 

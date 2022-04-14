@@ -2,7 +2,6 @@ package com.charo.android.presentation.ui.charo.follow
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.charo.adapter.CharoListFollowAdapter
 import com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel
 import com.charo.android.presentation.ui.main.MainActivity
+import timber.log.Timber
 
 class CharoListFollowingFragment : Fragment() {
     private var _binding: FragmentCharoListFollowingBinding? = null
@@ -47,7 +47,7 @@ class CharoListFollowingFragment : Fragment() {
         initRecyclerView()
         charoViewModel.followData.observe(viewLifecycleOwner, {
             followAdapter.itemList.addAll(it.following)
-            Log.d("itemList.size", followAdapter.itemList.size.toString())
+            Timber.d("itemList.size ${followAdapter.itemList.size.toString()}")
             followAdapter.notifyDataSetChanged()
         })
         return binding.root

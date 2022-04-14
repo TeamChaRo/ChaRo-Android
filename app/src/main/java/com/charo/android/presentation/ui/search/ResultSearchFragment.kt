@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import com.charo.android.R
@@ -11,6 +10,7 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.fragment_result_search) {
@@ -24,10 +24,10 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         initResultSearchView()
         clickBackBtn()
         clickBackHome()
-        Log.d("searchViewModel", searchViewModel.province.value.toString())
-        Log.d("searchViewModel", searchViewModel.city.value.toString())
-        Log.d("searchViewModel", searchViewModel.theme.value.toString())
-        Log.d("searchViewModel", searchViewModel.caution.value.toString())
+        Timber.d("searchViewModel ${searchViewModel.province.value.toString()}")
+        Timber.d("searchViewModel ${searchViewModel.city.value.toString()}")
+        Timber.d("searchViewModel ${searchViewModel.theme.value.toString()}")
+        Timber.d("searchViewModel ${searchViewModel.caution.value.toString()}")
     }
 
 
@@ -71,7 +71,7 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         binding.imgBackSearchView.bringToFront()
         binding.imgBackSearchView.isClickable = true
         binding.imgBackSearchView.setOnClickListener {
-            Log.d("resultSearch", "뒤로가기 버튼 눌림")
+            Timber.d("resultSearch 뒤로가기 버튼 눌림")
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.apply {
                 replace(

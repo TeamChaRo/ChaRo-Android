@@ -4,7 +4,6 @@ package com.charo.android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -15,6 +14,7 @@ import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.KeyboardVisibilityUtils
 import com.charo.android.presentation.util.dpToPx
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class SignUpEmailFragment :
@@ -84,7 +84,7 @@ class SignUpEmailFragment :
 
                 override fun afterTextChanged(s: Editable?) {
                     signUpViewModel.data.observe(viewLifecycleOwner) {
-                        Log.d("certification", it.toString())
+                        Timber.d("certification ${it.toString()}")
                         if (s.toString() != it) {
                             textInputEmailNum.error = "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요."
                         } else {
@@ -128,13 +128,13 @@ class SignUpEmailFragment :
                         textSignUpNext.setOnClickListener {
                             signUpViewModel.emailCertification(etSignUpBlank.text.toString())
                             signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
-                            Log.d("되라",etSignUpBlank.text.toString())
+                            Timber.d("되라 ${etSignUpBlank.text.toString()}")
                             clEmailNum.isVisible = true
                         }
                         textSignUpNextFocus.setOnClickListener {
                             signUpViewModel.emailCertification(etSignUpBlank.text.toString())
                             signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
-                            Log.d("되라",etSignUpBlank.text.toString())
+                            Timber.d("되라 ${etSignUpBlank.text.toString()}")
                             clEmailNum.isVisible = true
                         }
                     tvEmailResend.setOnClickListener {

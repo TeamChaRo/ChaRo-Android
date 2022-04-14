@@ -1,10 +1,9 @@
 package com.charo.android.presentation.ui.signin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.charo.android.R
 import com.charo.android.data.model.request.signin.RequestSignInData
@@ -13,10 +12,10 @@ import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
 import com.charo.android.presentation.ui.signup.SignUpActivity
 import com.charo.android.presentation.util.SharedInformation
-
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -40,7 +39,7 @@ class SignInActivity : AppCompatActivity() {
                 val id = "3"
                 SharedInformation.saveSocialId(this, id)
                 SharedInformation.setEmail(this, binding.etSigninId.text.toString())
-                Log.d("etSigninPw", binding.etSigninPw.text.toString())
+                Timber.d("etSigninPw ${binding.etSigninPw.text.toString()}")
                 val requestSignInData = RequestSignInData(
                     userEmail = binding.etSigninId.text.toString(),
                     password = binding.etSigninPw.text.toString()
@@ -79,16 +78,14 @@ class SignInActivity : AppCompatActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
         OnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Log.w(
-                    "FirebaseTAG",
-                    "Fetching FCM registration token failed",
-                    task.exception
+                Timber.w(
+                    "FirebaseTAG Fetching FCM registration token failed ${task.exception}"
                 )
                 return@OnCompleteListener
             } else {
                 val token = task.result
                 val msg = getString(R.string.msg_token_fmt, token)
-                Log.d("Firebase Success", msg)
+                Timber.d("Firebase Success $msg")
             }
         })
     }

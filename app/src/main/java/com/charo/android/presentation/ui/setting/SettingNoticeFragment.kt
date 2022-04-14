@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.setting
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.charo.android.R
 import com.charo.android.data.datasource.local.setting.LocalSettingNoticeDataSourceImpl
@@ -10,6 +9,7 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.setting.adapter.SettingNoticeAdapter
 import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class SettingNoticeFragment : BaseFragment<FragmentSettingNoticeBinding>(R.layout.fragment_setting_notice) {
@@ -25,7 +25,7 @@ class SettingNoticeFragment : BaseFragment<FragmentSettingNoticeBinding>(R.layou
 
     private fun initView(){
         val settingNoticeData = LocalSettingNoticeDataSourceImpl().fetchData()
-        Log.d("settingNotice", settingNoticeData.toString())
+        Timber.d("settingNotice $settingNoticeData")
         settingNoticeAdapter = SettingNoticeAdapter()
         binding.rcSettingNotice.adapter = settingNoticeAdapter
         settingNoticeAdapter.setNoticeData(settingNoticeData)

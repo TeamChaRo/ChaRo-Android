@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.detail
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.charo.android.presentation.ui.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import timber.log.Timber
 
 class DetailLikeFragment : BottomSheetDialogFragment() {
     private var _binding: DialogDetailLikeBinding? = null
@@ -51,7 +51,7 @@ class DetailLikeFragment : BottomSheetDialogFragment() {
         _binding = DialogDetailLikeBinding.inflate(layoutInflater, container, false)
 
         if (viewModel.userData.value == null) {
-            Log.d("viewModel.userData", "execute")
+            Timber.d("viewModel.userData execute")
             viewModel.getLikes(viewModel.postId.value!!)
         }
 

@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.detail
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.charo.android.R
 import com.charo.android.databinding.FragmentDetailMapBinding
 import com.charo.android.hidden.Hidden
 import com.skt.Tmap.*
+import timber.log.Timber
 
 class DetailMapFragment : Fragment() {
     private var _binding: FragmentDetailMapBinding? = null
@@ -56,7 +56,7 @@ class DetailMapFragment : Fragment() {
     }
 
     private fun setCenter(tMapView: TMapView) {
-        Log.d("DetailMapFragment", "setCenter Called")
+        Timber.d("DetailMapFragment setCenter Called")
         val info: TMapInfo = tMapView.getDisplayTMapInfo(pointList)
         tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
         tMapView.zoomLevel = info.tMapZoomLevel

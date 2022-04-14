@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.signup
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSignUpPassWordBinding
@@ -11,6 +10,7 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.KeyboardVisibilityUtils
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 import java.util.regex.Pattern
 
 
@@ -48,7 +48,7 @@ class SignUpPassWordFragment :
 
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputPaasword.error = "영문과 숫자만 사용해 주세요."
-                        Log.d("password", Pattern.matches(emailPattern, s.toString()).toString())
+                        Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
                     } else {
                         textInputPaasword.error = null
                         textInputPaasword.isErrorEnabled = false

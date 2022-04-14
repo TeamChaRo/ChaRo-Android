@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.mypage
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import com.charo.android.presentation.ui.mypage.my.MyBottomFragment
 import com.charo.android.presentation.ui.mypage.my.MyTopFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 // 마이페이지 프래그먼트(본체)
 class MyPageFragment : Fragment() {
@@ -64,7 +64,7 @@ class MyPageFragment : Fragment() {
 
     class MyObserver: Observer<UserInformation> {
         override fun onChanged(t: UserInformation?) {
-            Log.d("mlog: ㅎㅇㅎㅇ", t?.nickname.toString())
+            Timber.d("mlog: ㅎㅇㅎㅇ ${t?.nickname.toString()}")
         }
     }
 }

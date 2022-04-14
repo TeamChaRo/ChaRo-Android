@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.more
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -19,6 +18,7 @@ import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {
@@ -35,7 +35,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
         userId = arguments?.getString("userId").toString()
         moreViewAdapter = MoreViewAdapter(userId, links)
-        Log.d("userIdeas", userId)
+        Timber.d("userIdeas $userId")
 
         initSpinner()
         clickBackButton(userId)
@@ -52,7 +52,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
-                Log.d("스피드확인", "얘는 데이터 추가")
+                Timber.d("스피드확인 : 얘는 데이터 추가")
                 moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
             }
 
@@ -88,7 +88,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
-                Log.d("스피드확인", "얘는 데이터 추가")
+                Timber.d("스피드확인 : 얘는 데이터 추가")
                 moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
             }
 
@@ -157,7 +157,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     //스피너 position에 따라 데이터 초기화
     private fun removeData(){
         moreViewModel.position.observe(viewLifecycleOwner){
-            Log.d("스피드확인", "얘는 데이터 삭제")
+            Timber.d("스피드확인 : 얘는 데이터 삭제")
 
         }
     }
@@ -209,7 +209,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                             }
                         }
                         moreViewAdapter.removeLoading()
-                        Log.d("infinite", "무한 스크롤 완")
+                        Timber.d("infinite 무한 스크롤 완")
                     }
                 }
             }
@@ -218,7 +218,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     private fun moreViewInfiniteLoadData() {
         val userEmail = SharedInformation.getEmail(requireActivity())
-        Log.d("userEmailss", userEmail)
+        Timber.d("userEmailss $userEmail")
         val lastId = moreViewModel.lastId.value!!.lastId
         val lastCount = moreViewModel.lastId.value!!.lastCount
         if (sharedViewModel.num.value == 0) {
@@ -235,7 +235,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     private fun moreNewViewInfiniteLoadData() {
         val userEmail = SharedInformation.getEmail(requireActivity())
-        Log.d("userEmailss", userEmail)
+        Timber.d("userEmailss $userEmail")
         val lastId = moreViewModel.lastId.value!!.lastId
         val lastCount = moreViewModel.lastId.value!!.lastCount
         if (sharedViewModel.num.value == 0) {

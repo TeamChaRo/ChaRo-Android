@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import com.charo.android.R
 import com.charo.android.databinding.ActivityDetailBinding
 import com.skt.Tmap.TMapPoint
 import com.skt.Tmap.TMapView
+import timber.log.Timber
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -68,8 +68,8 @@ class DetailActivity : AppCompatActivity() {
 
 //        var userId: String = intent.getStringExtra("userId").toString()
 //        var postId: Int = intent.getIntExtra("postId", 0)
-//        Log.d("log", userId)
-//        Log.d("log", postId.toString())
+//        Timber.d("log", userId)
+//        Timber.d("log", postId.toString())
 
 //        tMapView 생성부분
 //        val tMapView = TMapView(this)
@@ -91,7 +91,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     fun openFragment(num: Int) {
-        Log.d("openFragment", "called")
+        Timber.d("openFragment called")
         val transaction = supportFragmentManager.beginTransaction()
         when (num) {
             0 -> transaction.replace(R.id.detail_fragment, DetailFragment())
@@ -113,7 +113,7 @@ class DetailActivity : AppCompatActivity() {
 //            ) {
 //                if (response.isSuccessful) {
 //                    val data = response.body()!!.data
-//                    Log.d("server connect", "success")
+//                    Timber.d("server connect success")
 //
 //                    // view에 binding
 //                    // image는 나중에
@@ -183,13 +183,13 @@ class DetailActivity : AppCompatActivity() {
 ////                        inputLatiList.add(data!![0].latitude[i])
 ////                        inputLongList.add(data!![0].longtitude[i])
 ////
-////                        Log.d("위도", data!![0].latitude[i])
-////                        Log.d("경도", data!![0].longtitude[i])
+////                        Timber.d("위도", data!![0].latitude[i])
+////                        Timber.d("경도", data!![0].longtitude[i])
 ////                    }
 //                    inputLatiList.addAll(data!![0].latitude)
 //                    inputLongList.addAll(data!![0].longtitude)
 //                    if (data!![0].isParking) {
-//                        Log.d("uhhaha",data!![0].isParking.toString())
+//                        Timber.d("uhhaha",data!![0].isParking.toString())
 //                        setAttributeByFlag(
 //                            binding.imgDetailParkingYes,
 //                            binding.tvDetailParkingYes,
@@ -201,7 +201,7 @@ class DetailActivity : AppCompatActivity() {
 //                            false
 //                        )
 //                    } else {
-//                        Log.d("uhhaha",data!![0].isParking.toString())
+//                        Timber.d("uhhaha",data!![0].isParking.toString())
 //                        setAttributeByFlag(
 //                            binding.imgDetailParkingYes,
 //                            binding.tvDetailParkingYes,
@@ -238,11 +238,11 @@ class DetailActivity : AppCompatActivity() {
 //                    )
 //                    binding.tvDetailInformationText.text = data!![0].courseDesc
 //                } else {
-//                    Log.d("server connect", "fail")
-//                    Log.d("server connect", "${response.errorBody()}")
-//                    Log.d("server connect", "${response.message()}")
-//                    Log.d("server connect", "${response.code()}")
-//                    Log.d("server connect", "${response.raw().request.url}")
+//                    Timber.d("server connect", "fail")
+//                    Timber.d("server connect", "${response.errorBody()}")
+//                    Timber.d("server connect", "${response.message()}")
+//                    Timber.d("server connect", "${response.code()}")
+//                    Timber.d("server connect", "${response.raw().request.url}")
 //                    onBackPressed()
 //                }
 //                initDetailImageItem()
@@ -251,7 +251,7 @@ class DetailActivity : AppCompatActivity() {
 //            }
 //
 //            override fun onFailure(call: Call<ResponseDetailData>, t: Throwable) {
-//                Log.d("server connect", "error:${t.message}")
+//                Timber.d("server connect", "error:${t.message}")
 //                onBackPressed()
 //            }
 //        })
@@ -275,7 +275,7 @@ class DetailActivity : AppCompatActivity() {
 //            detailViewPagerAdapter.imageList.add(DetailViewpagerImageInfo(inputImageList[i]))
 //        }
 //        detailViewPagerAdapter.notifyDataSetChanged()
-//        Log.d("detailViewPagerAdapter.itemCount", detailViewPagerAdapter.itemCount.toString())
+//        Timber.d("detailViewPagerAdapter.itemCount", detailViewPagerAdapter.itemCount.toString())
     }
 
     private fun showDriveCourseInformationTextLenght() {
@@ -288,7 +288,7 @@ class DetailActivity : AppCompatActivity() {
 //        binding.imgDetailHeart.setOnClickListener() {
 //            val heart = binding.imgDetailHeart
 //            if (heart.isSelected) {
-//                Log.d("log", "heart is selected")
+//                Timber.d("log", "heart is selected")
 //                var likeCount = Integer.parseInt(binding.tvDetailHeartCount.text.toString()) - 1
 //                binding.tvDetailHeartCount.text = likeCount.toString()
 //            } else {
@@ -310,18 +310,18 @@ class DetailActivity : AppCompatActivity() {
 //                    response: Response<ResponseDetailLikeData>
 //                ) {
 //                    if(response.isSuccessful) {
-//                        Log.d("server connect", "success")
+//                        Timber.d("server connect", "success")
 //                    } else{
-//                        Log.d("server connect", "fail")
-//                        Log.d("server connect", "${response.errorBody()}")
-//                        Log.d("server connect", "${response.message()}")
-//                        Log.d("server connect", "${response.code()}")
-//                        Log.d("server connect", "${response.raw().request.url}")
+//                        Timber.d("server connect", "fail")
+//                        Timber.d("server connect", "${response.errorBody()}")
+//                        Timber.d("server connect", "${response.message()}")
+//                        Timber.d("server connect", "${response.code()}")
+//                        Timber.d("server connect", "${response.raw().request.url}")
 //                    }
 //                }
 //
 //                override fun onFailure(call: Call<ResponseDetailLikeData>, t: Throwable) {
-//                    Log.d("server connect", "error:${t.message}")
+//                    Timber.d("server connect", "error:${t.message}")
 //                }
 //            })
 //        }
@@ -331,7 +331,7 @@ class DetailActivity : AppCompatActivity() {
 //        binding.imgDetailSave.setOnClickListener() {
 //            val save = binding.imgDetailSave
 //            if (save.isSelected) {
-//                Log.d("log", "save is selected")
+//                Timber.d("log", "save is selected")
 //            }
 //            save.isSelected = !save.isSelected
 //
@@ -348,18 +348,18 @@ class DetailActivity : AppCompatActivity() {
 //                    response: Response<ResponseDetailSaveData>
 //                ) {
 //                    if(response.isSuccessful){
-//                        Log.d("server connect", "success")
+//                        Timber.d("server connect", "success")
 //                    } else {
-//                        Log.d("server connect", "fail")
-//                        Log.d("server connect", "${response.errorBody()}")
-//                        Log.d("server connect", "${response.message()}")
-//                        Log.d("server connect", "${response.code()}")
-//                        Log.d("server connect", "${response.raw().request.url}")
+//                        Timber.d("server connect", "fail")
+//                        Timber.d("server connect", "${response.errorBody()}")
+//                        Timber.d("server connect", "${response.message()}")
+//                        Timber.d("server connect", "${response.code()}")
+//                        Timber.d("server connect", "${response.raw().request.url}")
 //                    }
 //                }
 //
 //                override fun onFailure(call: Call<ResponseDetailSaveData>, t: Throwable) {
-//                    Log.d("server connect", "error:${t.message}")
+//                    Timber.d("server connect", "error:${t.message}")
 //                }
 //            })
 //        }
@@ -389,7 +389,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun findPathTest(tMapView: TMapView) {
-//        Log.d("log", "findPathTest")
+//        Timber.d("log", "findPathTest")
 //        // 순서
 //        // 1. 좌표를 배열에 추가
 //        addMapPointToList()
@@ -400,7 +400,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun addMapPointToList() {
-//        Log.d("log", "addMapPointToList")
+//        Timber.d("log", "addMapPointToList")
 //        for (i in 0 until inputLatiList.size) {
 //            var inputLatitude: String = inputLatiList[i]
 //            var inputLongitude: String = inputLongList[i]
@@ -414,7 +414,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun findPath(tMapView: TMapView) {
-//        Log.d("log", "findPath")
+//        Timber.d("log", "findPath")
 //        for (i in 0 until inputMapPointList.size - 1) {
 //            var flag: Boolean = true
 //            if (i != 0 && i % 2 == 0) {
@@ -436,7 +436,7 @@ class DetailActivity : AppCompatActivity() {
         cnt: Int,
         flag: Boolean
     ) {
-//        Log.d("log", "drawPath")
+//        Timber.d("log", "drawPath")
 //        val thread: Thread = Thread() {
 //            try {
 //                val tMapPolyLine: TMapPolyLine = TMapData().findPathData(start, end)
@@ -461,7 +461,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun mark(tMapView: TMapView) {
-//        Log.d("log", "mark")
+//        Timber.d("log", "mark")
 //        for (i in 0 until inputMapPointList.size) {
 //            val marker = TMapMarkerItem()
 //            val mapPoint = inputMapPointList[i]

@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +13,7 @@ import com.skt.Tmap.TMapPolyLine
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class DetailViewModel : ViewModel() {
     private var _postId = MutableLiveData<Int>()
@@ -50,23 +50,22 @@ class DetailViewModel : ViewModel() {
                 response: Response<ResponseDetailData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : DetailView", "success")
+                    Timber.d("server connect : DetailView success")
                     val data = response.body()?.data!!
                     _detailData.value = DetailData(postId, title, date, region, data)
                 } else {
-                    Log.d("server connect : DetailView", "error")
-                    Log.d("server connect : DetailView", "$response.errorBody()")
-                    Log.d("server connect : DetailView", response.message())
-                    Log.d("server connect : DetailView", "${response.code()}")
-                    Log.d(
-                        "server connect : DetailView",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : DetailView error")
+                    Timber.d("server connect : DetailView ${response.errorBody()}")
+                    Timber.d("server connect : DetailView ${response.message()}")
+                    Timber.d("server connect : DetailView ${response.code()}")
+                    Timber.d(
+                        "server connect : DetailView ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseDetailData>, t: Throwable) {
-                Log.d("server connect : DetailView", "error: ${t.message}")
+                Timber.d("server connect : DetailView error: ${t.message}")
             }
         })
     }
@@ -89,21 +88,20 @@ class DetailViewModel : ViewModel() {
                 response: Response<ResponseDetailLikeAndSave>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : DetailView Like", "success")
+                    Timber.d("server connect : DetailView Like success")
                 } else {
-                    Log.d("server connect : DetailView Like", "error")
-                    Log.d("server connect : DetailView Like", "$response.errorBody()")
-                    Log.d("server connect : DetailView Like", response.message())
-                    Log.d("server connect : DetailView Like", "${response.code()}")
-                    Log.d(
-                        "server connect : DetailView Like",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : DetailView Like error")
+                    Timber.d("server connect : DetailView Like ${response.errorBody()}")
+                    Timber.d("server connect : DetailView Like ${response.message()}")
+                    Timber.d("server connect : DetailView Like ${response.code()}")
+                    Timber.d(
+                        "server connect : DetailView Like ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseDetailLikeAndSave>, t: Throwable) {
-                Log.d("server connect : DetailView Like", "error: ${t.message}")
+                Timber.d("server connect : DetailView Like error: ${t.message}")
             }
         })
     }
@@ -122,21 +120,20 @@ class DetailViewModel : ViewModel() {
                 response: Response<ResponseDetailLikeAndSave>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : DetailView Save", "success")
+                    Timber.d("server connect : DetailView Save success")
                 } else {
-                    Log.d("server connect : DetailView Save", "error")
-                    Log.d("server connect : DetailView Save", "$response.errorBody()")
-                    Log.d("server connect : DetailView Save", response.message())
-                    Log.d("server connect : DetailView Save", "${response.code()}")
-                    Log.d(
-                        "server connect : DetailView Save",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : DetailView Save error")
+                    Timber.d("server connect : DetailView Save ${response.errorBody()}")
+                    Timber.d("server connect : DetailView Save ${response.message()}")
+                    Timber.d("server connect : DetailView Save ${response.code()}")
+                    Timber.d(
+                        "server connect : DetailView Save ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseDetailLikeAndSave>, t: Throwable) {
-                Log.d("server connect : DetailView Save", "error: ${t.message}")
+                Timber.d("server connect : DetailView Save error: ${t.message}")
             }
         })
     }
@@ -145,10 +142,9 @@ class DetailViewModel : ViewModel() {
         val call = com.charo.android.data.api.ApiService.detailViewService.getLikes(postId, Hidden.userId)
         call.enqueueUtil(
             onSuccess = {
-                Log.d("Current View", "DetailView Likes")
-                Log.d(
-                    "server connect : DetailView Likes List size",
-                    it.data.size.toString()
+                Timber.d("Current View DetailView Likes")
+                Timber.d(
+                    "server connect : DetailView Likes List size ${it.data.size.toString()}"
                 )
                 _userData.value = it.data
             }

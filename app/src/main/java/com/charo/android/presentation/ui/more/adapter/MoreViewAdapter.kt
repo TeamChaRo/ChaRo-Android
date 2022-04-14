@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.more.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -11,6 +10,7 @@ import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.more.MoreViewFragment
+import timber.log.Timber
 
 class MoreViewAdapter(
     val userId: String,
@@ -105,7 +105,7 @@ class MoreViewAdapter(
     }
 
     fun removeHomeTrendDrive(){
-        Log.d("moreDataRemove", "삭제되는 중")
+        Timber.d("moreDataRemove 삭제되는 중")
         this.moreData.clear()
         notifyDataSetChanged()
 

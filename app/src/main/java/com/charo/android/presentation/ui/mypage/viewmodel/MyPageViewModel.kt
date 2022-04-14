@@ -1,16 +1,14 @@
 package com.charo.android.presentation.ui.mypage.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-
 import com.charo.android.data.model.mypage.Post
 import com.charo.android.data.model.mypage.UserInformation
-
 import com.charo.android.domain.usecase.mypage.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MyPageViewModel(
     private val getRemoteLikePostUseCase: GetRemoteLikePostUseCase,
@@ -71,7 +69,7 @@ class MyPageViewModel(
                 _savedLikeLastCount = it.savedPost.lastCount
                 _savedLikePostList.value = it.savedPost.drive
             }.onFailure {
-                Log.d(TAG + "getLikePost()", it.message.toString())
+                Timber.d("$TAG getLikePost() ${it.message.toString()}")
             }
         }
     }
@@ -89,7 +87,7 @@ class MyPageViewModel(
                 _savedNewLastId = it.savedPost.lastId
                 _savedNewPostList.value = it.savedPost.drive
             }.onFailure {
-                Log.d(TAG + "getNewPost()", it.message.toString())
+                Timber.d("$TAG getNewPost() ${it.message.toString()}")
             }
         }
     }
@@ -107,7 +105,7 @@ class MyPageViewModel(
                 _writtenLikeLastCount = it.lastCount
                 _writtenLikePostList.value?.addAll(it.drive)
             }.onFailure {
-                Log.d(TAG + "getMoreWrittenLikePost()", it.message.toString())
+                Timber.d("$TAG getMoreWrittenLikePost() ${it.message.toString()}")
             }
         }
     }
@@ -120,7 +118,7 @@ class MyPageViewModel(
                 _writtenNewLastId = it.lastId
                 _writtenNewPostList.value?.addAll(it.drive)
             }.onFailure {
-                Log.d(TAG + "getMoreWrittenNewPost()", it.message.toString())
+                Timber.d("$TAG getMoreWrittenNewPost() ${it.message.toString()}")
             }
         }
     }
@@ -134,7 +132,7 @@ class MyPageViewModel(
                 _savedLikeLastCount = it.lastCount
                 _savedLikePostList.value?.addAll(it.drive)
             }.onFailure {
-                Log.d(TAG + "getMoreSavedLikePost()", it.message.toString())
+                Timber.d("$TAG getMoreSavedLikePost() ${it.message.toString()}")
             }
         }
     }
@@ -147,7 +145,7 @@ class MyPageViewModel(
                 _savedNewLastId = it.lastId
                 _savedNewPostList.value?.addAll(it.drive)
             }.onFailure {
-                Log.d(TAG + "getMoreSavedNewPost()", it.message.toString())
+                Timber.d("$TAG getMoreSavedNewPost() ${it.message.toString()}")
             }
         }
     }

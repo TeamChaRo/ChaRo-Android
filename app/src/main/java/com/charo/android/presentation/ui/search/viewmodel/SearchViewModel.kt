@@ -1,18 +1,16 @@
 package com.charo.android.presentation.ui.search.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.data.model.request.search.RequestSearchViewData
-import com.charo.android.domain.model.StatusCode
 import com.charo.android.domain.model.search.SearchDrive
 import com.charo.android.domain.usecase.home.PostRemoteHomeLikeUseCase
 import com.charo.android.domain.usecase.search.GetRemoteSearchUseCase
-
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SearchViewModel(
     private val getRemoteSearchUseCase: GetRemoteSearchUseCase,
@@ -40,12 +38,12 @@ class SearchViewModel(
             runCatching { getRemoteSearchUseCase.execute(requestSearchViewData) }
                 .onSuccess {
                     _search.value = it
-                    Log.d("search", "서버 통신 성공!")
-                    Log.d("search", _search.value.toString())
+                    Timber.d("search 서버 통신 성공!")
+                    Timber.d("search_${search.value.toString()}")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("search", "서버 통신 실패")
+                    Timber.d("search 서버 통신 실패")
                 }
         }
     }
@@ -56,11 +54,11 @@ class SearchViewModel(
         viewModelScope.launch {
             runCatching { postRemoteHomeLikeUseCase.execute(requestHomeLikeData) }
                 .onSuccess {
-                    Log.d("searchLike", "서버 통신 성공!")
+                    Timber.d("searchLike 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("searchLike", "서버 통신 실패패!")
+                    Timber.d("searchLike 서버 통신 실패!")
                 }
         }
 

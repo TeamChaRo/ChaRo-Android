@@ -1,13 +1,13 @@
 package com.charo.android.presentation.ui.onboarding
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.charo.android.databinding.ActivityOnBoardingBinding
 import com.charo.android.presentation.util.SharedInformation
+import timber.log.Timber
 
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -17,8 +17,8 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d("sharedOn", SharedInformation.getSocialId(this))
-        Log.d("sharedOn", SharedInformation.getEmail(this))
+        Timber.d("sharedOn ${SharedInformation.getSocialId(this)}")
+        Timber.d("sharedOn ${SharedInformation.getEmail(this)}")
 
         val pagerAdapter = OnBoardingPagerAdapter(this)
         binding.vpOnboarding.adapter = pagerAdapter

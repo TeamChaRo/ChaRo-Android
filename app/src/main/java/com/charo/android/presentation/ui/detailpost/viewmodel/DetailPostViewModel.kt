@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.detailpost.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,7 @@ import com.charo.android.domain.usecase.follow.PostFollowUseCase
 import com.charo.android.domain.usecase.interaction.PostLikeUseCase
 import com.charo.android.domain.usecase.interaction.PostSaveUseCase
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class DetailPostViewModel(
     private val getDetailPostUseCase: GetDetailPostUseCase,
@@ -58,7 +58,7 @@ class DetailPostViewModel(
                 _isStored.value = it.isStored
                 _likesCount.value = it.likesCount
             }.onFailure {
-                Log.e("mlog: DetailPostViewModel::getDetailPost()", it.message.toString())
+                Timber.e("mlog: DetailPostViewModel::getDetailPost() ${it.message.toString()}")
             }
         }
     }
@@ -74,7 +74,7 @@ class DetailPostViewModel(
                     updateLikesCount()
                 }
             }.onFailure {
-                Log.e("mlog: DetailPostViewModel::postLike()", it.message.toString())
+                Timber.e("mlog: DetailPostViewModel::postLike() ${it.message.toString()}")
             }
         }
     }
@@ -88,7 +88,7 @@ class DetailPostViewModel(
                     _isStored.value = (isStored.value?.plus(1))?.rem(2)
                 }
             }.onFailure {
-                Log.e("mlog: DetailPostViewModel::postSave()", it.message.toString())
+                Timber.e("mlog: DetailPostViewModel::postSave() ${it.message.toString()}")
             }
         }
     }
@@ -107,7 +107,7 @@ class DetailPostViewModel(
             }.onSuccess {
                 _likeUserList.value = it
             }.onFailure {
-                Log.e("mlog: DetailPostViewModel::getDetailPostLikeUserListData()", it.message.toString())
+                Timber.e("mlog: DetailPostViewModel::getDetailPostLikeUserListData() ${it.message.toString()}")
             }
         }
     }
@@ -117,7 +117,7 @@ class DetailPostViewModel(
             kotlin.runCatching {
                 postFollowUseCase(userEmail, otherUserEmail)
             }.onFailure {
-                Log.e("mlog: DetailPostViewModel::postFollow", it.message.toString())
+                Timber.e("mlog: DetailPostViewModel::postFollow ${it.message.toString()}")
             }
         }
     }

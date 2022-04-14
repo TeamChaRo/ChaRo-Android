@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.mypage.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +12,7 @@ import com.charo.android.domain.usecase.mypage.GetRemoteMoreWrittenLikePostUseCa
 import com.charo.android.domain.usecase.mypage.GetRemoteMoreWrittenNewPostUseCase
 import com.charo.android.domain.usecase.mypage.GetRemoteNewPostUseCase
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class OtherMyPageViewModel(
     private val getRemoteLikePostUseCase: GetRemoteLikePostUseCase,
@@ -67,7 +67,7 @@ class OtherMyPageViewModel(
                 _writtenLikeLastCount = it.writtenPost.lastCount
                 _writtenLikePostList.value = it.writtenPost.drive
             }.onFailure {
-                Log.d(TAG + "getLikePost()", it.message.toString())
+                Timber.d("$TAG getLikePost() ${it.message.toString()}")
             }
         }
     }
@@ -81,7 +81,7 @@ class OtherMyPageViewModel(
                 _writtenNewLastId = it.writtenPost.lastId
                 _writtenNewPostList.value = it.writtenPost.drive
             }.onFailure {
-                Log.d(TAG + "getNewPost()", it.message.toString())
+                Timber.d("$TAG getNewPost() ${it.message.toString()}")
             }
         }
     }
@@ -99,7 +99,7 @@ class OtherMyPageViewModel(
                 _writtenLikeLastCount = it.lastCount
                 _writtenLikePostList.value?.addAll(it.drive)
             }.onFailure {
-                Log.d(TAG + "getMoreWrittenLikePost()", it.message.toString())
+                Timber.d("$TAG getMoreWrittenLikePost() ${it.message.toString()}")
             }
         }
     }
@@ -112,7 +112,7 @@ class OtherMyPageViewModel(
                 _writtenNewLastId = it.lastId
                 _writtenNewPostList.value?.addAll(it.drive)
             }.onFailure {
-                Log.d(TAG + "getMoreWrittenNewPost()", it.message.toString())
+                Timber.d("$TAG getMoreWrittenNewPost() ${it.message.toString()}")
             }
         }
     }
@@ -124,7 +124,7 @@ class OtherMyPageViewModel(
             }.onSuccess {
                 _isFollow.value = it
             }.onFailure {
-                Log.e(TAG + "postFollow()", it.message.toString())
+                Timber.d("$TAG postFollow() ${it.message.toString()}")
             }
         }
     }

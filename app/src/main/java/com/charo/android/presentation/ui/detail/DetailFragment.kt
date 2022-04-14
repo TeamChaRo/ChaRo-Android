@@ -5,14 +5,15 @@ import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.charo.android.R
@@ -22,8 +23,8 @@ import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.enqueueUtil
-
 import com.skt.Tmap.*
+import timber.log.Timber
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
@@ -65,7 +66,7 @@ class DetailFragment : Fragment() {
         // ViewModel LiveData
         viewModel.setPostId(postId)
         if (viewModel.detailData.value == null) {
-            Log.d("viewModel", "getData() execute")
+            Timber.d("viewModel getData() execute")
             viewModel.getData(postId, title, date, region)
         }
 
@@ -83,7 +84,7 @@ class DetailFragment : Fragment() {
 
         val imageUrl = (activity as DetailActivity).imageUrl
         viewModel.detailData.observe(viewLifecycleOwner, {
-            Log.d("detail", "observed")
+            Timber.d("detail observed")
             binding.detailData = viewModel
             if (viewModel.detailData.value != null) {
                 if (viewPagerAdapter.itemList.isEmpty()) {
@@ -180,7 +181,7 @@ class DetailFragment : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                Log.e("Selected_Page", position.toString())
+                Timber.e("Selected_Page  ${position.toString()}")
                 binding.tvDetailViewpagerImage.text =
                     "${position + 1}/${viewPagerAdapter.itemList.size}"
             }
@@ -209,7 +210,7 @@ class DetailFragment : Fragment() {
             startActivity(chooser)
 
         } catch (ignored: ActivityNotFoundException) {
-            Log.d("test", "ignored : $ignored")
+            Timber.d("test ignored : $ignored")
         }
     }
 
@@ -256,8 +257,8 @@ class DetailFragment : Fragment() {
     private fun addList(tMapView: TMapView) {
         if (pointList.isEmpty()) {
             viewModel.detailData.value!!.data.course.forEach {
-                Log.d("latitude", it.latitude)
-                Log.d("longitude", it.longitude)
+                Timber.d("latitude  ${it.latitude}")
+                Timber.d("longitude  ${it.longitude}")
                 pointList.add(TMapPoint(it.latitude.toDouble(), it.longitude.toDouble()))
             }
         }
@@ -266,8 +267,8 @@ class DetailFragment : Fragment() {
 
     private fun setCenter(tMapView: TMapView) {
         val info: TMapInfo = tMapView.getDisplayTMapInfo(pointList)
-        Log.d("info.tMapPoint.longitude", info.tMapPoint.longitude.toString())
-        Log.d("info.tMapPoint.latitude", info.tMapPoint.latitude.toString())
+        Timber.d("info.tMapPoint.longitude  ${info.tMapPoint.longitude.toString()}")
+        Timber.d("info.tMapPoint.latitude  ${info.tMapPoint.latitude.toString()}")
         tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
         tMapView.zoomLevel = info.tMapZoomLevel
     }
@@ -334,15 +335,15 @@ class DetailFragment : Fragment() {
         val userEmail: String
         val nickname: String
         val isMyPage: Boolean
-        Log.d("author", viewModel.detailData.value?.data?.author.toString())
+        Timber.d("author  ${viewModel.detailData.value?.data?.author.toString()}")
         if (viewModel.detailData.value?.data?.author == Hidden.nickName) {
-            Log.d("DetailFragment", "true")
+            Timber.d("DetailFragment true")
             isMyPage = true
             userEmail = Hidden.userId
             nickname = Hidden.nickName
             intent.putExtra("nickname", nickname)
         } else {
-            Log.d("DetailFragment", "false")
+            Timber.d("DetailFragment false")
             isMyPage = false
             userEmail = Hidden.otherUserEmail
             nickname = Hidden.otherNickname
@@ -359,11 +360,11 @@ class DetailFragment : Fragment() {
             setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.detail_menu_edit -> {
-                        Log.d("edit", "clicked")
+                        Timber.d("edit clicked")
                         true
                     }
                     R.id.detail_menu_delete -> {
-                        Log.d("delete", "clicked")
+                        Timber.d("delete clicked")
                         deletePost()
                         true
                     }
@@ -389,7 +390,7 @@ class DetailFragment : Fragment() {
                     )
                     call.enqueueUtil(
                         onSuccess = {
-                            Log.d("deletePost", "execute")
+                            Timber.d("deletePost execute")
                             requireActivity().finish()
                         }
                     )

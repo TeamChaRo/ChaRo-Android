@@ -2,10 +2,10 @@ package com.charo.android.presentation.ui.detail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.charo.android.databinding.ActivityDetailImageBinding
+import timber.log.Timber
 
 class DetailImageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailImageBinding
@@ -29,7 +29,7 @@ class DetailImageActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                Log.d("Selected_Page", position.toString())
+                Timber.d("Selected_Page ${position.toString()}")
                 binding.tvDetailImage.text = "${position+1}/${viewPagerAdapter.itemList.size}"
             }
         })

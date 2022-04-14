@@ -168,4 +168,7 @@ dependencies {
 //google
     implementation("com.google.android.gms:play-services-auth:20.1.0")
 
+    // Timber
+    implementation ("com.jakewharton.timber:timber:4.7.1")
+
 }

@@ -6,12 +6,10 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.lifecycle.*
 import com.charo.android.domain.model.setting.ProfileChangeData
 import com.charo.android.domain.usecase.setting.*
 import com.charo.android.domain.usecase.signup.GetRemoteSignUpNickNameCheckUseCase
-
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -20,6 +18,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
+import timber.log.Timber
 
 class SettingViewModel(
     private val getRemoteProfileNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase,
@@ -112,12 +111,12 @@ class SettingViewModel(
             runCatching { getRemoteProfileNickNameCheckUseCase.execute(nickname) }
                 .onSuccess {
                    _profileNickName.value = it
-                    Log.d("nickname", "서버 통신 성공!")
-                    Log.d("nickname", it.toString())
+                    Timber.d("nickname 서버 통신 성공!")
+                    Timber.d("nickname $it")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("nickname", "서버 통신 실패!")
+                    Timber.d("nickname 서버 통신 실패!")
                 }
         }
     }
@@ -156,11 +155,11 @@ class SettingViewModel(
             )  }
                 .onSuccess {
                     _profileChangeData.value = it
-                    Log.d("profileImgChange", "서버 통신 성공")
+                    Timber.d("profileImgChange 서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("profileImgChange", "서버 통신 실패패")
+                    Timber.d("profileImgChange 서버 통신 실패패")
                }
         }
     }
@@ -181,10 +180,10 @@ class SettingViewModel(
             ) }
                 .onSuccess {
                     _profileChangeData.value = it
-                    Log.d("profileNickChange", "서버 통신 성공")
+                    Timber.d("profileNickChange 서버 통신 성공")
                 }
                 .onFailure {
-                    Log.d("profileNickChange", "서버 통신 실패")
+                    Timber.d("profileNickChange 서버 통신 실패")
                 }
         }
     }
@@ -206,11 +205,11 @@ class SettingViewModel(
             runCatching { withdrawalUserUseCase.execute(userEmail) }
                 .onSuccess {
                     withdrawalStatus.value = it.success
-                    Log.d("withdrawal", "서버 통신 성공!")
+                    Timber.d("withdrawal 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("withdrawal", "서버 통신 실패!")
+                    Timber.d("withdrawal 서버 통신 실패!")
                 }
         }
     }
@@ -221,12 +220,12 @@ class SettingViewModel(
             runCatching { profilePasswordCheckUseCase.execute(userEmail, password) }
                 .onSuccess {
                     _passwordCheck.value = it.success
-                    Log.d("passwordCheck", "서버 통신 성공!")
+                    Timber.d("passwordCheck 서버 통신 성공!")
                 }
                 .onFailure {
                     _passwordCheck.value = false
                     it.printStackTrace()
-                    Log.d("passwordCheck", "서버 통신 실패!")
+                    Timber.d("passwordCheck 서버 통신 실패!")
                 }
         }
     }
@@ -237,11 +236,11 @@ class SettingViewModel(
             runCatching { newPasswordRegisterUseCase.execute(userEmail, newPassword) }
                 .onSuccess {
                     _newPasswordRegister.value = it.success
-                    Log.d("newPassword", "서버 통신 성공!")
+                    Timber.d("newPassword 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("newPassword", "서버 통신 실패")
+                    Timber.d("newPassword 서버 통신 실패")
 
                 }
         }

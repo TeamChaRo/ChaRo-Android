@@ -1,13 +1,16 @@
 package com.charo.android.presentation.ui.home.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.domain.model.StatusCode
 import com.charo.android.domain.model.home.*
 import com.charo.android.domain.usecase.home.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class HomeViewModel(
     private val getRemoteBannerUseCase: GetRemoteBannerUseCase,
@@ -72,13 +75,13 @@ class HomeViewModel(
 
                 .onSuccess {
                     _banner.value = it
-                    Log.d("new", "서버 통신 성공!")
-                    Log.d("new", it.toString())
+                    Timber.d("new 서버 통신 성공!")
+                    Timber.d("new $it")
                 }
 
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("new", "서버 통신 실패")
+                    Timber.d("new 서버 통신 실패")
                 }
 
 
@@ -95,12 +98,12 @@ class HomeViewModel(
                             theme = it.homeNightDriveChip_2.toString()
                         )
                     }
-                    Log.d("customtheme", "서버 통신 성공!")
-                    Log.d("customtheme", _theme.value.toString())
+                    Timber.d("customtheme 서버 통신 성공!")
+                    Timber.d("customtheme ${_theme.value.toString()}")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("new", "서버 통신 실패")
+                    Timber.d("new 서버 통신 실패")
                 }
         }
     }
@@ -110,11 +113,11 @@ class HomeViewModel(
             runCatching { getRemoteLocalDriveUseCase.execute(userEmail) }
                 .onSuccess {
                     _localDrive.value = it
-                    Log.d("new", "서버 통신 성공!")
+                    Timber.d("new 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("new", "서버 통신 실패")
+                    Timber.d("new 서버 통신 실패")
                 }
         }
 
@@ -126,11 +129,11 @@ class HomeViewModel(
             runCatching { getRemoteTodayCharoDrive.execute(userEmail) }
                 .onSuccess {
                     _todayCharoDrive.value = it
-                    Log.d("new", "서버 통신 성공!")
+                    Timber.d("new 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("new", "서버 통신 실패")
+                    Timber.d("new 서버 통신 실패")
                 }
         }
     }
@@ -140,12 +143,12 @@ class HomeViewModel(
             runCatching { getRemoteTrendDrive.execute(userEmail) }
                 .onSuccess {
                     _trendDrive.value = it
-                    Log.d("trend", "서버 통신 성공!")
+                    Timber.d("trend 서버 통신 성공!")
 
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("trend", "서버 통신 실패")
+                    Timber.d("trend 서버 통신 실패")
 
                 }
 
@@ -159,11 +162,11 @@ class HomeViewModel(
             runCatching { postRemoteHomeLikeUseCase.execute(requestHomeLikeData) }
                 .onSuccess {
                     _statusCode.value = it
-                    Log.d("homeLike", "서버 통신 성공!")
+                    Timber.d("homeLike 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("homeLike", "서버 통신 실패패!")
+                    Timber.d("homeLike 서버 통신 실패!")
                 }
        }
     }

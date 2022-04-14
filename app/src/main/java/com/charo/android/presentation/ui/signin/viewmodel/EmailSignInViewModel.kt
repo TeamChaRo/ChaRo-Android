@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.signin.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,9 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.request.signin.RequestSignInData
 import com.charo.android.domain.model.signin.EmailSignInData
 import com.charo.android.domain.usecase.signin.GetRemoteEmailLoginUseCase
-
 import kotlinx.coroutines.launch
-import java.util.Arrays.toString
+import timber.log.Timber
 
 class EmailSignInViewModel(
     private val getRemoteEmailLoginUseCase: GetRemoteEmailLoginUseCase
@@ -29,12 +27,12 @@ class EmailSignInViewModel(
             runCatching { getRemoteEmailLoginUseCase.execute(requestSignInData) }
                 .onSuccess {
                    _emailSignInData.value = it
-                    Log.d("emailLogin", "서버 통신 성공")
-                    Log.d("emailLogin", it.toString())
+                    Timber.d("emailLogin 서버 통신 성공")
+                    Timber.d("emailLogin $it")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("emailLogin", "서버 통신 실패")
+                    Timber.d("emailLogin 서버 통신 실패")
                 }
         }
     }

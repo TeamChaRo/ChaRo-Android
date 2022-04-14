@@ -6,7 +6,6 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +22,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
+import timber.log.Timber
 
 class SignUpEmailViewModel(
     private val getRemoteSignUpEmailCheckUseCase: GetRemoteSignUpEmailCheckUseCase,
@@ -82,12 +82,12 @@ class SignUpEmailViewModel(
 
                 .onSuccess {
                     _success.value = it
-                    Log.d("signUp", "서버 통신 성공!")
-                    Log.d("signUp", it.toString())
+                    Timber.d("signUp 서버 통신 성공!")
+                    Timber.d("signUp $it")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("signUp", "서버 통신 실패")
+                    Timber.d("signUp 서버 통신 실패")
 
                 }
         }
@@ -99,12 +99,12 @@ class SignUpEmailViewModel(
             runCatching { getRemoteSignUpEmailCertificationUseCase.execute(userEmail) }
                 .onSuccess {
                     _data.value = it
-                    Log.d("signUps", "서버 통신 성공!")
-                    Log.d("signUp", it.toString())
+                    Timber.d("signUps 서버 통신 성공!")
+                    Timber.d("signUp $it")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("signUps", "서버 통신 실패!")
+                    Timber.d("signUps 서버 통신 실패!")
 
                 }
         }
@@ -115,12 +115,12 @@ class SignUpEmailViewModel(
             runCatching { getRemoteSignUpNickNameCheckUseCase.execute(nickname) }
                 .onSuccess {
                     _nickNameCheck.value = it
-                    Log.d("nickname", "서버 통신 성공!")
-                    Log.d("nickname", it.toString())
+                    Timber.d("nickname 서버 통신 성공!")
+                    Timber.d("nickname $it")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("nickname", "서버 통신 실패!")
+                    Timber.d("nickname 서버 통신 실패!")
                 }
         }
 
@@ -167,11 +167,11 @@ class SignUpEmailViewModel(
             )}
                 .onSuccess {
                     _registerSuccess.value = it
-                    Log.d("register", "서버 통신 성공!")
+                    Timber.d("register 서버 통신 성공!")
                 }
                 .onFailure {
-                    Log.d("register", "서버 통신 실패!")
-                    Log.d("register", it.printStackTrace().toString())
+                    Timber.d("register 서버 통신 실패!")
+                    Timber.d("register ${it.printStackTrace()}")
                 }
         }
     }
@@ -192,11 +192,11 @@ class SignUpEmailViewModel(
             }
                 .onSuccess {
                     _googleRegisterSuccess.value = it
-                    Log.d("googleSignUp", "구글 회원가입 성공!")
+                    Timber.d("googleSignUp 구글 회원가입 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("googleSignUp", "구글 회원가입 실패!")
+                    Timber.d("googleSignUp 구글 회원가입 실패!")
                 }
         }
     }
@@ -209,11 +209,11 @@ class SignUpEmailViewModel(
             ) }
                 .onSuccess {
                     _kakaoRegisterSuccess.value = it
-                    Log.d("kakaoSignUp", "카카오 회원가입 성공!")
+                    Timber.d("kakaoSignUp 카카오 회원가입 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("kakaoSignUp", "카카오 회원가입 실패!")
+                    Timber.d("kakaoSignUp 카카오 회원가입 실패!")
                 }
 
         }

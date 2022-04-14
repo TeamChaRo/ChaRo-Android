@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.alarm
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -56,7 +55,7 @@ class AlarmViewModel : ViewModel() {
 
     suspend fun getInitOtherAlarmData(userEmail: String) {
         _isServerConnecting.value = true
-        Log.d("from", "AlarmViewModel.getInitOtherAlarmData")
+
         val call = com.charo.android.data.api.ApiService.alarmViewService.getAlarmList(userEmail)
         call.enqueueUtil(
             onSuccess = {

@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.follow.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +8,7 @@ import com.charo.android.data.model.mypage.User
 import com.charo.android.domain.usecase.follow.GetRemoteFollowListUseCase
 import com.charo.android.domain.usecase.follow.PostFollowUseCase
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class FollowViewModel(
     private val getRemoteFollowListUseCase: GetRemoteFollowListUseCase,
@@ -54,7 +54,7 @@ class FollowViewModel(
                 _follower.value = it.follower
                 _following.value = it.following
             }.onFailure {
-                Log.e(TAG + "getFollowList()", it.message.toString())
+                Timber.e( "$TAG getFollowList() ${it.message.toString()}")
             }
         }
     }
@@ -64,7 +64,7 @@ class FollowViewModel(
             kotlin.runCatching {
                 postFollowUseCase(userEmail, otherUserEmail)
             }.onFailure {
-                Log.e(TAG + "postFollow()", it.message.toString())
+                Timber.e("$TAG postFollow() ${it.message.toString()}")
             }
         }
     }

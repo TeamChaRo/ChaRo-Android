@@ -3,24 +3,23 @@ package com.charo.android.presentation.ui.write
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.databinding.FragmentWriteMapLocationBinding
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.util.Define
-
 import com.skt.Tmap.TMapAddressInfo
 import com.skt.Tmap.TMapData
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapView
+import timber.log.Timber
 
 private const val LOCATION_NAME = "locationName"
 private const val LOCATION_ADDRESS = "locationAddress"
@@ -104,7 +103,7 @@ class WriteMapLocationFragment : Fragment() {
         }
 
         tmapdata.findAllPOI(locationName) { poiItem ->
-            Log.d("poi", poiItem[0].poiPoint.toString())
+            Timber.d("poi ${poiItem[0].poiPoint}")
             val marker = TMapMarkerItem()
             val mapPoint = poiItem[0].poiPoint
             marker.icon = bitmap
@@ -118,32 +117,32 @@ class WriteMapLocationFragment : Fragment() {
         binding.textLocationAddress.text = locationAddress
 
         tmapdata.findAllPOI(locationName) { poiItem ->
-            Log.d("poi", poiItem[0].poiPoint.toString())
+            Timber.d("poi ${poiItem[0].poiPoint}")
 
             var tmapPointCurrentSpot = poiItem[0].poiPoint
             if (poiItem[0].upperAddrName != null) {
                 locationAddress = poiItem[0].upperAddrName
-                Log.d("address upper", poiItem[0].upperAddrName)
+                Timber.d("address upper ${poiItem[0].upperAddrName}")
             }
             if (poiItem[0].middleAddrName != null) {
                 locationAddress += " " + poiItem[0].middleAddrName
-                Log.d("address middle", poiItem[0].middleAddrName)
+                Timber.d("address middle ${poiItem[0].middleAddrName}")
             }
             if (poiItem[0].lowerAddrName != null) {
                 locationAddress += " " + poiItem[0].lowerAddrName
-                Log.d("address lower", poiItem[0].lowerAddrName)
+                Timber.d("address lower ${poiItem[0].lowerAddrName}")
             }
             if (poiItem[0].detailAddrName != null) {
                 locationAddress += " " + poiItem[0].detailAddrName
-                Log.d("address detail", poiItem[0].detailAddrName)
+                Timber.d("address detail ${poiItem[0].detailAddrName}")
             }
             if (poiItem[0].firstNo != null) {
                 locationAddress += " " + poiItem[0].firstNo
-                Log.d("address firstNo", poiItem[0].firstNo)
+                Timber.d("address firstNo ${poiItem[0].firstNo}")
             }
             if (poiItem[0].secondNo != null && poiItem[0].secondNo != "0") {
                 locationAddress += " " + poiItem[0].secondNo
-                Log.d("address secondNo", poiItem[0].secondNo)
+                Timber.d("address secondNo ${poiItem[0].secondNo}")
             }
             tMapView.setCenterPoint(tmapPointCurrentSpot.longitude, tmapPointCurrentSpot.latitude)
             lat = tmapPointCurrentSpot.latitude

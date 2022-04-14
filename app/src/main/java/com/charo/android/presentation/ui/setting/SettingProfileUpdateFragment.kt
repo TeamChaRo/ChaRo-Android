@@ -3,18 +3,16 @@ package com.charo.android.presentation.ui.setting
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils.replace
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingProfileUpdateBinding
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
-
 import kotlinx.android.synthetic.main.fragment_setting_profile_update.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 import java.util.regex.Pattern
 
 
@@ -87,7 +85,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                                 text_input_profile_change_nick_name.isHelperTextEnabled = true
                                 text_input_profile_change_nick_name.helperText = "사용 가능한 닉네임입니다"
                                 binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
-                                Log.d("niceshot", s.toString())
+                                Timber.d("niceshot $s")
                                 binding.imgProfileUpdateButton.setOnClickListener {
                                     settingViewModel.newNickName.value = s.toString()
                                     settingViewModel.nickName.value = true
@@ -120,7 +118,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     .load(its)
                     .circleCrop()
                     .into(binding.imgProfileChange)
-                Log.d("updateProfile", its.toString())
+                Timber.d("updateProfile $its")
                 settingViewModel.images.value = true
                 binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
                 binding.imgProfileUpdateButton.setOnClickListener {
@@ -145,7 +143,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     // 프로필 사진 변경했을 때(닉네임이랑 / 닉네임 없이)
     private fun profileImageUpdateChange( imageUri: Uri, s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
-            Log.d("love", it.toString())
+            Timber.d("love $it")
             if (it == 0) {
                 settingViewModel.profileImageChange(
                     "and@naver.com",
@@ -177,7 +175,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     //닉네임만 변경했을 때
     private fun profileNickNameUpdateChange(s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
-            Log.d("loves", it.toString())
+            Timber.d("loves $it")
             if (it == 1) {
                 settingViewModel.profileNickNameChange(
                     "and@naver.com",

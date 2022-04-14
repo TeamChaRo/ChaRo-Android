@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.setting
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingPassWordUpdateBinding
@@ -12,6 +11,7 @@ import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.util.CustomToast
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 import java.util.regex.Pattern
 
 
@@ -66,11 +66,11 @@ class SettingPasswordUpdateFragment :
                         textInputPasswordUpdate.error = "5자 이상 15자 이내로 작성해 주세요."
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputPasswordUpdate.error = "영문과 숫자만 사용해 주세요."
-                        Log.d("password", Pattern.matches(emailPattern, s.toString()).toString())
+                        Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
                     } else {
                         settingViewModel.originPasswordCheck(userEmail, s.toString())
                         settingViewModel.passwordCheck.observe(viewLifecycleOwner) {
-                            Log.d("passwordCheck", it.toString())
+                            Timber.d("passwordCheck $it")
                             if (it == false) {
                                 textInputPasswordUpdate.error = "다시 입력해주세요."
                             } else {
@@ -104,7 +104,7 @@ class SettingPasswordUpdateFragment :
                         textInputNewPassword.error = "5자 이상 15자 이내로 작성해 주세요."
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputNewPassword.error = "영문과 숫자만 사용해 주세요."
-                        Log.d("password", Pattern.matches(emailPattern, s.toString()).toString())
+                        Timber.d("password ${Pattern.matches(emailPattern, s.toString())}")
                     }else{
                         textInputNewPassword.helperText = "확인되었습니다."
                         settingViewModel.newPasswordReconfirm.value = s.toString()
@@ -135,7 +135,7 @@ class SettingPasswordUpdateFragment :
                         textInputNewPasswordReconfirm.error = "5자 이상 15자 이내로 작성해 주세요."
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputNewPasswordReconfirm.error = "영문과 숫자만 사용해 주세요."
-                        Log.d("password", Pattern.matches(emailPattern, s.toString()).toString())
+                        Timber.d("password ${Pattern.matches(emailPattern, s.toString())}")
                     }else{
                         settingViewModel.newPasswordReconfirm.observe(viewLifecycleOwner){
                             if(it == s.toString()){

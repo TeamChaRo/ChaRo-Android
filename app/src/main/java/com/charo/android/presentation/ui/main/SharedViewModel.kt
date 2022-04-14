@@ -1,12 +1,12 @@
 package com.charo.android.presentation.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charo.android.domain.usecase.home.GetRemoteHomeTitle
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SharedViewModel(
     private val getRemoteHomeTitle: GetRemoteHomeTitle
@@ -42,7 +42,7 @@ class SharedViewModel(
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("title", "서버 통신 실패")
+                    Timber.d("title 서버 통신 실패")
                 }
         }
     }

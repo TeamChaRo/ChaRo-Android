@@ -4,9 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.charo.android.R
@@ -26,6 +24,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
@@ -61,10 +60,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         otherUserNickname = intent.getStringExtra("otherUserNickname")
         isMyPage = intent.getBooleanExtra("isMyPage", true)
         isFromOtherPage = intent.getBooleanExtra("isFromOtherPage", false)
-        Log.d("otherUserEmail", otherUserEmail.toString())
-        Log.d("otherUserNickname", otherUserNickname.toString())
-        Log.d("isMyPage", isMyPage.toString())
-        Log.d("isFromOtherPage", isFromOtherPage.toString())
+        Timber.d("otherUserEmail ${otherUserEmail.toString()}")
+        Timber.d("otherUserNickname ${otherUserNickname.toString()}")
+        Timber.d("isMyPage $isMyPage")
+        Timber.d("isFromOtherPage $isFromOtherPage")
         when (isFromOtherPage) {
             true -> {
                 binding.navView.selectedItemId = R.id.navigation_charo
@@ -176,7 +175,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun startActivityWriteShare() {
         userEmail = SharedInformation.getEmail(this@MainActivity)
-        Log.d("mainUserEmail", userEmail)
+        Timber.d("mainUserEmail", userEmail)
         if(userEmail == null || userEmail == "@"){
           //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)

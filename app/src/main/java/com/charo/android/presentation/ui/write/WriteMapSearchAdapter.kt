@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.write
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -11,11 +10,11 @@ import com.charo.android.data.model.response.ResponseStatusCode
 import com.charo.android.data.model.write.MapSearchInfo
 import com.charo.android.databinding.ItemAutoSearchBinding
 import com.charo.android.presentation.util.SharedInformation
-
 import com.skt.Tmap.TMapData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class WriteMapSearchAdapter(
 //    val locationFlag: String, val text: String, val userId: String, val nickName: String
@@ -95,23 +94,22 @@ class WriteMapSearchAdapter(
                 response: Response<ResponseStatusCode>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : WriteMap search save", "success ${response.body()?.success}")
-                    Log.d("server connect : WriteMap search save", "${response.body()?.msg}")
+                    Timber.d("server connect : WriteMap search save success ${response.body()?.success}")
+                    Timber.d("server connect : WriteMap search save ${response.body()?.msg}")
 
                 } else {
-                    Log.d("server connect : WriteMap search save", "error")
-                    Log.d("server connect : WriteMap search save", "$response.errorBody()")
-                    Log.d("server connect : WriteMap search save", response.message())
-                    Log.d("server connect : WriteMap search save", "${response.code()}")
-                    Log.d(
-                        "server connect : WriteMap search save",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : WriteMap search save error")
+                    Timber.d("server connect : WriteMap search save ${response.errorBody()}")
+                    Timber.d("server connect : WriteMap search save ${response.message()}")
+                    Timber.d("server connect : WriteMap search save ${response.code()}")
+                    Timber.d(
+                        "server connect : WriteMap search save ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseStatusCode>, t: Throwable) {
-                Log.d("server connect : WriteMap search save", "error: ${t.message}")
+                Timber.d("server connect : WriteMap search save error: ${t.message}")
             }
         })
     }

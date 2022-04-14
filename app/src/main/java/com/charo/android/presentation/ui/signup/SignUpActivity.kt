@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.signup
 
 import android.os.Bundle
-import android.util.Log
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySignUpBinding
 import com.charo.android.presentation.base.BaseActivity
@@ -9,6 +8,7 @@ import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.changeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
@@ -38,7 +38,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             signUpViewModel.userEmail.value = intent.getStringExtra("googleSignUpEmail")
             signUpViewModel.googleProfileImage.value = intent.getStringExtra("googleProfileImage")
             changeFragment(R.id.fragment_container_email, SignUpTermFragment())
-            Log.d("google", "왜 니가 되는 거냐")
+            Timber.d("google 왜 니가 되는 거냐")
         }
 
         //카카오 회원가입시에

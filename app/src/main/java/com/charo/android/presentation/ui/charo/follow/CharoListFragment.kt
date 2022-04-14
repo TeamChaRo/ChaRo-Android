@@ -1,7 +1,6 @@
 package com.charo.android.presentation.ui.charo.follow
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.charo.adapter.CharoListViewPagerAdapter
 import com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel
 import com.google.android.material.tabs.TabLayoutMediator
+import timber.log.Timber
 
 class CharoListFragment(private val userEmail: String, private val userNickname: String) : Fragment() {
     private var _binding: FragmentCharoListBinding? = null
@@ -56,7 +56,7 @@ class CharoListFragment(private val userEmail: String, private val userNickname:
 
     private fun getFollowData() {
         val myPageEmail: String? = (activity as CharoListActivity).myPageEmail
-        Log.d("myPageEmail", myPageEmail.toString())
+        Timber.d("myPageEmail ${myPageEmail.toString()}")
         myPageEmail?.let { charoViewModel.getFollowData(Hidden.userId, myPageEmail) }
     }
 

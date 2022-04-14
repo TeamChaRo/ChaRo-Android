@@ -2,32 +2,30 @@ package com.charo.android.presentation.ui.write
 
 import android.content.Context
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.*
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
-
-import com.skt.Tmap.TMapData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import android.text.style.ForegroundColorSpan
+import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.data.model.response.write.ResponseWriteData
 import com.charo.android.data.model.write.MapSearchInfo
 import com.charo.android.databinding.FragmentWriteMapSearchBinding
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.SharedInformation
-
+import com.skt.Tmap.TMapData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import timber.log.Timber
 
 class WriteMapSearchFragment : Fragment() {
 
@@ -180,7 +178,7 @@ class WriteMapSearchFragment : Fragment() {
                 response: Response<ResponseWriteData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : WriteMap search", "success")
+                    Timber.d("server connect : WriteMap search success")
 
                     writeMapSearchAdapter.clearItem()
 
@@ -203,19 +201,18 @@ class WriteMapSearchFragment : Fragment() {
                         writeMapSearchAdapter.notifyDataSetChanged()
                     }
                 } else {
-                    Log.d("server connect : WriteMap search", "error")
-                    Log.d("server connect : WriteMap search", "$response.errorBody()")
-                    Log.d("server connect : WriteMap search", response.message())
-                    Log.d("server connect : WriteMap search", "${response.code()}")
-                    Log.d(
-                        "server connect : WriteMap search",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : WriteMap search error")
+                    Timber.d("server connect : WriteMap search ${response.errorBody()}")
+                    Timber.d("server connect : WriteMap search ${response.message()}")
+                    Timber.d("server connect : WriteMap search ${response.code()}")
+                    Timber.d(
+                        "server connect : WriteMap search ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseWriteData>, t: Throwable) {
-                Log.d("server connect : WriteMap search", "error: ${t.message}")
+                Timber.d("server connect : WriteMap search error: ${t.message}")
             }
         })
     }

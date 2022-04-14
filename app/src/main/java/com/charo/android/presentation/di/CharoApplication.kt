@@ -1,6 +1,7 @@
 package com.charo.android.presentation.di
 
 import android.app.Application
+import com.charo.android.BuildConfig
 import com.charo.android.hidden.Hidden
 
 import com.kakao.sdk.common.KakaoSdk
@@ -8,6 +9,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import timber.log.Timber
 
 class CharoApplication: Application() {
     override fun onCreate() {
@@ -21,7 +23,10 @@ class CharoApplication: Application() {
             modules(dataSourceModule)
             modules(repositoryModule)
             modules(useCaseModule)
+        }
 
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
         }
     }
 }

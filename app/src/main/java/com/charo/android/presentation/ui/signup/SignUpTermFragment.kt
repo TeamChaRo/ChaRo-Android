@@ -2,7 +2,6 @@ package com.charo.android.presentation.ui.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSignUpTermBinding
@@ -11,6 +10,7 @@ import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.fragment_sign_up_term) {
@@ -75,8 +75,7 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
         if (SharedInformation.getSignUp(requireActivity()) == 0){
             binding.imgSignUpTermNext.setOnClickListener {
                 with(signUpViewModel){
-                    Log.d("signUp", userEmail.value.toString() + password.value.toString() +
-                            nickName.value.toString())
+                    Timber.d("signUp ${userEmail.value.toString()} ${password.value.toString()} ${nickName.value.toString()}")
                     signUpRegister(
                         profileImage.value!!,
                         userEmail.value.toString(),

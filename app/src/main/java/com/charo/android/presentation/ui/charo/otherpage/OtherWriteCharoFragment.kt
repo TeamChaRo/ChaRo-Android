@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.charo.otherpage
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.charo.adapter.CharoAdapter
 import com.charo.android.presentation.ui.charo.viewmodel.CharoViewModel
 import com.charo.android.presentation.ui.detail.DetailActivity
+import timber.log.Timber
 
 class OtherWriteCharoFragment : Fragment() {
     private var _binding: FragmentOtherWriteCharoBinding? = null
@@ -118,7 +118,7 @@ class OtherWriteCharoFragment : Fragment() {
                 if ((scrollY >= (v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight)) &&
                     scrollY > oldScrollY
                 ) {
-                    Log.d("무한스크롤 최하단 도달", "도달완")
+                    Timber.d("무한스크롤 최하단 도달 완료")
                     if (charoViewModel.isServerConnection.value == false && charoAdapter.itemList.isNotEmpty()) {
                         charoAdapter.addLoading()
                         when (spinnerPosition) {

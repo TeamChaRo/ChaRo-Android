@@ -7,7 +7,6 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,9 +19,9 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.KeyboardVisibilityUtils
 import com.charo.android.presentation.util.SharedInformation
-
 import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 import java.util.regex.Pattern
 
 
@@ -32,7 +31,7 @@ class SignUpProfileFragment :
     private val getContent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             signUpViewModel.profileImage.value = result.data?.data
-            Log.d("imageProfile", signUpViewModel.profileImage.value.toString())
+            Timber.d("imageProfile ${signUpViewModel.profileImage.value.toString()}")
 
             Glide.with(this)
                 .load(signUpViewModel.profileImage.value)

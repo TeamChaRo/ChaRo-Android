@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.more.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +11,7 @@ import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.domain.usecase.home.PostRemoteHomeLikeUseCase
 import com.charo.android.domain.usecase.more.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MoreViewViewModel(
     private val getRemoteMoreDriveUseCase: GetRemoteMoreDriveUseCase,
@@ -56,12 +56,12 @@ class MoreViewViewModel(
             runCatching { getRemoteMoreDriveUseCase.execute(userEmail, identifer, value) }
                 .onSuccess {
                     drive.value = it
-                    Log.d("more", "서버 통신 성공!")
-                    Log.d("more", drive.value.toString())
+                    Timber.d("more 서버 통신 성공!")
+                    Timber.d("more ${drive.value.toString()}")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("more", "서버 통신 실패")
+                    Timber.d("more 서버 통신 실패")
 
                 }
 
@@ -73,12 +73,12 @@ class MoreViewViewModel(
             runCatching { getRemoteMoreNewDriveViewUseCase.execute(userEmail, identifer, value) }
                 .onSuccess {
                     newDrive.value = it
-                    Log.d("more", "서버 통신 성공!")
-                    Log.d("more", drive.value.toString())
+                    Timber.d("more 서버 통신 성공!")
+                    Timber.d("more ${drive.value.toString()}")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("more", "서버 통신 실패")
+                    Timber.d("more 서버 통신 실패")
 
                 }
 
@@ -90,11 +90,11 @@ class MoreViewViewModel(
             runCatching { postRemoteHomeLikeUseCase.execute(requestHomeLikeData) }
                 .onSuccess {
                     _statusCode.value = it
-                    Log.d("moreLike", "서버 통신 성공!")
+                    Timber.d("moreLike 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("moreLike", "서버 통신 실패패!")
+                    Timber.d("moreLike 서버 통신 실패패!")
                 }
         }
     }
@@ -109,7 +109,7 @@ class MoreViewViewModel(
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("moreViewLastId", "서버 통신 실패!")
+                    Timber.d("moreViewLastId 서버 통신 실패!")
                 }
         }
     }
@@ -120,11 +120,11 @@ class MoreViewViewModel(
             runCatching { getRemoteMoreNewLastIdUseCase.execute(userEmail, identifier, value) }
                 .onSuccess {
                     _lastId.value = it
-                    Log.d("moreNewViewLastId", "서버 통신 성공")
+                    Timber.d("moreNewViewLastId 서버 통신 성공")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("moreNewViewLastId", "서버 통신 실패")
+                    Timber.d("moreNewViewLastId 서버 통신 실패")
                 }
         }
 
@@ -137,11 +137,11 @@ class MoreViewViewModel(
                 .onSuccess {
                     _lastId.value = LastId(it.lastCount, it.lastId)
                     drive.value = it.drive
-                    Log.d("moreViewInfinite", "서버 통신 성공!")
+                    Timber.d("moreViewInfinite 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("moreViewInfinite", "서버 통신 실패!")
+                    Timber.d("moreViewInfinite 서버 통신 실패!")
                 }
         }
     }
@@ -153,11 +153,11 @@ class MoreViewViewModel(
                 .onSuccess {
                     _lastId.value = LastId(it.lastCount, it.lastId)
                     newDrive.value = it.drive
-                    Log.d("moreNewViewInfinite", "서버 통신 성공!")
+                    Timber.d("moreNewViewInfinite 서버 통신 성공!")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Log.d("moreNewViewInfinite", "서버 통신 실패!")
+                    Timber.d("moreNewViewInfinite 서버 통신 실패!")
                 }
         }
 

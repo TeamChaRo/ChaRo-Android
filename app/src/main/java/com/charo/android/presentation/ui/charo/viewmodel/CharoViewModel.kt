@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.charo.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +10,7 @@ import com.charo.android.presentation.util.enqueueUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class CharoViewModel : ViewModel() {
 
@@ -85,22 +85,22 @@ class CharoViewModel : ViewModel() {
                 response: Response<ResponseMyPageLikeData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : My Page", "success")
+                    Timber.d("server connect : My Page success")
                     val data = response.body()?.data
                     _userInformation.value = data?.userInformation
                     _writtenLikeData.value = data?.writtenPost
                     _savedLikeData.value = data?.savedPost
                 } else {
-                    Log.d("server connect : My Page", "error")
-                    Log.d("server connect : My Page", "$response.errorBody()")
-                    Log.d("server connect : My Page", response.message())
-                    Log.d("server connect : My Page", "${response.code()}")
-                    Log.d("server connect : My Page", "${response.raw().request.url}")
+                    Timber.d("server connect : My Page error")
+                    Timber.d("server connect : My Page ${response.errorBody()}")
+                    Timber.d("server connect : My Page ${response.message()}")
+                    Timber.d("server connect : My Page ${response.code()}")
+                    Timber.d("server connect : My Page ${response.raw().request.url}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseMyPageLikeData>, t: Throwable) {
-                Log.d("server connect : My Page", "error: ${t.message}")
+                Timber.d("server connect : My Page error: ${t.message}")
             }
         })
     }
@@ -114,22 +114,22 @@ class CharoViewModel : ViewModel() {
                 response: Response<ResponseMyPageLikeData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : My Page", "success")
+                    Timber.d("server connect : My Page   success")
                     val data = response.body()?.data
                     _userInformation.value = data?.userInformation
                     _writtenNewData.value = data?.writtenPost
                     _savedNewData.value = data?.savedPost
                 } else {
-                    Log.d("server connect : My Page", "error")
-                    Log.d("server connect : My Page", "$response.errorBody()")
-                    Log.d("server connect : My Page", response.message())
-                    Log.d("server connect : My Page", "${response.code()}")
-                    Log.d("server connect : My Page", "${response.raw().request.url}")
+                    Timber.d("server connect : My Page   error")
+                    Timber.d("server connect : My Page   ${response.errorBody()}")
+                    Timber.d("server connect : My Page   ${response.message()}")
+                    Timber.d("server connect : My Page   ${response.code()}")
+                    Timber.d("server connect : My Page   ${response.raw().request.url}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseMyPageLikeData>, t: Throwable) {
-                Log.d("server connect : My Page", "error: ${t.message}")
+                Timber.d("server connect : My Page   error: ${t.message}")
             }
         })
     }
@@ -149,7 +149,7 @@ class CharoViewModel : ViewModel() {
             ) {
                 _isServerConnecting.value = false
                 if (response.isSuccessful) {
-                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    Timber.d("server connect : My Page Infinite Scrolling   success")
                     val data = response.body()?.data
                     _writtenMoreLikeData.value = data!!
                     _writtenLikeData.value?.drive?.addAll(data.drive)
@@ -158,20 +158,19 @@ class CharoViewModel : ViewModel() {
                         _writtenLikeData.value?.lastCount = data.lastCount
                     }
                 } else {
-                    Log.d("server connect : My Page Infinite Scrolling", "error")
-                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
-                    Log.d("server connect : My Page Infinite Scrolling", response.message())
-                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
-                    Log.d(
-                        "server connect : My Page Infinite Scrolling",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : My Page Infinite Scrolling   error")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.errorBody()}")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.message()}")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.code()}")
+                    Timber.d(
+                        "server connect : My Page Infinite Scrolling ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
                 _isServerConnecting.value = false
-                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+                Timber.d("server connect : My Page Infinite Scrolling   error: ${t.message}")
             }
         })
     }
@@ -190,7 +189,7 @@ class CharoViewModel : ViewModel() {
             ) {
                 _isServerConnecting.value = false
                 if (response.isSuccessful) {
-                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    Timber.d("server connect : My Page Infinite Scrolling   success")
                     val data = response.body()?.data
                     _writtenMoreNewData.value = data!!
                     _writtenNewData.value?.drive?.addAll(data.drive)
@@ -199,20 +198,19 @@ class CharoViewModel : ViewModel() {
                         _writtenNewData.value?.lastCount = data.lastCount
                     }
                 } else {
-                    Log.d("server connect : My Page Infinite Scrolling", "error")
-                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
-                    Log.d("server connect : My Page Infinite Scrolling", response.message())
-                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
-                    Log.d(
-                        "server connect : My Page Infinite Scrolling",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : My Page Infinite Scrolling   error")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.errorBody()}")
+                    Timber.d("server connect : My Page Infinite Scrolling    ${response.message()}")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.code()}")
+                    Timber.d(
+                        "server connect : My Page Infinite Scrolling ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
                 _isServerConnecting.value = false
-                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+                Timber.d("server connect : My Page Infinite Scrolling   error: ${t.message}")
             }
         })
     }
@@ -231,7 +229,7 @@ class CharoViewModel : ViewModel() {
                 response: Response<ResponseMyPageMoreData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    Timber.d("server connect : My Page Infinite Scrolling   success")
                     val data = response.body()?.data
                     _savedMoreLikeData.value = data!!
                     _savedLikeData.value?.drive?.addAll(data.drive)
@@ -240,20 +238,19 @@ class CharoViewModel : ViewModel() {
                         _savedLikeData.value?.lastCount = data.lastCount
                     }
                 } else {
-                    Log.d("server connect : My Page Infinite Scrolling", "error")
-                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
-                    Log.d("server connect : My Page Infinite Scrolling", response.message())
-                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
-                    Log.d(
-                        "server connect : My Page Infinite Scrolling",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : My Page Infinite Scrolling   error")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.errorBody()}")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.message()}")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.code()}")
+                    Timber.d(
+                        "server connect : My Page Infinite Scrolling ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
                 _isServerConnecting.value = false
-                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+                Timber.d("server connect : My Page Infinite Scrolling   error: ${t.message}")
             }
         })
     }
@@ -271,7 +268,7 @@ class CharoViewModel : ViewModel() {
                 response: Response<ResponseMyPageMoreData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : My Page Infinite Scrolling", "success")
+                    Timber.d("server connect : My Page Infinite Scrolling   success")
                     val data = response.body()?.data
                     _savedMoreNewData.value = data!!
                     _savedNewData.value?.drive?.addAll(data.drive)
@@ -280,27 +277,26 @@ class CharoViewModel : ViewModel() {
                         _savedNewData.value?.lastCount = data.lastCount
                     }
                 } else {
-                    Log.d("server connect : My Page Infinite Scrolling", "error")
-                    Log.d("server connect : My Page Infinite Scrolling", "$response.errorBody()")
-                    Log.d("server connect : My Page Infinite Scrolling", response.message())
-                    Log.d("server connect : My Page Infinite Scrolling", "${response.code()}")
-                    Log.d(
-                        "server connect : My Page Infinite Scrolling",
-                        "${response.raw().request.url}"
+                    Timber.d("server connect : My Page Infinite Scrolling   error")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.errorBody()}")
+                    Timber.d("server connect : My Page Infinite Scrolling    ${response.message()}")
+                    Timber.d("server connect : My Page Infinite Scrolling   ${response.code()}")
+                    Timber.d(
+                        "server connect : My Page Infinite Scrolling ${response.raw().request.url}"
                     )
                 }
             }
 
             override fun onFailure(call: Call<ResponseMyPageMoreData>, t: Throwable) {
                 _isServerConnecting.value = false
-                Log.d("server connect : My Page Infinite Scrolling", "error: ${t.message}")
+                Timber.d("server connect : My Page Infinite Scrolling   error: ${t.message}")
             }
         })
     }
 
     fun getInitOtherLikeData(userEmail: String) {
         _isServerConnecting.value = true
-        Log.d("from", "CharoViewModel.getInitOtherLikeData")
+        Timber.d("from   CharoViewModel.getInitOtherLikeData")
         val call = ApiService.myPageViewLikeService.getMyPage(userEmail)
         call.enqueueUtil(
             onSuccess = {
@@ -313,7 +309,7 @@ class CharoViewModel : ViewModel() {
 
     fun getInitOtherNewData(userEmail: String) {
         _isServerConnecting.value = true
-        Log.d("from", "CharoViewModel.getInitOtherNewData")
+        Timber.d("from   CharoViewModel.getInitOtherNewData")
         val call = ApiService.myPageViewNewService.getMyPage(userEmail)
         call.enqueueUtil(
             onSuccess = {
@@ -326,7 +322,7 @@ class CharoViewModel : ViewModel() {
 
     fun getMoreOtherWrittenLikeData(userEmail: String) {
         _isServerConnecting.value = true
-        Log.d("from", "getMoreOtherWrittenLikeData")
+        Timber.d("from   getMoreOtherWrittenLikeData")
         val call = ApiService.myPageViewMoreService.getMoreWrittenLikeData(
             userEmail,
             otherWrittenLikeData.value!!.lastId,
@@ -347,7 +343,7 @@ class CharoViewModel : ViewModel() {
 
     fun getMoreOtherWrittenNewData(userEmail: String) {
         _isServerConnecting.value = true
-        Log.d("from", "getMoreOtherWrittenNewData")
+        Timber.d("from   getMoreOtherWrittenNewData")
         val call = com.charo.android.data.api.ApiService.myPageViewMoreService.getMoreWrittenNewData(
             userEmail,
             otherWrittenNewData.value!!.lastId
@@ -367,15 +363,15 @@ class CharoViewModel : ViewModel() {
 
     fun getFollowData(userEmail: String, myPageEmail: String) {
         _isServerConnecting.value = true
-        Log.d("from", "getFollowData")
+        Timber.d("from   getFollowData")
         val call = com.charo.android.data.api.ApiService.myPageViewFollowService.getFollowInfo(userEmail, myPageEmail)
         call.enqueueUtil(
             onSuccess = {
                 _followData.value = it.data
-                Log.d("getFollowData", "success")
+                Timber.d("getFollowData   success")
             },
             onError = {
-                Log.d("getFollowData", "failed")
+                Timber.d("getFollowData   failed")
             }
         )
     }

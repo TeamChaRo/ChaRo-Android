@@ -2,7 +2,6 @@ package com.charo.android.presentation.ui.mypage.postlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,8 @@ import com.charo.android.databinding.FragmentSavedPostBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
-
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class SavedPostFragment : Fragment() {
     private var _binding: FragmentSavedPostBinding? = null
@@ -75,17 +74,17 @@ class SavedPostFragment : Fragment() {
                     id: Long
                 ) {
                     if (position == 0) {
-                        Log.d("mlog: SavedPostFragment::spinner handler", "onItemSelected - 0")
+                        Timber.d("mlog: SavedPostFragment::spinner handler onItemSelected - 0")
                         sort = LIKE
                     } else {
-                        Log.d("mlog: SavedPostFragment::spinner handler", "onItemSelected - 1")
+                        Timber.d("mlog: SavedPostFragment::spinner handler onItemSelected - 1")
                         sort = NEW
                     }
                     changeRecyclerViewItemList(sort)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    Log.d("mlog: WrittenPostFragment::spinner handler", "onNothingSelected")
+                    Timber.d("mlog: WrittenPostFragment::spinner handler onNothingSelected")
                 }
             }
     }
@@ -122,16 +121,16 @@ class SavedPostFragment : Fragment() {
     private fun endlessScroll() {
         binding.nsvPostList.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-                Log.d("mlog: SavedPostFragment::endlessScroll", "NestedScrollView 최하단 도달")
+                Timber.d("mlog: SavedPostFragment::endlessScroll NestedScrollView 최하단 도달")
                 when (sort) {
                     LIKE -> {
                         // 서버에서 더 가져오는 로직
-                        Log.d("mlog: SavedPostFragment::endlessScroll", "인기순 저장한 게시글 더 불러오기")
+                        Timber.d("mlog: SavedPostFragment::endlessScroll 인기순 저장한 게시글 더 불러오기")
                         viewModel.getMoreSavedLikePost()
                     }
                     NEW -> {
                         // 서버에서 더 가져오는 로직
-                        Log.d("mlog: SavedPostFragment::endlessScroll", "최신순 저장한 게시글 더 불러오기")
+                        Timber.d("mlog: SavedPostFragment::endlessScroll 최신순 저장한 게시글 더 불러오기")
                         viewModel.getMoreSavedNewPost()
                     }
                 }

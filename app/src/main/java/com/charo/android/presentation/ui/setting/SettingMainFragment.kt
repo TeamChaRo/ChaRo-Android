@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -17,11 +16,11 @@ import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.ui.signin.SocialSignInActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
-
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class SettingMainFragment :
@@ -127,7 +126,7 @@ class SettingMainFragment :
         val dialog = CustomDialog(requireActivity())
         binding.textSettingLogout.setOnClickListener {
             val socialKey = SharedInformation.getSocialId(requireActivity())
-            Log.d("socialKey", socialKey)
+            Timber.d("socialKey $socialKey")
             dialog.showDialog(R.layout.custom_dialog_log_out)
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {

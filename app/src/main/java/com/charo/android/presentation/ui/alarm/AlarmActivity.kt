@@ -21,6 +21,7 @@ import com.charo.android.presentation.util.SharedInformation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class AlarmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAlarmBinding
@@ -70,7 +71,7 @@ class AlarmActivity : AppCompatActivity() {
     private fun getInitAlarmData(){
         val userEmail = SharedInformation.getEmail(this)
 
-        Log.e("getAlarmList param", userEmail)
+        Timber.e("getAlarmList param $userEmail")
         val call: Call<ResponseAlarmListData> =
             com.charo.android.data.api.ApiService.alarmViewService.getAlarmList(userEmail)
         call.enqueue(object : Callback<ResponseAlarmListData> {
@@ -78,11 +79,11 @@ class AlarmActivity : AppCompatActivity() {
                 call: Call<ResponseAlarmListData>,
                 response: Response<ResponseAlarmListData>
             ) {
-                Log.e("getAlarmList param111", userEmail)
+                Timber.e("getAlarmList param111 $userEmail")
 
                 if (response.isSuccessful) {
-                    Log.d("server connect : Alarm", "success")
-                    Log.d("server connect : Alarm", "${response.body()}")
+                    Timber.d("server connect : Alarm success")
+                    Timber.d("server connect : Alarm ${response.body()}")
                     val pushList = response.body()?.pushList
 
                     //test
@@ -148,28 +149,28 @@ class AlarmActivity : AppCompatActivity() {
 
                     }
 
-                    Log.e("alarmAdapter", "${alarmAdapter.itemList}")
-                    Log.e("alarmAdapter", "${alarmAdapter.itemCount}")
+                    Timber.e("alarmAdapter ${alarmAdapter.itemList}")
+                    Timber.e("alarmAdapter ${alarmAdapter.itemCount}")
 
 
                     alarmAdapter.notifyDataSetChanged()
                 } else {
-                    Log.d("server connect : Alarm ", "error")
-                    Log.d("server connect : Alarm ", "$response.errorBody()")
-                    Log.d("server connect : Alarm ", response.message())
-                    Log.d("server connect : Alarm ", "${response.code()}")
-                    Log.d("server connect : Alarm ", "${response.raw().request.url}")
+                    Timber.d("server connect : Alarm error")
+                    Timber.d("server connect : Alarm ${response.errorBody()}")
+                    Timber.d("server connect : Alarm ${response.message()}")
+                    Timber.d("server connect : Alarm ${response.code()}")
+                    Timber.d("server connect : Alarm  ${response.raw().request.url}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseAlarmListData>, t: Throwable) {
-                Log.d("server connect : Alarm ", "error: ${t.message}")
+                Timber.d("server connect : Alarm error: ${t.message}")
             }
         })
     }
 
     fun serveDeleteItem(it: AlarmListInfo, pushId: Int){ //AlarmViewModel
-        Log.e("postDeleteAlarm param", "$pushId")
+        Timber.e("postDeleteAlarm param $pushId")
         val call: Call<ResponseAlarmDeleteData> =
             com.charo.android.data.api.ApiService.alarmViewService.postDeleteAlarm(pushId)
         call.enqueue(object : Callback<ResponseAlarmDeleteData> {
@@ -178,29 +179,29 @@ class AlarmActivity : AppCompatActivity() {
                 response: Response<ResponseAlarmDeleteData>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : Alarm delete", "success")
-                    Log.d("server connect : Alarm delete", "${response.body()}")
+                    Timber.d("server connect : Alarm delete success")
+                    Timber.d("server connect : Alarm delete ${response.body()}")
 
                     alarmAdapter.removeItem(it)
                     alarmAdapter.notifyDataSetChanged()
 
                 } else {
-                    Log.d("server connect : Alarm delete", "error")
-                    Log.d("server connect : Alarm delete", "$response.errorBody()")
-                    Log.d("server connect : Alarm delete", response.message())
-                    Log.d("server connect : Alarm delete", "${response.code()}")
-                    Log.d("server connect : Alarm delete", "${response.raw().request.url}")
+                    Timber.d("server connect : Alarm delete error")
+                    Timber.d("server connect : Alarm delete ${response.errorBody()}")
+                    Timber.d("server connect : Alarm delete${response.message()}")
+                    Timber.d("server connect : Alarm delete ${response.code()}")
+                    Timber.d("server connect : Alarm delete ${response.raw().request.url}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
-                Log.d("server connect : Alarm delete", "error: ${t.message}")
+                Timber.d("server connect : Alarm delete error: ${t.message}")
             }
         })
     }
 
     private fun postReadAlarm(pushId: Int){
-        Log.e("postReadAlarm param", "$pushId")
+        Timber.e("postReadAlarm param $pushId")
         val call: Call<ResponseStatusCode> =
             com.charo.android.data.api.ApiService.alarmViewService.postReadAlarm(RequestReadPushData(pushId))
         call.enqueue(object : Callback<ResponseStatusCode> {
@@ -209,24 +210,24 @@ class AlarmActivity : AppCompatActivity() {
                 response: Response<ResponseStatusCode>
             ) {
                 if (response.isSuccessful) {
-                    Log.d("server connect : Alarm read", "success")
-                    Log.d("server connect : Alarm read", "${response.body()}")
+                    Timber.d("server connect : Alarm read success")
+                    Timber.d("server connect : Alarm read${response.body()}")
 
                     //TODO: 알람 내용에 맞는 화면으로 이동 (API 확인 후)
 
                     Toast.makeText(this@AlarmActivity, "알람 클릭 $response.body()", Toast.LENGTH_LONG).show()
 
                 } else {
-                    Log.d("server connect : Alarm read", "error")
-                    Log.d("server connect : Alarm read", "$response.errorBody()")
-                    Log.d("server connect : Alarm read", response.message())
-                    Log.d("server connect : Alarm read", "${response.code()}")
-                    Log.d("server connect : Alarm read", "${response.raw().request.url}")
+                    Timber.d("server connect : Alarm readerror")
+                    Timber.d("server connect : Alarm read ${response.errorBody()}")
+                    Timber.d("server connect : Alarm read ${response.message()}")
+                    Timber.d("server connect : Alarm read ${response.code()}")
+                    Timber.d("server connect : Alarm read ${response.raw().request.url}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseStatusCode>, t: Throwable) {
-                Log.d("server connect : Alarm read", "error: ${t.message}")
+                Timber.d("server connect : Alarm read error: ${t.message}")
             }
         })
     }

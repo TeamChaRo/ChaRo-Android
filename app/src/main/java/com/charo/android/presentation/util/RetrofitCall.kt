@@ -1,9 +1,9 @@
 package com.charo.android.presentation.util
 
-import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 fun <ResponseType> Call<ResponseType>.enqueueUtil(
     onSuccess: (ResponseType) -> Unit,
@@ -15,15 +15,15 @@ fun <ResponseType> Call<ResponseType>.enqueueUtil(
                 onSuccess.invoke(response.body() ?: return)
             } else {
                 onError?.invoke(response.code())
-                Log.d("server connect", "error")
-                Log.d("server connect", "$response")
-                Log.d("server connect", response.message())
-                Log.d("server connect", "${response.code()}")
+                Timber.d("server connect error")
+                Timber.d("server connect $response")
+                Timber.d("server connect ${response.message()}")
+                Timber.d("server connect ${response.code()}")
             }
         }
 
         override fun onFailure(call: Call<ResponseType>, t: Throwable) {
-            Log.d("Network", "error:$t")
+            Timber.d("Network error:$t")
         }
     })
 }
