@@ -175,7 +175,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun startActivityWriteShare() {
         userEmail = SharedInformation.getEmail(this@MainActivity)
-        Timber.d("mainUserEmail", userEmail)
+        Timber.d("mainUserEmail $userEmail")
         if(userEmail == null || userEmail == "@"){
           //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
