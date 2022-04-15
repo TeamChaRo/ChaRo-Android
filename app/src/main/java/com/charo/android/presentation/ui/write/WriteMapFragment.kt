@@ -29,6 +29,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 class WriteMapFragment : Fragment(), View.OnClickListener {
@@ -36,13 +37,14 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
     companion object {
         fun newInstance() = WriteMapFragment()
     }
-
-    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                WriteSharedViewModel() as T
-        }
-    }
+//    원래 진희코드
+//    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+//        object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+//                WriteSharedViewModel() as T
+//        }
+//    }
+    private val sharedViewModel by sharedViewModel<WriteSharedViewModel>()
 
     //    좌표 배열
     var path = arrayListOf<TMapPoint>()

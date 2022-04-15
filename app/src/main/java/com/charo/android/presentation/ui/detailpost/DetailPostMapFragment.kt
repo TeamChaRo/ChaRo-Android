@@ -14,6 +14,7 @@ import com.charo.android.databinding.FragmentDetailPostMapBinding
 import com.charo.android.domain.model.detailpost.DetailPost
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.skt.Tmap.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,10 @@ import timber.log.Timber
 class DetailPostMapFragment : Fragment() {
     private var _binding: FragmentDetailPostMapBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
-    private val viewModel by sharedViewModel<DetailPostViewModel>()
+    // TODO: Old ViewModel
+//    private val viewModel by sharedViewModel<DetailPostViewModel>()
+    // TODO: New ViewModel
+    private val viewModel by sharedViewModel<WriteSharedViewModel>()
     private lateinit var tMapView: TMapView
 
     override fun onCreateView(
@@ -46,8 +50,8 @@ class DetailPostMapFragment : Fragment() {
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clDetailPostMap.addView(tMapView)
 
-        viewModel.detailPost.observe(viewLifecycleOwner) {
-            drawPath(tMapView, it.course)
+        viewModel.courseDetail.observe(viewLifecycleOwner) {
+            drawPath(tMapView, it)
         }
     }
 

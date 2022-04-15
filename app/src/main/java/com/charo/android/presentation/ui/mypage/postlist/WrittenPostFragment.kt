@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.data.model.mypage.Post
 import com.charo.android.databinding.FragmentWrittenPostBinding
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -97,8 +97,9 @@ class WrittenPostFragment : Fragment() {
 
     private fun initRecyclerView(postList: MutableList<Post>) {
         writtenPostAdapter = PostAdapter {
-            val intent = Intent(requireContext(), DetailPostActivity::class.java)
+            val intent = Intent(requireContext(), WriteShareActivity::class.java)
             intent.putExtra("postId", it.postId)
+            intent.putExtra("destination", "detail")
             startActivity(intent)
         }
         binding.rvPostList.adapter = writtenPostAdapter

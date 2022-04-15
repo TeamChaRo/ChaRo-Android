@@ -13,6 +13,7 @@ import com.charo.android.databinding.DialogDetailLikeBinding
 import com.charo.android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
 import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.charo.android.presentation.util.LoginUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,7 +24,10 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     private var _binding: DialogDetailLikeBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
     private lateinit var adapter: DetailPostLikeListAdapter
-    private val viewModel by sharedViewModel<DetailPostViewModel>()
+    // TODO: Old ViewModel
+//    private val viewModel by sharedViewModel<DetailPostViewModel>()
+    // TODO: New ViewModel
+    private val viewModel by sharedViewModel<WriteSharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
