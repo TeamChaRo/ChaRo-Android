@@ -18,6 +18,7 @@ object BindingAdapter {
     fun setImage(imageView: ImageView, imageUrl : String){
         Glide.with(imageView.context)
             .load(imageUrl)
+            .placeholder(R.drawable.home_today_drive_image)
             .transform(RoundedCorners(20.dpToPx))
             .into(imageView)
     }
