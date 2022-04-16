@@ -1,12 +1,28 @@
 package com.charo.android.presentation.ui.write
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.write.WriteImgInfo
+import com.charo.android.domain.model.detailpost.DetailPost
+import com.charo.android.domain.model.detailpost.User
+import com.charo.android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
+import com.charo.android.domain.usecase.detailpost.GetDetailPostUseCase
+import com.charo.android.domain.usecase.follow.PostFollowUseCase
+import com.charo.android.domain.usecase.interaction.PostLikeUseCase
+import com.charo.android.domain.usecase.interaction.PostSaveUseCase
+import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import timber.log.Timber
 
-class WriteSharedViewModel : ViewModel() {
+class WriteSharedViewModel(
+    private val getDetailPostUseCase: GetDetailPostUseCase,
+    private val postLikeUseCase: PostLikeUseCase,
+    private val postSaveUseCase: PostSaveUseCase,
+    private val getDetailPostLikeUserListUseCase: GetDetailPostLikeUserListUseCase,
+    private val postFollowUseCase: PostFollowUseCase
+) : ViewModel() {
     // TODO: Implement the ViewModel
     fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
 
@@ -42,11 +58,33 @@ class WriteSharedViewModel : ViewModel() {
     var endLat = MutableLiveData<Double>().default(0.0)
     var endLong = MutableLiveData<Double>().default(0.0)
 
+    // DetailPostFragment
+    var postId: Int = -1
+    var userEmail: String = ""
+    var isAuthorFlag = MutableLiveData<Boolean>().default(false)
+    var profileImage = MutableLiveData<String>().default("")
+    var author = MutableLiveData<String>().default("")
+    var authorEmail = MutableLiveData<String>().default("")
+    var imageStringViewPager = MutableLiveData<MutableList<String>>()
+    var warnings = MutableLiveData<List<Boolean>>()
+    var isFavorite = MutableLiveData<Int>().default(0)
+    var likesCount = MutableLiveData<Int>().default(0)
+    var isStored = MutableLiveData<Int>().default(0)
+    var courseDetail = MutableLiveData<List<DetailPost.Course>>()
+
+    // DetailPostLikeListFragment
+    private var _likeUserList = MutableLiveData<List<User>>()
+    val likeUserList: LiveData<List<User>> get() = _likeUserList
+
+    // DetailPostImageFragment
+    var imageIndex = 0
+
     fun initData() {
         title.value = ""
         province.value = ""            //경기도
         region.value = ""            //수원
-        warning.value = ArrayList<MultipartBody.Part>()                          //["highway", "mountainRoad"]
+        warning.value =
+            ArrayList<MultipartBody.Part>()                          //["highway", "mountainRoad"]
         theme.value = ArrayList<String>()                            //["summer", "sea"]
         isParking.value = false      //true
         parkingDesc.value = ""
@@ -71,5 +109,119 @@ class WriteSharedViewModel : ViewModel() {
         endLat.value = 0.0
         endLong.value = 0.0
 
+    }
+
+    fun getDetailPostData() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getDetailPostUseCase(userEmail, postId)
+            }.onSuccess {
+                // 단순 값 할당의 과정입니다 ...
+                imageStringViewPager.value = it.images.toMutableList()
+                province.value = it.province
+                isParking.value = it.isParking
+                parkingDesc.value = it.parkingDesc
+                courseDesc.value = it.courseDesc
+                theme.value = ArrayList(it.themes)
+                warnings.value = it.warnings
+                author.value = it.author
+                authorEmail.value = it.authorEmail
+                isAuthorFlag.value = it.isAuthor
+                profileImage.value = it.profileImage
+                likesCount.value = it.likesCount
+                isFavorite.value = it.isFavorite
+                isStored.value = it.isStored
+                when (it.course.size) {
+                    2 -> {
+                        with(it.course) {
+                            startAddress.value = this[0].address
+                            startLat.value = this[0].latitude
+                            startLat.value = this[0].longitude
+                            endAddress.value = this[1].address
+                            endLat.value = this[1].latitude
+                            endLong.value = this[1].longitude
+                            courseDetail.value = this
+                        }
+                    }
+                    3 -> {
+                        with(it.course) {
+                            startAddress.value = this[0].address
+                            startLat.value = this[0].latitude
+                            startLat.value = this[0].longitude
+                            midFrstAddress.value = this[1].address
+                            midFrstLat.value = this[1].latitude
+                            midFrstLong.value = this[1].longitude
+                            endAddress.value = this[2].address
+                            endLat.value = this[2].latitude
+                            endLong.value = this[2].longitude
+                            courseDetail.value = this
+                        }
+                    }
+                    else -> {
+                        Timber.tag("getDetailPost").e(it.course.toString())
+                    }
+                }
+            }.onFailure {
+                Timber.tag("getDetailPostData").e(it)
+            }
+        }
+    }
+
+    fun postLike() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postLikeUseCase(userEmail, postId)
+            }.onSuccess {
+                if (it) {
+                    isFavorite.value = isFavorite.value?.plus(1)?.rem(2)
+                    updateLikesCount()
+                }
+            }.onFailure {
+                Timber.tag("postLike").e(it)
+            }
+        }
+    }
+
+    fun postSave() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postSaveUseCase(userEmail, postId)
+            }.onSuccess {
+                if(it) {
+                    isStored.value = isStored.value?.plus(1)?.rem(2)
+                }
+            }.onFailure {
+                Timber.tag("postSave").e(it)
+            }
+        }
+    }
+
+    private fun updateLikesCount() {
+        when(isFavorite.value) {
+            0 -> likesCount.value = likesCount.value?.minus(1)
+            else -> likesCount.value = likesCount.value?.plus(1)
+        }
+    }
+
+    fun getDetailPostLikeUserListData() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getDetailPostLikeUserListUseCase(postId, userEmail)
+            }.onSuccess {
+                _likeUserList.value = it
+            }.onFailure {
+                Timber.tag("getDetailPostLikeUserListData").e(it)
+            }
+        }
+    }
+
+    fun postFollow(otherUserEmail: String) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                postFollowUseCase(userEmail, otherUserEmail)
+            }.onFailure {
+                Timber.tag("postFollow").e(it)
+            }
+        }
     }
 }

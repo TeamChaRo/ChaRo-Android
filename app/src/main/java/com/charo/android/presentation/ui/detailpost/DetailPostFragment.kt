@@ -21,6 +21,7 @@ import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.charo.android.presentation.util.LoginUtil
 import com.skt.Tmap.*
 import com.skt.Tmap.TMapView.OnClickListenerCallback
@@ -34,7 +35,12 @@ import timber.log.Timber
 class DetailPostFragment : Fragment() {
     private var _binding: FragmentDetailPostBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
-    private val viewModel by sharedViewModel<DetailPostViewModel>()
+
+    // TODO: Old ViewModel
+//    private val detailPostViewModel by sharedViewModel<DetailPostViewModel>()
+
+    // TODO: New ViewModel
+    private val viewModel by sharedViewModel<WriteSharedViewModel>()
     private lateinit var viewPagerAdapter: DetailPostViewPagerAdapter
 
     private lateinit var tMapView: TMapView
@@ -45,8 +51,12 @@ class DetailPostFragment : Fragment() {
     ): View? {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_detail_post, container, false)
+        // TODO: Old ViewModel
+//        binding.viewModel = detailPostViewModel
+        // TODO: New ViewModel
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        viewModel.initData()
         return binding.root
     }
 
@@ -55,9 +65,13 @@ class DetailPostFragment : Fragment() {
         tMapView = TMapView(requireContext())
         viewModel.getDetailPostData()
         initTMap(tMapView)
-        viewModel.detailPost.observe(viewLifecycleOwner) {
-            initViewPager(it.images)
-            drawPath(tMapView, it.course)
+        viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
+            initViewPager(it)
+        }
+        viewModel.courseDetail.observe(viewLifecycleOwner) {
+            if(it != null) {
+                drawPath(tMapView, it)
+            }
         }
         copyAddress()
         clickLike()
@@ -74,10 +88,11 @@ class DetailPostFragment : Fragment() {
     }
 
     private fun initViewPager(imageList: List<String>) {
+        // TODO: Fragment Replace 수정(id 부분)
         viewPagerAdapter = DetailPostViewPagerAdapter {
             viewModel.imageIndex = it
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fcv_detail_post, DetailPostImageFragment())
+                .replace(R.id.write_share_layout, DetailPostImageFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -211,6 +226,7 @@ class DetailPostFragment : Fragment() {
     private fun clickLike() {
         binding.imgDetailLike.setOnClickListener {
             if (viewModel.userEmail != "@") {
+                // TODO: WriteSharedViewModel에 postLike 구현필요
                 viewModel.postLike()
             } else {
                 LoginUtil.loginPrompt(requireContext())
@@ -221,6 +237,7 @@ class DetailPostFragment : Fragment() {
     private fun clickSave() {
         binding.imgDetailSave.setOnClickListener {
             if (viewModel.userEmail != "@") {
+                // TODO: WriteSharedViewModel에 postSave 구현필요
                 viewModel.postSave()
             } else {
                 LoginUtil.loginPrompt(requireContext())
@@ -259,7 +276,8 @@ class DetailPostFragment : Fragment() {
 
     private fun clickMap() {
         val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.fcv_detail_post, DetailPostMapFragment())
+        // TODO: Fragment Transaction 수정요망(id 부분)
+        transaction.replace(R.id.write_share_layout, DetailPostMapFragment())
             .addToBackStack(null)
             .commit()
     }
@@ -267,12 +285,12 @@ class DetailPostFragment : Fragment() {
     private fun clickAuthor() {
         binding.imgAuthor.setOnClickListener {
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
-            intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
+            intent.putExtra("userEmail", viewModel.authorEmail.value)
             startActivity(intent)
         }
         binding.tvAuthorNickname.setOnClickListener {
             val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
-            intent.putExtra("userEmail", viewModel.detailPost.value?.authorEmail)
+            intent.putExtra("userEmail", viewModel.authorEmail.value)
             startActivity(intent)
         }
     }

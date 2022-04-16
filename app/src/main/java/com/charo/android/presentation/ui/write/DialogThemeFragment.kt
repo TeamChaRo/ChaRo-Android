@@ -17,6 +17,7 @@ import com.charo.android.presentation.util.ThemeUtil
 
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DialogThemeFragment : BottomSheetDialogFragment() {
     private var _binding: DialogThemeBinding? = null
@@ -27,12 +28,14 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
     private val chipTextMap : HashMap<String, TextView> = HashMap()  //"산", chipTextMountain
     private val isSelectMap : HashMap<TextView, ConstraintLayout> = HashMap()
 
-    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                WriteSharedViewModel() as T
-        }
-    }
+//    원래 진희코드
+//    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+//        object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+//                WriteSharedViewModel() as T
+//        }
+//    }
+    private val sharedViewModel by sharedViewModel<WriteSharedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -13,16 +13,17 @@ import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
 import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { HomeViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SignUpEmailViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { MoreViewViewModel(get(), get(), get(), get(), get(),get(),get()) }
+    viewModel { MoreViewViewModel(get(), get(), get(), get(), get(), get(), get()) }
     viewModel { SharedViewModel(get()) }
     viewModel { SettingViewModel(get(), get(), get(), get(), get(), get()) }
-    viewModel { SearchViewModel(get(),get()) }
+    viewModel { SearchViewModel(get(), get()) }
     viewModel { SocialSignInViewModel(get()) }
     viewModel { EmailSignInViewModel(get()) }
     // SH
@@ -30,4 +31,5 @@ val viewModelModule = module {
     viewModel { FollowViewModel(get(), get()) }
     viewModel { DetailPostViewModel(get(), get(), get(), get(), get()) }
     viewModel { OtherMyPageViewModel(get(), get(), get(), get(), get()) }
+    viewModel { WriteSharedViewModel(get(), get(), get(), get(), get()) }
 }

@@ -19,6 +19,7 @@ import com.skt.Tmap.TMapAddressInfo
 import com.skt.Tmap.TMapData
 import com.skt.Tmap.TMapMarkerItem
 import com.skt.Tmap.TMapView
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 private const val LOCATION_NAME = "locationName"
@@ -51,12 +52,14 @@ class WriteMapLocationFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                WriteSharedViewModel() as T
-        }
-    }
+//    원래 진희코드
+//    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+//        object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+//                WriteSharedViewModel() as T
+//        }
+//    }
+    private val sharedViewModel by sharedViewModel<WriteSharedViewModel>()
 
     var writeShareActivity: WriteShareActivity? = null
     override fun onAttach(context: Context) {

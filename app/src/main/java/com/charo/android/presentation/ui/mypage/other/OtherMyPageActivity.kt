@@ -10,11 +10,11 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import com.charo.android.R
 import com.charo.android.databinding.ActivityOtherMyPageBinding
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.follow.FollowActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.postlist.WrittenPostFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,8 +23,9 @@ import timber.log.Timber
 class OtherMyPageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOtherMyPageBinding
     private val adapter = PostAdapter {
-        val intent = Intent(this, DetailPostActivity::class.java)
+        val intent = Intent(this, WriteShareActivity::class.java)
         intent.putExtra("postId", it.postId)
+        intent.putExtra("destination", "detail")
         startActivity(intent)
     }
     private val viewModel by viewModel<OtherMyPageViewModel>()
@@ -137,7 +138,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickFollow() {
         binding.tvFollow.setOnClickListener {
-            if(viewModel.userEmail != "@") {
+            if (viewModel.userEmail != "@") {
                 viewModel.postFollow()
             } else {
                 LoginUtil.loginPrompt(this)

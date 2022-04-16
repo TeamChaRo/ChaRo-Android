@@ -22,6 +22,7 @@ import com.skt.Tmap.TMapData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,12 +42,14 @@ class WriteMapSearchFragment : Fragment() {
     private lateinit var locationFlag: String
     var mapSearchList = mutableListOf<MapSearchInfo>()
 
-    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                WriteSharedViewModel() as T
-        }
-    }
+//    원래 진희코드
+//    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+//        object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+//                WriteSharedViewModel() as T
+//        }
+//    }
+    private val sharedViewModel by sharedViewModel<WriteSharedViewModel>()
 
     var writeShareActivity: WriteShareActivity? = null
     override fun onAttach(context: Context) {

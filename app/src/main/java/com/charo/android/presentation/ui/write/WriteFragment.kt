@@ -44,6 +44,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 
@@ -52,18 +53,22 @@ class WriteFragment : Fragment(), View.OnClickListener {
     companion object {
         fun newInstance() = WriteFragment()
     }
+
     private var _binding: FragmentWriteBinding? = null
     private val binding get() = _binding!!
 
     lateinit var galleryLauncher: ActivityResultLauncher<Intent>
 
     private lateinit var writeAdapter: WriteAdapter
-    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                WriteSharedViewModel() as T
-        }
-    }
+
+    //    원래 진희코드
+//    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
+//        object : ViewModelProvider.Factory {
+//            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+//                WriteSharedViewModel() as T
+//        }
+//    }
+    private val sharedViewModel by sharedViewModel<WriteSharedViewModel>()
 
     var writeShareActivity: WriteShareActivity? = null
     override fun onAttach(context: Context) {
@@ -85,7 +90,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
 
         initToolBar()
 
-        writeAdapter = WriteAdapter(){
+        writeAdapter = WriteAdapter() {
             //delete image
             writeAdapter.imgList.removeAt(it)
             writeAdapter.notifyDataSetChanged()
@@ -105,7 +110,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
         //글자수 제한
         warningText(binding.etWriteTitle, binding.tvWarningTitle, 38)
         warningText(binding.etWriteParkReview, binding.tvWarningParkReview, 23)
-        warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive,280)
+        warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive, 280)
 
         return root
     }
@@ -121,7 +126,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
         setHasOptionsMenu(true)
     }
 
-    private fun initListener(){
+    private fun initListener() {
         binding.imgWriteAddImg.setOnClickListener(this)
         binding.clWritePhoto.setOnClickListener(this)
         binding.btnWriteCautionHighway.setOnClickListener(this)
@@ -147,19 +152,21 @@ class WriteFragment : Fragment(), View.OnClickListener {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
+
             override fun afterTextChanged(p0: Editable?) {
                 edt.removeTextChangedListener(this)
 
-                val textLength : Int = p0.toString().length
-                if(len > 200)
+                val textLength: Int = p0.toString().length
+                if (len > 200)
                     binding.tvLenMyDrive.text = "${textLength}/${len}자"
 
-                if(textLength > len) {
-                    edt.setText(p0.toString().substring(0,textLength-1))
-                    edt.setSelection(textLength-1)
+                if (textLength > len) {
+                    edt.setText(p0.toString().substring(0, textLength - 1))
+                    edt.setSelection(textLength - 1)
                 }
                 edt.isSelected = textLength > len
                 warningTxt.isVisible = textLength > len
@@ -170,8 +177,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     //지역 (도 단위)
-    private fun selectRegion(it: View){
-        MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
+    private fun selectRegion(it: View) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
             .setNeutralButton(R.string.cancel) { dialog, which ->
                 binding.btnWriteProvince.text = resources.getString(R.string.region)
@@ -190,7 +197,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
                 preCheckProvince = which
 
                 //이전 선택값과 다를 때
-                if(locationUtil.itemProvince[which] !=  sharedViewModel.province.value){
+                if (locationUtil.itemProvince[which] != sharedViewModel.province.value) {
                     binding.btnWriteRegion.text = resources.getString(R.string.city)
                     binding.btnWriteRegion.isSelected = false
                     sharedViewModel.region.value = ""
@@ -202,8 +209,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     //지역 (시 단위)
-    private fun selectProvince(it: View){
-        MaterialAlertDialogBuilder(requireContext(),R.style.Dialog)
+    private fun selectProvince(it: View) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
             .setNeutralButton(R.string.cancel) { dialog, which ->
                 binding.btnWriteRegion.text = resources.getString(R.string.city)
@@ -214,19 +221,22 @@ class WriteFragment : Fragment(), View.OnClickListener {
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
 
-                if(locationUtil.matchRegionToProvince[binding.btnWriteProvince.text] == null){
+                if (locationUtil.matchRegionToProvince[binding.btnWriteProvince.text] == null) {
                     binding.btnWriteRegion.text = resources.getString(R.string.city)
                     it.isSelected = false
-                }else{
-                    binding.btnWriteRegion.text = locationUtil.matchRegionToProvince[binding.btnWriteProvince.text]?.get(preCheckedRegion)
-                        ?: resources.getString(R.string.city)
+                } else {
+                    binding.btnWriteRegion.text =
+                        locationUtil.matchRegionToProvince[binding.btnWriteProvince.text]?.get(
+                            preCheckedRegion
+                        )
+                            ?: resources.getString(R.string.city)
 
                     sharedViewModel.region.value = binding.btnWriteRegion.text.toString()
                 }
             }
             .setSingleChoiceItems(
-                locationUtil.matchRegionToProvince[binding.btnWriteProvince.text] ?: arrayOf("도 단위를 선택해주세요.")
-                , preCheckedRegion
+                locationUtil.matchRegionToProvince[binding.btnWriteProvince.text]
+                    ?: arrayOf("도 단위를 선택해주세요."), preCheckedRegion
             ) { dialog, which ->
                 //which : index
                 preCheckedRegion = which
@@ -236,24 +246,32 @@ class WriteFragment : Fragment(), View.OnClickListener {
             .show()
     }
 
-    private fun observeThemeData(){
+    private fun observeThemeData() {
         //테마 변경 실시간 적용
         sharedViewModel.theme.observe(viewLifecycleOwner, Observer<ArrayList<String>> { newTheme ->
             val textView = arrayOfNulls<TextView>(3)
-            var theme : Int
+            var theme: Int
 
-            for(i in 0 until 3){
-                theme = resources.getIdentifier("btn_write_theme${i+1}","id", activity?.packageName)
+            for (i in 0 until 3) {
+                theme =
+                    resources.getIdentifier("btn_write_theme${i + 1}", "id", activity?.packageName)
                 textView[i] = view?.findViewById(theme)
 
                 //초기화   "테마${i+1}"
-                textView[i]?.text = getString(resources.getIdentifier("theme${i+1}","string", activity?.packageName))
+                textView[i]?.text = getString(
+                    resources.getIdentifier(
+                        "theme${i + 1}",
+                        "string",
+                        activity?.packageName
+                    )
+                )
                 textView[i]?.isSelected = false
             }
 
-            for(i in 0 until newTheme.count()){
+            for (i in 0 until newTheme.count()) {
                 //재설정
-                textView[i]?.text = ThemeUtil().themeMap.entries.find { it.value == newTheme[i] }?.key
+                textView[i]?.text =
+                    ThemeUtil().themeMap.entries.find { it.value == newTheme[i] }?.key
                 textView[i]?.isSelected = true
             }
         })
@@ -265,9 +283,9 @@ class WriteFragment : Fragment(), View.OnClickListener {
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
 
-    private fun convertImgToMultiPart(imgPath : Uri, list : ArrayList<MultipartBody.Part>){
+    private fun convertImgToMultiPart(imgPath: Uri, list: ArrayList<MultipartBody.Part>) {
         //uri -> Bitmap -> multipartform
-        val bitmap : Bitmap = if(Build.VERSION.SDK_INT < 28) {
+        val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
             MediaStore.Images.Media.getBitmap(
                 context?.contentResolver,
                 imgPath
@@ -284,76 +302,94 @@ class WriteFragment : Fragment(), View.OnClickListener {
         list.add(imageData)
     }
 
-    private fun galleryLauncher(){
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            var imgPath: Uri
-            val image = ArrayList<MultipartBody.Part>()
-            if (it.resultCode == Activity.RESULT_OK) {
-                if(it.data == null){
-                    Timber.d("error img data null")
-                    return@registerForActivityResult
-                }
-
-                if(it.data == null || it.data?.clipData == null){
-                    Toast.makeText(context, "이미지만 선택 가능합니다.", Toast.LENGTH_LONG).show()
-                    return@registerForActivityResult
-                }
-
-                val clipData = it.data!!.clipData
-                when {
-                    clipData?.itemCount!! > 6 -> {
-                        Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
+    private fun galleryLauncher() {
+        galleryLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                var imgPath: Uri
+                val image = ArrayList<MultipartBody.Part>()
+                if (it.resultCode == Activity.RESULT_OK) {
+                    if (it.data == null) {
+                        Timber.d("error img data null")
+                        return@registerForActivityResult
                     }
-                    clipData.itemCount in 1..6 -> {
-                        binding.clWritePhoto.visibility = View.GONE
-                        val imgMoreList = mutableListOf<WriteImgInfo>()
-                        for (i: Int in 0 until clipData.itemCount) {
-                            imgPath = clipData.getItemAt(i).uri
 
-                            //recyclerView 에 저장
-                            imgMoreList.add(
-                                0,
-                                WriteImgInfo(
-                                    imgUri = imgPath,
-                                )
-                            )
+                    if (it.data == null || it.data?.clipData == null) {
+                        Toast.makeText(context, "이미지만 선택 가능합니다.", Toast.LENGTH_LONG).show()
+                        return@registerForActivityResult
+                    }
 
-                            //이미지 멀티파트로 저장
-                            convertImgToMultiPart(imgPath, image)
+                    val clipData = it.data!!.clipData
+                    when {
+                        clipData?.itemCount!! > 6 -> {
+                            Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
                         }
+                        clipData.itemCount in 1..6 -> {
+                            binding.clWritePhoto.visibility = View.GONE
+                            val imgMoreList = mutableListOf<WriteImgInfo>()
+                            for (i: Int in 0 until clipData.itemCount) {
+                                imgPath = clipData.getItemAt(i).uri
 
-                        val position = writeAdapter.itemCount
-                        val newCount = position + imgMoreList.size
-                        if(newCount > 6){
-                            Toast.makeText(context, "사진은 6개까지 선택 가능합니다. \n다시 선택해주세요.", Toast.LENGTH_LONG).show()
-                        }else{
-                            writeAdapter.imgList.addAll(imgMoreList)
-                            writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
+                                //recyclerView 에 저장
+                                imgMoreList.add(
+                                    0,
+                                    WriteImgInfo(
+                                        imgUri = imgPath,
+                                    )
+                                )
 
-                            if(sharedViewModel.imageMultiPart.value == null){
-                                sharedViewModel.imageMultiPart.value = image
-                            }else{
-                                sharedViewModel.imageMultiPart.value!!.addAll(image)
+                                //이미지 멀티파트로 저장
+                                convertImgToMultiPart(imgPath, image)
+                            }
+
+                            val position = writeAdapter.itemCount
+                            val newCount = position + imgMoreList.size
+                            if (newCount > 6) {
+                                Toast.makeText(
+                                    context,
+                                    "사진은 6개까지 선택 가능합니다. \n다시 선택해주세요.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                writeAdapter.imgList.addAll(imgMoreList)
+                                writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
+
+                                if (sharedViewModel.imageMultiPart.value == null) {
+                                    sharedViewModel.imageMultiPart.value = image
+                                } else {
+                                    sharedViewModel.imageMultiPart.value!!.addAll(image)
+                                }
                             }
                         }
                     }
-                }
 
-                setPlusIconLoc()
+                    setPlusIconLoc()
+                }
             }
-        }
     }
 
     private fun openGallery() {
 
-        var writePermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        var readPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        var writePermission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        var readPermission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
         // 권한 없어서 요청
         if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                1000
+            )
 
         } else { // 권한 있음
-            if(writeAdapter.itemCount >= 6){
+            if (writeAdapter.itemCount >= 6) {
                 Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
                 return
             }
@@ -369,7 +405,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     //이미지 보내기
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
         override fun contentType(): MediaType = "image/jpeg".toMediaType()
 
         override fun writeTo(sink: BufferedSink) {
@@ -378,20 +414,20 @@ class WriteFragment : Fragment(), View.OnClickListener {
 
     }
 
-    private fun setPlusIconLoc(){
-        var rowSpec : GridLayout.Spec = GridLayout.spec(0)
-        var columnSpec : GridLayout.Spec = GridLayout.spec(0)
+    private fun setPlusIconLoc() {
+        var rowSpec: GridLayout.Spec = GridLayout.spec(0)
+        var columnSpec: GridLayout.Spec = GridLayout.spec(0)
 
         binding.clWritePhoto.visibility = View.GONE
         binding.gridImgPlus.visibility = View.VISIBLE
-        when(writeAdapter.imgList.size){
+        when (writeAdapter.imgList.size) {
             0 -> {
                 binding.clWritePhoto.visibility = View.VISIBLE
                 binding.gridImgPlus.visibility = View.GONE
             }
             1 -> {
                 rowSpec = GridLayout.spec(0)
-                columnSpec = GridLayout.spec(0,GridLayout.CENTER,1f)
+                columnSpec = GridLayout.spec(0, GridLayout.CENTER, 1f)
             }
             2 -> {
                 rowSpec = GridLayout.spec(0)
@@ -403,7 +439,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
             }
             4 -> {
                 rowSpec = GridLayout.spec(1)
-                columnSpec = GridLayout.spec(0,GridLayout.CENTER,1f)
+                columnSpec = GridLayout.spec(0, GridLayout.CENTER, 1f)
             }
             5 -> {
                 rowSpec = GridLayout.spec(1)
@@ -414,30 +450,48 @@ class WriteFragment : Fragment(), View.OnClickListener {
             }
         }
 
-        if(binding.imgWriteAddImg.parent != null)
+        if (binding.imgWriteAddImg.parent != null)
             (binding.imgWriteAddImg.parent as ViewGroup).removeView(binding.imgWriteAddImg)
-        binding.gridImgPlus.addView(binding.imgWriteAddImg, GridLayout.LayoutParams(rowSpec,columnSpec))
+        binding.gridImgPlus.addView(
+            binding.imgWriteAddImg,
+            GridLayout.LayoutParams(rowSpec, columnSpec)
+        )
     }
 
-    private fun nextButtonToMap(){
+    private fun nextButtonToMap() {
         //주의사항
         val warningList: ArrayList<MultipartBody.Part> = ArrayList()
         val warningUIList: ArrayList<String> = ArrayList()
 
-        if(binding.btnWriteCautionHighway.isSelected) {
+        if (binding.btnWriteCautionHighway.isSelected) {
             warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_HIGH_WAY))
             warningUIList.add(Define().WARNING_HIGH_WAY)
         }
-        if(binding.btnWriteCautionMoun.isSelected){
-            warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_MOUNTAIN_ROAD))
+        if (binding.btnWriteCautionMoun.isSelected) {
+            warningList.add(
+                MultipartBody.Part.createFormData(
+                    "warning",
+                    Define().WARNING_MOUNTAIN_ROAD
+                )
+            )
             warningUIList.add(Define().WARNING_MOUNTAIN_ROAD)
         }
-        if(binding.btnWriteCautionDiffi.isSelected){
-            warningList.add(MultipartBody.Part.createFormData("warning", Define().WARNING_DIFF_ROAD))
+        if (binding.btnWriteCautionDiffi.isSelected) {
+            warningList.add(
+                MultipartBody.Part.createFormData(
+                    "warning",
+                    Define().WARNING_DIFF_ROAD
+                )
+            )
             warningUIList.add(Define().WARNING_DIFF_ROAD)
         }
-        if(binding.btnWriteCautionPeople.isSelected){
-            warningList.add(MultipartBody.Part.createFormData("warning",Define().WARNING_HOT_PLACE))
+        if (binding.btnWriteCautionPeople.isSelected) {
+            warningList.add(
+                MultipartBody.Part.createFormData(
+                    "warning",
+                    Define().WARNING_HOT_PLACE
+                )
+            )
             warningUIList.add(Define().WARNING_HOT_PLACE)
         }
         sharedViewModel.warning.value = warningList
@@ -456,16 +510,26 @@ class WriteFragment : Fragment(), View.OnClickListener {
         sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
 
         //빈값 확인
-        if(TextUtils.isEmpty(sharedViewModel.title.value)
+        if (TextUtils.isEmpty(sharedViewModel.title.value)
             || TextUtils.isEmpty(sharedViewModel.province.value)
-            || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(sharedViewModel.region.value))
+            || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(
+                sharedViewModel.region.value
+            ))
             || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
             || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
-            || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)){
+            || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)
+        ) {
 
-            Toast.makeText(requireContext(),getString(R.string.txt_check_all_input),Toast.LENGTH_LONG).show()
-        }else{
-            writeShareActivity!!.replaceAddStackFragment(WriteMapFragment.newInstance(), "writeMap");
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.txt_check_all_input),
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            writeShareActivity!!.replaceAddStackFragment(
+                WriteMapFragment.newInstance(),
+                "writeMap"
+            )
         }
     }
 
@@ -475,7 +539,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
         if (sharedViewModel.imageMultiPart.value != null) {
             binding.clWritePhoto.visibility = View.GONE
 
-            val imgMoreList = sharedViewModel.imageUriRecyclerView.value ?: mutableListOf<WriteImgInfo>()
+            val imgMoreList =
+                sharedViewModel.imageUriRecyclerView.value ?: mutableListOf<WriteImgInfo>()
 
             imgMoreList.forEach { imageUri ->
                 writeAdapter.imgList = imgMoreList
@@ -486,29 +551,29 @@ class WriteFragment : Fragment(), View.OnClickListener {
         }
 
         //지역 도 시
-        if(sharedViewModel.province.value != ""){
+        if (sharedViewModel.province.value != "") {
             binding.btnWriteProvince.text = sharedViewModel.province.value
             binding.btnWriteProvince.isSelected = true
         }
-        if(sharedViewModel.region.value != "") {
+        if (sharedViewModel.region.value != "") {
             binding.btnWriteRegion.text = sharedViewModel.region.value
             binding.btnWriteRegion.isSelected = true
         }
 
         //주차 있없
-        if(sharedViewModel.isParking.value == true){
+        if (sharedViewModel.isParking.value == true) {
             binding.btnWriteParkYes.isSelected = true
             binding.btnWriteParkNo.isSelected = false
 
-        }else if(sharedViewModel.isParking.value == false){
+        } else if (sharedViewModel.isParking.value == false) {
             binding.btnWriteParkYes.isSelected = false
             binding.btnWriteParkNo.isSelected = true
         }
 
         //주의사항
-        if(sharedViewModel.warningUI.value != null){
-            for(warningData in sharedViewModel.warningUI.value!!){
-                when(warningData){
+        if (sharedViewModel.warningUI.value != null) {
+            for (warningData in sharedViewModel.warningUI.value!!) {
+                when (warningData) {
                     Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected = true
                     Define().WARNING_DIFF_ROAD -> binding.btnWriteCautionDiffi.isSelected = true
                     Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected = true
@@ -520,20 +585,22 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v){
+        when (v) {
             //갤러리 이미지
-            binding.imgWriteAddImg
-                , binding.clWritePhoto -> { openGallery() }
+            binding.imgWriteAddImg, binding.clWritePhoto -> {
+                openGallery()
+            }
 
             //주의사항
-            binding.btnWriteCautionHighway, binding.btnWriteCautionPeople
-                , binding.btnWriteCautionDiffi, binding.btnWriteCautionMoun
-                    -> { v.isSelected = !v.isSelected }
+            binding.btnWriteCautionHighway, binding.btnWriteCautionPeople, binding.btnWriteCautionDiffi, binding.btnWriteCautionMoun
+            -> {
+                v.isSelected = !v.isSelected
+            }
 
             //테마
-            binding.btnWriteTheme1
-                , binding.btnWriteTheme2
-                , binding.btnWriteTheme3 -> {openThemeDialog() }
+            binding.btnWriteTheme1, binding.btnWriteTheme2, binding.btnWriteTheme3 -> {
+                openThemeDialog()
+            }
 
             //주차 - 둘 중 하나만 선택 가능
             binding.btnWriteParkYes -> {
@@ -541,13 +608,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
                 binding.btnWriteParkNo.isSelected = false
 
                 sharedViewModel.isParking.value = true
-                }
+            }
             binding.btnWriteParkNo -> {
                 binding.btnWriteParkNo.isSelected = true
                 binding.btnWriteParkYes.isSelected = false
 
                 sharedViewModel.isParking.value = false
-                }
+            }
 
             //다음 버튼
             binding.btnWriteBottomNext -> nextButtonToMap()
