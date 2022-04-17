@@ -8,6 +8,9 @@ object DetailPostMapper {
     fun mapperToDetailPost(responseDetailPost: ResponseDetailPost): DetailPost {
         val data = responseDetailPost.data
         return DetailPost(
+            region = data.region,
+            title = data.title,
+            createdAt = data.createdAt,
             images = data.images,
             province = data.province,
             isParking = data.isParking,
