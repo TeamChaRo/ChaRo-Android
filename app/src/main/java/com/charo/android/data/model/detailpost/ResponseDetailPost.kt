@@ -6,6 +6,12 @@ data class ResponseDetailPost(
     val data: Data
 ) {
     data class Data(
+        // 추가된 부분
+        val postId: Int,
+        val title: String,
+        val region: String,
+        val createdAt: String,
+        // 여기까지
         val images: List<String>,
         val province: String,
         val isParking: Boolean,

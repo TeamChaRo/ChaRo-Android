@@ -1,6 +1,11 @@
 package com.charo.android.domain.model.detailpost
 
 data class DetailPost(
+    // 추가부분
+    val region: String,
+    val title: String,
+    val createdAt: String,
+    // 여기까지 추가된 부분
     val images: List<String>,
     val province: String,
     val isParking: Boolean,
