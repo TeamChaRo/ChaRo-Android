@@ -36,17 +36,8 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        생명주기 단에서 이게 맞을까 ... ? (승현)
-//        if(viewModel.userEmail != "@") {
-//            // 내 마이페이지 보는 경우
-//            viewModel.getLikePost()
-//            viewModel.getNewPost()
-//        }
-    }
-
-    override fun onResume() {
-        super.onResume()
         if(viewModel.userEmail != "@") {
+            // 내 마이페이지 보는 경우
             viewModel.getLikePost()
             viewModel.getNewPost()
         }

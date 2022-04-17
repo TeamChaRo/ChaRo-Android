@@ -15,6 +15,10 @@ class MyPageRepositoryImpl(private val remoteDataSource: RemoteMyPageDataSource)
         return remoteDataSource.getNewPost(userEmail)
     }
 
+    override suspend fun getFollow(userEmail: String, targetEmail: String): Boolean {
+        return remoteDataSource.getFollow(userEmail, targetEmail).toBoolean()
+    }
+
     override suspend fun getMoreWrittenLikePost(
         userEmail: String,
         lastId: Int,

@@ -2,9 +2,11 @@ package com.charo.android.data.api.mypage
 
 
 import com.charo.android.data.model.mypage.ResponseEndlessScroll
+import com.charo.android.data.model.mypage.ResponseFollow
 import com.charo.android.data.model.mypage.ResponseMyPage
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MyPageService {
     @GET("user/myPage/like/{userEmail}")
@@ -16,6 +18,12 @@ interface MyPageService {
     suspend fun getNewPost(
         @Path("userEmail") userEmail: String
     ): ResponseMyPage
+
+    @GET("user/follow/check")
+    suspend fun getFollow(
+        @Query("userEmail") userEmail: String,
+        @Query("targetEmail") targetEmail: String
+    ): ResponseFollow
 
     @GET("user/myPage/like/{userEmail}/write/{lastId}/{lastCount}")
     suspend fun getMoreWrittenLikePost(

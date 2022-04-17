@@ -46,15 +46,11 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
-//        생명주기 단에서 이게 맞을까 ... ? (승현)
-//        viewModel.getLikePost()
-//        viewModel.getNewPost()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getLikePost()
-        viewModel.getNewPost()
+        if(viewModel.userEmail.value != "@") {
+            viewModel.getLikePost()
+            viewModel.getNewPost()
+            viewModel.getFollow()
+        }
     }
 
     private fun initRecyclerView() {
@@ -144,7 +140,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickFollow() {
         binding.tvFollow.setOnClickListener {
-            if (viewModel.userEmail != "@") {
+            if (viewModel.userEmail.value != "@") {
                 viewModel.postFollow()
             } else {
                 LoginUtil.loginPrompt(this)
@@ -155,7 +151,7 @@ class OtherMyPageActivity : AppCompatActivity() {
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
             val intent = Intent(this, FollowActivity::class.java)
-            intent.putExtra("userEmail", viewModel.otherUserEmail)
+            intent.putExtra("userEmail", viewModel.otherUserEmail.value)
             intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
             startActivity(intent)
         }
