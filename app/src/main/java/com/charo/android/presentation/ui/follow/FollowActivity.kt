@@ -26,8 +26,14 @@ class FollowActivity : AppCompatActivity() {
         viewModel.setNickname(intent.getStringExtra("nickname") ?: error(finish()))
 
         initViewPager()
-        getFollowList()
+//        생명주기 단에서 이게 맞을까 ... ? (승현)
+//        getFollowList()
         clickBack()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFollowList()
     }
 
     private fun initViewPager() {

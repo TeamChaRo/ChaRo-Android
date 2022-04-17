@@ -46,7 +46,13 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
+//        생명주기 단에서 이게 맞을까 ... ? (승현)
+//        viewModel.getLikePost()
+//        viewModel.getNewPost()
+    }
 
+    override fun onResume() {
+        super.onResume()
         viewModel.getLikePost()
         viewModel.getNewPost()
     }
