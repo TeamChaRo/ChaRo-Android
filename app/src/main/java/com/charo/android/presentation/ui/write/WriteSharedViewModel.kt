@@ -15,6 +15,9 @@ import com.charo.android.domain.usecase.interaction.PostSaveUseCase
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class WriteSharedViewModel(
     private val getDetailPostUseCase: GetDetailPostUseCase,
@@ -61,6 +64,7 @@ class WriteSharedViewModel(
     // DetailPostFragment
     var postId: Int = -1
     var userEmail: String = ""
+    var createdAt = MutableLiveData<String>().default("")
     var isAuthorFlag = MutableLiveData<Boolean>().default(false)
     var profileImage = MutableLiveData<String>().default("")
     var author = MutableLiveData<String>().default("")
@@ -71,6 +75,8 @@ class WriteSharedViewModel(
     var likesCount = MutableLiveData<Int>().default(0)
     var isStored = MutableLiveData<Int>().default(0)
     var courseDetail = MutableLiveData<List<DetailPost.Course>>()
+    var detailCreatedAt = MutableLiveData<String>().default("")
+    var detailArea = MutableLiveData<String>().default("")
 
     // DetailPostLikeListFragment
     private var _likeUserList = MutableLiveData<List<User>>()
@@ -117,6 +123,8 @@ class WriteSharedViewModel(
                 getDetailPostUseCase(userEmail, postId)
             }.onSuccess {
                 // 단순 값 할당의 과정입니다 ...
+                title.value = it.title
+                region.value = it.region
                 imageStringViewPager.value = it.images.toMutableList()
                 province.value = it.province
                 isParking.value = it.isParking
@@ -161,6 +169,31 @@ class WriteSharedViewModel(
                         Timber.tag("getDetailPost").e(it.course.toString())
                     }
                 }
+                // createdAt 파싱
+//                val format = SimpleDateFormat("YYYY-MM-DD'T'hh:mm:ss.SSS'Z'", Locale.KOREAN)
+//                val date = format.parse(it.createdAt)
+//                Timber.tag("date").i(date!!.toString())
+//                val formatter = SimpleDateFormat("yyyy년 MM월 dd일",Locale.KOREAN)
+//                date?.let {
+//                    createdAt.value = formatter.format(date)
+//                }
+                val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                format.timeZone = TimeZone.getTimeZone("GMT")
+                val date = format.parse(it.createdAt)
+                date?.let {
+                    Timber.tag("date").i(date.toString())
+                    val formatter = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+                    createdAt.value = formatter.format(date)
+                }
+                // 지역 분기처리
+                when (it.province) {
+                    "특별시", "광역시" -> {
+                        detailArea.value = it.region + it.province
+                    }
+                    else -> {
+                        detailArea.value = "${it.province} ${it.region}"
+                    }
+                }
             }.onFailure {
                 Timber.tag("getDetailPostData").e(it)
             }
@@ -187,7 +220,7 @@ class WriteSharedViewModel(
             kotlin.runCatching {
                 postSaveUseCase(userEmail, postId)
             }.onSuccess {
-                if(it) {
+                if (it) {
                     isStored.value = isStored.value?.plus(1)?.rem(2)
                 }
             }.onFailure {
@@ -197,7 +230,7 @@ class WriteSharedViewModel(
     }
 
     private fun updateLikesCount() {
-        when(isFavorite.value) {
+        when (isFavorite.value) {
             0 -> likesCount.value = likesCount.value?.minus(1)
             else -> likesCount.value = likesCount.value?.plus(1)
         }
