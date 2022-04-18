@@ -46,9 +46,16 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
-        if(viewModel.userEmail.value != "@") {
+        if(viewModel.userEmail != "@") {
             viewModel.getLikePost()
             viewModel.getNewPost()
+            viewModel.getFollow()
+        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        if(viewModel.userEmail != "@") {
             viewModel.getFollow()
         }
     }
@@ -140,7 +147,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickFollow() {
         binding.tvFollow.setOnClickListener {
-            if (viewModel.userEmail.value != "@") {
+            if (viewModel.userEmail != "@") {
                 viewModel.postFollow()
             } else {
                 LoginUtil.loginPrompt(this)
@@ -151,7 +158,7 @@ class OtherMyPageActivity : AppCompatActivity() {
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
             val intent = Intent(this, FollowActivity::class.java)
-            intent.putExtra("userEmail", viewModel.otherUserEmail.value)
+            intent.putExtra("userEmail", viewModel.otherUserEmail)
             intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
             startActivity(intent)
         }

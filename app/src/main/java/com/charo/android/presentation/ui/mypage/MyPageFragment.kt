@@ -36,8 +36,17 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        이게 맞나 ... 싶긴 하지만 딱히 다른 방도가 떠오르지 않는다
+//        if(viewModel.userEmail != "@") {
+//            // 내 마이페이지 보는 경우
+//            viewModel.getLikePost()
+//            viewModel.getNewPost()
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         if(viewModel.userEmail != "@") {
-            // 내 마이페이지 보는 경우
             viewModel.getLikePost()
             viewModel.getNewPost()
         }

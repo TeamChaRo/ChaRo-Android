@@ -14,7 +14,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FollowActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFollowBinding
     private val viewModel: FollowViewModel by viewModel()
-    private lateinit var myPageEmail: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +27,11 @@ class FollowActivity : AppCompatActivity() {
         initViewPager()
         getFollowList()
         clickBack()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        getFollowList()
     }
 
     private fun initViewPager() {

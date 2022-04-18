@@ -47,7 +47,7 @@ class FollowerFragment : Fragment() {
             intent.putExtra("userEmail", it.userEmail)
             startActivity(intent)
         }, {
-            if(viewModel.userEmail != "@") {
+            if (viewModel.userEmail != "@") {
                 viewModel.postFollow(it.userEmail)
             } else {
                 LoginUtil.loginPrompt(requireContext())
