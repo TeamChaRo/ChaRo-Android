@@ -116,7 +116,7 @@ class MyPageViewModel(
                 getRemoteMoreWrittenNewPostUseCase(userEmail, _writtenNewLastId)
             }.onSuccess {
                 _writtenNewLastId = it.lastId
-                _writtenNewPostList.value = _writtenNewPostList.value?.apply { it.drive }
+                _writtenNewPostList.value = _writtenNewPostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenNewPost() ${it.message.toString()}")
             }

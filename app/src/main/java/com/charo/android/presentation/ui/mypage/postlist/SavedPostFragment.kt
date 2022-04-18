@@ -11,19 +11,22 @@ import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charo.android.R
-import com.charo.android.data.model.mypage.Post
 import com.charo.android.databinding.FragmentSavedPostBinding
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import timber.log.Timber
 
 class SavedPostFragment : Fragment() {
     private var _binding: FragmentSavedPostBinding? = null
     val binding get() = _binding ?: error("binding not initiated")
     val viewModel: MyPageViewModel by sharedViewModel()
-    private lateinit var savedPostAdapter: PostAdapter
+    private val savedPostAdapter: PostAdapter = PostAdapter {
+        val intent = Intent(requireContext(), WriteShareActivity::class.java)
+        intent.putExtra("postId", it.postId)
+        intent.putExtra("destination", "detail")
+        startActivity(intent)
+    }
     private var sort = LIKE
 
     override fun onCreateView(
@@ -39,22 +42,14 @@ class SavedPostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkPostListNotEmpty()
+        initSpinner()
+        initRecyclerView()
         endlessScroll()
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    private fun checkPostListNotEmpty() {
-        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                initSpinner()
-                initRecyclerView(it)
-            }
-        }
     }
 
     private fun initSpinner() {
@@ -73,47 +68,34 @@ class SavedPostFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    if (position == 0) {
-                        Timber.d("mlog: SavedPostFragment::spinner handler onItemSelected - 0")
-                        sort = LIKE
+                    sort = if (position == 0) {
+                        LIKE
                     } else {
-                        Timber.d("mlog: SavedPostFragment::spinner handler onItemSelected - 1")
-                        sort = NEW
+                        NEW
                     }
-                    changeRecyclerViewItemList(sort)
+                    changeRecyclerViewItemList()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    Timber.d("mlog: WrittenPostFragment::spinner handler onNothingSelected")
+
                 }
             }
     }
 
-    private fun initRecyclerView(postList: MutableList<Post>) {
-        savedPostAdapter = PostAdapter {
-            val intent = Intent(requireContext(), WriteShareActivity::class.java)
-            intent.putExtra("postId", it.postId)
-            intent.putExtra("destination", "detail")
-            startActivity(intent)
-        }
+    private fun initRecyclerView() {
         binding.rvPostList.adapter = savedPostAdapter
-        savedPostAdapter.replaceItem(postList)
     }
 
-    private fun changeRecyclerViewItemList(sort: Int) {
+    private fun changeRecyclerViewItemList() {
         when (sort) {
             LIKE -> {
-                viewModel.savedLikePostList.observe(viewLifecycleOwner) {
-                    savedPostAdapter.apply {
-                        this.replaceItem(it)
-                    }
+                viewModel.savedLikePostList.value?.let {
+                    savedPostAdapter.replaceItem(it)
                 }
             }
             NEW -> {
-                viewModel.savedNewPostList.observe(viewLifecycleOwner) {
-                    savedPostAdapter.apply {
-                        this.replaceItem(it)
-                    }
+                viewModel.savedNewPostList.value?.let {
+                    savedPostAdapter.replaceItem(it)
                 }
             }
         }
@@ -122,17 +104,18 @@ class SavedPostFragment : Fragment() {
     private fun endlessScroll() {
         binding.nsvPostList.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-                Timber.d("mlog: SavedPostFragment::endlessScroll NestedScrollView 최하단 도달")
                 when (sort) {
                     LIKE -> {
-                        // 서버에서 더 가져오는 로직
-                        Timber.d("mlog: SavedPostFragment::endlessScroll 인기순 저장한 게시글 더 불러오기")
                         viewModel.getMoreSavedLikePost()
+                        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
+                            savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
+                        }
                     }
                     NEW -> {
-                        // 서버에서 더 가져오는 로직
-                        Timber.d("mlog: SavedPostFragment::endlessScroll 최신순 저장한 게시글 더 불러오기")
                         viewModel.getMoreSavedNewPost()
+                        viewModel.savedNewPostList.observe(viewLifecycleOwner) {
+                            savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
+                        }
                     }
                 }
             }
