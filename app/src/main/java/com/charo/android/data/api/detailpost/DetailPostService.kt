@@ -1,11 +1,11 @@
 package com.charo.android.data.api.detailpost
 
 
+import com.charo.android.data.model.detailpost.RequestDeleteDetailPost
 import com.charo.android.data.model.detailpost.ResponseDetailPost
+import com.charo.android.data.model.detailpost.ResponseDeleteDetailPost
 import com.charo.android.data.model.detailpost.ResponseDetailPostLikeUserList
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface DetailPostService {
     @GET("post/detail/{userEmail}/{postId}")
@@ -19,4 +19,9 @@ interface DetailPostService {
         @Path("postId") postId: Int,
         @Query("userEmail") userEmail: String
     ): ResponseDetailPostLikeUserList
+
+    @HTTP(method = "DELETE", path = "/post/{postId}", hasBody = true)
+    suspend fun deleteDetailPost(
+        @Path("postId") postId: Int, @Body body: RequestDeleteDetailPost
+    ): ResponseDeleteDetailPost
 }

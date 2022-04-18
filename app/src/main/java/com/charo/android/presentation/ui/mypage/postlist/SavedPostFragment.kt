@@ -47,6 +47,19 @@ class SavedPostFragment : Fragment() {
         endlessScroll()
     }
 
+    override fun onResume() {
+        super.onResume()
+        super.onResume()
+        when (sort) {
+            LIKE -> {
+                viewModel.savedLikePostList.value?.let { savedPostAdapter.replaceItem(it.map { Post -> Post.copy() }) }
+            }
+            NEW -> {
+                viewModel.savedNewPostList.value?.let { savedPostAdapter.replaceItem(it.map { Post -> Post.copy() }) }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
@@ -54,7 +67,7 @@ class SavedPostFragment : Fragment() {
 
     private fun initSpinner() {
         // spinner 자체 set up
-        val filter = resources.getStringArray(R.array.charo_filter)
+        val filter = resources.getStringArray(R.array.my_page_filter)
         val adapter = ArrayAdapter(requireActivity(), R.layout.item_charo_spinner, filter)
         adapter.setDropDownViewResource(R.layout.item_charo_spinner)
         binding.spinnerPostList.adapter = adapter
@@ -90,12 +103,12 @@ class SavedPostFragment : Fragment() {
         when (sort) {
             LIKE -> {
                 viewModel.savedLikePostList.value?.let {
-                    savedPostAdapter.replaceItem(it)
+                    savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
                 }
             }
             NEW -> {
                 viewModel.savedNewPostList.value?.let {
-                    savedPostAdapter.replaceItem(it)
+                    savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
                 }
             }
         }

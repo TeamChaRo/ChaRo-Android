@@ -16,7 +16,6 @@ import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import timber.log.Timber
 
 class WrittenPostFragment : Fragment() {
     private val TAG = "mlog: WrittenPostFragment::"
@@ -54,13 +53,25 @@ class WrittenPostFragment : Fragment() {
         endlessScroll()
     }
 
+    override fun onResume() {
+        super.onResume()
+        when (sort) {
+            LIKE -> {
+                viewModel.writtenLikePostList.value?.let { writtenPostAdapter.replaceItem(it.map {Post -> Post.copy()}) }
+            }
+            NEW -> {
+                viewModel.writtenNewPostList.value?.let { writtenPostAdapter.replaceItem(it.map {Post -> Post.copy()}) }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
 
     private fun initSpinner() {
-        val filter = resources.getStringArray(R.array.charo_filter)
+        val filter = resources.getStringArray(R.array.my_page_filter)
         val adapter = ArrayAdapter(requireActivity(), R.layout.item_charo_spinner, filter)
         adapter.setDropDownViewResource(R.layout.item_charo_spinner)
         binding.spinnerPostList.adapter = adapter
@@ -95,12 +106,12 @@ class WrittenPostFragment : Fragment() {
         when (sort) {
             LIKE -> {
                 viewModel.writtenLikePostList.value?.let {
-                    writtenPostAdapter.replaceItem(it)
+                    writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
                 }
             }
             NEW -> {
                 viewModel.writtenNewPostList.value?.let {
-                    writtenPostAdapter.replaceItem(it)
+                    writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
                 }
             }
         }

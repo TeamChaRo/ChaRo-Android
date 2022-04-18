@@ -11,7 +11,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
         android:includeFontPadding="false"
-        android:text="삭제하시겠습니까? 열심히 썼잖아"
+        android:text="@string/text_confirm_delete"
         android:textColor="#454545"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,35 +19,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="113dp"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/noto_sans_cjkkr_medium"
-        android:includeFontPadding="false"
-        android:text="@string/ok"
-        android:textColor="#2c98f0"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/text_no"
-        app:layout_constraintStart_toStartOf="@id/tv_detail_delete"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/text_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
         android:includeFontPadding="false"
         android:text="@string/no"
         android:textColor="#2c98f0"
         android:textSize="14sp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/text_ok"
+        app:layout_constraintStart_toStartOf="@id/tv_detail_delete"
+        app:layout_constraintTop_toBottomOf="@id/tv_detail_delete" />
+
+    <TextView
+        android:id="@+id/text_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/noto_sans_cjkkr_medium"
+        android:includeFontPadding="false"
+        android:padding="20dp"
+        android:text="@string/ok"
+        android:textColor="#2c98f0"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tv_detail_delete"
-        app:layout_constraintStart_toEndOf="@+id/text_ok"
-        app:layout_constraintTop_toTopOf="@+id/text_ok" />
+        app:layout_constraintStart_toEndOf="@+id/text_no"
+        app:layout_constraintTop_toTopOf="@+id/text_no" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

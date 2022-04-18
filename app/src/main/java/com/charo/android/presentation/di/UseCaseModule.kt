@@ -1,6 +1,7 @@
 package com.charo.android.presentation.di
 
 
+import com.charo.android.domain.usecase.detailpost.DeleteDetailPostUseCase
 import com.charo.android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
 import com.charo.android.domain.usecase.detailpost.GetDetailPostUseCase
 import com.charo.android.domain.usecase.follow.GetRemoteFollowListUseCase
@@ -62,4 +63,5 @@ val useCaseModule = module {
     single { GetRemoteMoreNewViewInfiniteUseCase(get()) }
     single { GetRemoteMoreNewLastIdUseCase(get()) }
     single { GetRemoteFollowUseCase(get()) }
+    single { DeleteDetailPostUseCase(get()) }
 }

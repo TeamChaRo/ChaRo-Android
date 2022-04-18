@@ -7,11 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.domain.model.detailpost.DetailPost
 import com.charo.android.domain.model.detailpost.User
+import com.charo.android.domain.usecase.detailpost.DeleteDetailPostUseCase
 import com.charo.android.domain.usecase.detailpost.GetDetailPostLikeUserListUseCase
 import com.charo.android.domain.usecase.detailpost.GetDetailPostUseCase
 import com.charo.android.domain.usecase.follow.PostFollowUseCase
 import com.charo.android.domain.usecase.interaction.PostLikeUseCase
 import com.charo.android.domain.usecase.interaction.PostSaveUseCase
+import com.charo.android.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import timber.log.Timber
@@ -24,7 +26,8 @@ class WriteSharedViewModel(
     private val postLikeUseCase: PostLikeUseCase,
     private val postSaveUseCase: PostSaveUseCase,
     private val getDetailPostLikeUserListUseCase: GetDetailPostLikeUserListUseCase,
-    private val postFollowUseCase: PostFollowUseCase
+    private val postFollowUseCase: PostFollowUseCase,
+    private val deleteDetailPostUseCase: DeleteDetailPostUseCase
 ) : ViewModel() {
     // TODO: Implement the ViewModel
     fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { setValue(initialValue) }
@@ -84,6 +87,10 @@ class WriteSharedViewModel(
 
     // DetailPostImageFragment
     var imageIndex = 0
+
+    // 게시물 삭제 성공여부
+    private var _deleteSuccess = SingleLiveEvent<Boolean>()
+    val deleteSuccess: LiveData<Boolean> get() = _deleteSuccess
 
     fun initData() {
         title.value = ""
@@ -254,6 +261,18 @@ class WriteSharedViewModel(
                 postFollowUseCase(userEmail, otherUserEmail)
             }.onFailure {
                 Timber.tag("postFollow").e(it)
+            }
+        }
+    }
+
+    fun deleteDetailPost() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                imageStringViewPager.value?.let { deleteDetailPostUseCase(postId, it) }
+            }.onSuccess {
+                _deleteSuccess.value = it
+            }.onFailure {
+                Timber.tag("deleteDetailPost").e(it)
             }
         }
     }

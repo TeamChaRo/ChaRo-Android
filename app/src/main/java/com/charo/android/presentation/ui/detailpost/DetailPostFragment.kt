@@ -9,12 +9,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.charo.android.R
+import com.charo.android.data.model.detailold.RequestDetailDeleteData
 import com.charo.android.databinding.FragmentDetailPostBinding
 import com.charo.android.domain.model.detailpost.DetailPost
 import com.charo.android.hidden.Hidden
@@ -22,7 +26,9 @@ import com.charo.android.presentation.ui.detailpost.adapter.DetailPostViewPagerA
 import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.enqueueUtil
 import com.skt.Tmap.*
 import com.skt.Tmap.TMapView.OnClickListenerCallback
 import kotlinx.coroutines.CoroutineScope
@@ -36,10 +42,6 @@ class DetailPostFragment : Fragment() {
     private var _binding: FragmentDetailPostBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
 
-    // TODO: Old ViewModel
-//    private val detailPostViewModel by sharedViewModel<DetailPostViewModel>()
-
-    // TODO: New ViewModel
     private val viewModel by sharedViewModel<WriteSharedViewModel>()
     private lateinit var viewPagerAdapter: DetailPostViewPagerAdapter
 
@@ -51,9 +53,6 @@ class DetailPostFragment : Fragment() {
     ): View? {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_detail_post, container, false)
-        // TODO: Old ViewModel
-//        binding.viewModel = detailPostViewModel
-        // TODO: New ViewModel
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.initData()
@@ -64,12 +63,13 @@ class DetailPostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tMapView = TMapView(requireContext())
         viewModel.getDetailPostData()
+        initMenu()
         initTMap(tMapView)
         viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
             initViewPager(it)
         }
         viewModel.courseDetail.observe(viewLifecycleOwner) {
-            if(it != null) {
+            if (it != null) {
                 drawPath(tMapView, it)
             }
         }
@@ -80,6 +80,7 @@ class DetailPostFragment : Fragment() {
         goBack()
         clickAuthor()
         showLikeList()
+        observe()
     }
 
     override fun onDestroyView() {
@@ -87,8 +88,41 @@ class DetailPostFragment : Fragment() {
         super.onDestroyView()
     }
 
+    private fun initMenu() {
+        binding.tvOptions.setOnClickListener {
+            val popup = PopupMenu(binding.tvOptions.context, binding.tvOptions)
+            popup.inflate(R.menu.detail_menu)
+            popup.setOnMenuItemClickListener { item ->
+                when(item.itemId) {
+                    R.id.detail_menu_edit -> {
+                        // TODO: 수정하기 구현필요
+                    }
+                    R.id.detail_menu_delete -> {
+                        confirmDelete()
+                    }
+                    else -> {
+                        error("popup error")
+                    }
+                }
+                true
+            }
+            popup.show()
+        }
+    }
+
+    private fun confirmDelete() {
+        val dialog = CustomDialog(requireActivity())
+        dialog.showDialog(R.layout.dialog_detail_delete)
+        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+            override fun onClicked(num: Int) {
+                if (num == 1) {
+                    viewModel.deleteDetailPost()
+                }
+            }
+        })
+    }
+
     private fun initViewPager(imageList: List<String>) {
-        // TODO: Fragment Replace 수정(id 부분)
         viewPagerAdapter = DetailPostViewPagerAdapter {
             viewModel.imageIndex = it
             parentFragmentManager.beginTransaction()
@@ -299,6 +333,17 @@ class DetailPostFragment : Fragment() {
         binding.tvDetailLike.setOnClickListener {
             if (childFragmentManager.findFragmentByTag("Dialog") == null) {
                 DetailPostLikeListFragment().show(childFragmentManager, "Dialog")
+            }
+        }
+    }
+
+    private fun observe() {
+        viewModel.deleteSuccess.observe(viewLifecycleOwner) {
+            if (it) {
+                Toast.makeText(requireContext(), "게시물이 삭제되었습니다", Toast.LENGTH_SHORT).show()
+                requireActivity().finish()
+            } else {
+                Toast.makeText(requireContext(), "다시 시도해주세요", Toast.LENGTH_SHORT).show()
             }
         }
     }
