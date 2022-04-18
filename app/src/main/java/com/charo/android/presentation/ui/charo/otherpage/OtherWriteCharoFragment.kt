@@ -56,7 +56,7 @@ class OtherWriteCharoFragment : Fragment() {
     }
 
     private fun setUpSpinner() {
-        val filter = resources.getStringArray(R.array.charo_filter)
+        val filter = resources.getStringArray(R.array.my_page_filter)
         val adapter = ArrayAdapter(requireActivity(), R.layout.item_charo_spinner, filter)
         adapter.setDropDownViewResource(R.layout.item_charo_spinner)
         binding.spinnerOtherCharoFilter.adapter = adapter

@@ -69,7 +69,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun initSpinner() {
         // spinner 자체 set up
-        val filter = resources.getStringArray(R.array.charo_filter)
+        val filter = resources.getStringArray(R.array.my_page_filter)
         val adapter = ArrayAdapter(this, R.layout.item_charo_spinner, filter)
         adapter.setDropDownViewResource(R.layout.item_charo_spinner)
         binding.spinnerPostList.adapter = adapter
