@@ -10,6 +10,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.charo.android.R
 import com.google.android.material.chip.Chip
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestOptions
 
 
 object BindingAdapter {
@@ -26,10 +29,13 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("imgRoundBind")
     fun setRadius9Image(imageView: ImageView, imageUrl: String) {
+        // 마이페이지 이미지 로드하는 부분,
+        // CenterCrop 후 Round 되기를 원함(의도)
+        // MultiTransformation 사용 시 Option을 순서대로 적용함(해결)
+        val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(9.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
-            .placeholder(R.drawable.rectangle_radius_5)
-            .transform(RoundedCorners(9.dpToPx))
+            .apply(RequestOptions.bitmapTransform(multiOption))
             .into(imageView)
     }
 

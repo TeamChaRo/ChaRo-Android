@@ -30,6 +30,6 @@ val viewModelModule = module {
     viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { FollowViewModel(get(), get()) }
     viewModel { DetailPostViewModel(get(), get(), get(), get(), get()) }
-    viewModel { OtherMyPageViewModel(get(), get(), get(), get(), get()) }
+    viewModel { OtherMyPageViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { WriteSharedViewModel(get(), get(), get(), get(), get()) }
 }

@@ -7,6 +7,7 @@ import com.charo.android.data.model.mypage.ResponseMyPage
 interface MyPageRepository {
     suspend fun getLikePost(userEmail: String): ResponseMyPage
     suspend fun getNewPost(userEmail: String): ResponseMyPage
+    suspend fun getFollow(userEmail: String, targetEmail: String): Boolean
 
     suspend fun getMoreWrittenLikePost(
         userEmail: String,

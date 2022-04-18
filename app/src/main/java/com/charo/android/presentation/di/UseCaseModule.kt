@@ -61,5 +61,5 @@ val useCaseModule = module {
 
     single { GetRemoteMoreNewViewInfiniteUseCase(get()) }
     single { GetRemoteMoreNewLastIdUseCase(get()) }
-
+    single { GetRemoteFollowUseCase(get()) }
 }

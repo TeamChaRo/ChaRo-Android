@@ -109,6 +109,7 @@
                 android:includeFontPadding="false"
                 android:paddingHorizontal="9dp"
                 android:paddingVertical="5dp"
+                android:visibility="@{viewModel.isMine ? View.GONE : View.VISIBLE}"
                 android:text="@{viewModel.isFollow ? `팔로잉` : `팔로우`}"
                 android:textColor="@{viewModel.isFollow ? @color/blue_main_0f6fff : @color/white}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_profile_nickname"

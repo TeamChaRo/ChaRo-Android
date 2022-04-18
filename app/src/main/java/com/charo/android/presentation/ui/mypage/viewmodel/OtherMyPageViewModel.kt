@@ -7,10 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.mypage.Post
 import com.charo.android.data.model.mypage.UserInformation
 import com.charo.android.domain.usecase.follow.PostFollowUseCase
-import com.charo.android.domain.usecase.mypage.GetRemoteLikePostUseCase
-import com.charo.android.domain.usecase.mypage.GetRemoteMoreWrittenLikePostUseCase
-import com.charo.android.domain.usecase.mypage.GetRemoteMoreWrittenNewPostUseCase
-import com.charo.android.domain.usecase.mypage.GetRemoteNewPostUseCase
+import com.charo.android.domain.usecase.mypage.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -19,16 +16,19 @@ class OtherMyPageViewModel(
     private val getRemoteNewPostUseCase: GetRemoteNewPostUseCase,
     private val getRemoteMoreWrittenLikePostUseCase: GetRemoteMoreWrittenLikePostUseCase,
     private val getRemoteMoreWrittenNewPostUseCase: GetRemoteMoreWrittenNewPostUseCase,
-    private val postFollowUseCase: PostFollowUseCase
+    private val postFollowUseCase: PostFollowUseCase,
+    private val getRemoteFollowUseCase: GetRemoteFollowUseCase
 ) : ViewModel() {
     private val TAG = "mlog: OtherPageViewModel::"
 //    private val userEmail = "and@naver.com"
 
-    private var _userEmail: String = "@"
-    val userEmail get() = _userEmail
+    private var _userEmail = "@"
+    val userEmail: String get() = _userEmail
 
-    private var _otherUserEmail: String = ""
-    val otherUserEmail get() = _otherUserEmail
+    private var _otherUserEmail = ""
+    val otherUserEmail: String get() = _otherUserEmail
+
+    val isMine = MutableLiveData<Boolean>()
 
     // 유저 정보
     private var _userInfo = MutableLiveData<UserInformation>()
@@ -55,6 +55,9 @@ class OtherMyPageViewModel(
 
     fun setOtherUserEmail(otherUserEmail: String) {
         _otherUserEmail = otherUserEmail
+        if (_userEmail == _otherUserEmail) {
+            isMine.value = true
+        }
     }
 
     fun getLikePost() {
@@ -62,10 +65,12 @@ class OtherMyPageViewModel(
             kotlin.runCatching {
                 getRemoteLikePostUseCase(otherUserEmail)
             }.onSuccess {
-                _userInfo.value = it.userInformation
-                _writtenLikeLastId = it.writtenPost.lastId
-                _writtenLikeLastCount = it.writtenPost.lastCount
-                _writtenLikePostList.value = it.writtenPost.drive
+                it?.let {
+                    _userInfo.value = it.userInformation
+                    _writtenLikeLastId = it.writtenPost.lastId
+                    _writtenLikeLastCount = it.writtenPost.lastCount
+                    _writtenLikePostList.value = it.writtenPost.drive
+                }
             }.onFailure {
                 Timber.d("$TAG getLikePost() ${it.message.toString()}")
             }
@@ -125,6 +130,18 @@ class OtherMyPageViewModel(
                 _isFollow.value = it
             }.onFailure {
                 Timber.d("$TAG postFollow() ${it.message.toString()}")
+            }
+        }
+    }
+
+    fun getFollow() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getRemoteFollowUseCase(userEmail, otherUserEmail)
+            }.onSuccess {
+                _isFollow.value = it
+            }.onFailure {
+                Timber.i("$TAG getFollow() $it")
             }
         }
     }

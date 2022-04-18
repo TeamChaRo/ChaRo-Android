@@ -46,9 +46,18 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
+        if(viewModel.userEmail != "@") {
+            viewModel.getLikePost()
+            viewModel.getNewPost()
+            viewModel.getFollow()
+        }
+    }
 
-        viewModel.getLikePost()
-        viewModel.getNewPost()
+    override fun onRestart() {
+        super.onRestart()
+        if(viewModel.userEmail != "@") {
+            viewModel.getFollow()
+        }
     }
 
     private fun initRecyclerView() {

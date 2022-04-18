@@ -2,6 +2,7 @@ package com.charo.android.data.datasource.remote.mypage
 
 import com.charo.android.data.api.mypage.MyPageService
 import com.charo.android.data.model.mypage.ResponseEndlessScroll
+import com.charo.android.data.model.mypage.ResponseFollow
 import com.charo.android.data.model.mypage.ResponseMyPage
 
 
@@ -12,6 +13,10 @@ class RemoteMyPageDataSourceImpl(private val service: MyPageService): RemoteMyPa
 
     override suspend fun getNewPost(userEmail: String): ResponseMyPage {
         return service.getNewPost(userEmail)
+    }
+
+    override suspend fun getFollow(userEmail: String, targetEmail: String): ResponseFollow {
+        return service.getFollow(userEmail, targetEmail)
     }
 
     override suspend fun getMoreWrittenLikePost(
