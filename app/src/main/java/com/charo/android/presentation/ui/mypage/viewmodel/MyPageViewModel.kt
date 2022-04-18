@@ -103,7 +103,7 @@ class MyPageViewModel(
             }.onSuccess {
                 _writtenLikeLastId = it.lastId
                 _writtenLikeLastCount = it.lastCount
-                _writtenLikePostList.value?.addAll(it.drive)
+                _writtenLikePostList.value = _writtenLikePostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenLikePost() ${it.message.toString()}")
             }
@@ -116,7 +116,7 @@ class MyPageViewModel(
                 getRemoteMoreWrittenNewPostUseCase(userEmail, _writtenNewLastId)
             }.onSuccess {
                 _writtenNewLastId = it.lastId
-                _writtenNewPostList.value?.addAll(it.drive)
+                _writtenNewPostList.value = _writtenNewPostList.value?.apply { it.drive }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenNewPost() ${it.message.toString()}")
             }
@@ -130,7 +130,7 @@ class MyPageViewModel(
             }.onSuccess {
                 _savedLikeLastId = it.lastId
                 _savedLikeLastCount = it.lastCount
-                _savedLikePostList.value?.addAll(it.drive)
+                _savedLikePostList.value = _savedLikePostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreSavedLikePost() ${it.message.toString()}")
             }
@@ -143,7 +143,7 @@ class MyPageViewModel(
                 getRemoteMoreSavedNewPostUseCase(userEmail, _savedNewLastId)
             }.onSuccess {
                 _savedNewLastId = it.lastId
-                _savedNewPostList.value?.addAll(it.drive)
+                _savedNewPostList.value = _savedNewPostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreSavedNewPost() ${it.message.toString()}")
             }
