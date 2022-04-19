@@ -79,7 +79,13 @@
         <activity android:name=".presentation.ui.alarm.AlarmActivity" />
         <activity
             android:name=".presentation.ui.main.SplashActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -101,13 +107,7 @@
         <activity android:name=".presentation.ui.setting.SettingActivity" />
         <activity
             android:name=".presentation.ui.onboarding.OnBoardingActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
         <activity
             android:name=".presentation.ui.detail.DetailActivity"
