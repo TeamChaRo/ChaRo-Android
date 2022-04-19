@@ -11,21 +11,22 @@ object SharedInformation {
     private const val LOG_OUT = "LOG_OUT"
     private const val APP_PASSWORD = "APP_PASSWORD"
     private const val NICKNAME = "NICK_NAME"
+    private const val ON_BOARDING = "ONBOARDING"
 
     // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 3)
-    fun getSocialId(context: Context): String{
+    fun getSocialId(context: Context): String {
         val sharedPreferences = context.getSharedPreferences(SOCIAL_KEY, Context.MODE_PRIVATE)
         return sharedPreferences.getString(SOCIAL_KEY, "") ?: ""
     }
 
-    fun saveSocialId(context: Context, socialKey : String){
+    fun saveSocialId(context: Context, socialKey: String) {
         val sharedPreferences = context.getSharedPreferences(SOCIAL_KEY, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putString(SOCIAL_KEY, socialKey)
             .apply()
     }
 
-    fun removeSocialId(context: Context){
+    fun removeSocialId(context: Context) {
         val sharedPreferences = context.getSharedPreferences(SOCIAL_KEY, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(SOCIAL_KEY)
@@ -34,60 +35,61 @@ object SharedInformation {
 
     //이메일 저장
 
-    fun getEmail(context: Context): String{
+    fun getEmail(context: Context): String {
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
-        return sharedPreferences.getString(APP_EMAIL,  "@") ?: ""
+        return sharedPreferences.getString(APP_EMAIL, "@") ?: ""
     }
 
-    fun setEmail(context: Context, appEmail : String?){
+    fun setEmail(context: Context, appEmail: String?) {
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putString(APP_EMAIL, appEmail)
             .apply()
     }
 
-    fun removeEmail(context : Context){
+    fun removeEmail(context: Context) {
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(APP_EMAIL)
             .apply()
     }
+
     //닉네임 저장
-    fun setNickName(context : Context, nickName : String){
-        val sharedPreferences = context.getSharedPreferences(NICKNAME,  Context.MODE_PRIVATE)
+    fun setNickName(context: Context, nickName: String) {
+        val sharedPreferences = context.getSharedPreferences(NICKNAME, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putString(NICKNAME, nickName)
             .apply()
     }
-    
-    fun getNickName(context : Context) : String{
+
+    fun getNickName(context: Context): String {
         val sharedPreferences = context.getSharedPreferences(NICKNAME, Context.MODE_PRIVATE)
         return sharedPreferences.getString(NICKNAME, "") ?: ""
     }
 
-    fun removeNickName(context : Context){
+    fun removeNickName(context: Context) {
         val sharedPreferences = context.getSharedPreferences(NICKNAME, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(NICKNAME)
             .apply()
 
     }
-    
-    
+
+
     //패스워드 저장
-    fun getPassword(context: Context) : String{
+    fun getPassword(context: Context): String {
         val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
-        return sharedPreferences.getString(APP_PASSWORD,  "") ?: ""
+        return sharedPreferences.getString(APP_PASSWORD, "") ?: ""
     }
 
-    fun setPassword(context: Context, password : String){
+    fun setPassword(context: Context, password: String) {
         val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putString(APP_PASSWORD, password)
             .apply()
     }
 
-    fun removePassword(context : Context){
+    fun removePassword(context: Context) {
         val sharedPreferences = context.getSharedPreferences(APP_PASSWORD, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(APP_PASSWORD)
@@ -97,19 +99,19 @@ object SharedInformation {
     //닉네임 저장
 
     // 메인뷰 themeNum 저장(HomeThemeAdapter)
-    fun setThemeNum(context: Context, themeNum : Int){
+    fun setThemeNum(context: Context, themeNum: Int) {
         val sharedPreferences = context.getSharedPreferences(THEME_NUM, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putInt(THEME_NUM, themeNum)
             .apply()
     }
 
-    fun getThemeNum(context: Context): Int{
+    fun getThemeNum(context: Context): Int {
         val sharedPreferences = context.getSharedPreferences(THEME_NUM, Context.MODE_PRIVATE)
-        return sharedPreferences.getInt(THEME_NUM,  99)
+        return sharedPreferences.getInt(THEME_NUM, 99)
     }
 
-    fun removeThemeNum(context : Context){
+    fun removeThemeNum(context: Context) {
         val sharedPreferences = context.getSharedPreferences(THEME_NUM, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(THEME_NUM)
@@ -117,49 +119,64 @@ object SharedInformation {
     }
 
     //카카오 로그인 회원가입/로그아웃 해결
-    fun setKaKaoSignUp(context: Context, kakaoSignUp : Int){
+    fun setKaKaoSignUp(context: Context, kakaoSignUp: Int) {
         val sharedPreferences = context.getSharedPreferences(KAKAO_SIGN_UP, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putInt(KAKAO_SIGN_UP, kakaoSignUp)
             .apply()
     }
 
-    fun getKaKaoSignUp(context: Context): Int{
+    fun getKaKaoSignUp(context: Context): Int {
         val sharedPreferences = context.getSharedPreferences(KAKAO_SIGN_UP, Context.MODE_PRIVATE)
-        return sharedPreferences.getInt(KAKAO_SIGN_UP,  999)
+        return sharedPreferences.getInt(KAKAO_SIGN_UP, 999)
     }
 
 
     //카카오,구글(1), 일반 로그인 회원가입
-    fun setSignUp(context: Context, signUp : Int){
+    fun setSignUp(context: Context, signUp: Int) {
         val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putInt(SIGN_UP, signUp)
             .apply()
     }
-    fun getSignUp(context: Context): Int{
+
+    fun getSignUp(context: Context): Int {
         val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
-        return sharedPreferences.getInt(SIGN_UP,  999)
+        return sharedPreferences.getInt(SIGN_UP, 999)
     }
-    
+
 
     //로그아웃
-    fun setLogout(context: Context, logout : String ){
+    fun setLogout(context: Context, logout: String) {
         val sharedPreferences = context.getSharedPreferences(LOG_OUT, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .putString(LOG_OUT, logout)
             .apply()
     }
 
-    fun getLogout(context: Context): String{
+    fun getLogout(context: Context): String {
         val sharedPreferences = context.getSharedPreferences(SIGN_UP, Context.MODE_PRIVATE)
         return sharedPreferences.getString(LOG_OUT, "") ?: ""
     }
 
-    fun removeLogout(context : Context){
+    fun removeLogout(context: Context) {
         val sharedPreferences = context.getSharedPreferences(LOG_OUT, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(LOG_OUT)
             .apply()
+    }
+
+    // 온보딩
+    fun setOnBoarding(context: Context) {
+        val sharedPreferences =
+            context.getSharedPreferences(ON_BOARDING, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .putBoolean(ON_BOARDING, true)
+            .apply()
+    }
+
+    fun getOnBoarding(context: Context): Boolean {
+        val sharedPreferences = context.getSharedPreferences(ON_BOARDING, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(ON_BOARDING, false)
     }
 }

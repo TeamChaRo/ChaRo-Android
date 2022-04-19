@@ -23,7 +23,7 @@ class OnBoardingActivity : AppCompatActivity() {
         val pagerAdapter = OnBoardingPagerAdapter(this)
         binding.vpOnboarding.adapter = pagerAdapter
         binding.dotsIndicator.setViewPager2(binding.vpOnboarding)
-
+        SharedInformation.setOnBoarding(this)
     }
 
 
