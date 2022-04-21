@@ -1,6 +1,7 @@
 package com.charo.android.presentation.ui.write
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -28,10 +29,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.databinding.FragmentWriteBinding
@@ -49,6 +47,8 @@ import timber.log.Timber
 
 
 class WriteFragment : Fragment(), View.OnClickListener {
+
+    private val TAG = "승현"
 
     companion object {
         fun newInstance() = WriteFragment()
@@ -101,6 +101,11 @@ class WriteFragment : Fragment(), View.OnClickListener {
         }
         binding.recyclerviewWriteImg.adapter = writeAdapter
 
+        // 승현
+        if (sharedViewModel.editFlag.value == true) {
+            initEditData()
+        }
+
         initListener()
         initWriteData()
         observeThemeData()
@@ -113,6 +118,34 @@ class WriteFragment : Fragment(), View.OnClickListener {
         warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive, 280)
 
         return root
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initEditData() {
+        with(sharedViewModel) {
+            // this = sharedViewModel
+            // 일부 변환이 필요한 Data의 경우 ViewModel이 관리할 수 있으면 ViewModel이 관리하게 함
+            this.initEditData()
+
+            // 직접 Fragment단에서 수정해야 하는 것들(양방향 DataBinding 미사용이므로 여기서 꼭 처리해줘야 함)
+            // 툴바 타이틀
+            binding.tvWriteToolbarTitle.text = "수정하기"
+            // 글 제목
+            binding.etWriteTitle.setText(this.title.value)
+            // 주차공간 설명
+            binding.etWriteParkReview.setText(this.parkingDesc.value)
+            // 주의사항의 경우 isSelected를 통해 값을 관리하기 때문에 Fragment단에서 관리해야 함
+            this.warnings.value?.let {
+                binding.btnWriteCautionHighway.isSelected = it[0]
+                binding.btnWriteCautionMoun.isSelected = it[1]
+                binding.btnWriteCautionDiffi.isSelected = it[2]
+                binding.btnWriteCautionPeople.isSelected = it[3]
+            }
+            // 코스 설명
+            binding.etWriteMyDrive.setText(this.courseDesc.value)
+            // 코스 설명 글자수
+            binding.tvLenMyDrive.text = "${this.courseDesc.value?.length}/280자"
+        }
     }
 
     private fun initToolBar() {

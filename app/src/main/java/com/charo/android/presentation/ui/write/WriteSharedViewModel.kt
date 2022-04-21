@@ -14,6 +14,7 @@ import com.charo.android.domain.usecase.follow.PostFollowUseCase
 import com.charo.android.domain.usecase.interaction.PostLikeUseCase
 import com.charo.android.domain.usecase.interaction.PostSaveUseCase
 import com.charo.android.presentation.util.SingleLiveEvent
+import com.charo.android.presentation.util.ThemeUtil
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import timber.log.Timber
@@ -73,6 +74,7 @@ class WriteSharedViewModel(
     var author = MutableLiveData<String>().default("")
     var authorEmail = MutableLiveData<String>().default("")
     var imageStringViewPager = MutableLiveData<MutableList<String>>()
+    var themes = MutableLiveData<ArrayList<String>>()
     var warnings = MutableLiveData<List<Boolean>>()
     var isFavorite = MutableLiveData<Int>().default(0)
     var likesCount = MutableLiveData<Int>().default(0)
@@ -91,6 +93,10 @@ class WriteSharedViewModel(
     // 게시물 삭제 성공여부
     private var _deleteSuccess = SingleLiveEvent<Boolean>()
     val deleteSuccess: LiveData<Boolean> get() = _deleteSuccess
+
+    // 게시물 수정인지 여부
+    private var _editFlag = SingleLiveEvent<Boolean>()
+    val editFlag: LiveData<Boolean> get() = _editFlag
 
     fun initData() {
         title.value = ""
@@ -137,7 +143,7 @@ class WriteSharedViewModel(
                 isParking.value = it.isParking
                 parkingDesc.value = it.parkingDesc
                 courseDesc.value = it.courseDesc
-                theme.value = ArrayList(it.themes)
+                themes.value = ArrayList(it.themes)
                 warnings.value = it.warnings
                 author.value = it.author
                 authorEmail.value = it.authorEmail
@@ -275,5 +281,15 @@ class WriteSharedViewModel(
                 Timber.tag("deleteDetailPost").e(it)
             }
         }
+    }
+
+    fun initEditFlag() {
+        _editFlag.value = true
+    }
+
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun initEditData() {
+        // note: 서버에서 온 테마 데이터는 한글인 반면, 작성하기에서는 테마 데이터를 영어로 처리하고 있기 때문에 ThemeUtil 사용해 변환시켜 준다.
+        theme.value = ArrayList(themes.value?.map { ThemeUtil().themeMap[it] as String })
     }
 }
