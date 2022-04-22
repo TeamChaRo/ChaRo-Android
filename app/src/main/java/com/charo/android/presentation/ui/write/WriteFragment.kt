@@ -98,7 +98,12 @@ class WriteFragment : Fragment(), View.OnClickListener {
             writeAdapter.imgList.removeAt(it)
             writeAdapter.notifyDataSetChanged()
 
-            sharedViewModel.imageMultiPart.value!!.removeAt(it)
+            // note(승현):
+            // ViewModel 에 이미지 멀티파트 리스트 값을 할당해주는 과정은 최종적으로 다음 버튼을 누를 때 이루어짐
+            // 따라서, RecyclerView 에서 이미지를 아무리 추가하고 삭제한다고 하더라도 '다음' 버튼을 누르기 전까지는
+            // 이미지 멀티파트 리스트에는 아무런 값이 들어있지 않음
+            // 따라서, 아래 코드는 리팩토링을 거친 결과 불필요하게 되므로 주석처리함
+//            sharedViewModel.imageMultiPart.value!!.removeAt(it)
 
             setPlusIconLoc()
         }
@@ -409,7 +414,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
         galleryLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 var imgPath: Uri
-                val image = ArrayList<MultipartBody.Part>()
+                // note(승현):
+                // image: ArrayList<MultipartBody.Part> 는 convertImgToMultiPart() 메서드를 실행할 때
+                // 인자로 넣어주기 위해 존재하는 변수
+                // convertImgToMultiPart() 메서드 호출지점을 galleryLauncher() 가 아닌
+                // nextButtonToMap() 메서드로 이동시켰기 때문에 아래 변수는 이 스코프에서 사용하지 않는 변수가 됨
+                // 따라서 주석처리
+//                val image = ArrayList<MultipartBody.Part>()
                 if (it.resultCode == Activity.RESULT_OK) {
                     if (it.data == null) {
                         Timber.d("error img data null")
@@ -437,16 +448,25 @@ class WriteFragment : Fragment(), View.OnClickListener {
                                 // 상세보기 UI 상에서의 이미지 순서가 달라지게 됨
                                 // 따라서, add(index, element) 메서드 대신 add(element) 메서드로 대체함
                                 //recyclerView 에 저장
+                                val writeImgInfo =
+                                    WriteImgInfo(imgUri = imgPath, isFromLocal = true)
                                 imgMoreList.add(
 //                                    0,
-                                    WriteImgInfo(
-                                        imgUri = imgPath,
-                                        isFromLocal = true
-                                    )
+                                    writeImgInfo
                                 )
 
+                                // note(승현):
+                                // 기존의 코드는 갤러리에서 이미지를 가져왔을 때 콜백으로 convertImgToMultiPart() 메서드를 호출하는 방식
+                                // 이는 기존 작성하기처럼 로컬 저장소에서 이미지를 가져오는 경우에는 문제없이 동작하나,
+                                // 수정하기처럼 이미지를 서버 DB 에서 가져와야 하는 경우는 별도의 구현 처리를 해줘야 함
+                                // 로컬 저장소와 서버 DB 에서 가져온 이미지 Uri 를 멀티파트화하는 코드를 별도로 분리해서 구현할 수 있으나
+                                // (개인의견) 갤러리에서 이미지를 가져올 때마다 멀티파트화시키는 것보다는
+                                // 다음 버튼을 누르는 순간 이미지를 멀티파트화시켜준다면 불필요한 convert 과정을 줄일 수 있을 것이라고 생각
+                                // (핑계) 사실 별도로 구현할 경우 예외처리가 복잡하기도 할 것 같다.
+                                // 따라서 nextButtonToMap() 메서드에서 convertImgToMultiPart() 메서드를 호출해
+                                // 버튼을 눌렀을 때 RecyclerView Adapter 의 itemList 를 멀티파트화 시키는 방향으로 코드를 수정함
                                 //이미지 멀티파트로 저장
-                                convertImgToMultiPart(imgPath, image)
+//                                convertImgToMultiPart(writeImgInfo, image)
                             }
 
                             val position = writeAdapter.itemCount
@@ -461,11 +481,14 @@ class WriteFragment : Fragment(), View.OnClickListener {
                                 writeAdapter.imgList.addAll(imgMoreList)
                                 writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
 
-                                if (sharedViewModel.imageMultiPart.value == null) {
-                                    sharedViewModel.imageMultiPart.value = image
-                                } else {
-                                    sharedViewModel.imageMultiPart.value!!.addAll(image)
-                                }
+                                // note(승현):
+                                // 아래 코드는 convertImgToMultiPart() 메서드를 통해 얻은 멀티파트 리스트를 ViewModel 에 담는 과정
+                                // convertImgToMultiPart() 메서드의 호출위치를 바꿨기 때문에 아래 코드 주석처리함
+//                                if (sharedViewModel.imageMultiPart.value == null) {
+//                                    sharedViewModel.imageMultiPart.value = image
+//                                } else {
+//                                    sharedViewModel.imageMultiPart.value!!.addAll(image)
+//                                }
                             }
                         }
                     }
@@ -617,7 +640,18 @@ class WriteFragment : Fragment(), View.OnClickListener {
         //보여지는 이미지
         sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
 
-        //빈값 확인
+        // note(승현):
+        // RecyclerView Adapter itemList 의 Uri 리스트를 멀티파트 폼으로 변환
+        CoroutineScope(Dispatchers.Main).launch {
+            val multiPartJob = async { convertImgToMultiPart(writeAdapter.imgList) }
+            val multiPartImageList: ArrayList<MultipartBody.Part> = multiPartJob.await()
+            sharedViewModel.imageMultiPart.value = multiPartImageList
+            checkDataSetEmpty(warningList)
+        }
+    }
+
+    // 빈값 확인
+    private fun checkDataSetEmpty(warningList: ArrayList<MultipartBody.Part>) {
         if (TextUtils.isEmpty(sharedViewModel.title.value)
             || TextUtils.isEmpty(sharedViewModel.province.value)
             || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(
@@ -627,6 +661,35 @@ class WriteFragment : Fragment(), View.OnClickListener {
             || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
             || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)
         ) {
+            // note: 있어야 할 값이 없으면 Toast 를 띄워주는 조건문이다.
+            // note: 어떤 조건에서 Toast 를 띄우는지 확인하기 위해 Timber 를 찍어봤다.
+            if (TextUtils.isEmpty(sharedViewModel.title.value)) {
+                Timber.tag("빈 값 있는 상황").i("제목 없음")
+            }
+            if (TextUtils.isEmpty(sharedViewModel.province.value)) {
+                Timber.tag("빈 값 있는 상황").i("지역(도) 없음")
+            }
+            if (getString(R.string.no_select) != sharedViewModel.province.value
+                && TextUtils.isEmpty(sharedViewModel.region.value)
+            ) {
+                Timber.tag("빈 값 있는 상황").i("지역(도)는 있는데 지역(시) 없음")
+            }
+            if (TextUtils.isEmpty(sharedViewModel.courseDesc.value)) {
+                Timber.tag("빈 값 있는 상황").i("코스 설명이 없음")
+            }
+            if (warningList.size == 0) {
+                Timber.tag("빈 값 있는 상황").i("주의사항 없음")
+            }
+            if (sharedViewModel.imageMultiPart.value == null) {
+                Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 null")
+            }
+            if (sharedViewModel.imageMultiPart.value?.size == 0) {
+                Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 size 0")
+            }
+            if (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0) {
+                Timber.tag("빈 값 있는 상황").i("테마 없음")
+            }
+
 
             Toast.makeText(
                 requireContext(),
