@@ -362,9 +362,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
                             for (i: Int in 0 until clipData.itemCount) {
                                 imgPath = clipData.getItemAt(i).uri
 
+                                // note(승현):
+                                // imgMoreList.add(0, writeImgInfo)로 인해 작성하기 UI 상에서의 이미지 순서와
+                                // 상세보기 UI 상에서의 이미지 순서가 달라지게 됨
+                                // 따라서, add(index, element) 메서드 대신 add(element) 메서드로 대체함
                                 //recyclerView 에 저장
                                 imgMoreList.add(
-                                    0,
+//                                    0,
                                     WriteImgInfo(
                                         imgUri = imgPath,
                                     )
