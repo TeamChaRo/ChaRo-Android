@@ -295,6 +295,6 @@ class WriteSharedViewModel(
         // 서버에서 온 이미지 데이터는 List<String>인 반면, 작성하기에서는 MutableList<Uri>와 ArrayList<MultipartBody.Part>이므로 변환이 필요하다.
         // Uri -> MultipartBody.Part 로의 변환은 WriteFragment 에서 수행하기 때문에, ViewModel 에서는 String -> Uri 변환만 수행한다.
         imageUriRecyclerView.value =
-            imageStringViewPager.value?.map { WriteImgInfo(it.toUri()) }?.toMutableList()
+            imageStringViewPager.value?.map { WriteImgInfo(it.toUri(), false) }?.toMutableList()
     }
 }

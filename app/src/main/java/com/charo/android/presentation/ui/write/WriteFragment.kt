@@ -371,6 +371,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
 //                                    0,
                                     WriteImgInfo(
                                         imgUri = imgPath,
+                                        isFromLocal = true
                                     )
                                 )
 
