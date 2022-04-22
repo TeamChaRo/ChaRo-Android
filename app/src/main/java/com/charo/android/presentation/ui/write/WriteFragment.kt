@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -37,6 +38,7 @@ import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.*
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -44,6 +46,7 @@ import okhttp3.RequestBody
 import okio.BufferedSink
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+import java.net.URL
 
 
 class WriteFragment : Fragment(), View.OnClickListener {
@@ -316,23 +319,90 @@ class WriteFragment : Fragment(), View.OnClickListener {
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
 
-    private fun convertImgToMultiPart(imgPath: Uri, list: ArrayList<MultipartBody.Part>) {
-        //uri -> Bitmap -> multipartform
-        val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
-            MediaStore.Images.Media.getBitmap(
-                context?.contentResolver,
-                imgPath
-            )
-        } else {
-            val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
-            ImageDecoder.decodeBitmap(source)
+    // note(승현):
+    // 어차피 리팩토링으로 인해서 '다음' 버튼을 눌렀을 때 일괄적으로 Uri 를 멀티파트화 시킨다면,
+    // 굳이 WriteImgInfo 객체 하나하나 받을 이유가 있을까? -> 없다
+    // 또, 서버 DB에 직접 접근해야 하는 경우 네트워크를 타야 하기 때문에 IO 스레드를 이용하든, 코루틴을 쓰든 해야 함
+    // 게다가 서버 갔다 온 이후에 멀티파트화 시킨 다음에 멀티파트화한 리스트를 가지고 있어야
+    // nextButtonToMap() 메서드 내 빈 값 체크에서 안 걸림
+    // 그러면 그냥 코루틴 async 써서 처리하면 되지 않을까? 하는 마음으로 리팩토링함
+    // 파라미터 WriteImgInfo 객체 -> WriteImgInfo 리스트 로 변경
+    private suspend fun convertImgToMultiPart(
+        writeImgInfoList: MutableList<WriteImgInfo>,
+    ): ArrayList<MultipartBody.Part> {
+        val list = ArrayList<MultipartBody.Part>()
+        writeImgInfoList.forEach { writeImgInfo ->
+            when (writeImgInfo.isFromLocal) {
+                // note(승현):
+                // writeImgInfo 의 imgUri 가 기기 로컬 저장소의 Uri 인 경우
+                true -> {
+                    // note(승현):
+                    // 단순 Log
+                    Timber.tag("convertImgToMultiPart()").i("로컬 이미지 convert 수행")
+                    //uri -> Bitmap -> multipartform
+                    val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
+                        MediaStore.Images.Media.getBitmap(
+                            context?.contentResolver,
+                            writeImgInfo.imgUri
+                        )
+                    } else {
+                        val source = ImageDecoder.createSource(
+                            requireContext().contentResolver,
+                            writeImgInfo.imgUri
+                        )
+                        ImageDecoder.decodeBitmap(source)
+                    }
+
+                    val imageRequestBody = BitmapRequestBody(bitmap)
+                    val imageData: MultipartBody.Part =
+                        MultipartBody.Part.createFormData(
+                            "image",
+                            "image.jpeg",
+                            imageRequestBody
+                        )
+
+                    list.add(imageData)
+                    // note(승현):
+                    // 단순 Log
+                    Timber.tag("convertImgToMultiPart()::convert 후 List").i(list.toString())
+                }
+                // note(승현):
+                // writeImgInfo 의 imgUri 가 서버 DB의 Uri 인 경우
+                false -> {
+                    // note(승현):
+                    // 단순 Log
+                    Timber.tag("convertImgToMultiPart()").i("리모트 이미지 convert 수행")
+                    // Uri -> String -> Bitmap -> MultiPartForm
+                    // note(승현):
+                    // 메인 스레드에서 네트워크 액세스를 시도할 경우 에러 발생하기 때문에
+                    // 코루틴을 사용해 이미지를 가져와 bitmap 으로 변환시킨 후 성공할 경우 bitmap 을 멀티파트화 시킴
+                    // 실패할 경우 어떻게 처리할 것인지 약간의 논의 필요함
+                    kotlin.runCatching {
+                        withContext(Dispatchers.IO) {
+                            val url = URL(writeImgInfo.imgUri.toString())
+                            BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                        }
+                    }.onSuccess { bitmap ->
+                        val imageRequestBody = BitmapRequestBody(bitmap)
+                        val imageData: MultipartBody.Part =
+                            MultipartBody.Part.createFormData(
+                                "image",
+                                "image.jpeg",
+                                imageRequestBody
+                            )
+
+                        list.add(imageData)
+                        // note(승현):
+                        // 단순 Log
+                        Timber.tag("convertImgToMultiPart()::convert 후 List").i(list.toString())
+                    }.onFailure { error ->
+                        Timber.tag("convertImgToMultiPart::서버 DB 이미지 가져와 bitmap 만들기 실패")
+                            .e(error)
+                    }
+                }
+            }
         }
-
-        val imageRequestBody = BitmapRequestBody(bitmap)
-        val imageData: MultipartBody.Part =
-            MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
-
-        list.add(imageData)
+        return list
     }
 
     private fun galleryLauncher() {
