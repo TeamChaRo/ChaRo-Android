@@ -745,10 +745,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
         if (sharedViewModel.warningUI.value != null) {
             for (warningData in sharedViewModel.warningUI.value!!) {
                 when (warningData) {
-                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected = true
+                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected =
+                        true
                     Define().WARNING_DIFF_ROAD -> binding.btnWriteCautionDiffi.isSelected = true
-                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected = true
-                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected = true
+                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected =
+                        true
+                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected =
+                        true
                 }
             }
         }
