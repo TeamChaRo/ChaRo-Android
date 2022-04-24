@@ -68,7 +68,7 @@
                     android:id="@+id/tv_options"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:visibility="@{viewModel.isAuthorFlag == false ? View.GONE : View.VISIBLE}"
                     android:fontFamily="@font/noto_sans_cjkkr_medium"
                     android:includeFontPadding="false"
                     android:paddingHorizontal="20dp"
