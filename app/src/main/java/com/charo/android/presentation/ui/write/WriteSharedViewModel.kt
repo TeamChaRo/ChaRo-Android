@@ -21,7 +21,6 @@ import okhttp3.MultipartBody
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class WriteSharedViewModel(
     private val getDetailPostUseCase: GetDetailPostUseCase,
@@ -81,7 +80,6 @@ class WriteSharedViewModel(
     var likesCount = MutableLiveData<Int>().default(0)
     var isStored = MutableLiveData<Int>().default(0)
     var courseDetail = MutableLiveData<List<DetailPost.Course>>()
-    var detailCreatedAt = MutableLiveData<String>().default("")
     var detailArea = MutableLiveData<String>().default("")
 
     // DetailPostLikeListFragment
@@ -153,8 +151,8 @@ class WriteSharedViewModel(
                 isAuthorFlag.value = it.isAuthor
                 profileImage.value = it.profileImage
                 likesCount.value = it.likesCount
-                isFavorite.value = it.isFavorite
-                isStored.value = it.isStored
+                isFavorite.value = if (it.isFavorite == 0) 0 else 1
+                isStored.value = if (it.isStored == 0) 0 else 1
                 courseDetail.value = it.course
 
                 // createdAt 파싱
