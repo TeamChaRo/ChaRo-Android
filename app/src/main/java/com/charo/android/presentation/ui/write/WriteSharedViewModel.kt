@@ -152,36 +152,8 @@ class WriteSharedViewModel(
                 likesCount.value = it.likesCount
                 isFavorite.value = it.isFavorite
                 isStored.value = it.isStored
-                when (it.course.size) {
-                    2 -> {
-                        with(it.course) {
-                            startAddress.value = this[0].address
-                            startLat.value = this[0].latitude
-                            startLat.value = this[0].longitude
-                            endAddress.value = this[1].address
-                            endLat.value = this[1].latitude
-                            endLong.value = this[1].longitude
-                            courseDetail.value = this
-                        }
-                    }
-                    3 -> {
-                        with(it.course) {
-                            startAddress.value = this[0].address
-                            startLat.value = this[0].latitude
-                            startLat.value = this[0].longitude
-                            midFrstAddress.value = this[1].address
-                            midFrstLat.value = this[1].latitude
-                            midFrstLong.value = this[1].longitude
-                            endAddress.value = this[2].address
-                            endLat.value = this[2].latitude
-                            endLong.value = this[2].longitude
-                            courseDetail.value = this
-                        }
-                    }
-                    else -> {
-                        Timber.tag("getDetailPost").e(it.course.toString())
-                    }
-                }
+                courseDetail.value = it.course
+
                 // createdAt 파싱
 //                val format = SimpleDateFormat("YYYY-MM-DD'T'hh:mm:ss.SSS'Z'", Locale.KOREAN)
 //                val date = format.parse(it.createdAt)
@@ -296,5 +268,34 @@ class WriteSharedViewModel(
         // Uri -> MultipartBody.Part 로의 변환은 WriteFragment 에서 수행하기 때문에, ViewModel 에서는 String -> Uri 변환만 수행한다.
         imageUriRecyclerView.value =
             imageStringViewPager.value?.map { WriteImgInfo(it.toUri(), false) }?.toMutableList()
+    }
+
+    fun initEditMapData() {
+        Timber.tag("initEditMapData()").i(courseDetail.value?.toString())
+        courseDetail.value?.let { courseDetail ->
+            with(courseDetail) {
+                when (this.size) {
+                    2 -> {
+                        startAddress.value = this[0].address
+                        startLat.value = this[0].latitude
+                        startLong.value = this[0].longitude
+                        endAddress.value = this[1].address
+                        endLat.value = this[1].latitude
+                        endLong.value = this[1].longitude
+                    }
+                    3 -> {
+                        startAddress.value = this[0].address
+                        startLat.value = this[0].latitude
+                        startLat.value = this[0].longitude
+                        midFrstAddress.value = this[1].address
+                        midFrstLat.value = this[1].latitude
+                        midFrstLong.value = this[1].longitude
+                        endAddress.value = this[2].address
+                        endLat.value = this[2].latitude
+                        endLong.value = this[2].longitude
+                    }
+                }
+            }
+        }
     }
 }
