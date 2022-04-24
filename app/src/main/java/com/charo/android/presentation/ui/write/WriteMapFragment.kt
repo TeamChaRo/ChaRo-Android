@@ -81,7 +81,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
         binding.clWriteTmapView.addView(tMapView)
 
-        if(sharedViewModel.editFlag.value == true) {
+        if (sharedViewModel.editFlag.value == true && sharedViewModel.editMapFlag.value == true) {
             sharedViewModel.initEditMapData()
         }
 
