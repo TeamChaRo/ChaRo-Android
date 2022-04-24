@@ -21,6 +21,7 @@ import okhttp3.MultipartBody
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class WriteSharedViewModel(
     private val getDetailPostUseCase: GetDetailPostUseCase,
@@ -97,6 +98,8 @@ class WriteSharedViewModel(
     // 게시물 수정인지 여부
     private var _editFlag = SingleLiveEvent<Boolean>()
     val editFlag: LiveData<Boolean> get() = _editFlag
+    private var _editMapFlag = SingleLiveEvent<Boolean>()
+    val editMapFlag: LiveData<Boolean> get() = _editMapFlag
 
     fun initData() {
         title.value = ""
@@ -257,6 +260,7 @@ class WriteSharedViewModel(
 
     fun initEditFlag() {
         _editFlag.value = true
+        _editMapFlag.value = true
     }
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -286,7 +290,7 @@ class WriteSharedViewModel(
                     3 -> {
                         startAddress.value = this[0].address
                         startLat.value = this[0].latitude
-                        startLat.value = this[0].longitude
+                        startLong.value = this[0].longitude
                         midFrstAddress.value = this[1].address
                         midFrstLat.value = this[1].latitude
                         midFrstLong.value = this[1].longitude
@@ -297,5 +301,6 @@ class WriteSharedViewModel(
                 }
             }
         }
+        _editMapFlag.value = false
     }
 }
