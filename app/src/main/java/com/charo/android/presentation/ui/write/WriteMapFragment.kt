@@ -276,7 +276,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 }
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
-                requireActivity().finish()
+//                requireActivity().finish()
             }
         }
     }
