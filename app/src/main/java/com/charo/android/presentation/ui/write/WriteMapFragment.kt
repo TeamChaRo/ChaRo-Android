@@ -5,8 +5,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +12,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.data.api.ApiService
 import com.charo.android.databinding.FragmentWriteMapBinding
@@ -203,7 +198,12 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 // ArrayList<TMapPoint>로 변환
                 val pointList = ArrayList<TMapPoint>()
                 if (sharedViewModel.startLat.value != 0.0) {
-                    pointList.add(TMapPoint(sharedViewModel.startLat.value!!, sharedViewModel.startLong.value!!))
+                    pointList.add(
+                        TMapPoint(
+                            sharedViewModel.startLat.value!!,
+                            sharedViewModel.startLong.value!!
+                        )
+                    )
                 }
                 if (sharedViewModel.midFrstLat.value != 0.0) {
                     pointList.add(
@@ -214,7 +214,12 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                     )
                 }
                 if (sharedViewModel.endLat.value != 0.0) {
-                    pointList.add(TMapPoint(sharedViewModel.endLat.value!!, sharedViewModel.endLong.value!!))
+                    pointList.add(
+                        TMapPoint(
+                            sharedViewModel.endLat.value!!,
+                            sharedViewModel.endLong.value!!
+                        )
+                    )
                 }
 
                 // 지도 중앙 맞춰주기
@@ -523,32 +528,79 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         param["isParking"] = isParkingRB
         param["courseDesc"] = courseDescRB
 
-        val call = ApiService.writeViewService
-            .writePost(
-                sendWarning,
-                sendTheme,
-                sharedViewModel.course.value!!,
-                sharedViewModel.imageMultiPart.value!!,
-                param
-            )
-        call.enqueueUtil(
-            onSuccess = {
-                Timber.d("serveWriteData success")
-                Timber.d("serveWriteData $it")
+        when (sharedViewModel.editFlag.value) {
+            true -> {
+                // 수정하기
+                val postIdRB: RequestBody = sharedViewModel.postId.toString()
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+                val deleted = ArrayList<MultipartBody.Part>()
+                sharedViewModel.imageStringViewPager.value?.let {
+                    for (i in it.indices) {
+                        deleted.add(
+                            MultipartBody.Part.createFormData("deleted[$i]", it[i])
+                        )
+                    }
+                }
+                val call = ApiService.writeViewService
+                    .editPost(
+                        sendWarning,
+                        sendTheme,
+                        sharedViewModel.course.value!!,
+                        sharedViewModel.imageMultiPart.value!!,
+                        param,
+                        deleted
+                    )
+                call.enqueueUtil(
+                    onSuccess = {
+                        Timber.i("수정하기 성공")
+                        Timber.i("수정하기 결과: $it")
 
-                Toast.makeText(context, "게시물이 등록되었습니다.", Toast.LENGTH_LONG).show()
-                writeShareActivity!!.finish()
-            },
-            onError = {
-                Timber.d("serveWriteData failed")
-                Timber.d("serveWriteData ${call.request().body.toString()}")
-                Timber.d("serveWriteData $param")
-                Timber.d("serveWriteData  sendWarning $sendWarning")
-                Timber.d("serveWriteData sendTheme $sendTheme")
-                Timber.d("serveWriteData course $sendTheme")
-                Timber.d("serveWriteData image ${sharedViewModel.imageMultiPart.value!!}")
-            },
-        )
+                        Toast.makeText(requireContext(), "게시물이 수정되었습니다", Toast.LENGTH_LONG).show()
+                        requireActivity().finish()
+                    },
+                    onError = {
+                        Timber.i("수정하기 failed")
+                        Timber.i("수정하기 ${call.request().body.toString()}")
+                        Timber.i("수정하기 $param")
+                        Timber.i("수정하기 sendWarning $sendWarning")
+                        Timber.i("수정하기 sendTheme $sendTheme")
+                        Timber.i("수정하기 course $sendTheme")
+                        Timber.i("수정하기 image ${sharedViewModel.imageMultiPart.value!!}")
+                        Timber.i("수정하기 deleted $deleted")
+                        Timber.i("수정하기")
+                    }
+                )
+            }
+            else -> {
+                // 작성하기
+                val call = ApiService.writeViewService
+                    .writePost(
+                        sendWarning,
+                        sendTheme,
+                        sharedViewModel.course.value!!,
+                        sharedViewModel.imageMultiPart.value!!,
+                        param
+                    )
+                call.enqueueUtil(
+                    onSuccess = {
+                        Timber.d("serveWriteData success")
+                        Timber.d("serveWriteData $it")
+
+                        Toast.makeText(context, "게시물이 등록되었습니다.", Toast.LENGTH_LONG).show()
+                        writeShareActivity!!.finish()
+                    },
+                    onError = {
+                        Timber.d("serveWriteData failed")
+                        Timber.d("serveWriteData ${call.request().body.toString()}")
+                        Timber.d("serveWriteData $param")
+                        Timber.d("serveWriteData  sendWarning $sendWarning")
+                        Timber.d("serveWriteData sendTheme $sendTheme")
+                        Timber.d("serveWriteData course $sendTheme")
+                        Timber.d("serveWriteData image ${sharedViewModel.imageMultiPart.value!!}")
+                    },
+                )
+            }
+        }
     }
 
     override fun onClick(v: View?) {
