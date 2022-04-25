@@ -15,8 +15,6 @@
 
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="fontFamily">@font/noto_sans_cjkkr_medium</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="HeaderH6">
