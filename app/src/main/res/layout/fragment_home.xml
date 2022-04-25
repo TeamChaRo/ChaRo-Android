@@ -229,10 +229,13 @@
                     <TextView
                         android:id="@+id/text_home_hot_drive"
                         style="@style/HeaderH3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:text="@string/main_charo_hot_drive"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        app:layout_constraintEnd_toStartOf="@+id/text_home_hot_drive_plus"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -287,10 +290,13 @@
                     <TextView
                         android:id="@+id/text_home_night_drive"
                         style="@style/HeaderH3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:text="@{sharedViewModel.customThemeTitle}"
+                        app:layout_constraintEnd_toStartOf="@+id/text_home_night_drive_plus"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -337,6 +343,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="33dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cl_home_night_drive">
@@ -344,10 +352,13 @@
                     <TextView
                         android:id="@+id/text_home_location_drive"
                         style="@style/HeaderH3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="19dp"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         android:text="@{sharedViewModel.localThemeTitle}"
+                        app:layout_constraintEnd_toStartOf="@+id/text_home_location_drive_plus"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
