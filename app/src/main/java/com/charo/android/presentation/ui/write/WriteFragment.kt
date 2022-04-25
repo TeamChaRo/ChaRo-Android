@@ -1,11 +1,13 @@
 package com.charo.android.presentation.ui.write
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -28,10 +30,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.databinding.FragmentWriteBinding
@@ -39,6 +38,7 @@ import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.*
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -46,9 +46,12 @@ import okhttp3.RequestBody
 import okio.BufferedSink
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
+import java.net.URL
 
 
 class WriteFragment : Fragment(), View.OnClickListener {
+
+    private val TAG = "승현"
 
     companion object {
         fun newInstance() = WriteFragment()
@@ -95,11 +98,21 @@ class WriteFragment : Fragment(), View.OnClickListener {
             writeAdapter.imgList.removeAt(it)
             writeAdapter.notifyDataSetChanged()
 
-            sharedViewModel.imageMultiPart.value!!.removeAt(it)
+            // note(승현):
+            // ViewModel 에 이미지 멀티파트 리스트 값을 할당해주는 과정은 최종적으로 다음 버튼을 누를 때 이루어짐
+            // 따라서, RecyclerView 에서 이미지를 아무리 추가하고 삭제한다고 하더라도 '다음' 버튼을 누르기 전까지는
+            // 이미지 멀티파트 리스트에는 아무런 값이 들어있지 않음
+            // 따라서, 아래 코드는 리팩토링을 거친 결과 불필요하게 되므로 주석처리함
+//            sharedViewModel.imageMultiPart.value!!.removeAt(it)
 
             setPlusIconLoc()
         }
         binding.recyclerviewWriteImg.adapter = writeAdapter
+
+        // 승현
+        if (sharedViewModel.editFlag.value == true) {
+            initEditData()
+        }
 
         initListener()
         initWriteData()
@@ -113,6 +126,34 @@ class WriteFragment : Fragment(), View.OnClickListener {
         warningText(binding.etWriteMyDrive, binding.tvWarningMyDrive, 280)
 
         return root
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initEditData() {
+        with(sharedViewModel) {
+            // this = sharedViewModel
+            // 일부 변환이 필요한 Data의 경우 ViewModel이 관리할 수 있으면 ViewModel이 관리하게 함
+            this.initEditData()
+
+            // 직접 Fragment단에서 수정해야 하는 것들(양방향 DataBinding 미사용이므로 여기서 꼭 처리해줘야 함)
+            // 툴바 타이틀
+            binding.tvWriteToolbarTitle.text = "수정하기"
+            // 글 제목
+            binding.etWriteTitle.setText(this.title.value)
+            // 주차공간 설명
+            binding.etWriteParkReview.setText(this.parkingDesc.value)
+            // 주의사항의 경우 isSelected를 통해 값을 관리하기 때문에 Fragment단에서 관리해야 함
+            this.warnings.value?.let {
+                binding.btnWriteCautionHighway.isSelected = it[0]
+                binding.btnWriteCautionMoun.isSelected = it[1]
+                binding.btnWriteCautionDiffi.isSelected = it[2]
+                binding.btnWriteCautionPeople.isSelected = it[3]
+            }
+            // 코스 설명
+            binding.etWriteMyDrive.setText(this.courseDesc.value)
+            // 코스 설명 글자수
+            binding.tvLenMyDrive.text = "${this.courseDesc.value?.length}/280자"
+        }
     }
 
     private fun initToolBar() {
@@ -283,30 +324,103 @@ class WriteFragment : Fragment(), View.OnClickListener {
         bottomSheetDialogFragment.show(childFragmentManager, bottomSheetDialogFragment.tag)
     }
 
-    private fun convertImgToMultiPart(imgPath: Uri, list: ArrayList<MultipartBody.Part>) {
-        //uri -> Bitmap -> multipartform
-        val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
-            MediaStore.Images.Media.getBitmap(
-                context?.contentResolver,
-                imgPath
-            )
-        } else {
-            val source = ImageDecoder.createSource(requireContext().contentResolver, imgPath)
-            ImageDecoder.decodeBitmap(source)
+    // note(승현):
+    // 어차피 리팩토링으로 인해서 '다음' 버튼을 눌렀을 때 일괄적으로 Uri 를 멀티파트화 시킨다면,
+    // 굳이 WriteImgInfo 객체 하나하나 받을 이유가 있을까? -> 없다
+    // 또, 서버 DB에 직접 접근해야 하는 경우 네트워크를 타야 하기 때문에 IO 스레드를 이용하든, 코루틴을 쓰든 해야 함
+    // 게다가 서버 갔다 온 이후에 멀티파트화 시킨 다음에 멀티파트화한 리스트를 가지고 있어야
+    // nextButtonToMap() 메서드 내 빈 값 체크에서 안 걸림
+    // 그러면 그냥 코루틴 async 써서 처리하면 되지 않을까? 하는 마음으로 리팩토링함
+    // 파라미터 WriteImgInfo 객체 -> WriteImgInfo 리스트 로 변경
+    private suspend fun convertImgToMultiPart(
+        writeImgInfoList: MutableList<WriteImgInfo>,
+    ): ArrayList<MultipartBody.Part> {
+        val list = ArrayList<MultipartBody.Part>()
+        writeImgInfoList.forEach { writeImgInfo ->
+            when (writeImgInfo.isFromLocal) {
+                // note(승현):
+                // writeImgInfo 의 imgUri 가 기기 로컬 저장소의 Uri 인 경우
+                true -> {
+                    // note(승현):
+                    // 단순 Log
+                    Timber.tag("convertImgToMultiPart()").i("로컬 이미지 convert 수행")
+                    //uri -> Bitmap -> multipartform
+                    val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
+                        MediaStore.Images.Media.getBitmap(
+                            context?.contentResolver,
+                            writeImgInfo.imgUri
+                        )
+                    } else {
+                        val source = ImageDecoder.createSource(
+                            requireContext().contentResolver,
+                            writeImgInfo.imgUri
+                        )
+                        ImageDecoder.decodeBitmap(source)
+                    }
+
+                    val imageRequestBody = BitmapRequestBody(bitmap)
+                    val imageData: MultipartBody.Part =
+                        MultipartBody.Part.createFormData(
+                            "image",
+                            "image.jpeg",
+                            imageRequestBody
+                        )
+
+                    list.add(imageData)
+                    // note(승현):
+                    // 단순 Log
+                    Timber.tag("convertImgToMultiPart()::convert 후 List").i(list.toString())
+                }
+                // note(승현):
+                // writeImgInfo 의 imgUri 가 서버 DB의 Uri 인 경우
+                false -> {
+                    // note(승현):
+                    // 단순 Log
+                    Timber.tag("convertImgToMultiPart()").i("리모트 이미지 convert 수행")
+                    // Uri -> String -> Bitmap -> MultiPartForm
+                    // note(승현):
+                    // 메인 스레드에서 네트워크 액세스를 시도할 경우 에러 발생하기 때문에
+                    // 코루틴을 사용해 이미지를 가져와 bitmap 으로 변환시킨 후 성공할 경우 bitmap 을 멀티파트화 시킴
+                    // 실패할 경우 어떻게 처리할 것인지 약간의 논의 필요함
+                    kotlin.runCatching {
+                        withContext(Dispatchers.IO) {
+                            val url = URL(writeImgInfo.imgUri.toString())
+                            BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                        }
+                    }.onSuccess { bitmap ->
+                        val imageRequestBody = BitmapRequestBody(bitmap)
+                        val imageData: MultipartBody.Part =
+                            MultipartBody.Part.createFormData(
+                                "image",
+                                "image.jpeg",
+                                imageRequestBody
+                            )
+
+                        list.add(imageData)
+                        // note(승현):
+                        // 단순 Log
+                        Timber.tag("convertImgToMultiPart()::convert 후 List").i(list.toString())
+                    }.onFailure { error ->
+                        Timber.tag("convertImgToMultiPart::서버 DB 이미지 가져와 bitmap 만들기 실패")
+                            .e(error)
+                    }
+                }
+            }
         }
-
-        val imageRequestBody = BitmapRequestBody(bitmap)
-        val imageData: MultipartBody.Part =
-            MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
-
-        list.add(imageData)
+        return list
     }
 
     private fun galleryLauncher() {
         galleryLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 var imgPath: Uri
-                val image = ArrayList<MultipartBody.Part>()
+                // note(승현):
+                // image: ArrayList<MultipartBody.Part> 는 convertImgToMultiPart() 메서드를 실행할 때
+                // 인자로 넣어주기 위해 존재하는 변수
+                // convertImgToMultiPart() 메서드 호출지점을 galleryLauncher() 가 아닌
+                // nextButtonToMap() 메서드로 이동시켰기 때문에 아래 변수는 이 스코프에서 사용하지 않는 변수가 됨
+                // 따라서 주석처리
+//                val image = ArrayList<MultipartBody.Part>()
                 if (it.resultCode == Activity.RESULT_OK) {
                     if (it.data == null) {
                         Timber.d("error img data null")
@@ -329,16 +443,30 @@ class WriteFragment : Fragment(), View.OnClickListener {
                             for (i: Int in 0 until clipData.itemCount) {
                                 imgPath = clipData.getItemAt(i).uri
 
+                                // note(승현):
+                                // imgMoreList.add(0, writeImgInfo)로 인해 작성하기 UI 상에서의 이미지 순서와
+                                // 상세보기 UI 상에서의 이미지 순서가 달라지게 됨
+                                // 따라서, add(index, element) 메서드 대신 add(element) 메서드로 대체함
                                 //recyclerView 에 저장
+                                val writeImgInfo =
+                                    WriteImgInfo(imgUri = imgPath, isFromLocal = true)
                                 imgMoreList.add(
-                                    0,
-                                    WriteImgInfo(
-                                        imgUri = imgPath,
-                                    )
+//                                    0,
+                                    writeImgInfo
                                 )
 
+                                // note(승현):
+                                // 기존의 코드는 갤러리에서 이미지를 가져왔을 때 콜백으로 convertImgToMultiPart() 메서드를 호출하는 방식
+                                // 이는 기존 작성하기처럼 로컬 저장소에서 이미지를 가져오는 경우에는 문제없이 동작하나,
+                                // 수정하기처럼 이미지를 서버 DB 에서 가져와야 하는 경우는 별도의 구현 처리를 해줘야 함
+                                // 로컬 저장소와 서버 DB 에서 가져온 이미지 Uri 를 멀티파트화하는 코드를 별도로 분리해서 구현할 수 있으나
+                                // (개인의견) 갤러리에서 이미지를 가져올 때마다 멀티파트화시키는 것보다는
+                                // 다음 버튼을 누르는 순간 이미지를 멀티파트화시켜준다면 불필요한 convert 과정을 줄일 수 있을 것이라고 생각
+                                // (핑계) 사실 별도로 구현할 경우 예외처리가 복잡하기도 할 것 같다.
+                                // 따라서 nextButtonToMap() 메서드에서 convertImgToMultiPart() 메서드를 호출해
+                                // 버튼을 눌렀을 때 RecyclerView Adapter 의 itemList 를 멀티파트화 시키는 방향으로 코드를 수정함
                                 //이미지 멀티파트로 저장
-                                convertImgToMultiPart(imgPath, image)
+//                                convertImgToMultiPart(writeImgInfo, image)
                             }
 
                             val position = writeAdapter.itemCount
@@ -353,11 +481,14 @@ class WriteFragment : Fragment(), View.OnClickListener {
                                 writeAdapter.imgList.addAll(imgMoreList)
                                 writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
 
-                                if (sharedViewModel.imageMultiPart.value == null) {
-                                    sharedViewModel.imageMultiPart.value = image
-                                } else {
-                                    sharedViewModel.imageMultiPart.value!!.addAll(image)
-                                }
+                                // note(승현):
+                                // 아래 코드는 convertImgToMultiPart() 메서드를 통해 얻은 멀티파트 리스트를 ViewModel 에 담는 과정
+                                // convertImgToMultiPart() 메서드의 호출위치를 바꿨기 때문에 아래 코드 주석처리함
+//                                if (sharedViewModel.imageMultiPart.value == null) {
+//                                    sharedViewModel.imageMultiPart.value = image
+//                                } else {
+//                                    sharedViewModel.imageMultiPart.value!!.addAll(image)
+//                                }
                             }
                         }
                     }
@@ -509,7 +640,18 @@ class WriteFragment : Fragment(), View.OnClickListener {
         //보여지는 이미지
         sharedViewModel.imageUriRecyclerView.value = writeAdapter.imgList
 
-        //빈값 확인
+        // note(승현):
+        // RecyclerView Adapter itemList 의 Uri 리스트를 멀티파트 폼으로 변환
+        CoroutineScope(Dispatchers.Main).launch {
+            val multiPartJob = async { convertImgToMultiPart(writeAdapter.imgList) }
+            val multiPartImageList: ArrayList<MultipartBody.Part> = multiPartJob.await()
+            sharedViewModel.imageMultiPart.value = multiPartImageList
+            checkDataSetEmpty(warningList)
+        }
+    }
+
+    // 빈값 확인
+    private fun checkDataSetEmpty(warningList: ArrayList<MultipartBody.Part>) {
         if (TextUtils.isEmpty(sharedViewModel.title.value)
             || TextUtils.isEmpty(sharedViewModel.province.value)
             || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(
@@ -519,6 +661,35 @@ class WriteFragment : Fragment(), View.OnClickListener {
             || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
             || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)
         ) {
+            // note: 있어야 할 값이 없으면 Toast 를 띄워주는 조건문이다.
+            // note: 어떤 조건에서 Toast 를 띄우는지 확인하기 위해 Timber 를 찍어봤다.
+            if (TextUtils.isEmpty(sharedViewModel.title.value)) {
+                Timber.tag("빈 값 있는 상황").i("제목 없음")
+            }
+            if (TextUtils.isEmpty(sharedViewModel.province.value)) {
+                Timber.tag("빈 값 있는 상황").i("지역(도) 없음")
+            }
+            if (getString(R.string.no_select) != sharedViewModel.province.value
+                && TextUtils.isEmpty(sharedViewModel.region.value)
+            ) {
+                Timber.tag("빈 값 있는 상황").i("지역(도)는 있는데 지역(시) 없음")
+            }
+            if (TextUtils.isEmpty(sharedViewModel.courseDesc.value)) {
+                Timber.tag("빈 값 있는 상황").i("코스 설명이 없음")
+            }
+            if (warningList.size == 0) {
+                Timber.tag("빈 값 있는 상황").i("주의사항 없음")
+            }
+            if (sharedViewModel.imageMultiPart.value == null) {
+                Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 null")
+            }
+            if (sharedViewModel.imageMultiPart.value?.size == 0) {
+                Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 size 0")
+            }
+            if (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0) {
+                Timber.tag("빈 값 있는 상황").i("테마 없음")
+            }
+
 
             Toast.makeText(
                 requireContext(),
@@ -574,10 +745,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
         if (sharedViewModel.warningUI.value != null) {
             for (warningData in sharedViewModel.warningUI.value!!) {
                 when (warningData) {
-                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected = true
+                    Define().WARNING_HIGH_WAY -> binding.btnWriteCautionHighway.isSelected =
+                        true
                     Define().WARNING_DIFF_ROAD -> binding.btnWriteCautionDiffi.isSelected = true
-                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected = true
-                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected = true
+                    Define().WARNING_MOUNTAIN_ROAD -> binding.btnWriteCautionMoun.isSelected =
+                        true
+                    Define().WARNING_HOT_PLACE -> binding.btnWriteCautionPeople.isSelected =
+                        true
                 }
             }
         }

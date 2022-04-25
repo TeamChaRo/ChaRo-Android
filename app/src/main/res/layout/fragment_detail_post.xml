@@ -17,77 +17,85 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.detailpost.DetailPostFragment">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_detail_post_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="21dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_view_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:includeFontPadding="false"
+                android:text="@{viewModel.isAuthorFlag ? `내가 작성한 글` : `구경하기`}"
+                android:textColor="@color/black_sub_212429"
+                android:textSize="17sp"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
+                app:layout_constraintBottom_toBottomOf="@id/cl_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cl_back" />
+
+            <TextView
+                android:id="@+id/tv_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:text="@string/text_options"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:visibility="@{viewModel.isAuthorFlag == false ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_view_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_view_title" />
+
+            <LinearLayout
+                android:id="@+id/ll_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="9dp"
+                android:background="@color/gray2_sub_dde2e5"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/cl_back" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:overScrollMode="never"
             app:layout_constraintBottom_toTopOf="@id/cl_detail_bottom"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/cl_detail_post_top">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="41dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_back"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="21dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/img_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_back_1"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/tv_view_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:text="@{viewModel.isAuthorFlag ? `내가 작성한 글` : `구경하기`}"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintBottom_toBottomOf="@id/cl_back"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cl_back" />
-
-                <TextView
-                    android:id="@+id/tv_options"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:text="@string/text_options"
-                    android:textColor="@color/black"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="10dp"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_view_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_view_title" />
-
-                <LinearLayout
-                    android:id="@+id/ll_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="9dp"
-                    android:background="@color/gray2_sub_dde2e5"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/cl_back" />
 
                 <TextView
                     android:id="@+id/tv_post_title"
@@ -104,7 +112,7 @@
                     app:fontFamily="@font/noto_sans_cjkkr_bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ll_1" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/img_author"
@@ -228,10 +236,10 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:paddingVertical="10dp"
-                    android:text="@{viewModel.theme[0]}"
+                    android:text="@{viewModel.themes[0]}"
                     android:textColor="@color/gray5_sub_495057"
                     android:textSize="14sp"
-                    android:visibility="@{viewModel.theme.size >= 1 ? View.VISIBLE : View.INVISIBLE}"
+                    android:visibility="@{viewModel.themes.size >= 1 ? View.VISIBLE : View.INVISIBLE}"
                     app:fontFamily="@font/noto_sans_cjkkr_medium"
                     app:layout_constraintEnd_toStartOf="@id/tv_post_theme_2"
                     app:layout_constraintStart_toStartOf="parent"
@@ -247,10 +255,10 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:paddingVertical="10dp"
-                    android:text="@{viewModel.theme[1]}"
+                    android:text="@{viewModel.themes[1]}"
                     android:textColor="@color/gray5_sub_495057"
                     android:textSize="14sp"
-                    android:visibility="@{viewModel.theme.size >= 2 ? View.VISIBLE : View.INVISIBLE}"
+                    android:visibility="@{viewModel.themes.size >= 2 ? View.VISIBLE : View.INVISIBLE}"
                     app:fontFamily="@font/noto_sans_cjkkr_medium"
                     app:layout_constraintBottom_toBottomOf="@id/tv_post_theme_1"
                     app:layout_constraintEnd_toStartOf="@id/tv_post_theme_3"
@@ -267,10 +275,10 @@
                     android:gravity="center"
                     android:includeFontPadding="false"
                     android:paddingVertical="10dp"
-                    android:text="@{viewModel.theme[2]}"
+                    android:text="@{viewModel.themes[2]}"
                     android:textColor="@color/gray5_sub_495057"
                     android:textSize="14sp"
-                    android:visibility="@{viewModel.theme.size >= 3 ? View.VISIBLE : View.INVISIBLE}"
+                    android:visibility="@{viewModel.themes.size >= 3 ? View.VISIBLE : View.INVISIBLE}"
                     app:fontFamily="@font/noto_sans_cjkkr_medium"
                     app:layout_constraintBottom_toBottomOf="@id/tv_post_theme_1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -327,7 +335,7 @@
                             android:paddingHorizontal="9dp"
                             android:paddingTop="10dp"
                             android:paddingBottom="11dp"
-                            android:text="@{viewModel.startAddress}"
+                            android:text="@{viewModel.courseDetail[0].address}"
                             android:textColor="@color/gray5_sub_495057"
                             android:textSize="13sp"
                             app:fontFamily="@font/noto_sans_cjkkr_regular"
@@ -362,7 +370,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:visibility='@{viewModel.midFrstAddress != "" ? View.VISIBLE : View.GONE}'
+                        android:visibility="@{viewModel.courseDetail.size() == 3 ? View.VISIBLE : View.GONE}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_post_location_start">
@@ -396,7 +404,7 @@
                             android:paddingHorizontal="9dp"
                             android:paddingTop="10dp"
                             android:paddingBottom="11dp"
-                            android:text="@{viewModel.midFrstAddress}"
+                            android:text="@{viewModel.courseDetail[1].address}"
                             android:textColor="@color/gray5_sub_495057"
                             android:textSize="13sp"
                             app:fontFamily="@font/noto_sans_cjkkr_regular"
@@ -464,7 +472,7 @@
                             android:paddingHorizontal="9dp"
                             android:paddingTop="10dp"
                             android:paddingBottom="11dp"
-                            android:text="@{viewModel.endAddress}"
+                            android:text="@{viewModel.courseDetail[viewModel.courseDetail.size() - 1].address}"
                             android:textColor="@color/gray5_sub_495057"
                             android:textSize="13sp"
                             app:fontFamily="@font/noto_sans_cjkkr_regular"
