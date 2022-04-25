@@ -223,10 +223,15 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 }
 
                 // 지도 중앙 맞춰주기
-                val info: TMapInfo =
-                    tMapView.getDisplayTMapInfo(pointList)
-                tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                tMapView.zoomLevel = info.tMapZoomLevel
+                if(pointList.isEmpty()) {
+                    tMapView.setCenterPoint(127.840076, 35.838083)
+                    tMapView.zoomLevel = 6
+                } else {
+                    val info: TMapInfo =
+                        tMapView.getDisplayTMapInfo(pointList)
+                    tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+                    tMapView.zoomLevel = info.tMapZoomLevel
+                }
 
                 // Marker 생성
                 for (i in pointList.indices) {
