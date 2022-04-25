@@ -290,9 +290,9 @@ class DetailPostFragment : Fragment() {
             try {
                 // TODO: 나중에 postId 바꾸기
 //                val deepLink =
-//                    "http://www.charo.com/detail/${(activity as DetailPostActivity).postId}" //딥링크
+//                    "https://charo.page.link/qLo3?postId=${(activity as DetailPostActivity).postId}" //딥링크
                 val deepLink =
-                    "http://www.charo.com/detail/${viewModel.postId}" //딥링크
+                    "https://charo.page.link/qLo3?postId=${viewModel.postId}" //딥링크
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "*/*"
                 intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자

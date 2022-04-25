@@ -33,4 +33,6 @@ class Define {
     val YOUTUBE_PLAYLIST_ILYSB : String = "watch?v=SSTp0rknOgA"
     val YOUTUBE_PLAYLIST_NOISES : String = "watch?v=-nQessUrdk0"
 
+    //dynamicLink
+    val DYNAMIC_SEGMENT : String = "qLo3"
 }

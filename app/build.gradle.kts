@@ -79,7 +79,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
     implementation("com.google.firebase:firebase-common-ktx:20.1.0")
     implementation("com.google.firebase:firebase-auth-ktx:21.0.3")
-    implementation("com.google.firebase:firebase-bom:29.3.0")
 
 //    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-messaging:22.0.0")
@@ -88,6 +87,11 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:21.0.3")
     implementation("com.firebaseui:firebase-ui-auth:4.3.2")
     implementation("com.google.firebase:firebase-inappmessaging-display-ktx:20.1.2")
+
+    implementation(platform("com.google.firebase:firebase-bom:29.3.0"))
+    implementation("com.google.firebase:firebase-dynamic-links-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
     kapt(KaptDependencies.hilt)
 
 // DataStore
