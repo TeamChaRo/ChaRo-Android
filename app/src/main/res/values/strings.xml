@@ -161,6 +161,7 @@
     <string name="notice">공지사항</string>
     <string name="cs">고객센터</string>
     <string name="cs_query">1:1 문의</string>
+    <string name="report">신고하기</string>
     <string name="terms">약관</string>
     <string name="privacy">개인정보 처리방침</string>
     <string name="service">서비스 이용약관</string>
