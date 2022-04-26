@@ -52,7 +52,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.drive.observe(viewLifecycleOwner) {
-                Timber.d("스피드확인 : 얘는 데이터 추가")
                 moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
             }
 
@@ -88,7 +87,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
-                Timber.d("스피드확인 : 얘는 데이터 추가")
                 moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
             }
 

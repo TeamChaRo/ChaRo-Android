@@ -9,8 +9,11 @@ import com.charo.android.databinding.ItemResultSearchBinding
 import com.charo.android.domain.model.search.SearchDrive
 import com.charo.android.presentation.ui.detail.DetailActivity
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
+import com.charo.android.presentation.ui.write.WriteShareActivity
+import com.charo.android.presentation.util.LoginUtil
 
 class ResultSearchAdapter(
+    var email : String,
     var links : ResultSearchFragment.DataToSearchLike
 ) :
     RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {
@@ -21,7 +24,7 @@ class ResultSearchAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ResultSearchAdapter.ResultSearchViewHolder {
+    ): ResultSearchViewHolder {
         val binding = ItemResultSearchBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
@@ -29,25 +32,32 @@ class ResultSearchAdapter(
     }
 
     override fun onBindViewHolder(
-        holder: ResultSearchAdapter.ResultSearchViewHolder,
+        holder: ResultSearchViewHolder,
         position: Int
     ) {
         holder.onBind(searchData[position])
         holder.binding.imgResultSearchHeart.setOnClickListener {
             postId = searchData[position].postId
-            if(select){
-                it.isSelected = !searchData[position].isFavorite
-                select = false
+            if(email == "@"){
+                LoginUtil.loginPrompt(holder.itemView.context)
             }else{
-                it.isSelected = searchData[position].isFavorite
+                if(select){
+                    it.isSelected = !searchData[position].isFavorite
+                    select = false
+                }else{
+                    it.isSelected = searchData[position].isFavorite
+                }
+                links.getPostId(postId)
             }
 
-            links.getPostId(postId)
         }
 
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
-            intent.putExtra("postId", searchData[position].postId)
+            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("postId", searchData[position].postId)
+                putExtra("destination","detail")
+            }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

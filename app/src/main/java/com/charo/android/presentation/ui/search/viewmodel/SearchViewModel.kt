@@ -33,9 +33,26 @@ class SearchViewModel(
         get() = _search
 
 
-    fun getSearch(requestSearchViewData: RequestSearchViewData) {
+    //검색 좋아요(인기순)
+    fun getSearchLike(requestSearchViewData: RequestSearchViewData) {
         viewModelScope.launch {
             runCatching { getRemoteSearchUseCase.execute(requestSearchViewData) }
+                .onSuccess {
+                    _search.value = it
+                    Timber.d("search 서버 통신 성공!")
+                    Timber.d("search_${search.value.toString()}")
+                }
+                .onFailure {
+                    it.printStackTrace()
+                    Timber.d("search 서버 통신 실패")
+                }
+        }
+    }
+
+    //검색 최신순
+    fun getSearchNew(requestSearchViewData: RequestSearchViewData) {
+        viewModelScope.launch {
+            runCatching { getRemoteSearchUseCase.executeNew(requestSearchViewData) }
                 .onSuccess {
                     _search.value = it
                     Timber.d("search 서버 통신 성공!")

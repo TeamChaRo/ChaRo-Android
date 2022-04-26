@@ -5,5 +5,9 @@ import com.charo.android.data.model.response.search.ResponseSearchViewData
 
 
 interface SearchViewRepository {
-    suspend fun postSearch(requestSearchViewData: RequestSearchViewData): ResponseSearchViewData
+    //검색 인기순
+    suspend fun postSearchLike(requestSearchViewData: RequestSearchViewData): ResponseSearchViewData
+
+    //검색 최신순
+    suspend fun postSearchNew(requestSearchViewData: RequestSearchViewData): ResponseSearchViewData
 }

@@ -1,20 +1,25 @@
 package com.charo.android.presentation.ui.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.data.model.request.search.RequestSearchViewData
 import com.charo.android.databinding.FragmentResultSearchBinding
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
 import com.charo.android.presentation.util.SharedInformation
+import com.charo.android.presentation.util.ThemeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 
 class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.fragment_result_search) {
     private val searchViewModel: SearchViewModel by sharedViewModel()
+    private val themeUtil = ThemeUtil()
     private lateinit var resultSearchAdapter: ResultSearchAdapter
     var links = DataToSearchLike()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,6 +29,7 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         initResultSearchView()
         clickBackBtn()
         clickBackHome()
+        clickSpinner()
         Timber.d("searchViewModel ${searchViewModel.province.value.toString()}")
         Timber.d("searchViewModel ${searchViewModel.city.value.toString()}")
         Timber.d("searchViewModel ${searchViewModel.theme.value.toString()}")
@@ -57,7 +63,8 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
     }
 
     private fun initResultSearchView() {
-        resultSearchAdapter = ResultSearchAdapter(links)
+        val userId = SharedInformation.getEmail(requireActivity())
+        resultSearchAdapter = ResultSearchAdapter(userId, links)
         binding.recyclerviewResultSearch.adapter = resultSearchAdapter
         searchViewModel.search.observe(viewLifecycleOwner) {
             resultSearchAdapter.setSearchDrive(it)
@@ -101,6 +108,41 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         )
         binding.spinnerResultSearch.adapter = adapter
     }
+    //스피너 필터 클릭 이벤트
+    private fun clickSpinner() {
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        val requestSearchViewData = RequestSearchViewData(
+            region = searchViewModel.city.value.toString(),
+            theme = themeUtil.themeMap.get(searchViewModel.theme.value.toString()) ?: "",
+            warning = themeUtil.cautionMap.get(searchViewModel.caution.value.toString()) ?: "",
+            userEmail = userEmail,
+        )
+        binding.spinnerResultSearch.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (position == 0) {
+                        searchViewModel.getSearchLike(requestSearchViewData)
+
+                    } else {
+                        searchViewModel.getSearchNew(requestSearchViewData)
+                    }
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+            }
+
+    }
+
 
     inner class DataToSearchLike(){
         fun getPostId(postId : Int){

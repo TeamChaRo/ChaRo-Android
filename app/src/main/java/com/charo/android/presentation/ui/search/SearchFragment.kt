@@ -73,7 +73,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 warning = themeUtil.cautionMap.get(searchViewModel.caution.value.toString()) ?: "",
                 userEmail = userEmail,
             )
-            searchViewModel.getSearch(requestSearchViewData)
+            searchViewModel.getSearchLike(requestSearchViewData)
             searchViewModel.search.observe(viewLifecycleOwner) {
                 if (it.count() == 0) {
                     val transaction = activity?.supportFragmentManager?.beginTransaction()
