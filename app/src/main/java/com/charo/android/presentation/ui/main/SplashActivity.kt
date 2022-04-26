@@ -20,6 +20,7 @@ import timber.log.Timber
 
 class SplashActivity : AppCompatActivity() {
     private val time: Long = 2000
+    private var deepLinkPostId: String? = null
 
     private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,54 +35,51 @@ class SplashActivity : AppCompatActivity() {
             Timber.d("autoEmail $autoEmail")
             Timber.d("onBoardingChecked $onBoardingChecked")
 
-            Firebase.dynamicLinks
-                .getDynamicLink(intent)
-                .addOnSuccessListener(this) { pendingDynamicLinkData ->
-                    var deepLink: Uri? = null
-                    if (pendingDynamicLinkData != null) {
-                        deepLink = pendingDynamicLinkData.link
-                        Timber.d("[DynamicLink] deepLink $deepLink")
-
-                        if(deepLink != null){
-                            val segment = deepLink.lastPathSegment
-                            Timber.d("[DynamicLink] segment $segment")
-
-                            if(segment == Define().DYNAMIC_SEGMENT){
-                                val postId = deepLink.getQueryParameter("postId")
-                                val intent = Intent(this, WriteShareActivity::class.java)
-                                intent.putExtra("postId", postId)
-                                intent.putExtra("destination", "detail")
-                                startActivity(intent)
-                            }
-                        }
-                    } else {
-                        autoLogin(autoEmail, onBoardingChecked)
-                    }
-                }
-                .addOnFailureListener(this) { e ->
-                    run {
-                        Timber.w("[DynamicLink] getDynamicLink:onFailure $e")
-                        autoLogin(autoEmail, onBoardingChecked)
-                    }
-                }
+            autoLogin(autoEmail, onBoardingChecked)
+            handleDeepLink()
         }, time)
     }
 
     private fun autoLogin(autoEmail: String, onBoardingChecked: Boolean){
-        if (autoEmail != "@") {
+        val intent : Intent = if (autoEmail != "@") {
             Timber.d("autoEmail $autoEmail")
             Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            Intent(this, MainActivity::class.java)
         } else {
             if(onBoardingChecked) {
-                startActivity(Intent(this, OnBoardingActivity::class.java))
-                finish()
+                Intent(this, OnBoardingActivity::class.java)
             } else {
-                startActivity(Intent(this, SocialSignInActivity::class.java))
-                finish()
+                Intent(this, SocialSignInActivity::class.java)
             }
         }
+        intent.putExtra("postId", deepLinkPostId)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun handleDeepLink(){
+        Firebase.dynamicLinks
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+                    Timber.d("[DynamicLink] deepLink $deepLink")
+
+                    if (deepLink != null) {
+                        val segment = deepLink.lastPathSegment
+                        Timber.d("[DynamicLink] segment $segment")
+
+                        if (segment == Define().DYNAMIC_SEGMENT) {
+                            deepLinkPostId = deepLink.getQueryParameter("postId")
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener(this) { e ->
+                run {
+                    Timber.w("[DynamicLink] getDynamicLink:onFailure $e")
+                }
+            }
     }
 }
