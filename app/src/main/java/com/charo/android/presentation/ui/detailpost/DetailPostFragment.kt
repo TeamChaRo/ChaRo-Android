@@ -299,12 +299,12 @@ class DetailPostFragment : Fragment() {
     private fun clickShare() {
         binding.imgDetailShare.setOnClickListener {
             val imageUri = when {
-                viewModel.imageUriRecyclerView.value.isNullOrEmpty() -> {
+                viewModel.imageStringViewPager.value.isNullOrEmpty() -> {
                     //TODO: default image : 그래픽 이미지 (디자인 작업 후)
                     ""
                 }
                 else -> {
-                    viewModel.imageUriRecyclerView.value!![0].imgUri.toString()
+                    viewModel.imageStringViewPager.value!![0]
                 }
             }
             // TODO: 나중에 postId 바꾸기
@@ -317,6 +317,7 @@ class DetailPostFragment : Fragment() {
 
         val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
         Timber.e("createDynamicLink() link: $link")
+        Timber.e("createDynamicLink() imageUri: $imageUri")
 
         val uri = Uri.parse(link)
         FirebaseDynamicLinks.getInstance().createDynamicLink()
@@ -336,8 +337,7 @@ class DetailPostFragment : Fragment() {
             )
             .setSocialMetaTagParameters(
                 DynamicLink.SocialMetaTagParameters.Builder()
-                    .setTitle("Charo")
-                    .setDescription(title)
+                    .setTitle(title)
                     .setImageUrl(Uri.parse(imageUri))
                     .build()
             )

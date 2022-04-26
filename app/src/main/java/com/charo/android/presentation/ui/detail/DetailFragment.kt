@@ -225,8 +225,7 @@ class DetailFragment : Fragment() {
             )
             .setSocialMetaTagParameters(
                 DynamicLink.SocialMetaTagParameters.Builder()
-                    .setTitle("Charo")
-                    .setDescription(title)
+                    .setTitle(title)
                     .setImageUrl(Uri.parse(imageUrl))
                     .build()
             )
