@@ -6,10 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.home.BannerGangneungActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
+        android:minHeight="78dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_banner_gangneung"
+            android:textAppearance="@style/HeaderH4"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nscv_banner_gangneung"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,23 +43,6 @@
                 android:contentDescription="@string/img_description"
                 />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_banner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/white"
-                android:minHeight="78dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_banner_gangneung"
-                    android:textAppearance="@style/HeaderH4"
-                    android:layout_gravity="center"
-                    />
-            </androidx.appcompat.widget.Toolbar>
-
             <TextView
                 android:id="@+id/tv_text_sub_title_gangneung"
                 android:layout_width="0dp"
@@ -50,7 +51,7 @@
                 android:minWidth="109dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="30dp"
                 android:layout_marginHorizontal="20dp"
                 android:fontFamily="@font/jejugothic_regular"
