@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,12 @@ import com.charo.android.databinding.FragmentDetailBinding
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.util.CustomDialog
+import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.enqueueUtil
+import com.google.android.gms.tasks.Task
+import com.google.firebase.dynamiclinks.DynamicLink
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.ShortDynamicLink
 import com.skt.Tmap.*
 import timber.log.Timber
 
@@ -145,7 +151,7 @@ class DetailFragment : Fragment() {
 
         //공유하기 클릭 이벤트
         binding.imgDetailShare.setOnClickListener {
-            clickShare()
+            createDynamicLink((activity as DetailActivity).postId, (activity as DetailActivity).title, imageUrl)
         }
 
         // 지도 클릭 이벤트
@@ -196,22 +202,53 @@ class DetailFragment : Fragment() {
         binding.tvDetailViewpagerImage.text = "1/${viewPagerAdapter.itemList.size}"
     }
 
-    private fun clickShare() {
-        try {
-            val deepLink =
-                "https://charo.page.link/qLo3?postId=${(activity as DetailActivity).postId}" //딥링크
-            val intent = Intent(Intent.ACTION_SEND)
-            intent.type = "*/*"
-            intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
+    private fun createDynamicLink(postId : Int, title : String, imageUrl : String) {
 
-            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
+        Timber.e("createDynamicLink() uriPath: $link")
 
-            val chooser = Intent.createChooser(intent, "공유하기")
-            startActivity(chooser)
-
-        } catch (ignored: ActivityNotFoundException) {
-            Timber.d("test ignored : $ignored")
-        }
+        val uri = Uri.parse(link)
+        FirebaseDynamicLinks.getInstance().createDynamicLink()
+            .setLink(uri)
+            .setDomainUriPrefix("https://charo.page.link")
+            .setAndroidParameters(
+                DynamicLink.AndroidParameters.Builder(requireActivity().packageName)
+                    .setMinimumVersion(100)
+                    .build()
+            )
+            .setGoogleAnalyticsParameters(
+                DynamicLink.GoogleAnalyticsParameters.Builder()
+                    .setSource("share")
+                    .setMedium(title)
+                    .setCampaign("detailPost")
+                    .build()
+            )
+            .setSocialMetaTagParameters(
+                DynamicLink.SocialMetaTagParameters.Builder()
+                    .setTitle("Charo")
+                    .setDescription(title)
+                    .setImageUrl(Uri.parse(imageUrl))
+                    .build()
+            )
+            .buildShortDynamicLink()
+            .addOnCompleteListener() { task: Task<ShortDynamicLink> ->
+                if (task.isSuccessful) {
+                    val shortLink = task.result.shortLink
+                    try {
+                        if (shortLink != null) {
+                            val sendIntent = Intent()
+                            sendIntent.action = Intent.ACTION_SEND
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, shortLink.toString())
+                            sendIntent.type = "text/plain"
+                            startActivity(Intent.createChooser(sendIntent, "sharePost"))
+                        }
+                    } catch (ignored: ActivityNotFoundException) {
+                        ignored.printStackTrace()
+                    }
+                } else {
+                    Timber.e(task.exception.toString())
+                }
+            }
     }
 
     private fun clickLike(postId: Int) {

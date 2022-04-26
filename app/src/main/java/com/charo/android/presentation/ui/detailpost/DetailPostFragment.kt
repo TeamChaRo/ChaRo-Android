@@ -5,6 +5,7 @@ import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PointF
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +25,12 @@ import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.ui.write.WriteFragment
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.charo.android.presentation.util.CustomDialog
+import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LoginUtil
+import com.google.android.gms.tasks.Task
+import com.google.firebase.dynamiclinks.DynamicLink
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.ShortDynamicLink
 import com.skt.Tmap.*
 import com.skt.Tmap.TMapView.OnClickListenerCallback
 import kotlinx.coroutines.CoroutineScope
@@ -292,25 +298,68 @@ class DetailPostFragment : Fragment() {
 
     private fun clickShare() {
         binding.imgDetailShare.setOnClickListener {
-            try {
-                // TODO: 나중에 postId 바꾸기
-//                val deepLink =
-//                    "https://charo.page.link/qLo3?postId=${(activity as DetailPostActivity).postId}" //딥링크
-                val deepLink =
-                    "https://charo.page.link/qLo3?postId=${viewModel.postId}" //딥링크
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "*/*"
-                intent.putExtra(Intent.EXTRA_TEXT, deepLink) // text는 공유하고 싶은 글자
-
-                intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-
-                val chooser = Intent.createChooser(intent, "공유하기")
-                startActivity(chooser)
-
-            } catch (ignored: ActivityNotFoundException) {
-                Timber.d("test ignored : $ignored")
+            val imageUri = when {
+                viewModel.imageUriRecyclerView.value.isNullOrEmpty() -> {
+                    //TODO: default image : 그래픽 이미지 (디자인 작업 후)
+                    ""
+                }
+                else -> {
+                    viewModel.imageUriRecyclerView.value!![0].imgUri.toString()
+                }
             }
+            // TODO: 나중에 postId 바꾸기
+//            createDynamicLink((activity as DetailPostActivity).postId, (activity as DetailPostActivity).title, imageUri)
+            createDynamicLink(viewModel.postId, viewModel.title.value.toString(), imageUri)
         }
+    }
+
+    private fun createDynamicLink(postId : Int, title : String, imageUri : String) {
+
+        val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
+        Timber.e("createDynamicLink() link: $link")
+
+        val uri = Uri.parse(link)
+        FirebaseDynamicLinks.getInstance().createDynamicLink()
+            .setLink(uri)
+            .setDomainUriPrefix("https://charo.page.link")
+            .setAndroidParameters(
+                DynamicLink.AndroidParameters.Builder(requireActivity().packageName)
+                    .setMinimumVersion(100)
+                    .build()
+            )
+            .setGoogleAnalyticsParameters(
+                DynamicLink.GoogleAnalyticsParameters.Builder()
+                    .setSource("share")
+                    .setMedium(title)
+                    .setCampaign("detailPost")
+                    .build()
+            )
+            .setSocialMetaTagParameters(
+                DynamicLink.SocialMetaTagParameters.Builder()
+                    .setTitle("Charo")
+                    .setDescription(title)
+                    .setImageUrl(Uri.parse(imageUri))
+                    .build()
+            )
+            .buildShortDynamicLink()
+            .addOnCompleteListener() { task: Task<ShortDynamicLink> ->
+                if (task.isSuccessful) {
+                    val shortLink = task.result.shortLink
+                    try {
+                        if (shortLink != null) {
+                            val sendIntent = Intent()
+                            sendIntent.action = Intent.ACTION_SEND
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, shortLink.toString())
+                            sendIntent.type = "text/plain"
+                            startActivity(Intent.createChooser(sendIntent, "sharePost"))
+                        }
+                    } catch (ignored: ActivityNotFoundException) {
+                        ignored.printStackTrace()
+                    }
+                } else {
+                    Timber.e(task.exception.toString())
+                }
+            }
     }
 
     private fun clickMap() {

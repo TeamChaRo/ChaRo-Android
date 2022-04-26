@@ -49,6 +49,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        deepLinkDetailPost()
+
         // Obtain the FirebaseAnalytics instance.
         analytics = Firebase.analytics
 
@@ -90,6 +92,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onBackPressed() {
         finish()
 
+    }
+
+    private fun deepLinkDetailPost(){
+        if(intent != null && intent.getStringExtra("postId") != null){
+            val postId = intent.getStringExtra("postId")
+            val intent = Intent(this, WriteShareActivity::class.java)
+            intent.putExtra("postId", postId)
+            intent.putExtra("destination", "detail")
+            startActivity(intent)
+        }
     }
 
     private fun initNavView() {

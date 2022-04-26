@@ -45,6 +45,13 @@ class SocialSignInActivity() :
         goEmailLogin()
         goEmailSignUp()
         goKaKaoMain()
+
+        //deeplink로 왔을 때 로그인 화면 건너뛰고 메인 -> 게시물
+        if(intent != null && intent.getStringExtra("postId") != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     //자동 로그인
