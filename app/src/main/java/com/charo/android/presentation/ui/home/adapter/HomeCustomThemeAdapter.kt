@@ -9,8 +9,8 @@ import com.charo.android.databinding.ItemHomeNightDriveBinding
 import com.charo.android.domain.model.home.CustomThemeDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.LoginUtil.email
 
 class HomeCustomThemeAdapter(val userId: String,
                              var links: HomeFragment.DataToHomeLike) :
@@ -37,7 +37,7 @@ class HomeCustomThemeAdapter(val userId: String,
     ) {
         holder.onBind(customThemeDrive[position])
         holder.binding.imgHomeNightDriveHeart.setOnClickListener{
-            if(email == "@"){
+            if(userId == "@"){
                 LoginUtil.loginPrompt(holder.itemView.context)
             }else{
                 postId = customThemeDrive[position].homeNightDrivePostId
@@ -53,8 +53,11 @@ class HomeCustomThemeAdapter(val userId: String,
             }
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
-            intent.putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
+            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
+                putExtra("destination","detail")
+            }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

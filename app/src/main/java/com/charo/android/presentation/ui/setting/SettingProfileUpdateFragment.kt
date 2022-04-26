@@ -10,6 +10,7 @@ import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingProfileUpdateBinding
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
+import com.charo.android.presentation.util.SharedInformation
 import kotlinx.android.synthetic.main.fragment_setting_profile_update.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -143,20 +144,21 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     // 프로필 사진 변경했을 때(닉네임이랑 / 닉네임 없이)
     private fun profileImageUpdateChange( imageUri: Uri, s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
+            val email = SharedInformation.getEmail(requireActivity())
             Timber.d("love $it")
             if (it == 0) {
                 settingViewModel.profileImageChange(
-                    "and@naver.com",
+                    email,
                     imageUri,
                     "",
                     s,
                     requireActivity()
                 )
-
+            SharedInformation.setNickName(requireActivity(), s)
 
             } else if (it == 2) {
                 settingViewModel.profileImageChange(
-                    "and@naver.com",
+                    email,
                     imageUri,
                     "",
                     "",
@@ -175,14 +177,15 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     //닉네임만 변경했을 때
     private fun profileNickNameUpdateChange(s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
+            val email = SharedInformation.getEmail(requireActivity())
             Timber.d("loves $it")
             if (it == 1) {
                 settingViewModel.profileNickNameChange(
-                    "and@naver.com",
+                    email,
                     "",
                     s
                 )
-
+                SharedInformation.setNickName(requireActivity(), s)
             }
 
         }

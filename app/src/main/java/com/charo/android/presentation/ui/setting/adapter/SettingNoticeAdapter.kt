@@ -15,7 +15,7 @@ class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNo
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SettingNoticeAdapter.SettingNoticeViewHolder {
+    ): SettingNoticeViewHolder {
         val binding = ItemSettingNoticeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -25,7 +25,7 @@ class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNo
     }
 
     override fun onBindViewHolder(
-        holder: SettingNoticeAdapter.SettingNoticeViewHolder,
+        holder: SettingNoticeViewHolder,
         position: Int
     ) {
         holder.onBind(settingNotice[position])

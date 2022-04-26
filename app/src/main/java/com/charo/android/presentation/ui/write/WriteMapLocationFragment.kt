@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import com.charo.android.R
 import com.charo.android.databinding.FragmentWriteMapLocationBinding
 import com.charo.android.hidden.Hidden
@@ -175,8 +173,9 @@ class WriteMapLocationFragment : Fragment() {
                 }
             }
 
-            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance())
-
+//            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance())
+            requireActivity().supportFragmentManager
+                .popBackStack("writeMapSearch", POP_BACK_STACK_INCLUSIVE)
         }
 
             return root

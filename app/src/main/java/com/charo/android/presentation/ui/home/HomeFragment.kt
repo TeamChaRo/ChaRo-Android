@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -23,12 +24,11 @@ import com.charo.android.presentation.ui.more.MoreViewFragment
 import com.charo.android.presentation.ui.search.SearchActivity
 import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.LoginUtil.email
 import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import android.util.DisplayMetrics
+import timber.log.Timber
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -77,6 +77,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
+    //차 애니메이션
     private fun carAnimation(){
         binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -118,20 +119,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewPagerLocalAdapter.setHomeBanner(bannerLocal)
     }
 
-    //배너 설정
-    private fun initBanner() {
-        val userEmail = SharedInformation.getEmail(requireActivity())
-        email = userEmail
-        homeViewModel.getBanner(userEmail)
-        homeViewPagerAdapter = HomeViewPagerAdapter()
-        binding.vpMain.adapter = homeViewPagerAdapter
-        homeViewModel.banner.observe(viewLifecycleOwner) {
-            homeViewPagerAdapter.setHomeBanner(it, homeViewModel.getBannerRoad())
-        }
-    }
 
     private fun initTrendDrive() {
         val userEmail = SharedInformation.getEmail(requireActivity())
+        Timber.d("home 이메일 $userEmail")
         homeViewModel.getTrendDrive(userEmail)
         homeHotDriveAdapter = HomeTrendDriveAdapter(userEmail, links)
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter

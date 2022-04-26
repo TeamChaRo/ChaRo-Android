@@ -1,5 +1,6 @@
 package com.charo.android.presentation.ui.write
 
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,12 +15,12 @@ import com.charo.android.domain.usecase.follow.PostFollowUseCase
 import com.charo.android.domain.usecase.interaction.PostLikeUseCase
 import com.charo.android.domain.usecase.interaction.PostSaveUseCase
 import com.charo.android.presentation.util.SingleLiveEvent
+import com.charo.android.presentation.util.ThemeUtil
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class WriteSharedViewModel(
     private val getDetailPostUseCase: GetDetailPostUseCase,
@@ -73,12 +74,12 @@ class WriteSharedViewModel(
     var author = MutableLiveData<String>().default("")
     var authorEmail = MutableLiveData<String>().default("")
     var imageStringViewPager = MutableLiveData<MutableList<String>>()
+    var themes = MutableLiveData<ArrayList<String>>()
     var warnings = MutableLiveData<List<Boolean>>()
     var isFavorite = MutableLiveData<Int>().default(0)
     var likesCount = MutableLiveData<Int>().default(0)
     var isStored = MutableLiveData<Int>().default(0)
     var courseDetail = MutableLiveData<List<DetailPost.Course>>()
-    var detailCreatedAt = MutableLiveData<String>().default("")
     var detailArea = MutableLiveData<String>().default("")
 
     // DetailPostLikeListFragment
@@ -91,6 +92,12 @@ class WriteSharedViewModel(
     // 게시물 삭제 성공여부
     private var _deleteSuccess = SingleLiveEvent<Boolean>()
     val deleteSuccess: LiveData<Boolean> get() = _deleteSuccess
+
+    // 게시물 수정인지 여부
+    private var _editFlag = SingleLiveEvent<Boolean>()
+    val editFlag: LiveData<Boolean> get() = _editFlag
+    private var _editMapFlag = SingleLiveEvent<Boolean>()
+    val editMapFlag: LiveData<Boolean> get() = _editMapFlag
 
     fun initData() {
         title.value = ""
@@ -137,45 +144,17 @@ class WriteSharedViewModel(
                 isParking.value = it.isParking
                 parkingDesc.value = it.parkingDesc
                 courseDesc.value = it.courseDesc
-                theme.value = ArrayList(it.themes)
+                themes.value = ArrayList(it.themes)
                 warnings.value = it.warnings
                 author.value = it.author
                 authorEmail.value = it.authorEmail
                 isAuthorFlag.value = it.isAuthor
                 profileImage.value = it.profileImage
                 likesCount.value = it.likesCount
-                isFavorite.value = it.isFavorite
-                isStored.value = it.isStored
-                when (it.course.size) {
-                    2 -> {
-                        with(it.course) {
-                            startAddress.value = this[0].address
-                            startLat.value = this[0].latitude
-                            startLat.value = this[0].longitude
-                            endAddress.value = this[1].address
-                            endLat.value = this[1].latitude
-                            endLong.value = this[1].longitude
-                            courseDetail.value = this
-                        }
-                    }
-                    3 -> {
-                        with(it.course) {
-                            startAddress.value = this[0].address
-                            startLat.value = this[0].latitude
-                            startLat.value = this[0].longitude
-                            midFrstAddress.value = this[1].address
-                            midFrstLat.value = this[1].latitude
-                            midFrstLong.value = this[1].longitude
-                            endAddress.value = this[2].address
-                            endLat.value = this[2].latitude
-                            endLong.value = this[2].longitude
-                            courseDetail.value = this
-                        }
-                    }
-                    else -> {
-                        Timber.tag("getDetailPost").e(it.course.toString())
-                    }
-                }
+                isFavorite.value = if (it.isFavorite == 0) 0 else 1
+                isStored.value = if (it.isStored == 0) 0 else 1
+                courseDetail.value = it.course
+
                 // createdAt 파싱
 //                val format = SimpleDateFormat("YYYY-MM-DD'T'hh:mm:ss.SSS'Z'", Locale.KOREAN)
 //                val date = format.parse(it.createdAt)
@@ -275,5 +254,51 @@ class WriteSharedViewModel(
                 Timber.tag("deleteDetailPost").e(it)
             }
         }
+    }
+
+    fun initEditFlag() {
+        _editFlag.value = true
+        _editMapFlag.value = true
+    }
+
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun initEditData() {
+        // note: 서버에서 온 테마 데이터는 한글인 반면, 작성하기에서는 테마 데이터를 영어로 처리하고 있기 때문에 ThemeUtil 사용해 변환시켜 준다.
+        theme.value = ArrayList(themes.value?.map { ThemeUtil().themeMap[it] as String })
+        // note:
+        // 서버에서 온 이미지 데이터는 List<String>인 반면, 작성하기에서는 MutableList<Uri>와 ArrayList<MultipartBody.Part>이므로 변환이 필요하다.
+        // Uri -> MultipartBody.Part 로의 변환은 WriteFragment 에서 수행하기 때문에, ViewModel 에서는 String -> Uri 변환만 수행한다.
+        imageUriRecyclerView.value =
+            imageStringViewPager.value?.map { WriteImgInfo(it.toUri(), false) }?.toMutableList()
+    }
+
+    fun initEditMapData() {
+        Timber.tag("initEditMapData()").i(courseDetail.value?.toString())
+        courseDetail.value?.let { courseDetail ->
+            with(courseDetail) {
+                when (this.size) {
+                    2 -> {
+                        startAddress.value = this[0].address
+                        startLat.value = this[0].latitude
+                        startLong.value = this[0].longitude
+                        endAddress.value = this[1].address
+                        endLat.value = this[1].latitude
+                        endLong.value = this[1].longitude
+                    }
+                    3 -> {
+                        startAddress.value = this[0].address
+                        startLat.value = this[0].latitude
+                        startLong.value = this[0].longitude
+                        midFrstAddress.value = this[1].address
+                        midFrstLat.value = this[1].latitude
+                        midFrstLong.value = this[1].longitude
+                        endAddress.value = this[2].address
+                        endLat.value = this[2].latitude
+                        endLong.value = this[2].longitude
+                    }
+                }
+            }
+        }
+        _editMapFlag.value = false
     }
 }

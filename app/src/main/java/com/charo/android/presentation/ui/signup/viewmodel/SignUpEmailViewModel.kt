@@ -179,7 +179,7 @@ class SignUpEmailViewModel(
         override fun contentType(): MediaType? = "image/jpeg".toMediaType()
 
         override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, sink.outputStream())
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 10, sink.outputStream())
         }
     }
 

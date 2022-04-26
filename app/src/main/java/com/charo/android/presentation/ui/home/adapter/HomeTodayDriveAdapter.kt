@@ -9,8 +9,8 @@ import com.charo.android.databinding.ItemHomeTodayDriveBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.TodayCharoDrive
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.LoginUtil.email
 
 class HomeTodayDriveAdapter(
     val userId: String,
@@ -39,7 +39,7 @@ class HomeTodayDriveAdapter(
     ) {
         holder.onBind(todayCharoDrive[position])
         holder.binding.imgHomeTodayDriveHeart.setOnClickListener {
-            if(email == "@"){
+            if(userId == "@"){
                 LoginUtil.loginPrompt(holder.itemView.context)
             }else{
                 if (select){
@@ -57,8 +57,11 @@ class HomeTodayDriveAdapter(
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
-            intent.putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)
+            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("destination","detail")
+                putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)
+            }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
 

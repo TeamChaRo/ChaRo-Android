@@ -4,6 +4,7 @@ package com.charo.android.data.api.write
 import com.charo.android.data.model.request.write.RequestWriteHistoryData
 import com.charo.android.data.model.response.ResponseStatusCode
 import com.charo.android.data.model.response.write.ResponseWriteData
+import com.charo.android.data.model.write.ResponseEditData
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -30,4 +31,15 @@ interface WriteViewService {
     fun postSaveHistory(
         @Body body: RequestWriteHistoryData
     ): Call<ResponseStatusCode>
+
+    @Multipart
+    @PUT("/post")
+    fun editPost(
+        @PartMap warning: HashMap<String, RequestBody>,
+        @PartMap theme: HashMap<String, RequestBody>,
+        @Part course: ArrayList<MultipartBody.Part>,
+        @Part image: ArrayList<MultipartBody.Part>,
+        @PartMap stringData: HashMap<String, RequestBody>,
+        @Part deleted: ArrayList<MultipartBody.Part>
+    ): Call<ResponseEditData>
 }

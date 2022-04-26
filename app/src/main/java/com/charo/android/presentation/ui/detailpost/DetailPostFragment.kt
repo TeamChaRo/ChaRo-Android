@@ -9,8 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -18,17 +16,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.charo.android.R
-import com.charo.android.data.model.detailold.RequestDetailDeleteData
 import com.charo.android.databinding.FragmentDetailPostBinding
 import com.charo.android.domain.model.detailpost.DetailPost
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
-import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.charo.android.presentation.ui.write.WriteFragment
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.enqueueUtil
 import com.skt.Tmap.*
 import com.skt.Tmap.TMapView.OnClickListenerCallback
 import kotlinx.coroutines.CoroutineScope
@@ -93,9 +89,10 @@ class DetailPostFragment : Fragment() {
             val popup = PopupMenu(binding.tvOptions.context, binding.tvOptions)
             popup.inflate(R.menu.detail_menu)
             popup.setOnMenuItemClickListener { item ->
-                when(item.itemId) {
+                when (item.itemId) {
                     R.id.detail_menu_edit -> {
-                        // TODO: 수정하기 구현필요
+                        viewModel.initEditFlag()
+                        editDetailPost()
                     }
                     R.id.detail_menu_delete -> {
                         confirmDelete()
@@ -108,6 +105,14 @@ class DetailPostFragment : Fragment() {
             }
             popup.show()
         }
+    }
+
+    private fun editDetailPost() {
+        // 실제로 EditFragment 같은 건 없다.
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.write_share_layout, WriteFragment())
+            .addToBackStack(WriteFragment::class.simpleName)
+            .commit()
     }
 
     private fun confirmDelete() {
