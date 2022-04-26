@@ -213,7 +213,7 @@ class DetailFragment : Fragment() {
             .setDomainUriPrefix("https://charo.page.link")
             .setAndroidParameters(
                 DynamicLink.AndroidParameters.Builder(requireActivity().packageName)
-                    .setMinimumVersion(100)
+                    .setMinimumVersion(90)
                     .build()
             )
             .setGoogleAnalyticsParameters(

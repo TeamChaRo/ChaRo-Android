@@ -19,21 +19,23 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //deeplink로 왔을 때 온보딩 건너뛰고 메인 -> 게시물
-        if(intent != null && intent.getStringExtra("postId") != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-            return
-        }
-
         Timber.d("sharedOn ${SharedInformation.getSocialId(this)}")
         Timber.d("sharedOn ${SharedInformation.getEmail(this)}")
 
-        val pagerAdapter = OnBoardingPagerAdapter(this)
-        binding.vpOnboarding.adapter = pagerAdapter
-        binding.dotsIndicator.setViewPager2(binding.vpOnboarding)
-        SharedInformation.setOnBoarding(this)
+        //deeplink로 왔을 때 온보딩 건너뛰고 메인 -> 게시물
+        val postId = intent.getIntExtra("postId", -1)
+        if(intent != null && postId != -1){
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("postId", postId)
+            startActivity(intent)
+            finish()
+
+        } else {
+            val pagerAdapter = OnBoardingPagerAdapter(this)
+            binding.vpOnboarding.adapter = pagerAdapter
+            binding.dotsIndicator.setViewPager2(binding.vpOnboarding)
+            SharedInformation.setOnBoarding(this)
+        }
     }
 
     private inner class OnBoardingPagerAdapter(fa : FragmentActivity) : FragmentStateAdapter(fa){

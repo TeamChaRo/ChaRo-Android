@@ -1,26 +1,29 @@
 package com.charo.android.presentation.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySplashBinding
 import com.charo.android.presentation.ui.onboarding.OnBoardingActivity
 import com.charo.android.presentation.ui.signin.SocialSignInActivity
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.SharedInformation
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class SplashActivity : AppCompatActivity() {
     private val time: Long = 2000
-    private var deepLinkPostId: String? = null
+    private var deepLinkPostId: Int = -1
+    private var mContext: Context = this
 
     private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,16 +31,16 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_splash)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-
-            val autoEmail = SharedInformation.getEmail(this)
-            val onBoardingChecked = SharedInformation.getOnBoarding(this)
+        CoroutineScope(Dispatchers.Main).launch {
+            val autoEmail = SharedInformation.getEmail(mContext)
+            val onBoardingChecked = SharedInformation.getOnBoarding(mContext)
             Timber.d("autoEmail $autoEmail")
             Timber.d("onBoardingChecked $onBoardingChecked")
 
-            autoLogin(autoEmail, onBoardingChecked)
             handleDeepLink()
-        }, time)
+            delay(time)
+            autoLogin(autoEmail, onBoardingChecked)
+        }
     }
 
     private fun autoLogin(autoEmail: String, onBoardingChecked: Boolean){
@@ -53,11 +56,13 @@ class SplashActivity : AppCompatActivity() {
             }
         }
         intent.putExtra("postId", deepLinkPostId)
+        Timber.d("[DynamicLink] autoLogin $deepLinkPostId")
+
         startActivity(intent)
         finish()
     }
 
-    private fun handleDeepLink(){
+    private suspend fun handleDeepLink() {
         Firebase.dynamicLinks
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData ->
@@ -71,7 +76,9 @@ class SplashActivity : AppCompatActivity() {
                         Timber.d("[DynamicLink] segment $segment")
 
                         if (segment == Define().DYNAMIC_SEGMENT) {
-                            deepLinkPostId = deepLink.getQueryParameter("postId")
+                            val strPostId = deepLink.getQueryParameter("postId")
+                            deepLinkPostId = strPostId?.toInt() ?: -1
+                            Timber.d("[DynamicLink] deepLinkPostId $deepLinkPostId")
                         }
                     }
                 }

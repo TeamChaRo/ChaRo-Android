@@ -36,6 +36,15 @@ class SocialSignInActivity() :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //deeplink로 왔을 때 로그인 화면 건너뛰고 메인 -> 게시물
+        val postId = intent.getIntExtra("postId", -1)
+        if(intent != null && postId != -1){
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("postId", postId)
+            startActivity(intent)
+        }
+
         autoLogin()
         initKakaoLogin()
         initGoogleLogin()
@@ -45,13 +54,6 @@ class SocialSignInActivity() :
         goEmailLogin()
         goEmailSignUp()
         goKaKaoMain()
-
-        //deeplink로 왔을 때 로그인 화면 건너뛰고 메인 -> 게시물
-        if(intent != null && intent.getStringExtra("postId") != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 
     //자동 로그인
