@@ -12,9 +12,11 @@ import com.charo.android.databinding.FragmentMyTopBinding
 import com.charo.android.presentation.ui.follow.FollowActivity
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.setting.SettingActivity
+import com.charo.android.presentation.util.LoginUtil
 import com.charo.android.presentation.util.SharedInformation
 
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class MyTopFragment : Fragment() {
     private var _binding: FragmentMyTopBinding? = null

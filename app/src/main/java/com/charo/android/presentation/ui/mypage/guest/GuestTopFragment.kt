@@ -11,6 +11,9 @@ import com.charo.android.R
 import com.charo.android.databinding.FragmentGuestTopBinding
 import com.charo.android.presentation.ui.setting.SettingActivity
 import com.charo.android.presentation.ui.signin.SocialSignInActivity
+import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.SharedInformation
+import timber.log.Timber
 
 
 class GuestTopFragment : Fragment() {
@@ -39,8 +42,13 @@ class GuestTopFragment : Fragment() {
 
     private fun clickSetting() {
         binding.imgProfileSetting.setOnClickListener {
-            val intent = Intent(requireContext(), SettingActivity::class.java)
-            startActivity(intent)
+            val userEmail = SharedInformation.getEmail(requireActivity())
+            if (userEmail == "@") {
+                LoginUtil.loginPrompt(requireActivity())
+            } else {
+                val intent = Intent(requireContext(), SettingActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
