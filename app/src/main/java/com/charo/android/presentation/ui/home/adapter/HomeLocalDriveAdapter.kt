@@ -9,6 +9,7 @@ import com.charo.android.databinding.ItemHomeLocationDriveBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.LocalDrive
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeLocalDriveAdapter(val userId: String,
@@ -52,9 +53,12 @@ class HomeLocalDriveAdapter(val userId: String,
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
-            intent.putExtra("userId", userId)
-            intent.putExtra("postId", localDrive[position].homeLocationDrivePostId)
+            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("userId", userId)
+                putExtra("postId", localDrive[position].homeLocationDrivePostId)
+                putExtra("destination","detail")
+            }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

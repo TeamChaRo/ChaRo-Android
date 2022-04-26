@@ -9,6 +9,7 @@ import com.charo.android.databinding.ItemHomeNightDriveBinding
 import com.charo.android.domain.model.home.CustomThemeDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeCustomThemeAdapter(val userId: String,
@@ -52,8 +53,11 @@ class HomeCustomThemeAdapter(val userId: String,
             }
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
-            intent.putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
+            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
+                putExtra("destination","detail")
+            }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
