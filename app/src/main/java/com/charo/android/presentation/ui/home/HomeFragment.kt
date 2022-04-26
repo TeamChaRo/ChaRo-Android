@@ -181,11 +181,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     //검색 뷰 이동
     private fun goSearchView(nickName: String) {
         binding.imgMainSearch.setOnClickListener {
-            val intent = Intent(activity, SearchActivity::class.java)
-            intent.apply {
-                putExtra("nickName", nickName)
+            val userEmail = SharedInformation.getEmail(requireActivity())
+            if(userEmail=="@"){
+                LoginUtil.loginPrompt(requireActivity())
+            }else{
+                val intent = Intent(activity, SearchActivity::class.java)
+                intent.apply {
+                    putExtra("nickName", nickName)
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
         }
     }
 
