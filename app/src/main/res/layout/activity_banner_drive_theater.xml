@@ -6,31 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.home.BannerDriveTheaterActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:minHeight="78dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_banner_theater"
+            android:textAppearance="@style/HeaderH4"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nscv_banner_drive_theater"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="34dp"
             >
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_banner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:minHeight="78dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_banner_theater"
-                    android:textAppearance="@style/HeaderH4"
-                    android:layout_gravity="center"
-                    />
-            </androidx.appcompat.widget.Toolbar>
 
             <ImageView
                 android:id="@+id/banner_theater_back_mid"
@@ -58,7 +60,7 @@
                 android:id="@+id/iv_main_drive_theater"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_banner"
+                app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/banner_img_three_detail"
                 android:contentDescription="@string/img_description"
                 />
