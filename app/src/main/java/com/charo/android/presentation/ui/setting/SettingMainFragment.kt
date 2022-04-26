@@ -1,5 +1,6 @@
 package com.charo.android.presentation.ui.setting
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -40,13 +41,13 @@ class SettingMainFragment :
         allowAccess()
         clickPrivacy()
         clickServiceTerm()
+        clickReport()
         backBtn()
     }
     //뒤로가기
     private fun backBtn(){
         settingViewModel.settingFragmentBackStack.value = true
     }
-
 
     // 알림, 사진 접근 허용
     private fun allowAccess() {
@@ -78,6 +79,12 @@ class SettingMainFragment :
         }
     }
 
+    private fun clickReport(){
+        binding.textSettingReport.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingReportActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     //프로필 수정
     private fun clickProfileUpdate() {
