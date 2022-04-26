@@ -10,7 +10,6 @@ import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.TodayCharoDrive
 import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.LoginUtil.email
 
 class HomeTodayDriveAdapter(
     val userId: String,
@@ -39,7 +38,7 @@ class HomeTodayDriveAdapter(
     ) {
         holder.onBind(todayCharoDrive[position])
         holder.binding.imgHomeTodayDriveHeart.setOnClickListener {
-            if(email == "@"){
+            if(userId == "@"){
                 LoginUtil.loginPrompt(holder.itemView.context)
             }else{
                 if (select){

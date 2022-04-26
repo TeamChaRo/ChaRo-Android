@@ -10,9 +10,9 @@ import com.charo.android.domain.model.home.TrendDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.LoginUtil.email
+import timber.log.Timber
 
-class HomeTrendDriveAdapter(val userId: String,
+class HomeTrendDriveAdapter (val userId: String,
                             var links: HomeFragment.DataToHomeLike) :
     RecyclerView.Adapter<HomeTrendDriveAdapter.HomeHotDriveViewHolder>() {
     private val _trendDrive = mutableListOf<TrendDrive>()
@@ -38,7 +38,8 @@ class HomeTrendDriveAdapter(val userId: String,
 
         holder.onBind(trendDrive[position])
         holder.binding.imgHomeHotDriveHeart.setOnClickListener{
-            if(email == "@"){
+            if(userId == "@"){
+                Timber.d("homeHotDrive 로그인 유도")
                 LoginUtil.loginPrompt(holder.itemView.context)
             }else{
                 postId = trendDrive[position].homeTrendDrivePostId

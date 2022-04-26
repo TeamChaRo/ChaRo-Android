@@ -64,7 +64,7 @@ class SocialSignInActivity() :
     private fun initKakaoLogin() {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
-                Timber.e("kakao 로그인 실패", error)
+                Timber.e("kakao 로그인 실패 $error")
             } else if (token != null) {
                 Timber.i("kakao 로그인 성공 ${token.accessToken}")
                 kakaoUserEmail()
@@ -111,8 +111,7 @@ class SocialSignInActivity() :
                 } else if (SharedInformation.getKaKaoSignUp(this) == 2) {
                     SharedInformation.setEmail(this, user.kakaoAccount?.email)
                     Timber.i(
-                        "kakaoUser 사용자 정보 요청 성공" +
-                                "\n이메일: ${user.kakaoAccount?.email}"
+                        "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}"
                     )
                     socialSignInViewModel.kakaoLoginSuccess(
                         RequestSocialData(
