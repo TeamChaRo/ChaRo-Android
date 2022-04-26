@@ -480,8 +480,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     fun goHomeView() {
         binding.imgSearchBack.setOnClickListener {
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
+            requireActivity().finish()
         }
 
     }

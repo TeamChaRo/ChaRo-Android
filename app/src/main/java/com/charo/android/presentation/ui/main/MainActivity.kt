@@ -79,9 +79,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(SharedInformation.searchWrite){
+            binding.navView.selectedItemId = R.id.navigation_write
+            SharedInformation.searchWrite = false
+        }
+    }
 
-
-   override fun onBackPressed() {
+    override fun onBackPressed() {
         finish()
 
     }

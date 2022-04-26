@@ -41,7 +41,7 @@ class NoSearchFragment : BaseFragment<FragmentNoSearchBinding>(R.layout.fragment
     //드라이브 코스 작성하기
     private fun writeDriveCourse(){
         binding.imgNoSearchClick.setOnClickListener {
-            SharedInformation.searchWrite = 1
+            SharedInformation.searchWrite = true
             requireActivity().finish()
         }
 

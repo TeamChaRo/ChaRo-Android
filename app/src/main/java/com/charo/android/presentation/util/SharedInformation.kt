@@ -3,7 +3,7 @@ package com.charo.android.presentation.util
 import android.content.Context
 
 object SharedInformation {
-    var searchWrite : Int = 0
+    var searchWrite : Boolean = false
 
 
     private const val SOCIAL_KEY = "SOCIAL_KEY"
