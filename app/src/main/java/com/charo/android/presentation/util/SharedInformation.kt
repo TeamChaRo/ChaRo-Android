@@ -3,6 +3,9 @@ package com.charo.android.presentation.util
 import android.content.Context
 
 object SharedInformation {
+    var searchWrite : Int = 0
+
+
     private const val SOCIAL_KEY = "SOCIAL_KEY"
     private const val APP_EMAIL = "APP_EMAIL"
     private const val THEME_NUM = "THEME_NUM"

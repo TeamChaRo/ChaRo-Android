@@ -240,4 +240,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         }
     }
+
+    companion object{
+        const val WRITE = true
+    }
+
 }
