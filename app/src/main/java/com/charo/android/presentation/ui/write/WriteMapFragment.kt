@@ -485,7 +485,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
         sharedViewModel.course.value = course
 
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext(), R.style.Dialog)
             .setMessage(getString(R.string.noti_complete_write))
             .setNeutralButton(getString(R.string.word_no)) { dialog, which ->
             }

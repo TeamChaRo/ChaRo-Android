@@ -99,7 +99,7 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
         //선택안함 선택 후 다른 테마 선택 불가
         val noSelect : String = getString(R.string.no_select)
         if(themeData.textView.text != noSelect && selectedThemeList.contains(ThemeUtil().themeMap[noSelect])){
-            AlertDialog.Builder(requireContext())
+            AlertDialog.Builder(requireContext(), R.style.Dialog)
                 .setMessage(getString(R.string.txt_again_add_theme))
                 .setPositiveButton(R.string.agreement) { dialog, which -> }
                 .show()
@@ -112,7 +112,7 @@ class DialogThemeFragment : BottomSheetDialogFragment() {
 
         //최대 선택 가능 테마 3개
         if(selectedThemeList.size > 3){
-            AlertDialog.Builder(requireContext())
+            AlertDialog.Builder(requireContext(), R.style.Dialog)
                 .setMessage(getString(R.string.txt_max_theme_cnt))
                 .setPositiveButton(R.string.agreement) { dialog, which -> }
                 .show()

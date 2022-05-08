@@ -101,7 +101,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     fun selectTheme() {
         binding.btnSearchTheme.setOnClickListener {
             val searchItem = 0
-            MaterialAlertDialogBuilder(requireActivity())
+            MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle(R.string.main_charo_theme)
                 .setNeutralButton("취소") { dialog, which ->
                     binding.btnSearchTheme.setText(resources.getString(R.string.main_charo_theme))
@@ -130,7 +130,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     fun selectCatution() {
         binding.btnSearchCaution.setOnClickListener {
             val searchCautionItem = 0
-            MaterialAlertDialogBuilder(requireActivity())
+            MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle(R.string.caution)
                 .setNeutralButton("취소") { dialog, which ->
                     binding.btnSearchCaution.setText(resources.getString(R.string.caution))
@@ -160,7 +160,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     fun selectarea() {
         binding.btnSearchArea1.setOnClickListener {
             val searchCautionItem = 0
-            MaterialAlertDialogBuilder(requireActivity())
+            MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle("지역")
                 .setNeutralButton("취소") { dialog, which ->
                     binding.btnSearchArea1.setText("지역")
@@ -190,7 +190,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             btnSearchArea2.setOnClickListener {
                 if (btnSearchArea1.text == "특별시") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -218,7 +218,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "광역시") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -246,7 +246,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "경기도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -274,7 +274,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "강원도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -302,7 +302,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "충청남도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -330,7 +330,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "충청북도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -359,7 +359,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "경상북도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -387,7 +387,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "경상남도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -415,7 +415,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "전라북도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
@@ -443,7 +443,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }.show()
                 } else if (btnSearchArea1.text == "전라남도") {
                     val searchAreaItem = 0
-                    MaterialAlertDialogBuilder(requireActivity())
+                    MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                         .setTitle("지역")
                         .setNeutralButton("취소") { dialog, which ->
                             if (binding.btnSearchArea2.text.toString() == "지역") {
