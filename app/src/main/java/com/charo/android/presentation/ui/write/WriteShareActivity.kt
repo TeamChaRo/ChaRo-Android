@@ -68,11 +68,24 @@ class WriteShareActivity : AppCompatActivity() {
 
     }
 
+    private fun stopWrite(){
+        AlertDialog.Builder(this, R.style.Dialog)
+            .setMessage(R.string.noti_cancel_write)
+            .setNeutralButton(R.string.write_continue) { dialog, which ->
+            }
+            .setPositiveButton(R.string.write_cancel) { dialog, which ->
+                finish()
+            }
+            .show()
+    }
+
     override fun onBackPressed() {
         // TODO: 상세보기에서는 뒤로가기 누를 수 있게 하고 싶은데
         val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
         if (currentFragment is DetailPostFragment) {
             super.onBackPressed()
+        } else if (currentFragment is WriteFragment){
+            stopWrite()
         } else {
             supportFragmentManager.popBackStack()
             sharedViewModel.latitude.value = 0.0
@@ -83,15 +96,7 @@ class WriteShareActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                AlertDialog.Builder(this)
-                    .setMessage(R.string.noti_cancel_write)
-                    .setNeutralButton(R.string.write_continue) { dialog, which ->
-                    }
-                    .setPositiveButton(R.string.write_cancel) { dialog, which ->
-                        finish()
-                    }
-                    .show()
-
+                stopWrite()
                 return true
             }
         }
