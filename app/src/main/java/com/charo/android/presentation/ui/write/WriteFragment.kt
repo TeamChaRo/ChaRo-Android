@@ -658,45 +658,51 @@ class WriteFragment : Fragment(), View.OnClickListener {
             || (getString(R.string.no_select) != sharedViewModel.province.value && TextUtils.isEmpty(
                 sharedViewModel.region.value
             ))
-            || TextUtils.isEmpty(sharedViewModel.courseDesc.value) || warningList.size == 0
+            || TextUtils.isEmpty(sharedViewModel.courseDesc.value)
             || (sharedViewModel.imageMultiPart.value == null || sharedViewModel.imageMultiPart.value?.size == 0)
             || (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0)
         ) {
             // note: 있어야 할 값이 없으면 Toast 를 띄워주는 조건문이다.
-            // note: 어떤 조건에서 Toast 를 띄우는지 확인하기 위해 Timber 를 찍어봤다.
+                var noData : String = ""
             if (TextUtils.isEmpty(sharedViewModel.title.value)) {
                 Timber.tag("빈 값 있는 상황").i("제목 없음")
+                noData += "* 제목\n"
             }
             if (TextUtils.isEmpty(sharedViewModel.province.value)) {
                 Timber.tag("빈 값 있는 상황").i("지역(도) 없음")
+                noData += "* 지역(도)\n"
             }
             if (getString(R.string.no_select) != sharedViewModel.province.value
                 && TextUtils.isEmpty(sharedViewModel.region.value)
             ) {
                 Timber.tag("빈 값 있는 상황").i("지역(도)는 있는데 지역(시) 없음")
+                noData += "* 지역(시)\n"
             }
             if (TextUtils.isEmpty(sharedViewModel.courseDesc.value)) {
                 Timber.tag("빈 값 있는 상황").i("코스 설명이 없음")
+                noData += "* 코스 설명\n"
             }
             if (warningList.size == 0) {
                 Timber.tag("빈 값 있는 상황").i("주의사항 없음")
             }
             if (sharedViewModel.imageMultiPart.value == null) {
                 Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 null")
+                noData += "* 이미지\n"
             }
             if (sharedViewModel.imageMultiPart.value?.size == 0) {
                 Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 size 0")
+                if (sharedViewModel.imageMultiPart.value != null) {
+                    noData += "* 이미지\n"
+                }
             }
             if (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0) {
                 Timber.tag("빈 값 있는 상황").i("테마 없음")
+                noData += "* 테마"
             }
 
+            val coment = "필수값을 입력해주세요.\n$noData"
 
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.txt_check_all_input),
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(requireContext(), coment, Toast.LENGTH_LONG).show()
         } else {
             writeShareActivity!!.replaceAddStackFragment(
                 WriteMapFragment.newInstance(),
