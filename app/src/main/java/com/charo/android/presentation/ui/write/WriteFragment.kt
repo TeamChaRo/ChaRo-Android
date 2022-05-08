@@ -218,7 +218,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     //지역 (도 단위)
-    private fun selectRegion(it: View) {
+    private fun selectProvince(it: View) {
         MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
             .setNeutralButton(R.string.cancel) { dialog, which ->
@@ -232,6 +232,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
                 it.isSelected = true
                 binding.btnWriteProvince.text = locationUtil.itemProvince[preCheckProvince]
                 sharedViewModel.province.value = binding.btnWriteProvince.text.toString()
+                selectRegion(binding.btnWriteRegion)
             }
             .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
                 //which : index
@@ -250,7 +251,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     //지역 (시 단위)
-    private fun selectProvince(it: View) {
+    private fun selectRegion(it: View) {
         MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
             .setNeutralButton(R.string.cancel) { dialog, which ->
@@ -794,8 +795,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
             binding.btnWriteBottomNext -> nextButtonToMap()
 
             //지역 선택
-            binding.btnWriteProvince -> selectRegion(v)
-            binding.btnWriteRegion -> selectProvince(v)
+            binding.btnWriteProvince -> selectProvince(v)
+            binding.btnWriteRegion -> selectRegion(v)
 
         }
     }
