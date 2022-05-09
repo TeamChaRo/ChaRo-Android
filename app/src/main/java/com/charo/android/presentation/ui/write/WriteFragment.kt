@@ -16,6 +16,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -584,10 +585,25 @@ class WriteFragment : Fragment(), View.OnClickListener {
 
         if (binding.imgWriteAddImg.parent != null)
             (binding.imgWriteAddImg.parent as ViewGroup).removeView(binding.imgWriteAddImg)
+
         binding.gridImgPlus.addView(
             binding.imgWriteAddImg,
             GridLayout.LayoutParams(rowSpec, columnSpec)
         )
+
+        //add btn img 크기 해상도에 맞게 set
+        val displayMetrics = DisplayMetrics()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireContext().display!!.getRealMetrics(displayMetrics)
+        } else {
+            requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.widthPixels
+        }
+
+        val width = displayMetrics.widthPixels
+
+        binding.imgWriteAddImg.layoutParams.width = (width/3.5).toInt()
+        binding.imgWriteAddImg.requestLayout()
     }
 
     private fun nextButtonToMap() {
@@ -666,41 +682,41 @@ class WriteFragment : Fragment(), View.OnClickListener {
                 var noData : String = ""
             if (TextUtils.isEmpty(sharedViewModel.title.value)) {
                 Timber.tag("빈 값 있는 상황").i("제목 없음")
-                noData += "* 제목\n"
+                noData += "\n* 제목"
             }
             if (TextUtils.isEmpty(sharedViewModel.province.value)) {
                 Timber.tag("빈 값 있는 상황").i("지역(도) 없음")
-                noData += "* 지역(도)\n"
+                noData += "\n* 지역(도)"
             }
             if (getString(R.string.no_select) != sharedViewModel.province.value
                 && TextUtils.isEmpty(sharedViewModel.region.value)
             ) {
                 Timber.tag("빈 값 있는 상황").i("지역(도)는 있는데 지역(시) 없음")
-                noData += "* 지역(시)\n"
+                noData += "\n* 지역(시)"
             }
             if (TextUtils.isEmpty(sharedViewModel.courseDesc.value)) {
                 Timber.tag("빈 값 있는 상황").i("코스 설명이 없음")
-                noData += "* 코스 설명\n"
+                noData += "\n* 코스 설명"
             }
             if (warningList.size == 0) {
                 Timber.tag("빈 값 있는 상황").i("주의사항 없음")
             }
             if (sharedViewModel.imageMultiPart.value == null) {
                 Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 null")
-                noData += "* 이미지\n"
+                noData += "\n* 이미지"
             }
             if (sharedViewModel.imageMultiPart.value?.size == 0) {
                 Timber.tag("빈 값 있는 상황").i("이미지 멀티파트 size 0")
                 if (sharedViewModel.imageMultiPart.value != null) {
-                    noData += "* 이미지\n"
+                    noData += "\n* 이미지"
                 }
             }
             if (sharedViewModel.theme.value == null || sharedViewModel.theme.value?.size == 0) {
                 Timber.tag("빈 값 있는 상황").i("테마 없음")
-                noData += "* 테마"
+                noData += "\n* 테마"
             }
 
-            val coment = "필수값을 입력해주세요.\n$noData"
+            val coment = "필수값을 입력해주세요.$noData"
 
             Toast.makeText(requireContext(), coment, Toast.LENGTH_LONG).show()
         } else {
