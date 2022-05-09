@@ -37,6 +37,7 @@
             android:id="@+id/scroll_view_write"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_write">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,7 +90,8 @@
                     app:layout_constraintTop_toBottomOf="@id/et_write_title"
                     app:spanCount="3"
                     tools:itemCount="6"
-                    tools:listitem="@layout/item_write_img"></androidx.recyclerview.widget.RecyclerView>
+                    tools:listitem="@layout/item_write_img">
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <GridLayout
                     android:id="@+id/grid_img_plus"
@@ -185,7 +187,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/text_write_qa_location" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_province"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -194,7 +196,6 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:paddingEnd="10dp"
                         android:text="@string/unit_do"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -203,7 +204,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_region"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -213,7 +214,6 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:paddingRight="10dp"
                         android:text="@string/unit_si"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -273,7 +273,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/text_write_qa_theme" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_theme1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -282,7 +282,6 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:paddingRight="10dp"
                         android:text="@string/theme1"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -291,7 +290,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_theme2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -301,7 +300,6 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:paddingRight="10dp"
                         android:text="@string/theme2"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -310,7 +308,7 @@
                         app:layout_constraintStart_toEndOf="@+id/btn_write_theme1"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_theme" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_theme3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -319,7 +317,6 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:paddingRight="10dp"
                         android:text="@string/theme3"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -351,7 +348,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_park_yes"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -360,6 +357,7 @@
                         android:background="@drawable/btn_warning_click"
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:minHeight="42dp"
+                        android:gravity="center"
                         android:text="@string/parking_yes"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -370,7 +368,7 @@
 
                         />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_park_no"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -378,6 +376,7 @@
                         android:background="@drawable/btn_warning_click"
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:minHeight="42dp"
+                        android:gravity="center"
                         android:text="@string/parking_no"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -452,7 +451,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/text_write_qa_caution" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_caution_highway"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -461,6 +460,7 @@
                         android:background="@drawable/btn_warning_click"
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:minHeight="42dp"
+                        android:gravity="center"
                         android:text="@string/warning_highway"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -470,7 +470,7 @@
 
                         />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_caution_moun"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -478,6 +478,7 @@
                         android:background="@drawable/btn_warning_click"
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:minHeight="42dp"
+                        android:gravity="center"
                         android:text="@string/warning_mountain"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -485,7 +486,7 @@
                         app:layout_constraintStart_toEndOf="@id/btn_write_caution_highway"
                         app:layout_constraintTop_toBottomOf="@id/text_write_select_caution" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_caution_diffi"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -494,6 +495,7 @@
                         android:background="@drawable/btn_warning_click"
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:minHeight="42dp"
+                        android:gravity="center"
                         android:text="@string/warning_difficult"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -501,7 +503,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/btn_write_caution_highway" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
                         android:id="@+id/btn_write_caution_people"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -509,6 +511,7 @@
                         android:background="@drawable/btn_warning_click"
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:minHeight="42dp"
+                        android:gravity="center"
                         android:text="@string/warning_crowded"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
@@ -545,7 +548,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:layout_marginBottom="230dp"
+                        android:layout_marginBottom="150dp"
                         android:background="@drawable/background_et_write"
                         android:fontFamily="@font/noto_sans_cjkkr_regular"
                         android:gravity="top"
