@@ -27,6 +27,12 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
+            android:name=".presentation.ui.signin.PasswordSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.signin.PasswordReasearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.setting.SettingReportActivity"
             android:exported="false" />
         <activity

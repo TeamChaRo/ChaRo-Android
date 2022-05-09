@@ -23,12 +23,14 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
 
         clickSingUp()
         login()
+        goPasswordSearch()
         binding.imgSigninIdClear.setOnClickListener() { clearEmail() }
         binding.imgSigninPwClear.setOnClickListener() { clearPassword() }
+        setContentView(binding.root)
     }
 
     private fun login() {
@@ -88,5 +90,12 @@ class SignInActivity : AppCompatActivity() {
                 Timber.d("Firebase Success $msg")
             }
         })
+    }
+
+    //비밀번호 찾기 이동
+    private fun goPasswordSearch(){
+        val intent = Intent(this, PasswordSearchActivity::class.java)
+        startActivity(intent)
+
     }
 }

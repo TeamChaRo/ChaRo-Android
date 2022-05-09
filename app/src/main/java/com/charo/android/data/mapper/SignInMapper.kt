@@ -1,8 +1,10 @@
 package com.charo.android.data.mapper
 
 import com.charo.android.data.model.request.signin.RequestSocialData
+import com.charo.android.data.model.response.ResponseDefaultData
 import com.charo.android.data.model.response.signin.ResponseSignInData
 import com.charo.android.data.model.response.signin.ResponseSocialData
+import com.charo.android.domain.model.StatusCode
 import com.charo.android.domain.model.signin.EmailSignInData
 import com.charo.android.domain.model.signin.SocialLoginData
 import com.charo.android.domain.model.signin.SocialUserEmail
@@ -38,4 +40,12 @@ object SignInMapper {
         )
 
         }
+
+    //비밀번호찾기
+    fun mapperToSearchPassword(responseDefaultData: ResponseDefaultData) : StatusCode{
+        return StatusCode(
+            success = responseDefaultData.success
+        )
+
+    }
     }
