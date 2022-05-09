@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import com.charo.android.R
 import com.charo.android.databinding.ActivityPasswordSearchBinding
 import com.charo.android.presentation.base.BaseActivity
@@ -23,6 +24,7 @@ class PasswordSearchActivity :
         initView()
         changeBtnText()
         clickNextBtn()
+        checkSuccess()
     }
 
 
@@ -103,12 +105,29 @@ class PasswordSearchActivity :
         if(inputEmail){
             passwordSearchViewModel.getPasswordSearch(userInputEmail)
             passwordSearchViewModel.postInputEmail(false)
-        }else{
-            finish()
         }
-
     }
 
+    //서버 성공시 종료
+    private fun checkSuccess(){
+        passwordSearchViewModel.passwordSuccess.observe(this){
+            if(it){
+                Toast.makeText(this, "비밀번호가 변경되었습니다", Toast.LENGTH_SHORT).show()
+                finish()
+            }else{
+                Toast.makeText(this, "이메일을 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    }
+    //뒤로 가기 버튼
+    private fun clickBackBtn(){
+        binding.imgPasswordSearchDeleteButton.setOnClickListener { 
+            finish()
+        }
+    }
+    
     override fun onPause() {
         super.onPause()
         keyboardVisibilityUtils.detachKeyboardListeners()

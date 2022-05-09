@@ -25,14 +25,19 @@ class PasswordSearchViewModel(
     //사용자 입력 이메일
     var userInputEmail : MutableLiveData<String> = MutableLiveData()
 
+    //비밀번호 찾기 성공여부
+    var passwordSuccess : MutableLiveData<Boolean> = MutableLiveData()
+
     //비밀번호 찾기
      fun getPasswordSearch(userEmail : String){
         viewModelScope.launch {
             runCatching { getRemotePasswordSearchUseCase(userEmail) }
                 .onSuccess {
+                    passwordSuccess.value = it.success
                     Timber.d("비밀번호 찾기 성공")
                 }
                 .onFailure {
+                    passwordSuccess.value = false
                     Timber.d("비밀번호 찾기 실패")
                 }
         }
