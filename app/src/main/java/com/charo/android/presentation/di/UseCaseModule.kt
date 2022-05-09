@@ -14,6 +14,7 @@ import com.charo.android.domain.usecase.mypage.*
 import com.charo.android.domain.usecase.search.GetRemoteSearchUseCase
 import com.charo.android.domain.usecase.setting.*
 import com.charo.android.domain.usecase.signin.GetRemoteEmailLoginUseCase
+import com.charo.android.domain.usecase.signin.GetRemotePasswordSearchUseCase
 import com.charo.android.domain.usecase.signin.GetRemoteSocialLoginData
 import com.charo.android.domain.usecase.signup.*
 import org.koin.dsl.module
@@ -64,4 +65,5 @@ val useCaseModule = module {
     single { GetRemoteMoreNewLastIdUseCase(get()) }
     single { GetRemoteFollowUseCase(get()) }
     single { DeleteDetailPostUseCase(get()) }
+    single { GetRemotePasswordSearchUseCase(get())}
 }
