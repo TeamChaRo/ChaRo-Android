@@ -22,6 +22,7 @@ class PasswordSearchActivity :
         keyBoardChange()
         initView()
         changeBtnText()
+        clickNextBtn()
     }
 
 
@@ -106,7 +107,10 @@ class PasswordSearchActivity :
             finish()
         }
 
+    }
 
-
+    override fun onPause() {
+        super.onPause()
+        keyboardVisibilityUtils.detachKeyboardListeners()
     }
 }

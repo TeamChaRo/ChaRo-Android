@@ -10,7 +10,6 @@ import com.charo.android.data.model.request.signin.RequestSignInData
 import com.charo.android.databinding.ActivitySignInBinding
 import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
-import com.charo.android.presentation.ui.signup.SignUpActivity
 import com.charo.android.presentation.util.SharedInformation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -25,7 +24,6 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
 
 
-        clickSingUp()
         login()
         goPasswordSearch()
         binding.imgSigninIdClear.setOnClickListener() { clearEmail() }
@@ -69,12 +67,7 @@ class SignInActivity : AppCompatActivity() {
         binding.etSigninPw.text.clear()
     }
 
-    private fun clickSingUp(){
-        binding.tvSigninSignup.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
-        }
-    }
+
 
     private fun initFirebase(){
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
@@ -94,8 +87,11 @@ class SignInActivity : AppCompatActivity() {
 
     //비밀번호 찾기 이동
     private fun goPasswordSearch(){
-        val intent = Intent(this, PasswordSearchActivity::class.java)
-        startActivity(intent)
+        binding.tvSigninPassword.setOnClickListener {
+            val intent = Intent(this, PasswordSearchActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }
