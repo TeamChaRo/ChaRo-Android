@@ -1,7 +1,9 @@
 package com.charo.android.presentation.ui.more
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.doOnAttach
 import com.charo.android.R
 import com.charo.android.data.model.request.RequestThemeViewData
@@ -15,14 +17,27 @@ import com.charo.android.presentation.util.SharedInformation
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 
 class MoreThemeViewFragment :
     BaseFragment<FragmentMoreThemeViewBinding>(R.layout.fragment_more_theme_view) {
+    private lateinit var callback : OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     var requestThemeData = mutableListOf<RequestThemeViewData>()
     private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
     private lateinit var userId: String
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                sharedViewModel.moreFragment.value = true
+                Timber.d("onBackPressed호출됨more")
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -127,6 +142,10 @@ class MoreThemeViewFragment :
         })
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 }
 
 

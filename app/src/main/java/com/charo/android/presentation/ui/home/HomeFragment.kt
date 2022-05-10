@@ -26,6 +26,7 @@ import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.LoginUtil
 import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
+import kotlinx.coroutines.flow.callbackFlow
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -53,12 +54,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userEmail = SharedInformation.getEmail(requireActivity())
         val nickName: String = Hidden.nickName
         goSearchView(nickName)
         goAlarm()
         initToolBar()
-        replaceMoreViewFragment(Hidden.userId)
+        replaceMoreViewFragment()
 
         initBannerLocal()
 //        initBanner()
@@ -206,38 +206,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
     }
-
-    private fun replaceMoreViewFragment(userId: String) {
+    //moreView 이동
+    private fun replaceMoreViewFragment() {
         binding.textHomeHotDrivePlus.setOnClickListener {
             sharedViewModel.num.value = 0
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
-                addToBackStack(null)
-                commit()
-            }
+            goMoreView()
         }
         binding.textHomeNightDrivePlus.setOnClickListener {
             sharedViewModel.num.value = 3
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
-                addToBackStack(null)
-                commit()
-            }
+            goMoreView()
         }
         binding.textHomeLocationDrivePlus.setOnClickListener {
             sharedViewModel.num.value = 2
-
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
-                addToBackStack(null)
-                commit()
-            }
+            goMoreView()
         }
     }
 
+    //moreView 이동
+    private fun goMoreView(){
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.apply {
+            replace(R.id.nav_host_fragment_activity_main, MoreViewFragment())
+            addToBackStack(null)
+            commit()
+        }
+
+    }
 
     //좋아요 POST 보내기
     inner class DataToHomeLike() {

@@ -1,9 +1,12 @@
 package com.charo.android.presentation.ui.more
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.R
@@ -22,7 +25,7 @@ import timber.log.Timber
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {
-
+    private lateinit var callback : OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val moreViewModel: MoreViewViewModel by viewModel()
     private var homeFragment = HomeFragment()
@@ -30,6 +33,16 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     private lateinit var userId: String
     var links = DataToMoreLike()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                sharedViewModel.moreFragment.value = true
+                Timber.d("onBackPressed호출됨more")
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -248,6 +261,10 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         }
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 }
 
 

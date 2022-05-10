@@ -19,6 +19,7 @@ import com.charo.android.presentation.ui.write.WriteFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 import com.charo.android.presentation.util.SharedInformation
+import com.charo.android.presentation.util.changeFragment
 import com.charo.android.presentation.util.replaceFragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -90,8 +91,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        finish()
-
+        if (onBackPressedDispatcher.hasEnabledCallbacks()){
+            onBackPressedDispatcher.onBackPressed()
+            if(sharedViewModel.moreFragment.value == true){
+                changeFragment(R.id.nav_host_fragment_activity_main, homeFragment)
+                Timber.d("onBackPressed호출됨")
+                sharedViewModel.moreFragment.value = false
+            }else{
+                finish()
+                Timber.d("onBackPressed호출됨finish")
+            }
+        }
     }
 
     private fun deepLinkDetailPost(){
