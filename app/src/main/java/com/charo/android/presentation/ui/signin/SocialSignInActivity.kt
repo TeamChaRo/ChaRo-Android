@@ -100,7 +100,7 @@ class SocialSignInActivity() :
 
     }
 
-
+    //카카오
     fun kakaoUserEmail() {
         Timber.d("yeeee ${SharedInformation.getKaKaoSignUp(this)}")
         UserApiClient.instance.me { user, error ->
@@ -118,15 +118,19 @@ class SocialSignInActivity() :
                     finish()
 
                 } else if (SharedInformation.getKaKaoSignUp(this) == 2) {
-                    SharedInformation.setEmail(this, user.kakaoAccount?.email)
-                    Timber.i(
-                        "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}"
-                    )
-                    socialSignInViewModel.kakaoLoginSuccess(
-                        RequestSocialData(
-                            user.kakaoAccount?.email ?: ""
+                    if(user.kakaoAccount?.email != null){
+                        SharedInformation.setEmail(this, user.kakaoAccount?.email)
+                        Timber.i(
+                            "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}")
+                        socialSignInViewModel.kakaoLoginSuccess(
+                            RequestSocialData(
+                                user.kakaoAccount?.email ?: ""
+                            )
                         )
-                    )
+                    }else{
+                     Toast.makeText(this, "카카오 로그인시 이메일 동의 해주세요.", Toast.LENGTH_SHORT).show()
+                        UserApiClient.instance.unlink {  }
+                    }
                 }
             }
         }

@@ -52,4 +52,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     private fun clickBackBtn(){
         binding.btnSignupBack.setOnClickListener { finish() }
     }
+
+
 }

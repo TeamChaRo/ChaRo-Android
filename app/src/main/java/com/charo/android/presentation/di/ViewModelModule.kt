@@ -11,6 +11,7 @@ import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
 import com.charo.android.presentation.ui.search.viewmodel.SearchViewModel
 import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
+import com.charo.android.presentation.ui.signin.viewmodel.PasswordSearchViewModel
 import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
@@ -26,6 +27,7 @@ val viewModelModule = module {
     viewModel { SearchViewModel(get(), get()) }
     viewModel { SocialSignInViewModel(get()) }
     viewModel { EmailSignInViewModel(get()) }
+    viewModel { PasswordSearchViewModel(get()) }
     // SH
     viewModel { MyPageViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { FollowViewModel(get(), get()) }

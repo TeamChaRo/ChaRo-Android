@@ -158,6 +158,10 @@
     <string name="profile_update">프로필 수정</string>
     <string name="password_update">비밀번호 수정</string>
     <string name="password_search">비밀번호 찾기</string>
+    <string name="temporary_password">임시 비밀번호 발급</string>
+    <string name="password_search_content">가입하신 이메일 주소로 임시 비밀번호가 발급됩니다.\n로그인 후 꼭 비밀번호를 변경해주세요.</string>
+    <string name="password_search_hint">이메일 아이디를 입력해주세요</string>
+    <string name="temporary_password_send">임시 비밀번호 전송</string>
     <string name="email">이메일</string>
     <string name="information">정보</string>
     <string name="notice">공지사항</string>
