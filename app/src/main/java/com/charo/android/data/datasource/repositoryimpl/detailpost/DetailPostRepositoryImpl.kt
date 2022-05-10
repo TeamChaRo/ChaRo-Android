@@ -25,7 +25,7 @@ class DetailPostRepositoryImpl(private val dataSource: RemoteDetailPostDataSourc
         }
     }
 
-    override suspend fun deleteDetailPost(postId: Int, images: List<String>): Boolean {
-        return dataSource.deleteDetailPost(postId, RequestDeleteDetailPost(images)).toBoolean()
+    override suspend fun deleteDetailPost(postId: Int): Boolean {
+        return dataSource.deleteDetailPost(postId).toBoolean()
     }
 }

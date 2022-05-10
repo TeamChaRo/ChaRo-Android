@@ -20,9 +20,8 @@ class RemoteDetailPostDataSourceImpl(private val service: DetailPostService): Re
     }
 
     override suspend fun deleteDetailPost(
-        postId: Int,
-        requestBody: RequestDeleteDetailPost
+        postId: Int
     ): ResponseDeleteDetailPost {
-        return service.deleteDetailPost(postId, requestBody)
+        return service.deleteDetailPost(postId)
     }
 }
