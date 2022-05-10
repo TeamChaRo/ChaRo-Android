@@ -32,7 +32,7 @@
     <string name="search">드라이브 맞춤 검색</string>
     <string name="search_user_id">배희진희진님의</string>
     <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
-    <string name="search_start">찾아보기</string>
+    <string name="search_start">검색하기</string>
     <string name="et_title">제목을 입력해주세요</string>
     <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
     <string name="which_location">드라이브 코스 지역</string>
@@ -68,6 +68,8 @@
     <string name="select_theme">드라이브 코스를 표현할 수 있는 키워드를 선택해주세요. (최대 3개)</string>
     <string name="today_drive">오늘 드라이브는</string>
     <string name="area">지역</string>
+    <string name="area_province">지역(도)</string>
+    <string name="area_region">지역(시)</string>
     <string name="caution">주의사항</string>
     <string name="search_text_1">에 있는</string>
     <string name="search_text_2">에 어울리는 코스로</string>
