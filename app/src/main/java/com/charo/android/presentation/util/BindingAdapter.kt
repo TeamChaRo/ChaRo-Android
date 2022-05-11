@@ -1,5 +1,6 @@
 package com.charo.android.presentation.util
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.view.View
 import android.widget.ImageButton
@@ -11,6 +12,7 @@ import com.charo.android.R
 import com.google.android.material.chip.Chip
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 
@@ -19,10 +21,11 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("imgBind")
     fun setImage(imageView: ImageView, imageUrl : String){
+        val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(20.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
             .placeholder(R.drawable.home_today_drive_image)
-            .transform(RoundedCorners(20.dpToPx))
+            .apply(RequestOptions.bitmapTransform(multiOption))
             .into(imageView)
     }
 

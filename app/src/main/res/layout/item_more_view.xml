@@ -25,17 +25,13 @@
 
             <ImageView
                 android:id="@+id/img_more_view"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 imgBind="@{moreDrive.moreImage}"
                 app:layout_constraintDimensionRatio="8:5"
                 android:src="@drawable/result_search_shape"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -79,7 +75,7 @@
                 app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintTop_toBottomOf="@+id/text_more_view_title"
-                app:layout_constraintStart_toStartOf="@+id/img_more_view" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/chip_more_view_2"

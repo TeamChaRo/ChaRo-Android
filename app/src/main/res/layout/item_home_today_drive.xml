@@ -18,18 +18,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="10dp"
             >
 
             <ImageView
                 android:id="@+id/img_home_today_drive"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:minWidth="320dp"
-                android:scaleType="fitXY"
                 app:layout_constraintDimensionRatio="13:9"
                 android:layout_marginBottom="7dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -77,7 +76,7 @@
                 android:background="@drawable/rectangle_border_blue_radius_20"
                 android:includeFontPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive_title"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/img_home_today_drive" />
 
             <TextView
                 android:id="@+id/chip_home_today_drive_2"
