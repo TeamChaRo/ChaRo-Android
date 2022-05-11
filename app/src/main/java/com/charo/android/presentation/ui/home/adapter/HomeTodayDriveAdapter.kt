@@ -57,7 +57,7 @@ class HomeTodayDriveAdapter(
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
             intent.apply {
                 putExtra("destination","detail")
                 putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)

@@ -71,7 +71,7 @@ class MoreViewAdapter(
             }
 
             holder.binding.root.setOnClickListener() {
-                val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
+                val intent = Intent(holder.itemView.context, DetailPostActivity::class.java)
                 intent.putExtra("userId", userId)
                 intent.putExtra("postId", moreData[position].morePostId)
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
