@@ -57,7 +57,7 @@ class HomeTrendDriveAdapter (val userId: String,
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
             intent.apply {
                 putExtra("postId", trendDrive[position].homeTrendDrivePostId)
                 putExtra("destination","detail")

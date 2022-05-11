@@ -53,7 +53,7 @@ class HomeCustomThemeAdapter(val userId: String,
             }
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
             intent.apply {
                 putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
                 putExtra("destination","detail")
