@@ -10,6 +10,7 @@
         android:id="@+id/ns_sign_up_email"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,7 +101,11 @@
                         android:includeFontPadding="false"
                         android:maxLines="1"
                         android:padding="12dp"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:imeOptions="actionGo"
+                        android:singleLine="true"
+                        android:lines="1"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +117,11 @@
                     android:focusable="true"
                     android:src="@drawable/ic_map_search_close"
                     app:layout_constraintEnd_toEndOf="@+id/text_input_sign_up"
-                    app:layout_constraintTop_toTopOf="@+id/text_input_sign_up" />
+                    app:layout_constraintTop_toTopOf="@+id/text_input_sign_up"
+                    android:imeOptions="actionGo"
+                    android:singleLine="true"
+                    android:lines="1"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -187,7 +196,7 @@
                         android:layout_height="44dp"
                         android:fontFamily="@font/noto_sans_cjkkr_regular"
                         app:fontFamily="@font/noto_sans_cjkkr_regular"
-                        android:hint="@string/email_hint"
+                        android:hint="@string/auth_num_hint"
                         android:includeFontPadding="false"
                         android:maxLines="1"
                         android:padding="12dp"

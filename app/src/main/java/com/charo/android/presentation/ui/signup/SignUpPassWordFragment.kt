@@ -89,6 +89,7 @@ class SignUpPassWordFragment :
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
                             transaction?.apply {
                                 replace(R.id.fragment_container_email, SignUpProfileFragment())
+                                addToBackStack(SignUpPassWordFragment::class.simpleName)
                                 commit()
                             }
                         }
@@ -96,6 +97,7 @@ class SignUpPassWordFragment :
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
                             transaction?.apply {
                                 replace(R.id.fragment_container_email, SignUpProfileFragment())
+                                addToBackStack(SignUpPassWordFragment::class.simpleName)
                                 commit()
                             }
                         }

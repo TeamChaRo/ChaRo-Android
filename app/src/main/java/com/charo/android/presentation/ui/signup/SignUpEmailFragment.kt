@@ -30,10 +30,10 @@ class SignUpEmailFragment :
         certificationEmail()
         keyBoardChange()
     }
+
     //이메일 포함 되어있는지 확인
     private fun initView() {
         with(binding) {
-
 
             clEmailNum.isVisible = false
             imgDeleteButton.setOnClickListener {
@@ -54,11 +54,21 @@ class SignUpEmailFragment :
                 }
 
                 override fun afterTextChanged(s: Editable?) {
+                    tvEmailResend.isEnabled = true
                     if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()) {
                         textInputSignUp.error = "사용 불가능한 이메일 형식입니다."
                         pass = false
+
+                        binding.textSignUpNext.isEnabled = false
+                        binding.textSignUpNextFocus.isEnabled = false
+                        tvEmailResend.isEnabled = false
+                        binding.etInputEmailNum.setText("")
+
                     } else {
                         pass = true
+                        binding.textSignUpNext.isEnabled = true
+                        binding.textSignUpNextFocus.isEnabled = true
+
                         signUpViewModel.emailCheck(s.toString())
                         observeSuccess(pass)
                     }
@@ -66,10 +76,13 @@ class SignUpEmailFragment :
             })
         }
     }
+
     //인증번호 체크
     private fun certificationEmail() {
         with(binding) {
-
+            imgEmailDeleteButton.setOnClickListener {
+                etInputEmailNum.setText("")
+            }
             etInputEmailNum.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -87,25 +100,26 @@ class SignUpEmailFragment :
                         Timber.d("certification ${it.toString()}")
                         if (s.toString() != it) {
                             textInputEmailNum.error = "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요."
+
+                            textSignUpNext.isEnabled = false
+                            textSignUpNextFocus.isEnabled = false
+                            etInputEmailNum.isEnabled = true
                         } else {
                             textInputEmailNum.error = null
                             textInputEmailNum.isErrorEnabled = false
                             textInputEmailNum.isHelperTextEnabled = true
                             textInputEmailNum.helperText = "인증되었습니다."
 
+                            textSignUpNext.isEnabled = true
+                            textSignUpNextFocus.isEnabled = true
+                            etInputEmailNum.isEnabled = false
+                            tvEmailResend.isEnabled = false
+
                             textSignUpNext.setOnClickListener {
-                                val transaction = activity?.supportFragmentManager?.beginTransaction()
-                                transaction?.apply {
-                                    replace(R.id.fragment_container_email, SignUpPassWordFragment())
-                                    commit()
-                                }
+                                confirmEmailAuthNum()
                             }
                             textSignUpNextFocus.setOnClickListener {
-                                val transaction = activity?.supportFragmentManager?.beginTransaction()
-                                transaction?.apply {
-                                    replace(R.id.fragment_container_email, SignUpPassWordFragment())
-                                    commit()
-                                }
+                                confirmEmailAuthNum()
                             }
                         }
                     }
@@ -125,37 +139,80 @@ class SignUpEmailFragment :
                     textInputSignUp.isHelperTextEnabled = true
                     textInputSignUp.helperText = "사용 가능한 이메일 형식입니다."
 
-                        textSignUpNext.setOnClickListener {
-                            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
-                            signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
-                            Timber.d("되라 ${etSignUpBlank.text.toString()}")
-                            clEmailNum.isVisible = true
-                        }
-                        textSignUpNextFocus.setOnClickListener {
-                            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
-                            signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
-                            Timber.d("되라 ${etSignUpBlank.text.toString()}")
-                            clEmailNum.isVisible = true
-                        }
+                    //다음 버튼 활성화
+                    textSignUpNext.isEnabled = true
+                    textSignUpNextFocus.isEnabled = true
+                    tvEmailResend.isEnabled = true
+                    //인증번호 입력창 초기화
+                    etInputEmailNum.isEnabled = true
+                    etInputEmailNum.setText("")
+                    textInputEmailNum.error = null
+
+
+                    textSignUpNext.setOnClickListener {
+                        sendEmailAuthNum()
+                    }
+                    textSignUpNextFocus.setOnClickListener {
+                        sendEmailAuthNum()
+                    }
                     tvEmailResend.setOnClickListener {
-                        signUpViewModel.emailCertification(etSignUpBlank.text.toString())
-                        Toast.makeText(requireContext(), "재전송 했습니다",Toast.LENGTH_SHORT).show()
+                        reSendEmailAuthNum()
                     }
 
                 } else {
                     if (pass){
                         textInputSignUp.error = "중복된 이메일 형식입니다."
+
+                        binding.textSignUpNext.isEnabled = false
+                        binding.textSignUpNextFocus.isEnabled = false
+                        binding.etInputEmailNum.isEnabled = false
+                        tvEmailResend.isEnabled = false
                     }
                 }
             }
         }
+    }
 
+    private fun sendEmailAuthNum(){
+        with(binding) {
+            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
+            signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
+            Timber.d("되라 ${etSignUpBlank.text.toString()}")
+            clEmailNum.isVisible = true
+
+            Toast.makeText(requireContext(), "인증번호를 전송하였습니다", Toast.LENGTH_SHORT).show()
+
+            textSignUpNext.isEnabled = false
+            textSignUpNextFocus.isEnabled = false
+            etInputEmailNum.isEnabled = true
+        }
+    }
+
+    private fun reSendEmailAuthNum(){
+        with(binding) {
+            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
+            Toast.makeText(requireContext(), "인증번호를 재전송하였습니다",Toast.LENGTH_SHORT).show()
+            binding.etInputEmailNum.setText("")
+
+            textSignUpNext.isEnabled = false
+            textSignUpNextFocus.isEnabled = false
+            etInputEmailNum.isEnabled = true
+        }
+    }
+
+    private fun confirmEmailAuthNum(){
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.apply {
+            replace(R.id.fragment_container_email, SignUpPassWordFragment())
+            addToBackStack(SignUpEmailFragment::class.simpleName)
+            commit()
+        }
     }
 
     //키보드 올라올 때 버튼 뷰 변경
     private fun keyBoardChange(){
         keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
-        onShowKeyboard = {keyBoardHeight ->
+        onShowKeyboard = { keyBoardHeight ->
             scrollUpToMyWantedPosition()
             binding.textSignUpNext.visibility = View.GONE
             binding.textSignUpNextFocus.visibility = View.VISIBLE
@@ -165,8 +222,6 @@ class SignUpEmailFragment :
             binding.textSignUpNext.visibility = View.VISIBLE
             binding.textSignUpNextFocus.visibility = View.GONE
         })
-
-
     }
     //일반 회원가입 번호
     private fun signUpNum(){

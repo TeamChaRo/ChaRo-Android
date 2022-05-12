@@ -197,6 +197,7 @@
     <string name="firebase_auth_id">273821551567-b6hf2a71g95dvvmfbcua17u8enre95rt.apps.googleusercontent.com</string>
     <string name="origin_password">기존 비밀번호</string>
     <string name="password_update_hint">5이상 15자 이내의 영문과 숫자</string>
+    <string name="auth_num_hint">숫자 6자리</string>
     <string name="new_password_update">새 비밀번호</string>
     <string name="new_password_update_info">5자 이상 15자 이내의 비밀번호를 입력해주세요.</string>
     <string name="one_more_password">비밀번호를 한번 더 작성해주세요</string>

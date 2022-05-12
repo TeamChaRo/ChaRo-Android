@@ -27,8 +27,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
         if(SharedInformation.getSignUp(this) == 0){
             changeFragment(R.id.fragment_container_email, SignUpEmailFragment())
         }
-
-
     }
 
     //구글 회원가입시에
@@ -50,7 +48,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
     //뒤로가기
     private fun clickBackBtn(){
-        binding.btnSignupBack.setOnClickListener { finish() }
+        binding.btnSignupBack.setOnClickListener {
+//            finish()
+            onBackPressed()
+        }
     }
 
 

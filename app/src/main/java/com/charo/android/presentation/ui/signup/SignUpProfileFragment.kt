@@ -90,6 +90,7 @@ class SignUpProfileFragment :
                                     val transaction = activity?.supportFragmentManager?.beginTransaction()
                                     transaction?.apply {
                                         replace(R.id.fragment_container_email, SignUpTermFragment())
+                                        addToBackStack(SignUpProfileFragment::class.simpleName)
                                         commit()
                                     }
                                 }
@@ -98,6 +99,7 @@ class SignUpProfileFragment :
                                     val transaction = activity?.supportFragmentManager?.beginTransaction()
                                     transaction?.apply {
                                         replace(R.id.fragment_container_email, SignUpTermFragment())
+                                        addToBackStack(SignUpProfileFragment::class.simpleName)
                                         commit()
                                     }
                                 }
