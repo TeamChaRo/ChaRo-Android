@@ -81,6 +81,9 @@ class SignUpProfileFragment :
                 }
 
                 override fun afterTextChanged(s: Editable?) {
+                    textSignUpNicknameNext.isEnabled = false
+                    textSignUpNicknameNextFocus.isEnabled = false
+
                     if (s.toString().length > 5) {
                         textInputNickname.error = "5자 이내로 작성해주세요"
                     } else if (!Pattern.matches(nickNamePattern, s.toString())) {
@@ -96,6 +99,9 @@ class SignUpProfileFragment :
                                 textInputNickname.isHelperTextEnabled = true
                                 textInputNickname.helperText = "사용 가능한 닉네임입니다"
                                 signUpViewModel.nickName.value = etSignUpNickname.text.toString()
+
+                                textSignUpNicknameNext.isEnabled = true
+                                textSignUpNicknameNextFocus.isEnabled = true
 
                                 textSignUpNicknameNext.setOnClickListener {
                                     SharedInformation.setNickName(requireActivity(), s.toString())
