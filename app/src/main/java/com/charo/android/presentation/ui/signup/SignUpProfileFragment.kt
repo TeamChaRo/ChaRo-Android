@@ -1,7 +1,9 @@
 package com.charo.android.presentation.ui.signup
 
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
@@ -28,13 +30,17 @@ import java.util.regex.Pattern
 class SignUpProfileFragment :
     BaseFragment<FragmentSignUpProfileBinding>(R.layout.fragment_sign_up_profile) {
     private val signUpViewModel: SignUpEmailViewModel by sharedViewModel()
+
     private val getContent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            signUpViewModel.profileImage.value = result.data?.data
+            val preImage = signUpViewModel.profileImage.value
+                ?: Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(R.drawable.ic_profile) + '/' + resources.getResourceTypeName(R.drawable.ic_profile) + '/' + resources.getResourceEntryName(R.drawable.ic_profile))
+            signUpViewModel.profileImage.value = result.data?.data ?: preImage
             Timber.d("imageProfile ${signUpViewModel.profileImage.value.toString()}")
 
-            Glide.with(this)
+            Glide.with(requireActivity())
                 .load(signUpViewModel.profileImage.value)
+                .error(R.drawable.ic_profile)
                 .circleCrop()
                 .into(binding.imgSignUpProfile)
 
@@ -45,6 +51,12 @@ class SignUpProfileFragment :
         checkNickName()
         registerProfile()
         keyBoardChange()
+
+        Glide.with(requireActivity())
+            .load(signUpViewModel.profileImage.value)
+            .error(R.drawable.ic_profile)
+            .circleCrop()
+            .into(binding.imgSignUpProfile)
     }
 
 
