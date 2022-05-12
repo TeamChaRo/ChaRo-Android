@@ -2,8 +2,10 @@ package com.charo.android.presentation.ui.signup
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSignUpPassWordBinding
 import com.charo.android.presentation.base.BaseFragment
@@ -24,6 +26,17 @@ class SignUpPassWordFragment :
         initPasswordView()
         checkPassword()
         keyBoardChange()
+
+        if(TextUtils.isEmpty(binding.etSignUpPassword.text) || TextUtils.isEmpty(binding.etSignUpPasswordReconfirm.text)){
+            binding.textSignUpPasswordNext.setOnClickListener {
+                Toast.makeText(requireContext(), "비밀번호를 확인해주세요.",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            binding.textSignUpPasswordNextFocus.setOnClickListener {
+                Toast.makeText(requireContext(), "비밀번호를 확인해주세요.",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+        }
     }
 
     private fun initPasswordView() {
@@ -43,19 +56,23 @@ class SignUpPassWordFragment :
                 }
 
                 override fun afterTextChanged(s: Editable?) {
+                    etSignUpPasswordReconfirm.setText("")
+
                     if (s.toString().length < 5 || s.toString().length > 15) {
                         textInputPaasword.error = "5자 이상 15자 이내로 작성해 주세요."
+                        textSignUpPasswordNext.isEnabled = false
+                        textSignUpPasswordNextFocus.isEnabled = false
 
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputPaasword.error = "영문과 숫자만 사용해 주세요."
                         Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
+
+                        textSignUpPasswordNext.isEnabled = false
+                        textSignUpPasswordNextFocus.isEnabled = false
                     } else {
                         textInputPaasword.error = null
                         textInputPaasword.isErrorEnabled = false
-
                     }
-
-
                 }
             })
         }
@@ -81,9 +98,16 @@ class SignUpPassWordFragment :
                 override fun afterTextChanged(s: Editable?) {
                     if(s.toString() != etSignUpPassword.text.toString() ){
                         textPasswordReconfirm.error = "비밀번호가 일치하지 않습니다."
+
+                        textSignUpPasswordNext.isEnabled = false
+                        textSignUpPasswordNextFocus.isEnabled = false
                     } else{
                         textPasswordReconfirm.error = null
                         textPasswordReconfirm.isErrorEnabled = false
+
+                        textSignUpPasswordNext.isEnabled = true
+                        textSignUpPasswordNextFocus.isEnabled = true
+
                         signUpViewModel.password.value = etSignUpPassword.text.toString()
                         textSignUpPasswordNext.setOnClickListener {
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
@@ -113,10 +137,8 @@ class SignUpPassWordFragment :
     private fun keyBoardChange(){
         keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
             onShowKeyboard = {keyBoardHeight ->
-
                 binding.textSignUpPasswordNext.visibility = View.GONE
                 binding.textSignUpPasswordNextFocus.visibility = View.VISIBLE
-
             },
             onHideKeyboard = {
                 binding.textSignUpPasswordNext.visibility = View.VISIBLE
