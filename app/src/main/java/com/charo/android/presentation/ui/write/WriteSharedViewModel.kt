@@ -247,7 +247,7 @@ class WriteSharedViewModel(
     fun deleteDetailPost() {
         viewModelScope.launch {
             kotlin.runCatching {
-                imageStringViewPager.value?.let { deleteDetailPostUseCase(postId, it) }
+                deleteDetailPostUseCase(postId)
             }.onSuccess {
                 _deleteSuccess.value = it
             }.onFailure {

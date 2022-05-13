@@ -538,22 +538,16 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 // 수정하기
                 val postIdRB: RequestBody = sharedViewModel.postId.toString()
                     .toRequestBody("text/plain".toMediaTypeOrNull())
+                param["postId"] = postIdRB
+                val postId = sharedViewModel.postId
                 val deleted = ArrayList<MultipartBody.Part>()
-                sharedViewModel.imageStringViewPager.value?.let {
-                    for (i in it.indices) {
-                        deleted.add(
-                            MultipartBody.Part.createFormData("deleted[$i]", it[i])
-                        )
-                    }
-                }
                 val call = ApiService.writeViewService
                     .editPost(
                         sendWarning,
                         sendTheme,
                         sharedViewModel.course.value!!,
                         sharedViewModel.imageMultiPart.value!!,
-                        param,
-                        deleted
+                        param
                     )
                 call.enqueueUtil(
                     onSuccess = {
@@ -571,7 +565,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         Timber.i("수정하기 sendTheme $sendTheme")
                         Timber.i("수정하기 course $sendTheme")
                         Timber.i("수정하기 image ${sharedViewModel.imageMultiPart.value!!}")
-                        Timber.i("수정하기 deleted $deleted")
                         Timber.i("수정하기")
                     }
                 )
