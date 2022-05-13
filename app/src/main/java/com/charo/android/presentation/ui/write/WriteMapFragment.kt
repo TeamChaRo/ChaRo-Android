@@ -38,6 +38,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         fun newInstance() = WriteMapFragment()
     }
 
+    private lateinit var tMapView: TMapView
+
     //    원래 진희코드
 //    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
 //        object : ViewModelProvider.Factory {
@@ -72,15 +74,19 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
         locationFlag = sharedViewModel.locationFlag.value.toString()
 
-        val tMapView = TMapView(context)
-        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
-        binding.clWriteTmapView.addView(tMapView)
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.Main) {
+                tMapView = TMapView(context)
+                tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+                binding.clWriteTmapView.addView(tMapView)
+            }
 
-        if (sharedViewModel.editFlag.value == true && sharedViewModel.editMapFlag.value == true) {
-            sharedViewModel.initEditMapData()
+            if (sharedViewModel.editFlag.value == true && sharedViewModel.editMapFlag.value == true) {
+                sharedViewModel.initEditMapData()
+            }
+
+            fillTextView(locationFlag, tMapView)
         }
-
-        fillTextView(locationFlag, tMapView)
 
         binding.imgWriteMapBack.setOnClickListener(this)      // 뒤로가기 click
         binding.etWriteMapStart.setOnClickListener(this)
@@ -222,18 +228,9 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                     )
                 }
 
-                // 지도 중앙 맞춰주기
-                if(pointList.isEmpty()) {
-                    tMapView.setCenterPoint(127.840076, 35.838083)
-                    tMapView.zoomLevel = 6
-                } else {
-                    val info: TMapInfo =
-                        tMapView.getDisplayTMapInfo(pointList)
-                    tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                    tMapView.zoomLevel = info.tMapZoomLevel
-                }
-
                 // Marker 생성
+                val markerList = mutableListOf<TMapMarkerItem>()
+                val polyLineList = mutableListOf<TMapPolyLine>()
                 for (i in pointList.indices) {
                     val marker = TMapMarkerItem()
                     val bitmap: Bitmap = when (i) {
@@ -256,7 +253,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         tMapPoint = pointList[i]
                         name = "marker_location_flag_$i"
                     }
-                    tMapView.addMarkerItem(marker.name, marker)
+                    markerList.add(marker)
+//                    tMapView.addMarkerItem(marker.name, marker)
 
                     // 경로 그리기
                     if (i != pointList.size - 1) {
@@ -269,15 +267,44 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         tMapPolyLine.apply {
                             lineWidth = 3F
                             outLineColor =
-                                ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.blue_main_0f6fff
+                                )
                             lineColor =
-                                ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff)
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color.blue_main_0f6fff
+                                )
                         }
-                        tMapView.addTMapPolyLine(
-                            "tMapPolyLine$i",
-                            tMapPolyLine
-                        )
+                        polyLineList.add(tMapPolyLine)
+//                        tMapView.addTMapPolyLine(
+//                            "tMapPolyLine$i",
+//                            tMapPolyLine
+//                        )
                     }
+                }
+                for (i in markerList.indices) {
+                    when (i) {
+                        markerList.size - 1 -> {
+                            tMapView.addMarkerItem("marker$i", markerList[i])
+                        }
+                        else -> {
+                            tMapView.addMarkerItem("marker$i", markerList[i])
+                            tMapView.addTMapPolyLine("polyLine$i", polyLineList[i])
+                        }
+                    }
+                }
+
+                // 지도 중앙 맞춰주기
+                if (pointList.isEmpty()) {
+                    tMapView.setCenterPoint(127.840076, 35.838083)
+                    tMapView.zoomLevel = 6
+                } else {
+                    val info: TMapInfo =
+                        tMapView.getDisplayTMapInfo(pointList)
+                    tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+                    tMapView.zoomLevel = info.tMapZoomLevel
                 }
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
@@ -387,7 +414,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
         if (isShowBlackout) {
             binding.grayBackgroundForToast.visibility = View.VISIBLE
-            CustomToast.createToast(requireContext(), getString(R.string.noti_write_map))?.show()
+            CustomToast.createToast(requireContext(), getString(R.string.noti_write_map))
+                ?.show()
 
         } else {
             binding.grayBackgroundForToast.visibility = View.GONE
@@ -395,7 +423,10 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
     }
 
     private fun clickWriteComplete() {
-        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && TextUtils.isEmpty(sharedViewModel.midFrstAddress.value))) {
+        if ((binding.etWriteMapMid1.visibility == View.VISIBLE && TextUtils.isEmpty(
+                sharedViewModel.midFrstAddress.value
+            ))
+        ) {
             Toast.makeText(context, "경유지를 입력해주세요!", Toast.LENGTH_LONG).show()
             return
         }
@@ -554,7 +585,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         Timber.i("수정하기 성공")
                         Timber.i("수정하기 결과: $it")
 
-                        Toast.makeText(requireContext(), "게시물이 수정되었습니다", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "게시물이 수정되었습니다", Toast.LENGTH_LONG)
+                            .show()
                         requireActivity().finish()
                     },
                     onError = {
@@ -628,7 +660,11 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         "writeMapSearch"
                     )
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.start), Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.start),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
             }

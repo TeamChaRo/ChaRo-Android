@@ -349,4 +349,6 @@
     <string name="text_options">⋮</string>
     <string name="text_confirm_delete">정말 삭제하시겠습니까?</string>
 
+    <!--    서버통신 에러 string-->
+    <string name="server_error_general">문제가 발생했습니다. 다시 시도해주세요.</string>
 </resources>

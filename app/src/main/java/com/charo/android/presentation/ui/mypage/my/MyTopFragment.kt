@@ -38,6 +38,7 @@ class MyTopFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showFollowList()
         clickSetting()
+        setProfileImageInPreference()
     }
 
     override fun onDestroyView() {
@@ -58,6 +59,12 @@ class MyTopFragment : Fragment() {
         binding.imgProfileSetting.setOnClickListener {
             val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun setProfileImageInPreference() {
+        viewModel.userInfo.observe(viewLifecycleOwner) {
+            SharedInformation.setProfileImage(requireContext(), it.profileImage)
         }
     }
 }

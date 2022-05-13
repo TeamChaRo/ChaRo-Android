@@ -13,7 +13,6 @@ import com.charo.android.R
 import com.charo.android.databinding.FragmentDetailPostMapBinding
 import com.charo.android.domain.model.detailpost.DetailPost
 import com.charo.android.hidden.Hidden
-import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.skt.Tmap.*
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +25,7 @@ import timber.log.Timber
 class DetailPostMapFragment : Fragment() {
     private var _binding: FragmentDetailPostMapBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
+
     // TODO: Old ViewModel
 //    private val viewModel by sharedViewModel<DetailPostViewModel>()
     // TODO: New ViewModel
@@ -36,7 +36,12 @@ class DetailPostMapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_detail_post_map, container, false)
+        _binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.fragment_detail_post_map,
+            container,
+            false
+        )
         tMapView = TMapView(requireContext())
         return binding.root
     }
@@ -47,11 +52,15 @@ class DetailPostMapFragment : Fragment() {
     }
 
     private fun initMap(tMapView: TMapView) {
-        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
-        binding.clDetailPostMap.addView(tMapView)
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.Main) {
+                tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+                binding.clDetailPostMap.addView(tMapView)
+            }
 
-        viewModel.courseDetail.observe(viewLifecycleOwner) {
-            drawPath(tMapView, it)
+            viewModel.courseDetail.observe(viewLifecycleOwner) {
+                drawPath(tMapView, it)
+            }
         }
     }
 
@@ -62,12 +71,6 @@ class DetailPostMapFragment : Fragment() {
                 val pointList = course.map {
                     TMapPoint(it.latitude, it.longitude)
                 }
-
-                // 지도 중앙 맞춰주기
-                val info: TMapInfo =
-                    tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
-                tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                tMapView.zoomLevel = info.tMapZoomLevel
 
                 // Marker 생성
                 for (i in pointList.indices) {
@@ -114,6 +117,12 @@ class DetailPostMapFragment : Fragment() {
                             tMapPolyLine
                         )
                     }
+
+                    // 지도 중앙 맞춰주기
+                    val info: TMapInfo =
+                        tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
+                    tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+                    tMapView.zoomLevel = info.tMapZoomLevel
                 }
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)

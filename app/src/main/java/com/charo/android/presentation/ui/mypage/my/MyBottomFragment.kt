@@ -36,7 +36,7 @@ class MyBottomFragment : Fragment() {
     private fun initViewPager() {
         // ViewPager 초기화
         val postViewPagerAdapter = PostViewPagerAdapter(requireActivity())
-        postViewPagerAdapter.fragmentList = listOf(WrittenPostFragment(), SavedPostFragment())
+        postViewPagerAdapter.fragmentList = listOf("WrittenPostFragment", "SavedPostFragment")
         with(binding.vpProfile) {
             adapter = postViewPagerAdapter
             isUserInputEnabled = false

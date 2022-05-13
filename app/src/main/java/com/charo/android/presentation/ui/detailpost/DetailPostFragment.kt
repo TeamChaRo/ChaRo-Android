@@ -65,16 +65,9 @@ class DetailPostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tMapView = TMapView(requireContext())
         viewModel.getDetailPostData()
+
+        initMap()
         initMenu()
-        initTMap(tMapView)
-        viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
-            initViewPager(it)
-        }
-        viewModel.courseDetail.observe(viewLifecycleOwner) {
-            if (it != null) {
-                drawPath(tMapView, it)
-            }
-        }
         copyAddress()
         clickLike()
         clickSave()
@@ -88,6 +81,20 @@ class DetailPostFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun initMap() {
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.Main) {
+                initTMap(tMapView)
+            }
+
+            viewModel.courseDetail.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    drawPath(tMapView, it)
+                }
+            }
+        }
     }
 
     private fun initMenu() {
@@ -188,12 +195,6 @@ class DetailPostFragment : Fragment() {
                     TMapPoint(it.latitude, it.longitude)
                 }
 
-                // 지도 중앙 맞춰주기
-                val info: TMapInfo =
-                    tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
-                tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                tMapView.zoomLevel = info.tMapZoomLevel
-
                 // Marker 생성
                 for (i in pointList.indices) {
                     val marker = TMapMarkerItem()
@@ -239,6 +240,12 @@ class DetailPostFragment : Fragment() {
                             tMapPolyLine
                         )
                     }
+
+                    // 지도 중앙 맞춰주기
+                    val info: TMapInfo =
+                        tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
+                    tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+                    tMapView.zoomLevel = info.tMapZoomLevel
                 }
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
@@ -313,7 +320,7 @@ class DetailPostFragment : Fragment() {
         }
     }
 
-    private fun createDynamicLink(postId : Int, title : String, imageUri : String) {
+    private fun createDynamicLink(postId: Int, title: String, imageUri: String) {
 
         val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
         Timber.e("createDynamicLink() link: $link")
@@ -392,6 +399,10 @@ class DetailPostFragment : Fragment() {
     }
 
     private fun observe() {
+        viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
+            initViewPager(it)
+        }
+
         viewModel.deleteSuccess.observe(viewLifecycleOwner) {
             if (it) {
                 Toast.makeText(requireContext(), "게시물이 삭제되었습니다", Toast.LENGTH_SHORT).show()
