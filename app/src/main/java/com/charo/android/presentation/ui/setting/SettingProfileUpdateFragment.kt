@@ -4,7 +4,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingProfileUpdateBinding
@@ -21,9 +23,20 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     (R.layout.fragment_setting_profile_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding.profileViewModel = settingViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProfileImage()
         initIsProfileNum()
         profileCheckNickName()
         initBottomSheet()
@@ -32,6 +45,12 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         changeProfileImage()
         backBtn()
     }
+
+    private fun setProfileImage() {
+        val image = SharedInformation.getProfileImage(requireContext())
+        settingViewModel.originProfileUri.value = image
+    }
+
     // isProfileUpdate 초기화
 
     private fun initIsProfileNum(){

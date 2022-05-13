@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,23 +31,18 @@ class MyPageFragment : Fragment() {
     ): View? {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_my_page, container, false)
-        initFragmentContainerView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        이게 맞나 ... 싶긴 하지만 딱히 다른 방도가 떠오르지 않는다
-//        if(viewModel.userEmail != "@") {
-//            // 내 마이페이지 보는 경우
-//            viewModel.getLikePost()
-//            viewModel.getNewPost()
-//        }
+        initFragmentContainerView()
+        observeError()
     }
 
     override fun onResume() {
         super.onResume()
-        if(viewModel.userEmail != "@") {
+        if (viewModel.userEmail != "@") {
             viewModel.getLikePost()
             viewModel.getNewPost()
         }
@@ -60,7 +56,7 @@ class MyPageFragment : Fragment() {
     private fun initFragmentContainerView() {
         val transaction = childFragmentManager.beginTransaction()
 
-        if(viewModel.userEmail == "@") {
+        if (viewModel.userEmail == "@") {
             transaction.add(R.id.fcv_top, GuestTopFragment())
                 .add(R.id.fcv_bottom, GuestBottomFragment())
                 .commit()
@@ -68,6 +64,12 @@ class MyPageFragment : Fragment() {
             transaction.add(R.id.fcv_top, MyTopFragment())
                 .add(R.id.fcv_bottom, MyBottomFragment())
                 .commit()
+        }
+    }
+
+    private fun observeError() {
+        viewModel.serverError.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "문제가 발생했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 }

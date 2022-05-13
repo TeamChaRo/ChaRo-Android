@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 val networkModule = module {
     val interceptor = HttpLoggingInterceptor()
     val client = OkHttpClient.Builder()
-        .addNetworkInterceptor(interceptor)
+//        .addNetworkInterceptor(interceptor)
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
     client.addInterceptor(interceptor)
 

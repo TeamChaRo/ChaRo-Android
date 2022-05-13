@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.mypage.Post
 import com.charo.android.data.model.mypage.UserInformation
 import com.charo.android.domain.usecase.mypage.*
+import com.charo.android.presentation.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -49,6 +50,10 @@ class MyPageViewModel(
     private var _savedNewPostList = MutableLiveData<MutableList<Post>>()
     val savedNewPostList: LiveData<MutableList<Post>> get() = _savedNewPostList
 
+    // 서버 에러 알림용 변수
+    private var _serverError = SingleLiveEvent<Boolean>()
+    val serverError: LiveData<Boolean> get() = _serverError
+
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail
     }
@@ -58,6 +63,7 @@ class MyPageViewModel(
             kotlin.runCatching {
                 getRemoteLikePostUseCase(userEmail)
             }.onSuccess {
+                Timber.i("ViewModel 인기순 데이터 수신")
                 _userInfo.value = it.userInformation
 
                 // 테스트 - 게시물 없는 경우에 대한 테스트
@@ -70,6 +76,7 @@ class MyPageViewModel(
                 _savedLikePostList.value = it.savedPost.drive
             }.onFailure {
                 Timber.d("$TAG getLikePost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }
@@ -79,6 +86,7 @@ class MyPageViewModel(
             kotlin.runCatching {
                 getRemoteNewPostUseCase(userEmail)
             }.onSuccess {
+                Timber.i("ViewModel 최신순 데이터 수신")
                 _userInfo.value = it.userInformation
 
                 _writtenNewLastId = it.writtenPost.lastId
@@ -88,6 +96,7 @@ class MyPageViewModel(
                 _savedNewPostList.value = it.savedPost.drive
             }.onFailure {
                 Timber.d("$TAG getNewPost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }
@@ -106,6 +115,7 @@ class MyPageViewModel(
                 _writtenLikePostList.value = _writtenLikePostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenLikePost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }
@@ -119,6 +129,7 @@ class MyPageViewModel(
                 _writtenNewPostList.value = _writtenNewPostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenNewPost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }
@@ -133,6 +144,7 @@ class MyPageViewModel(
                 _savedLikePostList.value = _savedLikePostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreSavedLikePost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }
@@ -146,6 +158,7 @@ class MyPageViewModel(
                 _savedNewPostList.value = _savedNewPostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreSavedNewPost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }

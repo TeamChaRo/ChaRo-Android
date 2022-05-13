@@ -43,7 +43,7 @@ class GuestBottomFragment : Fragment() {
     private fun initViewPager() {
         // ViewPager 초기화
         val postViewPagerAdapter = PostViewPagerAdapter(requireActivity())
-        postViewPagerAdapter.fragmentList = listOf(GuestPostListFragment(), GuestPostListFragment())
+        postViewPagerAdapter.fragmentList = listOf("GuestPostListFragment", "GuestPostListFragment")
         with(binding.vpProfile) {
             adapter = postViewPagerAdapter
             isUserInputEnabled = false
