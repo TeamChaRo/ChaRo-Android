@@ -10,6 +10,8 @@ import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.more.MoreViewFragment
+import com.charo.android.presentation.ui.write.WriteShareActivity
+import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import timber.log.Timber
 
 class MoreViewAdapter(
@@ -71,9 +73,12 @@ class MoreViewAdapter(
             }
 
             holder.binding.root.setOnClickListener() {
-                val intent = Intent(holder.itemView.context, DetailPostActivity::class.java)
-                intent.putExtra("userId", userId)
-                intent.putExtra("postId", moreData[position].morePostId)
+                val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
+                intent.apply {
+                    putExtra("userId", userId)
+                    putExtra("destination", "detail")
+                    putExtra("postId", moreData[position].morePostId)
+                }
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
             }
         }

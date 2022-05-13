@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChaRo-Android</string>
+    <string name="app_name">차로</string>
     <string name="title_home_eng">Home</string>
     <string name="title_home_kor">구경하기</string>
     <string name="title_write_eng">Write</string>
