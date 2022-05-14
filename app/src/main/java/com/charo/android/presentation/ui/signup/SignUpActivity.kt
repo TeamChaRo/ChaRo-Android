@@ -1,6 +1,7 @@
 package com.charo.android.presentation.ui.signup
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySignUpBinding
 import com.charo.android.presentation.base.BaseActivity
@@ -17,11 +18,30 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initToolbar()
+
         initSignUpEmailFragment()
         changeGoogleSignUpFragment()
-        clickBackBtn()
     }
 
+    private fun initToolbar(){
+        val toolbar = binding.toolbarSignUp
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     fun initSignUpEmailFragment() {
         if(SharedInformation.getSignUp(this) == 0){
@@ -45,14 +65,4 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             changeFragment(R.id.fragment_container_email, SignUpProfileFragment())
         }
     }
-
-    //뒤로가기
-    private fun clickBackBtn(){
-        binding.btnSignupBack.setOnClickListener {
-//            finish()
-            onBackPressed()
-        }
-    }
-
-
 }

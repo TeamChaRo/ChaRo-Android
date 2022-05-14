@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.charo.android.R
@@ -20,6 +21,8 @@ class PasswordSearchActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initToolbar()
+
         keyBoardChange()
         initView()
         changeBtnText()
@@ -27,6 +30,24 @@ class PasswordSearchActivity :
         checkSuccess()
     }
 
+    private fun initToolbar(){
+        val toolbar = binding.toolbarPasswordSearch
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     //키보드 올라올 때 버튼 뷰 변경
     private fun keyBoardChange() {
@@ -121,13 +142,7 @@ class PasswordSearchActivity :
 
 
     }
-    //뒤로 가기 버튼
-    private fun clickBackBtn(){
-        binding.imgPasswordSearchDeleteButton.setOnClickListener { 
-            finish()
-        }
-    }
-    
+
     override fun onPause() {
         super.onPause()
         keyboardVisibilityUtils.detachKeyboardListeners()

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.signature.ApplicationVersionSignature
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingMainBinding
 import com.charo.android.presentation.base.BaseFragment
@@ -31,6 +32,8 @@ class SettingMainFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getVersionName()
         clickProfileUpdate()
         changeTabText()
         clickLogOut()
@@ -42,11 +45,6 @@ class SettingMainFragment :
         clickPrivacy()
         clickServiceTerm()
         clickReport()
-        backBtn()
-    }
-    //뒤로가기
-    private fun backBtn(){
-        settingViewModel.settingFragmentBackStack.value = true
     }
 
     // 알림, 사진 접근 허용
@@ -64,6 +62,7 @@ class SettingMainFragment :
             }
         }
     }
+
     // 개인 정보 처리
     private fun clickPrivacy(){
         binding.textSettingPrivacy.setOnClickListener {
@@ -120,11 +119,11 @@ class SettingMainFragment :
 
     }
 
-
     //제목 변경
     private fun changeTabText() {
+        (activity as SettingActivity).binding.toolbarTitle.text = getString(R.string.setting)
+
         val userEmail = SharedInformation.getEmail(requireActivity())
-        settingViewModel.updateTabText.value = "설정"
         binding.textSettingUserEmail.text = userEmail
     }
 
@@ -182,9 +181,7 @@ class SettingMainFragment :
                     }
                 }
             })
-
         }
-
     }
 
     //회원 탈퇴
@@ -213,7 +210,6 @@ class SettingMainFragment :
                     }
                 }
             })
-
         }
     }
 
@@ -221,9 +217,16 @@ class SettingMainFragment :
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.apply {
             replace(R.id.fragment_container_setting, fragment)
+            addToBackStack("")
             commit()
         }
     }
 
+    private fun getVersionName(){
+        val pInfo = requireContext().packageManager.getPackageInfo(requireContext().packageName, 0);
+        val versionName = pInfo.versionName + ""
+
+        binding.textSettingVersionNum.text = versionName
+    }
 
 }

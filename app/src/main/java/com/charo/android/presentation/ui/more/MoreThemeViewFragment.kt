@@ -2,8 +2,10 @@ package com.charo.android.presentation.ui.more
 
 import android.content.Context
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnAttach
 import com.charo.android.R
 import com.charo.android.data.model.request.RequestThemeViewData
@@ -39,17 +41,39 @@ class MoreThemeViewFragment :
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userId = arguments?.getString("userId").toString()
-
+        initToolbar()
 
         initMoreThemeViewPager(userId)
-        clickBackButton()
+//        clickBackButton()
         clickTab()
     }
 
+    private fun initToolbar(){
+        val toolbar = binding.toolbarMoreTheme
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                SharedInformation.removeThemeNum(requireActivity())
+                requireActivity().onBackPressed()
+//                val fragmentManager = activity?.supportFragmentManager
+//                val transaction = fragmentManager?.beginTransaction()
+//                transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
+//                    ?.commit()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun initMoreThemeViewPager(userId: String) {
         binding.apply {
@@ -111,15 +135,15 @@ class MoreThemeViewFragment :
         }
     }
 
-    private fun clickBackButton() {
-        binding.imgBackTheme.setOnClickListener {
-            SharedInformation.removeThemeNum(requireActivity())
-            val fragmentManager = activity?.supportFragmentManager
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
-                ?.commit()
-        }
-    }
+//    private fun clickBackButton() {
+//        binding.imgBackTheme.setOnClickListener {
+//            SharedInformation.removeThemeNum(requireActivity())
+//            val fragmentManager = activity?.supportFragmentManager
+//            val transaction = fragmentManager?.beginTransaction()
+//            transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
+//                ?.commit()
+//        }
+//    }
 
 
     fun clickTab() {

@@ -53,6 +53,7 @@
                 android:hint="@string/password_update_hint"
                 android:includeFontPadding="false"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="13sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -122,6 +123,7 @@
                     android:hint="@string/input_password_hint"
                     android:includeFontPadding="false"
                     android:maxLines="1"
+                    android:singleLine="true"
                     android:textSize="13sp"
                     android:inputType="textPassword"/>
 
@@ -153,6 +155,7 @@
                     android:hint="@string/input_password_reconfirm_hint"
                     android:includeFontPadding="false"
                     android:maxLines="1"
+                    android:singleLine="true"
                     android:textSize="13sp"
                     android:inputType="textPassword" />
 

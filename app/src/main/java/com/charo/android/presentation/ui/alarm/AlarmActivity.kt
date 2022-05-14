@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -34,11 +35,11 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initToolbar(getString(R.string.alarm))
 
         //fcm test TODO: 서버에서 보내는 알람 test 필요
         sendFCM()
 
-        goHome()
         alarmViewModel = AlarmViewModel()
 
         alarmSwipeHelperCallback = AlarmSwipeHelperCallback().apply {
@@ -48,6 +49,26 @@ class AlarmActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(binding.rcvAlarmList)
 
         initRecyclerView()
+    }
+
+    private fun initToolbar(title : String){
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbarTitle.text = title
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initRecyclerView() {
@@ -265,11 +286,5 @@ class AlarmActivity : AppCompatActivity() {
                 notificationManager!!.notify(0, mNotificationBuilder.build())
             }
         }, 0)
-    }
-
-    private fun goHome() {
-        binding.imgBackHomeAlarm.setOnClickListener {
-            onBackPressed()
-        }
     }
 }

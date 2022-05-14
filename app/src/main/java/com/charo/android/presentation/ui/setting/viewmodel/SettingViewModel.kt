@@ -74,9 +74,6 @@ class SettingViewModel(
     private val _updateNickName : MutableLiveData<String> = MutableLiveData()
     val updateNickName : LiveData<String> = _updateNickName
 
-    // toolbar 텍스트
-    val updateTabText = MutableLiveData<String>()
-
     // 받아오는 프로필 이미지
     val originProfileUri = MutableLiveData<String>("newnew")
 

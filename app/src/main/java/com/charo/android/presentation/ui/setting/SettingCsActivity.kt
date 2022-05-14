@@ -13,8 +13,8 @@ class SettingCsActivity : BaseActivity<ActivitySettingCsBinding>(R.layout.activi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initGoogleForm()
-    }
 
+    }
 
     private fun initGoogleForm(){
         binding.webGoogleForm.apply {

@@ -348,5 +348,6 @@
     <string name="txt_banner_gangneung_finish_coment">제가 준비한 것은 여기까지 입니다.\n8년 경험을 꾹꾹 담아봤는데 괜찮으셨나요?\n글을 써보니 강릉에 바다가 많다는 것을\n다시 한번 느낍니다.\n그만큼 매력적인 것 같아요.\n제 글을 보시고 드라이브 하는데\n도움이 되셨으면 좋겠습니다 !</string>
     <string name="text_options">⋮</string>
     <string name="text_confirm_delete">정말 삭제하시겠습니까?</string>
+    <string name="alarm">알림</string>
 
 </resources>

@@ -12,123 +12,100 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.search.NoSearchActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/search_app_bar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="78dp"
             android:background="@color/white"
-            android:fitsSystemWindows="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_no_search"
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                app:layout_collapseMode="pin"
+            <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/HeaderH4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_activity"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/img_cancel_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_gravity="end"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_close_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/img_back_search_view" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray2_sub_dde2e5"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            >
+            <ImageView
+                android:id="@+id/img_no_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search_no_img_android"
+                app:layout_constraintVertical_bias="0.3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/img_no_search_click"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/text_no_search_mention"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                app:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:lineHeight="21sp"
+                android:text="@string/search_mention"
+                android:textAlignment="center"
+                android:textColor="@color/gray5_sub_495057"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_no_search" />
 
-                    <TextView
-                        android:id="@+id/text_no_search"
-                        style="@style/HeaderH4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="96dp"
-                        android:layout_marginTop="34dp"
-                        android:layout_marginEnd="96dp"
-                        android:layout_marginBottom="23dp"
-                        android:text="@string/search_activity"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/img_no_search_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_search_btn_white"
+                android:layout_marginBottom="27dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/blue_main_0f6fff" />
 
-                    <ImageButton
-                        android:id="@+id/img_back_home"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="21dp"
-                        android:layout_marginBottom="9dp"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_icon_back"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/text_no_search_start"
+                style="@style/SectionH1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_write"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/img_no_search_click"
+                app:layout_constraintEnd_toEndOf="@+id/img_no_search_click"
+                app:layout_constraintStart_toStartOf="@id/img_no_search_click"
+                app:layout_constraintTop_toTopOf="@id/img_no_search_click" />
 
-
-                    <ImageButton
-                        android:id="@+id/img_cancel_search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_close_black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_no_search" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <ImageView
-            android:id="@+id/img_no_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search_no_img_android"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_app_bar" />
-
-        <TextView
-            android:id="@+id/text_no_search_mention"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="64dp"
-            android:fontFamily="@font/noto_sans_cjkkr_regular"
-            app:fontFamily="@font/noto_sans_cjkkr_regular"
-            android:lineHeight="21sp"
-            android:text="@string/search_mention"
-            android:textAlignment="center"
-            android:textColor="@color/gray5_sub_495057"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_no_search" />
-
-
-        <ImageButton
-            android:id="@+id/img_no_search_click"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_search_btn_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_no_search_mention"
-            app:tint="@color/blue_main_0f6fff" />
-
-        <TextView
-            android:id="@+id/text_no_search_start"
-            style="@style/SectionH1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_write"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/img_no_search_click"
-            app:layout_constraintEnd_toEndOf="@+id/img_no_search_click"
-            app:layout_constraintStart_toStartOf="@id/img_no_search_click"
-            app:layout_constraintTop_toTopOf="@id/img_no_search_click" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,30 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.alarm.AlarmActivity">
 
-    <ImageView
-        android:id="@+id/img_back_home_alarm"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_back_1"
+        android:minHeight="78dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/rcv_alarm_list"/>
+        >
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/HeaderH4"
+            android:layout_gravity="center"
+            />
+    </androidx.appcompat.widget.Toolbar>
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#DDE2E5"
-        app:layout_constraintBottom_toTopOf="@+id/rcv_alarm_list"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_alarm_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/img_back_home_alarm"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_alarm"

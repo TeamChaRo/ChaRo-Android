@@ -3,10 +3,12 @@ package com.charo.android.presentation.ui.more
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.R
@@ -46,16 +48,43 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+
         userId = arguments?.getString("userId").toString()
         moreViewAdapter = MoreViewAdapter(userId, links)
         Timber.d("userIdeas $userId")
 
         initSpinner()
-        clickBackButton(userId)
+//        clickBackButton(userId)
         clickSpinner()
         removeData()
     }
 
+    private fun initToolbar(){
+        val toolbar = binding.toolbarMore
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                requireActivity().onBackPressed()
+//                val bundle = Bundle()
+//                bundle.putString("userId", userId)
+//                homeFragment.arguments = bundle
+//                val fragmentManager = activity?.supportFragmentManager
+//                val transaction = fragmentManager?.beginTransaction()
+//                transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+//                    ?.commit()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     fun moreViewLoadData() {
         val userEmail = SharedInformation.getEmail(requireActivity())
@@ -173,18 +202,18 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         }
     }
 
-    private fun clickBackButton(userId: String) {
-        binding.imgBackHome.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("userId", userId)
-            homeFragment.arguments = bundle
-            val fragmentManager = activity?.supportFragmentManager
-            val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)
-                ?.commit()
-        }
-
-    }
+//    private fun clickBackButton(userId: String) {
+//        binding.imgBackHome.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putString("userId", userId)
+//            homeFragment.arguments = bundle
+//            val fragmentManager = activity?.supportFragmentManager
+//            val transaction = fragmentManager?.beginTransaction()
+//            transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)
+//                ?.commit()
+//        }
+//
+//    }
 
     inner class DataToMoreLike() {
 

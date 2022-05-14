@@ -85,6 +85,7 @@
                 android:hint="@string/input_nickname"
                 android:includeFontPadding="false"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="13sp"
                 android:privateImeOptions="defaultInputmode=korean"/>
 

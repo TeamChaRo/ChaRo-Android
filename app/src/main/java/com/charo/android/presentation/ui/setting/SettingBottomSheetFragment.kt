@@ -39,16 +39,9 @@ class SettingBottomSheetFragment : BottomSheetDialogFragment() {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting_bottom_sheet, container, false)
         clickBottomSheet()
 
-
-
         return binding.root
 
-
-
-
     }
-
-
 
     private fun clickBottomSheet(){
         binding.textBottomSheetNormal.setOnClickListener {
@@ -61,10 +54,7 @@ class SettingBottomSheetFragment : BottomSheetDialogFragment() {
             intent.setType("image/*")
             profileImageChange.launch(intent)
         }
-
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

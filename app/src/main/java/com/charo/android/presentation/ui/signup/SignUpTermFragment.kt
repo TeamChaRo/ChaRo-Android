@@ -1,6 +1,8 @@
 package com.charo.android.presentation.ui.signup
 
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import com.charo.android.R
@@ -77,7 +79,8 @@ class SignUpTermFragment : BaseFragment<FragmentSignUpTermBinding>(R.layout.frag
                 with(signUpViewModel){
                     Timber.d("signUp ${userEmail.value.toString()} ${password.value.toString()} ${nickName.value.toString()}")
                     signUpRegister(
-                        profileImage.value!!,
+                        profileImage.value
+                            ?: Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(R.drawable.ic_profile) + '/' + resources.getResourceTypeName(R.drawable.ic_profile) + '/' + resources.getResourceEntryName(R.drawable.ic_profile)) ,
                         userEmail.value.toString(),
                         password.value.toString(),
                         nickName.value.toString(),

@@ -1,6 +1,7 @@
 package com.charo.android.presentation.ui.setting
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.charo.android.R
@@ -13,9 +14,28 @@ class SettingPrivacyActivity : BaseActivity<ActivitySettingPrivacyBinding>(R.lay
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initPrivacy()
-        btnBack()
+        initToolbar(getString(R.string.privacy))
     }
 
+    private fun initToolbar(title : String){
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbarTitle.text = title
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun initPrivacy(){
         binding.webPrivacy.apply {
@@ -24,12 +44,6 @@ class SettingPrivacyActivity : BaseActivity<ActivitySettingPrivacyBinding>(R.lay
             settings.domStorageEnabled = true
             settings.javaScriptEnabled = true
             loadUrl(Hidden.privacy)
-        }
-    }
-
-    private fun btnBack(){
-        binding.imgPrivacyBack.setOnClickListener {
-            finish()
         }
     }
 }

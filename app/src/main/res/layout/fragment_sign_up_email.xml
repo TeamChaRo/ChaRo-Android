@@ -199,6 +199,7 @@
                         android:hint="@string/auth_num_hint"
                         android:includeFontPadding="false"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:padding="12dp"
                         android:textSize="13sp" />
 

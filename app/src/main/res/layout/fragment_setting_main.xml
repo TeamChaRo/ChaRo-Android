@@ -161,7 +161,7 @@
 
                 <TextView
                     android:id="@+id/text_setting_profile_update"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_update"
                     android:textSize="14sp"
@@ -170,12 +170,13 @@
                     android:textColor="@color/black_sub_212429"
                     android:clickable="true"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_account"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_account"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="20dp"
+                    />
 
                 <TextView
                     android:id="@+id/text_setting_password_update"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/password_update"
                     android:textSize="14sp"
@@ -183,8 +184,9 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_profile_update"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_profile_update"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="20dp"
+                    />
 
                 <TextView
                     android:id="@+id/text_setting_email"
@@ -236,7 +238,7 @@
 
                 <TextView
                     android:id="@+id/text_setting_notice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/notice"
                     android:textSize="14sp"
@@ -244,8 +246,9 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_information"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_information"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="20dp"
+                    />
 
                 <ImageView
                     android:id="@+id/img_setting_information"
@@ -272,7 +275,7 @@
 
                 <TextView
                     android:id="@+id/text_setting_cs_query"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/cs_query"
                     android:textSize="14sp"
@@ -280,12 +283,13 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_cs"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_cs"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="20dp"
+                    />
 
                 <TextView
                     android:id="@+id/text_setting_report"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/report"
                     android:textSize="14sp"
@@ -293,8 +297,9 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     android:layout_marginTop="18dp"
+                    android:layout_marginStart="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_cs_query"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_cs_query"/>
+                    />
 
                 <ImageView
                     android:id="@+id/img_setting_cs"
@@ -322,7 +327,7 @@
 
                 <TextView
                     android:id="@+id/text_setting_privacy"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/privacy"
                     android:textSize="14sp"
@@ -330,12 +335,12 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_terms"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_terms"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="18dp"/>
 
                 <TextView
                     android:id="@+id/text_setting_service"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/service"
                     android:textSize="14sp"
@@ -343,12 +348,12 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_privacy"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_privacy"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="18dp"/>
 
                 <TextView
                     android:id="@+id/text_setting_open_source"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/open_source"
                     android:textSize="14sp"
@@ -356,7 +361,7 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/black_sub_212429"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_service"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_service"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="18dp"/>
 
                 <TextView
@@ -388,7 +393,7 @@
 
                 <TextView
                     android:id="@+id/text_setting_logout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/logout"
                     android:textSize="14sp"
@@ -397,12 +402,12 @@
                     android:textColor="@color/blue_main_0f6fff"
                     android:clickable="true"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_version"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_version"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="18dp"/>
 
                 <TextView
                     android:id="@+id/text_setting_user_out"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_out"
                     android:textSize="14sp"
@@ -410,7 +415,7 @@
                     android:includeFontPadding="false"
                     android:textColor="@color/red_sign_up_ff826e"
                     app:layout_constraintTop_toBottomOf="@+id/text_setting_logout"
-                    app:layout_constraintStart_toStartOf="@+id/text_setting_logout"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="18dp"/>
 
 

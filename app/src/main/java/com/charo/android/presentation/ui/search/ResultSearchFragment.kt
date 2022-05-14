@@ -2,9 +2,11 @@ package com.charo.android.presentation.ui.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.data.model.request.search.RequestSearchViewData
@@ -24,10 +26,12 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
     var links = DataToSearchLike()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+
         loadSearchData()
         initSpinner()
         initResultSearchView()
-        clickBackBtn()
+//        clickBackBtn()
         clickBackHome()
         clickSpinner()
         Timber.d("searchViewModel ${searchViewModel.province.value.toString()}")
@@ -36,6 +40,31 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         Timber.d("searchViewModel ${searchViewModel.caution.value.toString()}")
     }
 
+    private fun initToolbar(){
+        val toolbar = binding.toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                (activity as SearchActivity).onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    //검색 종료(홈으로 이동)
+    private fun clickBackHome(){
+        binding.imgGoHomeView.setOnClickListener {
+            requireActivity().finish()
+        }
+    }
 
     fun loadSearchData() {
         if (searchViewModel.province.value == "") {
@@ -73,31 +102,29 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
 
     }
 
-    //뒤로가기
-    private fun clickBackBtn(){
-        binding.imgBackSearchView.bringToFront()
-        binding.imgBackSearchView.isClickable = true
-        binding.imgBackSearchView.setOnClickListener {
-            Timber.d("resultSearch 뒤로가기 버튼 눌림")
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.apply {
-                replace(
-                    R.id.fragment_container_search,
-                    SearchFragment()
-                )
-                commit()
-            }
-        }
-    }
-
-    //검색 종료(홈으로 이동)
-    private fun clickBackHome(){
-        binding.imgGoHomeView.setOnClickListener {
-            requireActivity().finish()
-        }
-
-
-    }
+//    //뒤로가기
+//    private fun clickBackBtn(){
+//        binding.imgBackSearchView.bringToFront()
+//        binding.imgBackSearchView.isClickable = true
+//        binding.imgBackSearchView.setOnClickListener {
+//            Timber.d("resultSearch 뒤로가기 버튼 눌림")
+//            val transaction = activity?.supportFragmentManager?.beginTransaction()
+//            transaction?.apply {
+//                replace(
+//                    R.id.fragment_container_search,
+//                    SearchFragment()
+//                )
+//                commit()
+//            }
+//        }
+//    }
+//
+//    //검색 종료(홈으로 이동)
+//    private fun clickBackHome(){
+//        binding.imgGoHomeView.setOnClickListener {
+//            requireActivity().finish()
+//        }
+//    }
 
 
     private fun initSpinner() {

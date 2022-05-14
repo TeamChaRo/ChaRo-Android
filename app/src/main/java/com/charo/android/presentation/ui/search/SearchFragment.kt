@@ -41,7 +41,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private fun nickName(){
         val userNickName = SharedInformation.getNickName(requireActivity())
         binding.textUserId.text = "${userNickName}님의"
-
     }
 
     private fun isActiveSearch(boolean : Boolean){
@@ -116,6 +115,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     val transaction = activity?.supportFragmentManager?.beginTransaction()
                     transaction?.apply {
                         replace(R.id.fragment_container_search, NoSearchFragment())
+                        addToBackStack("")
                         commit()
                     }
                 } else {
@@ -125,6 +125,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                             R.id.fragment_container_search,
                             ResultSearchFragment()
                         )
+                        addToBackStack("")
                         commit()
                     }
                 }

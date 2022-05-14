@@ -92,7 +92,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
         _binding = FragmentWriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        initToolBar()
+        initToolBar(getString(R.string.title_write_kor))
 
         writeAdapter = WriteAdapter() {
             //delete image
@@ -138,7 +138,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
 
             // 직접 Fragment단에서 수정해야 하는 것들(양방향 DataBinding 미사용이므로 여기서 꼭 처리해줘야 함)
             // 툴바 타이틀
-            binding.tvWriteToolbarTitle.text = "수정하기"
+            binding.toolbarTitle.text = "수정하기"
             // 글 제목
             binding.etWriteTitle.setText(this.title.value)
             // 주차공간 설명
@@ -157,13 +157,14 @@ class WriteFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun initToolBar() {
-        val toolbar = binding.toolbarWrite
+    private fun initToolBar(title : String) {
+        val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black)
+        binding.toolbarTitle.text = title
 
         setHasOptionsMenu(true)
     }

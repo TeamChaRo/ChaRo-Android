@@ -31,9 +31,8 @@ class SettingNoticeFragment : BaseFragment<FragmentSettingNoticeBinding>(R.layou
         settingNoticeAdapter.setNoticeData(settingNoticeData)
     }
 
-
     //제목 변경
     private fun changeTabText() {
-        settingViewModel.updateTabText.value = "공지사항"
+        (activity as SettingActivity).binding.toolbarTitle.text = "공지사항"
     }
 }

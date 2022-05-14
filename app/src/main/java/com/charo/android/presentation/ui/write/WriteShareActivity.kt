@@ -3,6 +3,9 @@ package com.charo.android.presentation.ui.write
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.activity.viewModels
 
@@ -96,11 +99,23 @@ class WriteShareActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                stopWrite()
+                onBackPressed()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
+        Log.e("aaaa", "sharedViewModel.isAuthorFlag.value " + sharedViewModel.isAuthorFlag.value)
+        if (currentFragment is DetailPostFragment && sharedViewModel.isAuthorFlag.value == true) {
+            val menuInflater: MenuInflater = MenuInflater(this)
+            menuInflater.inflate(R.menu.detail_menu, menu)
+
+//        return super.onCreateOptionsMenu(menu);
+            return true
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
 }

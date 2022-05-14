@@ -2,6 +2,7 @@ package com.charo.android.presentation.ui.setting
 
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingBinding
@@ -17,28 +18,29 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        clickBackBtn()
-        changeTabText()
+        initToolbar()
+
         changeFragment(R.id.fragment_container_setting, SettingMainFragment())
     }
 
-    private fun changeTabText() {
-        settingViewModel.updateTabText.observe(this, Observer {
-            binding.tvSettingUp.text = it
-        })
+    private fun initToolbar(){
+        val toolbar = binding.toolbarSetting
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbarTitle.text = getString(R.string.setting)
     }
 
-    //뒤로가기
-    private fun clickBackBtn() {
-        binding.btnSettingBack.setOnClickListener {
-            val fragmentChange = settingViewModel.settingFragmentBackStack.value ?: false
-            if (fragmentChange) {
-                finish()
-            } else {
-                changeFragment(R.id.fragment_container_setting, SettingMainFragment())
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
             }
-
         }
+        return super.onOptionsItemSelected(item)
     }
 }
 

@@ -1,6 +1,8 @@
 package com.charo.android.presentation.ui.detailpost
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.charo.android.R
@@ -19,6 +21,14 @@ class DetailPostActivity : AppCompatActivity() {
         viewModel.postId = intent.getIntExtra("postId", -1)
         viewModel.setUserEmail(SharedInformation.getEmail(this))
         initFragmentContainerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater: MenuInflater = MenuInflater(this)
+        menuInflater.inflate(R.menu.detail_menu, menu)
+
+//        return super.onCreateOptionsMenu(menu);
+        return true
     }
 
     private fun initFragmentContainerView() {

@@ -16,46 +16,25 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_sign_up"
             android:layout_width="match_parent"
-            android:layout_height="78dp"
+            android:layout_height="wrap_content"
+            android:minHeight="78dp"
             android:background="@color/white"
-            android:elevation="3dp"
-            app:contentInsetStart="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/btn_signup_back"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_back_1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_sign_up"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:text="@string/sign_up"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="17sp"
-                    android:textStyle="normal"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btn_signup_back" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/HeaderH4"
+                android:text="@string/sign_up"
+                android:layout_gravity="center"
+                />
         </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray2_sub_dde2e5"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_sign_up" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_email"

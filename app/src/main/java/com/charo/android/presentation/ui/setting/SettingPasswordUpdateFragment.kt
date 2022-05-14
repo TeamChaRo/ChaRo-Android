@@ -20,8 +20,6 @@ class SettingPasswordUpdateFragment :
     private val settingViewModel: SettingViewModel by sharedViewModel()
     val emailPattern = "^[a-zA-Z0-9]{5,15}$"
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         newPasswordRegister()
@@ -29,17 +27,17 @@ class SettingPasswordUpdateFragment :
         changeTabText()
         inVisibleNewPassword()
         newPasswordReconfirm()
-        backBtn()
-    }
-    //뒤로가기 버튼
-    private fun backBtn(){
-        settingViewModel.settingFragmentBackStack.value = false
+//        backBtn()
     }
 
+    //뒤로가기 버튼
+//    private fun backBtn(){
+//        settingViewModel.settingFragmentBackStack.value = false
+//    }
 
     //제목 변경
     private fun changeTabText() {
-        settingViewModel.updateTabText.value = "비밀번호 수정"
+        (activity as SettingActivity).binding.toolbarTitle.text = "비밀번호 수정"
     }
 
     // 새비밀번호 수정 숨기기
@@ -149,11 +147,10 @@ class SettingPasswordUpdateFragment :
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
                             transaction?.apply {
                                 replace(R.id.fragment_container_setting, SettingMainFragment())
+                                addToBackStack("")
                                 commit()
                             }
                         }
-
-
                     }
                 }
             })

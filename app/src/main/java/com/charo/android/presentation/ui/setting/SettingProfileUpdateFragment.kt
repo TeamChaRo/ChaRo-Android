@@ -30,7 +30,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         changeTabText()
         editTextFocusRemove()
         changeProfileImage()
-        backBtn()
+//        backBtn()
     }
     // isProfileUpdate 초기화
 
@@ -39,10 +39,10 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         settingViewModel.nickName.value = false
         settingViewModel.buttonClick.value = false
     }
-    //뒤로가기 버튼
-    private fun backBtn(){
-        settingViewModel.settingFragmentBackStack.value = false
-    }
+//    //뒤로가기 버튼
+//    private fun backBtn(){
+//        settingViewModel.settingFragmentBackStack.value = false
+//    }
 
     private fun profileCheckNickName() {
         val nickNamePattern = "^[가-힣ㄱ-ㅎ]{0,5}$"
@@ -96,14 +96,11 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                             }
                         }
                         profileNickNameUpdateChange(s.toString())
-
-
                     }
                 }
             })
         }
     }
-
 
     private fun initBottomSheet() {
         binding.imgProfileChange.setOnClickListener {
@@ -136,11 +133,9 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     settingViewModel.images.value = false
                 }
             }
-
-
         }
-
     }
+
     // 프로필 사진 변경했을 때(닉네임이랑 / 닉네임 없이)
     private fun profileImageUpdateChange( imageUri: Uri, s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
@@ -164,15 +159,9 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     "",
                     requireActivity()
                 )
-
             }
-
-
         }
     }
-
-
-
 
     //닉네임만 변경했을 때
     private fun profileNickNameUpdateChange(s: String) {
@@ -187,14 +176,11 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                 )
                 SharedInformation.setNickName(requireActivity(), s)
             }
-
         }
-
     }
 
-
     private fun changeTabText() {
-        settingViewModel.updateTabText.value = "프로필 변경"
+        (activity as SettingActivity).binding.toolbarTitle.text = "프로필 수정"
     }
 
     private fun editTextFocusRemove() {
@@ -212,6 +198,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.apply {
             replace(R.id.fragment_container_setting, SettingMainFragment())
+            addToBackStack("")
             commit()
         }
     }

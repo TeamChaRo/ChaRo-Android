@@ -15,7 +15,6 @@ class SettingReportActivity : BaseActivity<ActivitySettingReportBinding>(R.layou
         initGoogleForm()
     }
 
-
     private fun initGoogleForm(){
         binding.webReportGoogleForm.apply {
             WebViewClient()

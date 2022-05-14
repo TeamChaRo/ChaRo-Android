@@ -10,75 +10,45 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.more.MoreViewFragment">
+        tools:context=".presentation.ui.more.MoreThemeViewFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_more_theme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:fitsSystemWindows="true"
-                app:layout_constraintTop_toTopOf="parent"
+                android:minHeight="78dp"
+                app:layout_collapseMode="pin"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar_more_theme"
-                    android:layout_width="match_parent"
-                    android:layout_height="78dp"
-                    app:layout_collapseMode="pin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/text_toolbar_title"
+                    style="@style/HeaderH4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_charo_theme"
+                    android:layout_gravity="center"/>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+            </androidx.appcompat.widget.Toolbar>
 
-                        <TextView
-                            android:id="@+id/text_toolbar_title"
-                            style="@style/HeaderH4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="96dp"
-                            android:layout_marginTop="34dp"
-                            android:layout_marginEnd="96dp"
-                            android:layout_marginBottom="23dp"
-                            android:text="@string/main_charo_theme"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/img_back_theme"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="21dp"
-                            android:layout_marginBottom="9dp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_icon_back"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.AppBarLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray2_sub_dde2e5"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_more_theme" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_more_theme_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="112dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_more_theme"
                 app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/blue_main_0f6fff" />
 
