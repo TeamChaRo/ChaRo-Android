@@ -1,6 +1,7 @@
 package com.charo.android.presentation.ui.search
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySearchBinding
 import com.charo.android.presentation.base.BaseActivity
@@ -22,7 +23,15 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(R.layout.activity_sea
 
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
    /* fun initToolBar() {
         val toolbar = binding.toolbarSearch
         setSupportActionBar(toolbar)

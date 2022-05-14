@@ -1,13 +1,10 @@
 package com.charo.android.presentation.ui.search
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.charo.android.R
 import com.charo.android.databinding.FragmentNoSearchBinding
 import com.charo.android.presentation.base.BaseFragment
-import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.util.SharedInformation
 
 
@@ -28,16 +25,6 @@ class NoSearchFragment : BaseFragment<FragmentNoSearchBinding>(R.layout.fragment
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> {
-                requireActivity().onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 //    //검색으로 돌아가기

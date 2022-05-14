@@ -49,16 +49,6 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> {
-                (activity as SearchActivity).onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     //검색 종료(홈으로 이동)
     private fun clickBackHome(){
         binding.imgGoHomeView.setOnClickListener {
