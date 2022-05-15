@@ -67,7 +67,6 @@ class DetailPostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tMapView = TMapView(requireContext())
         viewModel.getDetailPostData()
-//        initMenu()
         initTMap(tMapView)
         viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
             initViewPager(it)
@@ -81,7 +80,6 @@ class DetailPostFragment : Fragment() {
         clickLike()
         clickSave()
         clickShare()
-//        goBack()
         clickAuthor()
         showLikeList()
         observe()
@@ -97,72 +95,9 @@ class DetailPostFragment : Fragment() {
         binding.toolbarTitle.text = title
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> {
-                requireActivity().finish()
-                return true
-            }
-            R.id.detail_menu_edit -> {
-                viewModel.initEditFlag()
-                editDetailPost()
-            }
-            R.id.detail_menu_delete -> {
-                confirmDelete()
-            }
-            else -> {
-                error("popup error")
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-//    private fun initMenu() {
-//        binding.tvOptions.setOnClickListener {
-//            val popup = PopupMenu(binding.tvOptions.context, binding.tvOptions)
-//            popup.inflate(R.menu.detail_menu)
-//            popup.setOnMenuItemClickListener { item ->
-//                when (item.itemId) {
-//                    R.id.detail_menu_edit -> {
-//                        viewModel.initEditFlag()
-//                        editDetailPost()
-//                    }
-//                    R.id.detail_menu_delete -> {
-//                        confirmDelete()
-//                    }
-//                    else -> {
-//                        error("popup error")
-//                    }
-//                }
-//                true
-//            }
-//            popup.show()
-//        }
-//    }
-
-    private fun editDetailPost() {
-        // 실제로 EditFragment 같은 건 없다.
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.write_share_layout, WriteFragment())
-            .addToBackStack(WriteFragment::class.simpleName)
-            .commit()
-    }
-
-    private fun confirmDelete() {
-        val dialog = CustomDialog(requireActivity())
-        dialog.showDialog(R.layout.dialog_detail_delete)
-        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
-            override fun onClicked(num: Int) {
-                if (num == 1) {
-                    viewModel.deleteDetailPost()
-                }
-            }
-        })
     }
 
     private fun initViewPager(imageList: List<String>) {

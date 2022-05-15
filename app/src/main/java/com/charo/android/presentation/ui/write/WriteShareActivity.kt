@@ -3,18 +3,16 @@ package com.charo.android.presentation.ui.write
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.viewModels
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.charo.android.R
 import com.charo.android.databinding.ActivityWriteShareBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostFragment
 import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -102,20 +100,54 @@ class WriteShareActivity : AppCompatActivity() {
                 onBackPressed()
                 return true
             }
+            R.id.detail_menu_edit -> {
+                sharedViewModel.initEditFlag()
+                editDetailPost()
+            }
+            R.id.detail_menu_delete -> {
+                confirmDelete()
+            }
+            else -> {
+                error("popup error")
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
-        Log.e("aaaa", "sharedViewModel.isAuthorFlag.value " + sharedViewModel.isAuthorFlag.value)
-        if (currentFragment is DetailPostFragment && sharedViewModel.isAuthorFlag.value == true) {
-            val menuInflater: MenuInflater = MenuInflater(this)
-            menuInflater.inflate(R.menu.detail_menu, menu)
-
-//        return super.onCreateOptionsMenu(menu);
+        if (currentFragment is DetailPostFragment) {
+            sharedViewModel.isAuthorFlag.observe(this){
+                when(it){
+                    true -> {
+                        val menuInflater: MenuInflater = MenuInflater(this)
+                        menuInflater.inflate(R.menu.detail_menu, menu)
+                    }
+                    else -> {}
+                }
+            }
             return true
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun editDetailPost() {
+        // 실제로 EditFragment 같은 건 없다.
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.write_share_layout, WriteFragment())
+            .addToBackStack(WriteFragment::class.simpleName)
+            .commit()
+    }
+
+    private fun confirmDelete() {
+        val dialog = CustomDialog(this)
+        dialog.showDialog(R.layout.dialog_detail_delete)
+        dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
+            override fun onClicked(num: Int) {
+                if (num == 1) {
+                    sharedViewModel.deleteDetailPost()
+                }
+            }
+        })
     }
 }
