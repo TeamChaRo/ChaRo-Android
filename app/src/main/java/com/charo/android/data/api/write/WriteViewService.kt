@@ -35,11 +35,12 @@ interface WriteViewService {
     @Multipart
     @PUT("/post")
     fun editPost(
+//        @Part postId: MultipartBody,
         @PartMap warning: HashMap<String, RequestBody>,
         @PartMap theme: HashMap<String, RequestBody>,
         @Part course: ArrayList<MultipartBody.Part>,
         @Part image: ArrayList<MultipartBody.Part>,
-        @PartMap stringData: HashMap<String, RequestBody>,
-        @Part deleted: ArrayList<MultipartBody.Part>
+        @PartMap stringData: HashMap<String, RequestBody>
+//        @Part deleted: ArrayList<MultipartBody.Part>
     ): Call<ResponseEditData>
 }

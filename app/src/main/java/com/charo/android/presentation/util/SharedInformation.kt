@@ -3,7 +3,7 @@ package com.charo.android.presentation.util
 import android.content.Context
 
 object SharedInformation {
-    var searchWrite : Boolean = false
+    var searchWrite: Boolean = false
 
 
     private const val SOCIAL_KEY = "SOCIAL_KEY"
@@ -15,6 +15,7 @@ object SharedInformation {
     private const val APP_PASSWORD = "APP_PASSWORD"
     private const val NICKNAME = "NICK_NAME"
     private const val ON_BOARDING = "ONBOARDING"
+    private const val PROFILE_IMAGE = "PROFILE_IMAGE"
 
     // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 3)
     fun getSocialId(context: Context): String {
@@ -54,6 +55,28 @@ object SharedInformation {
         val sharedPreferences = context.getSharedPreferences(APP_EMAIL, Context.MODE_PRIVATE)
         sharedPreferences.edit()
             .remove(APP_EMAIL)
+            .apply()
+    }
+
+    // 프로필 이미지
+    fun getProfileImage(context: Context): String? {
+        val sharedPresentException =
+            context.getSharedPreferences(PROFILE_IMAGE, Context.MODE_PRIVATE)
+        return sharedPresentException.getString(PROFILE_IMAGE, null)
+    }
+
+    fun setProfileImage(context: Context, profileImage: String?) {
+        val sharedPresentException =
+            context.getSharedPreferences(PROFILE_IMAGE, Context.MODE_PRIVATE)
+        sharedPresentException.edit()
+            .putString(PROFILE_IMAGE, profileImage)
+            .apply()
+    }
+
+    fun removeProfileImage(context: Context) {
+        val sharedPreferences = context.getSharedPreferences(PROFILE_IMAGE, Context.MODE_PRIVATE)
+        sharedPreferences.edit()
+            .remove(PROFILE_IMAGE)
             .apply()
     }
 

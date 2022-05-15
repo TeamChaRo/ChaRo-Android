@@ -9,9 +9,11 @@ import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.more.MoreThemeContentViewFragment
+import com.charo.android.presentation.ui.write.WriteShareActivity
 
 class MoreThemeContentAdapter(
-    var link : MoreThemeContentViewFragment.DataToMoreThemeLike
+    var link : MoreThemeContentViewFragment.DataToMoreThemeLike,
+    var userId : String
 ) : RecyclerView.Adapter<MoreThemeContentAdapter.MoreViewViewHolder>() {
     private val _moreData = mutableListOf<MoreDrive>()
     private var moreData : List<MoreDrive> = _moreData
@@ -45,8 +47,12 @@ class MoreThemeContentAdapter(
         }
 
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, DetailPostActivity::class.java)
-            intent.putExtra("postId", moreData[position].morePostId)
+            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("userId", userId)
+                putExtra("destination", "detail")
+                putExtra("postId", moreData[position].morePostId)
+            }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }

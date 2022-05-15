@@ -554,6 +554,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
 
         binding.clWritePhoto.visibility = View.GONE
         binding.gridImgPlus.visibility = View.VISIBLE
+        Timber.i("어댑터 리스트 사이즈: ${writeAdapter.imgList.size}")
         when (writeAdapter.imgList.size) {
             0 -> {
                 binding.clWritePhoto.visibility = View.VISIBLE
@@ -742,7 +743,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
             }
 
             writeAdapter.notifyDataSetChanged()
-
+            setPlusIconLoc()
         }
 
         //지역 도 시

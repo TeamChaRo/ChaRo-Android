@@ -22,6 +22,6 @@ interface DetailPostService {
 
     @HTTP(method = "DELETE", path = "/post/{postId}", hasBody = true)
     suspend fun deleteDetailPost(
-        @Path("postId") postId: Int, @Body body: RequestDeleteDetailPost
+        @Path("postId") postId: Int
     ): ResponseDeleteDetailPost
 }

@@ -29,7 +29,6 @@ class SettingViewModel(
     private val newPasswordRegisterUseCase: NewPasswordRegisterUseCase
 ) : ViewModel() {
 
-
     //중복 닉네임 체크
     private val _profileNickName : MutableLiveData<Boolean> = MutableLiveData(false)
     var profileNickName : LiveData<Boolean> = _profileNickName
@@ -75,7 +74,7 @@ class SettingViewModel(
     val updateNickName : LiveData<String> = _updateNickName
 
     // 받아오는 프로필 이미지
-    val originProfileUri = MutableLiveData<String>("newnew")
+    var originProfileUri = MutableLiveData<String?>()
 
     //변경 닉네임
     var newNickName : MutableLiveData<String> = MutableLiveData()
@@ -139,7 +138,7 @@ class SettingViewModel(
             bitmap = ImageDecoder.decodeBitmap(source)
         }
 
-        val imageRequestBody = bitmap?.let { ProfileUpdateBitmapRequest(it) }
+        val imageRequestBody = ProfileUpdateBitmapRequest(bitmap)
         val imageMultiPartBody: MultipartBody.Part =
             MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
 

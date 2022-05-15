@@ -62,7 +62,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
     private fun initMoreThemeView(){
         moreViewModel.getMoreView(userId, identifier, value)
-        moreThemeContentAdapter = MoreThemeContentAdapter(link)
+        moreThemeContentAdapter = MoreThemeContentAdapter(link,userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.drive.observe(viewLifecycleOwner) {
             moreThemeContentAdapter.setHomeTrendDrive(it)
@@ -71,7 +71,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
     private fun initMoreThemeNewView(){
             moreViewModel.getMoreNewView(userId, identifier, value)
-        moreThemeContentAdapter = MoreThemeContentAdapter(link)
+        moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
             binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
             moreViewModel.newDrive.observe(viewLifecycleOwner) {
                 moreThemeContentAdapter.setHomeTrendDrive(it)

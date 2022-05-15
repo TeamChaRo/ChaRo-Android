@@ -75,7 +75,8 @@ class WriteShareActivity : AppCompatActivity() {
             .setNeutralButton(R.string.write_continue) { dialog, which ->
             }
             .setPositiveButton(R.string.write_cancel) { dialog, which ->
-                finish()
+//                finish()
+                super.onBackPressed()
             }
             .show()
     }

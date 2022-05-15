@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChaRo-Android</string>
+    <string name="app_name">차로</string>
     <string name="title_home_eng">Home</string>
     <string name="title_home_kor">구경하기</string>
     <string name="title_write_eng">Write</string>
@@ -350,4 +350,6 @@
     <string name="text_confirm_delete">정말 삭제하시겠습니까?</string>
     <string name="alarm">알림</string>
 
+    <!--    서버통신 에러 string-->
+    <string name="server_error_general">문제가 발생했습니다. 다시 시도해주세요.</string>
 </resources>

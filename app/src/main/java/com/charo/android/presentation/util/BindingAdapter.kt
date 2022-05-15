@@ -15,12 +15,13 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import timber.log.Timber
 
 
 object BindingAdapter {
     @JvmStatic
     @BindingAdapter("imgBind")
-    fun setImage(imageView: ImageView, imageUrl : String){
+    fun setImage(imageView: ImageView, imageUrl: String) {
         val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(20.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
@@ -45,7 +46,7 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("imgNoRoundBind")
-    fun setNoRadiusImage(imageView: ImageView, imageUrl : String){
+    fun setNoRadiusImage(imageView: ImageView, imageUrl: String) {
         Glide.with(imageView.context)
             .load(imageUrl)
             .into(imageView)
@@ -53,7 +54,7 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("imgIntBind")
-    fun setIntImage(imageView: ImageView, imageDrawable : Int){
+    fun setIntImage(imageView: ImageView, imageDrawable: Int) {
         Glide.with(imageView.context)
             .load(imageDrawable)
             .into(imageView)
@@ -61,7 +62,7 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("profileBind")
-    fun setProfileImage(imageView: ImageView, imageUri : Uri){
+    fun setProfileImage(imageView: ImageView, imageUri: Uri) {
         Glide.with(imageView.context)
             .load(imageUri)
             .transform(RoundedCorners(20.dpToPx))
@@ -72,20 +73,22 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("setCircleImageUrl")
     fun setCircleImageUrl(imageView: ImageView, imageUrl: String?) {
-        if(imageUrl != null) {
+        if (imageUrl != null) {
             Glide.with(imageView.context)
                 .load(imageUrl)
                 .circleCrop()
                 .into(imageView)
+        } else {
+            imageView.setImageResource(R.drawable.ic_profile)
         }
     }
 
     @JvmStatic
     @BindingAdapter("tagBind")
-    fun setTag(textView: TextView, text: String){
-        if (text == ""){
+    fun setTag(textView: TextView, text: String) {
+        if (text == "") {
             textView.visibility = View.GONE
-        } else{
+        } else {
             textView.text = text
         }
     }
@@ -101,21 +104,19 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("chipBind")
-    fun setChip(chip: Chip, text: String?){
-        if (text != null){
+    fun setChip(chip: Chip, text: String?) {
+        if (text != null) {
             chip.text = text
-        } else{
+        } else {
             chip.visibility = View.GONE
         }
     }
 
     @JvmStatic
     @BindingAdapter("heartBind")
-    fun setHeart(imageButton: ImageButton, favorite : Boolean){
+    fun setHeart(imageButton: ImageButton, favorite: Boolean) {
         var select = true
         imageButton.isSelected = favorite
-
-
 
 
     }

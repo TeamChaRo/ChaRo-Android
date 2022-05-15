@@ -16,6 +16,7 @@ import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class WrittenPostFragment : Fragment() {
     private val TAG = "mlog: WrittenPostFragment::"
@@ -43,6 +44,7 @@ class WrittenPostFragment : Fragment() {
             )
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        Timber.i("$TAG: 작성한 게시물 리스트 프래그먼트 생성")
         return binding.root
     }
 
@@ -55,19 +57,27 @@ class WrittenPostFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        when (sort) {
-            LIKE -> {
-                viewModel.writtenLikePostList.value?.let { writtenPostAdapter.replaceItem(it.map {Post -> Post.copy()}) }
-            }
-            NEW -> {
-                viewModel.writtenNewPostList.value?.let { writtenPostAdapter.replaceItem(it.map {Post -> Post.copy()}) }
-            }
-        }
+        observeData()
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun observeData() {
+        when (sort) {
+            LIKE -> {
+                viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
+                    writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
+                }
+            }
+            NEW -> {
+                viewModel.writtenNewPostList.observe(viewLifecycleOwner) {
+                    writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
+                }
+            }
+        }
     }
 
     private fun initSpinner() {

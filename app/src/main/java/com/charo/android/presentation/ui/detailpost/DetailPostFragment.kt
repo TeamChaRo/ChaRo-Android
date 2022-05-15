@@ -7,9 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.PointF
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -22,9 +20,7 @@ import com.charo.android.domain.model.detailpost.DetailPost
 import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
-import com.charo.android.presentation.ui.write.WriteFragment
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
-import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LoginUtil
 import com.google.android.gms.tasks.Task
@@ -67,15 +63,8 @@ class DetailPostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tMapView = TMapView(requireContext())
         viewModel.getDetailPostData()
-        initTMap(tMapView)
-        viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
-            initViewPager(it)
-        }
-        viewModel.courseDetail.observe(viewLifecycleOwner) {
-            if (it != null) {
-                drawPath(tMapView, it)
-            }
-        }
+
+        initMap()
         copyAddress()
         clickLike()
         clickSave()
@@ -98,6 +87,20 @@ class DetailPostFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun initMap() {
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.Main) {
+                initTMap(tMapView)
+            }
+
+            viewModel.courseDetail.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    drawPath(tMapView, it)
+                }
+            }
+        }
     }
 
     private fun initViewPager(imageList: List<String>) {
@@ -155,12 +158,6 @@ class DetailPostFragment : Fragment() {
                     TMapPoint(it.latitude, it.longitude)
                 }
 
-                // 지도 중앙 맞춰주기
-                val info: TMapInfo =
-                    tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
-                tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-                tMapView.zoomLevel = info.tMapZoomLevel
-
                 // Marker 생성
                 for (i in pointList.indices) {
                     val marker = TMapMarkerItem()
@@ -206,6 +203,12 @@ class DetailPostFragment : Fragment() {
                             tMapPolyLine
                         )
                     }
+
+                    // 지도 중앙 맞춰주기
+                    val info: TMapInfo =
+                        tMapView.getDisplayTMapInfo(pointList as java.util.ArrayList<TMapPoint>?)
+                    tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
+                    tMapView.zoomLevel = info.tMapZoomLevel
                 }
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
@@ -257,12 +260,6 @@ class DetailPostFragment : Fragment() {
         }
     }
 
-//    private fun goBack() {
-//        binding.clBack.setOnClickListener {
-//            requireActivity().finish()
-//        }
-//    }
-
     private fun clickShare() {
         binding.imgDetailShare.setOnClickListener {
             val imageUri = when {
@@ -280,7 +277,7 @@ class DetailPostFragment : Fragment() {
         }
     }
 
-    private fun createDynamicLink(postId : Int, title : String, imageUri : String) {
+    private fun createDynamicLink(postId: Int, title: String, imageUri: String) {
 
         val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
         Timber.e("createDynamicLink() link: $link")
@@ -359,6 +356,10 @@ class DetailPostFragment : Fragment() {
     }
 
     private fun observe() {
+        viewModel.imageStringViewPager.observe(viewLifecycleOwner) {
+            initViewPager(it)
+        }
+
         viewModel.deleteSuccess.observe(viewLifecycleOwner) {
             if (it) {
                 Toast.makeText(requireContext(), "게시물이 삭제되었습니다", Toast.LENGTH_SHORT).show()

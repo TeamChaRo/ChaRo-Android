@@ -5,9 +5,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class DeleteDetailPostUseCase(private val repository: DetailPostRepository) {
-    suspend operator fun invoke(postId: Int, images: List<String>): Boolean {
+    suspend operator fun invoke(postId: Int): Boolean {
         return withContext(Dispatchers.IO) {
-            repository.deleteDetailPost(postId, images)
+            repository.deleteDetailPost(postId)
         }
     }
 }
