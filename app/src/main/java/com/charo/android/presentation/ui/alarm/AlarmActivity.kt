@@ -2,6 +2,7 @@ package com.charo.android.presentation.ui.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,13 +12,17 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.charo.android.R
+import com.charo.android.data.api.ApiService
 import com.charo.android.data.model.request.alarm.RequestReadPushData
 import com.charo.android.data.model.response.ResponseStatusCode
 import com.charo.android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.ActivityAlarmBinding
+import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.SharedInformation
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,10 +36,15 @@ class AlarmActivity : AppCompatActivity() {
     private lateinit var alarmAdapter: AlarmListAdapter
     private lateinit var alarmSwipeHelperCallback: AlarmSwipeHelperCallback
 
+    private lateinit var userEmail: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userEmail = SharedInformation.getEmail(this)
+
+
         initToolbar(getString(R.string.alarm))
 
         //fcm test TODO: 서버에서 보내는 알람 test 필요
@@ -76,6 +86,24 @@ class AlarmActivity : AppCompatActivity() {
             alarmAdapter = AlarmListAdapter(){
                 //itemClick 이벤트 구현
                 postReadAlarm(it.pushId)
+                Timber.tag("jinhee").d(" $it")
+
+                when(it.type) {
+                    "like","post" -> { //좋아요, 게시글 알림 : 게시글로 이동 (postId)
+                        val intent = Intent(this@AlarmActivity, WriteShareActivity::class.java)
+                        intent.apply {
+                            putExtra("userId", userEmail)
+                            putExtra("destination", "detail")
+                            putExtra("postId", it.postId)
+                        }
+                        ContextCompat.startActivity(this@AlarmActivity, intent, null)
+                    }
+                    "following" -> { //팔로우 팔로잉 알림 : 해당 user 로 이동 (followed)
+                        val intent = Intent(this@AlarmActivity, OtherMyPageActivity::class.java)
+                        intent.putExtra("userEmail", it.followed)
+                        startActivity(intent)
+                    }
+                }
             }
 
             rcvAlarmList.adapter = alarmAdapter
@@ -90,11 +118,8 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun getInitAlarmData(){
-        val userEmail = SharedInformation.getEmail(this)
-
         Timber.e("getAlarmList param $userEmail")
-        val call: Call<ResponseAlarmListData> =
-            com.charo.android.data.api.ApiService.alarmViewService.getAlarmList(userEmail)
+        val call: Call<ResponseAlarmListData> = ApiService.alarmViewService.getAlarmList(userEmail)
         call.enqueue(object : Callback<ResponseAlarmListData> {
             override fun onResponse(
                 call: Call<ResponseAlarmListData>,
@@ -107,53 +132,10 @@ class AlarmActivity : AppCompatActivity() {
                     Timber.d("server connect : Alarm ${response.body()}")
                     val pushList = response.body()?.pushList
 
-                    //test
-                    alarmAdapter.itemList.addAll(
-                        listOf<AlarmListInfo>(
-                            AlarmListInfo(
-                                20,
-                                2,
-                                0,
-                                "and@naver.com",
-                                "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/profileImage/default2.jpeg",
-                                "팔로잉",
-                                "안드네 토끼양님이 회원님을 팔로우하기 시작했습니다.",
-                                "09",
-                                "12"
-                            ),
-                        )
-                    )
-                    alarmAdapter.notifyDataSetChanged()
-                    ////////////
-
                     if(pushList != null){
-                        //alarmViewModel 사용 시
-                        alarmViewModel._pushId.value = pushList.pushId
-                        alarmViewModel._pushCode.value = pushList.pushCode
-                        alarmViewModel._isRead.value = pushList.isRead
-                        alarmViewModel._token.value = pushList.token
-                        alarmViewModel._image.value = pushList.image
-                        alarmViewModel._title.value = pushList.title
-                        alarmViewModel._body.value = pushList.body
-                        alarmViewModel._month.value = pushList.month
-                        alarmViewModel._day.value = pushList.day
-
-
-                        //alarmListInfo 사용 시
                         alarmAdapter.itemList.addAll(
-                            listOf<AlarmListInfo>(
-                                AlarmListInfo(
-                                    20,
-                                    2,
-                                    0,
-                                    "and@naver.com",
-                                    "https://charo-image.s3.ap-northeast-2.amazonaws.com/dummy/profileImage/default2.jpeg",
-                                    "팔로잉",
-                                    "안드네 토끼양님이 회원님을 팔로우하기 시작했습니다.",
-                                    "09",
-                                    "12"
-                                ),
-                                AlarmListInfo(
+                            listOf<ResponseAlarmListData.PushList>(
+                                ResponseAlarmListData.PushList(
                                     pushList.pushId,
                                     pushList.pushCode,
                                     pushList.isRead,
@@ -162,18 +144,14 @@ class AlarmActivity : AppCompatActivity() {
                                     pushList.title,
                                     pushList.body,
                                     pushList.month,
-                                    pushList.day
+                                    pushList.day,
+                                    pushList.type,
+                                    pushList.postId,
+                                    pushList.followed
                                 )
                             )
                         )
-                    }else{
-
                     }
-
-                    Timber.e("alarmAdapter ${alarmAdapter.itemList}")
-                    Timber.e("alarmAdapter ${alarmAdapter.itemCount}")
-
-
                     alarmAdapter.notifyDataSetChanged()
                 } else {
                     Timber.d("server connect : Alarm error")
@@ -190,10 +168,9 @@ class AlarmActivity : AppCompatActivity() {
         })
     }
 
-    fun serveDeleteItem(it: AlarmListInfo, pushId: Int){ //AlarmViewModel
+    fun serveDeleteItem(it: ResponseAlarmListData.PushList, pushId: Int){
         Timber.e("postDeleteAlarm param $pushId")
-        val call: Call<ResponseAlarmDeleteData> =
-            com.charo.android.data.api.ApiService.alarmViewService.postDeleteAlarm(pushId)
+        val call: Call<ResponseAlarmDeleteData> = ApiService.alarmViewService.postDeleteAlarm(pushId)
         call.enqueue(object : Callback<ResponseAlarmDeleteData> {
             override fun onResponse(
                 call: Call<ResponseAlarmDeleteData>,
@@ -207,6 +184,7 @@ class AlarmActivity : AppCompatActivity() {
                     alarmAdapter.notifyDataSetChanged()
 
                 } else {
+                    Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_LONG).show()
                     Timber.d("server connect : Alarm delete error")
                     Timber.d("server connect : Alarm delete ${response.errorBody()}")
                     Timber.d("server connect : Alarm delete${response.message()}")
@@ -216,6 +194,7 @@ class AlarmActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
+                Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_LONG).show()
                 Timber.d("server connect : Alarm delete error: ${t.message}")
             }
         })
@@ -223,8 +202,7 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun postReadAlarm(pushId: Int){
         Timber.e("postReadAlarm param $pushId")
-        val call: Call<ResponseStatusCode> =
-            com.charo.android.data.api.ApiService.alarmViewService.postReadAlarm(RequestReadPushData(pushId))
+        val call: Call<ResponseStatusCode> = ApiService.alarmViewService.postReadAlarm(RequestReadPushData(pushId))
         call.enqueue(object : Callback<ResponseStatusCode> {
             override fun onResponse(
                 call: Call<ResponseStatusCode>,
@@ -239,7 +217,7 @@ class AlarmActivity : AppCompatActivity() {
                     Toast.makeText(this@AlarmActivity, "알람 클릭 $response.body()", Toast.LENGTH_LONG).show()
 
                 } else {
-                    Timber.d("server connect : Alarm readerror")
+                    Timber.d("server connect : Alarm read error")
                     Timber.d("server connect : Alarm read ${response.errorBody()}")
                     Timber.d("server connect : Alarm read ${response.message()}")
                     Timber.d("server connect : Alarm read ${response.code()}")

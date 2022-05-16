@@ -4,21 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.ItemAlarmBinding
+import timber.log.Timber
 
 class AlarmListAdapter(
-    private val itemClick: (AlarmListInfo) -> Unit
+    private val itemClick: (ResponseAlarmListData.PushList) -> Unit
     ) : //AlarmViewModel
     RecyclerView.Adapter<AlarmListAdapter.AlarmListViewHolder>(){
-    val itemList = mutableListOf<AlarmListInfo>() //AlarmViewModel
+    val itemList = mutableListOf<ResponseAlarmListData.PushList>()
 
-    class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (AlarmListInfo) -> Unit) :
+    class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (ResponseAlarmListData.PushList) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         private val alarmActivity: AlarmActivity = AlarmActivity()
 
-        fun onBind(alarmListInfo: AlarmListInfo) { //alarmViewModel: AlarmViewModel
+        fun onBind(alarmListInfo: ResponseAlarmListData.PushList) {
             Glide.with(binding.imgAlarmListProfile)
-                .load(alarmListInfo.image) //alarmViewModel.image
+                .load(alarmListInfo.image)
                 .circleCrop()
                 .into(binding.imgAlarmListProfile)
 
@@ -54,7 +56,7 @@ class AlarmListAdapter(
         return itemList.size
     }
 
-    fun removeItem(data: AlarmListInfo){ //AlarmViewModel
+    fun removeItem(data: ResponseAlarmListData.PushList){ //AlarmViewModel
         itemList.remove(data)
     }
 }
