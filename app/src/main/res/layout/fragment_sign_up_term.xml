@@ -183,35 +183,26 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <ImageView
+        <TextView
             android:id="@+id/img_sign_up_term_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="27dp"
-            android:background="@drawable/sign_up_next"
-            android:clickable="true"
-            android:focusable="true"
+            android:clickable="false"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            app:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/sign_up_start"
+            android:textSize="16sp"
+            android:textColor="@drawable/selector_btn_text_color"
+            android:background="@drawable/selector_btn_next_blue_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            app:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:includeFontPadding="false"
-            android:text="@string/sign_up_start"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_sign_up_term_next"
-            app:layout_constraintEnd_toEndOf="@+id/img_sign_up_term_next"
-            app:layout_constraintStart_toStartOf="@+id/img_sign_up_term_next"
-            app:layout_constraintTop_toTopOf="@+id/img_sign_up_term_next" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

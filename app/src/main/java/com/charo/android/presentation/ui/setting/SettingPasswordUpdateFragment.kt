@@ -138,7 +138,7 @@ class SettingPasswordUpdateFragment :
                         settingViewModel.newPasswordReconfirm.observe(viewLifecycleOwner){
                             if(it == s.toString()){
                                 textInputNewPasswordReconfirm.helperText = "사용가능한 비밀번호입니다."
-                                imgPasswordUpdateButton.setImageResource(R.drawable.sign_up_next)
+                                imgPasswordUpdateButton.setImageResource(R.drawable.sign_up_next_active)
                             }
                         }
                         binding.imgPasswordUpdateButton.setOnClickListener {

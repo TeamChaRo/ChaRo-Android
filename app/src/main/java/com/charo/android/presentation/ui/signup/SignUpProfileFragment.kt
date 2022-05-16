@@ -66,6 +66,8 @@ class SignUpProfileFragment :
         with(binding) {
             img_sign_up_profile_delete_button.setOnClickListener {
                 etSignUpNickname.setText("")
+                textSignUpNicknameNext.isEnabled = false
+                textSignUpNicknameNextFocus.isEnabled = false
             }
 
             etSignUpNickname.addTextChangedListener(object : TextWatcher {

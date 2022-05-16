@@ -104,7 +104,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                                 text_input_profile_change_nick_name.isErrorEnabled = false
                                 text_input_profile_change_nick_name.isHelperTextEnabled = true
                                 text_input_profile_change_nick_name.helperText = "사용 가능한 닉네임입니다"
-                                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+                                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next_active)
                                 Timber.d("niceshot $s")
                                 binding.imgProfileUpdateButton.setOnClickListener {
                                     settingViewModel.newNickName.value = s.toString()
@@ -137,7 +137,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     .into(binding.imgProfileChange)
                 Timber.d("updateProfile $its")
                 settingViewModel.images.value = true
-                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next)
+                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next_active)
                 binding.imgProfileUpdateButton.setOnClickListener {
                     settingViewModel.buttonClick.value = true
                     changeSettingMain()

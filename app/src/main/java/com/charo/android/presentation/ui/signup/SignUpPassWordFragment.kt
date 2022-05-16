@@ -39,6 +39,11 @@ class SignUpPassWordFragment :
         }
     }
 
+    private fun isNextBtnActive(boolean: Boolean){
+        binding.textSignUpPasswordNext.isEnabled = boolean
+        binding.textSignUpPasswordNextFocus.isEnabled = boolean
+    }
+
     private fun initPasswordView() {
         val emailPattern = "^[a-zA-Z0-9]{5,15}$"
 
@@ -60,15 +65,14 @@ class SignUpPassWordFragment :
 
                     if (s.toString().length < 5 || s.toString().length > 15) {
                         textInputPaasword.error = "5자 이상 15자 이내로 작성해 주세요."
-                        textSignUpPasswordNext.isEnabled = false
-                        textSignUpPasswordNextFocus.isEnabled = false
+                        isNextBtnActive(false)
 
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputPaasword.error = "영문과 숫자만 사용해 주세요."
                         Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
 
-                        textSignUpPasswordNext.isEnabled = false
-                        textSignUpPasswordNextFocus.isEnabled = false
+                        isNextBtnActive(false)
+
                     } else {
                         textInputPaasword.error = null
                         textInputPaasword.isErrorEnabled = false
@@ -99,14 +103,13 @@ class SignUpPassWordFragment :
                     if(s.toString() != etSignUpPassword.text.toString() ){
                         textPasswordReconfirm.error = "비밀번호가 일치하지 않습니다."
 
-                        textSignUpPasswordNext.isEnabled = false
-                        textSignUpPasswordNextFocus.isEnabled = false
+                        isNextBtnActive(false)
+
                     } else{
                         textPasswordReconfirm.error = null
                         textPasswordReconfirm.isErrorEnabled = false
 
-                        textSignUpPasswordNext.isEnabled = true
-                        textSignUpPasswordNextFocus.isEnabled = true
+                        isNextBtnActive(true)
 
                         signUpViewModel.password.value = etSignUpPassword.text.toString()
                         textSignUpPasswordNext.setOnClickListener {

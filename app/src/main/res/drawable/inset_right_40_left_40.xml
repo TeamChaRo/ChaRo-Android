@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/rectangle_white"
+    android:drawable="@drawable/rectangle_white_radius_16"
     android:insetRight="40dp"
     android:insetLeft="40dp">
 

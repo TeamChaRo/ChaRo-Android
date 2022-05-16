@@ -3,6 +3,7 @@ package com.charo.android.presentation.ui.signup
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
@@ -29,6 +30,11 @@ class SignUpEmailFragment :
         signUpNum()
         certificationEmail()
         keyBoardChange()
+    }
+
+    private fun isNextBtnActive(boolean: Boolean){
+        binding.textSignUpNext.isEnabled = boolean
+        binding.textSignUpNextFocus.isEnabled = boolean
     }
 
     //이메일 포함 되어있는지 확인
@@ -59,15 +65,13 @@ class SignUpEmailFragment :
                         textInputSignUp.error = "사용 불가능한 이메일 형식입니다."
                         pass = false
 
-                        binding.textSignUpNext.isEnabled = false
-                        binding.textSignUpNextFocus.isEnabled = false
+                        isNextBtnActive(false)
                         tvEmailResend.isEnabled = false
                         binding.etInputEmailNum.setText("")
 
                     } else {
                         pass = true
-                        binding.textSignUpNext.isEnabled = true
-                        binding.textSignUpNextFocus.isEnabled = true
+                        isNextBtnActive(true)
 
                         signUpViewModel.emailCheck(s.toString())
                         observeSuccess(pass)
@@ -80,6 +84,7 @@ class SignUpEmailFragment :
     //인증번호 체크
     private fun certificationEmail() {
         with(binding) {
+
             imgEmailDeleteButton.setOnClickListener {
                 etInputEmailNum.setText("")
             }
@@ -98,11 +103,15 @@ class SignUpEmailFragment :
                 override fun afterTextChanged(s: Editable?) {
                     signUpViewModel.data.observe(viewLifecycleOwner) {
                         Timber.d("certification ${it.toString()}")
-                        if (s.toString() != it) {
+                        if (TextUtils.isEmpty(etInputEmailNum.text)){
+                            textInputEmailNum.error = "인증번호를 입력해주세요."
+
+                            isNextBtnActive(false)
+                            etInputEmailNum.isEnabled = true
+                        } else if (s.toString() != it) {
                             textInputEmailNum.error = "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요."
 
-                            textSignUpNext.isEnabled = false
-                            textSignUpNextFocus.isEnabled = false
+                            isNextBtnActive(false)
                             etInputEmailNum.isEnabled = true
                         } else {
                             textInputEmailNum.error = null
@@ -110,8 +119,7 @@ class SignUpEmailFragment :
                             textInputEmailNum.isHelperTextEnabled = true
                             textInputEmailNum.helperText = "인증되었습니다."
 
-                            textSignUpNext.isEnabled = true
-                            textSignUpNextFocus.isEnabled = true
+                            isNextBtnActive(true)
                             etInputEmailNum.isEnabled = false
                             tvEmailResend.isEnabled = false
 
@@ -140,8 +148,7 @@ class SignUpEmailFragment :
                     textInputSignUp.helperText = "사용 가능한 이메일 형식입니다."
 
                     //다음 버튼 활성화
-                    textSignUpNext.isEnabled = true
-                    textSignUpNextFocus.isEnabled = true
+                    isNextBtnActive(true)
                     tvEmailResend.isEnabled = true
                     //인증번호 입력창 초기화
                     etInputEmailNum.isEnabled = true
@@ -163,8 +170,7 @@ class SignUpEmailFragment :
                     if (pass){
                         textInputSignUp.error = "중복된 이메일 형식입니다."
 
-                        binding.textSignUpNext.isEnabled = false
-                        binding.textSignUpNextFocus.isEnabled = false
+                        isNextBtnActive(false)
                         binding.etInputEmailNum.isEnabled = false
                         tvEmailResend.isEnabled = false
                     }
@@ -182,8 +188,7 @@ class SignUpEmailFragment :
 
             Toast.makeText(requireContext(), "인증번호를 전송하였습니다", Toast.LENGTH_SHORT).show()
 
-            textSignUpNext.isEnabled = false
-            textSignUpNextFocus.isEnabled = false
+            isNextBtnActive(false)
             etInputEmailNum.isEnabled = true
         }
     }
@@ -194,8 +199,7 @@ class SignUpEmailFragment :
             Toast.makeText(requireContext(), "인증번호를 재전송하였습니다",Toast.LENGTH_SHORT).show()
             binding.etInputEmailNum.setText("")
 
-            textSignUpNext.isEnabled = false
-            textSignUpNextFocus.isEnabled = false
+            isNextBtnActive(false)
             etInputEmailNum.isEnabled = true
         }
     }
