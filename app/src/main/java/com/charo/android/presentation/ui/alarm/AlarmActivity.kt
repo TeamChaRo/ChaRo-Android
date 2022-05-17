@@ -7,8 +7,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -92,16 +92,17 @@ class AlarmActivity : AppCompatActivity() {
                     "like","post" -> { //좋아요, 게시글 알림 : 게시글로 이동 (postId)
                         val intent = Intent(this@AlarmActivity, WriteShareActivity::class.java)
                         intent.apply {
-                            putExtra("userId", userEmail)
                             putExtra("destination", "detail")
                             putExtra("postId", it.postId)
                         }
                         ContextCompat.startActivity(this@AlarmActivity, intent, null)
                     }
                     "following" -> { //팔로우 팔로잉 알림 : 해당 user 로 이동 (followed)
-                        val intent = Intent(this@AlarmActivity, OtherMyPageActivity::class.java)
-                        intent.putExtra("userEmail", it.followed)
-                        startActivity(intent)
+                        if(it.followed != null){
+                            val intent = Intent(this@AlarmActivity, OtherMyPageActivity::class.java)
+                            intent.putExtra("userEmail", it.followed)
+                            startActivity(intent)
+                        }
                     }
                 }
             }
@@ -133,24 +134,7 @@ class AlarmActivity : AppCompatActivity() {
                     val pushList = response.body()?.pushList
 
                     if(pushList != null){
-                        alarmAdapter.itemList.addAll(
-                            listOf<ResponseAlarmListData.PushList>(
-                                ResponseAlarmListData.PushList(
-                                    pushList.pushId,
-                                    pushList.pushCode,
-                                    pushList.isRead,
-                                    pushList.token,
-                                    pushList.image,
-                                    pushList.title,
-                                    pushList.body,
-                                    pushList.month,
-                                    pushList.day,
-                                    pushList.type,
-                                    pushList.postId,
-                                    pushList.followed
-                                )
-                            )
-                        )
+                        alarmAdapter.itemList.addAll(pushList)
                     }
                     alarmAdapter.notifyDataSetChanged()
                 } else {
@@ -168,9 +152,9 @@ class AlarmActivity : AppCompatActivity() {
         })
     }
 
-    fun serveDeleteItem(it: ResponseAlarmListData.PushList, pushId: Int){
-        Timber.e("postDeleteAlarm param $pushId")
-        val call: Call<ResponseAlarmDeleteData> = ApiService.alarmViewService.postDeleteAlarm(pushId)
+    fun serveDeleteItem(it: ResponseAlarmListData.PushList, view: View){
+        Timber.e("postDeleteAlarm param ${it.pushId}")
+        val call: Call<ResponseAlarmDeleteData> = ApiService.alarmViewService.postDeleteAlarm(it.pushId)
         call.enqueue(object : Callback<ResponseAlarmDeleteData> {
             override fun onResponse(
                 call: Call<ResponseAlarmDeleteData>,
@@ -180,22 +164,26 @@ class AlarmActivity : AppCompatActivity() {
                     Timber.d("server connect : Alarm delete success")
                     Timber.d("server connect : Alarm delete ${response.body()}")
 
-                    alarmAdapter.removeItem(it)
-                    alarmAdapter.notifyDataSetChanged()
+//                    alarmAdapter.removeItem(it)
+                    val position = alarmAdapter.itemList.indexOf(it)
+                    alarmAdapter.itemList.removeAt(position)
+                    alarmAdapter.notifyItemRemoved(position)
+                    alarmAdapter.notifyItemRangeChanged(position, alarmAdapter.itemList.size)
 
+                    Toast.makeText(view.context, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_LONG).show()
                     Timber.d("server connect : Alarm delete error")
                     Timber.d("server connect : Alarm delete ${response.errorBody()}")
                     Timber.d("server connect : Alarm delete${response.message()}")
                     Timber.d("server connect : Alarm delete ${response.code()}")
                     Timber.d("server connect : Alarm delete ${response.raw().request.url}")
+                    Toast.makeText(view.context, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
-                Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_LONG).show()
-                Timber.d("server connect : Alarm delete error: ${t.message}")
+                Timber.d("server connect : Alarm delete fail: ${t.message}")
+                Toast.makeText(view.context, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -210,12 +198,7 @@ class AlarmActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     Timber.d("server connect : Alarm read success")
-                    Timber.d("server connect : Alarm read${response.body()}")
-
-                    //TODO: 알람 내용에 맞는 화면으로 이동 (API 확인 후)
-
-                    Toast.makeText(this@AlarmActivity, "알람 클릭 $response.body()", Toast.LENGTH_LONG).show()
-
+                    Timber.d("server connect : 알람 클릭 ${response.body()}")
                 } else {
                     Timber.d("server connect : Alarm read error")
                     Timber.d("server connect : Alarm read ${response.errorBody()}")

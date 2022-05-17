@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.charo.android.data.model.mypage.UserInformation
-import com.charo.android.presentation.util.enqueueUtil
 
 
 class AlarmViewModel : ViewModel() {
@@ -52,24 +51,4 @@ class AlarmViewModel : ViewModel() {
     var _day = MutableLiveData<String>(null)
     val day: LiveData<String>
         get() = _day
-
-    suspend fun getInitOtherAlarmData(userEmail: String) {
-        _isServerConnecting.value = true
-
-        val call = com.charo.android.data.api.ApiService.alarmViewService.getAlarmList(userEmail)
-        call.enqueueUtil(
-            onSuccess = {
-                _pushId.value = it.pushList.pushId
-                _pushCode.value = it.pushList.pushCode
-                _isRead.value = it.pushList.isRead
-                _token.value = it.pushList.token
-                _image.value = it.pushList.image
-                _title.value = it.pushList.title
-                _body.value = it.pushList.body
-                _month.value = it.pushList.month
-                _day.value = it.pushList.day
-            }
-        )
-        _isServerConnecting.value = false
-    }
 }

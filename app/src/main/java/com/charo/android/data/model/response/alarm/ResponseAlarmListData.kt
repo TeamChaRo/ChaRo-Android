@@ -3,7 +3,8 @@ package com.charo.android.data.model.response.alarm
 import com.google.gson.annotations.SerializedName
 
 data class ResponseAlarmListData (
-    val pushList: PushList,
+    @SerializedName("data")
+    val pushList: ArrayList<PushList>,
     val msg: String,
     val success: Boolean
 ) {

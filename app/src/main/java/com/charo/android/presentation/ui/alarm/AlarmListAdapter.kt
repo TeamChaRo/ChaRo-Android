@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.ItemAlarmBinding
-import timber.log.Timber
 
 class AlarmListAdapter(
     private val itemClick: (ResponseAlarmListData.PushList) -> Unit
@@ -16,6 +15,7 @@ class AlarmListAdapter(
 
     class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemClick: (ResponseAlarmListData.PushList) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
+
         private val alarmActivity: AlarmActivity = AlarmActivity()
 
         fun onBind(alarmListInfo: ResponseAlarmListData.PushList) {
@@ -24,12 +24,19 @@ class AlarmListAdapter(
                 .circleCrop()
                 .into(binding.imgAlarmListProfile)
 
-            binding.tvAlarmStatus.text = alarmListInfo.title
-            binding.tvAlarmStatus.isSelected = true
             binding.tvAlarmDate.text = "${alarmListInfo.month}월 ${alarmListInfo.day}일"
             binding.tvAlarmContext.text = alarmListInfo.body
+            binding.tvAlarmStatus.text = alarmListInfo.title
+            binding.tvAlarmStatus.isSelected = true
 
-//            binding.tvAlarmStatus.text = alarmViewModel.title.value
+            when(alarmListInfo.isRead){
+                1-> {  // 조회한 알림
+                    binding.itemAlarmList.isSelected = true
+                }
+                else -> {
+                    binding.itemAlarmList.isSelected = false
+                }
+            }
 
             binding.itemAlarmList.setOnClickListener{
                 itemClick(alarmListInfo)
@@ -37,7 +44,7 @@ class AlarmListAdapter(
             }
 
             binding.tvAlarmDelete.setOnClickListener {
-                alarmActivity.serveDeleteItem(alarmListInfo, alarmListInfo.pushId)
+                alarmActivity.serveDeleteItem(alarmListInfo, it)
             }
         }
     }
@@ -58,5 +65,6 @@ class AlarmListAdapter(
 
     fun removeItem(data: ResponseAlarmListData.PushList){ //AlarmViewModel
         itemList.remove(data)
+        notifyDataSetChanged()
     }
 }
