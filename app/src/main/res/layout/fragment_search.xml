@@ -205,10 +205,9 @@
             android:layout_height="wrap_content"
             android:text="@string/search_start"
             android:gravity="center"
-            android:textColor="@color/blue_main_0f6fff"
+            android:textColor="@drawable/selector_btn_text_color"
             android:includeFontPadding="false"
-            android:layout_marginHorizontal="10dp"
-            android:background="@drawable/ic_search_btn_white"
+            android:background="@drawable/selector_btn_next_blue_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_search"  />

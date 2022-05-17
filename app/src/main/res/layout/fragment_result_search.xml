@@ -63,7 +63,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_result_search_1"
-                style="@style/HeaderH9"
+                style="@style/HeaderH8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="6dp"
@@ -72,12 +72,13 @@
                 app:chipCornerRadius="20dp"
                 app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
+                android:textColor="@color/blue_main_0f6fff"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_result_search_2"
-                style="@style/HeaderH9"
+                style="@style/HeaderH8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -86,12 +87,13 @@
                 app:chipCornerRadius="20dp"
                 app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
+                android:textColor="@color/blue_main_0f6fff"
                 app:layout_constraintStart_toEndOf="@id/chip_result_search_1"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_result_search_3"
-                style="@style/HeaderH9"
+                style="@style/HeaderH8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -100,12 +102,13 @@
                 app:chipCornerRadius="20dp"
                 app:chipStrokeColor="@color/blue_main_0f6fff"
                 app:chipStrokeWidth="1dp"
+                android:textColor="@color/blue_main_0f6fff"
                 app:layout_constraintStart_toEndOf="@id/chip_result_search_2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_result_search_4"
-                style="@style/HeaderH9"
+                style="@style/HeaderH8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -143,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="@string/main_charo_more_view_count"
+                    android:includeFontPadding="false"
                     android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -153,17 +157,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_result_search_count"
                     app:layout_constraintTop_toTopOf="@+id/text_result_search_count" />
-
-                <TextView
-                    android:id="@+id/text_result_search"
-                    style="@style/HeaderH8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray5_sub_495057"
-                    app:layout_constraintEnd_toStartOf="@+id/spinner_result_search"
-                    app:layout_constraintTop_toTopOf="@+id/spinner_result_search"
-                    tools:text="@string/main_charo_theme" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_result_search"

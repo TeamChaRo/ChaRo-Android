@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
+import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.data.model.request.search.RequestSearchViewData
 import com.charo.android.databinding.FragmentSearchBinding
@@ -34,6 +35,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         selectTheme()
         selectCaution()
         nickName()
+        initValue()
+        isActiveSearch(true)
 
         binding.btnSearchArea1.setOnClickListener { selectProvince(it) }
         binding.btnSearchArea2.setOnClickListener { selectRegion(it) }
@@ -50,24 +53,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 textSearchStart.setTextColor(getColor(requireActivity(),R.color.white))
                 textSearchStart.setPadding(0, 0, 0, 20)
             } else {
-                if(TextUtils.isEmpty(searchViewModel.province.value) && TextUtils.isEmpty(searchViewModel.city.value)
-                    && TextUtils.isEmpty(searchViewModel.theme.value) && TextUtils.isEmpty(searchViewModel.caution.value)) {
-
-                    textSearchStart.setBackgroundResource(R.drawable.ic_search_btn_white)
-                    textSearchStart.setTextColor(
-                        getColor(
-                            requireActivity(),
-                            R.color.blue_main_0f6fff
-                        )
+                textSearchStart.setBackgroundResource(R.drawable.ic_search_btn_white)
+                textSearchStart.setTextColor(
+                    getColor(
+                        requireActivity(),
+                        R.color.blue_main_0f6fff
                     )
-                    textSearchStart.setPadding(0, 0, 0, 20)
-                }
+                )
+                textSearchStart.setPadding(0, 0, 0, 20)
             }
         }
     }
 
     private fun clickSearch() {
         val userEmail = SharedInformation.getEmail(requireActivity())
+
         binding.textSearchStart.setOnClickListener {
             searchViewModel.province.value = if (binding.btnSearchArea1.text.toString() == "선택안함" || binding.btnSearchArea1.text.toString() == "지역(도)") {
                 ""
@@ -80,23 +80,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 } else {
                     binding.btnSearchArea2.text.toString()
                 }
-            searchViewModel.theme.value = if (binding.btnSearchTheme.text.toString() == "테마") {
+            searchViewModel.theme.value = if (binding.btnSearchTheme.text.toString() == "선택안함" || binding.btnSearchTheme.text.toString() == "테마") {
                 ""
             } else {
                 binding.btnSearchTheme.text.toString()
             }
             searchViewModel.caution.value =
-                if (binding.btnSearchCaution.text.toString() == "주의사항") {
+                if (binding.btnSearchCaution.text.toString() == "선택안함" || binding.btnSearchCaution.text.toString() == "주의사항") {
                     ""
                 } else {
                     binding.btnSearchCaution.text.toString()
                 }
-
-            if(TextUtils.isEmpty(searchViewModel.province.value) && TextUtils.isEmpty(searchViewModel.city.value)
-                && TextUtils.isEmpty(searchViewModel.theme.value) && TextUtils.isEmpty(searchViewModel.caution.value)){
-                Toast.makeText(requireContext(),"지역, 테마, 주의사항 중 하나 이상 선택해주세요.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
 
             if(!TextUtils.isEmpty(searchViewModel.province.value) && TextUtils.isEmpty(searchViewModel.city.value)){
                 Toast.makeText(requireContext(),"지역(시)를 선택해주세요.", Toast.LENGTH_LONG).show()
@@ -111,23 +105,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             )
             searchViewModel.getSearchLike(requestSearchViewData)
             searchViewModel.search.observe(viewLifecycleOwner) {
-                if (it.count() == 0) {
-                    val transaction = activity?.supportFragmentManager?.beginTransaction()
-                    transaction?.apply {
-                        replace(R.id.fragment_container_search, NoSearchFragment())
-                        addToBackStack("")
-                        commit()
+                Timber.d("searchViewModel.search $it")
+
+                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                val fragment : Fragment
+                transaction?.apply {
+                    fragment = if (it.isEmpty()) {
+                        NoSearchFragment()
+                    } else {
+                        ResultSearchFragment()
                     }
-                } else {
-                    val transaction = activity?.supportFragmentManager?.beginTransaction()
-                    transaction?.apply {
-                        replace(
-                            R.id.fragment_container_search,
-                            ResultSearchFragment()
-                        )
-                        addToBackStack("")
-                        commit()
-                    }
+                    replace(R.id.fragment_container_search, fragment)
+                    addToBackStack("")
+                    commit()
                 }
             }
         }
@@ -141,15 +131,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     binding.btnSearchTheme.setText(resources.getString(R.string.main_charo_theme))
                     searchItem = 0
                     it.isSelected = false
-                    isActiveSearch(false)
                 }
                 .setPositiveButton("확인") { dialog, which ->
                     it.isSelected = true
                     binding.btnSearchTheme.text = themeUtil.itemTheme[searchItem]
-                    isActiveSearch(true)
                     if (binding.btnSearchTheme.text.toString() == resources.getString(R.string.main_charo_theme)) {
                         it.isSelected = false
-                        isActiveSearch(false)
                     }
                 }
                 .setSingleChoiceItems(themeUtil.itemTheme, searchItem) { dialog, which ->
@@ -168,15 +155,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     binding.btnSearchCaution.setText(resources.getString(R.string.caution))
                     searchCautionItem = 0
                     it.isSelected = false
-                    isActiveSearch(false)
                 }
                 .setPositiveButton("확인") { dialog, which ->
                     it.isSelected = true
                     binding.btnSearchCaution.text = themeUtil.itemCaution[searchCautionItem]
-                    isActiveSearch(true)
                     if (binding.btnSearchCaution.text.toString() == resources.getString(R.string.caution)) {
                         it.isSelected = false
-                        isActiveSearch(false)
                     }
                 }
                 .setSingleChoiceItems(
@@ -200,13 +184,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 binding.btnSearchArea2.isSelected = false
                 it.isSelected = false
                 preCheckProvince = 0
-                isActiveSearch(false)
+                isActiveSearch(true)
             }
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
                 binding.btnSearchArea1.text = locationUtil.itemProvince[preCheckProvince]
                 searchViewModel.province.value = binding.btnSearchArea1.text.toString()
                 selectRegion(binding.btnSearchArea2)
+                isActiveSearch(true)
             }
             .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
                 //which : index
@@ -233,7 +218,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 it.isSelected = false
                 preCheckedRegion = 0
                 searchViewModel.city.value = ""
-                isActiveSearch(false)
+
+                if(TextUtils.isEmpty(searchViewModel.province.value) || searchViewModel.province.value == "선택안함"){
+                    isActiveSearch(true)
+                } else {
+                    isActiveSearch(false)
+                }
             }
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
@@ -249,8 +239,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                             ?: resources.getString(R.string.area_region)
 
                     searchViewModel.city.value = binding.btnSearchArea2.text.toString()
+                    isActiveSearch(true)
                 }
-                isActiveSearch(true)
             }
             .setSingleChoiceItems(
                 locationUtil.matchRegionToProvince[binding.btnSearchArea1.text]
@@ -268,8 +258,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.imgSearchBack.setOnClickListener {
             requireActivity().finish()
         }
-
     }
 
+    private fun initValue(){
+        //지역 도 시
+        if (!TextUtils.isEmpty(searchViewModel.province.value)) {
+            binding.btnSearchArea1.text = searchViewModel.province.value
+            binding.btnSearchArea1.isSelected = true
+        }
+        if (!TextUtils.isEmpty(searchViewModel.city.value)) {
+            binding.btnSearchArea2.text = searchViewModel.city.value
+            binding.btnSearchArea2.isSelected = true
+        }
+
+        //테마
+        if (!TextUtils.isEmpty(searchViewModel.theme.value)) {
+            binding.btnSearchTheme.text = searchViewModel.theme.value
+            binding.btnSearchTheme.isSelected = true
+        }
+
+        //주의사항
+        if (!TextUtils.isEmpty(searchViewModel.caution.value)) {
+            binding.btnSearchCaution.text = searchViewModel.caution.value
+            binding.btnSearchCaution.isSelected = true
+        }
+    }
 
 }

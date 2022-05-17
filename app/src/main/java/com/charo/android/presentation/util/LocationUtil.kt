@@ -169,14 +169,18 @@ class LocationUtil {
         "화순" to "hwasun"
     )
 
-    val itemSpecial = arrayOf("선택안함", "서울", "제주")
+    val itemSpecial = arrayOf(
+//        "선택안함",
+        "서울", "제주")
 
     val itemProvince =
         arrayOf("선택안함", "특별시", "광역시", "경기도", "강원도", "충청남도", "충청북도", "경상북도", "경상남도", "전라북도", "전라남도")
-    val itemMetroPolitan = arrayOf("선택안함", "부산", "대구", "인천", "울산", "대전", "광주")
+    val itemMetroPolitan = arrayOf(
+//        "선택안함",
+        "부산", "대구", "인천", "울산", "대전", "광주")
 
     val itemGyounGi = arrayOf(
-        "선택안함",
+//        "선택안함",
         "가평",
         "고양",
         "과천",
@@ -211,7 +215,7 @@ class LocationUtil {
     )
 
     val itemGangWon = arrayOf(
-        "선택안함",
+//        "선택안함",
         "고성",
         "강릉",
         "동해",
@@ -233,7 +237,7 @@ class LocationUtil {
     )
 
     val itemChoongChungNam = arrayOf(
-        "선택안함",
+//        "선택안함",
         "계룡",
         "공주",
         "금산",
@@ -252,10 +256,12 @@ class LocationUtil {
     )
 
     val itemChoongChungBuk =
-        arrayOf("선택안함", "괴산", "단양", "보은", "영동", "옥천", "음성", "제천", "증평", "진천", "청주", "충주")
+        arrayOf(
+//            "선택안함",
+            "괴산", "단양", "보은", "영동", "옥천", "음성", "제천", "증평", "진천", "청주", "충주")
 
     val itemGyungSangBuk = arrayOf(
-        "선택안함",
+//        "선택안함",
         "경산",
         "경주",
         "고령",
@@ -282,7 +288,7 @@ class LocationUtil {
         "포항"
     )
     val itemGyungSanNam = arrayOf(
-        "선택안함",
+//        "선택안함",
         "거제",
         "거창",
         "고성",
@@ -304,7 +310,7 @@ class LocationUtil {
     )
 
     val itemJungLaBuk = arrayOf(
-        "선택안함",
+//        "선택안함",
         "고창",
         "군산",
         "김제",
@@ -322,7 +328,7 @@ class LocationUtil {
     )
 
     val itemJungLaNam = arrayOf(
-        "선택안함",
+//        "선택안함",
         "강진",
         "고흥",
         "곡성",
