@@ -1,21 +1,18 @@
 package com.charo.android.presentation.util
 
-import android.graphics.Bitmap
 import android.net.Uri
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.charo.android.R
 import com.google.android.material.chip.Chip
-import androidx.databinding.BindingAdapter
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.Transformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.request.RequestOptions
-import timber.log.Timber
 
 
 object BindingAdapter {
