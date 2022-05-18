@@ -12,7 +12,6 @@ import com.charo.android.R
 import com.charo.android.databinding.ActivityOtherMyPageBinding
 import com.charo.android.presentation.ui.follow.FollowActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
-import com.charo.android.presentation.ui.mypage.postlist.WrittenPostFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
@@ -46,25 +45,23 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
-        if(viewModel.userEmail != "@") {
+        if (viewModel.userEmail != "@") {
             viewModel.getLikePost()
             viewModel.getNewPost()
             viewModel.getFollow()
         }
+        observeLiveData()
     }
 
     override fun onRestart() {
         super.onRestart()
-        if(viewModel.userEmail != "@") {
+        if (viewModel.userEmail != "@") {
             viewModel.getFollow()
         }
     }
 
     private fun initRecyclerView() {
         binding.rvPostList.adapter = adapter
-        viewModel.writtenLikePostList.observe(this) {
-            adapter.replaceItem(it)
-        }
     }
 
     private fun initSpinner() {
@@ -85,16 +82,16 @@ class OtherMyPageActivity : AppCompatActivity() {
                 ) {
                     if (position == 0) {
                         Timber.d("mlog: OtherMyPageActivity::spinner handler onItemSelected - 0")
-                        sort = WrittenPostFragment.LIKE
+                        sort = LIKE
                     } else {
                         Timber.d("mlog: OtherMyPageActivity::spinner handler onItemSelected - 1")
-                        sort = WrittenPostFragment.NEW
+                        sort = NEW
                     }
                     changeRecyclerViewItemList(sort)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    Timber.d("mlog: OtherMyPageActivity::spinner handler onNothingSelected")
+                    sort = LIKE
                 }
             }
     }
@@ -102,17 +99,13 @@ class OtherMyPageActivity : AppCompatActivity() {
     private fun changeRecyclerViewItemList(sort: Int) {
         when (sort) {
             LIKE -> {
-                viewModel.writtenLikePostList.observe(this) {
-                    adapter.apply {
-                        this.replaceItem(it)
-                    }
+                viewModel.writtenLikePostList.value?.let {
+                    adapter.replaceItem(it.map { Post -> Post.copy() })
                 }
             }
             NEW -> {
-                viewModel.writtenNewPostList.observe(this) {
-                    adapter.apply {
-                        this.replaceItem(it)
-                    }
+                viewModel.writtenNewPostList.value?.let {
+                    adapter.replaceItem(it.map { Post -> Post.copy() })
                 }
             }
         }
@@ -122,16 +115,11 @@ class OtherMyPageActivity : AppCompatActivity() {
     private fun endlessScroll() {
         binding.nsvPostList.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
             if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-                Timber.d("mlog: OtherMyPageActivity::endlessScroll NestedScrollView 최하단 도달")
                 when (sort) {
                     LIKE -> {
-                        // 서버에서 더 가져오는 로직
-                        Timber.d("mlog: OtherMyPageActivity::endlessScroll 인기순 작성한 게시글 더 불러오기")
                         viewModel.getMoreWrittenLikePost()
                     }
                     NEW -> {
-                        // 서버에서 더 가져오는 로직
-                        Timber.d("mlog: OtherMyPageActivity::endlessScroll 최신순 작성한 게시글 더 불러오기")
                         viewModel.getMoreWrittenNewPost()
                     }
                 }
@@ -161,6 +149,19 @@ class OtherMyPageActivity : AppCompatActivity() {
             intent.putExtra("userEmail", viewModel.otherUserEmail)
             intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
             startActivity(intent)
+        }
+    }
+
+    private fun observeLiveData() {
+        viewModel.writtenLikePostList.observe(this) {
+            if(sort == LIKE) {
+                adapter.replaceItem(it.map { Post -> Post.copy() })
+            }
+        }
+        viewModel.writtenNewPostList.observe(this) {
+            if(sort == NEW) {
+                adapter.replaceItem(it.map { Post -> Post.copy() })
+            }
         }
     }
 

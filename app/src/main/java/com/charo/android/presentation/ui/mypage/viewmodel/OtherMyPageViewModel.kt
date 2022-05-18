@@ -65,7 +65,7 @@ class OtherMyPageViewModel(
             kotlin.runCatching {
                 getRemoteLikePostUseCase(otherUserEmail)
             }.onSuccess {
-                it?.let {
+                it.let {
                     _userInfo.value = it.userInformation
                     _writtenLikeLastId = it.writtenPost.lastId
                     _writtenLikeLastCount = it.writtenPost.lastCount
@@ -102,7 +102,7 @@ class OtherMyPageViewModel(
             }.onSuccess {
                 _writtenLikeLastId = it.lastId
                 _writtenLikeLastCount = it.lastCount
-                _writtenLikePostList.value?.addAll(it.drive)
+                _writtenLikePostList.value = _writtenLikePostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenLikePost() ${it.message.toString()}")
             }
@@ -115,7 +115,7 @@ class OtherMyPageViewModel(
                 getRemoteMoreWrittenNewPostUseCase(otherUserEmail, _writtenNewLastId)
             }.onSuccess {
                 _writtenNewLastId = it.lastId
-                _writtenNewPostList.value?.addAll(it.drive)
+                _writtenNewPostList.value = _writtenNewPostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenNewPost() ${it.message.toString()}")
             }
