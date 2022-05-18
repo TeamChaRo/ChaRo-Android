@@ -15,6 +15,7 @@ import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class MoreThemeContentViewFragment(val userId: String, val identifier: String, val value: String) :
@@ -86,11 +87,9 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
     inner class DataToMoreThemeLike(){
         fun getPostId(postId : Int){
+            Timber.d("more PostId $postId")
             val userEmail = SharedInformation.getEmail(requireActivity())
-            sharedViewModel.postId.value = postId
-            sharedViewModel.postId.observe(viewLifecycleOwner){
-                moreViewModel.postLike(RequestHomeLikeData("and@naver.com",it))
-            }
+                moreViewModel.postLike(RequestHomeLikeData(userEmail,postId))
         }
 
     }

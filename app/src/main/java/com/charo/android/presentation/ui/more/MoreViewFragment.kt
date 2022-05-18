@@ -25,7 +25,7 @@ import timber.log.Timber
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {
-    private lateinit var callback : OnBackPressedCallback
+    private lateinit var callback: OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val moreViewModel: MoreViewViewModel by viewModel()
     private var homeFragment = HomeFragment()
@@ -35,7 +35,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = object : OnBackPressedCallback(true){
+        callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 sharedViewModel.moreFragment.value = true
                 Timber.d("onBackPressed호출됨more")
@@ -157,11 +157,11 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                 ) {
                     moreViewAdapter.removeHomeTrendDrive()
                     if (position == 0) {
-                        if(moreViewAdapter.moreData.isEmpty()){
+                        if (moreViewAdapter.moreData.isEmpty()) {
                             moreViewLoadData()
                         }
                     } else {
-                        if(moreViewAdapter.moreData.isEmpty()){
+                        if (moreViewAdapter.moreData.isEmpty()) {
                             moreNewViewData()
                         }
                     }
@@ -175,9 +175,10 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             }
 
     }
+
     //스피너 position에 따라 데이터 초기화
-    private fun removeData(){
-        moreViewModel.position.observe(viewLifecycleOwner){
+    private fun removeData() {
+        moreViewModel.position.observe(viewLifecycleOwner) {
             Timber.d("스피드확인 : 얘는 데이터 삭제")
 
         }
@@ -196,14 +197,11 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 //
 //    }
 
+    //좋아요
     inner class DataToMoreLike() {
-
         fun getPostId(postId: Int) {
             val userEmail = SharedInformation.getEmail(requireActivity())
-            sharedViewModel.postId.value = postId
-            sharedViewModel.postId.observe(viewLifecycleOwner) {
-                moreViewModel.postLike(RequestHomeLikeData(userEmail, it))
-            }
+            moreViewModel.postLike(RequestHomeLikeData(userEmail, postId))
         }
     }
 
@@ -217,10 +215,10 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                     (recyclerView.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
                 val itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (!binding.recyclerviewMoreView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
-                    if(moreViewAdapter.moreData.isNotEmpty()){
+                    if (moreViewAdapter.moreData.isNotEmpty()) {
                         moreViewAdapter.addLoading()
                         when (spinnerPosition) {
-                            0 ->{
+                            0 -> {
                                 moreViewAdapter.removeLoading()
                                 moreViewInfiniteLoadData()
                             }
@@ -244,12 +242,12 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         val lastCount = moreViewModel.lastId.value!!.lastCount
         if (sharedViewModel.num.value == 0) {
 
-                moreViewModel.getPreview(userEmail, "0", lastId, lastCount, "")
+            moreViewModel.getPreview(userEmail, "0", lastId, lastCount, "")
 
         } else if (sharedViewModel.num.value == 2) {
-                moreViewModel.getPreview(userEmail, "2", lastId, lastCount, "busan")
+            moreViewModel.getPreview(userEmail, "2", lastId, lastCount, "busan")
         } else {
-                moreViewModel.getPreview(userEmail, "3", lastId, lastCount, "")
+            moreViewModel.getPreview(userEmail, "3", lastId, lastCount, "")
         }
     }
 
@@ -260,13 +258,13 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         val lastId = moreViewModel.lastId.value!!.lastId
         val lastCount = moreViewModel.lastId.value!!.lastCount
         if (sharedViewModel.num.value == 0) {
-                moreViewModel.getNewPreview(userEmail, "0", lastId, "")
+            moreViewModel.getNewPreview(userEmail, "0", lastId, "")
 
         } else if (sharedViewModel.num.value == 2) {
-                moreViewModel.getNewPreview(userEmail, "2", lastId, "busan")
+            moreViewModel.getNewPreview(userEmail, "2", lastId, "busan")
 
         } else {
-                moreViewModel.getNewPreview(userEmail, "3", lastId, "")
+            moreViewModel.getNewPreview(userEmail, "3", lastId, "")
 
         }
     }

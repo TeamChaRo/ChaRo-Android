@@ -237,11 +237,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     inner class DataToHomeLike() {
         fun getPostId(postId: Int) {
             val userEmail = SharedInformation.getEmail(requireActivity())
-
-            sharedViewModel.postId.value = postId
-            sharedViewModel.postId.observe(viewLifecycleOwner) {
-                homeViewModel.postLike(RequestHomeLikeData(userEmail, it))
-            }
+            homeViewModel.postLike(RequestHomeLikeData(userEmail, postId))
         }
 
     }
