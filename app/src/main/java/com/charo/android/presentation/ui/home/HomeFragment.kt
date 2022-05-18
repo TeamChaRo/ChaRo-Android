@@ -119,7 +119,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewPagerLocalAdapter.setHomeBanner(bannerLocal)
     }
 
-
+    //요즘 뜨는 드라이브
     private fun initTrendDrive() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         Timber.d("home 이메일 $userEmail")
@@ -163,7 +163,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             homeCustomThemeAdapter.setCustomThemeDrive(it)
         }
     }
-
+    //테마 뷰 이동
     private fun initThemeDrive() {
         val themeData = LocalHomeThemeDataSourceImpl().fetchData()
         homeThemeAdapter = HomeThemeAdapter()
@@ -193,7 +193,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
     }
-
+    //알림 뷰 이동
     private fun goAlarm() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         binding.imgMainAlarm.setOnClickListener {

@@ -35,7 +35,7 @@ class HomeThemeAdapter(
     override fun onBindViewHolder(holder: HomeThemeViewHolder, position: Int) {
         holder.onBind(themeData[position])
 
-        holder.itemView.setOnClickListener {
+        holder.binding.root.setOnClickListener {
             val activity = it.context as AppCompatActivity
             SharedInformation.setThemeNum(activity, position)
             val moreThemeViewFragment = MoreThemeViewFragment()
@@ -55,7 +55,7 @@ class HomeThemeAdapter(
     }
 
     inner class HomeThemeViewHolder(
-        private val binding: ItemHomeThemeBinding
+         val binding: ItemHomeThemeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(homeThemeInfo: HomeThemeInfo) {
             binding.apply {
