@@ -23,7 +23,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
 
-
+        emailSignToast()
         login()
         goPasswordSearch()
         binding.imgSigninIdClear.setOnClickListener() { clearEmail() }
@@ -66,6 +66,16 @@ class SignInActivity : AppCompatActivity() {
     private fun clearPassword() {
         binding.etSigninPw.text.clear()
     }
+    //로그인 토스트 메세지
+    private fun emailSignToast(){
+        emailSignInViewModel.emailSignInStatus.observe(this){
+            if(it == 404){
+                Toast.makeText(this, "아이디 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
 
 
 
