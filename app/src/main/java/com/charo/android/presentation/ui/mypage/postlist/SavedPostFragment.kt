@@ -45,19 +45,7 @@ class SavedPostFragment : Fragment() {
         initSpinner()
         initRecyclerView()
         endlessScroll()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        super.onResume()
-        when (sort) {
-            LIKE -> {
-                viewModel.savedLikePostList.value?.let { savedPostAdapter.replaceItem(it.map { Post -> Post.copy() }) }
-            }
-            NEW -> {
-                viewModel.savedNewPostList.value?.let { savedPostAdapter.replaceItem(it.map { Post -> Post.copy() }) }
-            }
-        }
+        observeLiveData()
     }
 
     override fun onDestroyView() {
@@ -90,7 +78,7 @@ class SavedPostFragment : Fragment() {
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                    sort = LIKE
                 }
             }
     }
@@ -120,19 +108,26 @@ class SavedPostFragment : Fragment() {
                 when (sort) {
                     LIKE -> {
                         viewModel.getMoreSavedLikePost()
-                        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
-                            savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
-                        }
                     }
                     NEW -> {
                         viewModel.getMoreSavedNewPost()
-                        viewModel.savedNewPostList.observe(viewLifecycleOwner) {
-                            savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
-                        }
                     }
                 }
             }
         })
+    }
+
+    private fun observeLiveData() {
+        viewModel.savedLikePostList.observe(viewLifecycleOwner) {
+            if(sort == LIKE) {
+                savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
+            }
+        }
+        viewModel.savedNewPostList.observe(viewLifecycleOwner) {
+            if(sort == NEW) {
+                savedPostAdapter.replaceItem(it.map { Post -> Post.copy() })
+            }
+        }
     }
 
     companion object {
