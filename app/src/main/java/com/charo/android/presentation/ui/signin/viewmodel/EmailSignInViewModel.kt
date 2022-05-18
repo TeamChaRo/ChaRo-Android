@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.request.signin.RequestSignInData
 import com.charo.android.domain.model.signin.EmailSignInData
 import com.charo.android.domain.usecase.signin.GetRemoteEmailLoginUseCase
+import com.charo.android.presentation.util.ResultWrapper
+import com.charo.android.presentation.util.safeApiCall
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -17,23 +20,26 @@ class EmailSignInViewModel(
     private val _emailSignInData = MutableLiveData<EmailSignInData>()
     var emailSignInData : LiveData<EmailSignInData> = _emailSignInData
 
-
-
+    var emailSignInStatus = MutableLiveData<Int>()
 
 
 
     fun getEmailSignInData(requestSignInData: RequestSignInData){
         viewModelScope.launch {
-            runCatching { getRemoteEmailLoginUseCase.execute(requestSignInData) }
-                .onSuccess {
-                   _emailSignInData.value = it
+            when(val postEmailSignIn = safeApiCall(Dispatchers.IO) { getRemoteEmailLoginUseCase(requestSignInData) }){
+                is ResultWrapper.Success -> {
+                    _emailSignInData.value = postEmailSignIn.data!!
                     Timber.d("emailLogin 서버 통신 성공")
-                    Timber.d("emailLogin $it")
+                    emailSignInStatus.value = 200
                 }
-                .onFailure {
-                    it.printStackTrace()
-                    Timber.d("emailLogin 서버 통신 실패")
+                is ResultWrapper.NetworkError -> {
+                    emailSignInStatus.value = 500
                 }
+                is ResultWrapper.GenericError -> {
+                    emailSignInStatus.value = 404
+                }
+            }
         }
     }
 }
+
