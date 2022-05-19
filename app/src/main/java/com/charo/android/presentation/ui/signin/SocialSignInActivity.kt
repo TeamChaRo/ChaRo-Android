@@ -39,7 +39,7 @@ class SocialSignInActivity() :
 
         //deeplink로 왔을 때 로그인 화면 건너뛰고 메인 -> 게시물
         val postId = intent.getIntExtra("postId", -1)
-        if(intent != null && postId != -1){
+        if (intent != null && postId != -1) {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("postId", postId)
             startActivity(intent)
@@ -102,35 +102,23 @@ class SocialSignInActivity() :
 
     //카카오
     fun kakaoUserEmail() {
-        Timber.d("yeeee ${SharedInformation.getKaKaoSignUp(this)}")
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Timber.e("kakao 사용자 정보 요청 실패 $error")
             } else if (user != null) {
-                if (SharedInformation.getKaKaoSignUp(this) == 999) {
-                    Toast.makeText(this, "동의가 필요합니다.", Toast.LENGTH_SHORT).show()
-                    SharedInformation.setSignUp(this, 2)
-                    val intent = Intent(this, SignUpActivity::class.java)
-                    intent.apply {
-                        putExtra("kakaoSignUpEmail", user.kakaoAccount?.email)
-                    }
-                    startActivity(intent)
-                    finish()
-
-                } else if (SharedInformation.getKaKaoSignUp(this) == 2) {
-                    if(user.kakaoAccount?.email != null){
-                        SharedInformation.setEmail(this, user.kakaoAccount?.email)
-                        Timber.i(
-                            "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}")
-                        socialSignInViewModel.kakaoLoginSuccess(
-                            RequestSocialData(
-                                user.kakaoAccount?.email ?: ""
-                            )
+                if (user.kakaoAccount?.email != null) {
+                    SharedInformation.setEmail(this, user.kakaoAccount?.email)
+                    Timber.i(
+                        "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}"
+                    )
+                    socialSignInViewModel.kakaoLoginSuccess(
+                        RequestSocialData(
+                            user.kakaoAccount?.email ?: ""
                         )
-                    }else{
-                     Toast.makeText(this, "카카오 로그인시 이메일 동의 해주세요.", Toast.LENGTH_SHORT).show()
-                        UserApiClient.instance.unlink {  }
-                    }
+                    )
+                } else {
+                    Toast.makeText(this, "카카오 로그인시 이메일 동의 해주세요.", Toast.LENGTH_SHORT).show()
+                    UserApiClient.instance.unlink { }
                 }
             }
         }
@@ -138,7 +126,7 @@ class SocialSignInActivity() :
 
     //카카오 로그인 성공시 main 이동
     private fun goKaKaoMain() {
-        if(SharedInformation.getLogout(this) != "Logout"){
+        if (SharedInformation.getLogout(this) != "Logout") {
             socialSignInViewModel.kakaoSuccess.observe(this, Observer {
                 if (socialSignInViewModel.socialStatus.value != 404) {
                     SharedInformation.setLogout(this, "LogIn")
@@ -151,7 +139,6 @@ class SocialSignInActivity() :
                 }
             })
         }
-
 
 
     }
@@ -180,7 +167,7 @@ class SocialSignInActivity() :
                     } catch (e: ApiException) {
                         Timber.d("구글 Google sign in failed")
                     }
-                }else{
+                } else {
                     Timber.d("구글 ${result.resultCode.toString() + "+" + RESULT_OK.toString()}")
                     Timber.e("구글 진짜 제발 야!")
                 }
@@ -210,29 +197,29 @@ class SocialSignInActivity() :
                     socialSignInViewModel.googleLoginSuccess(RequestSocialData(email ?: ""))
                     checkGoogleLoginError(profileImage, email)
                     socialSignInViewModel.googleSuccess.observe(this) {
-                            if (SharedInformation.getLogout(this) != "Logout") {
-                                Toast.makeText(
-                                    this@SocialSignInActivity, "구글 로그인에 성공하였습니다.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                SharedInformation.setNickName(this, it?.nickname.toString())
-                                SharedInformation.setEmail(this, email.toString())
-                                SharedInformation.saveSocialId(this, "2")
-                                val intent =
-                                    Intent(this@SocialSignInActivity, MainActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            }
+                        if (SharedInformation.getLogout(this) != "Logout") {
+                            Toast.makeText(
+                                this@SocialSignInActivity, "구글 로그인에 성공하였습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            SharedInformation.setNickName(this, it?.nickname.toString())
+                            SharedInformation.setEmail(this, email.toString())
+                            SharedInformation.saveSocialId(this, "2")
+                            val intent =
+                                Intent(this@SocialSignInActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 }
             }
+    }
 
 
     //구글 로그인 분기처리(회원이 없을 경우 또는 있을 경우)
-    private fun checkGoogleLoginError(profileImage : Uri?, email : String?){
-        socialSignInViewModel.googleSocialStatus.observe(this){
-            if(it==404){
+    private fun checkGoogleLoginError(profileImage: Uri?, email: String?) {
+        socialSignInViewModel.googleSocialStatus.observe(this) {
+            if (it == 404) {
                 SharedInformation.setSignUp(this, 1)
                 Toast.makeText(
                     this@SocialSignInActivity, "약관 동의가 필요합니다.",
@@ -250,6 +237,7 @@ class SocialSignInActivity() :
             }
         }
     }
+
     //둘러보기
     private fun lookForMain() {
         binding.textSocialLook.setOnClickListener {
