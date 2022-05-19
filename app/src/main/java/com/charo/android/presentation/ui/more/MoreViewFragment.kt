@@ -25,7 +25,7 @@ import timber.log.Timber
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {
-    private lateinit var callback: OnBackPressedCallback
+//    private lateinit var callback: OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val moreViewModel: MoreViewViewModel by viewModel()
     private var homeFragment = HomeFragment()
@@ -35,18 +35,19 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                sharedViewModel.moreFragment.value = true
-                Timber.d("onBackPressed호출됨more")
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+//        callback = object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                sharedViewModel.moreFragment.value = true
+//                Timber.d("onBackPressed호출됨more")
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+        sharedViewModel.moreFragment.value = true
 
         userId = arguments?.getString("userId").toString()
         moreViewAdapter = MoreViewAdapter(userId, links)
@@ -271,7 +272,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     override fun onDetach() {
         super.onDetach()
-        callback.remove()
+//        callback.remove()
     }
 }
 

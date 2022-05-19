@@ -24,7 +24,7 @@ import timber.log.Timber
 
 class MoreThemeViewFragment :
     BaseFragment<FragmentMoreThemeViewBinding>(R.layout.fragment_more_theme_view) {
-    private lateinit var callback : OnBackPressedCallback
+//    private lateinit var callback : OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     var requestThemeData = mutableListOf<RequestThemeViewData>()
     private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
@@ -32,19 +32,20 @@ class MoreThemeViewFragment :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        callback = object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                sharedViewModel.moreFragment.value = true
-                Timber.d("onBackPressed호출됨more")
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+//        callback = object : OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                sharedViewModel.moreFragment.value = true
+//                Timber.d("onBackPressed호출됨more")
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userId = arguments?.getString("userId").toString()
         initToolbar()
+        sharedViewModel.moreFragment.value = true
 
         initMoreThemeViewPager(userId)
 //        clickBackButton()
@@ -168,7 +169,7 @@ class MoreThemeViewFragment :
 
     override fun onDetach() {
         super.onDetach()
-        callback.remove()
+//        callback.remove()
     }
 }
 
