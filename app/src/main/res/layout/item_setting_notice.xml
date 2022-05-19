@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:text="@{settingNoticeData.date}"
                 android:fontFamily="@font/noto_sans_cjkkr_regular"
-                app:fontFamily="@font/noto_sans_cjkkr_regular"
                 android:textSize="14sp"
                 android:textColor="@color/gray3_sub_acb5bd"
                 android:includeFontPadding="false"
