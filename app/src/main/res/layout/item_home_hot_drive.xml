@@ -9,7 +9,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +26,8 @@
                 android:id="@+id/img_home_hot_drive"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:minWidth="154dp"
+                android:minHeight="150dp"
                 app:layout_constraintDimensionRatio="77:75"
                 android:background="@android:color/transparent"
                 android:src="@drawable/home_today_drive_image"
