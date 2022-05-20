@@ -204,7 +204,7 @@ class SignUpEmailViewModel(
     //카카오 회원가입 등록
     fun signUpKaKao(userEmail : String, profileImage : String, nickName : String, pushAgree : Boolean, emailAgree: Boolean ){
         viewModelScope.launch {
-            runCatching { postRemoteKaKaoSignUpRegisterUseCase.execute(
+            runCatching { postRemoteKaKaoSignUpRegisterUseCase(
                 RequestSignUpKaKaoData(userEmail, profileImage, nickName, pushAgree, emailAgree)
             ) }
                 .onSuccess {
@@ -212,7 +212,6 @@ class SignUpEmailViewModel(
                     Timber.d("kakaoSignUp 카카오 회원가입 성공!")
                 }
                 .onFailure {
-                    it.printStackTrace()
                     Timber.d("kakaoSignUp 카카오 회원가입 실패!")
                 }
 

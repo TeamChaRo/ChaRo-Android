@@ -30,7 +30,7 @@ interface SignUpRegisterService {
         @Body requestSignUpSocialData : RequestSignUpGoogleData
     ) : ResponseStatusCode
 
-
+    //카카오
     @POST("/user/register/kakao")
     suspend fun signUpKaKaoRegister(
         @Body requestSignUpKaKaoData: RequestSignUpKaKaoData

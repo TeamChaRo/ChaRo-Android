@@ -44,7 +44,7 @@ class SocialSignInActivity() :
             intent.putExtra("postId", postId)
             startActivity(intent)
         }
-
+        checkKakaoSignUp()
         autoLogin()
         initKakaoLogin()
         initGoogleLogin()
@@ -139,8 +139,19 @@ class SocialSignInActivity() :
                 }
             })
         }
+    }
 
-
+    //카카오 로그인 실패시(회원가입 이슈)
+    private fun checkKakaoSignUp(){
+        socialSignInViewModel.socialStatus.observe(this){
+            if(it == 404){
+                SharedInformation.setSignUp(this, 2)
+                val intent = Intent(this, SignUpActivity::class.java)
+                intent.putExtra("kakaoSignUpEmail", SharedInformation.getEmail(this))
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
 
