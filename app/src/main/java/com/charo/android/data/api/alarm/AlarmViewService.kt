@@ -8,10 +8,7 @@ import com.charo.android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.data.model.response.alarm.ResponseFcmData
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AlarmViewService {
     @GET("/push/{userEmail}")
@@ -19,7 +16,7 @@ interface AlarmViewService {
         @Path("userEmail") userEmail : String
     ) : Call<ResponseAlarmListData>
 
-    @POST("/push/remove/{pushId}")
+    @DELETE("/push/remove/{pushId}")
     fun postDeleteAlarm(
         @Path("pushId") pushId : Int
     ) : Call<ResponseAlarmDeleteData>

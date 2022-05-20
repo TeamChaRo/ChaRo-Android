@@ -2,17 +2,14 @@ package com.charo.android.presentation.ui.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.charo.android.R
 import com.charo.android.data.api.ApiService
@@ -21,8 +18,6 @@ import com.charo.android.data.model.response.ResponseStatusCode
 import com.charo.android.data.model.response.alarm.ResponseAlarmDeleteData
 import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.ActivityAlarmBinding
-import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.SharedInformation
 import retrofit2.Call
 import retrofit2.Callback
@@ -84,31 +79,11 @@ class AlarmActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         with(binding) {
             alarmAdapter = AlarmListAdapter(){
-                //itemClick 이벤트 구현
-                postReadAlarm(it.pushId)
-                Timber.tag("jinhee").d(" $it")
-
-                when(it.type) {
-                    "like","post" -> { //좋아요, 게시글 알림 : 게시글로 이동 (postId)
-                        val intent = Intent(this@AlarmActivity, WriteShareActivity::class.java)
-                        intent.apply {
-                            putExtra("destination", "detail")
-                            putExtra("postId", it.postId)
-                        }
-                        ContextCompat.startActivity(this@AlarmActivity, intent, null)
-                    }
-                    "following" -> { //팔로우 팔로잉 알림 : 해당 user 로 이동 (followed)
-                        if(it.followed != null){
-                            val intent = Intent(this@AlarmActivity, OtherMyPageActivity::class.java)
-                            intent.putExtra("userEmail", it.followed)
-                            startActivity(intent)
-                        }
-                    }
-                }
+                //itemDelete 이벤트 구현
+                serveDeleteItem(it)
             }
 
             rcvAlarmList.adapter = alarmAdapter
-//            alarmViewModel.getInitAlarmData()
 
             rcvAlarmList.setOnClickListener {
                 alarmSwipeHelperCallback.removePreviousClamp(rcvAlarmList)
@@ -152,7 +127,7 @@ class AlarmActivity : AppCompatActivity() {
         })
     }
 
-    fun serveDeleteItem(it: ResponseAlarmListData.PushList, view: View){
+    private fun serveDeleteItem(it: ResponseAlarmListData.PushList){
         Timber.e("postDeleteAlarm param ${it.pushId}")
         val call: Call<ResponseAlarmDeleteData> = ApiService.alarmViewService.postDeleteAlarm(it.pushId)
         call.enqueue(object : Callback<ResponseAlarmDeleteData> {
@@ -164,31 +139,27 @@ class AlarmActivity : AppCompatActivity() {
                     Timber.d("server connect : Alarm delete success")
                     Timber.d("server connect : Alarm delete ${response.body()}")
 
-//                    alarmAdapter.removeItem(it)
-                    val position = alarmAdapter.itemList.indexOf(it)
-                    alarmAdapter.itemList.removeAt(position)
-                    alarmAdapter.notifyItemRemoved(position)
-                    alarmAdapter.notifyItemRangeChanged(position, alarmAdapter.itemList.size)
+                    alarmAdapter.removeItem(it)
+                    Toast.makeText(this@AlarmActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
 
-                    Toast.makeText(view.context, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
                     Timber.d("server connect : Alarm delete error")
                     Timber.d("server connect : Alarm delete ${response.errorBody()}")
                     Timber.d("server connect : Alarm delete${response.message()}")
                     Timber.d("server connect : Alarm delete ${response.code()}")
                     Timber.d("server connect : Alarm delete ${response.raw().request.url}")
-                    Toast.makeText(view.context, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
                 Timber.d("server connect : Alarm delete fail: ${t.message}")
-                Toast.makeText(view.context, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun postReadAlarm(pushId: Int){
+    fun postReadAlarm(pushId: Int){
         Timber.e("postReadAlarm param $pushId")
         val call: Call<ResponseStatusCode> = ApiService.alarmViewService.postReadAlarm(RequestReadPushData(pushId))
         call.enqueue(object : Callback<ResponseStatusCode> {

@@ -46,7 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private var isMyPage: Boolean = true
     private var isFromOtherPage: Boolean = false
     private lateinit var lookFor : String
-
+    private var lastTimeBackPressed : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,17 +92,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-        if (onBackPressedDispatcher.hasEnabledCallbacks()){
-            onBackPressedDispatcher.onBackPressed()
-            if(sharedViewModel.moreFragment.value == true){
+//        if (onBackPressedDispatcher.hasEnabledCallbacks()){
+//                onBackPressedDispatcher.onBackPressed()
+        if(sharedViewModel.moreFragment.value == true){
                 changeFragment(R.id.nav_host_fragment_activity_main, homeFragment)
-                Timber.d("onBackPressed호출됨")
+                Timber.d("moreview에서 onBackPressed호출됨")
                 sharedViewModel.moreFragment.value = false
             }else{
-                finish()
-                Timber.d("onBackPressed호출됨finish")
+                Timber.d("mainactiviy에서 onBackPressed호출됨 : finish")
+                if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
+                    finish()
+                    return
+                }
+                lastTimeBackPressed = System.currentTimeMillis();
+                Toast.makeText(this,"한 번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
             }
-        }
+//        }
     }
 
     private fun deepLinkDetailPost(){
