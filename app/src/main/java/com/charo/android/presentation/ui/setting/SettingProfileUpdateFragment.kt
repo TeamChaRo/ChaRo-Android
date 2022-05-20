@@ -217,7 +217,6 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.apply {
             replace(R.id.fragment_container_setting, SettingMainFragment())
-            addToBackStack("")
             commit()
         }
     }

@@ -46,6 +46,7 @@ class SocialSignInViewModel(
                 is ResultWrapper.GenericError -> {
                     Timber.d("kakaoLogin 사용자 에러")
                     socialStatus.value = kakaoData.code ?: 0
+                    Timber.d("kakaoLogin 사용자 ${kakaoData.code}")
                 }
             }
         }

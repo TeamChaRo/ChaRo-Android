@@ -192,7 +192,8 @@ class SettingMainFragment :
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
                     if (num == 1) {
-                        settingViewModel.withdrawalUser("test@naver.com")
+                        val userEmail = SharedInformation.getEmail(requireActivity())
+                        settingViewModel.withdrawalUser(userEmail)
                         settingViewModel.withdrawalStatus.observe(viewLifecycleOwner) {
                             if (it) {
                                 SharedInformation.removeNickName(requireActivity())
@@ -217,7 +218,6 @@ class SettingMainFragment :
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.apply {
             replace(R.id.fragment_container_setting, fragment)
-            addToBackStack("")
             commit()
         }
     }
