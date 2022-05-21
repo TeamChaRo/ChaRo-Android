@@ -82,6 +82,16 @@ class DetailPostFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_1)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbarTitle.text = title
+
+        viewModel.isAuthorFlag.observe(viewLifecycleOwner){
+            setHasOptionsMenu(it)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        val menuInflater: MenuInflater = MenuInflater(requireContext())
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onDestroyView() {

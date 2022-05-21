@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 
 import androidx.fragment.app.Fragment
@@ -116,19 +115,6 @@ class WriteShareActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
-        if (currentFragment is DetailPostFragment) {
-            sharedViewModel.isAuthorFlag.observe(this){
-                when(it){
-                    true -> {
-                        val menuInflater: MenuInflater = MenuInflater(this)
-                        menuInflater.inflate(R.menu.detail_menu, menu)
-                    }
-                    else -> {}
-                }
-            }
-            return true
-        }
         return super.onCreateOptionsMenu(menu)
     }
 

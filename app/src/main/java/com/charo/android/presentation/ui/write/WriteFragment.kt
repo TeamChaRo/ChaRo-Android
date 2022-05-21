@@ -91,7 +91,6 @@ class WriteFragment : Fragment(), View.OnClickListener {
     ): View? {
         _binding = FragmentWriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         initToolBar(getString(R.string.title_write_kor))
 
         writeAdapter = WriteAdapter() {
@@ -164,9 +163,8 @@ class WriteFragment : Fragment(), View.OnClickListener {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close_black)
-        binding.toolbarTitle.text = title
 
-        setHasOptionsMenu(true)
+        binding.toolbarTitle.text = title
     }
 
     private fun initListener() {
