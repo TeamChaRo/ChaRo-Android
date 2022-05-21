@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charo.android.R
@@ -34,6 +35,8 @@ class FollowerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        refreshRecyclerView()
+        observeLiveData()
     }
 
     override fun onDestroyView() {
@@ -54,9 +57,20 @@ class FollowerFragment : Fragment() {
             }
         }, viewModel.userEmail
         )
+        binding.rv.adapter = adapter
+    }
+
+    private fun refreshRecyclerView() {
+        binding.srlFollower.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff))
+        binding.srlFollower.setOnRefreshListener {
+            viewModel.getFollowList()
+            binding.srlFollower.isRefreshing = false
+        }
+    }
+
+    private fun observeLiveData() {
         viewModel.follower.observe(viewLifecycleOwner) {
             adapter.replaceItem(it)
         }
-        binding.rv.adapter = adapter
     }
 }

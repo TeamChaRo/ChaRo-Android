@@ -59,44 +59,48 @@ class MyPageViewModel(
     }
 
     fun getLikePost() {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                getRemoteLikePostUseCase(userEmail)
-            }.onSuccess {
-                Timber.i("ViewModel 인기순 데이터 수신")
-                _userInfo.value = it.userInformation
+        if(writtenLikePostList.value == null) {
+            viewModelScope.launch {
+                kotlin.runCatching {
+                    getRemoteLikePostUseCase(userEmail)
+                }.onSuccess {
+                    Timber.i("ViewModel 인기순 데이터 수신")
+                    _userInfo.value = it.userInformation
 
-                // 테스트 - 게시물 없는 경우에 대한 테스트
-                _writtenLikeLastId = it.writtenPost.lastId
-                _writtenLikeLastCount = it.writtenPost.lastCount
-                _writtenLikePostList.value = it.writtenPost.drive
+                    // 테스트 - 게시물 없는 경우에 대한 테스트
+                    _writtenLikeLastId = it.writtenPost.lastId
+                    _writtenLikeLastCount = it.writtenPost.lastCount
+                    _writtenLikePostList.value = it.writtenPost.drive
 
-                _savedLikeLastId = it.savedPost.lastId
-                _savedLikeLastCount = it.savedPost.lastCount
-                _savedLikePostList.value = it.savedPost.drive
-            }.onFailure {
-                Timber.d("$TAG getLikePost() ${it.message.toString()}")
-                _serverError.call()
+                    _savedLikeLastId = it.savedPost.lastId
+                    _savedLikeLastCount = it.savedPost.lastCount
+                    _savedLikePostList.value = it.savedPost.drive
+                }.onFailure {
+                    Timber.d("$TAG getLikePost() ${it.message.toString()}")
+                    _serverError.call()
+                }
             }
         }
     }
 
     fun getNewPost() {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                getRemoteNewPostUseCase(userEmail)
-            }.onSuccess {
-                Timber.i("ViewModel 최신순 데이터 수신")
-                _userInfo.value = it.userInformation
+        if(writtenNewPostList.value == null) {
+            viewModelScope.launch {
+                kotlin.runCatching {
+                    getRemoteNewPostUseCase(userEmail)
+                }.onSuccess {
+                    Timber.i("ViewModel 최신순 데이터 수신")
+                    _userInfo.value = it.userInformation
 
-                _writtenNewLastId = it.writtenPost.lastId
-                _writtenNewPostList.value = it.writtenPost.drive
+                    _writtenNewLastId = it.writtenPost.lastId
+                    _writtenNewPostList.value = it.writtenPost.drive
 
-                _savedNewLastId = it.savedPost.lastId
-                _savedNewPostList.value = it.savedPost.drive
-            }.onFailure {
-                Timber.d("$TAG getNewPost() ${it.message.toString()}")
-                _serverError.call()
+                    _savedNewLastId = it.savedPost.lastId
+                    _savedNewPostList.value = it.savedPost.drive
+                }.onFailure {
+                    Timber.d("$TAG getNewPost() ${it.message.toString()}")
+                    _serverError.call()
+                }
             }
         }
     }
@@ -112,7 +116,8 @@ class MyPageViewModel(
             }.onSuccess {
                 _writtenLikeLastId = it.lastId
                 _writtenLikeLastCount = it.lastCount
-                _writtenLikePostList.value = _writtenLikePostList.value?.apply { addAll(it.drive) }
+                _writtenLikePostList.value =
+                    _writtenLikePostList.value?.apply { addAll(it.drive) }
             }.onFailure {
                 Timber.d("$TAG getMoreWrittenLikePost() ${it.message.toString()}")
                 _serverError.call()

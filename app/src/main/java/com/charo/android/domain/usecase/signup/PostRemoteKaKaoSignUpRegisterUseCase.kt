@@ -7,7 +7,7 @@ import com.charo.android.domain.repository.signup.SignUpRegisterRepository
 
 class PostRemoteKaKaoSignUpRegisterUseCase(private val repository : SignUpRegisterRepository) {
 
-    suspend fun execute(requestSignUpKaKaoData: RequestSignUpKaKaoData) : StatusCode {
+    suspend operator fun invoke(requestSignUpKaKaoData: RequestSignUpKaKaoData) : StatusCode {
         return repository.signUpKaKaoRegister(requestSignUpKaKaoData)
 
     }

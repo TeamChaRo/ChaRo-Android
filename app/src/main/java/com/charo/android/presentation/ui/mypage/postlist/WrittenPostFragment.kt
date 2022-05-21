@@ -53,10 +53,6 @@ class WrittenPostFragment : Fragment() {
         initSpinner()
         initRecyclerView()
         endlessScroll()
-    }
-
-    override fun onResume() {
-        super.onResume()
         observeData()
     }
 
@@ -66,16 +62,14 @@ class WrittenPostFragment : Fragment() {
     }
 
     private fun observeData() {
-        when (sort) {
-            LIKE -> {
-                viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
-                    writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
-                }
+        viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
+            if(sort == LIKE) {
+                writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
             }
-            NEW -> {
-                viewModel.writtenNewPostList.observe(viewLifecycleOwner) {
-                    writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
-                }
+        }
+        viewModel.writtenNewPostList.observe(viewLifecycleOwner) {
+            if(sort == NEW) {
+                writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }
     }
@@ -103,7 +97,7 @@ class WrittenPostFragment : Fragment() {
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                    sort = LIKE
                 }
             }
     }
@@ -133,15 +127,9 @@ class WrittenPostFragment : Fragment() {
                 when (sort) {
                     LIKE -> {
                         viewModel.getMoreWrittenLikePost()
-                        viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
-                            writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
-                        }
                     }
                     NEW -> {
                         viewModel.getMoreWrittenNewPost()
-                        viewModel.writtenNewPostList.observe(viewLifecycleOwner) {
-                            writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
-                        }
                     }
                 }
             }
