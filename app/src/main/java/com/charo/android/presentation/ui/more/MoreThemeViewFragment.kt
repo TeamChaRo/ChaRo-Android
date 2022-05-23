@@ -10,6 +10,7 @@ import androidx.core.view.doOnAttach
 import com.charo.android.R
 import com.charo.android.data.model.request.RequestThemeViewData
 import com.charo.android.databinding.FragmentMoreThemeViewBinding
+import com.charo.android.hidden.Hidden.Companion.userId
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.main.SharedViewModel
@@ -28,7 +29,6 @@ class MoreThemeViewFragment :
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     var requestThemeData = mutableListOf<RequestThemeViewData>()
     private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
-    private lateinit var userId: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,11 +43,11 @@ class MoreThemeViewFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userId = arguments?.getString("userId").toString()
+
         initToolbar()
         sharedViewModel.moreFragment.value = true
 
-        initMoreThemeViewPager(userId)
+        initMoreThemeViewPager()
 //        clickBackButton()
         clickTab()
     }
@@ -76,14 +76,11 @@ class MoreThemeViewFragment :
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initMoreThemeViewPager(userId: String) {
+    private fun initMoreThemeViewPager() {
         binding.apply {
-
             moreThemeViewPagerAdapter = MoreThemeViewPagerAdapter(requireActivity())
             viewPagerMoreTheme.adapter = moreThemeViewPagerAdapter
-
-
-
+            val userId = SharedInformation.getEmail(requireActivity())
             with(moreThemeViewPagerAdapter) {
                 fragments = listOf(
                     MoreThemeContentViewFragment(userId, "1", "spring"),
