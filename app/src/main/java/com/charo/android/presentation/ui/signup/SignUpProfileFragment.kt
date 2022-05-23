@@ -64,7 +64,7 @@ class SignUpProfileFragment :
     private fun checkNickName() {
         val nickNamePattern = "^[가-힣ㄱ-ㅎ]{0,5}$"
         with(binding) {
-            img_sign_up_profile_delete_button.setOnClickListener {
+            imgSignUpProfileDeleteButton.setOnClickListener {
                 etSignUpNickname.setText("")
                 textSignUpNicknameNext.isEnabled = false
                 textSignUpNicknameNextFocus.isEnabled = false
