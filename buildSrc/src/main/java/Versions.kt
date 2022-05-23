@@ -1,7 +1,7 @@
 import org.gradle.api.JavaVersion
 
 object Versions {
-    const val kotlin_version = "1.5.31"
+    const val kotlin_version = "1.6.21"
     const val core_ktx_version = "1.3.2"
     const val appcompat_version = "1.2.0"
     const val material_design_version = "1.3.0"

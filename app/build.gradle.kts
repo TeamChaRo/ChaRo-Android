@@ -5,6 +5,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-android")
     id("com.google.gms.google-services")
+    id("com.google.android.gms.oss-licenses-plugin")
 }
 
 android {
@@ -54,7 +55,7 @@ dependencies {
     implementation(AndroidXDependencies.coreKtx)
     implementation(MaterialDesignDependencies.materialDesign)
     implementation(AndroidXDependencies.constraintLayout)
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
 //lottie
@@ -170,9 +171,11 @@ dependencies {
     implementation("com.kakao.sdk:v2-user:2.8.2")
 
 //google
-    implementation("com.google.android.gms:play-services-auth:20.1.0")
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
 
     // Timber
     implementation ("com.jakewharton.timber:timber:4.7.1")
 
+//opensource
+    implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
 }
