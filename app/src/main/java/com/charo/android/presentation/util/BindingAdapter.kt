@@ -1,6 +1,7 @@
 package com.charo.android.presentation.util
 
 import android.net.Uri
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -70,13 +71,16 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("setCircleImageUrl")
     fun setCircleImageUrl(imageView: ImageView, imageUrl: String?) {
-        if (imageUrl != null) {
+        if (TextUtils.isEmpty(imageUrl) || imageUrl == "null") {
+            Glide.with(imageView.context)
+                .load(R.drawable.ic_profile)
+                .circleCrop()
+                .into(imageView)
+        } else {
             Glide.with(imageView.context)
                 .load(imageUrl)
                 .circleCrop()
                 .into(imageView)
-        } else {
-            imageView.setImageResource(R.drawable.ic_profile)
         }
     }
 
