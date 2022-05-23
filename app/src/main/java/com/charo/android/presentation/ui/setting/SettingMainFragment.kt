@@ -18,6 +18,7 @@ import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.ui.signin.SocialSignInActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.user.UserApiClient
@@ -45,6 +46,7 @@ class SettingMainFragment :
         clickPrivacy()
         clickServiceTerm()
         clickReport()
+        clickOpenSource()
     }
 
     // 알림, 사진 접근 허용
@@ -61,6 +63,16 @@ class SettingMainFragment :
                 startActivity(intent)
             }
         }
+    }
+    //오픈 소스
+    private fun clickOpenSource(){
+        binding.textSettingOpenSource.setOnClickListener {
+            val intent = Intent(requireActivity(), OssLicensesMenuActivity::class.java)
+            startActivity(intent)
+
+            OssLicensesMenuActivity.setActivityTitle("오픈소스 라이선스")
+        }
+
     }
 
     // 개인 정보 처리

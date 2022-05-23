@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSe
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val kotlin_version by extra("1.5.31")
+
     repositories {
         google()
         mavenCentral()
@@ -10,11 +10,10 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.4")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21")
-//        classpath(ClassPathDependencies.hilt)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}")
         classpath(ClassPathDependencies.hilt)
-
+        classpath("com.google.android.gms:oss-licenses-plugin:0.10.4")
+//opensource
         classpath("com.google.gms:google-services:4.3.10")
     }
 }

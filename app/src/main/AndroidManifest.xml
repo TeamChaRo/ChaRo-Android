@@ -27,9 +27,12 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:appComponentFactory">
         <activity
-            android:name=".presentation.ui.signin.PasswordSearchActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".SettingOpenSourceActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.ui.signin.PasswordSearchActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".presentation.ui.setting.SettingReportActivity"
             android:exported="false" />

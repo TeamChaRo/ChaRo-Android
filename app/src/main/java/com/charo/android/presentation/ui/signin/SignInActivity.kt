@@ -30,7 +30,7 @@ class SignInActivity : AppCompatActivity() {
         binding.imgSigninPwClear.setOnClickListener() { clearPassword() }
         setContentView(binding.root)
     }
-
+    //로그인
     private fun login() {
         binding.btnSigninLogin.setOnClickListener {
             if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
@@ -53,6 +53,7 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(intent)
                         //로그인 후 firebase init
                         initFirebase()
+                        finish()
                     }
                 })
             }
