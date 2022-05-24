@@ -128,6 +128,15 @@ class OtherMyPageViewModel(
                 postFollowUseCase(userEmail, otherUserEmail)
             }.onSuccess {
                 _isFollow.value = it
+                if(it) {
+                    _userInfo.value = userInfo.value?.copy()?.apply {
+                        this.follower++
+                    }
+                } else {
+                    _userInfo.value = userInfo.value?.copy()?.apply {
+                        this.follower--
+                    }
+                }
             }.onFailure {
                 Timber.d("$TAG postFollow() ${it.message.toString()}")
             }

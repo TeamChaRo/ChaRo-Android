@@ -4,5 +4,5 @@ data class UserInformation(
     val nickname: String,
     val profileImage: String,
     val following: Int,
-    val follower: Int
+    var follower: Int
 )

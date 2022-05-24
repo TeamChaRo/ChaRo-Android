@@ -45,17 +45,23 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
-        if (viewModel.userEmail != "@") {
-            viewModel.getLikePost()
-            viewModel.getNewPost()
-            viewModel.getFollow()
-        }
+        fetchData()
+        setOnSwipeRefreshLayoutListener()
         observeLiveData()
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    private fun setOnSwipeRefreshLayoutListener() {
+        binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.layoutSwipe.setOnRefreshListener {
+            fetchData()
+            binding.layoutSwipe.isRefreshing = false
+        }
+    }
+
+    private fun fetchData() {
         if (viewModel.userEmail != "@") {
+            viewModel.getLikePost()
+            viewModel.getNewPost()
             viewModel.getFollow()
         }
     }

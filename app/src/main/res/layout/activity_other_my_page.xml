@@ -51,11 +51,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="34dp"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
-                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:includeFontPadding="false"
                 android:text="@string/my_charo_title"
                 android:textColor="@color/white"
                 android:textSize="17sp"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -88,12 +88,12 @@
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/noto_sans_cjkkr_bold"
-                app:fontFamily="@font/noto_sans_cjkkr_bold"
                 android:includeFontPadding="false"
                 android:maxLines="1"
                 android:text="@{viewModel.userInfo.nickname}"
                 android:textColor="@color/white"
                 android:textSize="18sp"
+                app:fontFamily="@font/noto_sans_cjkkr_bold"
                 app:layout_constraintEnd_toStartOf="@id/tv_follow"
                 app:layout_constraintStart_toEndOf="@id/cl_profile_picture"
                 app:layout_constraintTop_toTopOf="@id/cl_profile_picture" />
@@ -105,13 +105,13 @@
                 android:layout_marginEnd="15dp"
                 android:background="@{viewModel.isFollow ? @drawable/rectangle_white_radius_12 : @drawable/rectangle_border_white_radius_12}"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
-                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="9dp"
                 android:paddingVertical="5dp"
-                android:visibility="@{viewModel.isMine ? View.GONE : View.VISIBLE}"
                 android:text="@{viewModel.isFollow ? `팔로잉` : `팔로우`}"
                 android:textColor="@{viewModel.isFollow ? @color/blue_main_0f6fff : @color/white}"
+                android:visibility="@{viewModel.isMine ? View.GONE : View.VISIBLE}"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 app:layout_constraintBottom_toBottomOf="@id/tv_profile_nickname"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_profile_nickname" />
@@ -137,11 +137,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="@string/follower"
                     android:textColor="@color/gray2_sub_dde2e5"
                     android:textSize="13sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,11 +151,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="@{Integer.toString(viewModel.userInfo.follower)}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     app:layout_constraintStart_toEndOf="@id/tv_profile_follower"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -165,11 +165,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="@string/following"
                     android:textColor="@color/gray2_sub_dde2e5"
                     android:textSize="13sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     app:layout_constraintStart_toEndOf="@id/tv_profile_follower_count"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,11 +179,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="@{Integer.toString(viewModel.userInfo.following)}"
                     android:textColor="@color/white"
                     android:textSize="13sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     app:layout_constraintStart_toEndOf="@id/tv_profile_following"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -191,49 +191,58 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_other_bottom"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/layout_swipe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_other_top">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/nsv_post_list"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_other_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/nsv_post_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never">
 
-                    <Spinner
-                        android:id="@+id/spinner_post_list"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginEnd="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_post_list"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:overScrollMode="never"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/spinner_post_list"
-                        tools:itemCount="5"
-                        tools:listitem="@layout/item_my_page_post" />
+                        android:layout_height="match_parent">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <Spinner
+                            android:id="@+id/spinner_post_list"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.core.widget.NestedScrollView>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_post_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:overScrollMode="never"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_post_list"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/item_my_page_post" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
