@@ -16,6 +16,7 @@ import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class SavedPostFragment : Fragment() {
     private var _binding: FragmentSavedPostBinding? = null

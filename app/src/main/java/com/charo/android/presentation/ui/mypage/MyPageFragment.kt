@@ -37,20 +37,20 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initFragmentContainerView()
+        fetchData()
         observeError()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (viewModel.userEmail != "@") {
-            viewModel.getLikePost()
-            viewModel.getNewPost()
-        }
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun fetchData() {
+        if (viewModel.userEmail != "@") {
+            viewModel.getLikePost()
+            viewModel.getNewPost()
+        }
     }
 
     private fun initFragmentContainerView() {

@@ -28,8 +28,8 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.isAuthorFlag ? `내가 작성한 글` : `구경하기`}"
                 android:layout_gravity="center"
+                android:text="@{viewModel.isAuthorFlag ? `내가 작성한 글` : `구경하기`}"
                 android:textAppearance="@style/HeaderH4" />
         </androidx.appcompat.widget.Toolbar>
 
@@ -38,8 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#DDE2E5"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -722,12 +721,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_detail_like"
-                    android:clickable="@{viewModel.isAuthorFlag ? false : true}"
                     android:src="@{viewModel.isFavorite == 1 ? @drawable/ic_bigheart_active : @drawable/ic_bigheart_inactive}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_detail_like"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+                <!--                android:clickable="@{viewModel.isAuthorFlag ? false : true}"-->
 
                 <TextView
                     android:id="@+id/tv_detail_like"
