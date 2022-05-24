@@ -26,12 +26,16 @@ class FollowActivity : AppCompatActivity() {
 
         initViewPager()
         getFollowList()
+        setOnSwipeRefreshLayoutListener()
         clickBack()
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        getFollowList()
+    private fun setOnSwipeRefreshLayoutListener() {
+        binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.layoutSwipe.setOnRefreshListener {
+            getFollowList()
+            binding.layoutSwipe.isRefreshing = false
+        }
     }
 
     private fun initViewPager() {

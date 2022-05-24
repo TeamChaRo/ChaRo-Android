@@ -34,7 +34,6 @@ class FollowingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        refreshRecyclerView()
         observeLiveData()
     }
 
@@ -57,14 +56,6 @@ class FollowingFragment : Fragment() {
         }, viewModel.userEmail
         )
         binding.rv.adapter = adapter
-    }
-
-    private fun refreshRecyclerView() {
-        binding.srlFollowing.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff))
-        binding.srlFollowing.setOnRefreshListener {
-            viewModel.getFollowList()
-            binding.srlFollowing.isRefreshing = false
-        }
     }
 
     private fun observeLiveData() {
