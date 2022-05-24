@@ -12,765 +12,772 @@
             type="com.charo.android.presentation.ui.write.WriteSharedViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/layout_swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ui.detailpost.DetailPostFragment">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="78dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            tools:context=".presentation.ui.detailpost.DetailPostFragment">
 
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@{viewModel.isAuthorFlag ? `내가 작성한 글` : `구경하기`}"
-                android:textAppearance="@style/HeaderH4" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDE2E5"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toTopOf="@id/cl_detail_bottom"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="41dp">
+                android:layout_height="wrap_content"
+                android:minHeight="78dp"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_post_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="21dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:lineHeight="25sp"
-                    android:text="@{viewModel.title}"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="19sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/img_author"
-                    setCircleImageUrl="@{viewModel.profileImage}"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_post_date"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_author_nickname" />
-
-                <TextView
-                    android:id="@+id/tv_author_nickname"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:text="@{viewModel.author}"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="13sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img_author"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_title" />
-
-                <TextView
-                    android:id="@+id/tv_post_date"
+                    android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:text="@{viewModel.createdAt}"
-                    android:textColor="@color/gray3_sub_acb5bd"
-                    android:textSize="12sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:layout_constraintStart_toStartOf="@id/tv_author_nickname"
-                    app:layout_constraintTop_toBottomOf="@id/tv_author_nickname" />
+                    android:layout_gravity="center"
+                    android:text="@{viewModel.isAuthorFlag ? `내가 작성한 글` : `구경하기`}"
+                    android:textAppearance="@style/HeaderH4" />
+            </androidx.appcompat.widget.Toolbar>
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vp_post"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="12dp"
-                    app:layout_constraintDimensionRatio="360:222"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_date" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDE2E5"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-                <TextView
-                    android:id="@+id/tv_post_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/rectangle_radius_40"
-                    android:backgroundTint="@color/gray3_sub_acb5bd"
-                    android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:paddingHorizontal="11dp"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="2dp"
-                    android:text="@{`1/` + viewModel.imageStringViewPager.size()}"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:layout_constraintEnd_toEndOf="@id/vp_post"
-                    app:layout_constraintTop_toTopOf="@id/vp_post" />
-
-                <ImageView
-                    android:id="@+id/img_post_location"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_start"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/vp_post" />
-
-                <TextView
-                    android:id="@+id/tv_post_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:text="@{viewModel.detailArea}"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintBottom_toBottomOf="@id/img_post_location"
-                    app:layout_constraintStart_toEndOf="@id/img_post_location"
-                    app:layout_constraintTop_toTopOf="@id/img_post_location" />
-
-                <TextView
-                    android:id="@+id/tv_post_theme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="36dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:text="@string/main_charo_theme"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/img_post_location" />
-
-                <TextView
-                    android:id="@+id/tv_post_theme_1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/rectangle_border_blue_radius_20"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingVertical="10dp"
-                    android:text="@{viewModel.themes[0]}"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textSize="14sp"
-                    android:visibility="@{viewModel.themes.size >= 1 ? View.VISIBLE : View.INVISIBLE}"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintEnd_toStartOf="@id/tv_post_theme_2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_theme" />
-
-                <TextView
-                    android:id="@+id/tv_post_theme_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="6dp"
-                    android:background="@drawable/rectangle_border_blue_radius_20"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingVertical="10dp"
-                    android:text="@{viewModel.themes[1]}"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textSize="14sp"
-                    android:visibility="@{viewModel.themes.size >= 2 ? View.VISIBLE : View.INVISIBLE}"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_post_theme_1"
-                    app:layout_constraintEnd_toStartOf="@id/tv_post_theme_3"
-                    app:layout_constraintStart_toEndOf="@id/tv_post_theme_1"
-                    app:layout_constraintTop_toTopOf="@id/tv_post_theme_1" />
-
-                <TextView
-                    android:id="@+id/tv_post_theme_3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/rectangle_border_blue_radius_20"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:paddingVertical="10dp"
-                    android:text="@{viewModel.themes[2]}"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textSize="14sp"
-                    android:visibility="@{viewModel.themes.size >= 3 ? View.VISIBLE : View.INVISIBLE}"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_post_theme_1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_post_theme_2"
-                    app:layout_constraintTop_toTopOf="@id/tv_post_theme_1" />
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toTopOf="@id/cl_detail_bottom"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_post_address_map"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="34dp"
-                    android:background="@drawable/rectangle_radius_8"
-                    android:backgroundTint="@color/gray1_sub_f8f9fa"
-                    android:paddingVertical="15dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_theme_1">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="41dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_post_location_start"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tv_post_title"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="21dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:includeFontPadding="false"
+                        android:lineHeight="25sp"
+                        android:text="@{viewModel.title}"
+                        android:textColor="@color/black_sub_212429"
+                        android:textSize="19sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tv_post_location_start"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:fontFamily="@font/noto_sans_cjkkr_medium"
-                            android:includeFontPadding="false"
-                            android:text="@string/start_point"
-                            android:textColor="@color/black_sub_212429"
-                            android:textSize="14sp"
-                            app:fontFamily="@font/noto_sans_cjkkr_medium"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_post_address_start"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tv_post_address_start" />
-
-                        <TextView
-                            android:id="@+id/tv_post_address_start"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:background="@drawable/rectangle_radius_6"
-                            android:backgroundTint="@color/white"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/noto_sans_cjkkr_regular"
-                            android:includeFontPadding="false"
-                            android:maxLines="1"
-                            android:paddingHorizontal="9dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="11dp"
-                            android:text="@{viewModel.courseDetail[0].address}"
-                            android:textColor="@color/gray5_sub_495057"
-                            android:textSize="13sp"
-                            app:fontFamily="@font/noto_sans_cjkkr_regular"
-                            app:layout_constraintEnd_toStartOf="@id/cl_post_address_copy_start"
-                            app:layout_constraintStart_toEndOf="@id/tv_post_location_start"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cl_post_address_copy_start"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_post_address_start"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tv_post_address_start">
-
-                            <ImageView
-                                android:id="@+id/img_post_address_copy_start"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_copy_1_light_ver"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_post_location_via"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:visibility="@{viewModel.courseDetail.size() == 3 ? View.VISIBLE : View.GONE}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cl_post_location_start">
-
-                        <TextView
-                            android:id="@+id/tv_post_location_via"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:fontFamily="@font/noto_sans_cjkkr_medium"
-                            android:includeFontPadding="false"
-                            android:text="@string/via_point"
-                            android:textColor="@color/black_sub_212429"
-                            android:textSize="14sp"
-                            app:fontFamily="@font/noto_sans_cjkkr_medium"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_post_address_via"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tv_post_address_via" />
-
-                        <TextView
-                            android:id="@+id/tv_post_address_via"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:background="@drawable/rectangle_radius_6"
-                            android:backgroundTint="@color/white"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/noto_sans_cjkkr_regular"
-                            android:includeFontPadding="false"
-                            android:maxLines="1"
-                            android:paddingHorizontal="9dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="11dp"
-                            android:text="@{viewModel.courseDetail[1].address}"
-                            android:textColor="@color/gray5_sub_495057"
-                            android:textSize="13sp"
-                            app:fontFamily="@font/noto_sans_cjkkr_regular"
-                            app:layout_constraintEnd_toStartOf="@id/cl_post_address_copy_via"
-                            app:layout_constraintStart_toEndOf="@id/tv_post_location_via"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cl_post_address_copy_via"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_post_address_via"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tv_post_address_via">
-
-                            <ImageView
-                                android:id="@+id/img_post_address_copy_via"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_copy_1_light_ver"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_post_location_end"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cl_post_location_via">
-
-                        <TextView
-                            android:id="@+id/tv_post_location_end"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:fontFamily="@font/noto_sans_cjkkr_medium"
-                            android:includeFontPadding="false"
-                            android:text="@string/end_point"
-                            android:textColor="@color/black_sub_212429"
-                            android:textSize="14sp"
-                            app:fontFamily="@font/noto_sans_cjkkr_medium"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_post_address_end"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tv_post_address_end" />
-
-                        <TextView
-                            android:id="@+id/tv_post_address_end"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:background="@drawable/rectangle_radius_6"
-                            android:backgroundTint="@color/white"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/noto_sans_cjkkr_regular"
-                            android:includeFontPadding="false"
-                            android:maxLines="1"
-                            android:paddingHorizontal="9dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="11dp"
-                            android:text="@{viewModel.courseDetail[viewModel.courseDetail.size() - 1].address}"
-                            android:textColor="@color/gray5_sub_495057"
-                            android:textSize="13sp"
-                            app:fontFamily="@font/noto_sans_cjkkr_regular"
-                            app:layout_constraintEnd_toStartOf="@id/cl_post_address_copy_end"
-                            app:layout_constraintStart_toEndOf="@id/tv_post_location_end"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/cl_post_address_copy_end"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_post_address_end"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tv_post_address_end">
-
-                            <ImageView
-                                android:id="@+id/img_post_address_copy_end"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_copy_1_light_ver"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!--                    지도-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_post_map"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/img_author"
+                        setCircleImageUrl="@{viewModel.profileImage}"
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginHorizontal="9dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_post_date"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_author_nickname" />
+
+                    <TextView
+                        android:id="@+id/tv_author_nickname"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@{viewModel.author}"
+                        android:textColor="@color/black_sub_212429"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/img_author"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_title" />
+
+                    <TextView
+                        android:id="@+id/tv_post_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_cjkkr_regular"
+                        android:includeFontPadding="false"
+                        android:text="@{viewModel.createdAt}"
+                        android:textColor="@color/gray3_sub_acb5bd"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_regular"
+                        app:layout_constraintStart_toStartOf="@id/tv_author_nickname"
+                        app:layout_constraintTop_toBottomOf="@id/tv_author_nickname" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp_post"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:layout_marginTop="12dp"
-                        app:layout_constraintDimensionRatio="302:351"
-                        app:layout_constraintTop_toBottomOf="@id/cl_post_location_end" />
+                        app:layout_constraintDimensionRatio="360:222"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_date" />
+
+                    <TextView
+                        android:id="@+id/tv_post_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/rectangle_radius_40"
+                        android:backgroundTint="@color/gray3_sub_acb5bd"
+                        android:fontFamily="@font/noto_sans_cjkkr_regular"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="11dp"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="2dp"
+                        android:text="@{`1/` + viewModel.imageStringViewPager.size()}"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_regular"
+                        app:layout_constraintEnd_toEndOf="@id/vp_post"
+                        app:layout_constraintTop_toTopOf="@id/vp_post" />
+
+                    <ImageView
+                        android:id="@+id/img_post_location"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_start"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vp_post" />
+
+                    <TextView
+                        android:id="@+id/tv_post_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:text="@{viewModel.detailArea}"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintBottom_toBottomOf="@id/img_post_location"
+                        app:layout_constraintStart_toEndOf="@id/img_post_location"
+                        app:layout_constraintTop_toTopOf="@id/img_post_location" />
+
+                    <TextView
+                        android:id="@+id/tv_post_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="36dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/main_charo_theme"
+                        android:textColor="@color/black_sub_212429"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/img_post_location" />
+
+                    <TextView
+                        android:id="@+id/tv_post_theme_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/rectangle_border_blue_radius_20"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingVertical="10dp"
+                        android:text="@{viewModel.themes[0]}"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textSize="14sp"
+                        android:visibility="@{viewModel.themes.size >= 1 ? View.VISIBLE : View.INVISIBLE}"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintEnd_toStartOf="@id/tv_post_theme_2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_theme" />
+
+                    <TextView
+                        android:id="@+id/tv_post_theme_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="6dp"
+                        android:background="@drawable/rectangle_border_blue_radius_20"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingVertical="10dp"
+                        android:text="@{viewModel.themes[1]}"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textSize="14sp"
+                        android:visibility="@{viewModel.themes.size >= 2 ? View.VISIBLE : View.INVISIBLE}"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_post_theme_1"
+                        app:layout_constraintEnd_toStartOf="@id/tv_post_theme_3"
+                        app:layout_constraintStart_toEndOf="@id/tv_post_theme_1"
+                        app:layout_constraintTop_toTopOf="@id/tv_post_theme_1" />
+
+                    <TextView
+                        android:id="@+id/tv_post_theme_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/rectangle_border_blue_radius_20"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingVertical="10dp"
+                        android:text="@{viewModel.themes[2]}"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textSize="14sp"
+                        android:visibility="@{viewModel.themes.size >= 3 ? View.VISIBLE : View.INVISIBLE}"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_post_theme_1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_post_theme_2"
+                        app:layout_constraintTop_toTopOf="@id/tv_post_theme_1" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_post_address_map"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="34dp"
+                        android:background="@drawable/rectangle_radius_8"
+                        android:backgroundTint="@color/gray1_sub_f8f9fa"
+                        android:paddingVertical="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_theme_1">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_post_location_start"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tv_post_location_start"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                                android:includeFontPadding="false"
+                                android:text="@string/start_point"
+                                android:textColor="@color/black_sub_212429"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/noto_sans_cjkkr_medium"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_post_address_start"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_post_address_start" />
+
+                            <TextView
+                                android:id="@+id/tv_post_address_start"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/rectangle_radius_6"
+                                android:backgroundTint="@color/white"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                android:paddingHorizontal="9dp"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="11dp"
+                                android:text="@{viewModel.courseDetail[0].address}"
+                                android:textColor="@color/gray5_sub_495057"
+                                android:textSize="13sp"
+                                app:fontFamily="@font/noto_sans_cjkkr_regular"
+                                app:layout_constraintEnd_toStartOf="@id/cl_post_address_copy_start"
+                                app:layout_constraintStart_toEndOf="@id/tv_post_location_start"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cl_post_address_copy_start"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_post_address_start"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_post_address_start">
+
+                                <ImageView
+                                    android:id="@+id/img_post_address_copy_start"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_copy_1_light_ver"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_post_location_via"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:visibility="@{viewModel.courseDetail.size() == 3 ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cl_post_location_start">
+
+                            <TextView
+                                android:id="@+id/tv_post_location_via"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                                android:includeFontPadding="false"
+                                android:text="@string/via_point"
+                                android:textColor="@color/black_sub_212429"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/noto_sans_cjkkr_medium"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_post_address_via"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_post_address_via" />
+
+                            <TextView
+                                android:id="@+id/tv_post_address_via"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/rectangle_radius_6"
+                                android:backgroundTint="@color/white"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                android:paddingHorizontal="9dp"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="11dp"
+                                android:text="@{viewModel.courseDetail[1].address}"
+                                android:textColor="@color/gray5_sub_495057"
+                                android:textSize="13sp"
+                                app:fontFamily="@font/noto_sans_cjkkr_regular"
+                                app:layout_constraintEnd_toStartOf="@id/cl_post_address_copy_via"
+                                app:layout_constraintStart_toEndOf="@id/tv_post_location_via"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cl_post_address_copy_via"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_post_address_via"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_post_address_via">
+
+                                <ImageView
+                                    android:id="@+id/img_post_address_copy_via"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_copy_1_light_ver"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_post_location_end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cl_post_location_via">
+
+                            <TextView
+                                android:id="@+id/tv_post_location_end"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                                android:includeFontPadding="false"
+                                android:text="@string/end_point"
+                                android:textColor="@color/black_sub_212429"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/noto_sans_cjkkr_medium"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_post_address_end"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_post_address_end" />
+
+                            <TextView
+                                android:id="@+id/tv_post_address_end"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/rectangle_radius_6"
+                                android:backgroundTint="@color/white"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                                android:includeFontPadding="false"
+                                android:maxLines="1"
+                                android:paddingHorizontal="9dp"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="11dp"
+                                android:text="@{viewModel.courseDetail[viewModel.courseDetail.size() - 1].address}"
+                                android:textColor="@color/gray5_sub_495057"
+                                android:textSize="13sp"
+                                app:fontFamily="@font/noto_sans_cjkkr_regular"
+                                app:layout_constraintEnd_toStartOf="@id/cl_post_address_copy_end"
+                                app:layout_constraintStart_toEndOf="@id/tv_post_location_end"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/cl_post_address_copy_end"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                app:layout_constraintBottom_toBottomOf="@id/tv_post_address_end"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@id/tv_post_address_end">
+
+                                <ImageView
+                                    android:id="@+id/img_post_address_copy_end"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_copy_1_light_ver"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--                    지도-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_post_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginHorizontal="9dp"
+                            android:layout_marginTop="12dp"
+                            app:layout_constraintDimensionRatio="302:351"
+                            app:layout_constraintTop_toBottomOf="@id/cl_post_location_end" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tv_post_parking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="38dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/is_parking"
+                        android:textColor="@color/black_sub_212429"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cl_post_address_map" />
+
+                    <TextView
+                        android:id="@+id/tv_post_parking_yes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@{viewModel.isParking ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/parking_yes"
+                        android:textAlignment="center"
+                        android:textColor="@{viewModel.isParking ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintEnd_toStartOf="@id/tv_post_parking_no"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_parking" />
+
+                    <TextView
+                        android:id="@+id/tv_post_parking_no"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:background="@{viewModel.isParking ? @drawable/rectangle_border_gray_radius_21 : @drawable/rectangle_border_blue_radius_21}"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/parking_no"
+                        android:textAlignment="center"
+                        android:textColor="@{viewModel.isParking ? @color/gray4_sub_889098 : @color/gray5_sub_495057}"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_post_parking_yes"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_post_parking_yes"
+                        app:layout_constraintTop_toTopOf="@id/tv_post_parking_yes" />
+
+                    <TextView
+                        android:id="@+id/tv_post_parking_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rectangle_radius_12"
+                        android:backgroundTint="@color/gray1_sub_f8f9fa"
+                        android:fontFamily="@font/noto_sans_cjkkr_regular"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="10dp"
+                        android:text="@{viewModel.parkingDesc}"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textSize="13sp"
+                        android:visibility="@{viewModel.parkingDesc == null || viewModel.parkingDesc.length == 0 ? View.GONE : View.VISIBLE}"
+                        app:fontFamily="@font/noto_sans_cjkkr_regular"
+                        app:layout_constraintEnd_toEndOf="@id/tv_post_parking_no"
+                        app:layout_constraintStart_toStartOf="@id/tv_post_parking_yes"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_parking_yes" />
+
+                    <TextView
+                        android:id="@+id/tv_post_warning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="34dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/warning"
+                        android:textColor="@color/black_sub_212429"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_parking_description" />
+
+                    <TextView
+                        android:id="@+id/tv_warning_highway"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@{viewModel.warnings[0] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/warning_highway"
+                        android:textAlignment="center"
+                        android:textColor="@{viewModel.warnings[0] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintEnd_toStartOf="@id/tv_warning_mountain"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_warning" />
+
+                    <TextView
+                        android:id="@+id/tv_warning_mountain"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:background="@{viewModel.warnings[1] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/warning_mountain"
+                        android:textAlignment="center"
+                        android:textColor="@{viewModel.warnings[1] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_warning_highway"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_warning_highway"
+                        app:layout_constraintTop_toTopOf="@id/tv_warning_highway" />
+
+                    <TextView
+                        android:id="@+id/tv_warning_difficult"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@{viewModel.warnings[2] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
+                        android:fontFamily="@font/noto_sans_cjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/warning_difficult"
+                        android:textAlignment="center"
+                        android:textColor="@{viewModel.warnings[2] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_medium"
+                        app:layout_constraintEnd_toEndOf="@id/tv_warning_highway"
+                        app:layout_constraintStart_toStartOf="@id/tv_warning_highway"
+                        app:layout_constraintTop_toBottomOf="@id/tv_warning_highway" />
+
+                    <TextView
+                        android:id="@+id/tv_warning_crowded"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@{viewModel.warnings[3] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="11dp"
+                        android:text="@string/warning_crowded"
+                        android:textAlignment="center"
+                        android:textColor="@{viewModel.warnings[3] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_warning_difficult"
+                        app:layout_constraintEnd_toEndOf="@id/tv_warning_mountain"
+                        app:layout_constraintStart_toStartOf="@id/tv_warning_mountain"
+                        app:layout_constraintTop_toTopOf="@id/tv_warning_difficult" />
+
+                    <TextView
+                        android:id="@+id/tv_post_course_introduction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="34dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/course_description"
+                        android:textColor="@color/black_sub_212429"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_warning_difficult" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_post_course_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/rectangle_radius_12"
+                        android:backgroundTint="@color/gray1_sub_f8f9fa"
+                        app:layout_constraintTop_toBottomOf="@id/tv_post_course_introduction">
+
+                        <TextView
+                            android:id="@+id/tv_post_course_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="17dp"
+                            android:layout_marginTop="17dp"
+                            android:fontFamily="@font/noto_sans_cjkkr_regular"
+                            android:includeFontPadding="false"
+                            android:text="@{viewModel.courseDesc}"
+                            android:textColor="@color/gray5_sub_495057"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/noto_sans_cjkkr_regular"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_post_course_description_length"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="9dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/noto_sans_cjkkr_regular"
+                            android:includeFontPadding="false"
+                            android:text="@{viewModel.courseDesc.length() + `/280자`}"
+                            android:textColor="@color/gray3_sub_acb5bd"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/noto_sans_cjkkr_regular"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_post_course_description" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tv_post_parking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="38dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:text="@string/is_parking"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_post_address_map" />
+            </androidx.core.widget.NestedScrollView>
 
-                <TextView
-                    android:id="@+id/tv_post_parking_yes"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@{viewModel.isParking ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="11dp"
-                    android:text="@string/parking_yes"
-                    android:textAlignment="center"
-                    android:textColor="@{viewModel.isParking ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintEnd_toStartOf="@id/tv_post_parking_no"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_parking" />
-
-                <TextView
-                    android:id="@+id/tv_post_parking_no"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:background="@{viewModel.isParking ? @drawable/rectangle_border_gray_radius_21 : @drawable/rectangle_border_blue_radius_21}"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="11dp"
-                    android:text="@string/parking_no"
-                    android:textAlignment="center"
-                    android:textColor="@{viewModel.isParking ? @color/gray4_sub_889098 : @color/gray5_sub_495057}"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_post_parking_yes"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_post_parking_yes"
-                    app:layout_constraintTop_toTopOf="@id/tv_post_parking_yes" />
-
-                <TextView
-                    android:id="@+id/tv_post_parking_description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/rectangle_radius_12"
-                    android:backgroundTint="@color/gray1_sub_f8f9fa"
-                    android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="10dp"
-                    android:text="@{viewModel.parkingDesc}"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textSize="13sp"
-                    android:visibility="@{viewModel.parkingDesc == null ? View.GONE : View.VISIBLE}"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:layout_constraintEnd_toEndOf="@id/tv_post_parking_no"
-                    app:layout_constraintStart_toStartOf="@id/tv_post_parking_yes"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_parking_yes" />
-
-                <TextView
-                    android:id="@+id/tv_post_warning"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="34dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:text="@string/warning"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_parking_description" />
-
-                <TextView
-                    android:id="@+id/tv_warning_highway"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@{viewModel.warnings[0] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="11dp"
-                    android:text="@string/warning_highway"
-                    android:textAlignment="center"
-                    android:textColor="@{viewModel.warnings[0] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintEnd_toStartOf="@id/tv_warning_mountain"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_warning" />
-
-                <TextView
-                    android:id="@+id/tv_warning_mountain"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:background="@{viewModel.warnings[1] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="11dp"
-                    android:text="@string/warning_mountain"
-                    android:textAlignment="center"
-                    android:textColor="@{viewModel.warnings[1] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_warning_highway"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_warning_highway"
-                    app:layout_constraintTop_toTopOf="@id/tv_warning_highway" />
-
-                <TextView
-                    android:id="@+id/tv_warning_difficult"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@{viewModel.warnings[2] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
-                    android:fontFamily="@font/noto_sans_cjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="11dp"
-                    android:text="@string/warning_difficult"
-                    android:textAlignment="center"
-                    android:textColor="@{viewModel.warnings[2] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_medium"
-                    app:layout_constraintEnd_toEndOf="@id/tv_warning_highway"
-                    app:layout_constraintStart_toStartOf="@id/tv_warning_highway"
-                    app:layout_constraintTop_toBottomOf="@id/tv_warning_highway" />
-
-                <TextView
-                    android:id="@+id/tv_warning_crowded"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@{viewModel.warnings[3] ? @drawable/rectangle_border_blue_radius_21 : @drawable/rectangle_border_gray_radius_21}"
-                    android:includeFontPadding="false"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="11dp"
-                    android:text="@string/warning_crowded"
-                    android:textAlignment="center"
-                    android:textColor="@{viewModel.warnings[3] ? @color/gray5_sub_495057 : @color/gray4_sub_889098}"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_warning_difficult"
-                    app:layout_constraintEnd_toEndOf="@id/tv_warning_mountain"
-                    app:layout_constraintStart_toStartOf="@id/tv_warning_mountain"
-                    app:layout_constraintTop_toTopOf="@id/tv_warning_difficult" />
-
-                <TextView
-                    android:id="@+id/tv_post_course_introduction"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="34dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    android:includeFontPadding="false"
-                    android:text="@string/course_description"
-                    android:textColor="@color/black_sub_212429"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_warning_difficult" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="7dp"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_post_course_description"
-                    android:layout_width="match_parent"
+                    android:id="@+id/cl_detail_bottom_like"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/rectangle_radius_12"
-                    android:backgroundTint="@color/gray1_sub_f8f9fa"
-                    app:layout_constraintTop_toBottomOf="@id/tv_post_course_introduction">
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_save"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/tv_post_course_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="17dp"
-                        android:layout_marginTop="17dp"
-                        android:fontFamily="@font/noto_sans_cjkkr_regular"
-                        android:includeFontPadding="false"
-                        android:text="@{viewModel.courseDesc}"
-                        android:textColor="@color/gray5_sub_495057"
-                        android:textSize="14sp"
-                        app:fontFamily="@font/noto_sans_cjkkr_regular"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_post_course_description_length"
+                    <ImageView
+                        android:id="@+id/img_detail_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginEnd="9dp"
-                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/selector_detail_like"
+                        android:src="@{viewModel.isFavorite == 1 ? @drawable/ic_bigheart_active : @drawable/ic_bigheart_inactive}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_detail_like"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <!--                android:clickable="@{viewModel.isAuthorFlag ? false : true}"-->
+
+                    <TextView
+                        android:id="@+id/tv_detail_like"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
                         android:fontFamily="@font/noto_sans_cjkkr_regular"
                         android:includeFontPadding="false"
-                        android:text="@{viewModel.courseDesc.length() + `/280자`}"
-                        android:textColor="@color/gray3_sub_acb5bd"
-                        android:textSize="11sp"
+                        android:lineHeight="18sp"
+                        android:text="@{viewModel.likesCount + `명이 좋아해요`}"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/unchecked_box_acb5bd"
+                        android:textSize="12sp"
                         app:fontFamily="@font/noto_sans_cjkkr_regular"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_post_course_description" />
+                        app:layout_constraintStart_toEndOf="@id/img_detail_like"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_detail_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="7dp"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_detail_bottom_like"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/img_detail_save"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
                 <ImageView
-                    android:id="@+id/img_detail_like"
+                    android:id="@+id/img_detail_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/selector_detail_like"
-                    android:src="@{viewModel.isFavorite == 1 ? @drawable/ic_bigheart_active : @drawable/ic_bigheart_inactive}"
+                    android:layout_marginEnd="14dp"
+                    android:src="@{viewModel.isStored == 1 ? @drawable/ic_bigsave_5_active : @drawable/ic_bigsave_5_inactive}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tv_detail_like"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/img_detail_share"
+                    app:layout_constraintStart_toEndOf="@id/cl_detail_bottom_like"
                     app:layout_constraintTop_toTopOf="parent" />
-                <!--                android:clickable="@{viewModel.isAuthorFlag ? false : true}"-->
 
-                <TextView
-                    android:id="@+id/tv_detail_like"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:id="@+id/img_detail_share"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:lineHeight="18sp"
-                    android:text="@{viewModel.likesCount + `명이 좋아해요`}"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/unchecked_box_acb5bd"
-                    android:textSize="12sp"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:src="@drawable/ic_share_apple"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img_detail_like"
+                    app:layout_constraintStart_toEndOf="@id/img_detail_save"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ImageView
-                android:id="@+id/img_detail_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="14dp"
-                android:src="@{viewModel.isStored == 1 ? @drawable/ic_bigsave_5_active : @drawable/ic_bigsave_5_inactive}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/img_detail_share"
-                app:layout_constraintStart_toEndOf="@id/cl_detail_bottom_like"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/img_detail_share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_share_apple"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_detail_save"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>

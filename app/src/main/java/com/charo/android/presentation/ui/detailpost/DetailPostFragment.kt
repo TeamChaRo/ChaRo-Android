@@ -72,6 +72,15 @@ class DetailPostFragment : Fragment() {
         clickAuthor()
         showLikeList()
         observe()
+        setOnSwipeRefreshLayoutListener()
+    }
+
+    private fun setOnSwipeRefreshLayoutListener() {
+        binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.layoutSwipe.setOnRefreshListener {
+            viewModel.getDetailPostData()
+            binding.layoutSwipe.isRefreshing = false
+        }
     }
 
     private fun initToolbar(title : String){
