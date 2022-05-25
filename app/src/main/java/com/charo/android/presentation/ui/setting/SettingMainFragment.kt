@@ -1,6 +1,6 @@
 package com.charo.android.presentation.ui.setting
 
-import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.signature.ApplicationVersionSignature
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSettingMainBinding
 import com.charo.android.presentation.base.BaseFragment
@@ -49,6 +48,11 @@ class SettingMainFragment :
         clickOpenSource()
     }
 
+    override fun onResume() {
+        super.onResume()
+        allowAccess()
+    }
+
     // 알림, 사진 접근 허용
     private fun allowAccess() {
         binding.switchImg.isChecked = ContextCompat.checkSelfPermission(
@@ -56,11 +60,48 @@ class SettingMainFragment :
             permissionCheck
         ) == PackageManager.PERMISSION_GRANTED
 
+        binding.switchImg.setOnClickListener {
+            when(binding.switchImg.isChecked){
+                true -> {
+                    Timber.e("SharedInformation.getPermissionNever(requireContext()) ${SharedInformation.getPermissionNever(requireContext())}")
+                    if(SharedInformation.getPermissionNever(requireContext())){
+                        val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
+                        builder.setMessage("권한 다시 묻지 않기를 설정한 이력이 있습니다. \n " +
+                                "권한은 '설정 > 애플리케이션 정보 > 차로 > 권한' 에서 새로 설정할 수 있습니다. \n애플리케이션 정보 화면으로 이동하시겠습니까?")
+                        builder.setCancelable(false)
+                        builder.setPositiveButton("예") { dialog, which ->
+                            val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                            startActivity(intent)
+                        }
+                        builder.setNegativeButton("아니요") { dialog, which ->
+                            SharedInformation.setPermissionNever(requireContext(), true)
+                        }
+                        builder.show()
+                    } else {
+                        ActivityCompat.requestPermissions(requireActivity(), arrayOf(permissionCheck), 1)
+                    }
+                }
+                false -> {
+                    val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
+                    builder.setMessage("권한 해제는 '설정 > 애플리케이션 정보 > 차로 > 권한' 에서 설정할 수 있습니다. \n애플리케이션 정보 화면으로 이동하시겠습니까?")
+                    builder.setCancelable(false)
+                    builder.setPositiveButton("예") { dialog, which ->
+                        val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                        startActivity(intent)
+                    }
+                    builder.setNegativeButton("아니요") { dialog, which ->
+                        binding.switchImg.isChecked = true
+                    }
+                    builder.show()
+                }
+            }
 
-        binding.switchImg.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (!isChecked){
-                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
-                startActivity(intent)
+            if(ContextCompat.checkSelfPermission(requireActivity(), permissionCheck) == PackageManager.PERMISSION_GRANTED) {
+                SharedInformation.setPermissionNever(requireContext(), false)
+                binding.switchImg.isChecked = true
+            } else {
+                SharedInformation.setPermissionNever(requireContext(), true)
+                binding.switchImg.isChecked = false
             }
         }
     }
