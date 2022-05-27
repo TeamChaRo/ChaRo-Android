@@ -75,6 +75,11 @@ class DetailPostFragment : Fragment() {
         setOnSwipeRefreshLayoutListener()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     private fun setOnSwipeRefreshLayoutListener() {
         binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
         binding.layoutSwipe.setOnRefreshListener {
@@ -83,7 +88,7 @@ class DetailPostFragment : Fragment() {
         }
     }
 
-    private fun initToolbar(title : String){
+    private fun initToolbar(title: String) {
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
@@ -92,7 +97,7 @@ class DetailPostFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbarTitle.text = title
 
-        viewModel.isAuthorFlag.observe(viewLifecycleOwner){
+        viewModel.isAuthorFlag.observe(viewLifecycleOwner) {
             setHasOptionsMenu(it)
         }
     }
@@ -101,11 +106,6 @@ class DetailPostFragment : Fragment() {
         val menuInflater: MenuInflater = MenuInflater(requireContext())
         menuInflater.inflate(R.menu.detail_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     private fun initMap() {
@@ -231,8 +231,10 @@ class DetailPostFragment : Fragment() {
                 }
             }.onFailure {
                 // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
-                requireActivity().finish()
-                Timber.e("mlog: DetailPostFragment::Path 그리기 ${it.message.toString()}")
+                kotlin.runCatching {
+                    requireActivity().finish()
+                    Timber.e("mlog: DetailPostFragment::Path 그리기 ${it.message.toString()}")
+                }
             }
         }
     }

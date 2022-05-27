@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.FragmentSavedPostBinding
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
@@ -26,7 +27,7 @@ class SavedPostFragment : Fragment() {
         val intent = Intent(requireContext(), WriteShareActivity::class.java)
         intent.putExtra("postId", it.postId)
         intent.putExtra("destination", "detail")
-        startActivity(intent)
+        (requireActivity() as MainActivity).myPageResultLauncher.launch(intent)
     }
     private var sort = LIKE
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.FragmentMyTopBinding
 import com.charo.android.presentation.ui.follow.FollowActivity
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.setting.SettingActivity
 import com.charo.android.presentation.util.LoginUtil
@@ -51,7 +52,7 @@ class MyTopFragment : Fragment() {
             val intent = Intent(requireContext(), FollowActivity::class.java)
             intent.putExtra("userEmail", SharedInformation.getEmail(requireContext()))
             intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
-            startActivity(intent)
+            (requireActivity() as MainActivity).followResultLauncher.launch(intent)
         }
     }
 

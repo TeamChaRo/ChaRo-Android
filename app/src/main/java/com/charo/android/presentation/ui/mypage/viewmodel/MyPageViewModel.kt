@@ -8,8 +8,6 @@ import com.charo.android.data.model.mypage.Post
 import com.charo.android.data.model.mypage.UserInformation
 import com.charo.android.domain.usecase.mypage.*
 import com.charo.android.presentation.util.SingleLiveEvent
-import kotlinx.coroutines.async
-import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -55,6 +53,62 @@ class MyPageViewModel(
     // 서버 에러 알림용 변수
     private var _serverError = SingleLiveEvent<Boolean>()
     val serverError: LiveData<Boolean> get() = _serverError
+
+    var postId: Int = 0
+    var likesCount: Int = 0
+    var follower: Int = -1
+    var following: Int = -1
+
+    fun updatePost() {
+        updateWrittenLike()
+        updateWrittenNew()
+        updateSavedLike()
+        updateSavedNew()
+    }
+
+    fun updateFollow() {
+        _userInfo.value = userInfo.value?.copy(follower = this.follower, following = this.following)
+    }
+
+    private fun updateWrittenLike() {
+        writtenLikePostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            updateList[index] = post
+            _writtenLikePostList.value = updateList
+        }
+    }
+
+    private fun updateWrittenNew() {
+        writtenNewPostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            updateList[index] = post
+            _writtenNewPostList.value = updateList
+        }
+    }
+
+    private fun updateSavedLike() {
+        savedLikePostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            updateList[index] = post
+            _savedLikePostList.value = updateList
+        }
+    }
+
+    private fun updateSavedNew() {
+        savedNewPostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            updateList[index] = post
+            _savedNewPostList.value = updateList
+        }
+    }
 
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail

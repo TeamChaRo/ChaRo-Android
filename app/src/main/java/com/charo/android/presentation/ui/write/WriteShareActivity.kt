@@ -1,32 +1,31 @@
 package com.charo.android.presentation.ui.write
 
 import android.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.ActivityWriteShareBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostFragment
-import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class WriteShareActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteShareBinding
-//    원래 진희코드
+
+    //    원래 진희코드
 //    private lateinit var sharedViewModel: WriteSharedViewModel
     private val sharedViewModel by viewModel<WriteSharedViewModel>()
 
     private lateinit var writeFragment: WriteFragment
-
-    // TODO: ViewModel 갈아끼우기(승현)
-    private val viewModel by viewModel<DetailPostViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +67,7 @@ class WriteShareActivity : AppCompatActivity() {
 
     }
 
-    private fun stopWrite(){
+    private fun stopWrite() {
         AlertDialog.Builder(this, R.style.Dialog)
             .setMessage(R.string.noti_cancel_write)
             .setNeutralButton(R.string.write_continue) { dialog, which ->
@@ -84,8 +83,16 @@ class WriteShareActivity : AppCompatActivity() {
         // TODO: 상세보기에서는 뒤로가기 누를 수 있게 하고 싶은데
         val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
         if (currentFragment is DetailPostFragment) {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                putExtra("postId", sharedViewModel.postId)
+                putExtra("likesCount", sharedViewModel.likesCount.value)
+            }
+            Timber.tag("slog postId in DetailPost").i(sharedViewModel.postId.toString())
+            Timber.tag("slog likesCount in DetailPost")
+                .i(sharedViewModel.likesCount.value.toString())
+            setResult(RESULT_OK, intent)
             super.onBackPressed()
-        } else if (currentFragment is WriteFragment){
+        } else if (currentFragment is WriteFragment) {
             stopWrite()
         } else {
             supportFragmentManager.popBackStack()
