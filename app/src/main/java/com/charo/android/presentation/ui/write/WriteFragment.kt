@@ -37,6 +37,7 @@ import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.databinding.FragmentWriteBinding
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LocationUtil
+import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
@@ -510,16 +511,23 @@ class WriteFragment : Fragment(), View.OnClickListener {
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
         // 권한 없어서 요청
-        if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(
+        if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(requireActivity(), "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ),
-                1000
-            )
-
+                    1000)
+                SharedInformation.setPermissionNever(requireContext(), false)
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), 1000)
+                SharedInformation.setPermissionNever(requireContext(), true)
+            }
         } else { // 권한 있음
             if (writeAdapter.itemCount >= 6) {
                 Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
