@@ -59,7 +59,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         userEmail = SharedInformation.getEmail(this)
         myPageViewModel.setUserEmail(userEmail)
-        requestPermissions()
+
+        if(!SharedInformation.notRequestAllow){
+            requestPermissions()
+        }
+
         nickName = intent.getStringExtra("nickName").toString()
         otherUserEmail = intent.getStringExtra("otherUserEmail")
         otherUserNickname = intent.getStringExtra("otherUserNickname")
@@ -172,12 +176,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun replaceHomeFragment(userId: String, nickName: String) {
+        SharedInformation.notRequestAllow = false
         replaceFragment(homeFragment, userId, nickName)
     }
 
 
 
     private fun replaceWriteFragment(userId : String, nickName : String){
+        SharedInformation.notRequestAllow = false
         if(userId == null || userEmail == "@"){
 
             //로그인 유도 필요한 곳에 작성
@@ -190,6 +196,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
 
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
+        SharedInformation.notRequestAllow = true
         when (isMyPage) {
 //            true -> replaceFragment(charoFragment, userId, nickName)
             // TODO: 테스트 코드입니다.

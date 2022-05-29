@@ -4,7 +4,7 @@ import android.content.Context
 
 object SharedInformation {
     var searchWrite: Boolean = false
-
+    var notRequestAllow: Boolean = true
 
     private const val SOCIAL_KEY = "SOCIAL_KEY"
     private const val APP_EMAIL = "APP_EMAIL"
