@@ -598,6 +598,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         Timber.i("수정하기 course $sendTheme")
                         Timber.i("수정하기 image ${sharedViewModel.imageMultiPart.value!!}")
                         Timber.i("수정하기")
+
+                        Toast.makeText(context, R.string.server_error_general, Toast.LENGTH_LONG).show()
                     }
                 )
             }
@@ -627,6 +629,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         Timber.d("serveWriteData sendTheme $sendTheme")
                         Timber.d("serveWriteData course $sendTheme")
                         Timber.d("serveWriteData image ${sharedViewModel.imageMultiPart.value!!}")
+
+                        Toast.makeText(context, R.string.server_error_general, Toast.LENGTH_LONG).show()
                     },
                 )
             }

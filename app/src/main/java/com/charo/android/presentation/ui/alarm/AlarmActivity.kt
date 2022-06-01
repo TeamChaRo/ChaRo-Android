@@ -118,11 +118,13 @@ class AlarmActivity : AppCompatActivity() {
                     Timber.d("server connect : Alarm ${response.message()}")
                     Timber.d("server connect : Alarm ${response.code()}")
                     Timber.d("server connect : Alarm  ${response.raw().request.url}")
+                    Toast.makeText(this@AlarmActivity, R.string.server_error_general, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseAlarmListData>, t: Throwable) {
                 Timber.d("server connect : Alarm error: ${t.message}")
+                Toast.makeText(this@AlarmActivity, R.string.server_error_general, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -154,7 +156,7 @@ class AlarmActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseAlarmDeleteData>, t: Throwable) {
                 Timber.d("server connect : Alarm delete fail: ${t.message}")
-                Toast.makeText(this@AlarmActivity, "삭제할 수 없는 알림입니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AlarmActivity, R.string.server_error_general, Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -181,6 +183,7 @@ class AlarmActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseStatusCode>, t: Throwable) {
                 Timber.d("server connect : Alarm read error: ${t.message}")
+                Toast.makeText(this@AlarmActivity, R.string.server_error_general, Toast.LENGTH_SHORT).show()
             }
         })
     }
