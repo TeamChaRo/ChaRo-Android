@@ -71,7 +71,7 @@ class WriteShareActivity : AppCompatActivity() {
     private fun stopWrite(){
         AlertDialog.Builder(this, R.style.Dialog)
             .setMessage(R.string.noti_cancel_write)
-            .setNeutralButton(R.string.write_continue) { dialog, which ->
+            .setNegativeButton(R.string.write_continue) { dialog, which ->
             }
             .setPositiveButton(R.string.write_cancel) { dialog, which ->
 //                finish()
