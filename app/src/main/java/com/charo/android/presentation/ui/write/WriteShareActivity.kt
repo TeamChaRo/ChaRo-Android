@@ -80,16 +80,16 @@ class WriteShareActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // TODO: 상세보기에서는 뒤로가기 누를 수 있게 하고 싶은데
         val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
         if (currentFragment is DetailPostFragment) {
             val intent = Intent(this, MainActivity::class.java).apply {
                 putExtra("postId", sharedViewModel.postId)
                 putExtra("likesCount", sharedViewModel.likesCount.value)
+                if(sharedViewModel.isStoredFromServer != requireNotNull(sharedViewModel.isStored.value)) {
+                    val diff = requireNotNull(sharedViewModel.isStored.value) - sharedViewModel.isStoredFromServer
+                    putExtra("saveCountDiff", diff)
+                }
             }
-            Timber.tag("slog postId in DetailPost").i(sharedViewModel.postId.toString())
-            Timber.tag("slog likesCount in DetailPost")
-                .i(sharedViewModel.likesCount.value.toString())
             setResult(RESULT_OK, intent)
             super.onBackPressed()
         } else if (currentFragment is WriteFragment) {

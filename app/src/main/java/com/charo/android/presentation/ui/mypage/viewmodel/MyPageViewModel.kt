@@ -56,6 +56,7 @@ class MyPageViewModel(
 
     var postId: Int = 0
     var likesCount: Int = 0
+    var saveCountDiff: Int = 0
     var follower: Int = -1
     var following: Int = -1
 
@@ -74,7 +75,9 @@ class MyPageViewModel(
         writtenLikePostList.value?.let { list ->
             val updateList = list.toMutableList()
             val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
-            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
             updateList[index] = post
             _writtenLikePostList.value = updateList
         }
@@ -84,7 +87,9 @@ class MyPageViewModel(
         writtenNewPostList.value?.let { list ->
             val updateList = list.toMutableList()
             val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
-            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
             updateList[index] = post
             _writtenNewPostList.value = updateList
         }
@@ -94,7 +99,9 @@ class MyPageViewModel(
         savedLikePostList.value?.let { list ->
             val updateList = list.toMutableList()
             val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
-            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
             updateList[index] = post
             _savedLikePostList.value = updateList
         }
@@ -104,7 +111,9 @@ class MyPageViewModel(
         savedNewPostList.value?.let { list ->
             val updateList = list.toMutableList()
             val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
-            val post = updateList[index].copy(favoriteNum = this.likesCount)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
             updateList[index] = post
             _savedNewPostList.value = updateList
         }

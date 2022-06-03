@@ -53,15 +53,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             when (result.resultCode) {
                 RESULT_OK -> {
-                    Timber.tag("slog resultCode").i("RESULT_OK")
-
                     result.data?.let {
-                        Timber.tag("slog postId in MainActivity PostFragment")
-                            .i(it.getIntExtra("postId", 0).toString())
-                        Timber.tag("slog likesCount in MainActivity PostFragment")
-                            .i(it.getIntExtra("likesCount", 0).toString())
                         myPageViewModel.postId = it.getIntExtra("postId", 0)
                         myPageViewModel.likesCount = it.getIntExtra("likesCount", 0)
+                        myPageViewModel.saveCountDiff = it.getIntExtra("saveCountDiff", 0)
 
                         if (myPageViewModel.postId > 0) {
                             myPageViewModel.updatePost()
@@ -84,7 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     myPageViewModel.follower = it.getIntExtra("follower", -1)
                     myPageViewModel.following = it.getIntExtra("following", -1)
 
-                    if(myPageViewModel.follower != -1 && myPageViewModel.following != -1) {
+                    if(myPageViewModel.follower != -1 || myPageViewModel.following != -1) {
                         myPageViewModel.updateFollow()
                     }
                 }
