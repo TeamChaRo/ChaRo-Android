@@ -36,8 +36,8 @@ class FollowAdapter(
 
             binding.tvFollow.setOnClickListener {
                 followClick(model)
-                model.isFollow = !model.isFollow
-                binding.model = model
+//                model.isFollow = !model.isFollow
+//                binding.model = model
             }
         }
     }

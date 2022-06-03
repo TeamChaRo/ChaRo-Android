@@ -54,7 +54,7 @@ class FollowViewModel(
                 _follower.value = it.follower
                 _following.value = it.following
             }.onFailure {
-                Timber.e( "$TAG getFollowList() ${it.message.toString()}")
+                Timber.e("$TAG getFollowList() ${it.message.toString()}")
             }
         }
     }
@@ -63,9 +63,38 @@ class FollowViewModel(
         viewModelScope.launch {
             kotlin.runCatching {
                 postFollowUseCase(userEmail, otherUserEmail)
+                updateFollowList(otherUserEmail)
             }.onFailure {
                 Timber.e("$TAG postFollow() ${it.message.toString()}")
             }
         }
+    }
+
+    private fun updateFollowList(otherUserEmail: String) {
+        val newFollowingUser: User
+        val updatedFollowerList = requireNotNull(_follower.value).map {
+            if (it.userEmail == otherUserEmail) {
+                it.copy().apply {
+                    this.isFollow = !this.isFollow
+                }
+            } else {
+                it.copy()
+            }
+        }.toList()
+        newFollowingUser = requireNotNull(updatedFollowerList.find { it.userEmail == otherUserEmail })
+        val updatedFollowingList = requireNotNull(_following.value).map {
+            if (it.userEmail == otherUserEmail) {
+                it.copy().apply {
+                    this.isFollow = !this.isFollow
+                }
+            } else {
+                it.copy()
+            }
+        }.toMutableList()
+        if(updatedFollowingList.find { it.userEmail == otherUserEmail } == null) {
+            updatedFollowingList.add(0, newFollowingUser)
+        }
+        _follower.value = updatedFollowerList
+        _following.value = updatedFollowingList
     }
 }

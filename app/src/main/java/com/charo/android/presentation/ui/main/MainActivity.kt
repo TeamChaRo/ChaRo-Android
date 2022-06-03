@@ -79,7 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     myPageViewModel.follower = it.getIntExtra("follower", -1)
                     myPageViewModel.following = it.getIntExtra("following", -1)
 
-                    if(myPageViewModel.follower != -1 || myPageViewModel.following != -1) {
+                    if(myPageViewModel.follower != -1 && myPageViewModel.following != -1) {
                         myPageViewModel.updateFollow()
                     }
                 }
