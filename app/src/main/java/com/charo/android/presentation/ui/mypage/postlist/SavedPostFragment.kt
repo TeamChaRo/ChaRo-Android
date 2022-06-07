@@ -27,6 +27,7 @@ class SavedPostFragment : Fragment() {
         val intent = Intent(requireContext(), WriteShareActivity::class.java)
         intent.putExtra("postId", it.postId)
         intent.putExtra("destination", "detail")
+        intent.putExtra("from", "MainActivity")
         (requireActivity() as MainActivity).myPageResultLauncher.launch(intent)
     }
     private var sort = LIKE
@@ -34,7 +35,7 @@ class SavedPostFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_saved_post, container, false)
         binding.viewModel = viewModel
