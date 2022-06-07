@@ -33,11 +33,13 @@ class FollowActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("follower", viewModel.follower.value?.size ?: -1)
-            putExtra("following", viewModel.following.value?.filter { it.isFollow }?.size ?: -1)
+        if(intent.getStringExtra("from") == "MainActivity") {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                putExtra("follower", viewModel.follower.value?.size ?: -1)
+                putExtra("following", viewModel.following.value?.filter { it.isFollow }?.size ?: -1)
+            }
+            setResult(RESULT_OK, intent)
         }
-        setResult(RESULT_OK, intent)
         super.onBackPressed()
     }
 

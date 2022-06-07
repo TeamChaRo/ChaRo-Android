@@ -27,7 +27,7 @@ class MyTopFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_my_top, container, false)
         binding.viewModel = viewModel
@@ -49,9 +49,11 @@ class MyTopFragment : Fragment() {
 
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
-            val intent = Intent(requireContext(), FollowActivity::class.java)
-            intent.putExtra("userEmail", SharedInformation.getEmail(requireContext()))
-            intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
+            val intent = Intent(requireContext(), FollowActivity::class.java).apply {
+                putExtra("userEmail", SharedInformation.getEmail(requireContext()))
+                putExtra("nickname", viewModel.userInfo.value?.nickname)
+                putExtra("from", "MainActivity")
+            }
             (requireActivity() as MainActivity).followResultLauncher.launch(intent)
         }
     }
