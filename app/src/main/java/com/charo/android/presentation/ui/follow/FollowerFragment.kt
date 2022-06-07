@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charo.android.R
@@ -25,7 +24,7 @@ class FollowerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_follower, container, false)
 
@@ -45,9 +44,12 @@ class FollowerFragment : Fragment() {
 
     private fun initRecyclerView() {
         adapter = FollowAdapter({
-            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
-            intent.putExtra("userEmail", it.userEmail)
-            startActivity(intent)
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java).apply {
+                putExtra("userEmail", it.userEmail)
+                putExtra("from", "FollowActivity")
+            }
+
+            (requireActivity() as FollowActivity).followResultLauncher.launch(intent)
         }, {
             if (viewModel.userEmail != "@") {
                 viewModel.postFollow(it.userEmail)

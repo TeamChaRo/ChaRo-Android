@@ -50,6 +50,19 @@ class OtherMyPageActivity : AppCompatActivity() {
         observeLiveData()
     }
 
+    override fun onBackPressed() {
+        if(intent.getStringExtra("from") == "FollowActivity") {
+            val intent = Intent(this, FollowActivity::class.java).apply {
+                putExtra("nickname", requireNotNull(viewModel.userInfo.value).nickname)
+                putExtra("userEmail", viewModel.otherUserEmail)
+                putExtra("image", requireNotNull(viewModel.userInfo.value).profileImage)
+                putExtra("isFollow", requireNotNull(viewModel.isFollow).value)
+            }
+            setResult(RESULT_OK, intent)
+        }
+        super.onBackPressed()
+    }
+
     private fun setOnSwipeRefreshLayoutListener() {
         binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
         binding.layoutSwipe.setOnRefreshListener {
@@ -135,7 +148,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickBack() {
         binding.clBack.setOnClickListener {
-            finish()
+            onBackPressed()
         }
     }
 

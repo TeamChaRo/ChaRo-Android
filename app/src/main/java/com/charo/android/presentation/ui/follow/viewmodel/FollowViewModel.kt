@@ -34,6 +34,8 @@ class FollowViewModel(
     private var _following = MutableLiveData<List<User>>()
     val following: LiveData<List<User>> get() = _following
 
+    lateinit var newUser: User
+
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail
     }
@@ -63,19 +65,19 @@ class FollowViewModel(
         viewModelScope.launch {
             kotlin.runCatching {
                 postFollowUseCase(userEmail, otherUserEmail)
-                updateFollowList(otherUserEmail)
+                updateFollowList(otherUserEmail, null)
             }.onFailure {
                 Timber.e("$TAG postFollow() ${it.message.toString()}")
             }
         }
     }
 
-    private fun updateFollowList(otherUserEmail: String) {
+    private fun updateFollowList(otherUserEmail: String, isFollow: Boolean?) {
         val newFollowingUser: User
         val updatedFollowerList = requireNotNull(_follower.value).map {
             if (it.userEmail == otherUserEmail) {
                 it.copy().apply {
-                    this.isFollow = !this.isFollow
+                    this.isFollow = isFollow ?: !this.isFollow
                 }
             } else {
                 it.copy()
@@ -85,16 +87,20 @@ class FollowViewModel(
         val updatedFollowingList = requireNotNull(_following.value).map {
             if (it.userEmail == otherUserEmail) {
                 it.copy().apply {
-                    this.isFollow = !this.isFollow
+                    this.isFollow = isFollow ?: !this.isFollow
                 }
             } else {
                 it.copy()
             }
         }.toMutableList()
-        if(updatedFollowingList.find { it.userEmail == otherUserEmail } == null) {
+        if(updatedFollowingList.find { it.userEmail == otherUserEmail } == null && userEmail == myPageEmail) {
             updatedFollowingList.add(0, newFollowingUser)
         }
         _follower.value = updatedFollowerList
         _following.value = updatedFollowingList
+    }
+
+    fun updateNewUser() {
+        updateFollowList(newUser.userEmail, newUser.isFollow)
     }
 }
