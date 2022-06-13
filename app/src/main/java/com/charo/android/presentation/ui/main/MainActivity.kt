@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.charo.android.R
@@ -26,7 +27,6 @@ import com.charo.android.presentation.util.replaceFragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -38,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
     private val charoFragment: CharoFragment by lazy { CharoFragment() }
     private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
-    private val sharedViewModel : SharedViewModel by viewModel()
+    private val sharedViewModel: SharedViewModel by viewModel()
     private val myPageViewModel: MyPageViewModel by viewModel()
     private lateinit var userEmail: String
     private lateinit var nickName: String
@@ -47,8 +47,45 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     var otherUserNickname: String? = null
     private var isMyPage: Boolean = true
     private var isFromOtherPage: Boolean = false
-    private lateinit var lookFor : String
-    private var lastTimeBackPressed : Long = 0
+    private lateinit var lookFor: String
+    private var lastTimeBackPressed: Long = 0
+
+    val myPageResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    result.data?.let {
+                        myPageViewModel.postId = it.getIntExtra("postId", 0)
+                        myPageViewModel.likesCount = it.getIntExtra("likesCount", 0)
+                        myPageViewModel.saveCountDiff = it.getIntExtra("saveCountDiff", 0)
+
+                        if (myPageViewModel.postId > 0) {
+                            myPageViewModel.updatePost()
+                        }
+                    } ?: Timber.tag("slog").i("result.data is null")
+                }
+                RESULT_CANCELED -> {
+                    Timber.tag("slog resultCode").i("RESULT_CANCELED")
+                }
+                else -> {
+                    Timber.tag("slog resultCode").i(result.resultCode.toString())
+                }
+            }
+        }
+
+    val followResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    myPageViewModel.follower = it.getIntExtra("follower", -1)
+                    myPageViewModel.following = it.getIntExtra("following", -1)
+
+                    if(myPageViewModel.follower != -1 && myPageViewModel.following != -1) {
+                        myPageViewModel.updateFollow()
+                    }
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +118,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     false -> replaceCharoFragment(otherUserEmail!!, otherUserNickname!!, isMyPage)
                 }
             }
-            false ->  replaceHomeFragment(userEmail, nickName)
+            false -> replaceHomeFragment(userEmail, nickName)
         }
         initNavView()
         lookFor()
@@ -90,7 +127,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onResume() {
         super.onResume()
-        if(SharedInformation.searchWrite){
+        if (SharedInformation.searchWrite) {
             binding.navView.selectedItemId = R.id.navigation_write
             SharedInformation.searchWrite = false
         }
@@ -99,27 +136,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onBackPressed() {
 //        if (onBackPressedDispatcher.hasEnabledCallbacks()){
 //                onBackPressedDispatcher.onBackPressed()
-        if(sharedViewModel.moreFragment.value == true){
-                changeFragment(R.id.nav_host_fragment_activity_main, homeFragment)
-                Timber.d("moreview에서 onBackPressed호출됨")
-                sharedViewModel.moreFragment.value = false
-            }else{
-                Timber.d("mainactiviy에서 onBackPressed호출됨 : finish")
-                if(System.currentTimeMillis() - lastTimeBackPressed < 1500){
-                    finish()
-                    return
-                }
-                lastTimeBackPressed = System.currentTimeMillis();
-                Toast.makeText(this,"한 번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
+        if (sharedViewModel.moreFragment.value == true) {
+            changeFragment(R.id.nav_host_fragment_activity_main, homeFragment)
+            Timber.d("moreview에서 onBackPressed호출됨")
+            sharedViewModel.moreFragment.value = false
+        } else {
+            Timber.d("mainactiviy에서 onBackPressed호출됨 : finish")
+            if (System.currentTimeMillis() - lastTimeBackPressed < 1500) {
+                finish()
+                return
             }
+            lastTimeBackPressed = System.currentTimeMillis()
+            Toast.makeText(this, "한 번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
 //        }
     }
 
-    private fun deepLinkDetailPost(){
-        Timber.d("MainActivity deepLinkDetailPost, intent : $intent, postId : ${intent.getStringExtra("postId")}")
+    private fun deepLinkDetailPost() {
+        Timber.d(
+            "MainActivity deepLinkDetailPost, intent : $intent, postId : ${
+                intent.getStringExtra(
+                    "postId"
+                )
+            }"
+        )
 
         val postId = intent.getIntExtra("postId", -1)
-        if(intent != null && postId != -1){
+        if (intent != null && postId != -1) {
             val intent = Intent(this, WriteShareActivity::class.java)
             intent.putExtra("postId", postId)
             intent.putExtra("destination", "detail")
@@ -132,20 +175,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.apply {
             userEmail = SharedInformation.getEmail(this@MainActivity)
             navView.setOnItemSelectedListener {
-                val parameters : Bundle  = Bundle().apply {
+                val parameters: Bundle = Bundle().apply {
                     this.putInt(FirebaseAnalytics.Param.ITEM_ID, it.itemId)
                     this.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "fragment")
                 }
 
                 when (it.itemId) {
                     R.id.navigation_home -> {
-                        parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_home_kor))
+                        parameters.putString(
+                            FirebaseAnalytics.Param.ITEM_NAME,
+                            getString(R.string.title_home_kor)
+                        )
                         analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
                         replaceHomeFragment(userEmail, nickName)
                         return@setOnItemSelectedListener true
                     }
                     R.id.navigation_write -> {
-                        parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_write_kor))
+                        parameters.putString(
+                            FirebaseAnalytics.Param.ITEM_NAME,
+                            getString(R.string.title_write_kor)
+                        )
                         analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
 
                         startActivityWriteShare()
@@ -153,7 +202,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
-                        parameters.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_charo_kor))
+                        parameters.putString(
+                            FirebaseAnalytics.Param.ITEM_NAME,
+                            getString(R.string.title_charo_kor)
+                        )
                         analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
 
                         replaceCharoFragment(userEmail, nickName, isMyPage)
@@ -164,8 +216,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
 
             binding.btnWrite.setOnClickListener {
-                val parameters : Bundle  = Bundle().apply {
-                    this.putString(FirebaseAnalytics.Param.ITEM_NAME, getString(R.string.title_write_kor))
+                val parameters: Bundle = Bundle().apply {
+                    this.putString(
+                        FirebaseAnalytics.Param.ITEM_NAME,
+                        getString(R.string.title_write_kor)
+                    )
                     this.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "fragment")
                 }
                 analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
@@ -181,7 +236,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
 
-
     private fun replaceWriteFragment(userId : String, nickName : String){
         SharedInformation.notRequestAllow = false
         if(userId == null || userEmail == "@"){
@@ -192,7 +246,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             replaceFragment(writeFragment, userId, nickName)
         }
     }
-
 
 
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
@@ -208,9 +261,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun replaceCharoFragment(userId: String, nickName: String) {
         userEmail = SharedInformation.getEmail(this@MainActivity)
-        if(userEmail == null || userEmail == "@"){
+        if (userEmail == null || userEmail == "@") {
             LoginUtil.loginPrompt(this)
-        }else{
+        } else {
             replaceFragment(charoFragment, userId, nickName)
         }
 
@@ -220,8 +273,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     fun startActivityWriteShare() {
         userEmail = SharedInformation.getEmail(this@MainActivity)
         Timber.d("mainUserEmail $userEmail")
-        if(userEmail == null || userEmail == "@"){
-          //  로그인 유도 필요한 곳에 작성
+        if (userEmail == null || userEmail == "@") {
+            //  로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this)
         } else {
             val intent = Intent(this@MainActivity, WriteShareActivity::class.java)
@@ -232,7 +285,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     //둘러보기 이메일 받기
-    private fun lookFor(){
+    private fun lookFor() {
         lookFor = intent.getStringExtra("lookForEmail").toString()
         sharedViewModel.lookForEmail.value = lookFor
     }
@@ -300,12 +353,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
-    companion object{
+    companion object {
         const val WRITE = true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
                 return true

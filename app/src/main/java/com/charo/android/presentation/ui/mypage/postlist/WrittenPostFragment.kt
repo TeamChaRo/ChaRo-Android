@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.FragmentWrittenPostBinding
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
@@ -27,14 +28,15 @@ class WrittenPostFragment : Fragment() {
         val intent = Intent(requireContext(), WriteShareActivity::class.java)
         intent.putExtra("postId", it.postId)
         intent.putExtra("destination", "detail")
-        startActivity(intent)
+        intent.putExtra("from", "MainActivity")
+        (requireActivity() as MainActivity).myPageResultLauncher.launch(intent)
     }
     private var sort = LIKE
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             DataBindingUtil.inflate(
                 layoutInflater,
@@ -63,12 +65,12 @@ class WrittenPostFragment : Fragment() {
 
     private fun observeData() {
         viewModel.writtenLikePostList.observe(viewLifecycleOwner) {
-            if(sort == LIKE) {
+            if (sort == LIKE) {
                 writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }
         viewModel.writtenNewPostList.observe(viewLifecycleOwner) {
-            if(sort == NEW) {
+            if (sort == NEW) {
                 writtenPostAdapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }

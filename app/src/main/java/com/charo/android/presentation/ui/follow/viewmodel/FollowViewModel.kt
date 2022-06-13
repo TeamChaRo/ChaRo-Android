@@ -34,6 +34,8 @@ class FollowViewModel(
     private var _following = MutableLiveData<List<User>>()
     val following: LiveData<List<User>> get() = _following
 
+    lateinit var newUser: User
+
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail
     }
@@ -54,7 +56,7 @@ class FollowViewModel(
                 _follower.value = it.follower
                 _following.value = it.following
             }.onFailure {
-                Timber.e( "$TAG getFollowList() ${it.message.toString()}")
+                Timber.e("$TAG getFollowList() ${it.message.toString()}")
             }
         }
     }
@@ -63,9 +65,44 @@ class FollowViewModel(
         viewModelScope.launch {
             kotlin.runCatching {
                 postFollowUseCase(userEmail, otherUserEmail)
+                updateFollowList(otherUserEmail, null)
             }.onFailure {
                 Timber.e("$TAG postFollow() ${it.message.toString()}")
             }
         }
+    }
+
+    private fun updateFollowList(otherUserEmail: String, isFollow: Boolean?) {
+        val newFollowingUser: User?
+        val updatedFollowerList = requireNotNull(_follower.value).map {
+            if (it.userEmail == otherUserEmail) {
+                it.copy().apply {
+                    this.isFollow = isFollow ?: !this.isFollow
+                }
+            } else {
+                it.copy()
+            }
+        }.toList()
+        val updatedFollowingList = requireNotNull(_following.value).map {
+            if (it.userEmail == otherUserEmail) {
+                it.copy().apply {
+                    this.isFollow = isFollow ?: !this.isFollow
+                }
+            } else {
+                it.copy()
+            }
+        }.toMutableList()
+        newFollowingUser = updatedFollowerList.find { it.userEmail == otherUserEmail }
+        newFollowingUser?.let { newFollowingUser ->
+            if (updatedFollowingList.find { it.userEmail == otherUserEmail } == null && userEmail == myPageEmail) {
+                updatedFollowingList.add(0, newFollowingUser)
+            }
+        }
+        _follower.value = updatedFollowerList
+        _following.value = updatedFollowingList
+    }
+
+    fun updateNewUser() {
+        updateFollowList(newUser.userEmail, newUser.isFollow)
     }
 }

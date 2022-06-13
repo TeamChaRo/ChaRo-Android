@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.FragmentMyTopBinding
 import com.charo.android.presentation.ui.follow.FollowActivity
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.setting.SettingActivity
 import com.charo.android.presentation.util.LoginUtil
@@ -26,7 +27,7 @@ class MyTopFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_my_top, container, false)
         binding.viewModel = viewModel
@@ -48,10 +49,12 @@ class MyTopFragment : Fragment() {
 
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
-            val intent = Intent(requireContext(), FollowActivity::class.java)
-            intent.putExtra("userEmail", SharedInformation.getEmail(requireContext()))
-            intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
-            startActivity(intent)
+            val intent = Intent(requireContext(), FollowActivity::class.java).apply {
+                putExtra("userEmail", SharedInformation.getEmail(requireContext()))
+                putExtra("nickname", viewModel.userInfo.value?.nickname)
+                putExtra("from", "MainActivity")
+            }
+            (requireActivity() as MainActivity).followResultLauncher.launch(intent)
         }
     }
 

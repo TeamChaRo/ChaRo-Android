@@ -20,7 +20,6 @@ class OtherMyPageViewModel(
     private val getRemoteFollowUseCase: GetRemoteFollowUseCase
 ) : ViewModel() {
     private val TAG = "mlog: OtherPageViewModel::"
-//    private val userEmail = "and@naver.com"
 
     private var _userEmail = "@"
     val userEmail: String get() = _userEmail
@@ -48,6 +47,12 @@ class OtherMyPageViewModel(
     // 마이페이지 주인 팔로우 여부
     private var _isFollow = MutableLiveData<Boolean>(false)
     val isFollow: LiveData<Boolean> get() = _isFollow
+
+    var postId: Int = 0
+    var likesCount: Int = 0
+    var saveCountDiff: Int = 0
+    var follower: Int = -1
+    var following: Int = -1
 
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail
@@ -128,6 +133,15 @@ class OtherMyPageViewModel(
                 postFollowUseCase(userEmail, otherUserEmail)
             }.onSuccess {
                 _isFollow.value = it
+                if(it) {
+                    _userInfo.value = userInfo.value?.copy()?.apply {
+                        this.follower++
+                    }
+                } else {
+                    _userInfo.value = userInfo.value?.copy()?.apply {
+                        this.follower--
+                    }
+                }
             }.onFailure {
                 Timber.d("$TAG postFollow() ${it.message.toString()}")
             }
@@ -143,6 +157,39 @@ class OtherMyPageViewModel(
             }.onFailure {
                 Timber.i("$TAG getFollow() $it")
             }
+        }
+    }
+
+    fun updateFollow() {
+        _userInfo.value = userInfo.value?.copy(follower = this.follower, following = this.following)
+    }
+
+    fun updatePost() {
+        updateWrittenLike()
+        updateWrittenNew()
+    }
+
+    private fun updateWrittenLike() {
+        writtenLikePostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _writtenLikePostList.value = updateList
+        }
+    }
+
+    private fun updateWrittenNew() {
+        writtenNewPostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _writtenNewPostList.value = updateList
         }
     }
 }

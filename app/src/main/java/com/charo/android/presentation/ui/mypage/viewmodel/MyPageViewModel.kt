@@ -54,53 +54,114 @@ class MyPageViewModel(
     private var _serverError = SingleLiveEvent<Boolean>()
     val serverError: LiveData<Boolean> get() = _serverError
 
+    var postId: Int = 0
+    var likesCount: Int = 0
+    var saveCountDiff: Int = 0
+    var follower: Int = -1
+    var following: Int = -1
+
+    fun updatePost() {
+        updateWrittenLike()
+        updateWrittenNew()
+        updateSavedLike()
+        updateSavedNew()
+    }
+
+    fun updateFollow() {
+        _userInfo.value = userInfo.value?.copy(follower = this.follower, following = this.following)
+    }
+
+    private fun updateWrittenLike() {
+        writtenLikePostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _writtenLikePostList.value = updateList
+        }
+    }
+
+    private fun updateWrittenNew() {
+        writtenNewPostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _writtenNewPostList.value = updateList
+        }
+    }
+
+    private fun updateSavedLike() {
+        savedLikePostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _savedLikePostList.value = updateList
+        }
+    }
+
+    private fun updateSavedNew() {
+        savedNewPostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _savedNewPostList.value = updateList
+        }
+    }
+
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail
     }
 
     fun getLikePost() {
-        if(writtenLikePostList.value == null) {
-            viewModelScope.launch {
-                kotlin.runCatching {
-                    getRemoteLikePostUseCase(userEmail)
-                }.onSuccess {
-                    Timber.i("ViewModel 인기순 데이터 수신")
-                    _userInfo.value = it.userInformation
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getRemoteLikePostUseCase(userEmail)
+            }.onSuccess {
+                Timber.i("ViewModel 인기순 데이터 수신")
+                _userInfo.value = it.userInformation
 
-                    // 테스트 - 게시물 없는 경우에 대한 테스트
-                    _writtenLikeLastId = it.writtenPost.lastId
-                    _writtenLikeLastCount = it.writtenPost.lastCount
-                    _writtenLikePostList.value = it.writtenPost.drive
+                // 테스트 - 게시물 없는 경우에 대한 테스트
+                _writtenLikeLastId = it.writtenPost.lastId
+                _writtenLikeLastCount = it.writtenPost.lastCount
+                _writtenLikePostList.value = it.writtenPost.drive
 
-                    _savedLikeLastId = it.savedPost.lastId
-                    _savedLikeLastCount = it.savedPost.lastCount
-                    _savedLikePostList.value = it.savedPost.drive
-                }.onFailure {
-                    Timber.d("$TAG getLikePost() ${it.message.toString()}")
-                    _serverError.call()
-                }
+                _savedLikeLastId = it.savedPost.lastId
+                _savedLikeLastCount = it.savedPost.lastCount
+                _savedLikePostList.value = it.savedPost.drive
+            }.onFailure {
+                Timber.d("$TAG getLikePost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }
 
     fun getNewPost() {
-        if(writtenNewPostList.value == null) {
-            viewModelScope.launch {
-                kotlin.runCatching {
-                    getRemoteNewPostUseCase(userEmail)
-                }.onSuccess {
-                    Timber.i("ViewModel 최신순 데이터 수신")
-                    _userInfo.value = it.userInformation
+        viewModelScope.launch {
+            kotlin.runCatching {
+                getRemoteNewPostUseCase(userEmail)
+            }.onSuccess {
+                Timber.i("ViewModel 최신순 데이터 수신")
+                _userInfo.value = it.userInformation
 
-                    _writtenNewLastId = it.writtenPost.lastId
-                    _writtenNewPostList.value = it.writtenPost.drive
+                _writtenNewLastId = it.writtenPost.lastId
+                _writtenNewPostList.value = it.writtenPost.drive
 
-                    _savedNewLastId = it.savedPost.lastId
-                    _savedNewPostList.value = it.savedPost.drive
-                }.onFailure {
-                    Timber.d("$TAG getNewPost() ${it.message.toString()}")
-                    _serverError.call()
-                }
+                _savedNewLastId = it.savedPost.lastId
+                _savedNewPostList.value = it.savedPost.drive
+            }.onFailure {
+                Timber.d("$TAG getNewPost() ${it.message.toString()}")
+                _serverError.call()
             }
         }
     }

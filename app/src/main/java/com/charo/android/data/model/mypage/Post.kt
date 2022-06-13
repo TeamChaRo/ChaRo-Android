@@ -11,6 +11,6 @@ data class Post(
     val month: String,
     val day: String,
     val isFavorite: Boolean,
-    val favoriteNum: Int,
-    val saveNum: Int
+    var favoriteNum: Int,
+    var saveNum: Int
 )

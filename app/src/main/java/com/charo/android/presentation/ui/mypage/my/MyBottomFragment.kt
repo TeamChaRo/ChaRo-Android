@@ -5,18 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.charo.android.R
 import com.charo.android.databinding.FragmentMyBottomBinding
 import com.charo.android.presentation.ui.mypage.adapter.PostViewPagerAdapter
 import com.charo.android.presentation.ui.mypage.postlist.SavedPostFragment
 import com.charo.android.presentation.ui.mypage.postlist.WrittenPostFragment
+import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MyBottomFragment : Fragment() {
     private var _binding: FragmentMyBottomBinding? = null
     val binding get() = _binding ?: error("binding not initiated")
+    private val viewModel by sharedViewModel<MyPageViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +30,12 @@ class MyBottomFragment : Fragment() {
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_my_bottom, container, false)
         initViewPager()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
+        setOnSwipeRefreshLayoutListener()
     }
 
     override fun onDestroyView() {
@@ -47,5 +57,14 @@ class MyBottomFragment : Fragment() {
         TabLayoutMediator(binding.tabProfile, binding.vpProfile) { tab, position ->
             tab.setIcon(tabIconList[position])
         }.attach()
+    }
+
+    private fun setOnSwipeRefreshLayoutListener() {
+        binding.layoutSwipe.setOnRefreshListener {
+            viewModel.getLikePost()
+            viewModel.getNewPost()
+
+            binding.layoutSwipe.isRefreshing = false
+        }
     }
 }

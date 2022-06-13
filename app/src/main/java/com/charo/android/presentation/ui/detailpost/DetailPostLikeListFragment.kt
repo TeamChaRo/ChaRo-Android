@@ -11,10 +11,11 @@ import androidx.databinding.DataBindingUtil
 import com.charo.android.R
 import com.charo.android.databinding.DialogDetailLikeBinding
 import com.charo.android.presentation.ui.detailpost.adapter.DetailPostLikeListAdapter
-import com.charo.android.presentation.ui.detailpost.viewmodel.DetailPostViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.charo.android.presentation.util.LoginUtil
+import com.charo.android.presentation.util.SharedInformation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -24,6 +25,7 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     private var _binding: DialogDetailLikeBinding? = null
     private val binding get() = _binding ?: error("binding not initialized")
     private lateinit var adapter: DetailPostLikeListAdapter
+
     // TODO: Old ViewModel
 //    private val viewModel by sharedViewModel<DetailPostViewModel>()
     // TODO: New ViewModel
@@ -74,17 +76,20 @@ class DetailPostLikeListFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerView() {
-        adapter = DetailPostLikeListAdapter({
-            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
-            intent.putExtra("userEmail", it.userEmail)
-            startActivity(intent)
-        }, {
-            if(viewModel.userEmail != "@") {
-                viewModel.postFollow(it.userEmail)
-            } else {
-                LoginUtil.loginPrompt(requireContext())
-            }
-        })
+        adapter = DetailPostLikeListAdapter(
+            SharedInformation.getEmail(requireContext()), {
+                val intent = Intent(requireContext(), OtherMyPageActivity::class.java).apply {
+                    putExtra("userEmail", it.userEmail)
+                    putExtra("from", "WriteShareActivity")
+                }
+                (requireActivity() as WriteShareActivity).followResultLauncher.launch(intent)
+            }, {
+                if (viewModel.userEmail != "@") {
+                    viewModel.postFollow(it.userEmail)
+                } else {
+                    LoginUtil.loginPrompt(requireContext())
+                }
+            })
         binding.rcvDetailDialog.adapter = adapter
     }
 
