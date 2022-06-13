@@ -86,6 +86,8 @@ class WriteSharedViewModel(
     // DetailPostLikeListFragment
     private var _likeUserList = MutableLiveData<List<User>>()
     val likeUserList: LiveData<List<User>> get() = _likeUserList
+    var resultUserEmail: String = ""
+    var resultUserFollow: Boolean = false
 
     // DetailPostImageFragment
     var imageIndex = 0
@@ -304,5 +306,15 @@ class WriteSharedViewModel(
             }
         }
         _editMapFlag.value = false
+    }
+
+    fun updateLikeUserList() {
+        _likeUserList.value = likeUserList.value?.map {
+            if(it.userEmail == resultUserEmail) {
+                it.copy(isFollow = resultUserFollow)
+            } else {
+                it.copy()
+            }
+        }?.toMutableList()
     }
 }

@@ -40,7 +40,7 @@ class OtherMyPageActivity : AppCompatActivity() {
                     viewModel.follower = it.getIntExtra("follower", -1)
                     viewModel.following = it.getIntExtra("following", -1)
 
-                    if(viewModel.follower != -1 && viewModel.following != -1) {
+                    if (viewModel.follower != -1 && viewModel.following != -1) {
                         viewModel.updateFollow()
                     }
                 }
@@ -84,14 +84,25 @@ class OtherMyPageActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(intent.getStringExtra("from") == "FollowActivity") {
-            val intent = Intent(this, FollowActivity::class.java).apply {
-                putExtra("nickname", requireNotNull(viewModel.userInfo.value).nickname)
-                putExtra("userEmail", viewModel.otherUserEmail)
-                putExtra("image", requireNotNull(viewModel.userInfo.value).profileImage)
-                putExtra("isFollow", requireNotNull(viewModel.isFollow).value)
+        when (intent.getStringExtra("from")) {
+            "FollowActivity" -> {
+                val intent = Intent(this, FollowActivity::class.java).apply {
+                    putExtra("nickname", requireNotNull(viewModel.userInfo.value).nickname)
+                    putExtra("userEmail", viewModel.otherUserEmail)
+                    putExtra("image", requireNotNull(viewModel.userInfo.value).profileImage)
+                    putExtra("isFollow", requireNotNull(viewModel.isFollow).value)
+                }
+                setResult(RESULT_OK, intent)
             }
-            setResult(RESULT_OK, intent)
+            "WriteShareActivity" -> {
+                if (viewModel.otherUserEmail != SharedInformation.getEmail(this)) {
+                    val intent = Intent(this, WriteShareActivity::class.java).apply {
+                        putExtra("userEmail", viewModel.otherUserEmail)
+                        putExtra("isFollow", viewModel.isFollow.value)
+                    }
+                    setResult(RESULT_OK, intent)
+                }
+            }
         }
         super.onBackPressed()
     }
@@ -197,7 +208,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
-            if(viewModel.userEmail == SharedInformation.getEmail(this)) {
+            if (viewModel.userEmail == SharedInformation.getEmail(this)) {
                 val intent = Intent(this, FollowActivity::class.java).apply {
                     putExtra("userEmail", viewModel.otherUserEmail)
                     putExtra("nickname", viewModel.userInfo.value?.nickname)
@@ -215,12 +226,12 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun observeLiveData() {
         viewModel.writtenLikePostList.observe(this) {
-            if(sort == LIKE) {
+            if (sort == LIKE) {
                 adapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }
         viewModel.writtenNewPostList.observe(this) {
-            if(sort == NEW) {
+            if (sort == NEW) {
                 adapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }

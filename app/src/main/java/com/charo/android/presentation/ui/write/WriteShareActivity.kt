@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.charo.android.R
+import com.charo.android.data.model.mypage.User
 import com.charo.android.databinding.ActivityWriteShareBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostFragment
 import com.charo.android.presentation.ui.main.MainActivity
@@ -15,6 +17,7 @@ import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class WriteShareActivity : AppCompatActivity() {
@@ -24,6 +27,17 @@ class WriteShareActivity : AppCompatActivity() {
     //    원래 진희코드
 //    private lateinit var sharedViewModel: WriteSharedViewModel
     private val sharedViewModel by viewModel<WriteSharedViewModel>()
+
+    val followResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    sharedViewModel.resultUserEmail = it.getStringExtra("userEmail") ?: ""
+                    sharedViewModel.resultUserFollow = it.getBooleanExtra("isFollow", false)
+                    sharedViewModel.updateLikeUserList()
+                }
+            }
+        }
 
     private lateinit var writeFragment: WriteFragment
 

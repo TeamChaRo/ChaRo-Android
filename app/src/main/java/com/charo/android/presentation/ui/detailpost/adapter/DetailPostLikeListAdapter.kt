@@ -1,6 +1,7 @@
 package com.charo.android.presentation.ui.detailpost.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -11,6 +12,7 @@ import com.charo.android.databinding.ItemDetailLikeBinding
 import com.charo.android.domain.model.detailpost.User
 
 class DetailPostLikeListAdapter(
+    private val userEmail: String,
     private val itemClick: (User) -> Unit,
     private val followClick: (User) -> Unit
 ) :
@@ -19,12 +21,16 @@ class DetailPostLikeListAdapter(
 
     class DetailPostLikeListViewHolder(
         private val binding: ItemDetailLikeBinding,
+        private val userEmail: String,
         private val itemClick: (User) -> Unit,
         private val followClick: (User) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: User) {
             binding.model = model
+            if(model.userEmail == userEmail) {
+                binding.tvDetailLikeFollow.visibility = View.GONE
+            }
             binding.executePendingBindings()
 
             binding.root.setOnClickListener {
@@ -48,7 +54,7 @@ class DetailPostLikeListAdapter(
             parent,
             false
         )
-        return DetailPostLikeListViewHolder(binding, itemClick, followClick)
+        return DetailPostLikeListViewHolder(binding, userEmail, itemClick, followClick)
     }
 
     override fun onBindViewHolder(holder: DetailPostLikeListViewHolder, position: Int) {
