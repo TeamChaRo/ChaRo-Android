@@ -20,7 +20,6 @@ class OtherMyPageViewModel(
     private val getRemoteFollowUseCase: GetRemoteFollowUseCase
 ) : ViewModel() {
     private val TAG = "mlog: OtherPageViewModel::"
-//    private val userEmail = "and@naver.com"
 
     private var _userEmail = "@"
     val userEmail: String get() = _userEmail
@@ -49,6 +48,9 @@ class OtherMyPageViewModel(
     private var _isFollow = MutableLiveData<Boolean>(false)
     val isFollow: LiveData<Boolean> get() = _isFollow
 
+    var postId: Int = 0
+    var likesCount: Int = 0
+    var saveCountDiff: Int = 0
     var follower: Int = -1
     var following: Int = -1
 
@@ -160,5 +162,34 @@ class OtherMyPageViewModel(
 
     fun updateFollow() {
         _userInfo.value = userInfo.value?.copy(follower = this.follower, following = this.following)
+    }
+
+    fun updatePost() {
+        updateWrittenLike()
+        updateWrittenNew()
+    }
+
+    private fun updateWrittenLike() {
+        writtenLikePostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _writtenLikePostList.value = updateList
+        }
+    }
+
+    private fun updateWrittenNew() {
+        writtenNewPostList.value?.let { list ->
+            val updateList = list.toMutableList()
+            val index = updateList.indexOf(updateList.find { it.postId == this.postId } ?: return)
+            val post = updateList[index].copy(favoriteNum = this.likesCount).apply {
+                saveNum += saveCountDiff
+            }
+            updateList[index] = post
+            _writtenNewPostList.value = updateList
+        }
     }
 }

@@ -11,6 +11,7 @@ import com.charo.android.R
 import com.charo.android.databinding.ActivityWriteShareBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostFragment
 import com.charo.android.presentation.ui.main.MainActivity
+import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -81,17 +82,31 @@ class WriteShareActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.write_share_layout)
         if (currentFragment is DetailPostFragment) {
-            if (intent.getStringExtra("from") == "MainActivity") {
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra("postId", sharedViewModel.postId)
-                    putExtra("likesCount", sharedViewModel.likesCount.value)
-                    if (sharedViewModel.isStoredFromServer != requireNotNull(sharedViewModel.isStored.value)) {
-                        val diff =
-                            requireNotNull(sharedViewModel.isStored.value) - sharedViewModel.isStoredFromServer
-                        putExtra("saveCountDiff", diff)
+            when (intent.getStringExtra("from")) {
+                "MainActivity" -> {
+                    val intent = Intent(this, MainActivity::class.java).apply {
+                        putExtra("postId", sharedViewModel.postId)
+                        putExtra("likesCount", sharedViewModel.likesCount.value)
+                        if (sharedViewModel.isStoredFromServer != requireNotNull(sharedViewModel.isStored.value)) {
+                            val diff =
+                                requireNotNull(sharedViewModel.isStored.value) - sharedViewModel.isStoredFromServer
+                            putExtra("saveCountDiff", diff)
+                        }
                     }
+                    setResult(RESULT_OK, intent)
                 }
-                setResult(RESULT_OK, intent)
+                "OtherMyPageActivity" -> {
+                    val intent = Intent(this, OtherMyPageActivity::class.java).apply {
+                        putExtra("postId", sharedViewModel.postId)
+                        putExtra("likesCount", sharedViewModel.likesCount.value)
+                        if (sharedViewModel.isStoredFromServer != requireNotNull(sharedViewModel.isStored.value)) {
+                            val diff =
+                                requireNotNull(sharedViewModel.isStored.value) - sharedViewModel.isStoredFromServer
+                            putExtra("saveCountDiff", diff)
+                        }
+                    }
+                    setResult(RESULT_OK, intent)
+                }
             }
             super.onBackPressed()
         } else if (currentFragment is WriteFragment) {

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import com.charo.android.R
 import com.charo.android.databinding.ActivityOtherMyPageBinding
 import com.charo.android.presentation.ui.follow.FollowActivity
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
@@ -26,10 +27,12 @@ class OtherMyPageActivity : AppCompatActivity() {
         val intent = Intent(this, WriteShareActivity::class.java)
         intent.putExtra("postId", it.postId)
         intent.putExtra("destination", "detail")
-        startActivity(intent)
+        intent.putExtra("from", "OtherMyPageActivity")
+        myPageResultLauncher.launch(intent)
     }
     private val viewModel by viewModel<OtherMyPageViewModel>()
     private var sort = LIKE
+
     private val followResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
@@ -39,6 +42,22 @@ class OtherMyPageActivity : AppCompatActivity() {
 
                     if(viewModel.follower != -1 && viewModel.following != -1) {
                         viewModel.updateFollow()
+                    }
+                }
+            }
+        }
+    private val myPageResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    result.data?.let {
+                        viewModel.postId = it.getIntExtra("postId", 0)
+                        viewModel.likesCount = it.getIntExtra("likesCount", 0)
+                        viewModel.saveCountDiff = it.getIntExtra("saveCountDiff", 0)
+
+                        if (viewModel.postId > 0) {
+                            viewModel.updatePost()
+                        }
                     }
                 }
             }
