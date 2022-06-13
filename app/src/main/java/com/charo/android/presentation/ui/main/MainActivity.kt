@@ -1,5 +1,6 @@
 package com.charo.android.presentation.ui.main
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -95,7 +96,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         userEmail = SharedInformation.getEmail(this)
         myPageViewModel.setUserEmail(userEmail)
-        requestPermissions()
+
+        if(!SharedInformation.notRequestAllow){
+            requestPermissions()
+        }
+
         nickName = intent.getStringExtra("nickName").toString()
         otherUserEmail = intent.getStringExtra("otherUserEmail")
         otherUserNickname = intent.getStringExtra("otherUserNickname")
@@ -226,12 +231,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun replaceHomeFragment(userId: String, nickName: String) {
+        SharedInformation.notRequestAllow = false
         replaceFragment(homeFragment, userId, nickName)
     }
 
 
-    private fun replaceWriteFragment(userId: String, nickName: String) {
-        if (userId == null || userEmail == "@") {
+    private fun replaceWriteFragment(userId : String, nickName : String){
+        SharedInformation.notRequestAllow = false
+        if(userId == null || userEmail == "@"){
 
             //로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this@MainActivity)
@@ -242,6 +249,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
 
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
+        SharedInformation.notRequestAllow = true
         when (isMyPage) {
 //            true -> replaceFragment(charoFragment, userId, nickName)
             // TODO: 테스트 코드입니다.
@@ -298,10 +306,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
-                Toast.makeText(this, "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
-                ActivityCompat.requestPermissions(this, permissions, 1)
+                val builder = AlertDialog.Builder(this, R.style.Dialog)
+                builder.setMessage("앱 이용을 위해 저장소 권한을 허용해야 합니다.")
+                builder.setCancelable(false)
+                builder.setPositiveButton("확인") { dialog, which ->
+                    ActivityCompat.requestPermissions(this, permissions, 1)
+                }
+                builder.show()
+                SharedInformation.setPermissionNever(this, false)
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
+                SharedInformation.setPermissionNever(this, true)
             }
         }
     }
@@ -315,17 +330,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         when (requestCode) {
             0 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
                 }
             }
             1 -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "권한 허용", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
-                startActivity(intent)
+                val builder = AlertDialog.Builder(this, R.style.Dialog)
+                builder.setMessage("앱 이용을 위해 권한 허용이 필요합니다.\n" +
+                        "권한은 '설정 > 애플리케이션 정보 > 차로 > 권한' 에서 설정할 수 있습니다. \n애플리케이션 정보 화면으로 이동하시겠습니까?")
+                builder.setCancelable(false)
+                builder.setPositiveButton("예") { dialog, which ->
+                    val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                    startActivity(intent)
+                }
+                builder.setNegativeButton("아니요") { dialog, which ->
+                }
+                builder.show()
             }
         }
     }

@@ -13,13 +13,13 @@
         android:text="@string/withdrawal"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
         app:fontFamily="@font/noto_sans_cjkkr_medium"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textColor="#454545"
         android:includeFontPadding="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        />
 
     <TextView
         android:id="@+id/text_withdrawal_agreement"
@@ -27,14 +27,15 @@
         android:layout_height="wrap_content"
         android:text="@string/agreement"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
-        android:textSize="14sp"
+        app:fontFamily="@font/noto_sans_cjkkr_medium"
+        android:textSize="15sp"
         android:textColor="#2c98f0"
         android:includeFontPadding="false"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintTop_toBottomOf="@+id/text_question_withdrawal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="113dp"
-        android:layout_marginStart="156dp"/>
+        android:layout_marginTop="30dp"/>
 
     <TextView
         android:id="@+id/text_withdrawal_cancel"
@@ -42,10 +43,11 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:fontFamily="@font/noto_sans_cjkkr_medium"
-        android:textSize="14sp"
+        app:fontFamily="@font/noto_sans_cjkkr_medium"
+        android:textSize="15sp"
         android:textColor="#2c98f0"
         android:includeFontPadding="false"
         app:layout_constraintTop_toTopOf="@+id/text_withdrawal_agreement"
         app:layout_constraintStart_toEndOf="@+id/text_withdrawal_agreement"
-        android:layout_marginStart="16dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

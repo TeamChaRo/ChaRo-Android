@@ -157,8 +157,10 @@ class SignUpProfileFragment :
             ) {
                 Toast.makeText(requireActivity(), "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
                 ActivityCompat.requestPermissions(requireActivity(), permissions, 1)
+                SharedInformation.setPermissionNever(requireContext(), false)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
+                SharedInformation.setPermissionNever(requireContext(), true)
             }
         } else{
             val intent = Intent(Intent.ACTION_PICK)

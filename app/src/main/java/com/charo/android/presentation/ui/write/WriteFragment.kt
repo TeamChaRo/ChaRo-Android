@@ -37,6 +37,7 @@ import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.databinding.FragmentWriteBinding
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LocationUtil
+import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.ThemeUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
@@ -51,8 +52,7 @@ import java.net.URL
 
 
 class WriteFragment : Fragment(), View.OnClickListener {
-
-    private val TAG = "승현"
+    private val TAG = "WriteFragment"
 
     companion object {
         fun newInstance() = WriteFragment()
@@ -415,83 +415,57 @@ class WriteFragment : Fragment(), View.OnClickListener {
         galleryLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 var imgPath: Uri
-                // note(승현):
-                // image: ArrayList<MultipartBody.Part> 는 convertImgToMultiPart() 메서드를 실행할 때
-                // 인자로 넣어주기 위해 존재하는 변수
-                // convertImgToMultiPart() 메서드 호출지점을 galleryLauncher() 가 아닌
-                // nextButtonToMap() 메서드로 이동시켰기 때문에 아래 변수는 이 스코프에서 사용하지 않는 변수가 됨
-                // 따라서 주석처리
-//                val image = ArrayList<MultipartBody.Part>()
+
                 if (it.resultCode == Activity.RESULT_OK) {
                     if (it.data == null) {
                         Timber.d("error img data null")
-                        return@registerForActivityResult
-                    }
-
-                    if (it.data == null || it.data?.clipData == null) {
                         Toast.makeText(context, "이미지만 선택 가능합니다.", Toast.LENGTH_LONG).show()
                         return@registerForActivityResult
                     }
 
+                    val data = it.data!!.data
                     val clipData = it.data!!.clipData
-                    when {
-                        clipData?.itemCount!! > 6 -> {
+                    Timber.d("WriteFragment img data : $data")
+                    Timber.d("WriteFragment img clipData : $clipData")
+
+                    if (data == null && clipData == null) {
+                        Toast.makeText(context, "이미지만 선택 가능합니다.", Toast.LENGTH_LONG).show()
+                        return@registerForActivityResult
+                    }
+
+                    val imgMoreList = mutableListOf<WriteImgInfo>()
+                    if (clipData != null) {
+                        if (clipData.itemCount > 6) {
                             Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
-                        }
-                        clipData.itemCount in 1..6 -> {
-                            binding.clWritePhoto.visibility = View.GONE
-                            val imgMoreList = mutableListOf<WriteImgInfo>()
-                            for (i: Int in 0 until clipData.itemCount) {
-                                imgPath = clipData.getItemAt(i).uri
+                            return@registerForActivityResult
+                        } else {
+                            if (clipData.itemCount in 1..6) {
+                                for (i: Int in 0 until clipData.itemCount) {
+                                    imgPath = clipData.getItemAt(i).uri
 
-                                // note(승현):
-                                // imgMoreList.add(0, writeImgInfo)로 인해 작성하기 UI 상에서의 이미지 순서와
-                                // 상세보기 UI 상에서의 이미지 순서가 달라지게 됨
-                                // 따라서, add(index, element) 메서드 대신 add(element) 메서드로 대체함
-                                //recyclerView 에 저장
-                                val writeImgInfo =
-                                    WriteImgInfo(imgUri = imgPath, isFromLocal = true)
-                                imgMoreList.add(
-//                                    0,
-                                    writeImgInfo
-                                )
-
-                                // note(승현):
-                                // 기존의 코드는 갤러리에서 이미지를 가져왔을 때 콜백으로 convertImgToMultiPart() 메서드를 호출하는 방식
-                                // 이는 기존 작성하기처럼 로컬 저장소에서 이미지를 가져오는 경우에는 문제없이 동작하나,
-                                // 수정하기처럼 이미지를 서버 DB 에서 가져와야 하는 경우는 별도의 구현 처리를 해줘야 함
-                                // 로컬 저장소와 서버 DB 에서 가져온 이미지 Uri 를 멀티파트화하는 코드를 별도로 분리해서 구현할 수 있으나
-                                // (개인의견) 갤러리에서 이미지를 가져올 때마다 멀티파트화시키는 것보다는
-                                // 다음 버튼을 누르는 순간 이미지를 멀티파트화시켜준다면 불필요한 convert 과정을 줄일 수 있을 것이라고 생각
-                                // (핑계) 사실 별도로 구현할 경우 예외처리가 복잡하기도 할 것 같다.
-                                // 따라서 nextButtonToMap() 메서드에서 convertImgToMultiPart() 메서드를 호출해
-                                // 버튼을 눌렀을 때 RecyclerView Adapter 의 itemList 를 멀티파트화 시키는 방향으로 코드를 수정함
-                                //이미지 멀티파트로 저장
-//                                convertImgToMultiPart(writeImgInfo, image)
-                            }
-
-                            val position = writeAdapter.itemCount
-                            val newCount = position + imgMoreList.size
-                            if (newCount > 6) {
-                                Toast.makeText(
-                                    context,
-                                    "사진은 6개까지 선택 가능합니다. \n다시 선택해주세요.",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            } else {
-                                writeAdapter.imgList.addAll(imgMoreList)
-                                writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
-
-                                // note(승현):
-                                // 아래 코드는 convertImgToMultiPart() 메서드를 통해 얻은 멀티파트 리스트를 ViewModel 에 담는 과정
-                                // convertImgToMultiPart() 메서드의 호출위치를 바꿨기 때문에 아래 코드 주석처리함
-//                                if (sharedViewModel.imageMultiPart.value == null) {
-//                                    sharedViewModel.imageMultiPart.value = image
-//                                } else {
-//                                    sharedViewModel.imageMultiPart.value!!.addAll(image)
-//                                }
+                                    val writeImgInfo =
+                                        WriteImgInfo(imgUri = imgPath, isFromLocal = true)
+                                    imgMoreList.add(writeImgInfo)
+                                }
                             }
                         }
+                    } else if (data != null){
+                        imgMoreList.add(WriteImgInfo(imgUri = it.data!!.data!!, isFromLocal = true))
+                    }
+
+                    binding.clWritePhoto.visibility = View.GONE
+
+                    val position = writeAdapter.itemCount
+                    val newCount = position + imgMoreList.size
+                    if (newCount > 6) {
+                        Toast.makeText(
+                            context,
+                            "사진은 6개까지 선택 가능합니다. \n다시 선택해주세요.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        writeAdapter.imgList.addAll(imgMoreList)
+                        writeAdapter.notifyItemInserted(position)   //기존에 선택된 항목 뒤에서부터 set
                     }
 
                     setPlusIconLoc()
@@ -510,29 +484,35 @@ class WriteFragment : Fragment(), View.OnClickListener {
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
         // 권한 없어서 요청
-        if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(
+        if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                || ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(requireActivity(), "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ),
-                1000
-            )
-
+                    1000)
+                SharedInformation.setPermissionNever(requireContext(), false)
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), 1000)
+                SharedInformation.setPermissionNever(requireContext(), true)
+            }
         } else { // 권한 있음
             if (writeAdapter.itemCount >= 6) {
                 Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
                 return
             }
 
-            val intent = Intent(Intent.ACTION_PICK)  //ACTION_PICK   //ACTION_GET_CONTENT
-            intent.type = "image/*"
-            //다중 선택 가능
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            val intent = Intent(Intent.ACTION_GET_CONTENT) //ACTION_PICK   //ACTION_GET_CONTENT
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) //다중 선택 가능
+            intent.type = MediaStore.Images.Media.CONTENT_TYPE
+            intent.setType("image/*")
+            galleryLauncher.launch(intent)
 
-            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI //데이터를 Uri로 받는다
-            galleryLauncher.launch(Intent.createChooser(intent, "Get Album"))
         }
     }
 

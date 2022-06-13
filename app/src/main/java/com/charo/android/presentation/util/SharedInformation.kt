@@ -4,7 +4,7 @@ import android.content.Context
 
 object SharedInformation {
     var searchWrite: Boolean = false
-
+    var notRequestAllow: Boolean = true
 
     private const val SOCIAL_KEY = "SOCIAL_KEY"
     private const val APP_EMAIL = "APP_EMAIL"
@@ -16,6 +16,7 @@ object SharedInformation {
     private const val NICKNAME = "NICK_NAME"
     private const val ON_BOARDING = "ONBOARDING"
     private const val PROFILE_IMAGE = "PROFILE_IMAGE"
+    private const val PERMISSION_QUESTION_NEVER = "PERMISSION_QUESTION_NEVER"
 
     // 카카오, 구글, 일반 로그아웃 구분 (카카오 : 1, 구글 : 2, 일반 : 3)
     fun getSocialId(context: Context): String {
@@ -204,5 +205,19 @@ object SharedInformation {
     fun getOnBoarding(context: Context): Boolean {
         val sharedPreferences = context.getSharedPreferences(ON_BOARDING, Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(ON_BOARDING, false)
+    }
+
+    //권한 설정 다시 묻지 않기 여부
+    fun setPermissionNever(context: Context, never: Boolean) {
+        val sharedPresentException =
+            context.getSharedPreferences(PERMISSION_QUESTION_NEVER, Context.MODE_PRIVATE)
+        sharedPresentException.edit()
+            .putBoolean(PERMISSION_QUESTION_NEVER, never)
+            .apply()
+    }
+
+    fun getPermissionNever(context: Context): Boolean {
+        val sharedPreferences = context.getSharedPreferences(PERMISSION_QUESTION_NEVER, Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(PERMISSION_QUESTION_NEVER, false)
     }
 }
