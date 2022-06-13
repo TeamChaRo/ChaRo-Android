@@ -262,7 +262,6 @@ class DetailPostFragment : Fragment() {
     private fun clickLike() {
         binding.imgDetailLike.setOnClickListener {
             if (viewModel.userEmail != "@") {
-                // TODO: WriteSharedViewModel에 postLike 구현필요
                 viewModel.postLike()
             } else {
                 LoginUtil.loginPrompt(requireContext())
@@ -273,7 +272,6 @@ class DetailPostFragment : Fragment() {
     private fun clickSave() {
         binding.imgDetailSave.setOnClickListener {
             if (viewModel.userEmail != "@") {
-                // TODO: WriteSharedViewModel에 postSave 구현필요
                 viewModel.postSave()
             } else {
                 LoginUtil.loginPrompt(requireContext())
@@ -349,7 +347,6 @@ class DetailPostFragment : Fragment() {
 
     private fun clickMap() {
         val transaction = parentFragmentManager.beginTransaction()
-        // TODO: Fragment Transaction 수정요망(id 부분)
         transaction.replace(R.id.write_share_layout, DetailPostMapFragment())
             .addToBackStack(null)
             .commit()
