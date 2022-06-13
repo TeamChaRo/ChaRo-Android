@@ -11,9 +11,9 @@ import com.charo.android.databinding.ActivityFollowBinding
 import com.charo.android.presentation.ui.follow.adapter.FollowViewPagerAdapter
 import com.charo.android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.charo.android.presentation.ui.main.MainActivity
+import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.util.SharedInformation
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.gson.annotations.SerializedName
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -53,12 +53,28 @@ class FollowActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (intent.getStringExtra("from") == "MainActivity") {
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("follower", viewModel.follower.value?.size ?: -1)
-                putExtra("following", viewModel.following.value?.filter { it.isFollow }?.size ?: -1)
+        when (intent.getStringExtra("from")) {
+            "MainActivity" -> {
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("follower", viewModel.follower.value?.size ?: -1)
+                    putExtra(
+                        "following",
+                        viewModel.following.value?.filter { it.isFollow }?.size ?: -1
+                    )
+                }
+                setResult(RESULT_OK, intent)
             }
-            setResult(RESULT_OK, intent)
+            "OtherMyPageActivity" -> {
+                val intent = Intent(this, OtherMyPageActivity::class.java).apply {
+                    putExtra("follower", viewModel.follower.value?.size ?: -1)
+                    putExtra(
+                        "following",
+                        viewModel.following.value?.filter { it.isFollow }?.size ?: -1
+                    )
+                }
+                setResult(RESULT_OK, intent)
+            }
+            else -> throw IllegalArgumentException()
         }
         super.onBackPressed()
     }

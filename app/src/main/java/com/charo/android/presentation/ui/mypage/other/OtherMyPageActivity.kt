@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
@@ -29,6 +30,19 @@ class OtherMyPageActivity : AppCompatActivity() {
     }
     private val viewModel by viewModel<OtherMyPageViewModel>()
     private var sort = LIKE
+    private val followResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    viewModel.follower = it.getIntExtra("follower", -1)
+                    viewModel.following = it.getIntExtra("following", -1)
+
+                    if(viewModel.follower != -1 && viewModel.following != -1) {
+                        viewModel.updateFollow()
+                    }
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -164,10 +178,19 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
-            val intent = Intent(this, FollowActivity::class.java)
-            intent.putExtra("userEmail", viewModel.otherUserEmail)
-            intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
-            startActivity(intent)
+            if(viewModel.userEmail == SharedInformation.getEmail(this)) {
+                val intent = Intent(this, FollowActivity::class.java).apply {
+                    putExtra("userEmail", viewModel.otherUserEmail)
+                    putExtra("nickname", viewModel.userInfo.value?.nickname)
+                    putExtra("from", "OtherMyPageActivity")
+                }
+                followResultLauncher.launch(intent)
+            } else {
+                val intent = Intent(this, FollowActivity::class.java)
+                intent.putExtra("userEmail", viewModel.otherUserEmail)
+                intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
+                startActivity(intent)
+            }
         }
     }
 

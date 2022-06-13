@@ -49,6 +49,9 @@ class OtherMyPageViewModel(
     private var _isFollow = MutableLiveData<Boolean>(false)
     val isFollow: LiveData<Boolean> get() = _isFollow
 
+    var follower: Int = -1
+    var following: Int = -1
+
     fun setUserEmail(userEmail: String) {
         _userEmail = userEmail
     }
@@ -153,5 +156,9 @@ class OtherMyPageViewModel(
                 Timber.i("$TAG getFollow() $it")
             }
         }
+    }
+
+    fun updateFollow() {
+        _userInfo.value = userInfo.value?.copy(follower = this.follower, following = this.following)
     }
 }
