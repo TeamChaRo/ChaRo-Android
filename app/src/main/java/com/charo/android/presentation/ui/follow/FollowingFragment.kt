@@ -14,6 +14,7 @@ import com.charo.android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.util.LoginUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
@@ -50,6 +51,7 @@ class FollowingFragment : Fragment() {
             (requireActivity() as FollowActivity).followResultLauncher.launch(intent)
         }, {
             if (viewModel.userEmail != "@") {
+                Timber.tag("mlog").i(it.userEmail)
                 viewModel.postFollow(it.userEmail)
             } else {
                 LoginUtil.loginPrompt(requireContext())

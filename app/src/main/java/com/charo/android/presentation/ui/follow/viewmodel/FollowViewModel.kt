@@ -73,7 +73,7 @@ class FollowViewModel(
     }
 
     private fun updateFollowList(otherUserEmail: String, isFollow: Boolean?) {
-        val newFollowingUser: User
+        val newFollowingUser: User?
         val updatedFollowerList = requireNotNull(_follower.value).map {
             if (it.userEmail == otherUserEmail) {
                 it.copy().apply {
@@ -83,7 +83,6 @@ class FollowViewModel(
                 it.copy()
             }
         }.toList()
-        newFollowingUser = requireNotNull(updatedFollowerList.find { it.userEmail == otherUserEmail })
         val updatedFollowingList = requireNotNull(_following.value).map {
             if (it.userEmail == otherUserEmail) {
                 it.copy().apply {
@@ -93,8 +92,11 @@ class FollowViewModel(
                 it.copy()
             }
         }.toMutableList()
-        if(updatedFollowingList.find { it.userEmail == otherUserEmail } == null && userEmail == myPageEmail) {
-            updatedFollowingList.add(0, newFollowingUser)
+        newFollowingUser = updatedFollowerList.find { it.userEmail == otherUserEmail }
+        newFollowingUser?.let { newFollowingUser ->
+            if (updatedFollowingList.find { it.userEmail == otherUserEmail } == null && userEmail == myPageEmail) {
+                updatedFollowingList.add(0, newFollowingUser)
+            }
         }
         _follower.value = updatedFollowerList
         _following.value = updatedFollowingList
