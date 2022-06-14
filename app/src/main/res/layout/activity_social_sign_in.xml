@@ -40,11 +40,11 @@
             android:includeFontPadding="false"
             android:textColor="@color/blue_main_0f6fff"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="189dp"
-            android:layout_marginStart="113dp"
-            android:layout_marginEnd="112dp"/>
+            app:layout_constraintVertical_bias="0.3"
+            />
 
         <ImageView
             android:id="@+id/img_social_charo_logo"
@@ -67,13 +67,13 @@
             android:textSize="17sp"
             android:fontFamily="@font/roboto_medium"
             app:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
+            app:layout_constraintBottom_toTopOf="@+id/img_social_kakao"
+            app:layout_constraintVertical_chainStyle="packed"
             android:paddingStart="7dp"
-            android:layout_marginTop="185dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginHorizontal="20dp"/>
 
 
         <TextView
@@ -87,6 +87,7 @@
             android:fontFamily="@font/noto_sans_cjkkr_medium"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/img_social_google"
+            app:layout_constraintBottom_toTopOf="@+id/text_social_email_login"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp"
@@ -103,6 +104,7 @@
             app:layout_constraintStart_toStartOf="@+id/img_social_kakao"
             app:layout_constraintBottom_toBottomOf="@+id/img_social_kakao"
             android:layout_marginStart="6dp"/>
+
         <TextView
             android:id="@+id/text_social_email_login"
             android:layout_width="wrap_content"
@@ -113,6 +115,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/gray3_sub_acb5bd"
             app:layout_constraintTop_toBottomOf="@+id/img_social_kakao"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/text_social_email_sign_up"
             app:layout_constraintHorizontal_chainStyle="packed"
