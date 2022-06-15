@@ -169,12 +169,12 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintTop_toBottomOf="@+id/text_home_today_drive" />
 
-                    <ImageView
+                    <View
                         android:id="@+id/img_home_line"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="1dp"
                         android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_line"
+                        android:background="#dde2e5"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/recyclerview_home_today_drive" />
@@ -197,6 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="18dp"
+                        android:includeFontPadding="false"
                         android:text="@string/main_charo_theme"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -235,6 +236,7 @@
                         android:text="@string/main_charo_hot_drive"
                         android:maxLines="1"
                         android:ellipsize="end"
+                        android:includeFontPadding="false"
                         app:layout_constraintEnd_toStartOf="@+id/text_home_hot_drive_plus"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -244,22 +246,14 @@
                         style="@style/HeaderH8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="35dp"
                         android:clickable="true"
                         android:text="@string/main_charo_hot_drive_plus"
                         app:layout_constraintBottom_toBottomOf="@+id/text_home_hot_drive"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_home_hot_drive" />
+                        app:layout_constraintTop_toTopOf="@+id/text_home_hot_drive"
+                        android:gravity="center"
+                        app:drawableEndCompat="@drawable/ic_more" />
 
-                    <ImageButton
-                        android:id="@+id/img_home_hot_drive_plus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_more"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_home_hot_drive_plus"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_home_hot_drive_plus" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview_home_hot_drive"
@@ -295,6 +289,7 @@
                         android:layout_marginStart="20dp"
                         android:maxLines="1"
                         android:ellipsize="end"
+                        android:includeFontPadding="false"
                         android:text="@{sharedViewModel.customThemeTitle}"
                         app:layout_constraintEnd_toStartOf="@+id/text_home_night_drive_plus"
                         app:layout_constraintStart_toStartOf="parent"
@@ -305,22 +300,13 @@
                         style="@style/HeaderH8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="26dp"
                         android:clickable="true"
                         android:text="@string/main_charo_hot_drive_plus"
                         app:layout_constraintBottom_toBottomOf="@+id/text_home_night_drive"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_home_night_drive" />
-
-                    <ImageView
-                        android:id="@+id/img_home_night_drive_plus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_more"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_home_night_drive_plus"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/text_home_night_drive_plus"
-                        app:layout_constraintTop_toTopOf="@+id/text_home_night_drive_plus" />
+                        app:layout_constraintTop_toTopOf="@+id/text_home_night_drive"
+                        android:gravity="center"
+                        app:drawableEndCompat="@drawable/ic_more"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview_home_night_drive"
@@ -357,6 +343,7 @@
                         android:layout_marginStart="19dp"
                         android:maxLines="1"
                         android:ellipsize="end"
+                        android:includeFontPadding="false"
                         android:text="@{sharedViewModel.localThemeTitle}"
                         app:layout_constraintEnd_toStartOf="@+id/text_home_location_drive_plus"
                         app:layout_constraintStart_toStartOf="parent"
@@ -367,22 +354,13 @@
                         style="@style/HeaderH8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="26dp"
                         android:clickable="true"
                         android:text="@string/main_charo_hot_drive_plus"
                         app:layout_constraintBottom_toBottomOf="@+id/text_home_location_drive"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/text_home_location_drive" />
-
-                    <ImageView
-                        android:id="@+id/img_home_location_drive_plus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_more"
-                        app:layout_constraintBottom_toBottomOf="@+id/text_home_location_drive_plus"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/text_home_location_drive_plus"
-                        app:layout_constraintTop_toTopOf="@+id/text_home_location_drive_plus" />
+                        app:layout_constraintTop_toTopOf="@+id/text_home_location_drive"
+                        android:gravity="center"
+                        app:drawableEndCompat="@drawable/ic_more"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerview_home_location_drive"

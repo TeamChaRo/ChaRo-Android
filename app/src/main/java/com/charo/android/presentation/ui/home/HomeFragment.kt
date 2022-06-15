@@ -127,7 +127,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeHotDriveAdapter = HomeTrendDriveAdapter(userEmail, links)
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
         homeViewModel.trendDrive.observe(viewLifecycleOwner) {
-            homeHotDriveAdapter.setHomeTrendDrive(it)
+            if(it == null || it.isEmpty()){
+                binding.clHomeHotDrive.visibility = View.GONE
+            } else {
+                binding.clHomeHotDrive.visibility = View.VISIBLE
+                homeHotDriveAdapter.setHomeTrendDrive(it)
+            }
         }
     }
 
@@ -137,7 +142,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeLocalDriveAdapter = HomeLocalDriveAdapter(userEmail, links)
         binding.recyclerviewHomeLocationDrive.adapter = homeLocalDriveAdapter
         homeViewModel.localDrive.observe(viewLifecycleOwner) {
-            homeLocalDriveAdapter.setLocalDrive(it)
+            if(it == null || it.isEmpty()){
+                binding.clHomeLocationDrive.visibility = View.GONE
+            } else {
+                binding.clHomeLocationDrive.visibility = View.VISIBLE
+                homeLocalDriveAdapter.setLocalDrive(it)
+            }
         }
     }
 
@@ -150,7 +160,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeTodayDriveAdapter = HomeTodayDriveAdapter(userEmail, links)
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
         homeViewModel.todayCharoDrive.observe(viewLifecycleOwner) {
-            homeTodayDriveAdapter.setTodayDrive(it)
+            if(it == null || it.isEmpty()){
+                binding.clHomeTodayDrive.visibility = View.GONE
+            } else {
+                binding.clHomeTodayDrive.visibility = View.VISIBLE
+                homeTodayDriveAdapter.setTodayDrive(it)
+            }
         }
     }
 
