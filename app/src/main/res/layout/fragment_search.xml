@@ -103,97 +103,106 @@
                     style="@style/HeaderH2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
+                    android:layout_marginStart="15dp"
                     android:text="@string/today_drive"
                     android:textColor="@color/gray5_sub_495057"
-                    app:layout_constraintStart_toStartOf="@+id/img_search_background"
+                    app:layout_constraintStart_toStartOf="@+id/ll_search_area"
                     app:layout_constraintTop_toTopOf="@+id/img_search_background" />
 
-                <TextView
-                    android:id="@+id/btn_search_area_1"
+                <LinearLayout
+                    android:id="@+id/ll_search_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ui_search_btn_unselect_android"
-                    android:text="@string/area_province"
-                    android:textColor="@drawable/selector_text_color"
-                    android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_today_drive" />
-
-                <TextView
-                    android:id="@+id/btn_search_area_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ui_search_btn_unselect_android"
-                    android:layout_marginStart="-15dp"
-                    android:text="@string/area_region"
-                    android:textColor="@drawable/selector_text_color"
-                    android:gravity="center"
-                    app:layout_constraintStart_toEndOf="@+id/btn_search_area_1"
-                    app:layout_constraintTop_toTopOf="@+id/btn_search_area_1" />
-
-                <TextView
-                    android:id="@+id/text_search_1"
-                    style="@style/HeaderH4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_text_1"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintStart_toEndOf="@id/btn_search_area_2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_search_area_2"
-                    app:layout_constraintTop_toTopOf="@+id/btn_search_area_2" />
+                    app:layout_constraintTop_toBottomOf="@id/text_today_drive"
+                    android:layout_marginStart="-20dp"
+                    >
+                    <TextView
+                        android:id="@+id/btn_search_area_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ui_search_btn_unselect_android"
+                        android:text="@string/area_province"
+                        android:textColor="@drawable/selector_text_color"
+                        android:gravity="center"/>
 
-                <TextView
-                    android:id="@+id/btn_search_theme"
+                    <TextView
+                        android:id="@+id/btn_search_area_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ui_search_btn_unselect_android"
+                        android:layout_marginStart="-15dp"
+                        android:text="@string/area_region"
+                        android:textColor="@drawable/selector_text_color"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/text_search_1"
+                        style="@style/HeaderH4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_text_1"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textAlignment="viewStart"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_search_theme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ui_search_btn_unselect_android"
-                    android:text="@string/main_charo_theme"
-                    android:textColor="@drawable/selector_text_color"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_search_area"
+                    app:layout_constraintStart_toStartOf="@+id/ll_search_area"
                     android:layout_marginTop="-7dp"
-                    app:layout_constraintStart_toStartOf="@+id/btn_search_area_1"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_search_area_1" />
+                    >
+                    <TextView
+                        android:id="@+id/btn_search_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ui_search_btn_unselect_android"
+                        android:text="@string/main_charo_theme"
+                        android:textColor="@drawable/selector_text_color"
+                        android:gravity="center"/>
 
-                <TextView
-                    android:id="@+id/text_search_2"
-                    style="@style/HeaderH4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_text_2"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_search_theme"
-                    app:layout_constraintStart_toEndOf="@+id/btn_search_theme"
-                    app:layout_constraintTop_toTopOf="@+id/btn_search_theme" />
+                    <TextView
+                        android:id="@+id/text_search_2"
+                        style="@style/HeaderH4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_text_2"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/btn_search_caution"
+                <LinearLayout
+                    android:id="@+id/ll_search_caution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ui_search_btn_unselect_android"
-                    android:text="@string/caution"
-                    android:textColor="@drawable/selector_text_color"
-                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_search_theme"
+                    app:layout_constraintStart_toStartOf="@+id/ll_search_theme"
                     android:layout_marginTop="-7dp"
-                    app:layout_constraintStart_toStartOf="@+id/btn_search_theme"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_search_theme" />
+                    >
+                    <TextView
+                        android:id="@+id/btn_search_caution"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ui_search_btn_unselect_android"
+                        android:text="@string/caution"
+                        android:textColor="@drawable/selector_text_color"
+                        android:gravity="center"/>
 
-                <TextView
-                    android:id="@+id/text_search_3"
-                    style="@style/HeaderH4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_text_3"
-                    android:textColor="@color/gray5_sub_495057"
-                    android:textAlignment="viewStart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_search_caution"
-                    app:layout_constraintStart_toEndOf="@+id/btn_search_caution"
-                    app:layout_constraintTop_toTopOf="@+id/btn_search_caution" />
+                    <TextView
+                        android:id="@+id/text_search_3"
+                        style="@style/HeaderH4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_text_3"
+                        android:textColor="@color/gray5_sub_495057"
+                        android:textAlignment="viewStart"/>
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
