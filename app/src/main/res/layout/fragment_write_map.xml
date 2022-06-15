@@ -50,7 +50,8 @@
                 <TextView
                     android:id="@+id/et_write_map_start"
                     android:layout_width="0dp"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="42dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/selector_write_address"
                     android:gravity="center|left"
@@ -68,7 +69,8 @@
                 <TextView
                     android:id="@+id/et_write_map_mid1"
                     android:layout_width="0dp"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="42dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/selector_write_address"
@@ -127,7 +129,8 @@
                 <TextView
                     android:id="@+id/et_write_map_end"
                     android:layout_width="0dp"
-                    android:layout_height="42dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="42dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/selector_write_address"

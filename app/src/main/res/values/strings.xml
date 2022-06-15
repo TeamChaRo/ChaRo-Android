@@ -221,7 +221,7 @@
 
     <string name="txt_check_all_input">모든 값을 입력/선택 해주세요.</string>
     <string name="txt_check_input_start_end">출발지와 도착지 모두 입력 후 추가 가능합니다.</string>
-    <string name="noti_write_map">출발지와 목적지를 입력하여 경로를 확인 후,\n경유지를 추가해 경로를 수정할 수 있습니다.</string>
+    <string name="noti_write_map">출발지와 목적지를 입력하여 경로를 확인 후, 경유지를 추가해 경로를 수정할 수 있습니다.</string>
     <string name="noti_cancel_write">게시물 작성을 중단하시겠습니까?</string>
     <string name="write_continue">이어서 작성</string>
     <string name="write_cancel">작성중단</string>
@@ -276,7 +276,7 @@
     <string name="txt_banner_theater_paju_recommend">윤블리 드라이버님이 다녀온\n파주 자동차 극장 코스!\n“자유로 극장”으로 검색하셔서,\n미리 영화 시간표 확인하시구,\n여유로운 드라이브 즐겨보시는 것은 어떨까요?</string>
     <string name="txt_go_post">드라이브 코스 바로 가기</string>
     <string name="txt_banner_theater_gang_address">강원도 강릉시</string>
-    <string name="txt_banner_theater_gang_title">강릉 자동차 극장는 코스</string>
+    <string name="txt_banner_theater_gang_title">강릉 자동차 극장 코스</string>
     <string name="txt_banner_theater">자동차 극장 드라이브 코스</string>
     <string name="txt_banner_theater_gang_context">드라이브도 하면서 극장에서 영화도 볼 수 있는 데이터 코스로 딱 알맞은 드라이브 코스라고 하네요.\n요즘 시기에 너무 좋은 데이트 코스인 것 같아요.\n근처 편의점에서 영화 보면서 먹을 간식도 미리 사서 간다면 너무 좋을 것 같아요.</string>
     <string name="txt_banner_theater_gang_recommend">임쏘 드라이버님이 다녀온\n강릉 자동차 극장 코스입니다.\n극장에서 보는 영화도 좋지만\n프라이빗 한 공간에서\n연인, 친구, 가족과 색다른 경험을 만끽해 보세요.</string>
