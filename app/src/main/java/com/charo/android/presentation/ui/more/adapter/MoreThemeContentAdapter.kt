@@ -68,12 +68,8 @@ class MoreThemeContentAdapter(
             binding.apply {
                 moreDrive = moreData
                 binding.executePendingBindings()
-
             }
-
-
         }
-
     }
 
     fun setHomeTrendDrive(moreData: List<MoreDrive>){

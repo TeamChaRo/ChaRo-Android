@@ -51,15 +51,6 @@
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/text_more_view_spinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/HeaderH8"
-            tools:text="@string/main_charo_theme"
-            app:layout_constraintTop_toTopOf="@+id/spinner_more_view"
-            app:layout_constraintEnd_toStartOf="@+id/spinner_more_view" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_more_view"
             android:layout_width="match_parent"
@@ -74,5 +65,44 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner_more_view"
             tools:listitem="@layout/item_more_view" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_more_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img_no_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search_no_img_android"
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/text_no_mention"
+                app:layout_constraintVertical_chainStyle="packed"/>
+
+            <TextView
+                android:id="@+id/text_no_mention"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_cjkkr_regular"
+                app:fontFamily="@font/noto_sans_cjkkr_regular"
+                android:lineHeight="21sp"
+                android:text="@string/no_data_drive"
+                android:textAlignment="center"
+                android:textColor="@color/gray5_sub_495057"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_no_list"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

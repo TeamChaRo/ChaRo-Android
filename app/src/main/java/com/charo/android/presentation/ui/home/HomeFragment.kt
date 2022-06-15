@@ -55,6 +55,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val nickName: String = Hidden.nickName
+
+        initDefaultView()
+
         goSearchView(nickName)
         goAlarm()
         initToolBar()
@@ -70,6 +73,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initCustomThemeDrive()
         initHomeTitle()
         initThemeDrive()
+
+        initEmptyView()
     }
 
     private fun initToolBar() {
@@ -102,6 +107,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         })
     }
+
     //배너 디지인
     private fun initBannerLocal() {
         val bannerLocal : List<BannerLocal>
@@ -117,6 +123,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         bannerLocal = listOf(Banner1,Banner2,Banner3,Banner4)
 
         homeViewPagerLocalAdapter.setHomeBanner(bannerLocal)
+    }
+
+    //초기 뷰
+    private fun initDefaultView(){
+        binding.clHomeTodayDrive.visibility = View.GONE
+        binding.clHomeHotDrive.visibility = View.GONE
+        binding.clHomeNightDrive.visibility = View.GONE
+        binding.clHomeLocationDrive.visibility = View.GONE
+        binding.clEmptyList.visibility = View.VISIBLE
     }
 
     //요즘 뜨는 드라이브
@@ -175,9 +190,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeCustomThemeAdapter = HomeCustomThemeAdapter(userEmail, links)
         binding.recyclerviewHomeNightDrive.adapter = homeCustomThemeAdapter
         homeViewModel.customThemeDrive.observe(viewLifecycleOwner) {
-            homeCustomThemeAdapter.setCustomThemeDrive(it)
+            if(it == null || it.isEmpty()){
+                binding.clHomeNightDrive.visibility = View.GONE
+            } else {
+                binding.clHomeNightDrive.visibility = View.VISIBLE
+                homeCustomThemeAdapter.setCustomThemeDrive(it)
+            }
         }
     }
+
+    private fun initEmptyView(){
+        if(homeViewModel.trendDrive.value?.isEmpty() == true
+            && homeViewModel.customThemeDrive.value?.isEmpty() == true
+            && homeViewModel.localDrive.value?.isEmpty() == true) {
+            binding.clEmptyList.visibility = View.VISIBLE
+        } else {
+            binding.clEmptyList.visibility = View.GONE
+        }
+    }
+
     //테마 뷰 이동
     private fun initThemeDrive() {
         val themeData = LocalHomeThemeDataSourceImpl().fetchData()
@@ -256,6 +287,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
     }
-
-
 }

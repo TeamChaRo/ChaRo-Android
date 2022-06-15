@@ -92,7 +92,7 @@
     <string name="blossom">#벚꽃</string>
     <string name="title_activity_no_search">NoSearchActivity</string>
     <string name="search_activity">드라이브 맞춤 검색 결과</string>
-    <string name="search_mention">검색하신 드라이브 코스가 아직 없습니다.\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?</string>
+    <string name="search_mention">검색조건에 맞는 드라이브 코스가 없습니다.\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떤가요?</string>
     <string name="search_write">드라이브 코스 작성하기</string>
     <string name="signin_login">로그인</string>
     <string name="signin_signup">회원가입</string>
@@ -102,7 +102,7 @@
     <string name="auto_search">검색어를 입력해주세요</string>
     <string name="skip">SKIP</string>
     <string name="looking">구경해요!</string>
-    <string name="on_boarding_1">   사람들의 드라이브 경험을\n자유롭게 구경해보세요</string>
+    <string name="on_boarding_1">사람들의 드라이브 경험을\n자유롭게 구경해보세요</string>
     <string name="searching"> 검색해요!</string>
     <string name="on_boarding_2">원하는 지역과 테마로\n맞춤 드라이브 코스를 찾아보세요</string>
     <string name="writing">작성해요!</string>
@@ -209,8 +209,8 @@
     <string name="write_recent_search">최근 검색</string>
     <string name="write_auto_search">관련 검색어</string>
 
-    <string name="text_my_page_no_written_post">작성하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n작성해보는 것은 어떠신가요?</string>
-    <string name="text_my_page_no_saved_post">저장하신 드라이브 코스가 아직 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떠신가요?</string>
+    <string name="text_my_page_no_written_post">아직 작성한 드라이브 코스가 없습니다\n직접 나만의 드라이브 코스를\n작성해보는 것은 어떤가요?</string>
+    <string name="text_my_page_no_saved_post">아직 저장한 드라이브 코스가 없습니다\n직접 나만의 드라이브 코스를\n만들어보는 것은 어떤가요?</string>
 
     <string name="set_start_point">출발지로 설정</string>
     <string name="set_via_point">경유지로 설정</string>
@@ -349,6 +349,9 @@
     <string name="text_options">⋮</string>
     <string name="text_confirm_delete">정말 삭제하시겠습니까?</string>
     <string name="alarm">알림</string>
+
+    <string name="no_data_drive">아직 등록된 드라이브 코스가 없습니다.</string>
+    <string name="no_data_alarm">새로운 알림이 없습니다.</string>
 
     <!--    서버통신 에러 string-->
     <string name="server_error_general">문제가 발생했습니다. 다시 시도해주세요.</string>

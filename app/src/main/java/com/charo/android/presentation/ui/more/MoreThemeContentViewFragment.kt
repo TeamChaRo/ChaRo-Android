@@ -34,6 +34,10 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     }
 
     private fun clickSpinner() {
+        //default
+        initMoreThemeView()
+
+        //click
         binding.spinnerMoreTheme.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 @SuppressLint("NotifyDataSetChanged")
@@ -45,20 +49,14 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 ) {
                     if (position == 0) {
                         initMoreThemeView()
-
                     } else {
-
                         initMoreThemeNewView()
                     }
-
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 
                 }
-
             }
-
     }
 
     private fun initMoreThemeView(){
@@ -66,17 +64,31 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         moreThemeContentAdapter = MoreThemeContentAdapter(link,userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.drive.observe(viewLifecycleOwner) {
-            moreThemeContentAdapter.setHomeTrendDrive(it)
+            if(it.isEmpty()){
+                binding.clEmptyList.visibility = View.VISIBLE
+                binding.clThemeList.visibility = View.GONE
+            } else {
+                binding.clEmptyList.visibility = View.GONE
+                binding.clThemeList.visibility = View.VISIBLE
+                moreThemeContentAdapter.setHomeTrendDrive(it)
+            }
         }
     }
 
     private fun initMoreThemeNewView(){
-            moreViewModel.getMoreNewView(userId, identifier, value)
+        moreViewModel.getMoreNewView(userId, identifier, value)
         moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
-            binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
-            moreViewModel.newDrive.observe(viewLifecycleOwner) {
+        binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
+        moreViewModel.newDrive.observe(viewLifecycleOwner) {
+            if(it.isEmpty()){
+                binding.clEmptyList.visibility = View.VISIBLE
+                binding.clThemeList.visibility = View.GONE
+            } else {
+                binding.clEmptyList.visibility = View.GONE
+                binding.clThemeList.visibility = View.VISIBLE
                 moreThemeContentAdapter.setHomeTrendDrive(it)
             }
+        }
     }
 
     private fun initSpinner(){

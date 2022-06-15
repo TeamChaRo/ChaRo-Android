@@ -62,9 +62,7 @@ class MoreViewViewModel(
                 .onFailure {
                     it.printStackTrace()
                     Timber.d("more 서버 통신 실패")
-
                 }
-
         }
     }
     //처음 최신순

@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -109,9 +110,14 @@ class AlarmActivity : AppCompatActivity() {
                     val pushList = response.body()?.pushList
 
                     if(pushList != null){
+                        binding.rcvAlarmList.visibility = View.VISIBLE
+                        binding.clEmptyList.visibility = View.GONE
                         alarmAdapter.itemList.addAll(pushList)
+                        alarmAdapter.notifyDataSetChanged()
+                    } else {
+                        binding.rcvAlarmList.visibility = View.GONE
+                        binding.clEmptyList.visibility = View.VISIBLE
                     }
-                    alarmAdapter.notifyDataSetChanged()
                 } else {
                     Timber.d("server connect : Alarm error")
                     Timber.d("server connect : Alarm ${response.errorBody()}")

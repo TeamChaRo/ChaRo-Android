@@ -110,7 +110,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
                 val fragment : Fragment
                 transaction?.apply {
-                    fragment = if (it.isEmpty()) {
+                    fragment = if (it == null || it.isEmpty()) {
                         NoSearchFragment()
                     } else {
                         ResultSearchFragment()

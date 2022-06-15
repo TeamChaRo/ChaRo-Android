@@ -57,6 +57,8 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 //        clickBackButton(userId)
         clickSpinner()
         removeData()
+
+        emptyData()
     }
 
     private fun initToolbar(){
@@ -252,7 +254,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         }
     }
 
-
     private fun moreNewViewInfiniteLoadData() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         Timber.d("userEmailss $userEmail")
@@ -267,6 +268,16 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         } else {
             moreViewModel.getNewPreview(userEmail, "3", lastId, "")
 
+        }
+    }
+
+    private fun emptyData() {
+        moreViewModel.drive.observe(viewLifecycleOwner) {
+            if(it == null || it.isEmpty()){
+                binding.clEmptyList.visibility = View.VISIBLE
+            } else {
+                binding.clEmptyList.visibility = View.GONE
+            }
         }
     }
 
