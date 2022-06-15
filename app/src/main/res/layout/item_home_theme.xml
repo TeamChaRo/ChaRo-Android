@@ -24,6 +24,7 @@
             android:background="@drawable/theme_circle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/text_home_theme"
             android:layout_width="0dp"
@@ -31,9 +32,10 @@
             android:text="@string/main_charo_theme_name"
             style="@style/TextStyle2"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
+            android:includeFontPadding="false"
             app:layout_constraintTop_toBottomOf="@+id/img_home_theme"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
