@@ -218,11 +218,11 @@
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
                         app:fontFamily="@font/noto_sans_cjkkr_medium"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_write_location_empty"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btn_write_province"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+                  <!--  <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btn_write_location_empty"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -235,7 +235,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/btn_write_region"
                         app:layout_constraintTop_toBottomOf="@+id/text_write_select_location" />
-
+-->
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -282,7 +282,7 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:text="@string/theme1"
+                        android:text="tring/theme11"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
                         app:fontFamily="@font/noto_sans_cjkkr_medium"

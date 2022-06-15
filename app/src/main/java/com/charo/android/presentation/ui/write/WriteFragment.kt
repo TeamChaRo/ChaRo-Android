@@ -202,15 +202,17 @@ class WriteFragment : Fragment(), View.OnClickListener {
                 edt.removeTextChangedListener(this)
 
                 val textLength: Int = p0.toString().length
+
                 if (len > 200)
                     binding.tvLenMyDrive.text = "${textLength}/${len}자"
 
-                if (textLength > len) {
-                    edt.setText(p0.toString().substring(0, textLength - 1))
-                    edt.setSelection(textLength - 1)
-                }
                 edt.isSelected = textLength > len
                 warningTxt.isVisible = textLength > len
+
+                if (textLength > len) {
+                    edt.setText(p0.toString().substring(0, len - 1))
+                    edt.setSelection(len - 1)
+                }
 
                 edt.addTextChangedListener(this)
             }
