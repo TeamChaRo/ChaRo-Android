@@ -20,10 +20,23 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("imgBind")
     fun setImage(imageView: ImageView, imageUrl: String) {
-        val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(20.dpToPx))
+        val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(14.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
             .placeholder(R.drawable.home_today_drive_image)
+            .error(R.drawable.home_today_drive_image)
+            .apply(RequestOptions.bitmapTransform(multiOption))
+            .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("imgRoundBind10")
+    fun setRadius10Image(imageView: ImageView, imageUrl: String) {
+        val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(10.dpToPx))
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_image_r10_placeholder)
+            .error(R.drawable.ic_image_r10_placeholder)
             .apply(RequestOptions.bitmapTransform(multiOption))
             .into(imageView)
     }

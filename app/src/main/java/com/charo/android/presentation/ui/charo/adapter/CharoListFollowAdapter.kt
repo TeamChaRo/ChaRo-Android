@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.charo.android.R
 import com.charo.android.data.model.charo.User
 import com.charo.android.databinding.ItemCharoListBinding
 
@@ -16,6 +17,7 @@ class CharoListFollowAdapter(val itemClick: (User) -> Unit) :
         fun onBind(userData: User) {
             Glide.with(binding.imgCharoListProfile)
                 .load(userData.image)
+                .error(R.drawable.ic_profile)
                 .circleCrop()
                 .into(binding.imgCharoListProfile)
 

@@ -29,7 +29,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintDimensionRatio="8:5"
                 android:scaleType="fitXY"
-                imgBind="@{searchDrive.image}"
+                imgRoundBind10="@{searchDrive.image}"
                 android:src="@drawable/result_search_shape"
                 app:layout_constraintTop_toTopOf="parent" />
 

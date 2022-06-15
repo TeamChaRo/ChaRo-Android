@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.charo.android.R
 import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.ItemAlarmBinding
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
@@ -26,6 +27,7 @@ class AlarmListAdapter(
         fun onBind(alarmListInfo: ResponseAlarmListData.PushList) {
             Glide.with(binding.imgAlarmListProfile)
                 .load(alarmListInfo.image)
+                .error(R.drawable.ic_profile)
                 .circleCrop()
                 .into(binding.imgAlarmListProfile)
 
