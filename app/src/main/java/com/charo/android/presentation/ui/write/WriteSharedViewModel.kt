@@ -79,12 +79,15 @@ class WriteSharedViewModel(
     var isFavorite = MutableLiveData<Int>().default(0)
     var likesCount = MutableLiveData<Int>().default(0)
     var isStored = MutableLiveData<Int>().default(0)
+    var isStoredFromServer: Int = 0
     var courseDetail = MutableLiveData<List<DetailPost.Course>>()
     var detailArea = MutableLiveData<String>().default("")
 
     // DetailPostLikeListFragment
     private var _likeUserList = MutableLiveData<List<User>>()
     val likeUserList: LiveData<List<User>> get() = _likeUserList
+    var resultUserEmail: String = ""
+    var resultUserFollow: Boolean = false
 
     // DetailPostImageFragment
     var imageIndex = 0
@@ -153,6 +156,7 @@ class WriteSharedViewModel(
                 likesCount.value = it.likesCount
                 isFavorite.value = if (it.isFavorite == 0) 0 else 1
                 isStored.value = if (it.isStored == 0) 0 else 1
+                isStoredFromServer = if (it.isStored == 0) 0 else 1
                 courseDetail.value = it.course
 
                 // createdAt 파싱
@@ -208,6 +212,8 @@ class WriteSharedViewModel(
             }.onSuccess {
                 if (it) {
                     isStored.value = isStored.value?.plus(1)?.rem(2)
+                    Timber.tag("isStoredFromServer").i(isStoredFromServer.toString())
+                    Timber.tag("isStored").i(isStored.value.toString())
                 }
             }.onFailure {
                 Timber.tag("postSave").e(it)
@@ -300,5 +306,15 @@ class WriteSharedViewModel(
             }
         }
         _editMapFlag.value = false
+    }
+
+    fun updateLikeUserList() {
+        _likeUserList.value = likeUserList.value?.map {
+            if(it.userEmail == resultUserEmail) {
+                it.copy(isFollow = resultUserFollow)
+            } else {
+                it.copy()
+            }
+        }?.toMutableList()
     }
 }

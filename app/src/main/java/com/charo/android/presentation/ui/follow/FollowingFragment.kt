@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.charo.android.R
@@ -15,6 +14,7 @@ import com.charo.android.presentation.ui.follow.viewmodel.FollowViewModel
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.util.LoginUtil
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
@@ -25,7 +25,7 @@ class FollowingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_following, container, false)
         return binding.root
@@ -34,7 +34,6 @@ class FollowingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        refreshRecyclerView()
         observeLiveData()
     }
 
@@ -45,11 +44,14 @@ class FollowingFragment : Fragment() {
 
     private fun initRecyclerView() {
         adapter = FollowAdapter({
-            val intent = Intent(requireContext(), OtherMyPageActivity::class.java)
-            intent.putExtra("userEmail", it.userEmail)
-            startActivity(intent)
+            val intent = Intent(requireContext(), OtherMyPageActivity::class.java).apply {
+                putExtra("userEmail", it.userEmail)
+                putExtra("from", "FollowActivity")
+            }
+            (requireActivity() as FollowActivity).followResultLauncher.launch(intent)
         }, {
             if (viewModel.userEmail != "@") {
+                Timber.tag("mlog").i(it.userEmail)
                 viewModel.postFollow(it.userEmail)
             } else {
                 LoginUtil.loginPrompt(requireContext())
@@ -57,14 +59,6 @@ class FollowingFragment : Fragment() {
         }, viewModel.userEmail
         )
         binding.rv.adapter = adapter
-    }
-
-    private fun refreshRecyclerView() {
-        binding.srlFollowing.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.blue_main_0f6fff))
-        binding.srlFollowing.setOnRefreshListener {
-            viewModel.getFollowList()
-            binding.srlFollowing.isRefreshing = false
-        }
     }
 
     private fun observeLiveData() {

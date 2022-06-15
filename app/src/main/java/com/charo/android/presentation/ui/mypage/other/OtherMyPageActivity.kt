@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import com.charo.android.R
 import com.charo.android.databinding.ActivityOtherMyPageBinding
 import com.charo.android.presentation.ui.follow.FollowActivity
+import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.mypage.adapter.PostAdapter
 import com.charo.android.presentation.ui.mypage.viewmodel.OtherMyPageViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
@@ -25,10 +27,41 @@ class OtherMyPageActivity : AppCompatActivity() {
         val intent = Intent(this, WriteShareActivity::class.java)
         intent.putExtra("postId", it.postId)
         intent.putExtra("destination", "detail")
-        startActivity(intent)
+        intent.putExtra("from", "OtherMyPageActivity")
+        myPageResultLauncher.launch(intent)
     }
     private val viewModel by viewModel<OtherMyPageViewModel>()
     private var sort = LIKE
+
+    private val followResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    viewModel.follower = it.getIntExtra("follower", -1)
+                    viewModel.following = it.getIntExtra("following", -1)
+
+                    if (viewModel.follower != -1 && viewModel.following != -1) {
+                        viewModel.updateFollow()
+                    }
+                }
+            }
+        }
+    private val myPageResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    result.data?.let {
+                        viewModel.postId = it.getIntExtra("postId", 0)
+                        viewModel.likesCount = it.getIntExtra("likesCount", 0)
+                        viewModel.saveCountDiff = it.getIntExtra("saveCountDiff", 0)
+
+                        if (viewModel.postId > 0) {
+                            viewModel.updatePost()
+                        }
+                    }
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,17 +78,47 @@ class OtherMyPageActivity : AppCompatActivity() {
         clickBack()
         clickFollow()
         showFollowList()
-        if (viewModel.userEmail != "@") {
-            viewModel.getLikePost()
-            viewModel.getNewPost()
-            viewModel.getFollow()
-        }
+        fetchData()
+        setOnSwipeRefreshLayoutListener()
         observeLiveData()
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    override fun onBackPressed() {
+        when (intent.getStringExtra("from")) {
+            "FollowActivity" -> {
+                val intent = Intent(this, FollowActivity::class.java).apply {
+                    putExtra("nickname", requireNotNull(viewModel.userInfo.value).nickname)
+                    putExtra("userEmail", viewModel.otherUserEmail)
+                    putExtra("image", requireNotNull(viewModel.userInfo.value).profileImage)
+                    putExtra("isFollow", requireNotNull(viewModel.isFollow).value)
+                }
+                setResult(RESULT_OK, intent)
+            }
+            "WriteShareActivity" -> {
+                if (viewModel.otherUserEmail != SharedInformation.getEmail(this)) {
+                    val intent = Intent(this, WriteShareActivity::class.java).apply {
+                        putExtra("userEmail", viewModel.otherUserEmail)
+                        putExtra("isFollow", viewModel.isFollow.value)
+                    }
+                    setResult(RESULT_OK, intent)
+                }
+            }
+        }
+        super.onBackPressed()
+    }
+
+    private fun setOnSwipeRefreshLayoutListener() {
+        binding.layoutSwipe.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.layoutSwipe.setOnRefreshListener {
+            fetchData()
+            binding.layoutSwipe.isRefreshing = false
+        }
+    }
+
+    private fun fetchData() {
         if (viewModel.userEmail != "@") {
+            viewModel.getLikePost()
+            viewModel.getNewPost()
             viewModel.getFollow()
         }
     }
@@ -129,7 +192,7 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun clickBack() {
         binding.clBack.setOnClickListener {
-            finish()
+            onBackPressed()
         }
     }
 
@@ -145,21 +208,30 @@ class OtherMyPageActivity : AppCompatActivity() {
 
     private fun showFollowList() {
         binding.clProfileFollow.setOnClickListener {
-            val intent = Intent(this, FollowActivity::class.java)
-            intent.putExtra("userEmail", viewModel.otherUserEmail)
-            intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
-            startActivity(intent)
+            if (viewModel.userEmail == SharedInformation.getEmail(this)) {
+                val intent = Intent(this, FollowActivity::class.java).apply {
+                    putExtra("userEmail", viewModel.otherUserEmail)
+                    putExtra("nickname", viewModel.userInfo.value?.nickname)
+                    putExtra("from", "OtherMyPageActivity")
+                }
+                followResultLauncher.launch(intent)
+            } else {
+                val intent = Intent(this, FollowActivity::class.java)
+                intent.putExtra("userEmail", viewModel.otherUserEmail)
+                intent.putExtra("nickname", viewModel.userInfo.value?.nickname)
+                startActivity(intent)
+            }
         }
     }
 
     private fun observeLiveData() {
         viewModel.writtenLikePostList.observe(this) {
-            if(sort == LIKE) {
+            if (sort == LIKE) {
                 adapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }
         viewModel.writtenNewPostList.observe(this) {
-            if(sort == NEW) {
+            if (sort == NEW) {
                 adapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }

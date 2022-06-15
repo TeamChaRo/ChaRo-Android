@@ -39,12 +39,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="19dp"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
-                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:includeFontPadding="false"
                 android:lineHeight="24sp"
                 android:text="@string/like"
                 android:textColor="@color/black_sub_212429"
                 android:textSize="17sp"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,35 +52,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nscv_detail_like"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_detail_dialog"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:paddingBottom="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_detail_dialog_top">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_detail_dialog"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="5dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:itemCount="15"
-                    tools:listitem="@layout/item_detail_like" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
+            app:layout_constraintTop_toBottomOf="@id/cl_detail_dialog_top"
+            tools:itemCount="15"
+            tools:listitem="@layout/item_detail_like" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
