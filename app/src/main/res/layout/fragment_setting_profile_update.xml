@@ -98,12 +98,11 @@
             android:id="@+id/img_profile_change_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_map_search_close"
             app:layout_constraintEnd_toEndOf="@+id/text_input_profile_change_nick_name"
-            app:layout_constraintTop_toTopOf="@+id/text_input_profile_change_nick_name" />
+            app:layout_constraintTop_toTopOf="@+id/text_input_profile_change_nick_name"/>
 
         <ImageView
             android:id="@+id/img_profile_update_button"

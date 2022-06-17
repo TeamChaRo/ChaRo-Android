@@ -126,6 +126,11 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
             val bottomSheet = SettingBottomSheetFragment()
             bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
         }
+
+        binding.textProfileChange.setOnClickListener {
+            val bottomSheet = SettingBottomSheetFragment()
+            bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+        }
     }
 
     private fun changeProfileImage() {
