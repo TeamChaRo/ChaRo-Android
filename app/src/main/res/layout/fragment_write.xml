@@ -127,11 +127,12 @@
                         android:id="@+id/img_write_photo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
                         android:src="@drawable/group_525"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/text_write_photo"
+                        app:layout_constraintVertical_chainStyle="packed"/>
 
                     <TextView
                         android:id="@+id/text_write_photo"
@@ -139,7 +140,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="40dp"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="30dp"
                         android:fontFamily="@font/noto_sans_cjkkr_regular"
                         android:gravity="center"
                         android:text="@string/how_your_drive"
