@@ -36,8 +36,12 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> {
-                onBackPressed()
-                return true
+                val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_setting)
+                if (currentFragment is SettingMainFragment) {
+                    onBackPressed()
+                } else {
+                    changeFragment(R.id.fragment_container_setting, SettingMainFragment())
+                }
             }
         }
         return super.onOptionsItemSelected(item)

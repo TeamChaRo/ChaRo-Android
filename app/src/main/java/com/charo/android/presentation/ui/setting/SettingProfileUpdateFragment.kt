@@ -220,8 +220,6 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
             commit()
         }
     }
-
-
 }
 
 
