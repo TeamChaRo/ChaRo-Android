@@ -29,7 +29,6 @@ class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNo
         position: Int
     ) {
         holder.onBind(settingNotice[position])
-
     }
 
     override fun getItemCount(): Int {
@@ -46,7 +45,7 @@ class SettingNoticeAdapter : RecyclerView.Adapter<SettingNoticeAdapter.SettingNo
                 settingNoticeData = settingNotice
                 executePendingBindings()
 
-                imgSettingNoticeExpand.setOnClickListener {
+                clSettingNoticeTop.setOnClickListener {
                     if(!settingNotice.view){
                         settingNotice.view = true
                         clSettingNoticeExpand.visibility = View.VISIBLE
