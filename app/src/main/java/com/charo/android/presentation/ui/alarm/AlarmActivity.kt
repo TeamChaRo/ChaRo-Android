@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.charo.android.R
 import com.charo.android.data.api.ApiService
 import com.charo.android.data.model.request.alarm.RequestReadPushData
@@ -25,7 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 
-class AlarmActivity : AppCompatActivity() {
+class AlarmActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: ActivityAlarmBinding
     private lateinit var alarmViewModel: AlarmViewModel
 
@@ -43,8 +44,9 @@ class AlarmActivity : AppCompatActivity() {
 
         initToolbar(getString(R.string.alarm))
 
-        //fcm test TODO: 서버에서 보내는 알람 test 필요
-        sendFCM()
+        //TODO: 서버에서 보내는 알람 test 필요
+        //fcm test
+//        sendFCM()
 
         alarmViewModel = AlarmViewModel()
 
@@ -55,6 +57,8 @@ class AlarmActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(binding.rcvAlarmList)
 
         initRecyclerView()
+        binding.srAlarmList.setOnRefreshListener(this)
+        binding.srEmptyList.setOnRefreshListener(this)
     }
 
     private fun initToolbar(title : String){
@@ -103,6 +107,8 @@ class AlarmActivity : AppCompatActivity() {
                 response: Response<ResponseAlarmListData>
             ) {
                 Timber.e("getAlarmList param111 $userEmail")
+                binding.srAlarmList.isRefreshing = false
+                binding.srEmptyList.isRefreshing = false
 
                 if (response.isSuccessful) {
                     Timber.d("server connect : Alarm success")
@@ -130,6 +136,8 @@ class AlarmActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseAlarmListData>, t: Throwable) {
                 Timber.d("server connect : Alarm error: ${t.message}")
+                binding.srAlarmList.isRefreshing = false
+                binding.srEmptyList.isRefreshing = false
                 Toast.makeText(this@AlarmActivity, R.string.server_error_general, Toast.LENGTH_SHORT).show()
             }
         })
@@ -227,5 +235,10 @@ class AlarmActivity : AppCompatActivity() {
                 notificationManager!!.notify(0, mNotificationBuilder.build())
             }
         }, 0)
+    }
+
+    override fun onRefresh() {
+        Timber.d("onRefresh alarm")
+        getInitAlarmData()
     }
 }
