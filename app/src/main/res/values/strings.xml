@@ -289,8 +289,9 @@
     <string name="txt_banner_theater_osiria_context">이번에는 부산입니다!\n롯데시네마에서 운영하고 있는 곳으로, 기장에 위치해있습니다!\n역시 예약은 롯데시네마 앱을 통해 가능하며,\n1일 2회의 상영이 이루어진다고 합니다!\n시작 시간은 매일 달라지니 꼭 확인하세요!</string>
     <string name="txt_banner_theater_osiria_finish">차로가 추천해 준 자동차 극장\n드라이브 코스,\n\n코로나 시국에 안전하게 영화와, 드라이브 모두\n즐겨보는 것은 어떨까요?\n다녀온 후 여러분의 드라이브 이야기도 들려주세요!</string>
 
-    <string name="txt_banner_spring_playlisr">봄 신선한 바람 플레이리스트</string>
-    <string name="txt_banner_spring_playlist_context">드라이브와 잘 어울리는 계절인 봄이 찾아왔습니다.\n\n양옆 창문 열어놓고 선선한 바람 맞으며 드라이브 하는\n낭만, 다들 가지고 계시죠? 드라이브 하면서 빠질 수 없는게 음악인데요, 음악 고르는데 시간쏟지 마시고 차로가\n봄 바람과 잘 어울리는 플레이리스트를 준비했습니다.\n선곡한 15곡은 밤에 드라이브할 때 어울리는 노래입니다.\n너무 신나지 않지만 조용하지 않은 노래로 골라봤습니다. 🔈</string>
+    <string name="txt_banner_spring_playlist">드라이브할 때 듣기 좋은 플레이리스트</string>
+    <string name="txt_banner_spring_playlist_2">드라이브할 때 듣기 좋은 \n플레이리스트</string>
+    <string name="txt_banner_spring_playlist_context">양옆 창문 열어놓고 선선한 바람맞으며 드라이브하는 낭만, 다들 가지고 계시죠? \n\n드라이브하면서 빠지면 절대 안 되는게 음악인데요, 차로가 드라이브할 때 잘 어울리는 노래를 골라 준비했습니다. 음악과 함께 즐거운 드라이브 되세요~:🔈🔈</string>
     <string name="txt_guide_go_playlist">아래 버튼을 누르면\n전체 플레이리스트로 이동해요.</string>
     <string name="txt_go_playlist">유튜브 플레이리스트로 이동하기</string>
     <string name="txt_guide_individual_playlist">개별 음원을 선택하고 싶으면\n아래 앨범 커버를 클릭해주세요.</string>

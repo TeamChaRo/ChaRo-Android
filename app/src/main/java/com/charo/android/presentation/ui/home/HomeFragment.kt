@@ -116,9 +116,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewPagerLocalAdapter = HomeViewPagerLocalAdapter()
         binding.vpMain.adapter = homeViewPagerLocalAdapter
 
-        val Banner1 : BannerLocal = BannerLocal(R.drawable.banner_img_one,"강릉 해변 \n드라이브 코스와 맛집","강릉 8년차가 소개해주는",0,28f,false)
-        val Banner2 : BannerLocal = BannerLocal(R.drawable.banner_img_two,"봄의 선선한 바람 \n플레이리스트","",R.drawable.spring_playlist,28f,false)
-        val Banner3 : BannerLocal = BannerLocal(R.drawable.banner_img_three,"자동차 극장\n드라이브 코스","",R.drawable.drive_in_theater,28f,false)
+        val Banner1 : BannerLocal = BannerLocal(R.drawable.banner_img_one,getString(R.string.txt_banner_title_gangneung),"강릉 8년차가 소개해주는",0,28f,false)
+        val Banner2 : BannerLocal = BannerLocal(R.drawable.banner_img_two,getString(R.string.txt_banner_spring_playlist_2),"",0,28f,false)
+        val Banner3 : BannerLocal = BannerLocal(R.drawable.banner_img_three,getString(R.string.txt_banner_title_theater),"",R.drawable.drive_in_theater,28f,false)
         val Banner4 : BannerLocal = BannerLocal(R.drawable.banner_img_four,"차에서의 \n오늘이 최고가 될 수 있게\n당신의 드라이브 메이트","",0,22f,true)
         bannerLocal = listOf(Banner1,Banner2,Banner3,Banner4)
 

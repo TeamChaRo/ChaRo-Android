@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_banner_spring_playlisr"
+            android:text="@string/txt_banner_spring_playlist"
             android:textAppearance="@style/HeaderH4"
             android:layout_gravity="center"
             />
@@ -40,9 +40,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/banner_img_two_detail"
+                android:background="@drawable/banner_img_two"
                 android:contentDescription="@string/img_description"
                 />
+
+            <TextView
+                android:id="@+id/tv_main_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/iv_main_spring_playlist"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_main_spring_playlist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="0.35"
+                android:fontFamily="@font/jejugothic_regular"
+                app:fontFamily="@font/jejugothic_regular"
+                android:textStyle="normal"
+                android:textSize="28sp"
+                android:textColor="@color/white"
+                android:gravity="center_horizontal"
+                android:text="@string/txt_banner_spring_playlist_2"/>
 
             <TextView
                 android:id="@+id/tv_spring_playlist_context"
