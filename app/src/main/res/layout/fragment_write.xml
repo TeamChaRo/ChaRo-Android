@@ -282,7 +282,7 @@
                         android:fontFamily="@font/noto_sans_cjkkr_medium"
                         android:gravity="center"
                         android:minHeight="42dp"
-                        android:text="tring/theme11"
+                        android:text="@string/theme1"
                         android:textColor="@drawable/selector_text_color"
                         android:textSize="14sp"
                         app:fontFamily="@font/noto_sans_cjkkr_medium"

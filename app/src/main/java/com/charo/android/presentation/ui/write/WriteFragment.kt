@@ -12,6 +12,7 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
@@ -35,6 +36,7 @@ import androidx.lifecycle.Observer
 import com.charo.android.R
 import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.databinding.FragmentWriteBinding
+import com.charo.android.presentation.ui.setting.SettingBottomSheetFragment
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.SharedInformation
@@ -62,6 +64,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+    private var mLastClickTime = 0L
 
     private lateinit var writeAdapter: WriteAdapter
 
@@ -767,7 +770,10 @@ class WriteFragment : Fragment(), View.OnClickListener {
         when (v) {
             //갤러리 이미지
             binding.imgWriteAddImg, binding.clWritePhoto -> {
-                openGallery()
+                if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                    openGallery()
+                }
+                mLastClickTime = SystemClock.elapsedRealtime()
             }
 
             //주의사항

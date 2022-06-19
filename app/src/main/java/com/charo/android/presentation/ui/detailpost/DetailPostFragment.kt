@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.PointF
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,7 @@ class DetailPostFragment : Fragment() {
     private lateinit var viewPagerAdapter: DetailPostViewPagerAdapter
 
     private lateinit var tMapView: TMapView
+    private var mLastClickTime = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -281,18 +283,20 @@ class DetailPostFragment : Fragment() {
 
     private fun clickShare() {
         binding.imgDetailShare.setOnClickListener {
-            val imageUri = when {
-                viewModel.imageStringViewPager.value.isNullOrEmpty() -> {
-                    //TODO: default image : 그래픽 이미지 (디자인 작업 후)
-                    ""
+            //더블 클릭 방지
+            if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                val imageUri = when {
+                    viewModel.imageStringViewPager.value.isNullOrEmpty() -> {
+                        //TODO: default image : 그래픽 이미지 (디자인 작업 후)
+                        ""
+                    }
+                    else -> {
+                        viewModel.imageStringViewPager.value!![0]
+                    }
                 }
-                else -> {
-                    viewModel.imageStringViewPager.value!![0]
-                }
+                createDynamicLink(viewModel.postId, viewModel.title.value.toString(), imageUri)
             }
-            // TODO: 나중에 postId 바꾸기
-//            createDynamicLink((activity as DetailPostActivity).postId, (activity as DetailPostActivity).title, imageUri)
-            createDynamicLink(viewModel.postId, viewModel.title.value.toString(), imageUri)
+            mLastClickTime = SystemClock.elapsedRealtime()
         }
     }
 

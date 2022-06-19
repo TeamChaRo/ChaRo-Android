@@ -2,6 +2,7 @@ package com.charo.android.presentation.ui.setting
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import java.util.regex.Pattern
 class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBinding>
     (R.layout.fragment_setting_profile_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
+    private var mLastClickTime = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -122,14 +124,21 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     }
 
     private fun initBottomSheet() {
+        //더블 클릭 방지
         binding.imgProfileChange.setOnClickListener {
-            val bottomSheet = SettingBottomSheetFragment()
-            bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+            if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                val bottomSheet = SettingBottomSheetFragment()
+                bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
         }
 
         binding.textProfileChange.setOnClickListener {
-            val bottomSheet = SettingBottomSheetFragment()
-            bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+            if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                val bottomSheet = SettingBottomSheetFragment()
+                bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
         }
     }
 
