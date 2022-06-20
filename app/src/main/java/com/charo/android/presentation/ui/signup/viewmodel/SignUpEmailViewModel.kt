@@ -32,14 +32,23 @@ class SignUpEmailViewModel(
     private val PostRemoteSocialSIgnUpRegisterUseCase : PostRemoteSocialSignUpRegisterUseCase,
     private val postRemoteKaKaoSignUpRegisterUseCase: PostRemoteKaKaoSignUpRegisterUseCase
 ) : ViewModel() {
+    private val _isConfirmAuthNum = MutableLiveData<Boolean>(false)
+    val isConfirmAuthNum: MutableLiveData<Boolean>
+        get() = _isConfirmAuthNum
 
     private val _success = MutableLiveData<Boolean>(false)
     val success: LiveData<Boolean>
         get() = _success
 
+    //인증번호
     private val _data = MutableLiveData<String>()
-    val data: LiveData<String>
+    val data: MutableLiveData<String>
         get() = _data
+
+    //인증번호 발송 설종여부
+    private val _authNumSuccess = MutableLiveData<Boolean>()
+    val authNumSuccess: MutableLiveData<Boolean>
+        get() = _authNumSuccess
 
     private val _nickNameCheck = MutableLiveData<Boolean>()
     val nickNameCheck: LiveData<Boolean>
@@ -71,10 +80,6 @@ class SignUpEmailViewModel(
     val socialLoginNum = MutableLiveData<Int>()
     val googleProfileImage = MutableLiveData<String>()
 
-
-
-
-
     //이메일 중복 체크
     fun emailCheck(email: String) {
         viewModelScope.launch {
@@ -98,11 +103,14 @@ class SignUpEmailViewModel(
         viewModelScope.launch {
             runCatching { getRemoteSignUpEmailCertificationUseCase.execute(userEmail) }
                 .onSuccess {
+                    _authNumSuccess.value = true
                     _data.value = it
                     Timber.d("signUps 서버 통신 성공!")
                     Timber.d("signUp $it")
                 }
                 .onFailure {
+                    _authNumSuccess.value = false
+                    _data.value = ""
                     it.printStackTrace()
                     Timber.d("signUps 서버 통신 실패!")
 

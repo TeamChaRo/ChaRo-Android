@@ -83,8 +83,13 @@ class SignUpEmailFragment :
 
     //인증번호 체크
     private fun certificationEmail() {
-        with(binding) {
+        if(signUpViewModel.isConfirmAuthNum.value == true){
+            isNextBtnActive(true)
+        } else {
+            isNextBtnActive(false)
+        }
 
+        with(binding) {
             imgEmailDeleteButton.setOnClickListener {
                 etInputEmailNum.setText("")
             }
@@ -98,41 +103,47 @@ class SignUpEmailFragment :
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-
-                override fun afterTextChanged(s: Editable?) {
                     signUpViewModel.data.observe(viewLifecycleOwner) {
-                        Timber.d("certification ${it.toString()}")
+                        Timber.d("certification $it")
                         if (TextUtils.isEmpty(etInputEmailNum.text)){
                             textInputEmailNum.error = "인증번호를 입력해주세요."
-
-                            isNextBtnActive(false)
-                            etInputEmailNum.isEnabled = true
+                            signUpViewModel.isConfirmAuthNum.setValue(false)
                         } else if (s.toString() != it) {
                             textInputEmailNum.error = "입력하신 인증번호가 맞지 않습니다. 다시 한 번 확인해주세요."
+                            signUpViewModel.isConfirmAuthNum.setValue(false)
 
-                            isNextBtnActive(false)
-                            etInputEmailNum.isEnabled = true
                         } else {
                             textInputEmailNum.error = null
                             textInputEmailNum.isErrorEnabled = false
                             textInputEmailNum.isHelperTextEnabled = true
                             textInputEmailNum.helperText = "인증되었습니다."
-
-                            isNextBtnActive(true)
-                            etInputEmailNum.isEnabled = false
-                            tvEmailResend.isEnabled = false
-
-                            textSignUpNext.setOnClickListener {
-                                confirmEmailAuthNum()
-                            }
-                            textSignUpNextFocus.setOnClickListener {
-                                confirmEmailAuthNum()
-                            }
+                            signUpViewModel.isConfirmAuthNum.setValue(true)
                         }
                     }
                 }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
             })
+        }
+
+        signUpViewModel.isConfirmAuthNum.observe(viewLifecycleOwner) {
+            if(it){
+                binding.etInputEmailNum.isEnabled = false
+                binding.tvEmailResend.isEnabled = false
+                isNextBtnActive(true)
+
+                binding.textSignUpNext.setOnClickListener {
+                    confirmEmailAuthNum()
+                }
+                binding.textSignUpNextFocus.setOnClickListener {
+                    confirmEmailAuthNum()
+                }
+            } else {
+                isNextBtnActive(false)
+                binding.etInputEmailNum.isEnabled = true
+            }
         }
     }
 
@@ -157,13 +168,13 @@ class SignUpEmailFragment :
 
 
                     textSignUpNext.setOnClickListener {
-                        sendEmailAuthNum()
+                        sendEmailAuthNum("SEND")
                     }
                     textSignUpNextFocus.setOnClickListener {
-                        sendEmailAuthNum()
+                        sendEmailAuthNum("SEND")
                     }
                     tvEmailResend.setOnClickListener {
-                        reSendEmailAuthNum()
+                        sendEmailAuthNum("RESEND")
                     }
 
                 } else {
@@ -179,28 +190,35 @@ class SignUpEmailFragment :
         }
     }
 
-    private fun sendEmailAuthNum(){
+    private fun sendEmailAuthNum(TAG : String){
         with(binding) {
+            signUpViewModel.data.setValue("")
             signUpViewModel.emailCertification(etSignUpBlank.text.toString())
-            signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
-            Timber.d("되라 ${etSignUpBlank.text.toString()}")
+
+            signUpViewModel.data.observe(viewLifecycleOwner){
+                if(!TextUtils.isEmpty(it)){
+                    if(signUpViewModel.authNumSuccess.value == true){
+                        signUpViewModel.userEmail.value = etSignUpBlank.text.toString()
+                        Toast.makeText(requireContext(), "인증번호를 전송하였습니다", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+            signUpViewModel.authNumSuccess.observe(viewLifecycleOwner){
+                if(!it){
+                    Toast.makeText(requireContext(), "인증번호 전송이 실패하였습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                    signUpViewModel.authNumSuccess.setValue(null)
+                }
+            }
+
             clEmailNum.isVisible = true
-
-            Toast.makeText(requireContext(), "인증번호를 전송하였습니다", Toast.LENGTH_SHORT).show()
-
-            isNextBtnActive(false)
-            etInputEmailNum.isEnabled = true
-        }
-    }
-
-    private fun reSendEmailAuthNum(){
-        with(binding) {
-            signUpViewModel.emailCertification(etSignUpBlank.text.toString())
-            Toast.makeText(requireContext(), "인증번호를 재전송하였습니다",Toast.LENGTH_SHORT).show()
             binding.etInputEmailNum.setText("")
-
             isNextBtnActive(false)
             etInputEmailNum.isEnabled = true
+
+            textInputEmailNum.helperText = ""
+            textInputEmailNum.error = "인증번호를 입력해주세요."
+            signUpViewModel.isConfirmAuthNum.setValue(false)
         }
     }
 
