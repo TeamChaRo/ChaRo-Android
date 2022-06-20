@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -21,7 +20,6 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.KeyboardVisibilityUtils
 import com.charo.android.presentation.util.SharedInformation
-import kotlinx.android.synthetic.main.fragment_sign_up_profile.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -60,7 +58,7 @@ class SignUpProfileFragment :
     }
 
 
-    //닉네임 중복  체크
+    //닉네임 중복 체크
     private fun checkNickName() {
         val nickNamePattern = "^[가-힣ㄱ-ㅎ]{0,5}$"
         with(binding) {
@@ -155,12 +153,12 @@ class SignUpProfileFragment :
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
-                Toast.makeText(requireActivity(), "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
                 ActivityCompat.requestPermissions(requireActivity(), permissions, 1)
-                SharedInformation.setPermissionNever(requireContext(), false)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
-                SharedInformation.setPermissionNever(requireContext(), true)
+
+                //SharedInformation 다시묻지않기
+                SharedInformation.showForceRequestPermission(requireContext())
             }
         } else{
             val intent = Intent(Intent.ACTION_PICK)
@@ -168,9 +166,6 @@ class SignUpProfileFragment :
             intent.type = "image/*"
             getContent.launch(intent)
         }
-
-
-
     }
 
     override fun onRequestPermissionsResult(
@@ -182,25 +177,21 @@ class SignUpProfileFragment :
         when (requestCode) {
             0 -> {
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(requireActivity(), "권한 허용", Toast.LENGTH_SHORT).show()
+                    SharedInformation.setPermissionNever(requireContext(), false)
+                    Toast.makeText(requireActivity(), getString(R.string.txt_allow_permission), Toast.LENGTH_SHORT).show()
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = MediaStore.Images.Media.CONTENT_TYPE
                     intent.type = "image/*"
                     getContent.launch(intent)
                 } else {
-                    Toast.makeText(requireActivity(), "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+                    //다시묻지않기
+                    SharedInformation.setPermissionNever(requireContext(), true)
                 }
             }
-            1 -> if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(requireActivity(), "권한 허용", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Intent.ACTION_PICK)
-                intent.type = MediaStore.Images.Media.CONTENT_TYPE
-                intent.type = "image/*"
-                getContent.launch(intent)
-            } else {
-                Toast.makeText(requireActivity(), "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
-                startActivity(intent)
+            1 -> {
+                //거부
+                SharedInformation.setPermissionNever(requireContext(), false)
+                Toast.makeText(requireActivity(), getString(R.string.txt_need_permission), Toast.LENGTH_SHORT).show()
             }
         }
     }

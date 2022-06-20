@@ -1,10 +1,8 @@
 package com.charo.android.presentation.ui.main
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.Settings
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -306,17 +304,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                 )
             ) {
-                val builder = AlertDialog.Builder(this, R.style.Dialog)
-                builder.setMessage("앱 이용을 위해 저장소 권한을 허용해야 합니다.")
-                builder.setCancelable(false)
-                builder.setPositiveButton("확인") { dialog, which ->
-                    ActivityCompat.requestPermissions(this, permissions, 1)
-                }
-                builder.show()
-                SharedInformation.setPermissionNever(this, false)
+                ActivityCompat.requestPermissions(this, permissions, 1)
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
-                SharedInformation.setPermissionNever(this, true)
             }
         }
     }
@@ -330,25 +320,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         when (requestCode) {
             0 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "앱 이용을 위해 권한 허용이 필요합니다.", Toast.LENGTH_SHORT).show()
+                    SharedInformation.setPermissionNever(this, false)
+                    Toast.makeText(this, getString(R.string.txt_allow_permission), Toast.LENGTH_SHORT).show()
+                } else { //다시묻지않기
+                    SharedInformation.setPermissionNever(this, true)
                 }
             }
-            1 -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "권한이 허용되었습니다.", Toast.LENGTH_SHORT).show()
-            } else {
-                val builder = AlertDialog.Builder(this, R.style.Dialog)
-                builder.setMessage("앱 이용을 위해 권한 허용이 필요합니다.\n" +
-                        "권한은 '설정 > 애플리케이션 정보 > 차로 > 권한' 에서 설정할 수 있습니다. \n애플리케이션 정보 화면으로 이동하시겠습니까?")
-                builder.setCancelable(false)
-                builder.setPositiveButton("예") { dialog, which ->
-                    val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
-                    startActivity(intent)
-                }
-                builder.setNegativeButton("아니요") { dialog, which ->
-                }
-                builder.show()
+            1 -> { //거부
+                SharedInformation.setPermissionNever(this, false)
+                Toast.makeText(this, getString(R.string.txt_need_permission), Toast.LENGTH_SHORT).show()
             }
         }
     }

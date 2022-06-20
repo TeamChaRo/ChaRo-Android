@@ -61,50 +61,55 @@ class SettingMainFragment :
         ) == PackageManager.PERMISSION_GRANTED
 
         binding.switchImg.setOnClickListener {
-            when(binding.switchImg.isChecked){
-                true -> {
-                    Timber.e("SharedInformation.getPermissionNever(requireContext()) ${SharedInformation.getPermissionNever(requireContext())}")
-                    if(SharedInformation.getPermissionNever(requireContext())){
-                        val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
-                        builder.setMessage("권한 다시 묻지 않기를 설정한 이력이 있습니다. \n " +
-                                "권한은 '설정 > 애플리케이션 정보 > 차로 > 권한' 에서 새로 설정할 수 있습니다. \n애플리케이션 정보 화면으로 이동하시겠습니까?")
-                        builder.setCancelable(false)
-                        builder.setPositiveButton("예") { dialog, which ->
-                            val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
-                            startActivity(intent)
-                        }
-                        builder.setNegativeButton("아니요") { dialog, which ->
-                            SharedInformation.setPermissionNever(requireContext(), true)
-                        }
-                        builder.show()
-                    } else {
-                        ActivityCompat.requestPermissions(requireActivity(), arrayOf(permissionCheck), 1)
-                    }
-                }
-                false -> {
-                    val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
-                    builder.setMessage("권한 해제는 '설정 > 애플리케이션 정보 > 차로 > 권한' 에서 설정할 수 있습니다. \n애플리케이션 정보 화면으로 이동하시겠습니까?")
-                    builder.setCancelable(false)
-                    builder.setPositiveButton("예") { dialog, which ->
-                        val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
-                        startActivity(intent)
-                    }
-                    builder.setNegativeButton("아니요") { dialog, which ->
-                        binding.switchImg.isChecked = true
-                    }
-                    builder.show()
-                }
-            }
-
-            if(ContextCompat.checkSelfPermission(requireActivity(), permissionCheck) == PackageManager.PERMISSION_GRANTED) {
-                SharedInformation.setPermissionNever(requireContext(), false)
-                binding.switchImg.isChecked = true
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permissionCheck)) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permissionCheck), 1)
             } else {
-                SharedInformation.setPermissionNever(requireContext(), true)
-                binding.switchImg.isChecked = false
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(permissionCheck), 0)
+
+                //다시묻지않기
+                showForceRequestPermission()
             }
         }
     }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            0 -> {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    SharedInformation.setPermissionNever(requireContext(), false)
+                    binding.switchImg.isChecked = true
+                } else {
+                    //다시묻지않기
+                    showForceRequestPermission()
+                }
+            }
+            1 -> {
+                //거부
+                SharedInformation.setPermissionNever(requireContext(), false)
+            }
+        }
+    }
+
+    private fun showForceRequestPermission(){
+        SharedInformation.setPermissionNever(requireContext(), true)
+
+        val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
+        builder.setMessage(getString(R.string.txt_go_permission_setting))
+        builder.setCancelable(false)
+        builder.setPositiveButton("예") { dialog, which ->
+            val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+            startActivity(intent)
+        }
+        builder.setNegativeButton("아니요") { dialog, which ->
+        }
+        builder.show()
+    }
+
     //오픈 소스
     private fun clickOpenSource(){
         binding.textSettingOpenSource.setOnClickListener {

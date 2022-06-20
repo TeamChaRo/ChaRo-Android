@@ -356,4 +356,10 @@
 
     <!--    서버통신 에러 string-->
     <string name="server_error_general">문제가 발생했습니다. 다시 시도해주세요.</string>
+
+    <!--권한-->
+    <string name="txt_need_permission">앱 이용을 위해 권한 허용이 필요합니다.</string>
+    <string name="txt_allow_permission">권한이 허용되었습니다.</string>
+    <string name="txt_go_permission_setting">권한은 \'설정 > 애플리케이션 정보 > 차로 > 권한\' 에서 설정할 수 있습니다.\n애플리케이션 정보 화면으로 이동하시겠습니까?</string>
+
 </resources>

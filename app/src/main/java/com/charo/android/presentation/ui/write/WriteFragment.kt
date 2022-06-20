@@ -36,7 +36,6 @@ import androidx.lifecycle.Observer
 import com.charo.android.R
 import com.charo.android.data.model.write.WriteImgInfo
 import com.charo.android.databinding.FragmentWriteBinding
-import com.charo.android.presentation.ui.setting.SettingBottomSheetFragment
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.SharedInformation
@@ -479,7 +478,19 @@ class WriteFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openGallery() {
+        if (writeAdapter.itemCount >= 6) {
+            Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
+            return
+        }
 
+        val intent = Intent(Intent.ACTION_GET_CONTENT) //ACTION_PICK   //ACTION_GET_CONTENT
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) //다중 선택 가능
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+        intent.setType("image/*")
+        galleryLauncher.launch(intent)
+    }
+
+    private fun checkGalleryPermission() {
         var writePermission = ContextCompat.checkSelfPermission(
             requireContext(),
             Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -491,33 +502,49 @@ class WriteFragment : Fragment(), View.OnClickListener {
         // 권한 없어서 요청
         if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                || ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                Toast.makeText(requireActivity(), "앱 이용을 위해 저장소 권한을 허용해야 합니다.", Toast.LENGTH_SHORT).show()
+                && ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ),
-                    1000)
-                SharedInformation.setPermissionNever(requireContext(), false)
+                    1)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
-                ), 1000)
-                SharedInformation.setPermissionNever(requireContext(), true)
+                ),
+                    0)
+
+                //SharedInformation 다시묻지않기
+                SharedInformation.showForceRequestPermission(requireContext())
             }
         } else { // 권한 있음
-            if (writeAdapter.itemCount >= 6) {
-                Toast.makeText(context, "사진은 6개까지 선택 가능합니다.", Toast.LENGTH_LONG).show()
-                return
+            openGallery()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            0 -> {
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    SharedInformation.setPermissionNever(requireContext(), false)
+                    Toast.makeText(requireActivity(), getString(R.string.txt_allow_permission), Toast.LENGTH_SHORT).show()
+                    openGallery()
+                } else {
+                    //다시묻지않기
+                    SharedInformation.setPermissionNever(requireContext(), true)
+                }
             }
-
-            val intent = Intent(Intent.ACTION_GET_CONTENT) //ACTION_PICK   //ACTION_GET_CONTENT
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) //다중 선택 가능
-            intent.type = MediaStore.Images.Media.CONTENT_TYPE
-            intent.setType("image/*")
-            galleryLauncher.launch(intent)
-
+            1 -> {
+                //거부
+                SharedInformation.setPermissionNever(requireContext(), false)
+                Toast.makeText(requireActivity(), getString(R.string.txt_need_permission), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -771,7 +798,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
             //갤러리 이미지
             binding.imgWriteAddImg, binding.clWritePhoto -> {
                 if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
-                    openGallery()
+                    checkGalleryPermission()
                 }
                 mLastClickTime = SystemClock.elapsedRealtime()
             }

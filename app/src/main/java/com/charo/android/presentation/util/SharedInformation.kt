@@ -1,6 +1,10 @@
 package com.charo.android.presentation.util
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings
+import com.charo.android.R
 
 object SharedInformation {
     var searchWrite: Boolean = false
@@ -219,5 +223,21 @@ object SharedInformation {
     fun getPermissionNever(context: Context): Boolean {
         val sharedPreferences = context.getSharedPreferences(PERMISSION_QUESTION_NEVER, Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(PERMISSION_QUESTION_NEVER, false)
+    }
+
+    fun showForceRequestPermission(context: Context){
+        if(getPermissionNever(context)){ //다시묻지않기
+            val builder = AlertDialog.Builder(context, R.style.Dialog)
+            builder.setMessage(context.getString(R.string.txt_need_permission) + "\n" + context.getString(R.string.txt_go_permission_setting))
+            builder.setCancelable(false)
+            builder.setPositiveButton("예") { dialog, which ->
+                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                context.startActivity(intent)
+            }
+            builder.setNegativeButton("아니요") { dialog, which ->
+                setPermissionNever(context, true)
+            }
+            builder.show()
+        }
     }
 }
