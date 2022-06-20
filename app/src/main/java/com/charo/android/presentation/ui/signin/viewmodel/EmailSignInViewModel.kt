@@ -21,8 +21,7 @@ class EmailSignInViewModel(
     var emailSignInData : LiveData<EmailSignInData> = _emailSignInData
 
     var emailSignInStatus = MutableLiveData<Int>()
-
-
+    var emailSignInErrorMsg = MutableLiveData<String>()
 
     fun getEmailSignInData(requestSignInData: RequestSignInData){
         viewModelScope.launch {
@@ -36,6 +35,7 @@ class EmailSignInViewModel(
                     emailSignInStatus.value = 500
                 }
                 is ResultWrapper.GenericError -> {
+                    emailSignInErrorMsg.value = postEmailSignIn.msg.toString()
                     emailSignInStatus.value = 404
                 }
             }

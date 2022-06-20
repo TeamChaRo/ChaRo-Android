@@ -2,6 +2,7 @@ package com.charo.android.presentation.ui.signin
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -67,18 +68,23 @@ class SignInActivity : AppCompatActivity() {
     private fun clearPassword() {
         binding.etSigninPw.text.clear()
     }
+
     //로그인 토스트 메세지
     private fun emailSignToast(){
         emailSignInViewModel.emailSignInStatus.observe(this){
             if(it == 404){
-                Toast.makeText(this, "아이디 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+                val errorMsg : String
+                = if (!TextUtils.isEmpty(emailSignInViewModel.emailSignInErrorMsg.value)) {
+                    emailSignInViewModel.emailSignInErrorMsg.value!!
+                } else {
+                    "ID/PW를 확인해주세요."
+                }
+                Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
+            } else if(it == 500){
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT).show()
             }
         }
-
     }
-
-
-
 
     private fun initFirebase(){
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
@@ -102,7 +108,5 @@ class SignInActivity : AppCompatActivity() {
             val intent = Intent(this, PasswordSearchActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 }

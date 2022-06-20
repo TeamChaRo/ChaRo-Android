@@ -145,6 +145,7 @@ class SocialSignInActivity() :
     private fun checkKakaoSignUp(){
         socialSignInViewModel.socialStatus.observe(this){
             if(it == 404){
+                Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
                 SharedInformation.setSignUp(this, 2)
                 val intent = Intent(this, SignUpActivity::class.java)
                 intent.putExtra("kakaoSignUpEmail", SharedInformation.getEmail(this))
@@ -177,10 +178,12 @@ class SocialSignInActivity() :
                         firebaseAuthWithGoogle(account.idToken)
                     } catch (e: ApiException) {
                         Timber.d("구글 Google sign in failed")
+                        Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Timber.d("구글 ${result.resultCode.toString() + "+" + RESULT_OK.toString()}")
                     Timber.e("구글 진짜 제발 야!")
+                    Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -210,7 +213,7 @@ class SocialSignInActivity() :
                     socialSignInViewModel.googleSuccess.observe(this) {
                         if (SharedInformation.getLogout(this) != "Logout") {
                             Toast.makeText(
-                                this@SocialSignInActivity, "구글 로그인에 성공하였습니다.",
+                                this@SocialSignInActivity, "구글 로그인 성공",
                                 Toast.LENGTH_SHORT
                             ).show()
                             SharedInformation.setNickName(this, it?.nickname.toString())

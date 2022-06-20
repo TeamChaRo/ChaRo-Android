@@ -53,7 +53,7 @@ class SocialSignInViewModel(
     }
 
 
-    fun     googleLoginSuccess(requestSocialData: RequestSocialData){
+    fun googleLoginSuccess(requestSocialData: RequestSocialData){
         viewModelScope.launch {
             when (val googleData =
                 safeApiCall(Dispatchers.IO) {getRemoteSocialLoginData.execute(requestSocialData) }){
@@ -68,7 +68,6 @@ class SocialSignInViewModel(
                     Timber.d("googleLogin 사용자 에러")
                     googleSocialStatus.value = googleData.code ?: 0
                 }
-
             }
         }
     }
