@@ -35,5 +35,5 @@ class Define {
 
     //dynamicLink
     val DEEP_LINK : String = "https://charo.page.link"
-    val DYNAMIC_SEGMENT : String = "qLo3"
+    val DTL_SEGMENT : String = "dtl"
 }

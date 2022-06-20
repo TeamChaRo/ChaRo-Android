@@ -75,7 +75,7 @@ class SplashActivity : AppCompatActivity() {
                         val segment = deepLink.lastPathSegment
                         Timber.d("[DynamicLink] segment $segment")
 
-                        if (segment == Define().DYNAMIC_SEGMENT) {
+                        if (segment == Define().DTL_SEGMENT) {
                             val strPostId = deepLink.getQueryParameter("postId")
                             deepLinkPostId = strPostId?.toInt() ?: -1
                             Timber.d("[DynamicLink] deepLinkPostId $deepLinkPostId")

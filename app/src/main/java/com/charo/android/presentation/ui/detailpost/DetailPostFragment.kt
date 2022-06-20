@@ -287,8 +287,12 @@ class DetailPostFragment : Fragment() {
             if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
                 val imageUri = when {
                     viewModel.imageStringViewPager.value.isNullOrEmpty() -> {
-                        //TODO: default image : 그래픽 이미지 (디자인 작업 후)
-                        ""
+                        //기본 이미지
+                        Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                                + resources.getResourcePackageName(R.drawable.grapic_design) + '/'
+                                + resources.getResourceTypeName(R.drawable.grapic_design) + '/'
+                                + resources.getResourceEntryName(R.drawable.grapic_design))
+                            .toString()
                     }
                     else -> {
                         viewModel.imageStringViewPager.value!![0]
@@ -302,7 +306,7 @@ class DetailPostFragment : Fragment() {
 
     private fun createDynamicLink(postId: Int, title: String, imageUri: String) {
 
-        val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
+        val link: String = Define().DEEP_LINK + "/" + Define().DTL_SEGMENT + "?postId=" + postId
         Timber.e("createDynamicLink() link: $link")
         Timber.e("createDynamicLink() imageUri: $imageUri")
 
