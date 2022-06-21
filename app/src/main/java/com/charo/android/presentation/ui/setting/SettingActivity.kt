@@ -3,7 +3,6 @@ package com.charo.android.presentation.ui.setting
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.lifecycle.Observer
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingBinding
 import com.charo.android.presentation.base.BaseActivity

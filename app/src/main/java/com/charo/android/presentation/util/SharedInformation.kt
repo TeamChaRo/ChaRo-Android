@@ -3,6 +3,7 @@ package com.charo.android.presentation.util
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.provider.Settings
 import com.charo.android.R
 
@@ -231,7 +232,7 @@ object SharedInformation {
             builder.setMessage(context.getString(R.string.txt_need_permission) + "\n" + context.getString(R.string.txt_go_permission_setting))
             builder.setCancelable(false)
             builder.setPositiveButton("예") { dialog, which ->
-                val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + context.packageName))
                 context.startActivity(intent)
             }
             builder.setNegativeButton("아니요") { dialog, which ->

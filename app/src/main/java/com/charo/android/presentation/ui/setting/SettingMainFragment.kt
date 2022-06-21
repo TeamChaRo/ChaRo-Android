@@ -3,6 +3,7 @@ package com.charo.android.presentation.ui.setting
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -102,7 +103,7 @@ class SettingMainFragment :
         builder.setMessage(getString(R.string.txt_go_permission_setting))
         builder.setCancelable(false)
         builder.setPositiveButton("예") { dialog, which ->
-            val intent = Intent(Settings.ACTION_APPLICATION_SETTINGS)
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + requireActivity().packageName))
             startActivity(intent)
         }
         builder.setNegativeButton("아니요") { dialog, which ->
