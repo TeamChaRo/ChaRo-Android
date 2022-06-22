@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="13dp"
-                            android:src="@drawable/ic_main_alarm"
+                            android:src="@drawable/selector_alarm_icon"
                             app:layout_collapseMode="parallax"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />

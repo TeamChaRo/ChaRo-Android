@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.charo.android.R
+import com.charo.android.data.api.ApiService
 import com.charo.android.data.datasource.local.home.LocalHomeThemeDataSourceImpl
 import com.charo.android.data.model.request.home.RequestHomeLikeData
+import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.FragmentHomeBinding
 import com.charo.android.domain.model.home.BannerLocal
 import com.charo.android.hidden.Hidden
@@ -29,6 +31,9 @@ import com.charo.android.presentation.util.ThemeUtil
 import kotlinx.coroutines.flow.callbackFlow
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import timber.log.Timber
 
 
@@ -75,6 +80,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initThemeDrive()
 
         initEmptyView()
+        getInitAlarmData()
     }
 
     private fun initToolBar() {
@@ -285,6 +291,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             val userEmail = SharedInformation.getEmail(requireActivity())
             homeViewModel.postLike(RequestHomeLikeData(userEmail, postId))
         }
+    }
 
+    //새로운 alarm 여부
+    private fun getInitAlarmData(){
+        val userEmail = SharedInformation.getEmail(requireActivity())
+        Timber.e("home getAlarmList param $userEmail")
+        val call: Call<ResponseAlarmListData> = ApiService.alarmViewService.getAlarmList(userEmail)
+        call.enqueue(object : Callback<ResponseAlarmListData> {
+            override fun onResponse(
+                call: Call<ResponseAlarmListData>,
+                response: Response<ResponseAlarmListData>
+            ) {
+                if (response.isSuccessful) {
+                    Timber.d("server connect : home Alarm success")
+                    Timber.d("server connect : home Alarm ${response.body()}")
+                    val pushList = response.body()?.pushList
+
+                    //기본 알림 아이콘 : 비활 상태
+                    binding.imgMainAlarm.isActivated = false
+                    if(pushList != null){
+                        for(item in pushList){
+                            //새로운 알림이 하나라도 있을 경우 아이콘 활성화
+                            if(item.isRead == 1){
+                                binding.imgMainAlarm.isActivated = true
+                                break
+                            }
+                        }
+                    }
+                } else {
+                    binding.imgMainAlarm.isActivated = false
+                    Timber.d("server connect : home Alarm error")
+                    Timber.d("server connect : home Alarm ${response.errorBody()}")
+                    Timber.d("server connect : home Alarm ${response.message()}")
+                    Timber.d("server connect : home Alarm ${response.code()}")
+                    Timber.d("server connect : home Alarm  ${response.raw().request.url}")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseAlarmListData>, t: Throwable) {
+                binding.imgMainAlarm.isActivated = false
+                Timber.d("server connect : home Alarm error: ${t.message}")
+            }
+        })
     }
 }
