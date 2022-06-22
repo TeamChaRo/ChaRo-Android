@@ -44,9 +44,6 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("imgRoundBind")
     fun setRadius9Image(imageView: ImageView, imageUrl: String) {
-        // 마이페이지 이미지 로드하는 부분,
-        // CenterCrop 후 Round 되기를 원함(의도)
-        // MultiTransformation 사용 시 Option을 순서대로 적용함(해결)
         val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(9.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
@@ -71,6 +68,7 @@ object BindingAdapter {
             .into(imageView)
     }
 
+    // 확인요망
     @JvmStatic
     @BindingAdapter("profileBind")
     fun setProfileImage(imageView: ImageView, imageUri: Uri) {
@@ -92,6 +90,7 @@ object BindingAdapter {
         } else {
             Glide.with(imageView.context)
                 .load(imageUrl)
+                .error(R.drawable.ic_profile)
                 .circleCrop()
                 .into(imageView)
         }
@@ -116,6 +115,7 @@ object BindingAdapter {
             .into(imageView)
     }
 
+    // 확인요망
     @JvmStatic
     @BindingAdapter("chipBind")
     fun setChip(chip: Chip, text: String?) {

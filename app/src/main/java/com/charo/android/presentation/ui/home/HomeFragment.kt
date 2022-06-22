@@ -24,11 +24,8 @@ import com.charo.android.presentation.ui.home.viewmodel.HomeViewModel
 import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.MoreViewFragment
 import com.charo.android.presentation.ui.search.SearchActivity
-import com.charo.android.presentation.util.LocationUtil
 import com.charo.android.presentation.util.LoginUtil
 import com.charo.android.presentation.util.SharedInformation
-import com.charo.android.presentation.util.ThemeUtil
-import kotlinx.coroutines.flow.callbackFlow
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Call
@@ -40,9 +37,6 @@ import timber.log.Timber
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by viewModel()
-    private var theme = ThemeUtil()
-    private var location = LocationUtil()
-    private lateinit var homeViewPagerAdapter: HomeViewPagerAdapter
     private lateinit var homeViewPagerLocalAdapter: HomeViewPagerLocalAdapter
     private lateinit var homeTodayDriveAdapter: HomeTodayDriveAdapter
     private lateinit var homeThemeAdapter: HomeThemeAdapter
@@ -62,23 +56,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val nickName: String = Hidden.nickName
 
         initDefaultView()
-
         goSearchView(nickName)
         goAlarm()
         initToolBar()
         replaceMoreViewFragment()
-
         initBannerLocal()
-//        initBanner()
         carAnimation()
-
         initTrendDrive()
         initLocalDrive()
         initTodayCharoDrive()
         initCustomThemeDrive()
         initHomeTitle()
         initThemeDrive()
-
         initEmptyView()
         getInitAlarmData()
     }

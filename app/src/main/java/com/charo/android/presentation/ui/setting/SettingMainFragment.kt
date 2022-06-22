@@ -62,7 +62,11 @@ class SettingMainFragment :
         ) == PackageManager.PERMISSION_GRANTED
 
         binding.switchImg.setOnClickListener {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permissionCheck)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    requireActivity(),
+                    permissionCheck
+                )
+            ) {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(permissionCheck), 1)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(permissionCheck), 0)
@@ -81,7 +85,7 @@ class SettingMainFragment :
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             0 -> {
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     SharedInformation.setPermissionNever(requireContext(), false)
                     binding.switchImg.isChecked = true
                 } else {
@@ -96,14 +100,17 @@ class SettingMainFragment :
         }
     }
 
-    private fun showForceRequestPermission(){
+    private fun showForceRequestPermission() {
         SharedInformation.setPermissionNever(requireContext(), true)
 
         val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
         builder.setMessage(getString(R.string.txt_go_permission_setting))
         builder.setCancelable(false)
         builder.setPositiveButton("예") { dialog, which ->
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + requireActivity().packageName))
+            val intent = Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:" + requireActivity().packageName)
+            )
             startActivity(intent)
         }
         builder.setNegativeButton("아니요") { dialog, which ->
@@ -112,7 +119,7 @@ class SettingMainFragment :
     }
 
     //오픈 소스
-    private fun clickOpenSource(){
+    private fun clickOpenSource() {
         binding.textSettingOpenSource.setOnClickListener {
             val intent = Intent(requireActivity(), OssLicensesMenuActivity::class.java)
             startActivity(intent)
@@ -123,21 +130,21 @@ class SettingMainFragment :
     }
 
     // 개인 정보 처리
-    private fun clickPrivacy(){
+    private fun clickPrivacy() {
         binding.textSettingPrivacy.setOnClickListener {
             val intent = Intent(requireActivity(), SettingPrivacyActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun clickServiceTerm(){
+    private fun clickServiceTerm() {
         binding.textSettingService.setOnClickListener {
             val intent = Intent(requireActivity(), SettingServiceTermActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun clickReport(){
+    private fun clickReport() {
         binding.textSettingReport.setOnClickListener {
             val intent = Intent(requireActivity(), SettingReportActivity::class.java)
             startActivity(intent)
@@ -154,9 +161,9 @@ class SettingMainFragment :
     //비밀번호 수정
     private fun clickPasswordUpdate() {
         binding.textSettingPasswordUpdate.setOnClickListener {
-            if(SharedInformation.getSignUp(requireActivity()) == 0){
+            if (SharedInformation.getSignUp(requireActivity()) == 0) {
                 changeSettingFragment(SettingPasswordUpdateFragment())
-            }else{
+            } else {
                 Toast.makeText(requireActivity(), "소셜 로그인은 수정이 불가능 합니다.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -197,7 +204,7 @@ class SettingMainFragment :
                 override fun onClicked(num: Int) {
                     if (num == 1) {
                         if (socialKey == "1") {
-                            UserApiClient.instance.unlink { error ->
+                            UserApiClient.instance.logout { error ->
                                 if (error != null) {
                                     Toast.makeText(
                                         requireActivity(),
@@ -209,10 +216,15 @@ class SettingMainFragment :
                                     SharedInformation.removeNickName(requireActivity())
                                     SharedInformation.removeEmail(requireActivity())
                                     SharedInformation.removeSocialId(requireActivity())
-                                    Toast.makeText(requireActivity(), "카카오 로그아웃 성공", Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "카카오 로그아웃 성공",
+                                        Toast.LENGTH_SHORT
+                                    )
                                         .show()
                                     ActivityCompat.finishAffinity(requireActivity())
-                                    val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
+                                    val intent =
+                                        Intent(requireActivity(), SocialSignInActivity::class.java)
                                     startActivity(intent)
 
                                 }
@@ -232,7 +244,8 @@ class SettingMainFragment :
                             SharedInformation.setLogout(requireActivity(), "Logout")
                             SharedInformation.removeEmail(requireActivity())
                             SharedInformation.removeSocialId(requireActivity())
-                            Toast.makeText(requireActivity(), "구글 로그아웃 성공", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "구글 로그아웃 성공", Toast.LENGTH_SHORT)
+                                .show()
                             ActivityCompat.finishAffinity(requireActivity())
                             val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                             startActivity(intent)
@@ -281,7 +294,7 @@ class SettingMainFragment :
         }
     }
 
-    private fun getVersionName(){
+    private fun getVersionName() {
         val pInfo = requireContext().packageManager.getPackageInfo(requireContext().packageName, 0);
         val versionName = pInfo.versionName + ""
 

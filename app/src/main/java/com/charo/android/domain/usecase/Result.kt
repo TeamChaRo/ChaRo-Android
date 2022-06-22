@@ -2,6 +2,7 @@ package com.charo.android.domain.usecase
 
 import java.lang.Exception
 
+// 확인요망
 sealed class Result<out T> {
     data class Success<T>(val data:T) : Result<T>()
     data class Error(val exception: Exception): Result<Nothing>()

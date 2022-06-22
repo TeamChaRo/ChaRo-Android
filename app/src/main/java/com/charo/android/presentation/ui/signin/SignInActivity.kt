@@ -19,7 +19,7 @@ import timber.log.Timber
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
-    private val emailSignInViewModel : EmailSignInViewModel by viewModel()
+    private val emailSignInViewModel: EmailSignInViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -31,6 +31,7 @@ class SignInActivity : AppCompatActivity() {
         binding.imgSigninPwClear.setOnClickListener() { clearPassword() }
         setContentView(binding.root)
     }
+
     //로그인
     private fun login() {
         binding.btnSigninLogin.setOnClickListener {
@@ -45,7 +46,7 @@ class SignInActivity : AppCompatActivity() {
 
                 emailSignInViewModel.getEmailSignInData(requestSignInData)
                 emailSignInViewModel.emailSignInData.observe(this, Observer {
-                    if(it.success) {
+                    if (it.success) {
                         val id = "3"
                         SharedInformation.saveSocialId(this, id)
                         SharedInformation.setEmail(this, binding.etSigninId.text.toString())
@@ -70,40 +71,41 @@ class SignInActivity : AppCompatActivity() {
     }
 
     //로그인 토스트 메세지
-    private fun emailSignToast(){
-        emailSignInViewModel.emailSignInStatus.observe(this){
-            if(it == 404){
-                val errorMsg : String
-                = if (!TextUtils.isEmpty(emailSignInViewModel.emailSignInErrorMsg.value)) {
-                    emailSignInViewModel.emailSignInErrorMsg.value!!
-                } else {
-                    "ID/PW를 확인해주세요."
-                }
+    private fun emailSignToast() {
+        emailSignInViewModel.emailSignInStatus.observe(this) {
+            if (it == 404) {
+                val errorMsg: String =
+                    if (!TextUtils.isEmpty(emailSignInViewModel.emailSignInErrorMsg.value)) {
+                        emailSignInViewModel.emailSignInErrorMsg.value!!
+                    } else {
+                        "ID/PW를 확인해주세요."
+                    }
                 Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
-            } else if(it == 500){
-                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT).show()
+            } else if (it == 500) {
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
-    private fun initFirebase(){
+    private fun initFirebase() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
-        OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Timber.w(
-                    "FirebaseTAG Fetching FCM registration token failed ${task.exception}"
-                )
-                return@OnCompleteListener
-            } else {
-                val token = task.result
-                val msg = getString(R.string.msg_token_fmt, token)
-                Timber.d("Firebase Success $msg")
-            }
-        })
+            OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Timber.w(
+                        "FirebaseTAG Fetching FCM registration token failed ${task.exception}"
+                    )
+                    return@OnCompleteListener
+                } else {
+                    val token = task.result
+                    val msg = getString(R.string.msg_token_fmt, token)
+                    Timber.d("Firebase Success $msg")
+                }
+            })
     }
 
     //비밀번호 찾기 이동
-    private fun goPasswordSearch(){
+    private fun goPasswordSearch() {
         binding.tvSigninPassword.setOnClickListener {
             val intent = Intent(this, PasswordSearchActivity::class.java)
             startActivity(intent)

@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.signin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,7 +29,7 @@ class PasswordSearchActivity :
         checkSuccess()
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         val toolbar = binding.toolbarPasswordSearch
         setSupportActionBar(toolbar)
 
@@ -40,7 +39,7 @@ class PasswordSearchActivity :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 return true
@@ -95,12 +94,12 @@ class PasswordSearchActivity :
     private fun changeBtnText() {
         passwordSearchViewModel.inputEmail.observe(this) {
             if (it) {
-                with(binding){
+                with(binding) {
                     textPasswordSearchNext.text = getString(R.string.temporary_password_send)
                     textPasswordSearchNextFocus.text = getString(R.string.temporary_password_send)
                 }
-            }else{
-                with(binding){
+            } else {
+                with(binding) {
                     textPasswordSearchNext.text = getString(R.string.next)
                     textPasswordSearchNextFocus.text = getString(R.string.next)
                 }
@@ -110,7 +109,7 @@ class PasswordSearchActivity :
     }
 
     //다음 버튼 클릭
-    private fun clickNextBtn(){
+    private fun clickNextBtn() {
         binding.textPasswordSearchNext.setOnClickListener {
             clickNextBtnEvent()
         }
@@ -120,22 +119,22 @@ class PasswordSearchActivity :
     }
 
     //다음 버튼 클릭 이벤트
-    private fun clickNextBtnEvent(){
+    private fun clickNextBtnEvent() {
         val inputEmail = passwordSearchViewModel.inputEmail.value ?: false
         val userInputEmail = passwordSearchViewModel.userInputEmail.value ?: ""
-        if(inputEmail){
+        if (inputEmail) {
             passwordSearchViewModel.getPasswordSearch(userInputEmail)
             passwordSearchViewModel.postInputEmail(false)
         }
     }
 
     //서버 성공시 종료
-    private fun checkSuccess(){
-        passwordSearchViewModel.passwordSuccess.observe(this){
-            if(it){
+    private fun checkSuccess() {
+        passwordSearchViewModel.passwordSuccess.observe(this) {
+            if (it) {
                 Toast.makeText(this, "임시 비밀번호가 발급되었습니다", Toast.LENGTH_SHORT).show()
                 finish()
-            }else{
+            } else {
                 Toast.makeText(this, "이메일을 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }

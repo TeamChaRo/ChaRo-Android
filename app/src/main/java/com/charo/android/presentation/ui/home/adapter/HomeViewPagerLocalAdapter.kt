@@ -15,12 +15,13 @@ import com.charo.android.presentation.ui.home.BannerDriveTheaterActivity
 import com.charo.android.presentation.ui.home.BannerGangneungActivity
 import com.charo.android.presentation.ui.home.BannerSpringPlaylistActivity
 
-class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapter.HomeViewPagerViewHolder>() {
+class HomeViewPagerLocalAdapter() :
+    RecyclerView.Adapter<HomeViewPagerLocalAdapter.HomeViewPagerViewHolder>() {
     private val _banner = mutableListOf<BannerLocal>()
     var banner: List<BannerLocal> = _banner
 
     private val _bannerRoad = mutableListOf<BannerRoad>()
-    var bannerRoad : List<BannerRoad> = _bannerRoad
+    var bannerRoad: List<BannerRoad> = _bannerRoad
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -43,17 +44,22 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
         holder.itemView.setOnClickListener {
             val activity = it.context as AppCompatActivity
 
-            when(position){
-                0->{
+            when (position) {
+                0 -> {
                     activity.startActivity(Intent(activity, BannerGangneungActivity::class.java))
                 }
-                1->{
-                    activity.startActivity(Intent(activity, BannerSpringPlaylistActivity::class.java))
+                1 -> {
+                    activity.startActivity(
+                        Intent(
+                            activity,
+                            BannerSpringPlaylistActivity::class.java
+                        )
+                    )
                 }
-                2->{
+                2 -> {
                     activity.startActivity(Intent(activity, BannerDriveTheaterActivity::class.java))
                 }
-                3->{
+                3 -> {
                     activity.startActivity(Intent(activity, BannerAboutCharoActivity::class.java))
                 }
             }
@@ -67,22 +73,22 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
     class HomeViewPagerViewHolder(
         private val binding: ItemHomeViewpagerLocalBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(banner : BannerLocal){
+        fun onBind(banner: BannerLocal) {
 
             Glide.with(binding.imgViewpager)
                 .load(banner.homeViewPagerRoadImage)
                 .into(binding.imgViewpager)
 
-            if(banner.homeViewPagerSubTitleImg == 0){
+            if (banner.homeViewPagerSubTitleImg == 0) {
                 binding.textViewpagerSubTitleImg.visibility = View.GONE
-            }else{
+            } else {
                 binding.textViewpagerSubTitleImg.visibility = View.VISIBLE
                 binding.textViewpagerSubTitleImg.setImageResource(banner.homeViewPagerSubTitleImg)
             }
 
-            if(banner.charoImgVisible){
+            if (banner.charoImgVisible) {
                 binding.imgViewpagerCharo.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.imgViewpagerCharo.visibility = View.INVISIBLE
             }
             binding.textViewpagerTitle.textSize = banner.titleFontSize
@@ -91,7 +97,7 @@ class HomeViewPagerLocalAdapter() : RecyclerView.Adapter<HomeViewPagerLocalAdapt
         }
     }
 
-    fun setHomeBanner(banner: List<BannerLocal>){
+    fun setHomeBanner(banner: List<BannerLocal>) {
         this.banner = banner
         notifyDataSetChanged()
     }

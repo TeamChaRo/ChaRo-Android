@@ -45,7 +45,6 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         changeTabText()
         editTextFocusRemove()
         changeProfileImage()
-//        backBtn()
     }
 
     private fun setProfileImage() {
@@ -54,16 +53,12 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     }
 
     // isProfileUpdate 초기화
-
-    private fun initIsProfileNum(){
+    private fun initIsProfileNum() {
         settingViewModel.images.value = false
         settingViewModel.nickName.value = false
         settingViewModel.buttonClick.value = false
     }
-//    //뒤로가기 버튼
-//    private fun backBtn(){
-//        settingViewModel.settingFragmentBackStack.value = false
-//    }
+
 
     private fun profileCheckNickName() {
         val nickNamePattern = "^[가-힣ㄱ-ㅎ]{0,5}$"
@@ -126,7 +121,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     private fun initBottomSheet() {
         //더블 클릭 방지
         binding.imgProfileChange.setOnClickListener {
-            if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+            if (SystemClock.elapsedRealtime() - mLastClickTime > 800) {
                 val bottomSheet = SettingBottomSheetFragment()
                 bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
             }
@@ -134,7 +129,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
         }
 
         binding.textProfileChange.setOnClickListener {
-            if(SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+            if (SystemClock.elapsedRealtime() - mLastClickTime > 800) {
                 val bottomSheet = SettingBottomSheetFragment()
                 bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
             }
@@ -157,7 +152,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     changeSettingMain()
                 }
                 profileImageUpdateChange(its, "")
-                settingViewModel.newNickName.observe(viewLifecycleOwner){
+                settingViewModel.newNickName.observe(viewLifecycleOwner) {
                     profileImageUpdateChange(its, it)
                 }
             } else {
@@ -170,7 +165,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     }
 
     // 프로필 사진 변경했을 때(닉네임이랑 / 닉네임 없이)
-    private fun profileImageUpdateChange( imageUri: Uri, s: String) {
+    private fun profileImageUpdateChange(imageUri: Uri, s: String) {
         settingViewModel.isProfileUpdate.observe(viewLifecycleOwner) {
             val email = SharedInformation.getEmail(requireActivity())
             Timber.d("love $it")
@@ -182,7 +177,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     s,
                     requireActivity()
                 )
-            SharedInformation.setNickName(requireActivity(), s)
+                SharedInformation.setNickName(requireActivity(), s)
 
             } else if (it == 2) {
                 settingViewModel.profileImageChange(
@@ -227,7 +222,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
     }
 
     //fragment 전환
-    private fun changeSettingMain(){
+    private fun changeSettingMain() {
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.apply {
             replace(R.id.fragment_container_setting, SettingMainFragment())

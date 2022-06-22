@@ -2,6 +2,7 @@ package com.charo.android.data.model.request.write
 
 import com.google.gson.annotations.SerializedName
 
+// 확인요망
  class RequestWriteData(
      @SerializedName("course")
     val course: ArrayList<Course>,

@@ -7,39 +7,38 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.more.MoreThemeContentViewFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
 
 class MoreThemeContentAdapter(
-    var link : MoreThemeContentViewFragment.DataToMoreThemeLike,
-    var userId : String
+    var link: MoreThemeContentViewFragment.DataToMoreThemeLike,
+    var userId: String
 ) : RecyclerView.Adapter<MoreThemeContentAdapter.MoreViewViewHolder>() {
     private val _moreData = mutableListOf<MoreDrive>()
-    private var moreData : List<MoreDrive> = _moreData
-    var postId : Int = 0
+    private var moreData: List<MoreDrive> = _moreData
+    var postId: Int = 0
     var select = true
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MoreThemeContentAdapter.MoreViewViewHolder {
+    ): MoreViewViewHolder {
         val binding = ItemMoreViewBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return MoreThemeContentAdapter.MoreViewViewHolder(binding)
+        return MoreViewViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MoreThemeContentAdapter.MoreViewViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MoreViewViewHolder, position: Int) {
         holder.onBind(moreData[position])
         holder.binding.imgMoreViewHeart.setOnClickListener {
             postId = moreData[position].morePostId
-            if(select){
+            if (select) {
                 it.isSelected = !moreData[position].moreIsFavorite
                 select = false
-            }else{
+            } else {
                 it.isSelected = moreData[position].moreIsFavorite
                 select = true
             }
@@ -72,7 +71,7 @@ class MoreThemeContentAdapter(
         }
     }
 
-    fun setHomeTrendDrive(moreData: List<MoreDrive>){
+    fun setHomeTrendDrive(moreData: List<MoreDrive>) {
         this.moreData = moreData
         notifyDataSetChanged()
     }

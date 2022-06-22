@@ -31,8 +31,8 @@
                     style="@style/HeaderH4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/main_charo_theme"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:text="@string/main_charo_theme" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -56,9 +56,9 @@
                 android:id="@+id/view_pager_more_theme"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tab_more_theme_tab"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tab_more_theme_tab" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

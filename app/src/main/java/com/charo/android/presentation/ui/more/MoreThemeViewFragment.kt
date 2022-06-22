@@ -1,45 +1,27 @@
 package com.charo.android.presentation.ui.more
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnAttach
 import com.charo.android.R
 import com.charo.android.data.model.request.RequestThemeViewData
 import com.charo.android.databinding.FragmentMoreThemeViewBinding
-import com.charo.android.hidden.Hidden.Companion.userId
 import com.charo.android.presentation.base.BaseFragment
-import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.adapter.MoreThemeViewPagerAdapter
 import com.charo.android.presentation.util.SharedInformation
-
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import timber.log.Timber
 
 
 class MoreThemeViewFragment :
     BaseFragment<FragmentMoreThemeViewBinding>(R.layout.fragment_more_theme_view) {
-//    private lateinit var callback : OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
-    var requestThemeData = mutableListOf<RequestThemeViewData>()
     private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        callback = object : OnBackPressedCallback(true){
-//            override fun handleOnBackPressed() {
-//                sharedViewModel.moreFragment.value = true
-//                Timber.d("onBackPressed호출됨more")
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,11 +30,10 @@ class MoreThemeViewFragment :
         sharedViewModel.moreFragment.value = true
 
         initMoreThemeViewPager()
-//        clickBackButton()
         clickTab()
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         val toolbar = binding.toolbarMoreTheme
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
@@ -62,14 +43,10 @@ class MoreThemeViewFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 SharedInformation.removeThemeNum(requireActivity())
                 requireActivity().onBackPressed()
-//                val fragmentManager = activity?.supportFragmentManager
-//                val transaction = fragmentManager?.beginTransaction()
-//                transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
-//                    ?.commit()
                 return true
             }
         }
@@ -104,8 +81,8 @@ class MoreThemeViewFragment :
             val themeNum = SharedInformation.getThemeNum(requireActivity())
             tabMoreThemeTab.getTabAt(themeNum)?.select()
             viewPagerMoreTheme.doOnAttach {
-                    viewPagerMoreTheme.setCurrentItem(themeNum, false)
-                }
+                viewPagerMoreTheme.setCurrentItem(themeNum, false)
+            }
 
 
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
@@ -129,19 +106,8 @@ class MoreThemeViewFragment :
             }.attach()
 
 
-
         }
     }
-
-//    private fun clickBackButton() {
-//        binding.imgBackTheme.setOnClickListener {
-//            SharedInformation.removeThemeNum(requireActivity())
-//            val fragmentManager = activity?.supportFragmentManager
-//            val transaction = fragmentManager?.beginTransaction()
-//            transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
-//                ?.commit()
-//        }
-//    }
 
 
     fun clickTab() {
@@ -164,10 +130,7 @@ class MoreThemeViewFragment :
         })
     }
 
-    override fun onDetach() {
-        super.onDetach()
-//        callback.remove()
-    }
+
 }
 
 

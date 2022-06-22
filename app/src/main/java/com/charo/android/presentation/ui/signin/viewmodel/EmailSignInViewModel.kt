@@ -15,17 +15,18 @@ import timber.log.Timber
 
 class EmailSignInViewModel(
     private val getRemoteEmailLoginUseCase: GetRemoteEmailLoginUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _emailSignInData = MutableLiveData<EmailSignInData>()
-    var emailSignInData : LiveData<EmailSignInData> = _emailSignInData
+    var emailSignInData: LiveData<EmailSignInData> = _emailSignInData
 
     var emailSignInStatus = MutableLiveData<Int>()
     var emailSignInErrorMsg = MutableLiveData<String>()
 
-    fun getEmailSignInData(requestSignInData: RequestSignInData){
+    fun getEmailSignInData(requestSignInData: RequestSignInData) {
         viewModelScope.launch {
-            when(val postEmailSignIn = safeApiCall(Dispatchers.IO) { getRemoteEmailLoginUseCase(requestSignInData) }){
+            when (val postEmailSignIn =
+                safeApiCall(Dispatchers.IO) { getRemoteEmailLoginUseCase(requestSignInData) }) {
                 is ResultWrapper.Success -> {
                     _emailSignInData.value = postEmailSignIn.data!!
                     Timber.d("emailLogin 서버 통신 성공")

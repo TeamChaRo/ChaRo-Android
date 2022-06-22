@@ -6,18 +6,19 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeLocationDriveBinding
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
-import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.LocalDrive
+import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
-class HomeLocalDriveAdapter(val userId: String,
-                            var links: HomeFragment.DataToHomeLike) :
+class HomeLocalDriveAdapter(
+    val userId: String,
+    var links: HomeFragment.DataToHomeLike
+) :
     RecyclerView.Adapter<HomeLocalDriveAdapter.HomeLocationDriveViewHolder>() {
     private val _localDrive = mutableListOf<LocalDrive>()
-    private var localDrive : List<LocalDrive> = _localDrive
-    var postId : Int = 0
+    private var localDrive: List<LocalDrive> = _localDrive
+    var postId: Int = 0
     var select = true
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,15 +37,15 @@ class HomeLocalDriveAdapter(val userId: String,
         position: Int
     ) {
         holder.onBind(localDrive[position])
-        holder.binding.imgHomeLocationDriveHeart.setOnClickListener{
-            if(userId=="@"){
+        holder.binding.imgHomeLocationDriveHeart.setOnClickListener {
+            if (userId == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
-            }else{
+            } else {
                 postId = localDrive[position].homeLocationDrivePostId
-                if(select){
+                if (select) {
                     it.isSelected = !localDrive[position].homeLocationDriveHeart
                     select = false
-                }else{
+                } else {
                     it.isSelected = localDrive[position].homeLocationDriveHeart
                 }
 
@@ -57,7 +58,7 @@ class HomeLocalDriveAdapter(val userId: String,
             intent.apply {
                 putExtra("userId", userId)
                 putExtra("postId", localDrive[position].homeLocationDrivePostId)
-                putExtra("destination","detail")
+                putExtra("destination", "detail")
             }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
@@ -79,7 +80,7 @@ class HomeLocalDriveAdapter(val userId: String,
 
     }
 
-    fun setLocalDrive(localDrive : List<LocalDrive>){
+    fun setLocalDrive(localDrive: List<LocalDrive>) {
         this.localDrive = localDrive
         notifyDataSetChanged()
     }

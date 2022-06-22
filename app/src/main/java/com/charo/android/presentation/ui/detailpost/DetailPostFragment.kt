@@ -323,9 +323,21 @@ class DetailPostFragment : Fragment() {
                 DynamicLink.GoogleAnalyticsParameters.Builder()
                     .setSource("share")
                     .setMedium(title)
-                    .setCampaign("detailPost")
+                    .setCampaign("charo")
                     .build()
             )
+            //TODO: ios app store id / token
+            .setIosParameters(
+                DynamicLink.IosParameters.Builder(requireActivity().packageName)
+                    .setAppStoreId("Define.APP_STORE_ID")
+                    .setMinimumVersion("1.0.0")
+                    .build())
+            .setItunesConnectAnalyticsParameters(
+                DynamicLink.ItunesConnectAnalyticsParameters.Builder()
+                    .setProviderToken("")
+                    .setCampaignToken("")
+                    .build())
+
             .setSocialMetaTagParameters(
                 DynamicLink.SocialMetaTagParameters.Builder()
                     .setTitle(title)

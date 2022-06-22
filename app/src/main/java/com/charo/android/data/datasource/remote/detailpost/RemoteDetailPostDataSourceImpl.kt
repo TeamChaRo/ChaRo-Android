@@ -1,7 +1,6 @@
 package com.charo.android.data.datasource.remote.detailpost
 
 import com.charo.android.data.api.detailpost.DetailPostService
-import com.charo.android.data.model.detailpost.RequestDeleteDetailPost
 import com.charo.android.data.model.detailpost.ResponseDeleteDetailPost
 import com.charo.android.data.model.detailpost.ResponseDetailPost
 import com.charo.android.data.model.detailpost.ResponseDetailPostLikeUserList

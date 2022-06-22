@@ -1,11 +1,9 @@
 package com.charo.android.presentation.ui.more
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +13,6 @@ import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.presentation.base.BaseFragment
-import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.adapter.MoreViewAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
@@ -26,25 +23,14 @@ import timber.log.Timber
 
 
 class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view), SwipeRefreshLayout.OnRefreshListener {
-//    private lateinit var callback: OnBackPressedCallback
+
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val moreViewModel: MoreViewViewModel by viewModel()
-    private var homeFragment = HomeFragment()
     private lateinit var moreViewAdapter: MoreViewAdapter
     private lateinit var userId: String
     var links = DataToMoreLike()
     var currentSpinnerPosition = 0
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        callback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                sharedViewModel.moreFragment.value = true
-//                Timber.d("onBackPressed호출됨more")
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +52,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         emptyData()
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         val toolbar = binding.toolbarMore
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
@@ -192,18 +178,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         }
     }
 
-//    private fun clickBackButton(userId: String) {
-//        binding.imgBackHome.setOnClickListener {
-//            val bundle = Bundle()
-//            bundle.putString("userId", userId)
-//            homeFragment.arguments = bundle
-//            val fragmentManager = activity?.supportFragmentManager
-//            val transaction = fragmentManager?.beginTransaction()
-//            transaction?.replace(R.id.nav_host_fragment_activity_main, homeFragment)
-//                ?.commit()
-//        }
-//
-//    }
 
     //좋아요
     inner class DataToMoreLike() {

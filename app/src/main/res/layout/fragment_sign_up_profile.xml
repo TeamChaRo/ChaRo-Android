@@ -4,162 +4,170 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="signupViewModel"
             type="com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/ns_sign_up_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".presentation.ui.signup.SignUpProfileFragment">
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp">
+            android:background="@color/white"
+            tools:context=".presentation.ui.signup.SignUpProfileFragment">
 
-            <ImageView
-                android:id="@+id/img_sign_up_road_3"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_profile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_sign_up_road_3"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"/>
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/text_input_profile_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/profile_img_input"
-                android:fontFamily="@font/noto_sans_cjkkr_bold"
-                app:fontFamily="@font/noto_sans_cjkkr_bold"
-                android:textSize="16sp"
-                android:textColor="@color/black_sub_212429"
-                android:includeFontPadding="false"
-                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road_3"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"/>
+                <ImageView
+                    android:id="@+id/img_sign_up_road_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_sign_up_road_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/img_sign_up_profile"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:clickable="true"
-                android:src="@drawable/sign_up_profile"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_profile_img"
-                app:layout_constraintStart_toStartOf="@+id/text_input_profile_img"
-                android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:id="@+id/text_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/write_nickname"
-                android:fontFamily="@font/noto_sans_cjkkr_bold"
-                app:fontFamily="@font/noto_sans_cjkkr_bold"
-                android:textSize="16sp"
-                android:textColor="@color/black_sub_212429"
-                android:includeFontPadding="false"
-                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_profile"
-                app:layout_constraintStart_toStartOf="@id/img_sign_up_profile"
-                android:layout_marginTop="34dp"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text_input_nickname"
-                style="@style/signUpBlankChange"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                app:errorEnabled="true"
-                app:errorIconDrawable="@null"
-                app:helperTextTextColor="@color/blue_main_0f6fff"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/text_nickname"
-                app:layout_constraintTop_toBottomOf="@+id/text_nickname">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_sign_up_nickname"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:padding="12dp"
-                    android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
-                    android:hint="@string/input_nickname"
+                <TextView
+                    android:id="@+id/text_input_profile_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
                     android:includeFontPadding="false"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="13sp"
-                    android:privateImeOptions="defaultInputmode=korean"/>
+                    android:text="@string/profile_img_input"
+                    android:textColor="@color/black_sub_212429"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road_3" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/img_sign_up_profile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:src="@drawable/sign_up_profile"
+                    app:layout_constraintStart_toStartOf="@+id/text_input_profile_img"
+                    app:layout_constraintTop_toBottomOf="@+id/text_input_profile_img" />
 
-            <ImageView
-                android:id="@+id/img_sign_up_profile_delete_button"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/write_nickname"
+                    android:textColor="@color/black_sub_212429"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_bold"
+                    app:layout_constraintStart_toStartOf="@id/img_sign_up_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/img_sign_up_profile" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_nickname"
+                    style="@style/signUpBlankChange"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:helperTextTextColor="@color/blue_main_0f6fff"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_nickname"
+                    app:layout_constraintTop_toBottomOf="@+id/text_nickname">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_sign_up_nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:fontFamily="@font/noto_sans_cjkkr_regular"
+                        android:hint="@string/input_nickname"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:padding="12dp"
+                        android:privateImeOptions="defaultInputmode=korean"
+                        android:singleLine="true"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_regular" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/img_sign_up_profile_delete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_map_search_close"
+                    app:layout_constraintEnd_toEndOf="@+id/text_input_nickname"
+                    app:layout_constraintTop_toTopOf="@+id/text_input_nickname" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/text_sign_up_nickname_next"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@drawable/ic_map_search_close"
-                app:layout_constraintEnd_toEndOf="@+id/text_input_nickname"
-                app:layout_constraintTop_toTopOf="@+id/text_input_nickname" />
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="27dp"
+                android:background="@drawable/selector_btn_next_blue_white"
+                android:clickable="false"
+                android:enabled="false"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/next"
+                android:textColor="@drawable/selector_btn_text_color"
+                android:textSize="16sp"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/text_sign_up_nickname_next_focus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_btn_rec_blue_white"
+                android:clickable="false"
+                android:enabled="false"
+                android:fontFamily="@font/noto_sans_cjkkr_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/next"
+                android:textColor="@drawable/selector_btn_text_color"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/text_sign_up_nickname_next"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="27dp"
-            android:clickable="false"
-            android:enabled="false"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            app:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/next"
-            android:textSize="16sp"
-            android:textColor="@drawable/selector_btn_text_color"
-            android:background="@drawable/selector_btn_next_blue_white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/text_sign_up_nickname_next_focus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:enabled="false"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:text="@string/next"
-            android:background="@drawable/selector_btn_rec_blue_white"
-            android:textColor="@drawable/selector_btn_text_color"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

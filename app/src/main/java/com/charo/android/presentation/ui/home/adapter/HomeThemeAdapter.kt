@@ -18,7 +18,6 @@ class HomeThemeAdapter(
 ) : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
 
     val themeData = mutableListOf<HomeThemeInfo>()
-    var themeId: Int = 99
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -55,7 +54,7 @@ class HomeThemeAdapter(
     }
 
     inner class HomeThemeViewHolder(
-         val binding: ItemHomeThemeBinding
+        val binding: ItemHomeThemeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(homeThemeInfo: HomeThemeInfo) {
             binding.apply {

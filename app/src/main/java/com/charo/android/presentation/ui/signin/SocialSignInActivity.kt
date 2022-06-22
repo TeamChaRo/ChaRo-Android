@@ -142,9 +142,9 @@ class SocialSignInActivity() :
     }
 
     //카카오 로그인 실패시(회원가입 이슈)
-    private fun checkKakaoSignUp(){
-        socialSignInViewModel.socialStatus.observe(this){
-            if(it == 404){
+    private fun checkKakaoSignUp() {
+        socialSignInViewModel.socialStatus.observe(this) {
+            if (it == 404) {
                 Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
                 SharedInformation.setSignUp(this, 2)
                 val intent = Intent(this, SignUpActivity::class.java)

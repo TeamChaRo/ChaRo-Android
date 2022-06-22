@@ -11,6 +11,7 @@ import com.charo.android.domain.model.signin.SocialUserEmail
 
 
 object SignInMapper {
+    // 확인요망
     fun mapperToSocialUserEmail(requestSocialData: RequestSocialData) : SocialUserEmail {
         return SocialUserEmail(
             userEmail = requestSocialData.userEmail
