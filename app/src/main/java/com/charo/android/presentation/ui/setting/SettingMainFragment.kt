@@ -204,7 +204,7 @@ class SettingMainFragment :
                 override fun onClicked(num: Int) {
                     if (num == 1) {
                         if (socialKey == "1") {
-                            UserApiClient.instance.unlink { error ->
+                            UserApiClient.instance.logout { error ->
                                 if (error != null) {
                                     Toast.makeText(
                                         requireActivity(),
