@@ -7,14 +7,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemResultSearchBinding
 import com.charo.android.domain.model.search.SearchDrive
-import com.charo.android.presentation.ui.detail.DetailActivity
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
 class ResultSearchAdapter(
-    var email : String,
-    var links : ResultSearchFragment.DataToSearchLike
+    var email: String,
+    var links: ResultSearchFragment.DataToSearchLike
 ) :
     RecyclerView.Adapter<ResultSearchAdapter.ResultSearchViewHolder>() {
     private val _searchData = mutableListOf<SearchDrive>()
@@ -38,13 +36,13 @@ class ResultSearchAdapter(
         holder.onBind(searchData[position])
         holder.binding.imgResultSearchHeart.setOnClickListener {
             postId = searchData[position].postId
-            if(email == "@"){
+            if (email == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
-            }else{
-                if(select){
+            } else {
+                if (select) {
                     it.isSelected = !searchData[position].isFavorite
                     select = false
-                }else{
+                } else {
                     it.isSelected = searchData[position].isFavorite
                 }
                 links.getPostId(postId)
@@ -56,7 +54,7 @@ class ResultSearchAdapter(
             val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
             intent.apply {
                 putExtra("postId", searchData[position].postId)
-                putExtra("destination","detail")
+                putExtra("destination", "detail")
             }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
@@ -70,7 +68,7 @@ class ResultSearchAdapter(
         val binding: ItemResultSearchBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(searchData: SearchDrive) {
-            binding.apply{
+            binding.apply {
                 searchDrive = searchData
                 binding.executePendingBindings()
             }
@@ -79,7 +77,7 @@ class ResultSearchAdapter(
 
     }
 
-    fun setSearchDrive(searchDrive: List<SearchDrive>){
+    fun setSearchDrive(searchDrive: List<SearchDrive>) {
         this.searchData = searchDrive
         notifyDataSetChanged()
     }
