@@ -37,18 +37,4 @@ object CustomToast {
             view = binding.root
         }
     }
-
-    fun createDialog(context: Context): Dialog? {
-        val inflater = LayoutInflater.from(context)
-        var binding: ToastMapCustomBinding
-                = DataBindingUtil.inflate(inflater, R.layout.toast_map_custom, null, false)
-
-//        binding.textToast.text = message
-
-        return Dialog(context).apply {
-            val dialog = Dialog(context)
-            dialog.setContentView(binding.root)
-            dialog.show()
-        }
-    }
 }
