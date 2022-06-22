@@ -1,6 +1,5 @@
 package com.charo.android.presentation.ui.more
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,11 +8,9 @@ import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentMoreThemeContentViewBinding
 import com.charo.android.presentation.base.BaseFragment
-import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.adapter.MoreThemeContentAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.util.SharedInformation
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -22,7 +19,6 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view) {
     private val moreViewModel: MoreViewViewModel by viewModel()
     private lateinit var moreThemeContentAdapter: MoreThemeContentAdapter
-    private val sharedViewModel: SharedViewModel by sharedViewModel()
     var link = DataToMoreThemeLike()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,19 +49,20 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                         initMoreThemeNewView()
                     }
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
 
                 }
             }
     }
 
-    private fun initMoreThemeView(){
+    private fun initMoreThemeView() {
         Timber.d("데이터 받아오는거 확인 $value")
         moreViewModel.getMoreView(userId, identifier, value)
-        moreThemeContentAdapter = MoreThemeContentAdapter(link,userId)
+        moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.drive.observe(viewLifecycleOwner) {
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 binding.clEmptyList.visibility = View.VISIBLE
                 binding.clThemeList.visibility = View.GONE
             } else {
@@ -76,13 +73,13 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         }
     }
 
-    private fun initMoreThemeNewView(){
+    private fun initMoreThemeNewView() {
         Timber.d("데이터 받아오는거 확인 $value")
         moreViewModel.getMoreNewView(userId, identifier, value)
         moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.newDrive.observe(viewLifecycleOwner) {
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 binding.clEmptyList.visibility = View.VISIBLE
                 binding.clThemeList.visibility = View.GONE
             } else {
@@ -93,17 +90,21 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         }
     }
 
-    private fun initSpinner(){
-        val adapter = ArrayAdapter.createFromResource(requireContext(), R.array.search_spinner, R.layout.custom_spinner_item)
+    private fun initSpinner() {
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.search_spinner,
+            R.layout.custom_spinner_item
+        )
         binding.spinnerMoreTheme.adapter = adapter
     }
 
 
-    inner class DataToMoreThemeLike(){
-        fun getPostId(postId : Int){
+    inner class DataToMoreThemeLike() {
+        fun getPostId(postId: Int) {
             Timber.d("more PostId $postId")
             val userEmail = SharedInformation.getEmail(requireActivity())
-                moreViewModel.postLike(RequestHomeLikeData(userEmail,postId))
+            moreViewModel.postLike(RequestHomeLikeData(userEmail, postId))
         }
 
     }
