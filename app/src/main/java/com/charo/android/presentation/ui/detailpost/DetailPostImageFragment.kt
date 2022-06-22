@@ -49,7 +49,7 @@ class DetailPostImageFragment : Fragment() {
         viewModel.imageStringViewPager.value?.let {
             viewPagerAdapter.replaceItem(it.toList())
         }
-        binding.vpImg.setCurrentItem(viewModel.imageIndex, false)
         binding.vpImg.adapter = viewPagerAdapter
+        binding.vpImg.setCurrentItem(viewModel.imageIndex, false)
     }
 }
