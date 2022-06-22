@@ -1,5 +1,6 @@
 package com.charo.android.presentation.ui.more
 
+// 확인요망
 data class MoreViewInfo(
     val moreViewImage : Int,
     val moreViewTitle : String,
