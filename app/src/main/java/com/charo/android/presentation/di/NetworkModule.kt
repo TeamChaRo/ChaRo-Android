@@ -27,7 +27,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 val networkModule = module {
     val interceptor = HttpLoggingInterceptor()
     val client = OkHttpClient.Builder()
-//        .addNetworkInterceptor(interceptor)
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
     client.addInterceptor(interceptor)
 
@@ -83,7 +82,6 @@ val networkModule = module {
     single<SettingViewService> {
         get<Retrofit>().create(SettingViewService::class.java)
     }
-    // SH
     single {
         get<Retrofit>().create(MyPageService::class.java)
     }
