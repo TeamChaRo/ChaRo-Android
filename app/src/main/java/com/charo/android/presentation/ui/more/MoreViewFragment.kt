@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentMoreViewBinding
@@ -24,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 
-class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view) {
+class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment_more_view), SwipeRefreshLayout.OnRefreshListener {
 //    private lateinit var callback: OnBackPressedCallback
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val moreViewModel: MoreViewViewModel by viewModel()
@@ -32,6 +33,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     private lateinit var moreViewAdapter: MoreViewAdapter
     private lateinit var userId: String
     var links = DataToMoreLike()
+    var currentSpinnerPosition = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -52,6 +54,9 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         userId = arguments?.getString("userId").toString()
         moreViewAdapter = MoreViewAdapter(userId, links)
         Timber.d("userIdeas $userId")
+
+        binding.srMoreView.setOnRefreshListener(this)
+        binding.srEmptyList.setOnRefreshListener(this)
 
         initSpinner()
 //        clickBackButton(userId)
@@ -158,6 +163,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                     position: Int,
                     id: Long
                 ) {
+                    currentSpinnerPosition = position
                     moreViewAdapter.removeHomeTrendDrive()
                     if (position == 0) {
                         if (moreViewAdapter.moreData.isEmpty()) {
@@ -183,7 +189,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     private fun removeData() {
         moreViewModel.position.observe(viewLifecycleOwner) {
             Timber.d("스피드확인 : 얘는 데이터 삭제")
-
         }
     }
 
@@ -273,9 +278,35 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
     private fun emptyData() {
         moreViewModel.drive.observe(viewLifecycleOwner) {
+            binding.srMoreView.isRefreshing = false
+            binding.srEmptyList.isRefreshing = false
+
             if(it == null || it.isEmpty()){
+                binding.srMoreView.visibility = View.GONE
+                binding.srEmptyList.visibility = View.VISIBLE
+                binding.clMoreList.visibility = View.GONE
                 binding.clEmptyList.visibility = View.VISIBLE
             } else {
+                binding.srMoreView.visibility = View.VISIBLE
+                binding.srEmptyList.visibility = View.GONE
+                binding.clMoreList.visibility = View.VISIBLE
+                binding.clEmptyList.visibility = View.GONE
+            }
+        }
+
+        moreViewModel.newDrive.observe(viewLifecycleOwner) {
+            binding.srMoreView.isRefreshing = false
+            binding.srEmptyList.isRefreshing = false
+
+            if(it == null || it.isEmpty()){
+                binding.srMoreView.visibility = View.GONE
+                binding.srEmptyList.visibility = View.VISIBLE
+                binding.clMoreList.visibility = View.GONE
+                binding.clEmptyList.visibility = View.VISIBLE
+            } else {
+                binding.srMoreView.visibility = View.VISIBLE
+                binding.srEmptyList.visibility = View.GONE
+                binding.clMoreList.visibility = View.VISIBLE
                 binding.clEmptyList.visibility = View.GONE
             }
         }
@@ -284,6 +315,21 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     override fun onDetach() {
         super.onDetach()
 //        callback.remove()
+    }
+
+    override fun onRefresh() {
+        Timber.d("moreView onRefresh >>>>> ")
+        moreViewAdapter.removeHomeTrendDrive()
+        if (currentSpinnerPosition == 0) {
+            if (moreViewAdapter.moreData.isEmpty()) {
+                moreViewLoadData()
+            }
+        } else {
+            if (moreViewAdapter.moreData.isEmpty()) {
+                moreNewViewData()
+            }
+        }
+        moreViewInfiniteScroll(currentSpinnerPosition)
     }
 }
 

@@ -11,78 +11,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_theme_list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/sr_theme_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <Spinner
-                android:id="@+id/spinner_more_theme"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview_more_theme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_theme_list"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="80dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_more_theme"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_empty_list"
+                <Spinner
+                    android:id="@+id/spinner_more_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_more_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="80dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_more_theme"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/sr_empty_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/img_no_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_search_no_img_android"
-                app:layout_constraintVertical_bias="0.3"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_empty_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/text_no_mention"
-                app:layout_constraintVertical_chainStyle="packed"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/text_no_mention"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_cjkkr_regular"
-                app:fontFamily="@font/noto_sans_cjkkr_regular"
-                android:lineHeight="21sp"
-                android:text="@string/no_data_drive"
-                android:textAlignment="center"
-                android:textColor="@color/gray5_sub_495057"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_no_list"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                <ImageView
+                    android:id="@+id/img_no_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_no_img_android"
+                    app:layout_constraintVertical_bias="0.3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/text_no_mention"
+                    app:layout_constraintVertical_chainStyle="packed"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_no_mention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_cjkkr_regular"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
+                    android:lineHeight="21sp"
+                    android:text="@string/no_data_drive"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray5_sub_495057"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_no_list"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentMoreThemeContentViewBinding
@@ -19,18 +20,21 @@ import timber.log.Timber
 
 
 class MoreThemeContentViewFragment(val userId: String, val identifier: String, val value: String) :
-    BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view) {
+    BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view) , SwipeRefreshLayout.OnRefreshListener {
     private val moreViewModel: MoreViewViewModel by viewModel()
     private lateinit var moreThemeContentAdapter: MoreThemeContentAdapter
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     var link = DataToMoreThemeLike()
 
+    var currentSpinnerPosition = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSpinner()
         clickSpinner()
 
+        binding.srThemeList.setOnRefreshListener(this)
+        binding.srEmptyList.setOnRefreshListener(this)
     }
 
     private fun clickSpinner() {
@@ -47,6 +51,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                     position: Int,
                     id: Long
                 ) {
+                    currentSpinnerPosition = position
                     if (position == 0) {
                         initMoreThemeView()
                     } else {
@@ -64,12 +69,19 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         moreThemeContentAdapter = MoreThemeContentAdapter(link,userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.drive.observe(viewLifecycleOwner) {
+            binding.srThemeList.isRefreshing = false
+            binding.srEmptyList.isRefreshing = false
+
             if(it.isEmpty()){
                 binding.clEmptyList.visibility = View.VISIBLE
                 binding.clThemeList.visibility = View.GONE
+                binding.srEmptyList.visibility = View.VISIBLE
+                binding.srThemeList.visibility = View.GONE
             } else {
                 binding.clEmptyList.visibility = View.GONE
                 binding.clThemeList.visibility = View.VISIBLE
+                binding.srEmptyList.visibility = View.GONE
+                binding.srThemeList.visibility = View.VISIBLE
                 moreThemeContentAdapter.setHomeTrendDrive(it)
             }
         }
@@ -80,12 +92,19 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.newDrive.observe(viewLifecycleOwner) {
+            binding.srThemeList.isRefreshing = false
+            binding.srEmptyList.isRefreshing = false
+
             if(it.isEmpty()){
                 binding.clEmptyList.visibility = View.VISIBLE
                 binding.clThemeList.visibility = View.GONE
+                binding.srEmptyList.visibility = View.VISIBLE
+                binding.srThemeList.visibility = View.GONE
             } else {
                 binding.clEmptyList.visibility = View.GONE
                 binding.clThemeList.visibility = View.VISIBLE
+                binding.srEmptyList.visibility = View.GONE
+                binding.srThemeList.visibility = View.VISIBLE
                 moreThemeContentAdapter.setHomeTrendDrive(it)
             }
         }
@@ -104,5 +123,14 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 moreViewModel.postLike(RequestHomeLikeData(userEmail,postId))
         }
 
+    }
+
+    override fun onRefresh() {
+        Timber.d("moreThemeView onRefresh >>>>")
+        if (currentSpinnerPosition == 0) {
+            initMoreThemeView()
+        } else {
+            initMoreThemeNewView()
+        }
     }
 }
