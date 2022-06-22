@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 
+// 확인요망
 open class NonNullLiveData<T : Any>(value: T) : LiveData<T>(value) {
     override fun getValue(): T {
         return super.getValue() as T

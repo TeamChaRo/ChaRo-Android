@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import com.charo.android.R
 import com.charo.android.databinding.ActivityMainBinding
 import com.charo.android.presentation.base.BaseActivity
-import com.charo.android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.mypage.MyPageFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
@@ -28,7 +27,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-
     private lateinit var analytics: FirebaseAnalytics
 
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
@@ -242,7 +240,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         SharedInformation.notRequestAllow = true
         when (isMyPage) {
             true -> replaceFragment(MyPageFragment(), userId, nickName)
-            false -> replaceFragment(OtherCharoFragment(), userId, nickName)
+            false -> throw IllegalArgumentException()
         }
     }
 

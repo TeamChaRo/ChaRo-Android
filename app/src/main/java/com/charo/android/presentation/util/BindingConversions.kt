@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
+// 확인요망
 object BindingConversions {
     @BindingAdapter("profileImageUrl")
     @JvmStatic
@@ -44,6 +45,7 @@ object BindingConversions {
         }
     }
 
+    // 확인요망
     @BindingAdapter("is_selected")
     @JvmStatic
     fun setSelected(view: View, selected: Boolean) {
