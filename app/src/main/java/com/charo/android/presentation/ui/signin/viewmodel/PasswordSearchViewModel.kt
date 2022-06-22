@@ -14,22 +14,22 @@ class PasswordSearchViewModel(
 
 
     //현재 사용자가 이메일 입력중인지
-    private var _inputEmail : MutableLiveData<Boolean> = MutableLiveData()
-    val inputEmail : LiveData<Boolean>
+    private var _inputEmail: MutableLiveData<Boolean> = MutableLiveData()
+    val inputEmail: LiveData<Boolean>
         get() = _inputEmail
 
-    fun postInputEmail(email : Boolean){
+    fun postInputEmail(email: Boolean) {
         _inputEmail.value = email
     }
 
     //사용자 입력 이메일
-    var userInputEmail : MutableLiveData<String> = MutableLiveData()
+    var userInputEmail: MutableLiveData<String> = MutableLiveData()
 
     //비밀번호 찾기 성공여부
-    var passwordSuccess : MutableLiveData<Boolean> = MutableLiveData()
+    var passwordSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
     //비밀번호 찾기
-     fun getPasswordSearch(userEmail : String){
+    fun getPasswordSearch(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemotePasswordSearchUseCase(userEmail) }
                 .onSuccess {

@@ -18,18 +18,18 @@ class SocialSignInViewModel(
 ) : ViewModel() {
 
     //카카오 로그인 성공
-    var kakaoSuccess : MutableLiveData<SocialLoginData?> = MutableLiveData()
+    var kakaoSuccess: MutableLiveData<SocialLoginData?> = MutableLiveData()
 
     //구글 로그인 성공
-    var googleSuccess : MutableLiveData<SocialLoginData?> = MutableLiveData()
+    var googleSuccess: MutableLiveData<SocialLoginData?> = MutableLiveData()
 
     //카카오 로그인 status
-    var socialStatus : MutableLiveData<Int> = MutableLiveData()
+    var socialStatus: MutableLiveData<Int> = MutableLiveData()
 
     //구글 로그인 status
-    var googleSocialStatus : MutableLiveData<Int> = MutableLiveData()
+    var googleSocialStatus: MutableLiveData<Int> = MutableLiveData()
     private val _userNickName = MutableLiveData<String>()
-    val userNickName : LiveData<String>
+    val userNickName: LiveData<String>
         get() = _userNickName
 
     //카카오 로그인 성공
@@ -53,10 +53,10 @@ class SocialSignInViewModel(
     }
 
 
-    fun googleLoginSuccess(requestSocialData: RequestSocialData){
+    fun googleLoginSuccess(requestSocialData: RequestSocialData) {
         viewModelScope.launch {
             when (val googleData =
-                safeApiCall(Dispatchers.IO) {getRemoteSocialLoginData.execute(requestSocialData) }){
+                safeApiCall(Dispatchers.IO) { getRemoteSocialLoginData.execute(requestSocialData) }) {
                 is ResultWrapper.Success -> {
                     googleSuccess.value = googleData.data
                     Timber.d("googleLogin 서버 통신 성공")
