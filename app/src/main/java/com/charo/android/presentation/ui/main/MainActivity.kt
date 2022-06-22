@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import com.charo.android.R
 import com.charo.android.databinding.ActivityMainBinding
 import com.charo.android.presentation.base.BaseActivity
-import com.charo.android.presentation.ui.charo.mypage.CharoFragment
 import com.charo.android.presentation.ui.charo.otherpage.OtherCharoFragment
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.mypage.MyPageFragment
@@ -34,8 +33,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
-    private val charoFragment: CharoFragment by lazy { CharoFragment() }
-    private val otherCharoFragment: OtherCharoFragment by lazy { OtherCharoFragment() }
     private val sharedViewModel: SharedViewModel by viewModel()
     private val myPageViewModel: MyPageViewModel by viewModel()
     private lateinit var userEmail: String
@@ -78,7 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     myPageViewModel.follower = it.getIntExtra("follower", -1)
                     myPageViewModel.following = it.getIntExtra("following", -1)
 
-                    if(myPageViewModel.follower != -1 && myPageViewModel.following != -1) {
+                    if (myPageViewModel.follower != -1 && myPageViewModel.following != -1) {
                         myPageViewModel.updateFollow()
                     }
                 }
@@ -95,7 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         userEmail = SharedInformation.getEmail(this)
         myPageViewModel.setUserEmail(userEmail)
 
-        if(!SharedInformation.notRequestAllow){
+        if (!SharedInformation.notRequestAllow) {
             requestPermissions()
         }
 
@@ -132,8 +129,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onBackPressed() {
-//        if (onBackPressedDispatcher.hasEnabledCallbacks()){
-//                onBackPressedDispatcher.onBackPressed()
         if (sharedViewModel.moreFragment.value == true) {
             changeFragment(R.id.nav_host_fragment_activity_main, homeFragment)
             Timber.d("moreview에서 onBackPressed호출됨")
@@ -147,7 +142,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             lastTimeBackPressed = System.currentTimeMillis()
             Toast.makeText(this, "한 번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
         }
-//        }
     }
 
     private fun deepLinkDetailPost() {
@@ -196,8 +190,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                         analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, parameters)
 
                         startActivityWriteShare()
-//                        replaceWriteFragment(userId,nickName)
-//                        return@setOnItemSelectedListener true
                     }
                     R.id.navigation_charo -> {
                         parameters.putString(
@@ -234,9 +226,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
 
-    private fun replaceWriteFragment(userId : String, nickName : String){
+    private fun replaceWriteFragment(userId: String, nickName: String) {
         SharedInformation.notRequestAllow = false
-        if(userId == null || userEmail == "@"){
+        if (userId == null || userEmail == "@") {
 
             //로그인 유도 필요한 곳에 작성
             LoginUtil.loginPrompt(this@MainActivity)
@@ -249,24 +241,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun replaceCharoFragment(userId: String, nickName: String, isMyPage: Boolean) {
         SharedInformation.notRequestAllow = true
         when (isMyPage) {
-//            true -> replaceFragment(charoFragment, userId, nickName)
-            // TODO: 테스트 코드입니다.
             true -> replaceFragment(MyPageFragment(), userId, nickName)
             false -> replaceFragment(OtherCharoFragment(), userId, nickName)
         }
     }
 
-
-    private fun replaceCharoFragment(userId: String, nickName: String) {
-        userEmail = SharedInformation.getEmail(this@MainActivity)
-        if (userEmail == null || userEmail == "@") {
-            LoginUtil.loginPrompt(this)
-        } else {
-            replaceFragment(charoFragment, userId, nickName)
-        }
-
-//        replaceFragment(otherCharoFragment, Hidden.otherUserEmail, Hidden.otherNickname)
-    }
 
     fun startActivityWriteShare() {
         userEmail = SharedInformation.getEmail(this@MainActivity)
@@ -321,21 +300,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             0 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     SharedInformation.setPermissionNever(this, false)
-                    Toast.makeText(this, getString(R.string.txt_allow_permission), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.txt_allow_permission),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else { //다시묻지않기
                     SharedInformation.setPermissionNever(this, true)
                 }
             }
             1 -> { //거부
                 SharedInformation.setPermissionNever(this, false)
-                Toast.makeText(this, getString(R.string.txt_need_permission), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.txt_need_permission), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
 
-    companion object {
-        const val WRITE = true
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

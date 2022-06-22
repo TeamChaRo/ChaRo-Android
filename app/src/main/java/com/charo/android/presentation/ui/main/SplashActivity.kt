@@ -43,13 +43,13 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun autoLogin(autoEmail: String, onBoardingChecked: Boolean){
-        val intent : Intent = if (autoEmail != "@") {
+    private fun autoLogin(autoEmail: String, onBoardingChecked: Boolean) {
+        val intent: Intent = if (autoEmail != "@") {
             Timber.d("autoEmail $autoEmail")
             Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
             Intent(this, MainActivity::class.java)
         } else {
-            if(onBoardingChecked) {
+            if (onBoardingChecked) {
                 Intent(this, OnBoardingActivity::class.java)
             } else {
                 Intent(this, SocialSignInActivity::class.java)

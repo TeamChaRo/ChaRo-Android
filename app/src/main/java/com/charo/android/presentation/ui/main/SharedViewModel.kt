@@ -22,9 +22,6 @@ class SharedViewModel(
     val localThemeTitle : LiveData<String>
         get() = _localThemeTitle
 
-    //메인뷰 테마 프래그먼트 숫자
-    var themeNum : MutableLiveData<Int> = MutableLiveData()
-
     //더보기뷰 뒤로 가기
     var moreFragment : MutableLiveData<Boolean> = MutableLiveData(false)
 
