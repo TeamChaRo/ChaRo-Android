@@ -92,6 +92,7 @@ object BindingAdapter {
         } else {
             Glide.with(imageView.context)
                 .load(imageUrl)
+                .error(R.drawable.ic_profile)
                 .circleCrop()
                 .into(imageView)
         }
