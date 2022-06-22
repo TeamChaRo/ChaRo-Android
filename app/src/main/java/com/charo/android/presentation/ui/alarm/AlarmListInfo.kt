@@ -1,5 +1,6 @@
 package com.charo.android.presentation.ui.alarm
 
+// 확인요망
 data class AlarmListInfo(
     val pushId : Int,
     val pushCode : Int,
