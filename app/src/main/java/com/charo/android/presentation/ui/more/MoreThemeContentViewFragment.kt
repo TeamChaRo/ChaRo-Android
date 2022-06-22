@@ -25,11 +25,11 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     var link = DataToMoreThemeLike()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSpinner()
         clickSpinner()
+
 
     }
 
@@ -40,7 +40,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         //click
         binding.spinnerMoreTheme.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
-                @SuppressLint("NotifyDataSetChanged")
+
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
@@ -60,6 +60,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     }
 
     private fun initMoreThemeView(){
+        Timber.d("데이터 받아오는거 확인 $value")
         moreViewModel.getMoreView(userId, identifier, value)
         moreThemeContentAdapter = MoreThemeContentAdapter(link,userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
@@ -76,6 +77,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     }
 
     private fun initMoreThemeNewView(){
+        Timber.d("데이터 받아오는거 확인 $value")
         moreViewModel.getMoreNewView(userId, identifier, value)
         moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter

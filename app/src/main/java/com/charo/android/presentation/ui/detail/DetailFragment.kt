@@ -204,7 +204,7 @@ class DetailFragment : Fragment() {
 
     private fun createDynamicLink(postId : Int, title : String, imageUrl : String) {
 
-        val link: String = Define().DEEP_LINK + "/" + Define().DYNAMIC_SEGMENT + "?postId=" + postId
+        val link: String = Define().DEEP_LINK + "/" + Define().DTL_SEGMENT + "?postId=" + postId
         Timber.e("createDynamicLink() uriPath: $link")
 
         val uri = Uri.parse(link)

@@ -25,7 +25,7 @@ class SearchViewModel(
 
     val caution = MutableLiveData<String>()
 
-    val userEmail = "and@naver.com"
+
 
 
     private var _search = MutableLiveData<List<SearchDrive>>()

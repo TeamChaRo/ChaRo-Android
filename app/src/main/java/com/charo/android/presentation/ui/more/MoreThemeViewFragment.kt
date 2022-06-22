@@ -133,15 +133,7 @@ class MoreThemeViewFragment :
         }
     }
 
-//    private fun clickBackButton() {
-//        binding.imgBackTheme.setOnClickListener {
-//            SharedInformation.removeThemeNum(requireActivity())
-//            val fragmentManager = activity?.supportFragmentManager
-//            val transaction = fragmentManager?.beginTransaction()
-//            transaction?.replace(R.id.nav_host_fragment_activity_main, HomeFragment())
-//                ?.commit()
-//        }
-//    }
+
 
 
     fun clickTab() {
@@ -164,10 +156,7 @@ class MoreThemeViewFragment :
         })
     }
 
-    override fun onDetach() {
-        super.onDetach()
-//        callback.remove()
-    }
+
 }
 
 
