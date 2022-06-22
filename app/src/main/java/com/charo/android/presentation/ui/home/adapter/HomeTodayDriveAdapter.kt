@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeTodayDriveBinding
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
-import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.domain.model.home.TodayCharoDrive
+import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
@@ -39,14 +38,14 @@ class HomeTodayDriveAdapter(
     ) {
         holder.onBind(todayCharoDrive[position])
         holder.binding.imgHomeTodayDriveHeart.setOnClickListener {
-            if(userId == "@"){
+            if (userId == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
-            }else{
-                if (select){
+            } else {
+                if (select) {
                     it.isSelected = !todayCharoDrive[position].homeTodayDriveHeart
 
-                    select =false
-                }else{
+                    select = false
+                } else {
                     it.isSelected = todayCharoDrive[position].homeTodayDriveHeart
                     select = true
                 }
@@ -59,7 +58,7 @@ class HomeTodayDriveAdapter(
         holder.binding.root.setOnClickListener() {
             val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
             intent.apply {
-                putExtra("destination","detail")
+                putExtra("destination", "detail")
                 putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)
             }
             ContextCompat.startActivity(holder.itemView.context, intent, null)

@@ -7,17 +7,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeNightDriveBinding
 import com.charo.android.domain.model.home.CustomThemeDrive
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
-class HomeCustomThemeAdapter(val userId: String,
-                             var links: HomeFragment.DataToHomeLike) :
+class HomeCustomThemeAdapter(
+    val userId: String,
+    var links: HomeFragment.DataToHomeLike
+) :
     RecyclerView.Adapter<HomeCustomThemeAdapter.HomeNightDriveViewHolder>() {
     private val _customThemeDrive = mutableListOf<CustomThemeDrive>()
     private var customThemeDrive: List<CustomThemeDrive> = _customThemeDrive
-    var postId : Int = 0
+    var postId: Int = 0
     var select = true
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,15 +37,15 @@ class HomeCustomThemeAdapter(val userId: String,
         position: Int
     ) {
         holder.onBind(customThemeDrive[position])
-        holder.binding.imgHomeNightDriveHeart.setOnClickListener{
-            if(userId == "@"){
+        holder.binding.imgHomeNightDriveHeart.setOnClickListener {
+            if (userId == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
-            }else{
+            } else {
                 postId = customThemeDrive[position].homeNightDrivePostId
-                if(select){
+                if (select) {
                     it.isSelected = !customThemeDrive[position].homeNightDriveHeart
                     select = false
-                }else{
+                } else {
                     it.isSelected = customThemeDrive[position].homeNightDriveHeart
                     select = true
                 }
@@ -56,7 +57,7 @@ class HomeCustomThemeAdapter(val userId: String,
             val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
             intent.apply {
                 putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
-                putExtra("destination","detail")
+                putExtra("destination", "detail")
             }
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
@@ -77,7 +78,8 @@ class HomeCustomThemeAdapter(val userId: String,
         }
 
     }
-    fun setCustomThemeDrive(customThemeDrive : List<CustomThemeDrive>){
+
+    fun setCustomThemeDrive(customThemeDrive: List<CustomThemeDrive>) {
         this.customThemeDrive = customThemeDrive
         notifyDataSetChanged()
     }
