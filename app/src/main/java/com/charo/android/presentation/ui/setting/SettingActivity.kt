@@ -6,15 +6,10 @@ import android.view.MenuItem
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingBinding
 import com.charo.android.presentation.base.BaseActivity
-import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.util.changeFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_setting) {
-
-    private val settingViewModel: SettingViewModel by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initToolbar()
@@ -22,7 +17,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         changeFragment(R.id.fragment_container_setting, SettingMainFragment())
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         val toolbar = binding.toolbarSetting
         setSupportActionBar(toolbar)
 
@@ -33,9 +28,10 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
-                val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_setting)
+                val currentFragment =
+                    supportFragmentManager.findFragmentById(R.id.fragment_container_setting)
                 if (currentFragment is SettingMainFragment) {
                     onBackPressed()
                 } else {
