@@ -20,6 +20,7 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
 import com.charo.android.presentation.util.KeyboardVisibilityUtils
 import com.charo.android.presentation.util.SharedInformation
+import com.charo.android.presentation.util.dpToPx
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 import java.util.regex.Pattern
@@ -200,6 +201,7 @@ class SignUpProfileFragment :
     private fun keyBoardChange(){
         keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
             onShowKeyboard = {keyBoardHeight ->
+                scrollUpToMyWantedPosition()
                 binding.textSignUpNicknameNext.visibility = View.GONE
                 binding.textSignUpNicknameNextFocus.visibility = View.VISIBLE
 
@@ -208,9 +210,16 @@ class SignUpProfileFragment :
                 binding.textSignUpNicknameNext.visibility = View.VISIBLE
                 binding.textSignUpNicknameNextFocus.visibility = View.GONE
             })
-
-
     }
+
+    //키보드 스크롤
+    private fun scrollUpToMyWantedPosition() =
+        with(binding.nsSignUpProfile) {
+            postDelayed({
+                smoothScrollBy(0, binding.textInputNickname.y.toInt() + 38)
+                binding.textInputNickname.setPadding(0,0,0,38.dpToPx)
+            }, 200)
+        }
     override fun onPause() {
         super.onPause()
         keyboardVisibilityUtils.detachKeyboardListeners()
