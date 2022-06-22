@@ -71,6 +71,7 @@
             tools:text="차에서의\n오늘이 최고가 될 수 있게\n당신의 드라이브 메이트"
             android:lineSpacingExtra="1sp"
             android:includeFontPadding="false"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintBottom_toBottomOf="@+id/img_viewpager"
             app:layout_constraintStart_toStartOf="@+id/img_viewpager"
             app:layout_constraintTop_toTopOf="@+id/img_viewpager"
@@ -85,7 +86,7 @@
             app:layout_constraintStart_toEndOf="@id/text_viewpager_title"
             app:layout_constraintBottom_toBottomOf="@id/text_viewpager_title"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="invisible"/>
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/img_viewpager_line"

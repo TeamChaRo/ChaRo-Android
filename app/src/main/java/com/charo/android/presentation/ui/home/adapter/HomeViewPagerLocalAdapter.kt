@@ -86,11 +86,11 @@ class HomeViewPagerLocalAdapter() :
                 binding.textViewpagerSubTitleImg.setImageResource(banner.homeViewPagerSubTitleImg)
             }
 
-            if (banner.charoImgVisible) {
+            /*if (banner.charoImgVisible) {
                 binding.imgViewpagerCharo.visibility = View.VISIBLE
             } else {
                 binding.imgViewpagerCharo.visibility = View.INVISIBLE
-            }
+            }*/
             binding.textViewpagerTitle.textSize = banner.titleFontSize
             binding.banner = banner
             binding.executePendingBindings()
