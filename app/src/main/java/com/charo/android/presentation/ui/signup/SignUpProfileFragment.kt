@@ -217,7 +217,7 @@ class SignUpProfileFragment :
         with(binding.nsSignUpProfile) {
             postDelayed({
                 smoothScrollBy(0, binding.textInputNickname.y.toInt() + 38)
-                binding.textInputNickname.setPadding(0,0,0,38.dpToPx)
+                binding.textInputNickname.setPadding(0,0,0,50.dpToPx)
             }, 200)
         }
     override fun onPause() {
