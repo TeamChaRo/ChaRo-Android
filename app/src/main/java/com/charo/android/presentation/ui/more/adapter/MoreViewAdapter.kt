@@ -8,10 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemCharoLoadingBinding
 import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
-import com.charo.android.presentation.ui.detailpost.DetailPostActivity
 import com.charo.android.presentation.ui.more.MoreViewFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
-import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import timber.log.Timber
 
 class MoreViewAdapter(
@@ -19,7 +17,7 @@ class MoreViewAdapter(
     var links: MoreViewFragment.DataToMoreLike,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var moreData : MutableList<MoreDrive> = mutableListOf()
+    var moreData: MutableList<MoreDrive> = mutableListOf()
 
     var postId: Int = 0
     var select = true
@@ -34,7 +32,7 @@ class MoreViewAdapter(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return when(viewType){
+        return when (viewType) {
             VIEW_TYPE -> {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemMoreViewBinding.inflate(layoutInflater, parent, false)
@@ -58,7 +56,7 @@ class MoreViewAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder is MoreViewViewHolder){
+        if (holder is MoreViewViewHolder) {
             holder.onBind(moreData[position])
             holder.binding.imgMoreViewHeart.setOnClickListener {
                 postId = moreData[position].morePostId
@@ -109,7 +107,7 @@ class MoreViewAdapter(
 
     }
 
-    fun removeHomeTrendDrive(){
+    fun removeHomeTrendDrive() {
         Timber.d("moreDataRemove 삭제되는 중")
         this.moreData.clear()
         notifyDataSetChanged()
@@ -117,14 +115,13 @@ class MoreViewAdapter(
     }
 
 
-
     fun addLoading() {
-       moreData.add(MoreDrive("","",false,"",0,"","","","",""))
+        moreData.add(MoreDrive("", "", false, "", 0, "", "", "", "", ""))
         this.notifyItemRangeInserted(moreData.size, 1)
     }
 
     fun removeLoading() {
-        if(moreData.last() == MoreDrive("","",false,"",0,"","","","","")) {
+        if (moreData.last() == MoreDrive("", "", false, "", 0, "", "", "", "", "")) {
             moreData.removeAt(moreData.lastIndex)
         }
     }
