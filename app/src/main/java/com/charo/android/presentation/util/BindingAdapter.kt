@@ -68,6 +68,7 @@ object BindingAdapter {
             .into(imageView)
     }
 
+    // 확인요망
     @JvmStatic
     @BindingAdapter("profileBind")
     fun setProfileImage(imageView: ImageView, imageUri: Uri) {
@@ -114,6 +115,7 @@ object BindingAdapter {
             .into(imageView)
     }
 
+    // 확인요망
     @JvmStatic
     @BindingAdapter("chipBind")
     fun setChip(chip: Chip, text: String?) {
