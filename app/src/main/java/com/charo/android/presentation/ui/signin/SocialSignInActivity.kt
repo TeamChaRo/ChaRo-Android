@@ -71,6 +71,7 @@ class SocialSignInActivity() :
 
     //kakao
     private fun initKakaoLogin() {
+        binding.imgSocialGoogleMark.bringToFront()
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 Timber.e("kakao 로그인 실패 $error")
