@@ -6,6 +6,7 @@
     <data>
 
     </data>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/ns_sign_up_email"
         android:layout_width="match_parent"
@@ -13,36 +14,36 @@
         android:background="@color/white"
         android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_email_sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.ui.signup.SignUpEmailFragment">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_email_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".presentation.ui.signup.SignUpEmailFragment">
 
-        <ImageView
-            android:id="@+id/img_sign_up_road"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sign_up_road_android_1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/img_sign_up_road"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/sign_up_road_android_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:paddingHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road"
-                android:focusable="true"
-                android:focusableInTouchMode="true">
+                app:layout_constraintTop_toBottomOf="@+id/img_sign_up_road">
 
                 <TextView
                     android:id="@+id/tv_email_id"
@@ -63,12 +64,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="3sp"
                     android:text="@string/email_answer"
                     android:textColor="@color/gray4_sub_889098"
                     android:textSize="11sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     app:layout_constraintBottom_toTopOf="@id/text_input_sign_up"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_email_id"
@@ -80,6 +81,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
                     app:errorEnabled="true"
                     app:errorIconDrawable="@null"
                     app:helperTextTextColor="@color/blue_main_0f6fff"
@@ -93,16 +98,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:fontFamily="@font/noto_sans_cjkkr_regular"
-                        app:fontFamily="@font/noto_sans_cjkkr_regular"
                         android:hint="@string/email_hint"
+                        android:imeOptions="actionGo"
                         android:includeFontPadding="false"
+                        android:lines="1"
                         android:maxLines="1"
                         android:padding="12dp"
-                        android:textSize="13sp"
-                        android:imeOptions="actionGo"
                         android:singleLine="true"
-                        android:lines="1"
-                        />
+                        android:textSize="13sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_regular" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,13 +116,12 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
+                    android:imeOptions="actionGo"
+                    android:lines="1"
+                    android:singleLine="true"
                     android:src="@drawable/ic_map_search_close"
                     app:layout_constraintEnd_toEndOf="@+id/text_input_sign_up"
-                    app:layout_constraintTop_toTopOf="@+id/text_input_sign_up"
-                    android:imeOptions="actionGo"
-                    android:singleLine="true"
-                    android:lines="1"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/text_input_sign_up" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,10 +140,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/noto_sans_cjkkr_bold"
-                    app:fontFamily="@font/noto_sans_cjkkr_bold"
                     android:includeFontPadding="false"
                     android:text="@string/email_number"
                     android:textSize="16sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,11 +153,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="@font/noto_sans_cjkkr_regular"
-                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="@string/email_number_input"
                     android:textColor="@color/gray4_sub_889098"
                     android:textSize="11sp"
+                    app:fontFamily="@font/noto_sans_cjkkr_regular"
                     app:layout_constraintStart_toStartOf="@+id/tv_email_number"
                     app:layout_constraintTop_toBottomOf="@+id/tv_email_number" />
 
@@ -179,6 +182,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
+                    app:boxCornerRadiusBottomEnd="12dp"
+                    app:boxCornerRadiusBottomStart="12dp"
+                    app:boxCornerRadiusTopEnd="12dp"
+                    app:boxCornerRadiusTopStart="12dp"
                     app:errorEnabled="true"
                     app:errorIconDrawable="@null"
                     app:helperTextTextColor="@color/blue_main_0f6fff"
@@ -192,13 +199,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:fontFamily="@font/noto_sans_cjkkr_regular"
-                        app:fontFamily="@font/noto_sans_cjkkr_regular"
                         android:hint="@string/auth_num_hint"
                         android:includeFontPadding="false"
                         android:maxLines="1"
-                        android:singleLine="true"
                         android:padding="12dp"
-                        android:textSize="13sp" />
+                        android:singleLine="true"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/noto_sans_cjkkr_regular" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -224,16 +231,16 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="27dp"
-                android:enabled="false"
+                android:background="@drawable/selector_btn_next_blue_white"
                 android:clickable="false"
+                android:enabled="false"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
-                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/next"
-                android:textSize="16sp"
                 android:textColor="@drawable/selector_btn_text_color"
-                android:background="@drawable/selector_btn_next_blue_white"
+                android:textSize="16sp"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -242,20 +249,20 @@
                 android:id="@+id/text_sign_up_next_focus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selector_btn_rec_blue_white"
                 android:clickable="false"
                 android:enabled="false"
                 android:fontFamily="@font/noto_sans_cjkkr_medium"
-                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="@string/next"
-                android:background="@drawable/selector_btn_rec_blue_white"
                 android:textColor="@drawable/selector_btn_text_color"
                 android:textSize="16sp"
                 android:visibility="gone"
+                app:fontFamily="@font/noto_sans_cjkkr_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
