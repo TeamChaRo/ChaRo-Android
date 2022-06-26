@@ -16,124 +16,134 @@
             android:id="@+id/text_social_look"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/look_at"
-            android:textSize="14sp"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:includeFontPadding="false"
-            android:textColor="@color/blue_main_0f6fff"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="21dp"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/look_at"
+            android:textColor="@color/blue_main_0f6fff"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="21dp"
-            android:layout_marginTop="58dp"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_social_drive_mate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drive_mate"
-            android:textSize="13sp"
             android:fontFamily="@font/noto_sans_cjkkr_bold"
-            app:fontFamily="@font/noto_sans_cjkkr_bold"
             android:includeFontPadding="false"
+            android:text="@string/drive_mate"
             android:textColor="@color/blue_main_0f6fff"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="13sp"
+            app:fontFamily="@font/noto_sans_cjkkr_bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.3"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
 
         <ImageView
             android:id="@+id/img_social_charo_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
-            app:layout_constraintTop_toBottomOf="@+id/text_social_drive_mate"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/text_social_drive_mate" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/img_social_google"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:background="@drawable/google_signin_shape"
-            android:drawableStart="@drawable/google_logo"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
             android:scaleType="fitXY"
             android:text="@string/google_sign_in"
+            android:textColor="@color/black"
             android:textSize="17sp"
-            android:fontFamily="@font/roboto_medium"
             app:fontFamily="@font/roboto_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
             app:layout_constraintBottom_toTopOf="@+id/img_social_kakao"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:paddingStart="7dp"
-            android:layout_marginHorizontal="20dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_charo_logo"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <ImageView
+            android:id="@+id/img_social_google_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/google_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/img_social_google"
+            app:layout_constraintStart_toStartOf="@+id/img_social_google"
+            app:layout_constraintTop_toTopOf="@+id/img_social_google" />
 
 
         <TextView
             android:id="@+id/img_social_kakao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_kakao_yellow"
-            android:text="@string/kakao_login"
-            android:gravity="center"
-            android:textSize="17sp"
-            android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_google"
-            app:layout_constraintBottom_toTopOf="@+id/text_social_email_login"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rectangle_kakao_yellow"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:gravity="center"
+            android:text="@string/kakao_login"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_social_email_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_google" />
 
 
         <ImageView
             android:id="@+id/img_social_kakao_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
             android:background="@drawable/kakao_logo"
-            app:layout_constraintTop_toTopOf="@+id/img_social_kakao"
-            app:layout_constraintStart_toStartOf="@+id/img_social_kakao"
             app:layout_constraintBottom_toBottomOf="@+id/img_social_kakao"
-            android:layout_marginStart="6dp"/>
+            app:layout_constraintStart_toStartOf="@+id/img_social_kakao"
+            app:layout_constraintTop_toTopOf="@+id/img_social_kakao" />
 
         <TextView
             android:id="@+id/text_social_email_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email_login"
+            android:layout_marginTop="34dp"
             android:fontFamily="@font/noto_sans_cjkkr_medium"
-            android:textSize="14sp"
             android:includeFontPadding="false"
+            android:text="@string/email_login"
             android:textColor="@color/gray3_sub_acb5bd"
-            app:layout_constraintTop_toBottomOf="@+id/img_social_kakao"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/text_social_email_sign_up"
             app:layout_constraintHorizontal_chainStyle="packed"
-            android:layout_marginTop="34dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_social_kakao" />
 
         <TextView
             android:id="@+id/text_social_email_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email_sign_up"
+            android:layout_marginStart="25dp"
             android:includeFontPadding="false"
-            app:layout_constraintTop_toTopOf="@+id/text_social_email_login"
-            app:layout_constraintStart_toEndOf="@+id/text_social_email_login"
+            android:fontFamily="@font/noto_sans_cjkkr_medium"
+            android:textColor="@color/gray3_sub_acb5bd"
+            android:text="@string/email_sign_up"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="25dp"/>
-
-
-
+            app:layout_constraintStart_toEndOf="@+id/text_social_email_login"
+            app:layout_constraintTop_toTopOf="@+id/text_social_email_login" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

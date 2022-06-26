@@ -27,9 +27,10 @@ class SignInActivity : AppCompatActivity() {
         emailSignToast()
         login()
         goPasswordSearch()
-        binding.imgSigninIdClear.setOnClickListener() { clearEmail() }
-        binding.imgSigninPwClear.setOnClickListener() { clearPassword() }
+        binding.imgSigninIdClear.setOnClickListener { clearEmail() }
+        binding.imgSigninPwClear.setOnClickListener { clearPassword() }
         setContentView(binding.root)
+        clickBack()
     }
 
     //로그인
@@ -68,6 +69,12 @@ class SignInActivity : AppCompatActivity() {
 
     private fun clearPassword() {
         binding.etSigninPw.text.clear()
+    }
+    //뒤로가기
+    private fun clickBack(){
+        binding.imgSignInBack.setOnClickListener {
+            finish()
+        }
     }
 
     //로그인 토스트 메세지

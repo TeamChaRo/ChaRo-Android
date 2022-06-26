@@ -71,6 +71,7 @@ class SocialSignInActivity() :
 
     //kakao
     private fun initKakaoLogin() {
+        binding.imgSocialGoogleMark.bringToFront()
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 Timber.e("kakao 로그인 실패 $error")
@@ -107,7 +108,6 @@ class SocialSignInActivity() :
                 Timber.e("kakao 사용자 정보 요청 실패 $error")
             } else if (user != null) {
                 if (user.kakaoAccount?.email != null) {
-                    SharedInformation.setEmail(this, user.kakaoAccount?.email)
                     Timber.i(
                         "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}"
                     )
@@ -130,6 +130,7 @@ class SocialSignInActivity() :
             socialSignInViewModel.kakaoSuccess.observe(this, Observer {
                 if (socialSignInViewModel.socialStatus.value != 404) {
                     SharedInformation.setLogout(this, "LogIn")
+                    SharedInformation.setEmail(this, it?.email.toString())
                     Toast.makeText(this, "카카오 로그인 성공", Toast.LENGTH_SHORT).show()
                     SharedInformation.setNickName(this, it?.nickname.toString())
                     SharedInformation.saveSocialId(this@SocialSignInActivity, "1")

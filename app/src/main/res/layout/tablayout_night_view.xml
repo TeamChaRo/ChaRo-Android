@@ -28,14 +28,14 @@
             android:includeFontPadding="false"
             android:lineSpacingExtra="5sp"
             android:text="@string/theme_night_view"
-            android:textColor="@color/blue_main_0f6fff"
+            android:textColor="@drawable/selector_text_color"
             android:textSize="13sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/img_tab_one"
             app:layout_constraintStart_toStartOf="@+id/img_tab_one"
             app:layout_constraintTop_toBottomOf="@+id/img_tab_one" />
-        android:layout_height="wrap_content">
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
