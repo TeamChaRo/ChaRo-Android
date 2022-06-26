@@ -10,20 +10,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/search_background"
-        >
+        android:background="@drawable/search_background">
 
         <ImageButton
             android:id="@+id/img_search_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/image"
             android:src="@drawable/ic_close_white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -55,13 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteY="126dp"
             app:layout_constraintVertical_bias="0.55"
-            >
+            tools:layout_editor_absoluteY="126dp">
 
             <TextView
                 android:id="@+id/text_user_id"
@@ -69,20 +67,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
+                android:includeFontPadding="false"
                 android:text="@string/search_user_id"
                 android:textColor="@color/white"
-                android:includeFontPadding="false"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_search_custom"
                 style="@style/HeaderH4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:text="@string/search_custom"
                 android:textColor="@color/white"
-                android:includeFontPadding="false"
                 app:layout_constraintStart_toStartOf="@id/text_user_id"
                 app:layout_constraintTop_toBottomOf="@+id/text_user_id" />
 
@@ -91,52 +89,68 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
-                android:paddingVertical="23dp"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/ic_background_white"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="23dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_search_custom"
-                >
+                app:layout_constraintTop_toBottomOf="@id/text_search_custom">
+
                 <TextView
                     android:id="@+id/text_today_drive"
                     style="@style/HeaderH2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:includeFontPadding="false"
                     android:text="@string/today_drive"
                     android:textColor="@color/gray5_sub_495057"
                     app:layout_constraintStart_toStartOf="@+id/ll_search_area"
                     app:layout_constraintTop_toTopOf="@+id/img_search_background" />
 
+                <TextView
+                    android:id="@+id/text_today_drive_sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:fontFamily="@font/noto_sans_cjkkr_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/search_sub"
+                    android:textColor="@color/gray3_sub_acb5bd"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/ll_search_area"
+                    app:layout_constraintStart_toStartOf="@id/ll_search_area"
+                    app:layout_constraintTop_toBottomOf="@+id/text_today_drive" />
+
                 <LinearLayout
                     android:id="@+id/ll_search_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_today_drive"
                     android:layout_marginStart="-20dp"
-                    >
+                    android:layout_marginTop="17dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_today_drive_sub">
+
                     <TextView
                         android:id="@+id/btn_search_area_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ui_search_btn_unselect_android"
+                        android:gravity="center"
                         android:text="@string/area_province"
-                        android:textColor="@drawable/selector_text_color"
-                        android:gravity="center"/>
+                        android:textColor="@drawable/selector_text_color" />
 
                     <TextView
                         android:id="@+id/btn_search_area_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ui_search_btn_unselect_android"
                         android:layout_marginStart="-15dp"
+                        android:background="@drawable/ui_search_btn_unselect_android"
+                        android:gravity="center"
                         android:text="@string/area_region"
-                        android:textColor="@drawable/selector_text_color"
-                        android:gravity="center"/>
+                        android:textColor="@drawable/selector_text_color" />
 
                     <TextView
                         android:id="@+id/text_search_1"
@@ -144,27 +158,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/search_text_1"
-                        android:textColor="@color/gray5_sub_495057"
-                        android:textAlignment="viewStart"/>
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/gray5_sub_495057" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_search_theme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_search_area"
-                    app:layout_constraintStart_toStartOf="@+id/ll_search_area"
                     android:layout_marginTop="-7dp"
-                    >
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/ll_search_area"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_search_area">
+
                     <TextView
                         android:id="@+id/btn_search_theme"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ui_search_btn_unselect_android"
+                        android:gravity="center"
                         android:text="@string/main_charo_theme"
-                        android:textColor="@drawable/selector_text_color"
-                        android:gravity="center"/>
+                        android:textColor="@drawable/selector_text_color" />
 
                     <TextView
                         android:id="@+id/text_search_2"
@@ -172,27 +186,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/search_text_2"
-                        android:textColor="@color/gray5_sub_495057"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/gray5_sub_495057" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_search_caution"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_search_theme"
-                    app:layout_constraintStart_toStartOf="@+id/ll_search_theme"
                     android:layout_marginTop="-7dp"
-                    >
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@+id/ll_search_theme"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_search_theme">
+
                     <TextView
                         android:id="@+id/btn_search_caution"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/ui_search_btn_unselect_android"
+                        android:gravity="center"
                         android:text="@string/caution"
-                        android:textColor="@drawable/selector_text_color"
-                        android:gravity="center"/>
+                        android:textColor="@drawable/selector_text_color" />
 
                     <TextView
                         android:id="@+id/text_search_3"
@@ -200,8 +214,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/search_text_3"
-                        android:textColor="@color/gray5_sub_495057"
-                        android:textAlignment="viewStart"/>
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/gray5_sub_495057" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -212,14 +226,16 @@
             style="@style/SectionH1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/search_start"
-            android:gravity="center"
-            android:textColor="@drawable/selector_btn_text_color"
-            android:includeFontPadding="false"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/selector_btn_next_blue_white"
-            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/search_start"
+            android:textColor="@drawable/selector_btn_text_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_search"  />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
