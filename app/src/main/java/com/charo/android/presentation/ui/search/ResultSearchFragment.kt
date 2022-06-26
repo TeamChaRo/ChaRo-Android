@@ -119,7 +119,6 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
                 binding.srEmptyList.visibility = View.GONE
             }
             resultSearchAdapter.setSearchDrive(it)
-            binding.textResultSearchCount.text = String.format(getString(R.string.main_charo_more_view_count), it.size)
         }
     }
 
