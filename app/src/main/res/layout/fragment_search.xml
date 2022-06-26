@@ -226,15 +226,16 @@
             style="@style/SectionH1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/selector_btn_next_blue_white"
+            android:background="@drawable/rectangle_white_radius_12_mypage"
             android:gravity="center"
+            android:paddingVertical="13dp"
             android:includeFontPadding="false"
+            android:layout_marginHorizontal="5dp"
+            android:alpha="0.9"
             android:text="@string/search_start"
-            android:textColor="@drawable/selector_btn_text_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/blue_main_0f6fff"
+            app:layout_constraintEnd_toEndOf="@+id/cl_search"
+            app:layout_constraintStart_toStartOf="@+id/cl_search"
             app:layout_constraintTop_toBottomOf="@+id/cl_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
