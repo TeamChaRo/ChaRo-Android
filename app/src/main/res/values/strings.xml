@@ -32,7 +32,7 @@
     <string name="search">드라이브 맞춤 검색</string>
     <string name="search_user_id">배희진희진님의</string>
     <string name="search_custom">맞춤 코스를 찾아 드릴게요</string>
-    <string name="search_start">찾아보기</string>
+    <string name="search_start">검색하기</string>
     <string name="et_title">제목을 입력해주세요</string>
     <string name="how_your_drive">이번에 다녀오신 드라이브는 어떠셨나요?\n사진을 첨부해 기록으로 남겨보세요 (0/6)</string>
     <string name="which_location">드라이브 코스 지역</string>
@@ -228,7 +228,7 @@
     <string name="word_no">아니오</string>
     <string name="word_yes">예</string>
     <string name="noti_complete_write">게시물 작성을 완료하시겠습니까?</string>
-
+    <string name="search_sub">3가지 요소 중 하나 이상만 입력해도 검색할 수 있어요!</string>
     <!-- KaKao -->
     <string name="kakao_login">카카오 로그인</string>
     <string name="detail_menu_edit">수정하기</string>
