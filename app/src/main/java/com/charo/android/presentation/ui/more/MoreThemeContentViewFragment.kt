@@ -17,7 +17,8 @@ import timber.log.Timber
 
 
 class MoreThemeContentViewFragment(val userId: String, val identifier: String, val value: String) :
-    BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view) , SwipeRefreshLayout.OnRefreshListener {
+    BaseFragment<FragmentMoreThemeContentViewBinding>(R.layout.fragment_more_theme_content_view),
+    SwipeRefreshLayout.OnRefreshListener {
     private val moreViewModel: MoreViewViewModel by viewModel()
     private lateinit var moreThemeContentAdapter: MoreThemeContentAdapter
     var link = DataToMoreThemeLike()
@@ -61,7 +62,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
             }
     }
 
-    private fun initMoreThemeView(){
+    private fun initMoreThemeView() {
         moreViewModel.getMoreView(userId, identifier, value)
         moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
