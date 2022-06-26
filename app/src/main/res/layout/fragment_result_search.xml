@@ -57,8 +57,8 @@
                 android:id="@+id/line_result_search_chip"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray2_sub_dde2e5"
                 android:layout_marginTop="12dp"
+                android:background="@color/gray2_sub_dde2e5"
                 app:layout_constraintTop_toBottomOf="@id/cl_result_search_chip" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,7 +81,7 @@
                     android:textColor="@color/blue_main_0f6fff"
                     app:chipBackgroundColor="@color/white"
                     app:chipCornerRadius="20dp"
-                    app:chipStrokeColor="@color/blue_main_0f6fff"
+                    app:chipStrokeColor="@color/blue_sign_up_9dc3fd"
                     app:chipStrokeWidth="1dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -92,11 +92,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:background="@drawable/rectangle_border_blue_radius_20"
+                    android:background="@drawable/rectangle_border_9dc3fd_radius_20"
                     android:textColor="@color/blue_main_0f6fff"
                     app:chipBackgroundColor="@color/white"
                     app:chipCornerRadius="20dp"
-                    app:chipStrokeColor="@color/blue_main_0f6fff"
+                    app:chipStrokeColor="@color/blue_sign_up_9dc3fd"
                     app:chipStrokeWidth="1dp"
                     app:layout_constraintStart_toEndOf="@id/chip_result_search_1"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -107,11 +107,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:background="@drawable/rectangle_border_blue_radius_20"
+                    android:background="@drawable/rectangle_border_9dc3fd_radius_20"
                     android:textColor="@color/blue_main_0f6fff"
                     app:chipBackgroundColor="@color/white"
                     app:chipCornerRadius="20dp"
-                    app:chipStrokeColor="@color/blue_main_0f6fff"
+                    app:chipStrokeColor="@color/blue_sign_up_9dc3fd"
                     app:chipStrokeWidth="1dp"
                     app:layout_constraintStart_toEndOf="@id/chip_result_search_2"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:background="@drawable/rectangle_border_blue_radius_20"
+                    android:background="@drawable/rectangle_border_9dc3fd_radius_20"
                     android:textColor="@color/gray4_sub_889098"
                     app:chipBackgroundColor="@color/white"
                     app:chipCornerRadius="20dp"
@@ -153,9 +153,9 @@
                         android:id="@+id/spinner_result_search"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/shape_spinner"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginTop="7dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/shape_spinner"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
