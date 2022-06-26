@@ -48,8 +48,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 //        clickBackButton(userId)
         clickSpinner()
         removeData()
-
-        emptyData()
     }
 
     private fun initToolbar() {
@@ -68,9 +66,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewModel.getMoreViewLastId(userEmail, "0", "")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.drive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-            }
 
         } else if (sharedViewModel.num.value == 2) {
             moreViewModel.getMoreView(userEmail, "2", "busan")
@@ -79,9 +74,6 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.textToolbarTitle.text = sharedViewModel.localThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.drive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-            }
         } else {
             moreViewModel.getMoreView(userEmail, "3", "")
             moreViewModel.getMoreViewLastId(userEmail, "3", "")
@@ -89,9 +81,11 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.textToolbarTitle.text = sharedViewModel.customThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.drive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-            }
+        }
+
+        moreViewModel.drive.observe(viewLifecycleOwner) {
+            moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
+            emptyData(it)
         }
     }
 
@@ -103,28 +97,22 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             moreViewModel.getMoreNewViewLastId(userEmail, "0", "")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.newDrive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-            }
 
         } else if (sharedViewModel.num.value == 2) {
             moreViewModel.getMoreNewView(userEmail, "2", "busan")
             moreViewModel.getMoreNewViewLastId(userEmail, "2", "busan")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.newDrive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-
-            }
         } else {
             moreViewModel.getMoreNewView(userEmail, "3", "")
             moreViewModel.getMoreNewViewLastId(userEmail, "3", "")
             moreViewAdapter = MoreViewAdapter(userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
-            moreViewModel.newDrive.observe(viewLifecycleOwner) {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-            }
+        }
 
+        moreViewModel.newDrive.observe(viewLifecycleOwner) {
+            moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
+            emptyData(it)
         }
     }
 
@@ -250,39 +238,20 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         }
     }
 
-    private fun emptyData() {
-        moreViewModel.drive.observe(viewLifecycleOwner) {
-            binding.srMoreView.isRefreshing = false
-            binding.srEmptyList.isRefreshing = false
+    private fun emptyData(it : List<MoreDrive>) {
+        binding.srMoreView.isRefreshing = false
+        binding.srEmptyList.isRefreshing = false
 
-            if(it == null || it.isEmpty()){
-                binding.srMoreView.visibility = View.GONE
-                binding.srEmptyList.visibility = View.VISIBLE
-                binding.clMoreList.visibility = View.GONE
-                binding.clEmptyList.visibility = View.VISIBLE
-            } else {
-                binding.srMoreView.visibility = View.VISIBLE
-                binding.srEmptyList.visibility = View.GONE
-                binding.clMoreList.visibility = View.VISIBLE
-                binding.clEmptyList.visibility = View.GONE
-            }
-        }
-
-        moreViewModel.newDrive.observe(viewLifecycleOwner) {
-            binding.srMoreView.isRefreshing = false
-            binding.srEmptyList.isRefreshing = false
-
-            if(it == null || it.isEmpty()){
-                binding.srMoreView.visibility = View.GONE
-                binding.srEmptyList.visibility = View.VISIBLE
-                binding.clMoreList.visibility = View.GONE
-                binding.clEmptyList.visibility = View.VISIBLE
-            } else {
-                binding.srMoreView.visibility = View.VISIBLE
-                binding.srEmptyList.visibility = View.GONE
-                binding.clMoreList.visibility = View.VISIBLE
-                binding.clEmptyList.visibility = View.GONE
-            }
+        if(moreViewAdapter.itemCount == 0 && it.isEmpty()){
+            binding.srMoreView.visibility = View.GONE
+            binding.srEmptyList.visibility = View.VISIBLE
+            binding.clMoreList.visibility = View.GONE
+            binding.clEmptyList.visibility = View.VISIBLE
+        } else {
+            binding.srMoreView.visibility = View.VISIBLE
+            binding.srEmptyList.visibility = View.GONE
+            binding.clMoreList.visibility = View.VISIBLE
+            binding.clEmptyList.visibility = View.GONE
         }
     }
 
