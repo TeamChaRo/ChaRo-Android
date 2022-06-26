@@ -118,11 +118,16 @@ class AlarmActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
                     if(pushList != null){
                         binding.rcvAlarmList.visibility = View.VISIBLE
                         binding.clEmptyList.visibility = View.GONE
+                        binding.srAlarmList.visibility = View.VISIBLE
+                        binding.srEmptyList.visibility = View.GONE
+                        alarmAdapter.itemList.clear()
                         alarmAdapter.itemList.addAll(pushList)
                         alarmAdapter.notifyDataSetChanged()
                     } else {
                         binding.rcvAlarmList.visibility = View.GONE
                         binding.clEmptyList.visibility = View.VISIBLE
+                        binding.srAlarmList.visibility = View.GONE
+                        binding.srEmptyList.visibility = View.VISIBLE
                     }
                 } else {
                     Timber.d("server connect : Alarm error")
