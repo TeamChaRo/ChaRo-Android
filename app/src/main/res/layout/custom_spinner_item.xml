@@ -4,6 +4,7 @@
     android:id="@+id/text_result_search"
     style="@style/HeaderH8"
     android:padding="10dp"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/gray5_sub_495057"/>
+    android:textColor="@color/gray4_sub_889098"/>
