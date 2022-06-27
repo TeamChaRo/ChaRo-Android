@@ -22,8 +22,6 @@
         android:id="@+id/item_img_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="11dp"
         android:src="@drawable/ic_img_delete_36_px_black"
         app:layout_constraintEnd_toEndOf="@+id/item_write_img"
         app:layout_constraintTop_toTopOf="@+id/item_write_img" />

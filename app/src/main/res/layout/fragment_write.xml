@@ -98,19 +98,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:columnCount="3"
+                    android:rowCount="2"
                     android:orientation="horizontal"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="5dp"
-                    android:rowCount="2"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/recyclerview_write_img"
+                    app:layout_constraintBottom_toBottomOf="@+id/recyclerview_write_img"
                     app:layout_constraintTop_toTopOf="@+id/recyclerview_write_img">
 
-                    <ImageView
+                    <LinearLayout
                         android:id="@+id/img_write_add_img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ui_write_img_plus" />
+                        android:layout_gravity="center"
+                        android:paddingHorizontal="10dp"
+                        >
+                        <ImageView
+                            android:id="@+id/img_plus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/icon_plus" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/noto_sans_cjkkr_regular"
+                            android:textStyle="normal"
+                            android:textSize="14sp"
+                            android:textColor="#889098"
+                            android:lineSpacingExtra="8.4sp"
+                            android:layout_gravity="center"
+                            android:text="사진추가" />
+                    </LinearLayout>
                 </GridLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

@@ -615,6 +615,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
         val width = displayMetrics.widthPixels
 
         binding.imgWriteAddImg.layoutParams.width = (width/3.5).toInt()
+        binding.imgWriteAddImg.layoutParams.height = (width/3.5).toInt()
         binding.imgWriteAddImg.requestLayout()
     }
 
