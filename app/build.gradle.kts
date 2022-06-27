@@ -6,6 +6,7 @@ plugins {
     id("kotlin-android")
     id("com.google.gms.google-services")
     id("com.google.android.gms.oss-licenses-plugin")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -92,6 +93,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:29.3.0"))
     implementation("com.google.firebase:firebase-dynamic-links-ktx")
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     kapt(KaptDependencies.hilt)
 

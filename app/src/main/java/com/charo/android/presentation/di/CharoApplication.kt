@@ -3,6 +3,7 @@ package com.charo.android.presentation.di
 import android.app.Application
 import com.charo.android.BuildConfig
 import com.charo.android.hidden.Hidden
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
@@ -27,6 +28,8 @@ class CharoApplication: Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        } else {
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         }
     }
 }

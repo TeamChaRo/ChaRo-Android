@@ -13,8 +13,11 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}")
         classpath(ClassPathDependencies.hilt)
         classpath("com.google.android.gms:oss-licenses-plugin:0.10.4")
-//opensource
+        //opensource
         classpath("com.google.gms:google-services:4.3.10")
+
+        // Add the Crashlytics Gradle plugin
+        classpath ("com.google.firebase:firebase-crashlytics-gradle:2.9.0")
     }
 }
 
