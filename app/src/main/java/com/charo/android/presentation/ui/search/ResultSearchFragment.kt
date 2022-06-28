@@ -75,23 +75,23 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
         if (searchViewModel.province.value == "") {
             binding.chipResultSearch1.visibility = View.GONE
         } else {
-            binding.chipResultSearch1.text = "#${searchViewModel.province.value}"
+            binding.chipResultSearch1.text = "${searchViewModel.province.value}"
         }
         if (searchViewModel.city.value == "") {
             binding.chipResultSearch2.visibility = View.GONE
         } else {
-            binding.chipResultSearch2.text = "#${searchViewModel.city.value}"
+            binding.chipResultSearch2.text = "${searchViewModel.city.value}"
         }
         if (searchViewModel.theme.value == "") {
             binding.chipResultSearch3.visibility = View.GONE
         } else {
-            binding.chipResultSearch3.text = "#${searchViewModel.theme.value}"
+            binding.chipResultSearch3.text = "${searchViewModel.theme.value}"
         }
 
         if (searchViewModel.caution.value == "") {
             binding.chipResultSearch4.visibility = View.GONE
         } else {
-            binding.chipResultSearch4.text = "#${searchViewModel.caution.value}X"
+            binding.chipResultSearch4.text = "${searchViewModel.caution.value}X"
 
         }
     }
@@ -119,7 +119,6 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
                 binding.srEmptyList.visibility = View.GONE
             }
             resultSearchAdapter.setSearchDrive(it)
-            binding.textResultSearchCount.text = String.format(getString(R.string.main_charo_more_view_count), it.size)
         }
     }
 

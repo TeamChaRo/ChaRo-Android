@@ -29,9 +29,6 @@
         tools:replace="android:appComponentFactory">
         <!--        tools:replace="android:allowBackup"-->
         <activity
-            android:name=".SettingOpenSourceActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ui.signin.PasswordSearchActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

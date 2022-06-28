@@ -36,7 +36,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         selectCaution()
         nickName()
         initValue()
-        isActiveSearch(true)
+        isActiveSearch(false)
 
         binding.btnSearchArea1.setOnClickListener { selectProvince(it) }
         binding.btnSearchArea2.setOnClickListener { selectRegion(it) }
@@ -47,21 +47,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.textUserId.text = "${userNickName}님의"
     }
 
+    //검색 활성화
     private fun isActiveSearch(boolean: Boolean) {
         binding.apply {
             if (boolean) {
-                textSearchStart.setBackgroundResource(R.drawable.ic_search_start_blue)
+                textSearchStart.setBackgroundResource(R.drawable.sign_up_next_active)
                 textSearchStart.setTextColor(getColor(requireActivity(), R.color.white))
-                textSearchStart.setPadding(0, 0, 0, 20)
             } else {
-                textSearchStart.setBackgroundResource(R.drawable.ic_search_btn_white)
+                textSearchStart.setBackgroundResource(R.drawable.rectangle_white_radius_12_mypage)
                 textSearchStart.setTextColor(
                     getColor(
                         requireActivity(),
                         R.color.blue_main_0f6fff
                     )
                 )
-                textSearchStart.setPadding(0, 0, 0, 20)
             }
         }
     }
