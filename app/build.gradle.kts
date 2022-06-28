@@ -28,12 +28,26 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isMinifyEnabled = true //프로가드 활성화
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro", "proguard-debug.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+            buildConfigField("String", "BUILD_TYPE", "\"debug\"")
+            buildConfigField("boolean", "DEBUG", "true")
+        }
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true //프로가드 활성화
+            isShrinkResources = true //안 쓰는 리소스 삭제
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+            buildConfigField("String", "BUILD_TYPE", "\"release\"")
+            buildConfigField("boolean", "DEBUG", "false")
         }
     }
     compileOptions {
