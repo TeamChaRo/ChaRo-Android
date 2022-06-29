@@ -54,13 +54,17 @@ class GuestTopFragment : Fragment() {
 
     private fun clickLogin() {
         binding.tvProfileNickname.setOnClickListener {
-            val intent = Intent(requireContext(), SocialSignInActivity::class.java)
+            val intent = Intent(requireContext(), SocialSignInActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
             startActivity(intent)
             requireActivity().finish()
         }
 
         binding.imgLogin.setOnClickListener {
-            val intent = Intent(requireContext(), SocialSignInActivity::class.java)
+            val intent = Intent(requireContext(), SocialSignInActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
             startActivity(intent)
             requireActivity().finish()
         }
