@@ -62,6 +62,7 @@
             android:includeFontPadding="false"
             android:text="@{model.isFollow ? `팔로잉` : `팔로우`}"
             android:textAlignment="center"
+            android:paddingVertical="2dp"
             android:paddingHorizontal="11dp"
             android:textColor="@{model.isFollow ? @color/black_sub_212429 : @color/white}"
             app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
