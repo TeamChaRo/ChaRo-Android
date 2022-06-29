@@ -57,7 +57,6 @@
                 android:id="@+id/tv_post_tag_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="9dp"
                 android:background="@drawable/rectangle_blue_radius_10dp"
                 android:fontFamily="@font/noto_sans_cjkkr_regular"

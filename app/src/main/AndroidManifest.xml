@@ -15,8 +15,8 @@
     <application
         android:name=".presentation.di.CharoApplication"
         android:allowBackup="false"
-        android:fullBackupContent="false"
         android:appComponentFactory="@string/app_name"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher_charo"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -65,12 +65,6 @@
             android:exported="true" />
         <activity
             android:name=".presentation.ui.follow.FollowActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.charo.follow.CharoListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.detail.DetailImageActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.setting.SettingServiceTermActivity"
@@ -131,22 +125,6 @@
             android:name=".presentation.ui.onboarding.OnBoardingActivity"
             android:exported="false" />
         <activity android:name=".presentation.ui.search.SearchActivity" />
-        <activity
-            android:name=".presentation.ui.detail.DetailActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.charo.com/detail/{postId}"
-                    android:scheme="http"
-                    tools:ignore="AppLinkUrlError" />
-                <!-- //www.example.com/detail/{postId} //www.example.com/detail?postId=postId -->
-            </intent-filter>
-        </activity>
         <activity android:name=".presentation.ui.signin.SignInActivity" />
         <activity
             android:name=".presentation.ui.main.MainActivity"
