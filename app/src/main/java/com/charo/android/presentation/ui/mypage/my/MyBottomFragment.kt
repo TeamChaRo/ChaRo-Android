@@ -1,19 +1,16 @@
 package com.charo.android.presentation.ui.mypage.my
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.charo.android.R
 import com.charo.android.databinding.FragmentMyBottomBinding
 import com.charo.android.presentation.ui.mypage.adapter.PostViewPagerAdapter
-import com.charo.android.presentation.ui.mypage.postlist.SavedPostFragment
-import com.charo.android.presentation.ui.mypage.postlist.WrittenPostFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
-
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -53,9 +50,10 @@ class MyBottomFragment : Fragment() {
         }
 
         // TabLayout 초기화 및 ViewPager와 연결
-        val tabIconList = arrayListOf(R.drawable.ic_write_active, R.drawable.ic_save_5_active)
+        val tabIconList = arrayListOf(R.drawable.selector_icon_write, R.drawable.selector_icon_save)
         TabLayoutMediator(binding.tabProfile, binding.vpProfile) { tab, position ->
-            tab.setIcon(tabIconList[position])
+            tab.setCustomView(R.layout.layout_custom_tab)
+            tab.view.findViewById<ImageView>(R.id.icon).setBackgroundResource(tabIconList[position])
         }.attach()
     }
 
