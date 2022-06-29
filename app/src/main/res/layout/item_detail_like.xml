@@ -54,14 +54,15 @@
 
         <TextView
             android:id="@+id/tv_detail_like_follow"
-            android:layout_width="56dp"
-            android:layout_height="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@{model.isFollow ? @drawable/shape_detail_like_isfollow_unchecked : @drawable/shape_detail_like_isfollow_checked}"
             android:fontFamily="@font/noto_sans_cjkkr_regular"
             app:fontFamily="@font/noto_sans_cjkkr_regular"
             android:includeFontPadding="false"
             android:text="@{model.isFollow ? `팔로잉` : `팔로우`}"
             android:textAlignment="center"
+            android:paddingHorizontal="11dp"
             android:textColor="@{model.isFollow ? @color/black_sub_212429 : @color/white}"
             app:layout_constraintBottom_toBottomOf="@id/img_detail_like_image_border"
             app:layout_constraintEnd_toEndOf="parent"
