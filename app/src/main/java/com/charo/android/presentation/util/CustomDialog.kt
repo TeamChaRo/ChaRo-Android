@@ -2,12 +2,15 @@ package com.charo.android.presentation.util
 
 import android.app.Dialog
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
-import com.charo.android.R
+import androidx.databinding.DataBindingUtil
 
-import kotlinx.android.synthetic.main.custom_dialog_log_out.*
-import kotlinx.android.synthetic.main.custom_dialog_withdrawal.*
+import com.charo.android.R
+import com.charo.android.databinding.CustomDialogWithdrawalBinding
+import com.charo.android.databinding.DialogDetailDeleteBinding
+
 
 class CustomDialog(context: Context) {
     private val dialog = Dialog(context)
@@ -19,35 +22,47 @@ class CustomDialog(context: Context) {
         onClickedListener = listener
     }
     //로그아웃
-    fun showDialog(@LayoutRes layout : Int){
-        dialog.setContentView(layout)
+    fun showDialog(context : Context,message : String){
+        val binding = DataBindingUtil.inflate<DialogDetailDeleteBinding>(
+            LayoutInflater.from(context),
+            R.layout.dialog_detail_delete,
+            null,
+            false
+        )
+        dialog.setContentView(binding.root)
         dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_right_40_left_40)
         dialog.show()
 
 
-        dialog.text_ok.setOnClickListener {
+        binding.textOk.setOnClickListener {
             onClickedListener.onClicked(1)
             dialog.dismiss()
         }
 
-        dialog.text_no.setOnClickListener {
+        binding.textNo.setOnClickListener {
             dialog.dismiss()
         }
     }
 
-    fun showWithdrawal(@LayoutRes layout : Int){
-        dialog.setContentView(layout)
+    fun showWithdrawal(context : Context){
+        val binding = DataBindingUtil.inflate<CustomDialogWithdrawalBinding>(
+            LayoutInflater.from(context),
+            R.layout.custom_dialog_withdrawal,
+            null,
+            false
+        )
+        dialog.setContentView(binding.root)
         dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_right_40_left_40)
         dialog.show()
 
-        dialog.text_withdrawal_agreement.setOnClickListener {
+        binding.textWithdrawalAgreement.setOnClickListener {
             onClickedListener.onClicked(1)
             dialog.dismiss()
         }
 
-        dialog.text_withdrawal_cancel.setOnClickListener {
+        binding.textWithdrawalAgreement.setOnClickListener {
             dialog.dismiss()
         }
     }

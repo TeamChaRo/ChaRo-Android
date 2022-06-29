@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("kotlin-android")
     id("com.google.gms.google-services")
@@ -45,7 +44,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("release")
+            //signingConfig = signingConfigs.getByName("release")
             buildConfigField("String", "BUILD_TYPE", "\"release\"")
             buildConfigField("boolean", "DEBUG", "false")
         }

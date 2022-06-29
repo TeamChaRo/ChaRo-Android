@@ -199,7 +199,7 @@ class SettingMainFragment :
         binding.textSettingLogout.setOnClickListener {
             val socialKey = SharedInformation.getSocialId(requireActivity())
             Timber.d("socialKey $socialKey")
-            dialog.showDialog(R.layout.custom_dialog_log_out)
+            dialog.showDialog(requireActivity(), getString(R.string.log_out))
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
                     if (num == 1) {
@@ -260,7 +260,7 @@ class SettingMainFragment :
     private fun withdrawal() {
         binding.textSettingUserOut.setOnClickListener {
             val dialog = CustomDialog(requireActivity())
-            dialog.showWithdrawal(R.layout.custom_dialog_withdrawal)
+            dialog.showWithdrawal(requireActivity())
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
                     if (num == 1) {

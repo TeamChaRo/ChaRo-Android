@@ -166,7 +166,7 @@ class WriteShareActivity : AppCompatActivity() {
 
     private fun confirmDelete() {
         val dialog = CustomDialog(this)
-        dialog.showDialog(R.layout.dialog_detail_delete)
+        dialog.showDialog(this, getString(R.string.text_confirm_delete))
         dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
             override fun onClicked(num: Int) {
                 if (num == 1) {
