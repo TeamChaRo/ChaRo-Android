@@ -1,3 +1,8 @@
 package com.charo.android.data.model.request.signin
 
-data class RequestSocialData(val userEmail: String)
+import com.google.gson.annotations.SerializedName
+
+data class RequestSocialData(
+    @SerializedName("userEmail")
+    val userEmail: String
+    )

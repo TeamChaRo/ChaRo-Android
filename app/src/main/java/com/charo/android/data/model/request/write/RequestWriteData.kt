@@ -26,8 +26,11 @@ import com.google.gson.annotations.SerializedName
     val warning: ArrayList<String>
 ) {
     data class Course(
+        @SerializedName("address")
         val address : String,
+        @SerializedName("longitude")
         val longitude : String,
+        @SerializedName("latitude")
         val latitude : String,
     )
 }

@@ -1,3 +1,8 @@
 package com.charo.android.data.model.request.alarm
 
-data class RequestReadPushData(val pushId : Int)
+import com.google.gson.annotations.SerializedName
+
+data class RequestReadPushData(
+    @SerializedName("pushId")
+    val pushId : Int
+    )

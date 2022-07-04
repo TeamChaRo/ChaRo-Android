@@ -1,3 +1,9 @@
 package com.charo.android.data.model.response.signup
 
-data class ResponseEmailCheckData(val success : Boolean, val msg : String)
+import com.google.gson.annotations.SerializedName
+
+data class ResponseEmailCheckData(
+    @SerializedName("success")
+    val success : Boolean,
+    @SerializedName("msg")
+    val msg : String)

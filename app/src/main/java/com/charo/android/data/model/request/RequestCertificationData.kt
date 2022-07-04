@@ -1,3 +1,8 @@
 package com.charo.android.data.model.request
 
-data class RequestCertificationData(val userEmail: String)
+import com.google.gson.annotations.SerializedName
+
+data class RequestCertificationData(
+    @SerializedName("userEmail")
+    val userEmail: String
+    )

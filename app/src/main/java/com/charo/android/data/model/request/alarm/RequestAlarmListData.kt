@@ -1,6 +1,9 @@
 package com.charo.android.data.model.request.alarm
 
+import com.google.gson.annotations.SerializedName
+
 // 확인요망
 data class RequestAlarmListData (
+    @SerializedName("userEmail")
     val userEmail: String
     )
