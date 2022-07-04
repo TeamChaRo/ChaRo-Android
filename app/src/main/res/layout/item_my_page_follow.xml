@@ -68,7 +68,7 @@
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:text="@{model.follow ? `팔로잉` : `팔로우`}"
-            android:textColor="@{model.follow ? @color/blue_main_0f6fff : @color/gray3_sub_acb5bd}"
+            android:textColor="@{model.follow ? @color/gray3_sub_acb5bd : @color/white}"
             android:textSize="13sp"
             android:visibility="@{isMe ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/tv_nickname"

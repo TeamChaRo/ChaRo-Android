@@ -255,10 +255,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-//        callback.remove()
-    }
+
 
     override fun onRefresh() {
         Timber.d("moreView onRefresh >>>>> ")
