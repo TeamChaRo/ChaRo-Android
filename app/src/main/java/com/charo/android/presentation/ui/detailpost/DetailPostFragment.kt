@@ -288,11 +288,7 @@ class DetailPostFragment : Fragment() {
                 val imageUri = when {
                     viewModel.imageStringViewPager.value.isNullOrEmpty() -> {
                         //기본 이미지
-                        Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
-                                + resources.getResourcePackageName(R.drawable.grapic_design) + '/'
-                                + resources.getResourceTypeName(R.drawable.grapic_design) + '/'
-                                + resources.getResourceEntryName(R.drawable.grapic_design))
-                            .toString()
+                        "https://charo-image.s3.ap-northeast-2.amazonaws.com/playstore/1.png"
                     }
                     else -> {
                         viewModel.imageStringViewPager.value!![0]
