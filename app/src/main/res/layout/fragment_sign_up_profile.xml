@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
-                    android:paddingVertical="3dp"
+                    android:paddingVertical="5dp"
                     app:errorEnabled="true"
                     app:errorIconDrawable="@null"
                     app:helperTextTextColor="@color/blue_main_0f6fff"
