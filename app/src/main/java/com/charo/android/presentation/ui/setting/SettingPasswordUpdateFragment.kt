@@ -107,7 +107,7 @@ class SettingPasswordUpdateFragment :
         }
 
     }
-
+    //새 비밀번호 재확인
     private fun newPasswordReconfirm(){
         val userEmail = SharedInformation.getEmail(requireActivity())
         with(binding){
@@ -124,17 +124,12 @@ class SettingPasswordUpdateFragment :
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if (s.toString().length < 5 || s.toString().length > 15) {
-                        textInputNewPasswordReconfirm.error = "5자 이상 15자 이내로 작성해 주세요."
-                    } else if (!Pattern.matches(emailPattern, s.toString())) {
-                        textInputNewPasswordReconfirm.error = "영문과 숫자만 사용해 주세요."
-                        Timber.d("password ${Pattern.matches(emailPattern, s.toString())}")
-                    }else{
                         settingViewModel.newPasswordReconfirm.observe(viewLifecycleOwner){
                             if(it == s.toString()){
                                 textInputNewPasswordReconfirm.helperText = "사용가능한 비밀번호입니다."
                                 imgPasswordUpdateButton.setImageResource(R.drawable.sign_up_next_active)
-                            }
+                            }else{
+                                textInputNewPasswordReconfirm.helperText = "비밀번호가 일치하지 않습니다."
                         }
                         binding.imgPasswordUpdateButton.setOnClickListener {
                             settingViewModel.newPasswordRegister(userEmail, s.toString())
