@@ -5,7 +5,7 @@ import com.charo.android.domain.repository.setting.SettingRepository
 
 class WithdrawalUserUseCase(private val repository : SettingRepository) {
 
-    suspend fun execute(userEmail: String) : StatusCode {
+    suspend operator fun invoke(userEmail: String) : StatusCode {
         return repository.withdrawalUser(userEmail)
     }
 }

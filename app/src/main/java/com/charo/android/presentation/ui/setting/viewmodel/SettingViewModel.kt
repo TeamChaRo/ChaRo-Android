@@ -198,7 +198,7 @@ class SettingViewModel(
     //회원 탈퇴
     fun withdrawalUser(userEmail: String){
         viewModelScope.launch {
-            runCatching { withdrawalUserUseCase.execute(userEmail) }
+            runCatching { withdrawalUserUseCase(userEmail) }
                 .onSuccess {
                     withdrawalStatus.value = it.success
                     Timber.d("withdrawal 서버 통신 성공!")

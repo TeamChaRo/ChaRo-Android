@@ -63,7 +63,7 @@ class CustomDialog(context: Context) {
             dialog.dismiss()
         }
 
-        binding.textWithdrawalAgreement.setOnClickListener {
+        binding.textWithdrawalCancel.setOnClickListener {
             dialog.dismiss()
         }
     }

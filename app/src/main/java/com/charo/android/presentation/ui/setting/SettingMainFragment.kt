@@ -18,6 +18,7 @@ import com.charo.android.presentation.ui.setting.viewmodel.SettingViewModel
 import com.charo.android.presentation.ui.signin.SocialSignInActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,7 +31,7 @@ class SettingMainFragment :
     BaseFragment<FragmentSettingMainBinding>(R.layout.fragment_setting_main) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
     private val permissionCheck = (android.Manifest.permission.READ_EXTERNAL_STORAGE)
-
+    private lateinit var googleSignInClient: GoogleSignInClient
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -258,30 +259,56 @@ class SettingMainFragment :
     //회원 탈퇴
     private fun withdrawal() {
         binding.textSettingUserOut.setOnClickListener {
+            val socialKey = SharedInformation.getSocialId(requireActivity())
+            val userEmail = SharedInformation.getEmail(requireActivity())
             val dialog = CustomDialog(requireActivity())
             dialog.showWithdrawal(requireActivity())
             dialog.setOnClickedListener(object : CustomDialog.ButtonClickListener {
                 override fun onClicked(num: Int) {
                     if (num == 1) {
-                        val userEmail = SharedInformation.getEmail(requireActivity())
-                        settingViewModel.withdrawalUser(userEmail)
-                        settingViewModel.withdrawalStatus.observe(viewLifecycleOwner) {
-                            if (it) {
-                                SharedInformation.removeNickName(requireActivity())
-                                SharedInformation.removeEmail(requireActivity())
-                                SharedInformation.removeSocialId(requireActivity())
-                                Toast.makeText(requireActivity(), "회원 탈퇴 성공", Toast.LENGTH_SHORT)
-                                    .show()
-                                ActivityCompat.finishAffinity(requireActivity())
-                            } else {
-                                Toast.makeText(requireActivity(), "회원 탈퇴 실패", Toast.LENGTH_SHORT)
-                                    .show()
+                        Timber.d("회원탈퇴 클릭")
+                        when (socialKey) {
+                            "1" -> {
+                                UserApiClient.instance.unlink { error ->
+                                    if(error != null){
+                                        Toast.makeText(requireActivity(), "카카오 회원 탈퇴 실패", Toast.LENGTH_SHORT).show()
+                                    }else{
+                                        checkWithdrawal(userEmail)
+                                        Toast.makeText(requireActivity(), "카카오 회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                            "2" -> {
+                                Firebase.auth.signOut()
+                                googleSignInClient.revokeAccess().addOnCompleteListener {
+                                    Toast.makeText(requireActivity(), "구글 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                                    checkWithdrawal(userEmail)
+                                }
+                            }
+                            else -> {
+                                checkWithdrawal(userEmail)
                             }
                         }
-
                     }
                 }
             })
+        }
+    }
+
+    private fun checkWithdrawal(userEmail : String){
+        settingViewModel.withdrawalUser(userEmail)
+        settingViewModel.withdrawalStatus.observe(viewLifecycleOwner) {
+            if (it) {
+                SharedInformation.removeNickName(requireActivity())
+                SharedInformation.removeEmail(requireActivity())
+                SharedInformation.removeSocialId(requireActivity())
+
+                ActivityCompat.finishAffinity(requireActivity())
+
+            } else {
+                Toast.makeText(requireActivity(), "회원 탈퇴 실패", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
