@@ -3,6 +3,7 @@ package com.charo.android.presentation.util
 
 class ThemeUtil {
     val themeMap = hashMapOf(
+        "선택안함" to "",
         "봄" to "spring",
         "여름" to "summer",
         "가을" to "fall",
