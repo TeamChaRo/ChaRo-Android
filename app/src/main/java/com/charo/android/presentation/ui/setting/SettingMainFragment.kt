@@ -223,8 +223,7 @@ class SettingMainFragment :
                                     )
                                         .show()
                                     ActivityCompat.finishAffinity(requireActivity())
-                                    val intent =
-                                        Intent(requireActivity(), SocialSignInActivity::class.java)
+                                    val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                                     startActivity(intent)
 
                                 }
