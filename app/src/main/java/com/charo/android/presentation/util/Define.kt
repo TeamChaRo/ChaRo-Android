@@ -36,4 +36,10 @@ class Define {
     //dynamicLink
     val DEEP_LINK : String = "https://charo.page.link"
     val DTL_SEGMENT : String = "dtl"
+
+    //이용약관
+    val googleForm : String = "https://docs.google.com/forms/d/e/1FAIpQLSdg0MjTyIZcnh_uihSpEYQ8rey0K39Adk6qJ-d21rKEDTW2WA/viewform?usp=sf_link"
+    val reportForm : String = "https://docs.google.com/forms/d/1A1I8b2xQLgKVGsx112udNrHRp51n1p0m2ymot-kofy4/viewform?edit_requested=true"
+    val privacy : String = "https://nosy-catmint-6ad.notion.site/9d02516137d74b42ba8d0b9554903ca7"
+    val serviceTerm : String = "https://nosy-catmint-6ad.notion.site/4f9ab2a0143d4867b107b52103043cca"
 }

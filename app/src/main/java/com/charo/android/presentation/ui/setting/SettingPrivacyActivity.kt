@@ -6,8 +6,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingPrivacyBinding
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseActivity
+import com.charo.android.presentation.util.Define
 
 
 class SettingPrivacyActivity : BaseActivity<ActivitySettingPrivacyBinding>(R.layout.activity_setting_privacy) {
@@ -43,7 +43,7 @@ class SettingPrivacyActivity : BaseActivity<ActivitySettingPrivacyBinding>(R.lay
             WebChromeClient()
             settings.domStorageEnabled = true
             settings.javaScriptEnabled = true
-            loadUrl(Hidden.privacy)
+            loadUrl(Define().privacy)
         }
     }
 }

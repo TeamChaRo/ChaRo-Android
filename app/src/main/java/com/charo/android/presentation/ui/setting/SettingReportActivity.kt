@@ -6,8 +6,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingReportBinding
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseActivity
+import com.charo.android.presentation.util.Define
 
 class SettingReportActivity : BaseActivity<ActivitySettingReportBinding>(R.layout.activity_setting_report) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class SettingReportActivity : BaseActivity<ActivitySettingReportBinding>(R.layou
             WebChromeClient()
             settings.javaScriptEnabled = true
             settings.useWideViewPort = true
-            loadUrl(Hidden.reportForm)
+            loadUrl(Define().reportForm)
         }
     }
 }

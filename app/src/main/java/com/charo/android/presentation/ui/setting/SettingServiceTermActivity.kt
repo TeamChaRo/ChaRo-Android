@@ -6,8 +6,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingServiceTermBinding
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseActivity
+import com.charo.android.presentation.util.Define
 
 
 class SettingServiceTermActivity : BaseActivity<ActivitySettingServiceTermBinding>(R.layout.activity_setting_service_term) {
@@ -44,7 +44,7 @@ class SettingServiceTermActivity : BaseActivity<ActivitySettingServiceTermBindin
             WebChromeClient()
             settings.domStorageEnabled = true
             settings.javaScriptEnabled = true
-            loadUrl(Hidden.serviceTerm)
+            loadUrl(Define().serviceTerm)
         }
     }
 }

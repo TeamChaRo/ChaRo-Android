@@ -5,8 +5,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.charo.android.R
 import com.charo.android.databinding.ActivitySettingCsBinding
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseActivity
+import com.charo.android.presentation.util.Define
 
 
 class SettingCsActivity : BaseActivity<ActivitySettingCsBinding>(R.layout.activity_setting_cs) {
@@ -22,7 +22,7 @@ class SettingCsActivity : BaseActivity<ActivitySettingCsBinding>(R.layout.activi
             WebChromeClient()
             settings.javaScriptEnabled = true
             settings.useWideViewPort = true
-            loadUrl(Hidden.googleForm)
+            loadUrl(Define().googleForm)
         }
     }
 }
