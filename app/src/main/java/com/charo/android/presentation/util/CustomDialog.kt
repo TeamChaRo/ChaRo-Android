@@ -29,6 +29,7 @@ class CustomDialog(context: Context) {
             null,
             false
         )
+        binding.dialogText = message
         dialog.setContentView(binding.root)
         dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.window?.setBackgroundDrawableResource(R.drawable.inset_right_40_left_40)
@@ -62,7 +63,7 @@ class CustomDialog(context: Context) {
             dialog.dismiss()
         }
 
-        binding.textWithdrawalAgreement.setOnClickListener {
+        binding.textWithdrawalCancel.setOnClickListener {
             dialog.dismiss()
         }
     }

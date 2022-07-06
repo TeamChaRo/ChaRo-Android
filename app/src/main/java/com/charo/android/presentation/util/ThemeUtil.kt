@@ -3,6 +3,7 @@ package com.charo.android.presentation.util
 
 class ThemeUtil {
     val themeMap = hashMapOf(
+        "선택안함" to "",
         "봄" to "spring",
         "여름" to "summer",
         "가을" to "fall",
@@ -31,6 +32,6 @@ class ThemeUtil {
 
     val itemCaution = arrayOf("선택안함", "고속도로", "산길포함", "초보힘듦", "사람많음")
 
-    val itemTheme = arrayOf("봄","여름","가을","겨울","산","바다","호수","강","해안도로","벚꽃","단풍",
+    val itemTheme = arrayOf("선택안함","봄","여름","가을","겨울","산","바다","호수","강","해안도로","벚꽃","단풍",
     "여유","스피드","야경","도심")
 }

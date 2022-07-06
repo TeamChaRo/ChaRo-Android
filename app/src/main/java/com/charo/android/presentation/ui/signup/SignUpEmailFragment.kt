@@ -58,7 +58,6 @@ class SignUpEmailFragment :
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
                 }
-
                 override fun afterTextChanged(s: Editable?) {
                     tvEmailResend.isEnabled = true
                     if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()) {
