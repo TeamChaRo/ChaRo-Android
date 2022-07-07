@@ -40,13 +40,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
     private lateinit var tMapView: TMapView
 
-    //    원래 진희코드
-//    private val sharedViewModel: WriteSharedViewModel by activityViewModels {
-//        object : ViewModelProvider.Factory {
-//            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-//                WriteSharedViewModel() as T
-//        }
-//    }
     private val sharedViewModel by sharedViewModel<WriteSharedViewModel>()
 
     //    좌표 배열
@@ -158,7 +151,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             clickWriteMapDelete1(tMapView)
         }
 
-//        addList(tMapView)
         drawPath(tMapView)
     }
 
@@ -194,7 +186,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         sharedViewModel.midFrstLong.value = 0.0
 
         path.clear()
-//        addList(tMapView)
         drawPath(tMapView)
     }
 
@@ -254,7 +245,6 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                         name = "marker_location_flag_$i"
                     }
                     markerList.add(marker)
-//                    tMapView.addMarkerItem(marker.name, marker)
 
                     // 경로 그리기
                     if (i != pointList.size - 1) {
@@ -278,12 +268,12 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                                 )
                         }
                         polyLineList.add(tMapPolyLine)
-//                        tMapView.addTMapPolyLine(
-//                            "tMapPolyLine$i",
-//                            tMapPolyLine
-//                        )
                     }
                 }
+
+                //이전 경로 초기화 후 그리기
+                tMapView.removeAllTMapPolyLine()
+                tMapView.removeAllMarkerItem()
                 for (i in markerList.indices) {
                     when (i) {
                         markerList.size - 1 -> {
@@ -307,105 +297,10 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                     tMapView.zoomLevel = info.tMapZoomLevel
                 }
             }.onFailure {
-                // 실패 시 액티비티 종료 -> 추후엔 종료 말고 뭔가 다른 액션이 있었으면 좋겠다고 생각은 함(다이얼로그라던가 ...)
-//                requireActivity().finish()
+                Toast.makeText(requireContext(),getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
             }
         }
     }
-
-//    private fun addList(tMapView: TMapView) {
-//        if (sharedViewModel.startLat.value != 0.0) {
-//            path.add(TMapPoint(sharedViewModel.startLat.value!!, sharedViewModel.startLong.value!!))
-//        }
-//        if (sharedViewModel.midFrstLat.value != 0.0) {
-//            path.add(
-//                TMapPoint(
-//                    sharedViewModel.midFrstLat.value!!,
-//                    sharedViewModel.midFrstLong.value!!
-//                )
-//            )
-//        }
-//        if (sharedViewModel.endLat.value != 0.0) {
-//            path.add(TMapPoint(sharedViewModel.endLat.value!!, sharedViewModel.endLong.value!!))
-//        }
-//
-//        if (path.isNotEmpty()) {
-//            setCenter(tMapView)
-//        }
-//        tMapView.removeAllTMapPolyLine()
-//        mark(tMapView)
-//    }
-//
-//    private fun setCenter(tMapView: TMapView) {
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            val info: TMapInfo = tMapView.getDisplayTMapInfo(path)
-//            tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
-//            tMapView.zoomLevel = info.tMapZoomLevel - 1
-//        }, 500)
-//    }
-//
-//    private fun mark(tMapView: TMapView) {
-//        for (i in 0 until path.size) {
-//            val marker = TMapMarkerItem()
-//            val mapPoint = path[i]
-//            var bitmap: Bitmap = if (i == 0) {
-//                BitmapFactory.decodeResource(resources, R.drawable.ic_route_start)
-//            } else if (i == path.size - 1) {
-//                BitmapFactory.decodeResource(resources, R.drawable.ic_route_end)
-//            } else {
-//                BitmapFactory.decodeResource(resources, R.drawable.ic_route_waypoint)
-//            }
-//            marker.icon = bitmap
-//            marker.setPosition(0.5F, 1.0F)
-//            marker.tMapPoint = mapPoint
-//            marker.name = "marker_location_flag_$i"
-//            tMapView.addMarkerItem(marker.name, marker)
-//        }
-//
-//        if (path.size > 1) {
-//            findPath(tMapView)
-//        }
-//    }
-//
-//    private fun findPath(tMapView: TMapView) {
-//        for (i in 0 until path.size - 1) {
-//            var flag: Boolean = true
-//            if (i != 0 && i % 2 == 0) {
-//                flag = !flag
-//            }
-//            drawPath(tMapView, path[i], path[i + 1], i, flag)
-//        }
-//    }
-//
-//    private fun drawPath(
-//        tMapView: TMapView,
-//        start: TMapPoint,
-//        end: TMapPoint,
-//        cnt: Int,
-//        flag: Boolean
-//    ) {
-//        val thread: Thread = Thread() {
-//            try {
-//                val tMapPolyLine: TMapPolyLine = TMapData().findPathData(start, end)
-//                tMapPolyLine.lineWidth = 3F
-////                tMapPolyLine.lineColor = getColor(activity, R.color.blue_main)
-//                tMapView.addTMapPolyLine("tMapPolyLine$cnt", tMapPolyLine)
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//        }
-//        thread.start()
-//
-//        try {
-//            thread.join()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//
-//        if (!flag) {
-//            Thread.sleep(1000)
-//        }
-//    }
 
     private fun blackOut() {
         val isShowBlackout =
