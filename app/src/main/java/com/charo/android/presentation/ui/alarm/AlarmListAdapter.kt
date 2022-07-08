@@ -2,6 +2,7 @@ package com.charo.android.presentation.ui.alarm
 
 import android.content.Intent
 import android.text.TextUtils
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class AlarmListAdapter(
     class AlarmListViewHolder(val binding: ItemAlarmBinding, val itemDeleteClick: (ResponseAlarmListData.PushList) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
+        val checkList = SparseBooleanArray()
         private val alarmActivity: AlarmActivity = AlarmActivity()
 
         fun onBind(alarmListInfo: ResponseAlarmListData.PushList) {
@@ -36,17 +38,25 @@ class AlarmListAdapter(
             binding.tvAlarmStatus.text = alarmListInfo.title
             binding.tvAlarmStatus.isSelected = true
 
-            when(alarmListInfo.isRead){
+            if(alarmListInfo.isRead == 1){
+                checkList.put(absoluteAdapterPosition, true)
+            }
+
+            binding.itemAlarmList.isSelected = checkList.get(absoluteAdapterPosition)
+
+            /*when(alarmListInfo.isRead){
                 1-> {  // 조회한 알림
                     binding.itemAlarmList.isSelected = true
+                    checkList.put(absoluteAdapterPosition, true)
                 }
                 else -> {
                     binding.itemAlarmList.isSelected = false
                 }
-            }
+            }*/
 
             binding.itemAlarmList.setOnClickListener{
                 binding.itemAlarmList.isSelected = true
+                checkList.put(absoluteAdapterPosition, true)
 
                 //itemClick 이벤트 구현
                 alarmActivity.postReadAlarm(alarmListInfo.pushId)

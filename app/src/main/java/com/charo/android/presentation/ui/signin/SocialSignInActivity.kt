@@ -75,6 +75,7 @@ class SocialSignInActivity() :
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 Timber.e("kakao 로그인 실패 $error")
+                Toast.makeText(this, getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
             } else if (token != null) {
                 Timber.i("kakao 로그인 성공 ${token.accessToken}")
                 kakaoUserEmail()
@@ -94,7 +95,6 @@ class SocialSignInActivity() :
                     Timber.d("kakao 토큰 정보 보기 실패")
                 } else {
                     kakaoUserEmail()
-
                 }
             }
         }
@@ -128,7 +128,7 @@ class SocialSignInActivity() :
     private fun goKaKaoMain() {
         if (SharedInformation.getLogout(this) != "Logout") {
             socialSignInViewModel.kakaoSuccess.observe(this, Observer {
-                if (socialSignInViewModel.socialStatus.value != 404) {
+                if (socialSignInViewModel.socialStatus.value != 404 && socialSignInViewModel.socialStatus.value != 500) {
                     SharedInformation.setLogout(this, "LogIn")
                     SharedInformation.setEmail(this, it?.email.toString())
                     Toast.makeText(this, "카카오 로그인 성공", Toast.LENGTH_SHORT).show()
@@ -152,6 +152,8 @@ class SocialSignInActivity() :
                 intent.putExtra("kakaoSignUpEmail", SharedInformation.getEmail(this))
                 startActivity(intent)
                 finish()
+            } else if(it == 500){
+                Toast.makeText(this, getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -249,6 +251,8 @@ class SocialSignInActivity() :
                 }
                 startActivity(intent)
                 finish()
+            } else if(it == 500){
+                Toast.makeText(this, getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
             }
         }
     }

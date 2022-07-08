@@ -42,6 +42,7 @@ class SocialSignInViewModel(
                 }
                 is ResultWrapper.NetworkError -> {
                     Timber.d("kakaoLogin 서버 통신 실패")
+                    socialStatus.value = 500
                 }
                 is ResultWrapper.GenericError -> {
                     Timber.d("kakaoLogin 사용자 에러")
@@ -63,6 +64,7 @@ class SocialSignInViewModel(
                 }
                 is ResultWrapper.NetworkError -> {
                     Timber.d("googleLogin 서버 통신 실패")
+                    googleSocialStatus.value = 500
                 }
                 is ResultWrapper.GenericError -> {
                     Timber.d("googleLogin 사용자 에러")
