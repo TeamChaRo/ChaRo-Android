@@ -228,9 +228,7 @@ class SettingMainFragment :
                                     ActivityCompat.finishAffinity(requireActivity())
                                     val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                                     startActivity(intent)
-
                                 }
-
                             }
                         } else if (socialKey == "3") {
                             SharedInformation.setLogout(requireActivity(), "Logout")

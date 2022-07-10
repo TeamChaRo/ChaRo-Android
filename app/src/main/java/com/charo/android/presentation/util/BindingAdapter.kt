@@ -23,8 +23,9 @@ object BindingAdapter {
         val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(14.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
-            .placeholder(R.drawable.home_today_drive_image)
-            .error(R.drawable.home_today_drive_image)
+            .placeholder(R.drawable.shape_r14_f3f8ff)
+            .error(R.drawable.shape_r14_f3f8ff)
+            .fallback(R.drawable.shape_r14_f3f8ff)
             .apply(RequestOptions.bitmapTransform(multiOption))
             .into(imageView)
     }
@@ -35,8 +36,9 @@ object BindingAdapter {
         val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(10.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
-            .placeholder(R.drawable.ic_image_r10_placeholder)
-            .error(R.drawable.ic_image_r10_placeholder)
+            .placeholder(R.drawable.shape_r10_f3f8ff)
+            .error(R.drawable.shape_r10_f3f8ff)
+            .fallback(R.drawable.shape_r10_f3f8ff)
             .apply(RequestOptions.bitmapTransform(multiOption))
             .into(imageView)
     }
@@ -47,6 +49,9 @@ object BindingAdapter {
         val multiOption = MultiTransformation(CenterCrop(), RoundedCorners(9.dpToPx))
         Glide.with(imageView.context)
             .load(imageUrl)
+            .placeholder(R.drawable.shape_r9_f3f8ff)
+            .error(R.drawable.shape_r9_f3f8ff)
+            .fallback(R.drawable.shape_r9_f3f8ff)
             .apply(RequestOptions.bitmapTransform(multiOption))
             .into(imageView)
     }
