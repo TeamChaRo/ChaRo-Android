@@ -115,7 +115,7 @@ class AlarmActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
                     Timber.d("server connect : Alarm ${response.body()}")
                     val pushList = response.body()?.pushList
 
-                    if(pushList != null){
+                    if(pushList != null && pushList.isNotEmpty()){
                         binding.rcvAlarmList.visibility = View.VISIBLE
                         binding.clEmptyList.visibility = View.GONE
                         binding.srAlarmList.visibility = View.VISIBLE
