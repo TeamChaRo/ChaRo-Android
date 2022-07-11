@@ -143,15 +143,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun deepLinkDetailPost() {
+        val postId = intent.getIntExtra("postId", -1)
         Timber.d(
-            "MainActivity deepLinkDetailPost, intent : $intent, postId : ${
-                intent.getStringExtra(
-                    "postId"
-                )
-            }"
+            "MainActivity deepLinkDetailPost, intent : $intent, postId : $postId"
         )
 
-        val postId = intent.getIntExtra("postId", -1)
         if (intent != null && postId != -1) {
             val intent = Intent(this, WriteShareActivity::class.java)
             intent.putExtra("postId", postId)

@@ -16,6 +16,7 @@
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
 -keep class com.charo.android.data.model.** { *; }
+-keep class com.kakao.sdk.**.model.* { <fields>; }
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
