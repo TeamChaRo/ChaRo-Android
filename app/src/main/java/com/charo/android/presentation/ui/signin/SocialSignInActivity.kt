@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -59,14 +60,59 @@ class SocialSignInActivity() :
     //자동 로그인
     private fun autoLogin() {
         val autoEmail = SharedInformation.getEmail(this)
-        Timber.d("autoEmail $autoEmail")
-        if (autoEmail != "@") {
-            Timber.d("autoEmail $autoEmail")
+        val socialKey = SharedInformation.getSocialId(this)
+        Timber.d("autoLogin autoEmail $autoEmail")
+        Timber.d("autoLogin socialKey $socialKey")
+
+        if (autoEmail == "@") {
+            return
+        }
+
+        //카카오 로그인
+        if(socialKey == "1"){
+            //토큰 확인
+            if (AuthApiClient.instance.hasToken()) {
+                UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
+                    if (error != null) {
+                        Timber.e("kakao 자동 로그인 실패 $error")
+                        if (error is KakaoSdkError && error.isInvalidTokenError() == true) {
+                            //토큰 만료
+                            Toast.makeText(this, "토큰이 만료되었습니다. 다시 로그인해주세요.", Toast.LENGTH_SHORT).show()
+                            Timber.e("kakao 토큰 만료 $error")
+                        } else {
+                            //기타 에러
+                            Timber.e("kakao 기타 에러 $error")
+                        }
+                        removeAutoInfo()
+                    } else {
+                        //유효한 토큰 , 자동 로그인
+                        Timber.e("kakao 자동 로그인 성공 $tokenInfo")
+                        Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            } else {
+                //토큰 없음 , 로그인 필요
+                Timber.e("kakao 토큰 없음")
+                removeAutoInfo()
+                return
+            }
+        } else { //구글, 이메일 로그인
+            Timber.e("자동 로그인 성공")
             Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun removeAutoInfo(){
+        SharedInformation.setLogout(this, "Logout")
+        SharedInformation.removeNickName(this)
+        SharedInformation.removeEmail(this)
+        SharedInformation.removeSocialId(this)
     }
 
     //kakao
@@ -98,7 +144,6 @@ class SocialSignInActivity() :
                 }
             }
         }
-
     }
 
     //카카오

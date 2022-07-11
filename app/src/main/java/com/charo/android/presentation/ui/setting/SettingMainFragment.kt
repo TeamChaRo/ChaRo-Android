@@ -24,6 +24,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.kakao.sdk.auth.AuthApiClient
+import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -209,26 +211,40 @@ class SettingMainFragment :
                         if (socialKey == "1") {
                             UserApiClient.instance.logout { error ->
                                 if (error != null) {
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "로그아웃 실패 $error",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    SharedInformation.setLogout(requireActivity(), "Logout")
-                                    SharedInformation.removeNickName(requireActivity())
-                                    SharedInformation.removeEmail(requireActivity())
-                                    SharedInformation.removeSocialId(requireActivity())
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "카카오 로그아웃 성공",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                        .show()
-                                    ActivityCompat.finishAffinity(requireActivity())
-                                    val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
-                                    startActivity(intent)
+                                    Timber.e("로그아웃 실패 , SDK에서 토큰 삭제됨")
+                                    //토큰 유효성 체크
+                                    if (AuthApiClient.instance.hasToken()) {
+                                        UserApiClient.instance.accessTokenInfo { _, error ->
+                                            if (error != null) {
+                                                if (error is KakaoSdkError && error.isInvalidTokenError() == true) {
+                                                    //액세스 토큰 및 리프레시 토큰이 유효하지 않음
+                                                    Timber.e("로그아웃 실패 , 토큰 유효하지 않음 $error")
+                                                }
+                                                else { //기타 에러
+                                                    Timber.e("로그아웃 실패 , 기타 에러 $error")
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        //토큰 존재하지 않음
+                                        Timber.e("로그아웃 실패 , 토큰 존재하지 않음 $error")
+                                    }
                                 }
+
+                                //로그아웃 실패해도 토큰 삭제되기 때문에 강제 로그아웃
+                                SharedInformation.setLogout(requireActivity(), "Logout")
+                                SharedInformation.removeNickName(requireActivity())
+                                SharedInformation.removeEmail(requireActivity())
+                                SharedInformation.removeSocialId(requireActivity())
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "카카오 로그아웃 성공",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                                ActivityCompat.finishAffinity(requireActivity())
+                                val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
+                                startActivity(intent)
                             }
                         } else if (socialKey == "3") {
                             SharedInformation.setLogout(requireActivity(), "Logout")
