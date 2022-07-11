@@ -69,11 +69,11 @@ class SignUpEmailFragment :
                         binding.etInputEmailNum.setText("")
 
                     } else {
-                        pass = true
+//                        pass = true
                         isNextBtnActive(true)
 
                         signUpViewModel.emailCheck(s.toString())
-                        observeSuccess(pass)
+                        observeSuccess()
                     }
                 }
             })
@@ -148,7 +148,7 @@ class SignUpEmailFragment :
 
 
     //이메일 중복 체크
-    private fun observeSuccess(pass : Boolean) {
+    private fun observeSuccess() {
         signUpViewModel.success.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it) {
@@ -177,13 +177,15 @@ class SignUpEmailFragment :
                     }
 
                 } else {
-                    if (pass){
+                    if (signUpViewModel.emailCheckStatus.value == 2000){ //서버통신 성공 & response false
                         textInputSignUp.error = "중복된 이메일 형식입니다."
-
-                        isNextBtnActive(false)
-                        binding.etInputEmailNum.isEnabled = false
-                        tvEmailResend.isEnabled = false
+                    } else { //서버통신 실패
+                        textInputSignUp.error = getString(R.string.server_error_general)
                     }
+
+                    isNextBtnActive(false)
+                    binding.etInputEmailNum.isEnabled = false
+                    tvEmailResend.isEnabled = false
                 }
             }
         }

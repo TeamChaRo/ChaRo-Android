@@ -36,9 +36,15 @@ class SignUpEmailViewModel(
     val isConfirmAuthNum: MutableLiveData<Boolean>
         get() = _isConfirmAuthNum
 
+    //이메일 중복체크 확인
     private val _success = MutableLiveData<Boolean>(false)
     val success: LiveData<Boolean>
         get() = _success
+
+    //이메일 중복체크 서버통신
+    private val _emailCheckStatus = MutableLiveData<Int>()
+    val emailCheckStatus: LiveData<Int>
+        get() = _emailCheckStatus
 
     //인증번호
     private val _data = MutableLiveData<String>()
@@ -84,16 +90,16 @@ class SignUpEmailViewModel(
     fun emailCheck(email: String) {
         viewModelScope.launch {
             runCatching { getRemoteSignUpEmailCheckUseCase.execute(email) }
-
                 .onSuccess {
                     _success.value = it
-                    Timber.d("signUp 서버 통신 성공!")
-                    Timber.d("signUp $it")
+                    _emailCheckStatus.value = 2000
+                    Timber.d("signUp emailCheck 서버 통신 성공!")
+                    Timber.d("signUp emailCheck $it")
                 }
                 .onFailure {
                     it.printStackTrace()
-                    Timber.d("signUp 서버 통신 실패")
-
+                    _success.value = false
+                    Timber.d("signUp emailCheck 서버 통신 실패")
                 }
         }
     }
