@@ -226,29 +226,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_no_search" />
 
-                <ImageButton
+                <TextView
                     android:id="@+id/img_no_search_click"
-                    android:layout_width="wrap_content"
+                    style="@style/SectionH1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="27dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_search_btn_white"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/sign_up_next_active"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:tint="@color/blue_main_0f6fff" />
-
-                <TextView
-                    android:id="@+id/text_no_search_start"
-                    style="@style/SectionH1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/search_write"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_no_search_click"
-                    app:layout_constraintEnd_toEndOf="@+id/img_no_search_click"
-                    app:layout_constraintStart_toStartOf="@id/img_no_search_click"
-                    app:layout_constraintTop_toTopOf="@id/img_no_search_click" />
+                    android:textColor="@color/white"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

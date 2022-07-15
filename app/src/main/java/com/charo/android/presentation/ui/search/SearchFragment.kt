@@ -36,7 +36,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         selectCaution()
         nickName()
         initValue()
-        isActiveSearch(false)
 
         binding.btnSearchArea1.setOnClickListener { selectProvince(it) }
         binding.btnSearchArea2.setOnClickListener { selectRegion(it) }
@@ -51,10 +50,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private fun isActiveSearch(boolean: Boolean) {
         binding.apply {
             if (boolean) {
-                textSearchStart.setBackgroundResource(R.drawable.sign_up_next_active)
+                textSearchStart.isActivated = true
                 textSearchStart.setTextColor(getColor(requireActivity(), R.color.white))
             } else {
-                textSearchStart.setBackgroundResource(R.drawable.rectangle_white_radius_12_mypage)
+                textSearchStart.isActivated = false
                 textSearchStart.setTextColor(
                     getColor(
                         requireActivity(),
@@ -69,26 +68,34 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         val userEmail = SharedInformation.getEmail(requireActivity())
 
         binding.textSearchStart.setOnClickListener {
+            //모두 빈값이면 return
+            if(binding.btnSearchArea1.text.toString() == getString(R.string.area_province)
+                && binding.btnSearchArea2.text.toString() == getString(R.string.area_region)
+                && binding.btnSearchTheme.text.toString() == getString(R.string.main_charo_theme)
+                && binding.btnSearchCaution.text.toString() == getString(R.string.caution)){
+                return@setOnClickListener
+            }
+
             searchViewModel.province.value =
-                if (binding.btnSearchArea1.text.toString() == "선택안함" || binding.btnSearchArea1.text.toString() == "지역(도)") {
+                if (binding.btnSearchArea1.text.toString() == getString(R.string.no_select) || binding.btnSearchArea1.text.toString() == getString(R.string.area_province)) {
                     ""
                 } else {
                     binding.btnSearchArea1.text.toString()
                 }
             searchViewModel.city.value =
-                if (binding.btnSearchArea2.text.toString() == "선택안함" || binding.btnSearchArea2.text.toString() == "지역(시)") {
+                if (binding.btnSearchArea2.text.toString() == getString(R.string.no_select) || binding.btnSearchArea2.text.toString() == getString(R.string.area_region)) {
                     ""
                 } else {
                     binding.btnSearchArea2.text.toString()
                 }
             searchViewModel.theme.value =
-                if (binding.btnSearchTheme.text.toString() == "선택안함" || binding.btnSearchTheme.text.toString() == "테마") {
+                if (binding.btnSearchTheme.text.toString() == getString(R.string.no_select) || binding.btnSearchTheme.text.toString() == getString(R.string.main_charo_theme)) {
                     ""
                 } else {
                     binding.btnSearchTheme.text.toString()
                 }
             searchViewModel.caution.value =
-                if (binding.btnSearchCaution.text.toString() == "선택안함" || binding.btnSearchCaution.text.toString() == "주의사항") {
+                if (binding.btnSearchCaution.text.toString() == getString(R.string.no_select) || binding.btnSearchCaution.text.toString() == getString(R.string.caution)) {
                     ""
                 } else {
                     binding.btnSearchCaution.text.toString()
@@ -109,6 +116,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 userEmail = userEmail,
             )
             searchViewModel.getSearchLike(requestSearchViewData)
+            searchViewModel.searchStatus.observe(viewLifecycleOwner) {
+                Timber.d("searchViewModel.searchStatus $it")
+                if(it != 2000) {
+                    Toast.makeText(requireContext(), getString(R.string.server_error_general),Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
             searchViewModel.search.observe(viewLifecycleOwner) {
                 Timber.d("searchViewModel.search $it")
 
@@ -128,16 +142,36 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.btnSearchTheme.setOnClickListener {
             MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle(R.string.main_charo_theme)
-                .setNeutralButton("취소") { dialog, which ->
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnSearchTheme.setText(resources.getString(R.string.main_charo_theme))
                     searchItem = 0
                     it.isSelected = false
+
+                    //시 없이 도만 선택했을 경우 비활
+                    if(binding.btnSearchArea1.text.toString() != resources.getString(R.string.area_province)
+                            && binding.btnSearchArea2.text.toString() == resources.getString(R.string.area_region)) {
+                        isActiveSearch(false)
+                    //모두 빈 값일 경우 비활
+                    } else if (binding.btnSearchCaution.text.toString() == resources.getString(R.string.caution)
+                        && binding.btnSearchArea2.text.toString() == resources.getString(R.string.area_region)) {
+                        isActiveSearch(false)
+                    } else {
+                        isActiveSearch(true)
+                    }
                 }
-                .setPositiveButton("확인") { dialog, which ->
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
                     binding.btnSearchTheme.text = themeUtil.itemTheme[searchItem]
                     if (binding.btnSearchTheme.text.toString() == resources.getString(R.string.main_charo_theme)) {
                         it.isSelected = false
+                    } else {
+                        isActiveSearch(true)
+                    }
+
+                    //시 없이 도만 선택했을 경우 비활
+                    if(binding.btnSearchArea1.text.toString() != resources.getString(R.string.area_province)
+                        && binding.btnSearchArea2.text.toString() == resources.getString(R.string.area_region)) {
+                        isActiveSearch(false)
                     }
                 }
                 .setSingleChoiceItems(themeUtil.itemTheme, searchItem) { dialog, which ->
@@ -152,16 +186,36 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.btnSearchCaution.setOnClickListener {
             MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle(R.string.caution)
-                .setNeutralButton("취소") { dialog, which ->
+                .setNeutralButton(R.string.cancel) { dialog, which ->
                     binding.btnSearchCaution.setText(resources.getString(R.string.caution))
                     searchCautionItem = 0
                     it.isSelected = false
+
+                    //시 없이 도만 선택했을 경우 비활
+                    if(binding.btnSearchArea1.text.toString() != resources.getString(R.string.area_province)
+                        && binding.btnSearchArea2.text.toString() == resources.getString(R.string.area_region)) {
+                        isActiveSearch(false)
+                    //모두 빈 값일 경우 비활
+                    } else if (binding.btnSearchArea2.text.toString() == resources.getString(R.string.area_region)
+                        && binding.btnSearchTheme.text.toString() == resources.getString(R.string.main_charo_theme)) {
+                        isActiveSearch(false)
+                    } else {
+                        isActiveSearch(true)
+                    }
                 }
-                .setPositiveButton("확인") { dialog, which ->
+                .setPositiveButton(R.string.agreement) { dialog, which ->
                     it.isSelected = true
                     binding.btnSearchCaution.text = themeUtil.itemCaution[searchCautionItem]
                     if (binding.btnSearchCaution.text.toString() == resources.getString(R.string.caution)) {
                         it.isSelected = false
+                    } else {
+                        isActiveSearch(true)
+                    }
+
+                    //시 없이 도만 선택했을 경우 비활
+                    if(binding.btnSearchArea1.text.toString() != resources.getString(R.string.area_province)
+                        && binding.btnSearchArea2.text.toString() == resources.getString(R.string.area_region)) {
+                        isActiveSearch(false)
                     }
                 }
                 .setSingleChoiceItems(
@@ -185,14 +239,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 binding.btnSearchArea2.isSelected = false
                 it.isSelected = false
                 preCheckProvince = 0
-                isActiveSearch(true)
+
+                if (binding.btnSearchCaution.text.toString() == resources.getString(R.string.caution)
+                    && binding.btnSearchTheme.text.toString() == resources.getString(R.string.main_charo_theme)) {
+                    isActiveSearch(false)
+                } else {
+                    isActiveSearch(true)
+                }
             }
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
                 binding.btnSearchArea1.text = locationUtil.itemProvince[preCheckProvince]
                 searchViewModel.province.value = binding.btnSearchArea1.text.toString()
-                selectRegion(binding.btnSearchArea2)
-                isActiveSearch(true)
+
+                if(binding.btnSearchArea1.text.toString() == resources.getString(R.string.no_select)) {
+                    isActiveSearch(true)
+                } else {
+                    selectRegion(binding.btnSearchArea2)
+                }
             }
             .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
                 //which : index
@@ -220,11 +284,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 preCheckedRegion = 0
                 searchViewModel.city.value = ""
 
-                if (TextUtils.isEmpty(searchViewModel.province.value) || searchViewModel.province.value == "선택안함") {
-                    isActiveSearch(true)
-                } else {
-                    isActiveSearch(false)
-                }
+                isActiveSearch(false)
             }
             .setPositiveButton(R.string.agreement) { dialog, which ->
                 it.isSelected = true
@@ -262,6 +322,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     private fun initValue() {
+        isActiveSearch(false)
         //지역 도 시
         if (!TextUtils.isEmpty(searchViewModel.province.value)) {
             binding.btnSearchArea1.text = searchViewModel.province.value
@@ -270,18 +331,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         if (!TextUtils.isEmpty(searchViewModel.city.value)) {
             binding.btnSearchArea2.text = searchViewModel.city.value
             binding.btnSearchArea2.isSelected = true
+            isActiveSearch(true)
         }
 
         //테마
         if (!TextUtils.isEmpty(searchViewModel.theme.value)) {
             binding.btnSearchTheme.text = searchViewModel.theme.value
             binding.btnSearchTheme.isSelected = true
+            isActiveSearch(true)
         }
 
         //주의사항
         if (!TextUtils.isEmpty(searchViewModel.caution.value)) {
             binding.btnSearchCaution.text = searchViewModel.caution.value
             binding.btnSearchCaution.isSelected = true
+            isActiveSearch(true)
         }
     }
 

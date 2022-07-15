@@ -25,12 +25,13 @@ class SearchViewModel(
 
     val caution = MutableLiveData<String>()
 
-
-
-
     private var _search = MutableLiveData<List<SearchDrive>>()
     val search: LiveData<List<SearchDrive>>
         get() = _search
+
+    private var _searchStatus = MutableLiveData<Int>()
+    val searchStatus: LiveData<Int>
+        get() = _searchStatus
 
 
     //검색 좋아요(인기순)
@@ -39,10 +40,12 @@ class SearchViewModel(
             runCatching { getRemoteSearchUseCase.execute(requestSearchViewData) }
                 .onSuccess {
                     _search.value = it
+                    _searchStatus.value = 2000
                     Timber.d("search 서버 통신 성공!")
                     Timber.d("search_${search.value.toString()}")
                 }
                 .onFailure {
+                    _searchStatus.value = 500
                     it.printStackTrace()
                     Timber.d("search 서버 통신 실패")
                 }
@@ -55,16 +58,17 @@ class SearchViewModel(
             runCatching { getRemoteSearchUseCase.executeNew(requestSearchViewData) }
                 .onSuccess {
                     _search.value = it
+                    _searchStatus.value = 2000
                     Timber.d("search 서버 통신 성공!")
                     Timber.d("search_${search.value.toString()}")
                 }
                 .onFailure {
+                    _searchStatus.value = 500
                     it.printStackTrace()
                     Timber.d("search 서버 통신 실패")
                 }
         }
     }
-
 
     //Post 좋아요
     fun postLike(requestHomeLikeData: RequestHomeLikeData) {
@@ -78,7 +82,5 @@ class SearchViewModel(
                     Timber.d("searchLike 서버 통신 실패!")
                 }
         }
-
-
     }
 }
