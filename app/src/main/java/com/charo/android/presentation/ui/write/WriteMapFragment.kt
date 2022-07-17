@@ -413,7 +413,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
         AlertDialog.Builder(requireContext(), R.style.Dialog)
             .setMessage(getString(R.string.noti_complete_write))
-            .setNeutralButton(getString(R.string.word_no)) { dialog, which ->
+            .setNegativeButton(getString(R.string.word_no)) { dialog, which ->
             }
             .setPositiveButton(getString(R.string.word_yes)) { dialog, which ->
                 serveWriteData()
