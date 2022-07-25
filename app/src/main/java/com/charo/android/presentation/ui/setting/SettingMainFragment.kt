@@ -246,22 +246,23 @@ class SettingMainFragment :
                                 val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                                 startActivity(intent)
                             }
-                        } else if (socialKey == "3") {
-                            SharedInformation.setLogout(requireActivity(), "Logout")
-                            SharedInformation.removeEmail(requireActivity())
-                            SharedInformation.removeSocialId(requireActivity())
-                            Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
-                            ActivityCompat.finishAffinity(requireActivity())
-                            val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
-                            startActivity(intent)
-
-                        } else {
+                        } else if (socialKey == "2") { //구글 로그아웃
                             Firebase.auth.signOut()
+
                             SharedInformation.setLogout(requireActivity(), "Logout")
                             SharedInformation.removeEmail(requireActivity())
                             SharedInformation.removeSocialId(requireActivity())
                             Toast.makeText(requireActivity(), "구글 로그아웃 성공", Toast.LENGTH_SHORT)
                                 .show()
+                            ActivityCompat.finishAffinity(requireActivity())
+                            val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
+                            startActivity(intent)
+
+                        } else { //이메일 로그아웃
+                            SharedInformation.setLogout(requireActivity(), "Logout")
+                            SharedInformation.removeEmail(requireActivity())
+                            SharedInformation.removeSocialId(requireActivity())
+                            Toast.makeText(requireActivity(), "로그아웃 성공", Toast.LENGTH_SHORT).show()
                             ActivityCompat.finishAffinity(requireActivity())
                             val intent = Intent(requireActivity(), SocialSignInActivity::class.java)
                             startActivity(intent)
@@ -301,9 +302,25 @@ class SettingMainFragment :
                             }
                             "2" -> {
                                 Firebase.auth.signOut()
+
+                                //파베 회원 아이디 삭제
+                                val mUser = Firebase.auth.currentUser
+                                mUser?.delete()?.addOnCompleteListener(requireActivity()){
+                                    if(it.isSuccessful){
+                                        Timber.e("파베 회원 아이디 삭제 성공")
+                                    } else {
+                                        Timber.e("파베 회원 아이디 삭제 실패")
+                                    }
+                                }
+
+                                //구글 계정 삭제
                                 googleSignInClient.revokeAccess().addOnCompleteListener {
-                                    Toast.makeText(requireActivity(), "구글 탈퇴 성공", Toast.LENGTH_SHORT).show()
-                                    checkWithdrawal(userEmail)
+                                    if(it.isSuccessful) {
+                                        Toast.makeText(requireActivity(), "구글 회원 탈퇴 성공", Toast.LENGTH_SHORT).show()
+                                        checkWithdrawal(userEmail)
+                                    } else {
+                                        Toast.makeText(requireActivity(), "구글 회원 탈퇴 실패", Toast.LENGTH_SHORT).show()
+                                    }
                                 }
                             }
                             else -> {
@@ -347,5 +364,4 @@ class SettingMainFragment :
 
         binding.textSettingVersionNum.text = versionName
     }
-
 }

@@ -3,6 +3,7 @@ package com.charo.android.presentation.ui.signin
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,8 +20,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GetTokenResult
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.KakaoSdkError
@@ -86,11 +92,7 @@ class SocialSignInActivity() :
                         removeAutoInfo()
                     } else {
                         //유효한 토큰 , 자동 로그인
-                        Timber.e("kakao 자동 로그인 성공 $tokenInfo")
-                        Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        autoLoginSuccess()
                     }
                 }
             } else {
@@ -99,13 +101,46 @@ class SocialSignInActivity() :
                 removeAutoInfo()
                 return
             }
-        } else { //구글, 이메일 로그인
-            Timber.e("자동 로그인 성공")
-            Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        } else if(socialKey == "2"){ //구글 로그인
+            val mUser : FirebaseUser? = Firebase.auth.currentUser
+
+            if(mUser != null){
+                mUser.getIdToken(true)
+                    .addOnCompleteListener(OnCompleteListener<GetTokenResult?> { task ->
+                        if (task.isSuccessful) {
+                            val idToken: String? = task.result.token
+                            Timber.d("아이디 토큰 = $idToken")
+
+                            if(!TextUtils.isEmpty(idToken)) {
+                                // 로그인 성공
+                                autoLoginSuccess()
+                            } else {
+                                Timber.e("google 자동 로그인 실패 idToken null")
+                                removeAutoInfo()
+                                return@OnCompleteListener
+                            }
+                        } else {
+                            Timber.e("google 자동 로그인 실패 ${task.result}")
+                            removeAutoInfo()
+                            return@OnCompleteListener
+                        }
+                    })
+            } else {
+                Timber.e("google 자동 로그인 실패 mUser null")
+                removeAutoInfo()
+                return
+            }
+        } else { //이메일 로그인
+            autoLoginSuccess()
         }
+    }
+
+    private fun autoLoginSuccess(){
+        Timber.e("자동 로그인 성공")
+        Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun removeAutoInfo(){

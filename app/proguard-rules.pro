@@ -44,6 +44,12 @@
 ##---- Kakao
 -keep class com.kakao.sdk.**.model.* { <fields>; }
 
+##---- Google Login
+-keep class com.google.googlesignin.** { *; }
+-keepnames class com.google.googlesignin.* { *; }
+
+-keep class com.google.android.gms.auth.** { *; }
+
 ##---- Retrofit
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
