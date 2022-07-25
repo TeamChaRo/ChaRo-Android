@@ -41,6 +41,8 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         moreViewAdapter = MoreViewAdapter(userId, links)
         Timber.d("userIdeas $userId")
 
+        binding.srMoreView.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
         binding.srMoreView.setOnRefreshListener(this)
         binding.srEmptyList.setOnRefreshListener(this)
 

@@ -57,6 +57,8 @@ class AlarmActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
         itemTouchHelper.attachToRecyclerView(binding.rcvAlarmList)
 
         initRecyclerView()
+        binding.srAlarmList.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
         binding.srAlarmList.setOnRefreshListener(this)
         binding.srEmptyList.setOnRefreshListener(this)
     }

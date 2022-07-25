@@ -30,6 +30,8 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         initSpinner()
         clickSpinner()
 
+        binding.srThemeList.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
         binding.srThemeList.setOnRefreshListener(this)
         binding.srEmptyList.setOnRefreshListener(this)
     }

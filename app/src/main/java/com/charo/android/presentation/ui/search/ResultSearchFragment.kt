@@ -97,6 +97,8 @@ class ResultSearchFragment : BaseFragment<FragmentResultSearchBinding>(R.layout.
     }
 
     private fun initResultSearchView() {
+        binding.srSearchList.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
         binding.srSearchList.setOnRefreshListener(this)
         binding.srEmptyList.setOnRefreshListener(this)
 
