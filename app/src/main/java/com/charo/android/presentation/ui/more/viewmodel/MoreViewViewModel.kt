@@ -10,6 +10,9 @@ import com.charo.android.domain.model.more.LastId
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.domain.usecase.home.PostRemoteHomeLikeUseCase
 import com.charo.android.domain.usecase.more.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -31,11 +34,18 @@ class MoreViewViewModel(
     private val getRemoteMoreNewViewInfiniteUseCase: GetRemoteMoreNewViewInfiniteUseCase
 ) : ViewModel() {
     //인기순
-    var drive = MutableLiveData<List<MoreDrive>>()
+
+    private var _drive = MutableStateFlow<List<MoreDrive>>(
+        emptyList()
+    )
+    val drive : StateFlow<List<MoreDrive>>
+        get() = _drive
 
 
-    private val _lastId = MutableLiveData<LastId>()
-    val lastId: LiveData<LastId>
+    private val _lastId = MutableStateFlow(
+        LastId(0,0)
+    )
+    val lastId: StateFlow<LastId>
         get() = _lastId
 
 
@@ -53,9 +63,11 @@ class MoreViewViewModel(
     //처음 인기 순
     fun getMoreView(userEmail: String, identifer: String, value: String) {
         viewModelScope.launch {
-            runCatching { getRemoteMoreDriveUseCase.execute(userEmail, identifer, value) }
-                .onSuccess {
-                    drive.value = it
+            runCatching { getRemoteMoreDriveUseCase(userEmail, identifer, value) }
+                .onSuccess { it ->
+                    it.collectLatest {
+                        _drive.value = it
+                    }
                     Timber.d("more 서버 통신 성공!")
                     Timber.d("more ${drive.value.toString()}")
                 }
@@ -100,10 +112,11 @@ class MoreViewViewModel(
     //인기순 마지막 Id 및 count
     fun getMoreViewLastId(userEmail: String, identifer: String, value: String){
         viewModelScope.launch {
-            runCatching {  getRemoteMoreLastIdUseCase.execute(userEmail, identifer, value)}
+            runCatching {  getRemoteMoreLastIdUseCase(userEmail, identifer, value)}
                 .onSuccess {
-                    _lastId.value = it
-
+                    it.collectLatest {
+                        _lastId.value = it
+                    }
                 }
                 .onFailure {
                     it.printStackTrace()
@@ -134,7 +147,7 @@ class MoreViewViewModel(
             runCatching { getRemoteMoreViewInfiniteUseCase.execute(userEmail, identifer, postId, count, value) }
                 .onSuccess {
                     _lastId.value = LastId(it.lastCount, it.lastId)
-                    drive.value = it.drive
+                    _drive.value = it.drive
                     Timber.d("moreViewInfinite 서버 통신 성공!")
                 }
                 .onFailure {

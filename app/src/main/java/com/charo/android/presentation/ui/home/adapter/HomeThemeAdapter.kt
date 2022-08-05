@@ -16,7 +16,7 @@ import com.charo.android.presentation.util.SharedInformation
 class HomeThemeAdapter(
 
 ) : RecyclerView.Adapter<HomeThemeAdapter.HomeThemeViewHolder>() {
-
+    private var imageClickListener : ((Int) -> Unit) ?= null
     val themeData = mutableListOf<HomeThemeInfo>()
 
     override fun onCreateViewHolder(
@@ -35,8 +35,10 @@ class HomeThemeAdapter(
         holder.onBind(themeData[position])
 
         holder.binding.root.setOnClickListener {
+            imageClickListener?.let{
+                it(position)
+            }
             val activity = it.context as AppCompatActivity
-            SharedInformation.setThemeNum(activity, position)
             val moreThemeViewFragment = MoreThemeViewFragment()
             if (!moreThemeViewFragment.isAdded) {
                 activity.supportFragmentManager.beginTransaction()
@@ -51,6 +53,11 @@ class HomeThemeAdapter(
 
     override fun getItemCount(): Int {
         return themeData.size
+    }
+
+    //themeNum 넘겨주기
+    fun setThemeNum(listener : (Int) ->Unit){
+        imageClickListener = listener
     }
 
     inner class HomeThemeViewHolder(

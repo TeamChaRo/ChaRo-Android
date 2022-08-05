@@ -210,6 +210,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeThemeAdapter = HomeThemeAdapter()
         binding.recyclerviewHomeTheme.adapter = homeThemeAdapter
         homeThemeAdapter.themeData.addAll(themeData)
+        homeThemeAdapter.setThemeNum {
+            sharedViewModel.themeNum.value = it
+        }
     }
 
     private fun initHomeTitle() {

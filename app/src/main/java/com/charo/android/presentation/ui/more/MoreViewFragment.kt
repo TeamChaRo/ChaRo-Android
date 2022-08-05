@@ -5,6 +5,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -17,6 +20,8 @@ import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.adapter.MoreViewAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.util.SharedInformation
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -85,13 +90,13 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             binding.recyclerviewMoreView.adapter = moreViewAdapter
         }
 
-        moreViewModel.drive.observe(viewLifecycleOwner) {
-            moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
-            emptyData(it)
-        }
-    }
-
-
+        moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach {
+                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
+                emptyData(it)
+            }
+            .launchIn(lifecycleScope)
+         }
     fun moreNewViewData() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         if (sharedViewModel.num.value == 0) {
@@ -210,8 +215,8 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     private fun moreViewInfiniteLoadData() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         Timber.d("userEmailss $userEmail")
-        val lastId = moreViewModel.lastId.value!!.lastId
-        val lastCount = moreViewModel.lastId.value!!.lastCount
+        val lastId = moreViewModel.lastId.value.lastId
+        val lastCount = moreViewModel.lastId.value.lastCount
         if (sharedViewModel.num.value == 0) {
 
             moreViewModel.getPreview(userEmail, "0", lastId, lastCount, "")
