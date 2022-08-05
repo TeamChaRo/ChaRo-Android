@@ -45,7 +45,7 @@ class SignUpPassWordFragment :
     }
 
     private fun initPasswordView() {
-        val emailPattern = "^[a-zA-Z0-9]{5,15}$"
+        val emailPattern = """^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@!%*#?&]).{5,15}.$"""
 
         with(binding) {
             etSignUpPassword.addTextChangedListener(object : TextWatcher {
@@ -68,7 +68,7 @@ class SignUpPassWordFragment :
                         isNextBtnActive(false)
 
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
-                        textInputPaasword.error = "영문과 숫자만 사용해 주세요."
+                        textInputPaasword.error = "영문/숫자/특수문자 한개 이상 사용해주세요"
                         Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
 
                         isNextBtnActive(false)
@@ -82,7 +82,7 @@ class SignUpPassWordFragment :
         }
     }
 
-
+    //비밀번호 체크
     private fun checkPassword(){
         with(binding){
             etSignUpPasswordReconfirm.addTextChangedListener(object: TextWatcher{

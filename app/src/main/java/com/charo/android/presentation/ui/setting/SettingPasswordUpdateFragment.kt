@@ -18,7 +18,7 @@ import java.util.regex.Pattern
 class SettingPasswordUpdateFragment :
     BaseFragment<FragmentSettingPassWordUpdateBinding>(R.layout.fragment_setting_pass_word_update) {
     private val settingViewModel: SettingViewModel by sharedViewModel()
-    val emailPattern = "^[a-zA-Z0-9]{5,15}$"
+    val emailPattern = """^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@!%*#?&]).{5,15}.$"""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,7 +58,7 @@ class SettingPasswordUpdateFragment :
                     if (s.toString().length < 5 || s.toString().length > 15) {
                         textInputPasswordUpdate.error = "5자 이상 15자 이내로 작성해 주세요."
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
-                        textInputPasswordUpdate.error = "영문과 숫자만 사용해 주세요."
+                        textInputPasswordUpdate.error = "영문/숫자/특수문자 한개 이상 사용해주세요."
                         Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
                     } else {
                         settingViewModel.originPasswordCheck(userEmail, s.toString())
@@ -96,7 +96,7 @@ class SettingPasswordUpdateFragment :
                     if (s.toString().length < 5 || s.toString().length > 15) {
                         textInputNewPassword.error = "5자 이상 15자 이내로 작성해 주세요."
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
-                        textInputNewPassword.error = "영문과 숫자만 사용해 주세요."
+                        textInputNewPassword.error = "영문/숫자/특수문자 한개 이상 사용해주세요."
                         Timber.d("password ${Pattern.matches(emailPattern, s.toString())}")
                     }else{
                         textInputNewPassword.helperText = "확인되었습니다."
