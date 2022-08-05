@@ -127,11 +127,11 @@ class SettingPasswordUpdateFragment :
                         settingViewModel.newPasswordReconfirm.observe(viewLifecycleOwner){
                             if(it == s.toString()){
                                 textInputNewPasswordReconfirm.helperText = "사용가능한 비밀번호입니다."
-                                imgPasswordUpdateButton.setImageResource(R.drawable.sign_up_next_active)
+                                textPasswordUpdateBtn.isEnabled = true
                             }else{
                                 textInputNewPasswordReconfirm.helperText = "비밀번호가 일치하지 않습니다."
                         }
-                        binding.imgPasswordUpdateButton.setOnClickListener {
+                        binding.textPasswordUpdateBtn.setOnClickListener {
                             settingViewModel.newPasswordRegister(userEmail, s.toString())
                             CustomToast.createPasswordUpdateToast(requireActivity(),"비밀번호가 변경되었습니다.")?.show()
                             val transaction = activity?.supportFragmentManager?.beginTransaction()
