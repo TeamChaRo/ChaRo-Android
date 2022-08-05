@@ -88,7 +88,7 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     } else if (s.toString().isEmpty()) {
                         textInputProfileChangeNickName.isErrorEnabled = false
                         textInputProfileChangeNickName.isHelperTextEnabled = false
-                        binding.imgProfileUpdateButton.setImageResource(R.drawable.setting_no_next)
+                        checkOkBtn(false)
 
                     } else {
                         //닉네임 중복 체크
@@ -100,9 +100,9 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                                 textInputProfileChangeNickName.isErrorEnabled = false
                                 textInputProfileChangeNickName.isHelperTextEnabled = true
                                 textInputProfileChangeNickName.helperText = "사용 가능한 닉네임입니다"
-                                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next_active)
+                                checkOkBtn(true)
                                 Timber.d("niceshot $s")
-                                binding.imgProfileUpdateButton.setOnClickListener {
+                                binding.textProfileChangeNext.setOnClickListener {
                                     settingViewModel.newNickName.value = s.toString()
                                     settingViewModel.nickName.value = true
                                     settingViewModel.buttonClick.value = true
@@ -145,8 +145,8 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
                     .into(binding.imgProfileChange)
                 Timber.d("updateProfile $its")
                 settingViewModel.images.value = true
-                binding.imgProfileUpdateButton.setImageResource(R.drawable.sign_up_next_active)
-                binding.imgProfileUpdateButton.setOnClickListener {
+                checkOkBtn(true)
+                binding.textProfileChangeNext.setOnClickListener {
                     settingViewModel.buttonClick.value = true
                     changeSettingMain()
                 }
@@ -227,6 +227,12 @@ class SettingProfileUpdateFragment : BaseFragment<FragmentSettingProfileUpdateBi
             replace(R.id.fragment_container_setting, SettingMainFragment())
             commit()
         }
+    }
+
+    //완료 버튼 클릭 전환
+    private fun checkOkBtn(boolean : Boolean){
+        binding.textProfileChangeNext.isEnabled = boolean
+        binding.textProfileChangeNext.isClickable = boolean
     }
 }
 
