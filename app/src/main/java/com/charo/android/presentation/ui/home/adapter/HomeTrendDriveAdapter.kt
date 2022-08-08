@@ -1,18 +1,16 @@
 package com.charo.android.presentation.ui.home.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeHotDriveBinding
 import com.charo.android.domain.model.home.TrendDrive
 import com.charo.android.presentation.ui.home.HomeFragment
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 import timber.log.Timber
 
 class HomeTrendDriveAdapter(
+    private val itemClick: (Int, Int) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) :
@@ -58,13 +56,7 @@ class HomeTrendDriveAdapter(
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
-            intent.apply {
-                putExtra("postId", trendDrive[position].homeTrendDrivePostId)
-                putExtra("destination", "detail")
-            }
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
-
+            itemClick(position, trendDrive[position].homeTrendDrivePostId)
         }
 
     }
@@ -82,9 +74,18 @@ class HomeTrendDriveAdapter(
         }
     }
 
-
     fun setHomeTrendDrive(trendDrive: List<TrendDrive>) {
         this.trendDrive = trendDrive
+        notifyDataSetChanged()
+    }
+
+    fun setLike(position: Int, postId: Int, update: Boolean) {
+        if (position < 0 || position >= trendDrive.size) {
+            return
+        }
+        if(trendDrive[position].homeTrendDrivePostId == postId) {
+            this.trendDrive[position].homeTrendDriveHeart = update
+        }
         notifyDataSetChanged()
     }
 }

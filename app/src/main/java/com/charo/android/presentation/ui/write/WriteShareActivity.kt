@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.charo.android.R
-import com.charo.android.data.model.mypage.User
 import com.charo.android.databinding.ActivityWriteShareBinding
 import com.charo.android.presentation.ui.detailpost.DetailPostFragment
 import com.charo.android.presentation.ui.main.MainActivity
@@ -17,7 +16,6 @@ import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
 class WriteShareActivity : AppCompatActivity() {
@@ -99,6 +97,10 @@ class WriteShareActivity : AppCompatActivity() {
             when (intent.getStringExtra("from")) {
                 "MainActivity" -> {
                     val intent = Intent(this, MainActivity::class.java).apply {
+                        //home like
+                        putExtra("updateLike", sharedViewModel.isFavorite.value)
+                        putExtra("position", intent.getIntExtra("position", -1))
+
                         putExtra("postId", sharedViewModel.postId)
                         putExtra("likesCount", sharedViewModel.likesCount.value)
                         if (sharedViewModel.isStoredFromServer != requireNotNull(sharedViewModel.isStored.value)) {

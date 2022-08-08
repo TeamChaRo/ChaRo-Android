@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.viewpager2.widget.ViewPager2
@@ -24,6 +25,7 @@ import com.charo.android.presentation.ui.home.viewmodel.HomeViewModel
 import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.MoreViewFragment
 import com.charo.android.presentation.ui.search.SearchActivity
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 import com.charo.android.presentation.util.SharedInformation
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -46,10 +48,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     var links = DataToHomeLike()
 
-
     val context = activity as? AppCompatActivity
     var bundle = Bundle()
 
+    private val homeResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                result.data?.let {
+                    val updateLike = it.getIntExtra("updateLike", -1)
+                    val position = it.getIntExtra("position", -1)
+                    val postId = it.getIntExtra("postId", -1)
+                    Timber.d("homeLauncher updateLike $updateLike position $position postId $postId")
+
+                    if(updateLike != -1 && position != -1 && postId != -1){
+                        when(updateLike){
+                            0 -> {
+                                homeTodayDriveAdapter.setLike(position, postId, false)
+                                homeHotDriveAdapter.setLike(position, postId, false)
+                                homeCustomThemeAdapter.setLike(position, postId , false)
+                                homeLocalDriveAdapter.setLike(position, postId, false)
+                            }
+                            1 -> {
+                                homeTodayDriveAdapter.setLike(position, postId, true)
+                                homeHotDriveAdapter.setLike(position, postId, true)
+                                homeCustomThemeAdapter.setLike(position, postId, true)
+                                homeLocalDriveAdapter.setLike(position, postId, true)
+                            }
+                        }
+                    }
+                }
+            }
+            Timber.d("homeLauncher result $result")
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -134,7 +164,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val userEmail = SharedInformation.getEmail(requireActivity())
         Timber.d("home 이메일 $userEmail")
         homeViewModel.getTrendDrive(userEmail)
-        homeHotDriveAdapter = HomeTrendDriveAdapter(userEmail, links)
+        homeHotDriveAdapter = HomeTrendDriveAdapter({position, postId ->
+            val intent = Intent(requireContext(), WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("destination", "detail")
+                putExtra("postId", postId)
+                putExtra("position", position)
+                putExtra("from", "MainActivity")
+            }
+            homeResultLauncher.launch(intent)
+        }, userEmail, links)
         binding.recyclerviewHomeHotDrive.adapter = homeHotDriveAdapter
         homeViewModel.trendDrive.observe(viewLifecycleOwner) {
             if(it == null || it.isEmpty()){
@@ -149,7 +188,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun initLocalDrive() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         homeViewModel.getLocalDrive(userEmail)
-        homeLocalDriveAdapter = HomeLocalDriveAdapter(userEmail, links)
+        homeLocalDriveAdapter = HomeLocalDriveAdapter({position, postId, userId ->
+            val intent = Intent(requireContext(), WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("destination", "detail")
+                putExtra("postId", postId)
+                putExtra("position", position)
+                putExtra("userId", userId)
+                putExtra("from", "MainActivity")
+            }
+            homeResultLauncher.launch(intent)
+        }, userEmail, links)
         binding.recyclerviewHomeLocationDrive.adapter = homeLocalDriveAdapter
         homeViewModel.localDrive.observe(viewLifecycleOwner) {
             if(it == null || it.isEmpty()){
@@ -167,7 +216,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recyclerviewHomeTodayDrive)
         homeViewModel.getTodayCharoDrive(userEmail)
-        homeTodayDriveAdapter = HomeTodayDriveAdapter(userEmail, links)
+        homeTodayDriveAdapter = HomeTodayDriveAdapter({position, postId ->
+        val intent = Intent(requireContext(), WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("destination", "detail")
+                putExtra("postId", postId)
+                putExtra("position", position)
+                putExtra("from", "MainActivity")
+            }
+            homeResultLauncher.launch(intent)
+        },userEmail, links)
         binding.recyclerviewHomeTodayDrive.adapter = homeTodayDriveAdapter
         homeViewModel.todayCharoDrive.observe(viewLifecycleOwner) {
             if(it == null || it.isEmpty()){
@@ -182,7 +240,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun initCustomThemeDrive() {
         val userEmail = SharedInformation.getEmail(requireActivity())
         homeViewModel.getCustomTheme(userEmail)
-        homeCustomThemeAdapter = HomeCustomThemeAdapter(userEmail, links)
+        homeCustomThemeAdapter = HomeCustomThemeAdapter({position, postId ->
+            val intent = Intent(requireContext(), WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("destination", "detail")
+                putExtra("postId", postId)
+                putExtra("position", position)
+                putExtra("from", "MainActivity")
+            }
+            homeResultLauncher.launch(intent)
+        }, userEmail, links)
         binding.recyclerviewHomeNightDrive.adapter = homeCustomThemeAdapter
         homeViewModel.customThemeDrive.observe(viewLifecycleOwner) {
             if(it == null || it.isEmpty()){

@@ -1,17 +1,15 @@
 package com.charo.android.presentation.ui.home.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeTodayDriveBinding
 import com.charo.android.domain.model.home.TodayCharoDrive
 import com.charo.android.presentation.ui.home.HomeFragment
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeTodayDriveAdapter(
+    private val itemClick: (Int, Int) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) : RecyclerView.Adapter<HomeTodayDriveAdapter.HomeTodayDriveViewHolder>() {
@@ -56,14 +54,8 @@ class HomeTodayDriveAdapter(
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
-            intent.apply {
-                putExtra("destination", "detail")
-                putExtra("postId", todayCharoDrive[position].homeTodayDrivePostId)
-            }
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
+            itemClick(position, todayCharoDrive[position].homeTodayDrivePostId)
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -77,13 +69,22 @@ class HomeTodayDriveAdapter(
             binding.apply {
                 binding.todayCharoDrive = todayCharoDrive
                 binding.executePendingBindings()
-
             }
         }
     }
 
     fun setTodayDrive(todayCharoDrive: List<TodayCharoDrive>) {
         this.todayCharoDrive = todayCharoDrive
+        notifyDataSetChanged()
+    }
+
+    fun setLike(position: Int, postId: Int, update: Boolean) {
+        if(position < 0 || position >= todayCharoDrive.size){
+            return
+        }
+        if(todayCharoDrive[position].homeTodayDrivePostId == postId) {
+            this.todayCharoDrive[position].homeTodayDriveHeart = update
+        }
         notifyDataSetChanged()
     }
 }

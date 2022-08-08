@@ -1,17 +1,15 @@
 package com.charo.android.presentation.ui.home.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeNightDriveBinding
 import com.charo.android.domain.model.home.CustomThemeDrive
 import com.charo.android.presentation.ui.home.HomeFragment
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeCustomThemeAdapter(
+    private val itemClick: (Int, Int) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) :
@@ -54,12 +52,7 @@ class HomeCustomThemeAdapter(
             }
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
-            intent.apply {
-                putExtra("postId", customThemeDrive[position].homeNightDrivePostId)
-                putExtra("destination", "detail")
-            }
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
+            itemClick(position, customThemeDrive[position].homeNightDrivePostId)
         }
     }
 
@@ -81,6 +74,16 @@ class HomeCustomThemeAdapter(
 
     fun setCustomThemeDrive(customThemeDrive: List<CustomThemeDrive>) {
         this.customThemeDrive = customThemeDrive
+        notifyDataSetChanged()
+    }
+
+    fun setLike(position: Int, postId: Int, update: Boolean) {
+        if(position < 0 || position >= customThemeDrive.size){
+            return
+        }
+        if(customThemeDrive[position].homeNightDrivePostId == postId){
+            this.customThemeDrive[position].homeNightDriveHeart = update
+        }
         notifyDataSetChanged()
     }
 }

@@ -1,17 +1,15 @@
 package com.charo.android.presentation.ui.home.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemHomeLocationDriveBinding
 import com.charo.android.domain.model.home.LocalDrive
 import com.charo.android.presentation.ui.home.HomeFragment
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeLocalDriveAdapter(
+    private val itemClick: (Int, Int, String) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) :
@@ -54,13 +52,7 @@ class HomeLocalDriveAdapter(
 
         }
         holder.binding.root.setOnClickListener() {
-            val intent = Intent(holder.itemView?.context, WriteShareActivity::class.java)
-            intent.apply {
-                putExtra("userId", userId)
-                putExtra("postId", localDrive[position].homeLocationDrivePostId)
-                putExtra("destination", "detail")
-            }
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
+            itemClick(position, localDrive[position].homeLocationDrivePostId, userId)
         }
     }
 
@@ -85,4 +77,13 @@ class HomeLocalDriveAdapter(
         notifyDataSetChanged()
     }
 
+    fun setLike(position: Int, postId: Int, update: Boolean) {
+        if(position < 0 || position >= localDrive.size){
+            return
+        }
+        if(localDrive[position].homeLocationDrivePostId == postId){
+            this.localDrive[position].homeLocationDriveHeart = update
+        }
+        notifyDataSetChanged()
+    }
 }

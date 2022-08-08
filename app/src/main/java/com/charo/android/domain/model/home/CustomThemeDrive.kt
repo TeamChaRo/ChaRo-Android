@@ -6,7 +6,7 @@ data class CustomThemeDrive(
     val homeNightDriveChip_1 : String?="",
     val homeNightDriveChip_2 : String?="",
     val homeNightDriveChip_3 : String?="",
-    val homeNightDriveHeart : Boolean,
+    var homeNightDriveHeart : Boolean,
     val homeNightDriveDay: String,
     val homeNightDriveMonth: String,
     val homeNightDrivePostId: Int,
