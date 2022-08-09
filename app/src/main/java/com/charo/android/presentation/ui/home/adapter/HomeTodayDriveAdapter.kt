@@ -9,7 +9,8 @@ import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeTodayDriveAdapter(
-    private val itemClick: (Int, Int) -> Unit,
+    private val itemClick: (TodayCharoDrive) -> Unit,
+    private val heartClick: (Int, Boolean) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) : RecyclerView.Adapter<HomeTodayDriveAdapter.HomeTodayDriveViewHolder>() {
@@ -39,22 +40,18 @@ class HomeTodayDriveAdapter(
             if (userId == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
             } else {
-                if (select) {
-                    it.isSelected = !todayCharoDrive[position].homeTodayDriveHeart
-
-                    select = false
-                } else {
-                    it.isSelected = todayCharoDrive[position].homeTodayDriveHeart
-                    select = true
-                }
+                todayCharoDrive[position].homeTodayDriveHeart = !todayCharoDrive[position].homeTodayDriveHeart
+                it.isSelected = todayCharoDrive[position].homeTodayDriveHeart
                 postId = todayCharoDrive[position].homeTodayDrivePostId
+
+                heartClick(postId, it.isSelected)
                 links.getPostId(postId)
             }
 
 
         }
         holder.binding.root.setOnClickListener() {
-            itemClick(position, todayCharoDrive[position].homeTodayDrivePostId)
+            itemClick(todayCharoDrive[position])
         }
     }
 
@@ -78,12 +75,11 @@ class HomeTodayDriveAdapter(
         notifyDataSetChanged()
     }
 
-    fun setLike(position: Int, postId: Int, update: Boolean) {
-        if(position < 0 || position >= todayCharoDrive.size){
-            return
-        }
-        if(todayCharoDrive[position].homeTodayDrivePostId == postId) {
-            this.todayCharoDrive[position].homeTodayDriveHeart = update
+    fun setLike(postId: Int, update: Boolean) {
+        for(item in todayCharoDrive) {
+            if(item.homeTodayDrivePostId == postId) {
+                item.homeTodayDriveHeart = update
+            }
         }
         notifyDataSetChanged()
     }

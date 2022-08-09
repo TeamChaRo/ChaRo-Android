@@ -9,7 +9,8 @@ import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeCustomThemeAdapter(
-    private val itemClick: (Int, Int) -> Unit,
+    private val itemClick: (CustomThemeDrive) -> Unit,
+    private val heartClick: (Int, Boolean) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) :
@@ -39,20 +40,16 @@ class HomeCustomThemeAdapter(
             if (userId == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
             } else {
+                customThemeDrive[position].homeNightDriveHeart = !customThemeDrive[position].homeNightDriveHeart
+                it.isSelected = customThemeDrive[position].homeNightDriveHeart
                 postId = customThemeDrive[position].homeNightDrivePostId
-                if (select) {
-                    it.isSelected = !customThemeDrive[position].homeNightDriveHeart
-                    select = false
-                } else {
-                    it.isSelected = customThemeDrive[position].homeNightDriveHeart
-                    select = true
-                }
 
+                heartClick(postId, it.isSelected)
                 links.getPostId(postId)
             }
         }
         holder.binding.root.setOnClickListener() {
-            itemClick(position, customThemeDrive[position].homeNightDrivePostId)
+            itemClick(customThemeDrive[position])
         }
     }
 
@@ -77,12 +74,11 @@ class HomeCustomThemeAdapter(
         notifyDataSetChanged()
     }
 
-    fun setLike(position: Int, postId: Int, update: Boolean) {
-        if(position < 0 || position >= customThemeDrive.size){
-            return
-        }
-        if(customThemeDrive[position].homeNightDrivePostId == postId){
-            this.customThemeDrive[position].homeNightDriveHeart = update
+    fun setLike(postId: Int, update: Boolean) {
+        for(item in customThemeDrive) {
+            if(item.homeNightDrivePostId == postId) {
+                item.homeNightDriveHeart = update
+            }
         }
         notifyDataSetChanged()
     }

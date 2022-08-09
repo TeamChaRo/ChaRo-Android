@@ -9,7 +9,8 @@ import com.charo.android.presentation.ui.home.HomeFragment
 import com.charo.android.presentation.util.LoginUtil
 
 class HomeLocalDriveAdapter(
-    private val itemClick: (Int, Int, String) -> Unit,
+    private val itemClick: (LocalDrive, String) -> Unit,
+    private val heartClick: (Int, Boolean) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) :
@@ -39,20 +40,17 @@ class HomeLocalDriveAdapter(
             if (userId == "@") {
                 LoginUtil.loginPrompt(holder.itemView.context)
             } else {
+                localDrive[position].homeLocationDriveHeart = !localDrive[position].homeLocationDriveHeart
+                it.isSelected = localDrive[position].homeLocationDriveHeart
                 postId = localDrive[position].homeLocationDrivePostId
-                if (select) {
-                    it.isSelected = !localDrive[position].homeLocationDriveHeart
-                    select = false
-                } else {
-                    it.isSelected = localDrive[position].homeLocationDriveHeart
-                }
 
+                heartClick(postId, it.isSelected)
                 links.getPostId(postId)
             }
 
         }
         holder.binding.root.setOnClickListener() {
-            itemClick(position, localDrive[position].homeLocationDrivePostId, userId)
+            itemClick(localDrive[position], userId)
         }
     }
 
@@ -77,12 +75,11 @@ class HomeLocalDriveAdapter(
         notifyDataSetChanged()
     }
 
-    fun setLike(position: Int, postId: Int, update: Boolean) {
-        if(position < 0 || position >= localDrive.size){
-            return
-        }
-        if(localDrive[position].homeLocationDrivePostId == postId){
-            this.localDrive[position].homeLocationDriveHeart = update
+    fun setLike(postId: Int, update: Boolean) {
+        for(item in localDrive) {
+            if(item.homeLocationDrivePostId == postId) {
+                item.homeLocationDriveHeart = update
+            }
         }
         notifyDataSetChanged()
     }

@@ -10,7 +10,8 @@ import com.charo.android.presentation.util.LoginUtil
 import timber.log.Timber
 
 class HomeTrendDriveAdapter(
-    private val itemClick: (Int, Int) -> Unit,
+    private val itemClick: (TrendDrive) -> Unit,
+    private val heartClick: (Int, Boolean) -> Unit,
     val userId: String,
     var links: HomeFragment.DataToHomeLike
 ) :
@@ -42,21 +43,17 @@ class HomeTrendDriveAdapter(
                 Timber.d("homeHotDrive 로그인 유도")
                 LoginUtil.loginPrompt(holder.itemView.context)
             } else {
+                trendDrive[position].homeTrendDriveHeart = !trendDrive[position].homeTrendDriveHeart
+                it.isSelected = trendDrive[position].homeTrendDriveHeart
                 postId = trendDrive[position].homeTrendDrivePostId
-                if (select) {
-                    it.isSelected = !trendDrive[position].homeTrendDriveHeart
-                    select = false
-                } else {
-                    it.isSelected = trendDrive[position].homeTrendDriveHeart
-                    select = true
-                }
 
+                heartClick(postId, it.isSelected)
                 links.getPostId(postId)
             }
 
         }
         holder.binding.root.setOnClickListener() {
-            itemClick(position, trendDrive[position].homeTrendDrivePostId)
+            itemClick(trendDrive[position])
         }
 
     }
@@ -79,12 +76,11 @@ class HomeTrendDriveAdapter(
         notifyDataSetChanged()
     }
 
-    fun setLike(position: Int, postId: Int, update: Boolean) {
-        if (position < 0 || position >= trendDrive.size) {
-            return
-        }
-        if(trendDrive[position].homeTrendDrivePostId == postId) {
-            this.trendDrive[position].homeTrendDriveHeart = update
+    fun setLike(postId: Int, update: Boolean) {
+        for(item in trendDrive) {
+            if(item.homeTrendDrivePostId == postId) {
+                item.homeTrendDriveHeart = update
+            }
         }
         notifyDataSetChanged()
     }

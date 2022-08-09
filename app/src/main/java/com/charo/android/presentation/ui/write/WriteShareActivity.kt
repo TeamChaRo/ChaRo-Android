@@ -99,7 +99,6 @@ class WriteShareActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java).apply {
                         //home like
                         putExtra("updateLike", sharedViewModel.isFavorite.value)
-                        putExtra("position", intent.getIntExtra("position", -1))
 
                         putExtra("postId", sharedViewModel.postId)
                         putExtra("likesCount", sharedViewModel.likesCount.value)
