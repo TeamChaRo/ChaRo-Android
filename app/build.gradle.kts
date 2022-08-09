@@ -71,7 +71,7 @@ dependencies {
     implementation(AndroidXDependencies.constraintLayout)
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 //lottie
     implementation("com.airbnb.android:lottie:3.4.2")
 
@@ -165,8 +165,8 @@ dependencies {
     androidTestImplementation(TestDependencies.espresso)
 
 //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
 //CardView
     implementation(AndroidXDependencies.cardview)

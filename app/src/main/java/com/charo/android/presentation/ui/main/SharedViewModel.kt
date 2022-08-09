@@ -28,6 +28,9 @@ class SharedViewModel(
     //postId
     var postId : MutableLiveData<Int> = MutableLiveData()
 
+    //themeNum
+    var themeNum : MutableLiveData<Int> = MutableLiveData()
+
     //로그인 유저 & 둘러보기 유저 구분
     var lookForEmail : MutableLiveData<String> = MutableLiveData()
 

@@ -6,7 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnAttach
 import com.charo.android.R
-import com.charo.android.data.model.request.RequestThemeViewData
 import com.charo.android.databinding.FragmentMoreThemeViewBinding
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.main.SharedViewModel
@@ -77,12 +76,14 @@ class MoreThemeViewFragment :
                     MoreThemeContentViewFragment(userId, "1", "cityView")
                 )
             }
-
-            val themeNum = SharedInformation.getThemeNum(requireActivity())
-            tabMoreThemeTab.getTabAt(themeNum)?.select()
-            viewPagerMoreTheme.doOnAttach {
-                viewPagerMoreTheme.setCurrentItem(themeNum, false)
+            sharedViewModel.themeNum.observe(viewLifecycleOwner) {
+                var themeNum = it
+                tabMoreThemeTab.getTabAt(themeNum)?.select()
+                viewPagerMoreTheme.doOnAttach {
+                    viewPagerMoreTheme.setCurrentItem(themeNum, false)
+                }
             }
+
 
 
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->

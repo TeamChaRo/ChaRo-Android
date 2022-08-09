@@ -9,6 +9,7 @@ import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.presentation.ui.more.MoreThemeContentViewFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
+import timber.log.Timber
 
 class MoreThemeContentAdapter(
     var link: MoreThemeContentViewFragment.DataToMoreThemeLike,
@@ -72,6 +73,7 @@ class MoreThemeContentAdapter(
     }
 
     fun setHomeTrendDrive(moreData: List<MoreDrive>) {
+        Timber.d("이거 작동중")
         this.moreData = moreData
         notifyDataSetChanged()
     }

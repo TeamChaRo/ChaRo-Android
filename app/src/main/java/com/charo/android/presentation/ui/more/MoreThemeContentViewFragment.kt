@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
@@ -12,6 +15,8 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.more.adapter.MoreThemeContentAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.util.SharedInformation
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -68,24 +73,29 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         moreViewModel.getMoreView(userId, identifier, value)
         moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
-        moreViewModel.drive.observe(viewLifecycleOwner) {
-            binding.srThemeList.isRefreshing = false
-            binding.srEmptyList.isRefreshing = false
 
-            if (it.isEmpty()) {
-                binding.clEmptyList.visibility = View.VISIBLE
-                binding.clThemeList.visibility = View.GONE
-                binding.srEmptyList.visibility = View.VISIBLE
-                binding.srThemeList.visibility = View.GONE
-            } else {
-                binding.clEmptyList.visibility = View.GONE
-                binding.clThemeList.visibility = View.VISIBLE
-                binding.srEmptyList.visibility = View.GONE
-                binding.srThemeList.visibility = View.VISIBLE
-                moreThemeContentAdapter.setHomeTrendDrive(it)
-            }
+        moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach {
+                binding.srThemeList.isRefreshing = false
+                binding.srEmptyList.isRefreshing = false
+                if (it.isEmpty()) {
+                    binding.clEmptyList.visibility = View.VISIBLE
+                    binding.clThemeList.visibility = View.GONE
+                    binding.srEmptyList.visibility = View.VISIBLE
+                    binding.srThemeList.visibility = View.GONE
+                } else {
+                    binding.clEmptyList.visibility = View.GONE
+                    binding.clThemeList.visibility = View.VISIBLE
+                    binding.srEmptyList.visibility = View.GONE
+                    binding.srThemeList.visibility = View.VISIBLE
+                    moreThemeContentAdapter.setHomeTrendDrive(it)
+
+                }
+            }.launchIn(lifecycleScope)
+
+
         }
-    }
+
 
     private fun initMoreThemeNewView() {
         Timber.d("데이터 받아오는거 확인 $value")
