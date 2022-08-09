@@ -22,7 +22,7 @@ class MoreViewViewModel(
     private val getRemoteMoreLastIdUseCase: GetRemoteMoreLastIdUseCase,
 
     //최신순 LastId 받아오는 거
-    private val getRemoteMoreNewLastIdUseCase : GetRemoteMoreNewLastIdUseCase,
+    private val getRemoteMoreNewLastIdUseCase: GetRemoteMoreNewLastIdUseCase,
 
     private val getRemoteMoreNewDriveViewUseCase: GetRemoteMoreNewDriveUseCase,
     private val postRemoteHomeLikeUseCase: PostRemoteHomeLikeUseCase,
@@ -36,28 +36,40 @@ class MoreViewViewModel(
     //인기순
 
     private var _drive = MutableStateFlow<List<MoreDrive>>(
-        emptyList()
+        listOf(
+            MoreDrive(
+                "1", "", false, "", -1, "", ",", ",", "", ""
+            )
+        )
     )
-    val drive : StateFlow<List<MoreDrive>>
+    val drive: StateFlow<List<MoreDrive>>
         get() = _drive
 
 
     private val _lastId = MutableStateFlow(
-        LastId(0,0)
+        LastId(0, 0)
     )
     val lastId: StateFlow<LastId>
         get() = _lastId
 
+    //lastId 비교
+    var checkLastId = -1
 
     //최신순
-    var newDrive = MutableLiveData<List<MoreDrive>>()
+    var newDrive = MutableStateFlow<List<MoreDrive>>(
+        listOf(
+            MoreDrive(
+                "1", "", false, "", -1, "", ",", ",", "", ""
+            )
+        )
+    )
 
 
     //스피넌 position
     var position = MutableLiveData<Int>()
 
     private val _statusCode = MutableLiveData<StatusCode>()
-    val statusCode : LiveData<StatusCode>
+    val statusCode: LiveData<StatusCode>
         get() = _statusCode
 
     //처음 인기 순
@@ -77,12 +89,15 @@ class MoreViewViewModel(
                 }
         }
     }
+
     //처음 최신순
     fun getMoreNewView(userEmail: String, identifer: String, value: String) {
         viewModelScope.launch {
-            runCatching { getRemoteMoreNewDriveViewUseCase.execute(userEmail, identifer, value) }
-                .onSuccess {
-                    newDrive.value = it
+            runCatching { getRemoteMoreNewDriveViewUseCase(userEmail, identifer, value) }
+                .onSuccess { it ->
+                    it.collectLatest{
+                        newDrive.value = it
+                    }
                     Timber.d("more 서버 통신 성공!")
                     Timber.d("more ${drive.value.toString()}")
                 }
@@ -94,8 +109,9 @@ class MoreViewViewModel(
 
         }
     }
+
     //게시물 좋아요
-    fun postLike(requestHomeLikeData: RequestHomeLikeData){
+    fun postLike(requestHomeLikeData: RequestHomeLikeData) {
         viewModelScope.launch {
             runCatching { postRemoteHomeLikeUseCase.execute(requestHomeLikeData) }
                 .onSuccess {
@@ -110,9 +126,9 @@ class MoreViewViewModel(
     }
 
     //인기순 마지막 Id 및 count
-    fun getMoreViewLastId(userEmail: String, identifer: String, value: String){
+    fun getMoreViewLastId(userEmail: String, identifer: String, value: String) {
         viewModelScope.launch {
-            runCatching {  getRemoteMoreLastIdUseCase(userEmail, identifer, value)}
+            runCatching { getRemoteMoreLastIdUseCase(userEmail, identifer, value) }
                 .onSuccess {
                     it.collectLatest {
                         _lastId.value = it
@@ -126,11 +142,13 @@ class MoreViewViewModel(
     }
 
     //최신순 마지막 ID 및 count
-    fun getMoreNewViewLastId(userEmail:String, identifier: String, value : String){
+    fun getMoreNewViewLastId(userEmail: String, identifier: String, value: String) {
         viewModelScope.launch {
-            runCatching { getRemoteMoreNewLastIdUseCase.execute(userEmail, identifier, value) }
-                .onSuccess {
-                    _lastId.value = it
+            runCatching { getRemoteMoreNewLastIdUseCase(userEmail, identifier, value) }
+                .onSuccess { it ->
+                    it.collectLatest {
+                        _lastId.value = it
+                    }
                     Timber.d("moreNewViewLastId 서버 통신 성공")
                 }
                 .onFailure {
@@ -142,9 +160,17 @@ class MoreViewViewModel(
     }
 
     //인기순 무한 스크롤
-    fun getPreview(userEmail: String, identifer: String, postId : Int, count : Int, value: String){
+    fun getPreview(userEmail: String, identifer: String, postId: Int, count: Int, value: String) {
         viewModelScope.launch {
-            runCatching { getRemoteMoreViewInfiniteUseCase.execute(userEmail, identifer, postId, count, value) }
+            runCatching {
+                getRemoteMoreViewInfiniteUseCase.execute(
+                    userEmail,
+                    identifer,
+                    postId,
+                    count,
+                    value
+                )
+            }
                 .onSuccess {
                     _lastId.value = LastId(it.lastCount, it.lastId)
                     _drive.value = it.drive
@@ -158,9 +184,16 @@ class MoreViewViewModel(
     }
 
     //최신순 무한 스크롤
-    fun getNewPreview(userEmail: String, identifer: String, postId : Int, value: String){
+    fun getNewPreview(userEmail: String, identifer: String, postId: Int, value: String) {
         viewModelScope.launch {
-            runCatching { getRemoteMoreNewViewInfiniteUseCase.execute(userEmail, identifer, postId, value) }
+            runCatching {
+                getRemoteMoreNewViewInfiniteUseCase.execute(
+                    userEmail,
+                    identifer,
+                    postId,
+                    value
+                )
+            }
                 .onSuccess {
                     _lastId.value = LastId(it.lastCount, it.lastId)
                     newDrive.value = it.drive

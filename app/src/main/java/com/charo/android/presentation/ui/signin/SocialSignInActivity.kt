@@ -75,7 +75,7 @@ class SocialSignInActivity() :
         }
 
         //카카오 로그인
-        if(socialKey == "1"){
+        if (socialKey == "1") {
             //토큰 확인
             if (AuthApiClient.instance.hasToken()) {
                 UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
@@ -83,7 +83,8 @@ class SocialSignInActivity() :
                         Timber.e("kakao 자동 로그인 실패 $error")
                         if (error is KakaoSdkError && error.isInvalidTokenError() == true) {
                             //토큰 만료
-                            Toast.makeText(this, "토큰이 만료되었습니다. 다시 로그인해주세요.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "토큰이 만료되었습니다. 다시 로그인해주세요.", Toast.LENGTH_SHORT)
+                                .show()
                             Timber.e("kakao 토큰 만료 $error")
                         } else {
                             //기타 에러
@@ -101,17 +102,17 @@ class SocialSignInActivity() :
                 removeAutoInfo()
                 return
             }
-        } else if(socialKey == "2"){ //구글 로그인
-            val mUser : FirebaseUser? = Firebase.auth.currentUser
+        } else if (socialKey == "2") { //구글 로그인
+            val mUser: FirebaseUser? = Firebase.auth.currentUser
 
-            if(mUser != null){
+            if (mUser != null) {
                 mUser.getIdToken(true)
                     .addOnCompleteListener(OnCompleteListener<GetTokenResult?> { task ->
                         if (task.isSuccessful) {
                             val idToken: String? = task.result.token
                             Timber.d("아이디 토큰 = $idToken")
 
-                            if(!TextUtils.isEmpty(idToken)) {
+                            if (!TextUtils.isEmpty(idToken)) {
                                 // 로그인 성공
                                 autoLoginSuccess()
                             } else {
@@ -135,7 +136,7 @@ class SocialSignInActivity() :
         }
     }
 
-    private fun autoLoginSuccess(){
+    private fun autoLoginSuccess() {
         Timber.e("자동 로그인 성공")
         Toast.makeText(this, "자동 로그인 성공", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, MainActivity::class.java)
@@ -143,7 +144,7 @@ class SocialSignInActivity() :
         finish()
     }
 
-    private fun removeAutoInfo(){
+    private fun removeAutoInfo() {
         SharedInformation.setLogout(this, "Logout")
         SharedInformation.removeNickName(this)
         SharedInformation.removeEmail(this)
@@ -156,7 +157,8 @@ class SocialSignInActivity() :
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 Timber.e("kakao 로그인 실패 $error")
-                Toast.makeText(this, getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
+                    .show()
             } else if (token != null) {
                 Timber.i("kakao 로그인 성공 ${token.accessToken}")
                 kakaoUserEmail()
@@ -232,8 +234,9 @@ class SocialSignInActivity() :
                 intent.putExtra("kakaoSignUpEmail", SharedInformation.getEmail(this))
                 startActivity(intent)
                 finish()
-            } else if(it == 500){
-                Toast.makeText(this, getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
+            } else if (it == 500) {
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
@@ -331,8 +334,9 @@ class SocialSignInActivity() :
                 }
                 startActivity(intent)
                 finish()
-            } else if(it == 500){
-                Toast.makeText(this, getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
+            } else if (it == 500) {
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }

@@ -2,6 +2,7 @@ package com.charo.android.presentation.ui.more
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -147,7 +148,8 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
             moreResultLauncher.launch(intent)
         }, link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
-        moreViewModel.newDrive.observe(viewLifecycleOwner) {
+        moreViewModel.newDrive.flowWithLifecycle(lifecycle,Lifecycle.State.STARTED)
+            .onEach{
             binding.srThemeList.isRefreshing = false
             binding.srEmptyList.isRefreshing = false
 
@@ -163,7 +165,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 binding.srThemeList.visibility = View.VISIBLE
                 moreThemeContentAdapter.setHomeTrendDrive(it)
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun initSpinner() {
