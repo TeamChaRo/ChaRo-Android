@@ -48,8 +48,8 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
                     val postId = it.getIntExtra("postId", -1)
                     Timber.d("moreViewLauncher updateLike $updateLike postId $postId")
 
-                    if(updateLike != -1 && postId != -1){
-                        when(updateLike){
+                    if (updateLike != -1 && postId != -1) {
+                        when (updateLike) {
                             0 -> {
                                 moreViewAdapter.setLike(postId, false)
                             }
@@ -63,7 +63,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             Timber.d("moreViewLauncher result $result")
         }
 
-    private fun startForActivity(it: MoreDrive){
+    private fun startForActivity(it: MoreDrive) {
         val intent = Intent(requireContext(), WriteShareActivity::class.java)
         intent.apply {
             putExtra("userId", userId)
@@ -81,15 +81,15 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
         userId = arguments?.getString("userId").toString()
         moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userId, links)
-            binding.srMoreView.setColorSchemeResources(R.color.blue_main_0f6fff)
-            binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
-            binding.srMoreView.setOnRefreshListener(this)
-            binding.srEmptyList.setOnRefreshListener(this)
+        binding.srMoreView.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
+        binding.srMoreView.setOnRefreshListener(this)
+        binding.srEmptyList.setOnRefreshListener(this)
 
-            initSpinner()
+        initSpinner()
 //        clickBackButton(userId)
-            clickSpinner()
-            removeData()
+        clickSpinner()
+        removeData()
     }
 
     private fun initToolbar() {
@@ -127,7 +127,7 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
         moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach {
-                if(it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
                 }
                 emptyData(it)
