@@ -1,9 +1,12 @@
 package com.charo.android.presentation.ui.more
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +17,7 @@ import com.charo.android.databinding.FragmentMoreThemeContentViewBinding
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.more.adapter.MoreThemeContentAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.SharedInformation
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,6 +33,29 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     var link = DataToMoreThemeLike()
 
     var currentSpinnerPosition = 0
+
+    private val moreResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                result.data?.let {
+                    val updateLike = it.getIntExtra("updateLike", -1)
+                    val postId = it.getIntExtra("postId", -1)
+                    Timber.d("moreResultLauncher updateLike $updateLike postId $postId")
+
+                    if(updateLike != -1 && postId != -1){
+                        when(updateLike){
+                            0 -> {
+                                moreThemeContentAdapter.setLike(postId, false)
+                            }
+                            1 -> {
+                                moreThemeContentAdapter.setLike(postId, true)
+                            }
+                        }
+                    }
+                }
+            }
+            Timber.d("moreResultLauncher result $result")
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +98,16 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
     private fun initMoreThemeView() {
         moreViewModel.getMoreView(userId, identifier, value)
-        moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
+        moreThemeContentAdapter = MoreThemeContentAdapter({
+            val intent = Intent(requireContext(), WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("userId", userId)
+                putExtra("destination", "detail")
+                putExtra("from", "MoreView")
+                putExtra("postId", it.morePostId)
+            }
+            moreResultLauncher.launch(intent)
+        }, link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
 
         moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
@@ -100,7 +136,16 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     private fun initMoreThemeNewView() {
         Timber.d("데이터 받아오는거 확인 $value")
         moreViewModel.getMoreNewView(userId, identifier, value)
-        moreThemeContentAdapter = MoreThemeContentAdapter(link, userId)
+        moreThemeContentAdapter = MoreThemeContentAdapter({
+            val intent = Intent(requireContext(), WriteShareActivity::class.java)
+            intent.apply {
+                putExtra("userId", userId)
+                putExtra("destination", "detail")
+                putExtra("from", "MoreView")
+                putExtra("postId", it.morePostId)
+            }
+            moreResultLauncher.launch(intent)
+        }, link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
         moreViewModel.newDrive.observe(viewLifecycleOwner) {
             binding.srThemeList.isRefreshing = false

@@ -1,18 +1,16 @@
 package com.charo.android.presentation.ui.more.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.charo.android.databinding.ItemCharoLoadingBinding
 import com.charo.android.databinding.ItemMoreViewBinding
 import com.charo.android.domain.model.more.MoreDrive
 import com.charo.android.presentation.ui.more.MoreViewFragment
-import com.charo.android.presentation.ui.write.WriteShareActivity
 import timber.log.Timber
 
 class MoreViewAdapter(
+    private val itemClick: (MoreDrive) -> Unit,
     val userId: String,
     var links: MoreViewFragment.DataToMoreLike,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -59,25 +57,15 @@ class MoreViewAdapter(
         if (holder is MoreViewViewHolder) {
             holder.onBind(moreData[position])
             holder.binding.imgMoreViewHeart.setOnClickListener {
+                moreData[position].moreIsFavorite = !moreData[position].moreIsFavorite
+                it.isSelected = moreData[position].moreIsFavorite
+
                 postId = moreData[position].morePostId
-                if (select) {
-                    it.isSelected = !moreData[position].moreIsFavorite
-                    select = false
-                } else {
-                    it.isSelected = moreData[position].moreIsFavorite
-                    select = true
-                }
                 links.getPostId(postId)
             }
 
             holder.binding.root.setOnClickListener() {
-                val intent = Intent(holder.itemView.context, WriteShareActivity::class.java)
-                intent.apply {
-                    putExtra("userId", userId)
-                    putExtra("destination", "detail")
-                    putExtra("postId", moreData[position].morePostId)
-                }
-                ContextCompat.startActivity(holder.itemView.context, intent, null)
+                itemClick(moreData[position])
             }
         }
     }
@@ -114,7 +102,6 @@ class MoreViewAdapter(
 
     }
 
-
     fun addLoading() {
         moreData.add(MoreDrive("", "", false, "", 0, "", "", "", "", ""))
         this.notifyItemRangeInserted(moreData.size, 1)
@@ -126,4 +113,12 @@ class MoreViewAdapter(
         }
     }
 
+    fun setLike(postId: Int, update: Boolean) {
+        for(item in moreData) {
+            if(item.morePostId == postId) {
+                item.moreIsFavorite = update
+            }
+        }
+        notifyDataSetChanged()
+    }
 }

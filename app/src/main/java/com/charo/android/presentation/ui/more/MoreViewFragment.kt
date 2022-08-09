@@ -1,9 +1,11 @@
 package com.charo.android.presentation.ui.more
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -19,6 +21,7 @@ import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.adapter.MoreViewAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
+import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.SharedInformation
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -36,6 +39,39 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
     var links = DataToMoreLike()
     var currentSpinnerPosition = 0
 
+    private val moreViewLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                result.data?.let {
+                    val updateLike = it.getIntExtra("updateLike", -1)
+                    val postId = it.getIntExtra("postId", -1)
+                    Timber.d("moreViewLauncher updateLike $updateLike postId $postId")
+
+                    if(updateLike != -1 && postId != -1){
+                        when(updateLike){
+                            0 -> {
+                                moreViewAdapter.setLike(postId, false)
+                            }
+                            1 -> {
+                                moreViewAdapter.setLike(postId, true)
+                            }
+                        }
+                    }
+                }
+            }
+            Timber.d("moreViewLauncher result $result")
+        }
+
+    private fun startForActivity(it: MoreDrive){
+        val intent = Intent(requireContext(), WriteShareActivity::class.java)
+        intent.apply {
+            putExtra("userId", userId)
+            putExtra("destination", "detail")
+            putExtra("from", "MoreView")
+            putExtra("postId", it.morePostId)
+        }
+        moreViewLauncher.launch(intent)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,18 +79,18 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         sharedViewModel.moreFragment.value = true
 
         userId = arguments?.getString("userId").toString()
-        moreViewAdapter = MoreViewAdapter(userId, links)
-        Timber.d("userIdeas $userId")
+        moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userId, links)
+            Timber.d("userIdeas $userId")
 
-        binding.srMoreView.setColorSchemeResources(R.color.blue_main_0f6fff)
-        binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
-        binding.srMoreView.setOnRefreshListener(this)
-        binding.srEmptyList.setOnRefreshListener(this)
+            binding.srMoreView.setColorSchemeResources(R.color.blue_main_0f6fff)
+            binding.srEmptyList.setColorSchemeResources(R.color.blue_main_0f6fff)
+            binding.srMoreView.setOnRefreshListener(this)
+            binding.srEmptyList.setOnRefreshListener(this)
 
-        initSpinner()
+            initSpinner()
 //        clickBackButton(userId)
-        clickSpinner()
-        removeData()
+            clickSpinner()
+            removeData()
     }
 
     private fun initToolbar() {
@@ -71,21 +107,21 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreView(userEmail, "0", "")
             moreViewModel.getMoreViewLastId(userEmail, "0", "")
-            moreViewAdapter = MoreViewAdapter(userEmail, links)
+            moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
 
         } else if (sharedViewModel.num.value == 2) {
             moreViewModel.getMoreView(userEmail, "2", "busan")
             moreViewModel.getMoreViewLastId(userEmail, "2", "busan")
             sharedViewModel.getHomeTitle(userEmail)
-            moreViewAdapter = MoreViewAdapter(userEmail, links)
+            moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userEmail, links)
             binding.textToolbarTitle.text = sharedViewModel.localThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
         } else {
             moreViewModel.getMoreView(userEmail, "3", "")
             moreViewModel.getMoreViewLastId(userEmail, "3", "")
             sharedViewModel.getHomeTitle(userEmail)
-            moreViewAdapter = MoreViewAdapter(userEmail, links)
+            moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userEmail, links)
             binding.textToolbarTitle.text = sharedViewModel.customThemeTitle.value
             binding.recyclerviewMoreView.adapter = moreViewAdapter
         }
@@ -104,18 +140,18 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
         if (sharedViewModel.num.value == 0) {
             moreViewModel.getMoreNewView(userEmail, "0", "")
             moreViewModel.getMoreNewViewLastId(userEmail, "0", "")
-            moreViewAdapter = MoreViewAdapter(userEmail, links)
+            moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
 
         } else if (sharedViewModel.num.value == 2) {
             moreViewModel.getMoreNewView(userEmail, "2", "busan")
             moreViewModel.getMoreNewViewLastId(userEmail, "2", "busan")
-            moreViewAdapter = MoreViewAdapter(userEmail, links)
+            moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
         } else {
             moreViewModel.getMoreNewView(userEmail, "3", "")
             moreViewModel.getMoreNewViewLastId(userEmail, "3", "")
-            moreViewAdapter = MoreViewAdapter(userEmail, links)
+            moreViewAdapter = MoreViewAdapter({ startForActivity(it) }, userEmail, links)
             binding.recyclerviewMoreView.adapter = moreViewAdapter
         }
 

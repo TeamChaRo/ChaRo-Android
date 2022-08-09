@@ -122,6 +122,15 @@ class WriteShareActivity : AppCompatActivity() {
                     }
                     setResult(RESULT_OK, intent)
                 }
+                "MoreView" -> {
+                    val intent = Intent(this, MainActivity::class.java).apply {
+                        //moreView like
+                        putExtra("updateLike", sharedViewModel.isFavorite.value)
+                        putExtra("postId", sharedViewModel.postId)
+                        putExtra("position", intent.getIntExtra("position", -1))
+                    }
+                    setResult(RESULT_OK, intent)
+                }
             }
             super.onBackPressed()
         } else if (currentFragment is WriteFragment) {

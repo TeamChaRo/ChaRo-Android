@@ -3,7 +3,7 @@ package com.charo.android.domain.model.more
 data class MoreDrive(
     val moreDay: String,
     val moreImage: String,
-    val moreIsFavorite: Boolean,
+    var moreIsFavorite: Boolean,
     val moreMonth: String,
     val morePostId: Int,
     val moreRegion: String ?= "",
