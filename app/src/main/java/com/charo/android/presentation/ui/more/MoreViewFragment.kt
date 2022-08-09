@@ -92,7 +92,9 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
 
         moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach {
-                moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
+                if(it.isNotEmpty()){
+                    moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
+                }
                 emptyData(it)
             }
             .launchIn(lifecycleScope)
