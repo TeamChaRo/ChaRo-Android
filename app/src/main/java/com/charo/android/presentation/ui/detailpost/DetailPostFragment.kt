@@ -325,7 +325,7 @@ class DetailPostFragment : Fragment() {
             //TODO: ios app store id / token
             .setIosParameters(
                 DynamicLink.IosParameters.Builder(requireActivity().packageName)
-                    .setAppStoreId("Define.APP_STORE_ID")
+                    .setAppStoreId(Define().APP_STORE_ID)
                     .setMinimumVersion("1.0.0")
                     .build())
             .setItunesConnectAnalyticsParameters(

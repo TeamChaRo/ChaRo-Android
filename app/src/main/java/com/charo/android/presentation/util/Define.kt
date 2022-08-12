@@ -36,6 +36,7 @@ class Define {
     //dynamicLink
     val DEEP_LINK : String = "https://charo.page.link"
     val DTL_SEGMENT : String = "dtl"
+    val APP_STORE_ID : String = "1616448590"
 
     //이용약관
     val googleForm : String = "https://docs.google.com/forms/d/e/1FAIpQLSdg0MjTyIZcnh_uihSpEYQ8rey0K39Adk6qJ-d21rKEDTW2WA/viewform?usp=sf_link"
