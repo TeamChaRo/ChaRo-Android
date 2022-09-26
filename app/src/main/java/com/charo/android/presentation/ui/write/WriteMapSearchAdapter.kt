@@ -40,7 +40,7 @@ class WriteMapSearchAdapter(
         holder.onBind(userList[position])
 
         var writeShareActivity = holder.itemView.context as WriteShareActivity
-        var sharedViewModel = ViewModelProvider(writeShareActivity).get(WriteSharedViewModel::class.java)
+//        var sharedViewModel = ViewModelProvider(writeShareActivity).get(WriteSharedViewModel::class.java)
 
         holder.itemView.setOnClickListener {
             var lat = 0.0

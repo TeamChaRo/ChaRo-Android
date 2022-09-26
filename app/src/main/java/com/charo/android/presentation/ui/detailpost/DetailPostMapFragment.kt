@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.charo.android.BuildConfig.TMAP_API_KEY
 import com.charo.android.R
 import com.charo.android.databinding.FragmentDetailPostMapBinding
 import com.charo.android.domain.model.detailpost.DetailPost
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
 import com.skt.Tmap.*
 import kotlinx.coroutines.CoroutineScope
@@ -54,7 +54,7 @@ class DetailPostMapFragment : Fragment() {
     private fun initMap(tMapView: TMapView) {
         CoroutineScope(Dispatchers.Main).launch {
             withContext(Dispatchers.Main) {
-                tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+                tMapView.setSKTMapApiKey(TMAP_API_KEY)
                 binding.clDetailPostMap.addView(tMapView)
             }
 

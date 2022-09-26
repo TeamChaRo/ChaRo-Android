@@ -1,15 +1,15 @@
 package com.charo.android.data.api
 
+import com.charo.android.BuildConfig
 import com.charo.android.data.api.alarm.AlarmViewService
 import com.charo.android.data.api.write.WriteViewService
-import com.charo.android.hidden.Hidden
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
-    private const val BASE_URL = Hidden.baseUrl
+    private const val BASE_URL = BuildConfig.BASE_URL
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {

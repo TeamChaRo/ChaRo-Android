@@ -15,10 +15,10 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.charo.android.BuildConfig.TMAP_API_KEY
 import com.charo.android.R
 import com.charo.android.databinding.FragmentDetailPostBinding
 import com.charo.android.domain.model.detailpost.DetailPost
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.ui.detailpost.adapter.DetailPostViewPagerAdapter
 import com.charo.android.presentation.ui.mypage.other.OtherMyPageActivity
 import com.charo.android.presentation.ui.write.WriteSharedViewModel
@@ -146,7 +146,7 @@ class DetailPostFragment : Fragment() {
     }
 
     private fun initTMap(tMapView: TMapView) {
-        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+        tMapView.setSKTMapApiKey(TMAP_API_KEY)
         tMapView.setUserScrollZoomEnable(true)
         tMapView.setOnClickListenerCallBack(object : OnClickListenerCallback {
             override fun onPressUpEvent(

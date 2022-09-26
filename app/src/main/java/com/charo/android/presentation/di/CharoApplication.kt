@@ -2,7 +2,6 @@ package com.charo.android.presentation.di
 
 import android.app.Application
 import com.charo.android.BuildConfig
-import com.charo.android.hidden.Hidden
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 import com.kakao.sdk.common.KakaoSdk
@@ -15,7 +14,7 @@ import timber.log.Timber
 class CharoApplication: Application() {
     override fun onCreate() {
         super.onCreate()
-        KakaoSdk.init(this, Hidden.kakao)
+        KakaoSdk.init(this, BuildConfig.KAKAO_KEY)
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@CharoApplication)

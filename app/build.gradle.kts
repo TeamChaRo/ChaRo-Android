@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -12,6 +14,12 @@ android {
     compileSdk = Apps.compileSdk
 }
 
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+val tMapApiKey = properties.getProperty("tmap.api")
+val kakaoKey = properties.getProperty("kakao")
+val baseUrl = properties.getProperty("base.url")
+
 android {
     compileSdk = Apps.compileSdk
     buildToolsVersion = "30.0.3"
@@ -24,6 +32,13 @@ android {
         versionName = Apps.versionName
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "TMAP_API_KEY", tMapApiKey)
+        manifestPlaceholders["TMAP_API_KEY"] = tMapApiKey
+        buildConfigField("String", "KAKAO_KEY", kakaoKey)
+        manifestPlaceholders["KAKAO_KEY"] = kakaoKey
+        buildConfigField("String", "BASE_URL", baseUrl)
+        manifestPlaceholders["BASE_URL"] = baseUrl
     }
 
     buildTypes {

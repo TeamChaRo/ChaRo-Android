@@ -17,7 +17,6 @@ import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.data.model.response.alarm.ResponseAlarmListData
 import com.charo.android.databinding.FragmentHomeBinding
 import com.charo.android.domain.model.home.BannerLocal
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.base.BaseFragment
 import com.charo.android.presentation.ui.alarm.AlarmActivity
 import com.charo.android.presentation.ui.home.adapter.*
@@ -82,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val nickName: String = Hidden.nickName
+        val nickName: String = SharedInformation.getNickName(requireContext())
 
         initDefaultView()
         goSearchView(nickName)

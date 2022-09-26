@@ -9,14 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import com.charo.android.BuildConfig.TMAP_API_KEY
 import com.charo.android.R
 import com.charo.android.databinding.FragmentWriteMapLocationBinding
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.util.Define
-import com.skt.Tmap.TMapAddressInfo
-import com.skt.Tmap.TMapData
-import com.skt.Tmap.TMapMarkerItem
-import com.skt.Tmap.TMapView
+import com.skt.Tmap.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
@@ -85,7 +82,7 @@ class WriteMapLocationFragment : Fragment() {
 
         val tMapView = TMapView(context)
 
-        tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+        tMapView.setSKTMapApiKey(TMAP_API_KEY)
         binding.clWriteMapLocationView.addView(tMapView)
 
         val tmapdata = TMapData()

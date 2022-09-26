@@ -12,10 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.charo.android.BuildConfig.TMAP_API_KEY
 import com.charo.android.R
 import com.charo.android.data.api.ApiService
 import com.charo.android.databinding.FragmentWriteMapBinding
-import com.charo.android.hidden.Hidden
 import com.charo.android.presentation.util.CustomToast
 import com.charo.android.presentation.util.Define
 import com.charo.android.presentation.util.SharedInformation
@@ -70,7 +70,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
         CoroutineScope(Dispatchers.Main).launch {
             withContext(Dispatchers.Main) {
                 tMapView = TMapView(context)
-                tMapView.setSKTMapApiKey(Hidden().tMapApiKey)
+                tMapView.setSKTMapApiKey(TMAP_API_KEY)
                 binding.clWriteTmapView.addView(tMapView)
             }
 

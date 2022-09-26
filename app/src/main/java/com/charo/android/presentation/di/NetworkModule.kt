@@ -1,6 +1,7 @@
 package com.charo.android.presentation.di
 
 
+import com.charo.android.BuildConfig
 import com.charo.android.data.api.detailpost.DetailPostService
 import com.charo.android.data.api.follow.FollowService
 import com.charo.android.data.api.home.HomeViewService
@@ -17,7 +18,6 @@ import com.charo.android.data.api.signup.SignUpEmailCertificationViewService
 import com.charo.android.data.api.signup.SignUpEmailCheckViewService
 import com.charo.android.data.api.signup.SignUpNickNameCheckViewService
 import com.charo.android.data.api.signup.SignUpRegisterService
-import com.charo.android.hidden.Hidden
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -33,7 +33,7 @@ val networkModule = module {
     single<Retrofit> {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(Hidden.baseUrl)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client.build())
             .build()
     }
