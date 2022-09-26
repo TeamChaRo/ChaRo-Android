@@ -21,7 +21,6 @@ class MoreThemeViewFragment :
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private lateinit var moreThemeViewPagerAdapter: MoreThemeViewPagerAdapter
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -76,15 +75,6 @@ class MoreThemeViewFragment :
                     MoreThemeContentViewFragment(userId, "1", "cityView")
                 )
             }
-            sharedViewModel.themeNum.observe(viewLifecycleOwner) {
-                var themeNum = it
-                tabMoreThemeTab.getTabAt(themeNum)?.select()
-                viewPagerMoreTheme.doOnAttach {
-                    viewPagerMoreTheme.setCurrentItem(themeNum, false)
-                }
-            }
-
-
 
             TabLayoutMediator(tabMoreThemeTab, viewPagerMoreTheme) { tab, position ->
                 when (position) {
@@ -105,8 +95,6 @@ class MoreThemeViewFragment :
                     14 -> tab.setCustomView(R.layout.tablayout_city)
                 }
             }.attach()
-
-
         }
     }
 
@@ -114,17 +102,19 @@ class MoreThemeViewFragment :
     fun clickTab() {
         binding.tabMoreThemeTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
+                sharedViewModel.themeNum.value = tab?.position
 
-
+                var themeNum =sharedViewModel.themeNum.value
+                if (themeNum != null) {
+                    binding.tabMoreThemeTab.getTabAt(themeNum)?.select()
+                    binding.viewPagerMoreTheme.doOnAttach {
+                        binding.viewPagerMoreTheme.setCurrentItem(themeNum, false)
+                    }
                 }
-
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
 
             }
-
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
             }

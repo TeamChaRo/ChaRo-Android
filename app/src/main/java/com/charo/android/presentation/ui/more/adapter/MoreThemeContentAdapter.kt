@@ -10,9 +10,11 @@ import timber.log.Timber
 
 class MoreThemeContentAdapter(
     private val itemClick: (MoreDrive) -> Unit,
+    private val heartClick: (Int, Boolean) -> Unit,
     var link: MoreThemeContentViewFragment.DataToMoreThemeLike,
     var userId: String
 ) : RecyclerView.Adapter<MoreThemeContentAdapter.MoreViewViewHolder>() {
+
     private val _moreData = mutableListOf<MoreDrive>()
     private var moreData: List<MoreDrive> = _moreData
     var postId: Int = 0
@@ -38,6 +40,8 @@ class MoreThemeContentAdapter(
 
             postId = moreData[position].morePostId
             link.getPostId(postId)
+
+            heartClick(postId, it.isSelected)
         }
 
         holder.binding.root.setOnClickListener() {
@@ -61,7 +65,7 @@ class MoreThemeContentAdapter(
     }
 
     fun setHomeTrendDrive(moreData: List<MoreDrive>) {
-        Timber.d("이거 작동중")
+        Timber.d("이거 작동중 $moreData")
         this.moreData = moreData
         notifyDataSetChanged()
     }

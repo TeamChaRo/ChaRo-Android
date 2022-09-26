@@ -2,12 +2,9 @@ package com.charo.android.presentation.ui.more
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.isEmpty
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,12 +13,15 @@ import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.databinding.FragmentMoreThemeContentViewBinding
 import com.charo.android.presentation.base.BaseFragment
+import com.charo.android.presentation.ui.main.MainActivity
+import com.charo.android.presentation.ui.main.SharedViewModel
 import com.charo.android.presentation.ui.more.adapter.MoreThemeContentAdapter
 import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.ui.write.WriteShareActivity
 import com.charo.android.presentation.util.SharedInformation
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -31,32 +31,10 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
     SwipeRefreshLayout.OnRefreshListener {
     private val moreViewModel: MoreViewViewModel by viewModel()
     private lateinit var moreThemeContentAdapter: MoreThemeContentAdapter
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
     var link = DataToMoreThemeLike()
 
     var currentSpinnerPosition = 0
-
-    private val moreResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                result.data?.let {
-                    val updateLike = it.getIntExtra("updateLike", -1)
-                    val postId = it.getIntExtra("postId", -1)
-                    Timber.d("moreResultLauncher updateLike $updateLike postId $postId")
-
-                    if(updateLike != -1 && postId != -1){
-                        when(updateLike){
-                            0 -> {
-                                moreThemeContentAdapter.setLike(postId, false)
-                            }
-                            1 -> {
-                                moreThemeContentAdapter.setLike(postId, true)
-                            }
-                        }
-                    }
-                }
-            }
-            Timber.d("moreResultLauncher result $result")
-        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -107,14 +85,24 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 putExtra("from", "MoreView")
                 putExtra("postId", it.morePostId)
             }
-            moreResultLauncher.launch(intent)
+            (requireActivity() as MainActivity).moreResultLauncher.launch(intent)
+        }, { postId, updateLike ->
+
+            moreViewModel._drive.value = moreViewModel.setLike(postId, updateLike)
+            moreThemeContentAdapter.setHomeTrendDrive(moreViewModel._drive.value)
+
         }, link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
 
-        moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+        moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
             .onEach {
+//                Timber.e("flowWithLifecycle $it")
                 binding.srThemeList.isRefreshing = false
                 binding.srEmptyList.isRefreshing = false
+
+//                moreViewModel.getMoreView(userId, identifier, value)
+                moreThemeContentAdapter.setHomeTrendDrive(moreViewModel._drive.value)
+
                 if (it.isEmpty()) {
                     binding.clEmptyList.visibility = View.VISIBLE
                     binding.clThemeList.visibility = View.GONE
@@ -125,13 +113,9 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                     binding.clThemeList.visibility = View.VISIBLE
                     binding.srEmptyList.visibility = View.GONE
                     binding.srThemeList.visibility = View.VISIBLE
-                    moreThemeContentAdapter.setHomeTrendDrive(it)
-
                 }
             }.launchIn(lifecycleScope)
-
-
-        }
+    }
 
 
     private fun initMoreThemeNewView() {
@@ -145,13 +129,23 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 putExtra("from", "MoreView")
                 putExtra("postId", it.morePostId)
             }
-            moreResultLauncher.launch(intent)
+            (requireActivity() as MainActivity).moreResultLauncher.launch(intent)
+        }, { postId, updateLike ->
+            moreViewModel.newDrive.value = moreViewModel.setLike(postId, updateLike)
+            moreThemeContentAdapter.setHomeTrendDrive(moreViewModel.newDrive.value)
+
+            moreViewModel.setLike(postId, updateLike)
         }, link, userId)
+
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
-        moreViewModel.newDrive.flowWithLifecycle(lifecycle,Lifecycle.State.STARTED)
+
+        moreViewModel.newDrive.flowWithLifecycle(lifecycle,Lifecycle.State.RESUMED)
             .onEach{
             binding.srThemeList.isRefreshing = false
             binding.srEmptyList.isRefreshing = false
+
+//            moreViewModel.getMoreNewView(userId, identifier, value)
+            moreThemeContentAdapter.setHomeTrendDrive(moreViewModel.newDrive.value)
 
             if (it.isEmpty()) {
                 binding.clEmptyList.visibility = View.VISIBLE
@@ -163,7 +157,6 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 binding.clThemeList.visibility = View.VISIBLE
                 binding.srEmptyList.visibility = View.GONE
                 binding.srThemeList.visibility = View.VISIBLE
-                moreThemeContentAdapter.setHomeTrendDrive(it)
             }
         }.launchIn(lifecycleScope)
     }
@@ -189,6 +182,16 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
     override fun onRefresh() {
         Timber.d("moreThemeView onRefresh >>>>")
+        if (currentSpinnerPosition == 0) {
+            initMoreThemeView()
+        } else {
+            initMoreThemeNewView()
+        }
+    }
+
+    override fun onResume() {
+        Timber.d("moreThemeView onResume >>>>")
+        super.onResume()
         if (currentSpinnerPosition == 0) {
             initMoreThemeView()
         } else {

@@ -12,6 +12,7 @@ import com.charo.android.R
 import com.charo.android.databinding.ActivityMainBinding
 import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.home.HomeFragment
+import com.charo.android.presentation.ui.more.viewmodel.MoreViewViewModel
 import com.charo.android.presentation.ui.mypage.MyPageFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteFragment
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val homeFragment: HomeFragment by lazy { HomeFragment() }
     private val writeFragment: WriteFragment by lazy { WriteFragment() }
+    private val moreViewModel: MoreViewViewModel by viewModel()
     private val sharedViewModel: SharedViewModel by viewModel()
     private val myPageViewModel: MyPageViewModel by viewModel()
     private lateinit var userEmail: String
@@ -79,6 +81,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 }
             }
         }
+
+    val moreResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.let {
+                    val updateLike = it.getIntExtra("updateLike", -1)
+                    val postId = it.getIntExtra("postId", -1)
+                    Timber.d("moreResultLauncher updateLike $updateLike postId $postId")
+
+                    if(updateLike != -1 && postId != -1){
+                        when(updateLike){
+                            0 -> {
+                                moreViewModel.setLike(postId, false)
+                            }
+                            1 -> {
+                                moreViewModel.setLike(postId, true)
+                            }
+                        }
+                    }
+                }
+            }
+            Timber.d("moreResultLauncher result $result")
+        }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

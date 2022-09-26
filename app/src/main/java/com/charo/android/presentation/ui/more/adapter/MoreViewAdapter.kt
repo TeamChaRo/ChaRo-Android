@@ -90,7 +90,7 @@ class MoreViewAdapter(
         RecyclerView.ViewHolder(binding.root)
 
     fun setHomeTrendDrive(moreData: MutableList<MoreDrive>) {
-        if(moreData[0].moreDay != "1"){
+        if(moreData.size > 0 && moreData[0].moreDay != "1"){
             this.moreData.addAll(moreData)
         }
         notifyDataSetChanged()

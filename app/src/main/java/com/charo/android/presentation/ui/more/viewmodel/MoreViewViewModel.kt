@@ -35,7 +35,7 @@ class MoreViewViewModel(
 ) : ViewModel() {
     //인기순
 
-    private var _drive = MutableStateFlow<List<MoreDrive>>(
+    var _drive = MutableStateFlow<List<MoreDrive>>(
         listOf(
             MoreDrive(
                 "1", "", false, "", -1, "", ",", ",", "", ""
@@ -81,7 +81,7 @@ class MoreViewViewModel(
                         _drive.value = it
                     }
                     Timber.d("more 서버 통신 성공!")
-                    Timber.d("more ${drive.value.toString()}")
+                    Timber.d("more ${drive?.value}")
                 }
                 .onFailure {
                     it.printStackTrace()
@@ -99,7 +99,7 @@ class MoreViewViewModel(
                         newDrive.value = it
                     }
                     Timber.d("more 서버 통신 성공!")
-                    Timber.d("more ${drive.value.toString()}")
+                    Timber.d("more ${drive?.value}")
                 }
                 .onFailure {
                     it.printStackTrace()
@@ -204,7 +204,33 @@ class MoreViewViewModel(
                     Timber.d("moreNewViewInfinite 서버 통신 실패!")
                 }
         }
+    }
 
+    fun setLike(postId: Int, update: Boolean): List<MoreDrive> {
+        val driveList = drive.value
+        for(item in driveList) {
+            if(item.morePostId == postId) {
+                item.moreIsFavorite = update
+                break
+            }
+        }
+
+        Timber.e("_drive.value ${_drive.value}")
+        return driveList
+    }
+
+    fun setNewLike(postId: Int, update: Boolean): List<MoreDrive> {
+        val newDriveList = newDrive.value
+        for(item in newDriveList) {
+            if(item.morePostId == postId) {
+                item.moreIsFavorite = update
+                break
+            }
+        }
+        newDrive.value = newDriveList
+
+        Timber.e("_drive.value ${newDrive.value}")
+        return newDriveList
 
     }
 }
