@@ -69,7 +69,7 @@ class SignUpPassWordFragment :
 
                     } else if (!Pattern.matches(emailPattern, s.toString())) {
                         textInputPaasword.error = "영문/숫자/특수문자 한개 이상 사용해주세요"
-                        Timber.d("password ${Pattern.matches(emailPattern, s.toString()).toString()}")
+                        Timber.d("password ${Pattern.matches(emailPattern, s.toString())}")
 
                         isNextBtnActive(false)
 
@@ -139,7 +139,7 @@ class SignUpPassWordFragment :
 
     private fun keyBoardChange(){
         keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
-            onShowKeyboard = {keyBoardHeight ->
+            onShowKeyboard = {
                 binding.textSignUpPasswordNext.visibility = View.GONE
                 binding.textSignUpPasswordNextFocus.visibility = View.VISIBLE
             },

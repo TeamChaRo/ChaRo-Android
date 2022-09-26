@@ -231,11 +231,11 @@ object SharedInformation {
             val builder = AlertDialog.Builder(context, R.style.Dialog)
             builder.setMessage(context.getString(R.string.txt_need_permission) + "\n" + context.getString(R.string.txt_go_permission_setting))
             builder.setCancelable(false)
-            builder.setPositiveButton("예") { dialog, which ->
+            builder.setPositiveButton("예") { _, _ ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + context.packageName))
                 context.startActivity(intent)
             }
-            builder.setNegativeButton("아니요") { dialog, which ->
+            builder.setNegativeButton("아니요") { _, _ ->
                 setPermissionNever(context, true)
             }
             builder.show()

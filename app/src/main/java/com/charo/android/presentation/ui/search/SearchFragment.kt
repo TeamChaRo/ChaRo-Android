@@ -142,8 +142,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.btnSearchTheme.setOnClickListener {
             MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle(R.string.main_charo_theme)
-                .setNeutralButton(R.string.cancel) { dialog, which ->
-                    binding.btnSearchTheme.setText(resources.getString(R.string.main_charo_theme))
+                .setNeutralButton(R.string.cancel) { _, _ ->
+                    binding.btnSearchTheme.text = resources.getString(R.string.main_charo_theme)
                     searchItem = 0
                     it.isSelected = false
 
@@ -159,7 +159,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         isActiveSearch(true)
                     }
                 }
-                .setPositiveButton(R.string.agreement) { dialog, which ->
+                .setPositiveButton(R.string.agreement) { _, _ ->
                     it.isSelected = true
                     binding.btnSearchTheme.text = themeUtil.itemTheme[searchItem]
                     if (binding.btnSearchTheme.text.toString() == resources.getString(R.string.main_charo_theme)) {
@@ -174,7 +174,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         isActiveSearch(false)
                     }
                 }
-                .setSingleChoiceItems(themeUtil.itemTheme, searchItem) { dialog, which ->
+                .setSingleChoiceItems(themeUtil.itemTheme, searchItem) { _, which ->
                     searchItem = which
                 }
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
@@ -186,8 +186,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.btnSearchCaution.setOnClickListener {
             MaterialAlertDialogBuilder(requireActivity(), R.style.Dialog)
                 .setTitle(R.string.caution)
-                .setNeutralButton(R.string.cancel) { dialog, which ->
-                    binding.btnSearchCaution.setText(resources.getString(R.string.caution))
+                .setNeutralButton(R.string.cancel) { _, _ ->
+                    binding.btnSearchCaution.text = resources.getString(R.string.caution)
                     searchCautionItem = 0
                     it.isSelected = false
 
@@ -203,7 +203,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         isActiveSearch(true)
                     }
                 }
-                .setPositiveButton(R.string.agreement) { dialog, which ->
+                .setPositiveButton(R.string.agreement) { _, _ ->
                     it.isSelected = true
                     binding.btnSearchCaution.text = themeUtil.itemCaution[searchCautionItem]
                     if (binding.btnSearchCaution.text.toString() == resources.getString(R.string.caution)) {
@@ -221,7 +221,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 .setSingleChoiceItems(
                     themeUtil.itemCaution,
                     searchCautionItem,
-                ) { dialog, which ->
+                ) { _, which ->
                     searchCautionItem = which
                 }
                 .setBackground(resources.getDrawable(R.drawable.background_radius_all_20))
@@ -233,7 +233,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private fun selectProvince(it: View) {
         MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
-            .setNeutralButton(R.string.cancel) { dialog, which ->
+            .setNeutralButton(R.string.cancel) { _, _ ->
                 binding.btnSearchArea1.text = resources.getString(R.string.area_province)
                 binding.btnSearchArea2.text = resources.getString(R.string.area_region)
                 binding.btnSearchArea2.isSelected = false
@@ -247,7 +247,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     isActiveSearch(true)
                 }
             }
-            .setPositiveButton(R.string.agreement) { dialog, which ->
+            .setPositiveButton(R.string.agreement) { _, _ ->
                 it.isSelected = true
                 binding.btnSearchArea1.text = locationUtil.itemProvince[preCheckProvince]
                 searchViewModel.province.value = binding.btnSearchArea1.text.toString()
@@ -258,7 +258,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     selectRegion(binding.btnSearchArea2)
                 }
             }
-            .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
+            .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { _, which ->
                 //which : index
                 preCheckProvince = which
 
@@ -278,7 +278,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private fun selectRegion(it: View) {
         MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
-            .setNeutralButton(R.string.cancel) { dialog, which ->
+            .setNeutralButton(R.string.cancel) { _, _ ->
                 binding.btnSearchArea2.text = resources.getString(R.string.area_region)
                 it.isSelected = false
                 preCheckedRegion = 0
@@ -286,7 +286,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
                 isActiveSearch(false)
             }
-            .setPositiveButton(R.string.agreement) { dialog, which ->
+            .setPositiveButton(R.string.agreement) { _, _ ->
                 it.isSelected = true
 
                 if (locationUtil.matchRegionToProvince[binding.btnSearchArea1.text] == null) {
@@ -306,7 +306,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             .setSingleChoiceItems(
                 locationUtil.matchRegionToProvince[binding.btnSearchArea1.text]
                     ?: arrayOf("도 단위를 선택해주세요."), preCheckedRegion
-            ) { dialog, which ->
+            ) { _, which ->
                 //which : index
                 preCheckedRegion = which
             }

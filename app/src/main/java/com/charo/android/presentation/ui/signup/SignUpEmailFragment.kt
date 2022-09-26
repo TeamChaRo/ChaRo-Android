@@ -193,7 +193,7 @@ class SignUpEmailFragment :
 
     private fun sendEmailAuthNum(TAG : String){
         with(binding) {
-            signUpViewModel.data.setValue("")
+            signUpViewModel.data.value = ""
             signUpViewModel.emailCertification(etSignUpBlank.text.toString())
 
             signUpViewModel.data.observe(viewLifecycleOwner){
@@ -208,7 +208,7 @@ class SignUpEmailFragment :
             signUpViewModel.authNumSuccess.observe(viewLifecycleOwner){
                 if(!it){
                     Toast.makeText(requireContext(), "인증번호 전송이 실패하였습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
-                    signUpViewModel.authNumSuccess.setValue(null)
+                    signUpViewModel.authNumSuccess.value = null
                 }
             }
 
@@ -235,7 +235,7 @@ class SignUpEmailFragment :
     //키보드 올라올 때 버튼 뷰 변경
     private fun keyBoardChange(){
         keyboardVisibilityUtils = KeyboardVisibilityUtils(requireActivity().window ,
-        onShowKeyboard = { keyBoardHeight ->
+        onShowKeyboard = {
             scrollUpToMyWantedPosition()
             binding.textSignUpNext.visibility = View.GONE
             binding.textSignUpNextFocus.visibility = View.VISIBLE

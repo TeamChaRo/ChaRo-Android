@@ -225,20 +225,20 @@ class WriteFragment : Fragment(), View.OnClickListener {
     private fun selectProvince(it: View) {
         MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
-            .setNeutralButton(R.string.cancel) { dialog, which ->
+            .setNeutralButton(R.string.cancel) { _, _ ->
                 binding.btnWriteProvince.text = resources.getString(R.string.region)
                 binding.btnWriteRegion.text = resources.getString(R.string.city)
                 binding.btnWriteRegion.isSelected = false
                 it.isSelected = false
                 preCheckProvince = 0
             }
-            .setPositiveButton(R.string.agreement) { dialog, which ->
+            .setPositiveButton(R.string.agreement) { _, _ ->
                 it.isSelected = true
                 binding.btnWriteProvince.text = locationUtil.itemProvince[preCheckProvince]
                 sharedViewModel.province.value = binding.btnWriteProvince.text.toString()
                 selectRegion(binding.btnWriteRegion)
             }
-            .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { dialog, which ->
+            .setSingleChoiceItems(locationUtil.itemProvince, preCheckProvince) { _, which ->
                 //which : index
                 preCheckProvince = which
 
@@ -258,13 +258,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
     private fun selectRegion(it: View) {
         MaterialAlertDialogBuilder(requireContext(), R.style.Dialog)
             .setTitle(R.string.area)
-            .setNeutralButton(R.string.cancel) { dialog, which ->
+            .setNeutralButton(R.string.cancel) { _, _ ->
                 binding.btnWriteRegion.text = resources.getString(R.string.city)
                 it.isSelected = false
                 preCheckedRegion = 0
                 sharedViewModel.region.value = ""
             }
-            .setPositiveButton(R.string.agreement) { dialog, which ->
+            .setPositiveButton(R.string.agreement) { _, _ ->
                 it.isSelected = true
 
                 if (locationUtil.matchRegionToProvince[binding.btnWriteProvince.text] == null) {
@@ -283,7 +283,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
             .setSingleChoiceItems(
                 locationUtil.matchRegionToProvince[binding.btnWriteProvince.text]
                     ?: arrayOf("도 단위를 선택해주세요."), preCheckedRegion
-            ) { dialog, which ->
+            ) { _, which ->
                 //which : index
                 preCheckedRegion = which
             }
@@ -486,7 +486,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
         val intent = Intent(Intent.ACTION_GET_CONTENT) //ACTION_PICK   //ACTION_GET_CONTENT
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true) //다중 선택 가능
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
-        intent.setType("image/*")
+        intent.type = "image/*"
         galleryLauncher.launch(intent)
     }
 
@@ -749,7 +749,7 @@ class WriteFragment : Fragment(), View.OnClickListener {
             val imgMoreList =
                 sharedViewModel.imageUriRecyclerView.value ?: mutableListOf<WriteImgInfo>()
 
-            imgMoreList.forEach { imageUri ->
+            imgMoreList.forEach { _ ->
                 writeAdapter.imgList = imgMoreList
             }
 

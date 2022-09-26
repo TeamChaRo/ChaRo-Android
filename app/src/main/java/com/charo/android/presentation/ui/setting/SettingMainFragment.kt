@@ -111,14 +111,14 @@ class SettingMainFragment :
         val builder = AlertDialog.Builder(requireContext(), R.style.Dialog)
         builder.setMessage(getString(R.string.txt_go_permission_setting))
         builder.setCancelable(false)
-        builder.setPositiveButton("예") { dialog, which ->
+        builder.setPositiveButton("예") { _, _ ->
             val intent = Intent(
                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.parse("package:" + requireActivity().packageName)
             )
             startActivity(intent)
         }
-        builder.setNegativeButton("아니요") { dialog, which ->
+        builder.setNegativeButton("아니요") { _, _ ->
         }
         builder.show()
     }
@@ -359,7 +359,7 @@ class SettingMainFragment :
     }
 
     private fun getVersionName() {
-        val pInfo = requireContext().packageManager.getPackageInfo(requireContext().packageName, 0);
+        val pInfo = requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
         val versionName = pInfo.versionName + ""
 
         binding.textSettingVersionNum.text = versionName

@@ -39,7 +39,7 @@ class SignInActivity : AppCompatActivity() {
             if (binding.etSigninId.text.isBlank() || binding.etSigninPw.text.isBlank()) {
                 Toast.makeText(this, "ID/PW를 입력해주세요!", Toast.LENGTH_LONG).show()
             } else {
-                Timber.d("etSigninPw ${binding.etSigninPw.text.toString()}")
+                Timber.d("etSigninPw ${binding.etSigninPw.text}")
                 val requestSignInData = RequestSignInData(
                     userEmail = binding.etSigninId.text.toString(),
                     password = binding.etSigninPw.text.toString()

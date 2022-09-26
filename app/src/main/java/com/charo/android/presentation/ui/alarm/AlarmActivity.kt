@@ -212,7 +212,7 @@ class AlarmActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener 
     private fun sendFCM(){
         var NOTIFICATION_CHANNEL_ID = "0000"
         var NOTIFICATION_CHANNEL_NAME = "ChaRo-Android"
-        var notificationManager = getSystemService(NotificationManager::class.java) as NotificationManager?
+        var notificationManager = getSystemService(NotificationManager::class.java)
 
         val handler = Handler()
         handler.postDelayed(object : Runnable {

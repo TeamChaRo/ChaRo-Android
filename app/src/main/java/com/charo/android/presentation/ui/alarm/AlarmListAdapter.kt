@@ -79,7 +79,7 @@ class AlarmListAdapter(
                     view.context.startActivity(intent)
                 }
                 "following" -> { //팔로우 팔로잉 알림 : 해당 user 로 이동 (followed)
-                    if(alarmListInfo.followed != null && !TextUtils.isEmpty(alarmListInfo.followed)){
+                    if(!TextUtils.isEmpty(alarmListInfo.followed)){
                         val intent = Intent(view.context, OtherMyPageActivity::class.java)
                         intent.putExtra("userEmail", alarmListInfo.followed)
                         view.context.startActivity(intent)
