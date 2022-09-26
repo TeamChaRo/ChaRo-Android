@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import com.charo.android.R
@@ -227,11 +228,15 @@ class OtherMyPageActivity : AppCompatActivity() {
     private fun observeLiveData() {
         viewModel.writtenLikePostList.observe(this) {
             if (sort == LIKE) {
+                binding.layoutSwipe.isVisible = it.isNotEmpty()
+                binding.ivEmpty.isVisible = it.isEmpty()
                 adapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }
         viewModel.writtenNewPostList.observe(this) {
             if (sort == NEW) {
+                binding.layoutSwipe.isVisible = it.isNotEmpty()
+                binding.ivEmpty.isVisible = it.isEmpty()
                 adapter.replaceItem(it.map { Post -> Post.copy() })
             }
         }
