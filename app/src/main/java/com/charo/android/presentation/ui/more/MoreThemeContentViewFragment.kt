@@ -94,14 +94,14 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
         }, link, userId)
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
 
-        moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.RESUMED)
+        moreViewModel.drive.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
 //                Timber.e("flowWithLifecycle $it")
                 binding.srThemeList.isRefreshing = false
                 binding.srEmptyList.isRefreshing = false
 
 //                moreViewModel.getMoreView(userId, identifier, value)
-                moreThemeContentAdapter.setHomeTrendDrive(moreViewModel._drive.value)
+                moreThemeContentAdapter.setHomeTrendDrive(it)
 
                 if (it.isEmpty()) {
                     binding.clEmptyList.visibility = View.VISIBLE
@@ -114,7 +114,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                     binding.srEmptyList.visibility = View.GONE
                     binding.srThemeList.visibility = View.VISIBLE
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
 
@@ -139,7 +139,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
 
         binding.recyclerviewMoreTheme.adapter = moreThemeContentAdapter
 
-        moreViewModel.newDrive.flowWithLifecycle(lifecycle,Lifecycle.State.RESUMED)
+        moreViewModel.newDrive.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach{
             binding.srThemeList.isRefreshing = false
             binding.srEmptyList.isRefreshing = false
@@ -158,7 +158,7 @@ class MoreThemeContentViewFragment(val userId: String, val identifier: String, v
                 binding.srEmptyList.visibility = View.GONE
                 binding.srThemeList.visibility = View.VISIBLE
             }
-        }.launchIn(lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initSpinner() {

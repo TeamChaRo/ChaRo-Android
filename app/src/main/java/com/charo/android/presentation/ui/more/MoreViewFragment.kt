@@ -125,14 +125,14 @@ class MoreViewFragment : BaseFragment<FragmentMoreViewBinding>(R.layout.fragment
             binding.recyclerviewMoreView.adapter = moreViewAdapter
         }
 
-        moreViewModel.drive.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+        moreViewModel.drive.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 if (it.isNotEmpty()) {
                     moreViewAdapter.setHomeTrendDrive(it as MutableList<MoreDrive>)
                 }
                 emptyData(it)
             }
-            .launchIn(lifecycleScope)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     //최신순 데이터
