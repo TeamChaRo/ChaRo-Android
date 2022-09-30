@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
+import com.charo.android.BuildConfig
 import com.charo.android.R
 import com.charo.android.data.model.request.signin.RequestSocialData
 import com.charo.android.databinding.ActivitySocialSignInBinding
@@ -244,7 +245,7 @@ class SocialSignInActivity() :
 
     private fun initGoogleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestIdToken(BuildConfig.GOOGLE_WEB_CLIENT_ID)
             .requestEmail()
             .build()
 
