@@ -17,7 +17,9 @@ android {
 val properties = Properties()
 properties.load(project.rootProject.file("local.properties").inputStream())
 val tMapApiKey = properties.getProperty("tmap.api")
+val kakaoManifestKey = properties.getProperty("kakao.manifest")
 val kakaoKey = properties.getProperty("kakao")
+val googleWebClientId = properties.getProperty("google.web.client.id")
 val baseUrl = properties.getProperty("base.url")
 
 android {
@@ -36,9 +38,10 @@ android {
         buildConfigField("String", "TMAP_API_KEY", tMapApiKey)
         manifestPlaceholders["TMAP_API_KEY"] = tMapApiKey
         buildConfigField("String", "KAKAO_KEY", kakaoKey)
-        manifestPlaceholders["KAKAO_KEY"] = kakaoKey
+        manifestPlaceholders["KAKAO_KEY"] = kakaoManifestKey
         buildConfigField("String", "BASE_URL", baseUrl)
         manifestPlaceholders["BASE_URL"] = baseUrl
+        buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", googleWebClientId)
     }
 
     buildTypes {
