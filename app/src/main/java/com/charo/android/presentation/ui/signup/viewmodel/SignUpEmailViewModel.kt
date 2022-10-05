@@ -8,12 +8,13 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.request.signup.RequestSignUpGoogleData
 import com.charo.android.data.model.request.signup.RequestSignUpKaKaoData
 import com.charo.android.domain.model.StatusCode
 import com.charo.android.domain.usecase.signup.*
+import com.charo.android.presentation.base.BaseViewModel
+import com.charo.android.presentation.util.isServerError
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -29,9 +30,9 @@ class SignUpEmailViewModel(
     private val getRemoteSignUpEmailCertificationUseCase: GetRemoteSignUpEmailCertificationUseCase,
     private val getRemoteSignUpNickNameCheckUseCase: GetRemoteSignUpNickNameCheckUseCase,
     private val postRemoteSignUpRegisterUseCase: PostRemoteSignUpRegisterUseCase,
-    private val PostRemoteSocialSIgnUpRegisterUseCase : PostRemoteSocialSignUpRegisterUseCase,
+    private val PostRemoteSocialSIgnUpRegisterUseCase: PostRemoteSocialSignUpRegisterUseCase,
     private val postRemoteKaKaoSignUpRegisterUseCase: PostRemoteKaKaoSignUpRegisterUseCase
-) : ViewModel() {
+) : BaseViewModel() {
     private val _isConfirmAuthNum = MutableLiveData<Boolean>(false)
     val isConfirmAuthNum: MutableLiveData<Boolean>
         get() = _isConfirmAuthNum
@@ -95,8 +96,8 @@ class SignUpEmailViewModel(
                     _emailCheckStatus.value = 2000
                     Timber.d("signUp emailCheck 서버 통신 성공!")
                     Timber.d("signUp emailCheck $it")
-                }
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     _success.value = false
                     Timber.d("signUp emailCheck 서버 통신 실패")
@@ -113,8 +114,8 @@ class SignUpEmailViewModel(
                     _data.value = it
                     Timber.d("signUps 서버 통신 성공!")
                     Timber.d("signUp $it")
-                }
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     _authNumSuccess.value = false
                     _data.value = ""
                     it.printStackTrace()
@@ -123,6 +124,7 @@ class SignUpEmailViewModel(
                 }
         }
     }
+
     //닉네임 중복 체크
     fun nickNameCheck(nickname: String) {
         viewModelScope.launch {
@@ -131,14 +133,15 @@ class SignUpEmailViewModel(
                     _nickNameCheck.value = it
                     Timber.d("nickname 서버 통신 성공!")
                     Timber.d("nickname $it")
-                }
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("nickname 서버 통신 실패!")
                 }
         }
 
     }
+
     //일반 회원가입 등록
     fun signUpRegister(
         image: Uri,
@@ -147,16 +150,21 @@ class SignUpEmailViewModel(
         nickname: String,
         pushAgree: Boolean,
         emailAgree: Boolean,
-        context : Context
+        context: Context
     ) {
-        val userEmailRequestBody: RequestBody = userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
-         val passwordRequestBody: RequestBody = password.toRequestBody("text/plain".toMediaTypeOrNull())
-        val nicknameRequestBody: RequestBody = nickname.toRequestBody("text/plain".toMediaTypeOrNull())
-        val pushAgreeRequestBody : RequestBody = pushAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val emailAgreeRequestBody : RequestBody = emailAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val bitmap : Bitmap
+        val userEmailRequestBody: RequestBody =
+            userEmail.toRequestBody("text/plain".toMediaTypeOrNull())
+        val passwordRequestBody: RequestBody =
+            password.toRequestBody("text/plain".toMediaTypeOrNull())
+        val nicknameRequestBody: RequestBody =
+            nickname.toRequestBody("text/plain".toMediaTypeOrNull())
+        val pushAgreeRequestBody: RequestBody =
+            pushAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val emailAgreeRequestBody: RequestBody =
+            emailAgree.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val bitmap: Bitmap
 
-        if(Build.VERSION.SDK_INT < 28) {
+        if (Build.VERSION.SDK_INT < 28) {
             bitmap = MediaStore.Images.Media.getBitmap(
                 context.contentResolver,
                 image
@@ -171,25 +179,27 @@ class SignUpEmailViewModel(
             MultipartBody.Part.createFormData("image", "image.jpeg", imageRequestBody)
 
         viewModelScope.launch {
-            runCatching {postRemoteSignUpRegisterUseCase.execute(
-                imageMultiPartBody,
-                userEmailRequestBody,
-                passwordRequestBody,
-                nicknameRequestBody,
-                pushAgreeRequestBody,
-                emailAgreeRequestBody
-            )}
-                .onSuccess {
-                    _registerSuccess.value = it
-                    Timber.d("register 서버 통신 성공!")
-                }
-                .onFailure {
-                    Timber.d("register 서버 통신 실패!")
-                    Timber.d("register ${it.printStackTrace()}")
-                }
+            runCatching {
+                postRemoteSignUpRegisterUseCase.execute(
+                    imageMultiPartBody,
+                    userEmailRequestBody,
+                    passwordRequestBody,
+                    nicknameRequestBody,
+                    pushAgreeRequestBody,
+                    emailAgreeRequestBody
+                )
+            }.onSuccess {
+                _registerSuccess.value = it
+                Timber.d("register 서버 통신 성공!")
+            }.onFailure {
+                setServerErrorFlag(it.isServerError())
+                Timber.d("register 서버 통신 실패!")
+                Timber.d("register ${it.printStackTrace()}")
+            }
         }
     }
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody(){
+
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
         override fun contentType(): MediaType? = "image/jpeg".toMediaType()
 
         override fun writeTo(sink: BufferedSink) {
@@ -198,36 +208,48 @@ class SignUpEmailViewModel(
     }
 
     //구글 회원가입 등록
-    fun signUpGoogle(userEmail: String, googleProfileImage:String, pushAgree : Boolean, emailAgree: Boolean){
+    fun signUpGoogle(
+        userEmail: String,
+        googleProfileImage: String,
+        pushAgree: Boolean,
+        emailAgree: Boolean
+    ) {
         viewModelScope.launch {
-            runCatching { PostRemoteSocialSIgnUpRegisterUseCase.execute(
-                RequestSignUpGoogleData(userEmail, googleProfileImage, pushAgree, emailAgree)
-            )
+            runCatching {
+                PostRemoteSocialSIgnUpRegisterUseCase.execute(
+                    RequestSignUpGoogleData(userEmail, googleProfileImage, pushAgree, emailAgree)
+                )
+            }.onSuccess {
+                _googleRegisterSuccess.value = it
+                Timber.d("googleSignUp 구글 회원가입 성공!")
+            }.onFailure {
+                setServerErrorFlag(it.isServerError())
+                it.printStackTrace()
+                Timber.d("googleSignUp 구글 회원가입 실패!")
             }
-                .onSuccess {
-                    _googleRegisterSuccess.value = it
-                    Timber.d("googleSignUp 구글 회원가입 성공!")
-                }
-                .onFailure {
-                    it.printStackTrace()
-                    Timber.d("googleSignUp 구글 회원가입 실패!")
-                }
         }
     }
 
     //카카오 회원가입 등록
-    fun signUpKaKao(userEmail : String, profileImage : String, nickName : String, pushAgree : Boolean, emailAgree: Boolean ){
+    fun signUpKaKao(
+        userEmail: String,
+        profileImage: String,
+        nickName: String,
+        pushAgree: Boolean,
+        emailAgree: Boolean
+    ) {
         viewModelScope.launch {
-            runCatching { postRemoteKaKaoSignUpRegisterUseCase(
-                RequestSignUpKaKaoData(userEmail, profileImage, nickName, pushAgree, emailAgree)
-            ) }
-                .onSuccess {
-                    _kakaoRegisterSuccess.value = it
-                    Timber.d("kakaoSignUp 카카오 회원가입 성공!")
-                }
-                .onFailure {
-                    Timber.d("kakaoSignUp 카카오 회원가입 실패!")
-                }
+            runCatching {
+                postRemoteKaKaoSignUpRegisterUseCase(
+                    RequestSignUpKaKaoData(userEmail, profileImage, nickName, pushAgree, emailAgree)
+                )
+            }.onSuccess {
+                _kakaoRegisterSuccess.value = it
+                Timber.d("kakaoSignUp 카카오 회원가입 성공!")
+            }.onFailure {
+                setServerErrorFlag(it.isServerError())
+                Timber.d("kakaoSignUp 카카오 회원가입 실패!")
+            }
 
         }
     }

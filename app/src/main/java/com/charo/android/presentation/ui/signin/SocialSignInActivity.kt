@@ -16,6 +16,7 @@ import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.charo.android.presentation.ui.signup.SignUpActivity
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -62,6 +63,7 @@ class SocialSignInActivity() :
         goEmailLogin()
         goEmailSignUp()
         goKaKaoMain()
+        observeData()
     }
 
     //자동 로그인
@@ -367,4 +369,11 @@ class SocialSignInActivity() :
         }
     }
 
+    private fun observeData() {
+        socialSignInViewModel.serverErrorOccurred.observe(this) {
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
+            }
+        }
+    }
 }
