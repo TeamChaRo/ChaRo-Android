@@ -44,6 +44,8 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
 
     //    좌표 배열
     var path = arrayListOf<TMapPoint>()
+    var isDrawing = false
+    private var mLastClickTime = 0L
 
     private lateinit var locationFlag: String
 
@@ -190,6 +192,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
     }
 
     private fun drawPath(tMapView: TMapView) {
+        isDrawing = false
         CoroutineScope(Dispatchers.Main).launch {
             kotlin.runCatching {
                 // ArrayList<TMapPoint>로 변환
@@ -296,6 +299,7 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                     tMapView.setCenterPoint(info.tMapPoint.longitude, info.tMapPoint.latitude)
                     tMapView.zoomLevel = info.tMapZoomLevel
                 }
+                isDrawing = true
             }.onFailure {
                 Toast.makeText(requireContext(),getString(R.string.server_error_general),Toast.LENGTH_LONG).show()
             }
@@ -326,8 +330,12 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
             return
         }
 
-        val course = ArrayList<MultipartBody.Part>()
+        if(!isDrawing){
+            Toast.makeText(context, "경로를 그리는 중이에요. 잠시만 기다려주세요!", Toast.LENGTH_LONG).show()
+            return
+        }
 
+        val course = ArrayList<MultipartBody.Part>()
         course.add(
             MultipartBody.Part.createFormData(
                 "course[0][address]",
