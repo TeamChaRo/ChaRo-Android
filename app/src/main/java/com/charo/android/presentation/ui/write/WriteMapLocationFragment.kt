@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class WriteMapLocationFragment : Fragment() {
     private var lon = 0.0
 
     val markerCount = 1
+    private var mLastClickTime = 0L
 
     companion object {
         fun newInstance() = WriteMapLocationFragment()
@@ -149,30 +151,34 @@ class WriteMapLocationFragment : Fragment() {
         }
 
         binding.btnSetLocation.setOnClickListener {
-            lat = tMapView.centerPoint.latitude
-            lon = tMapView.centerPoint.longitude
+            //더블클릭 방지
+            if (SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                lat = tMapView.centerPoint.latitude
+                lon = tMapView.centerPoint.longitude
 
-            when(sharedViewModel.locationFlag.value){
-                Define().LOCATION_FLAG_START -> {
-                    sharedViewModel.startLat.value = tMapView.centerPoint.latitude
-                    sharedViewModel.startLong.value = tMapView.centerPoint.longitude
-                    sharedViewModel.startAddress.value = locationName
+                when(sharedViewModel.locationFlag.value){
+                    Define().LOCATION_FLAG_START -> {
+                        sharedViewModel.startLat.value = tMapView.centerPoint.latitude
+                        sharedViewModel.startLong.value = tMapView.centerPoint.longitude
+                        sharedViewModel.startAddress.value = locationName
+                    }
+                    Define().LOCATION_FLAG_END -> {
+                        sharedViewModel.endLat.value = tMapView.centerPoint.latitude
+                        sharedViewModel.endLong.value = tMapView.centerPoint.longitude
+                        sharedViewModel.endAddress.value = locationName
+                    }
+                    else -> {
+                        sharedViewModel.midFrstLat.value = tMapView.centerPoint.latitude
+                        sharedViewModel.midFrstLong.value = tMapView.centerPoint.longitude
+                        sharedViewModel.midFrstAddress.value = locationName
+                    }
                 }
-                Define().LOCATION_FLAG_END -> {
-                    sharedViewModel.endLat.value = tMapView.centerPoint.latitude
-                    sharedViewModel.endLong.value = tMapView.centerPoint.longitude
-                    sharedViewModel.endAddress.value = locationName
-                }
-                else -> {
-                    sharedViewModel.midFrstLat.value = tMapView.centerPoint.latitude
-                    sharedViewModel.midFrstLong.value = tMapView.centerPoint.longitude
-                    sharedViewModel.midFrstAddress.value = locationName
-                }
-            }
 
 //            writeShareActivity!!.replaceFragment(WriteMapFragment.newInstance())
-            requireActivity().supportFragmentManager
-                .popBackStack("writeMapSearch", POP_BACK_STACK_INCLUSIVE)
+                requireActivity().supportFragmentManager
+                    .popBackStack("writeMapSearch", POP_BACK_STACK_INCLUSIVE)
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
         }
 
             return root

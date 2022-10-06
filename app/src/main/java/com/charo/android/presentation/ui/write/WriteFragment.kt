@@ -830,7 +830,13 @@ class WriteFragment : Fragment(), View.OnClickListener {
             }
 
             //다음 버튼
-            binding.btnWriteBottomNext -> nextButtonToMap()
+            binding.btnWriteBottomNext -> {
+                //더블클릭 방지
+                if (SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                    nextButtonToMap()
+                }
+                mLastClickTime = SystemClock.elapsedRealtime()
+            }
 
             //지역 선택
             binding.btnWriteProvince -> selectProvince(v)

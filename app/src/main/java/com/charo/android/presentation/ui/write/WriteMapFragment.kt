@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -576,7 +577,11 @@ class WriteMapFragment : Fragment(), View.OnClickListener {
                 }
             }
             binding.btnWriteComplete -> {
-                clickWriteComplete()
+                //더블클릭 방지
+                if (SystemClock.elapsedRealtime() - mLastClickTime > 800) {
+                    clickWriteComplete()
+                }
+                mLastClickTime = SystemClock.elapsedRealtime()
             }
         }
     }
