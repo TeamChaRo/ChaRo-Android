@@ -239,6 +239,8 @@ class SocialSignInActivity() :
             } else if (it == 500) {
                 Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
                     .show()
+            } else if (it/100 != 2){
+                Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
