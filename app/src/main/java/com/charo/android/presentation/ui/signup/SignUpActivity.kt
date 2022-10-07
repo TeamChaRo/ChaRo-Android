@@ -70,7 +70,9 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
     private fun observeData() {
         signUpViewModel.serverErrorOccurred.observe(this) {
-            CustomDialog(this).showServerErrorDialog(this).show()
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
+            }
         }
     }
 }
