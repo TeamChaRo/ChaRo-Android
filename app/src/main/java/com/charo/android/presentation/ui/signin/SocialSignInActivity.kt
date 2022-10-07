@@ -231,7 +231,6 @@ class SocialSignInActivity() :
     private fun checkKakaoSignUp() {
         socialSignInViewModel.socialStatus.observe(this) {
             if (it == 404) {
-                Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
                 SharedInformation.setSignUp(this, 2)
                 val intent = Intent(this, SignUpActivity::class.java)
                 intent.putExtra("kakaoSignUpEmail", SharedInformation.getEmail(this))
@@ -240,6 +239,8 @@ class SocialSignInActivity() :
             } else if (it == 500) {
                 Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
                     .show()
+            } else if (it/100 != 2) {
+                Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -340,6 +341,8 @@ class SocialSignInActivity() :
             } else if (it == 500) {
                 Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
                     .show()
+            } else if (it / 100 != 2) {
+                Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
