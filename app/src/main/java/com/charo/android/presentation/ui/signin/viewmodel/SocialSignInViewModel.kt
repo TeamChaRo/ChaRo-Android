@@ -39,6 +39,7 @@ class SocialSignInViewModel(
                 safeApiCall(Dispatchers.IO) { getRemoteSocialLoginData.execute(requestSocialData) }) {
                 is ResultWrapper.Success -> {
                     kakaoSuccess.value = kakaoData.data
+                    socialStatus.value = 200
                 }
                 is ResultWrapper.NetworkError -> {
                     Timber.d("kakaoLogin 서버 통신 실패")

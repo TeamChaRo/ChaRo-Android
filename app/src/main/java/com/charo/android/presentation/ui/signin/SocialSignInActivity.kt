@@ -80,6 +80,7 @@ class SocialSignInActivity() :
         //카카오 로그인
         if (socialKey == "1") {
             //토큰 확인
+            Timber.d("여기 호출")
             if (AuthApiClient.instance.hasToken()) {
                 UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
                     if (error != null) {
@@ -164,7 +165,6 @@ class SocialSignInActivity() :
                     .show()
             } else if (token != null) {
                 Timber.i("kakao 로그인 성공 ${token.accessToken}")
-                kakaoUserEmail()
             }
         }
         binding.imgSocialKakao.setOnClickListener {
@@ -173,17 +173,18 @@ class SocialSignInActivity() :
             } else {
                 UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
             }
-        }
-
-        if (AuthApiClient.instance.hasToken()) {
-            UserApiClient.instance.accessTokenInfo { _, error ->
-                if (error != null) {
-                    Timber.d("kakao 토큰 정보 보기 실패")
-                } else {
-                    kakaoUserEmail()
+            if (AuthApiClient.instance.hasToken()) {
+                UserApiClient.instance.accessTokenInfo { _, error ->
+                    if (error != null) {
+                        Timber.d("kakao 토큰 정보 보기 실패")
+                    } else {
+                        kakaoUserEmail()
+                    }
                 }
             }
         }
+
+
     }
 
     //카카오
@@ -196,6 +197,7 @@ class SocialSignInActivity() :
                     Timber.i(
                         "kakaoUser 사용자 정보 요청 성공 \n이메일: ${user.kakaoAccount?.email}"
                     )
+                    SharedInformation.setEmail(this,user.kakaoAccount?.email)
                     socialSignInViewModel.kakaoLoginSuccess(
                         RequestSocialData(
                             user.kakaoAccount?.email ?: ""
@@ -212,7 +214,7 @@ class SocialSignInActivity() :
     //카카오 로그인 성공시 main 이동
     private fun goKaKaoMain() {
         if (SharedInformation.getLogout(this) != "Logout") {
-            socialSignInViewModel.kakaoSuccess.observe(this, Observer {
+            socialSignInViewModel.kakaoSuccess.observe(this) {
                 if (socialSignInViewModel.socialStatus.value != 404 && socialSignInViewModel.socialStatus.value != 500) {
                     SharedInformation.setLogout(this, "LogIn")
                     SharedInformation.setEmail(this, it?.email.toString())
@@ -223,7 +225,7 @@ class SocialSignInActivity() :
                     startActivity(intent)
                     finish()
                 }
-            })
+            }
         }
     }
 
@@ -239,7 +241,7 @@ class SocialSignInActivity() :
             } else if (it == 500) {
                 Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
                     .show()
-            } else if (it/100 != 2) {
+            } else if (it/100 != 2){
                 Toast.makeText(this, "카카오 로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
@@ -288,7 +290,6 @@ class SocialSignInActivity() :
     }
 
     private fun firebaseAuthWithGoogle(idToken: String?) {
-
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
