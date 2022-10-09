@@ -2,13 +2,14 @@ package com.charo.android.presentation.ui.home.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charo.android.R
 import com.charo.android.data.model.request.home.RequestHomeLikeData
 import com.charo.android.domain.model.StatusCode
 import com.charo.android.domain.model.home.*
 import com.charo.android.domain.usecase.home.*
+import com.charo.android.presentation.base.BaseViewModel
+import com.charo.android.presentation.util.isServerError
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -19,7 +20,7 @@ class HomeViewModel(
     private val getRemoteTodayCharoDrive: GetRemoteTodayCharoDriveUseCase,
     private val getRemoteTrendDrive: GetRemoteTrendDriveUseCase,
     private val postRemoteHomeLikeUseCase: PostRemoteHomeLikeUseCase
-    ) : ViewModel() {
+) : BaseViewModel() {
 
     private val _banner = MutableLiveData<List<Banner>>()
     val banner: LiveData<List<Banner>>
@@ -42,16 +43,15 @@ class HomeViewModel(
         get() = _trendDrive
 
     private val _theme = MutableLiveData<List<Theme>>()
-    val theme : LiveData<List<Theme>>
+    val theme: LiveData<List<Theme>>
         get() = _theme
 
     private val _statusCode = MutableLiveData<StatusCode>()
-    val statusCode : LiveData<StatusCode>
+    val statusCode: LiveData<StatusCode>
         get() = _statusCode
 
 
-
-    fun getBannerRoad() : List<BannerRoad>{
+    fun getBannerRoad(): List<BannerRoad> {
         return listOf(
             BannerRoad(
                 R.drawable.road_1
@@ -72,19 +72,15 @@ class HomeViewModel(
     fun getBanner(userEmail: String) {
         viewModelScope.launch {
             runCatching { getRemoteBannerUseCase.execute(userEmail) }
-
                 .onSuccess {
                     _banner.value = it
                     Timber.d("new 서버 통신 성공!")
                     Timber.d("new $it")
-                }
-
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("new 서버 통신 실패")
                 }
-
-
         }
     }
 
@@ -93,15 +89,15 @@ class HomeViewModel(
             runCatching { getRemoteCustomThemeUseCase.execute(userEmail) }
                 .onSuccess {
                     _customThemeDrive.value = it
-                    _theme.value = it.map{
+                    _theme.value = it.map {
                         Theme(
                             theme = it.homeNightDriveChip_2.toString()
                         )
                     }
                     Timber.d("customtheme 서버 통신 성공!")
                     Timber.d("customtheme ${_theme.value.toString()}")
-                }
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("new 서버 통신 실패")
                 }
@@ -114,8 +110,8 @@ class HomeViewModel(
                 .onSuccess {
                     _localDrive.value = it
                     Timber.d("new 서버 통신 성공!")
-                }
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("new 서버 통신 실패")
                 }
@@ -132,6 +128,7 @@ class HomeViewModel(
                     Timber.d("new 서버 통신 성공!")
                 }
                 .onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("new 서버 통신 실패")
                 }
@@ -144,31 +141,27 @@ class HomeViewModel(
                 .onSuccess {
                     _trendDrive.value = it
                     Timber.d("trend 서버 통신 성공!")
-
-                }
-                .onFailure {
+                }.onFailure {
+                    setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("trend 서버 통신 실패")
-
                 }
-
         }
     }
 
 
     //Post 좋아요
-    fun postLike(requestHomeLikeData: RequestHomeLikeData){
+    fun postLike(requestHomeLikeData: RequestHomeLikeData) {
         viewModelScope.launch {
             runCatching { postRemoteHomeLikeUseCase.execute(requestHomeLikeData) }
                 .onSuccess {
                     _statusCode.value = it
                     Timber.d("homeLike 서버 통신 성공!")
-                }
-                .onFailure {
+                }.onFailure {
                     it.printStackTrace()
                     Timber.d("homeLike 서버 통신 실패!")
                 }
-       }
+        }
     }
 
 }

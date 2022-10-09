@@ -2,15 +2,16 @@ package com.charo.android.presentation.ui.signin.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charo.android.domain.usecase.signin.GetRemotePasswordSearchUseCase
+import com.charo.android.presentation.base.BaseViewModel
+import com.charo.android.presentation.util.isServerError
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class PasswordSearchViewModel(
     private val getRemotePasswordSearchUseCase: GetRemotePasswordSearchUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
 
     //현재 사용자가 이메일 입력중인지
@@ -37,6 +38,7 @@ class PasswordSearchViewModel(
                     Timber.d("비밀번호 찾기 성공")
                 }
                 .onFailure {
+                    setServerErrorFlag(it.isServerError())
                     passwordSuccess.value = false
                     Timber.d("비밀번호 찾기 실패")
                 }

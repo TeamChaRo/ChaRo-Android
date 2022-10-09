@@ -2,11 +2,11 @@ package com.charo.android.presentation.ui.signin.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charo.android.data.model.request.signin.RequestSocialData
 import com.charo.android.domain.model.signin.SocialLoginData
 import com.charo.android.domain.usecase.signin.GetRemoteSocialLoginData
+import com.charo.android.presentation.base.BaseViewModel
 import com.charo.android.presentation.util.ResultWrapper
 import com.charo.android.presentation.util.safeApiCall
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +15,7 @@ import timber.log.Timber
 
 class SocialSignInViewModel(
     private val getRemoteSocialLoginData: GetRemoteSocialLoginData
-) : ViewModel() {
+) : BaseViewModel() {
 
     //카카오 로그인 성공
     var kakaoSuccess: MutableLiveData<SocialLoginData?> = MutableLiveData()
@@ -46,6 +46,11 @@ class SocialSignInViewModel(
                     socialStatus.value = 500
                 }
                 is ResultWrapper.GenericError -> {
+                    kakaoData.code?.let {
+                        if (it / 100 == 5) {
+                            setServerErrorFlag(true)
+                        }
+                    }
                     Timber.d("kakaoLogin 사용자 에러")
                     socialStatus.value = kakaoData.code ?: 0
                     Timber.d("kakaoLogin 사용자 ${kakaoData.code}")
@@ -68,6 +73,11 @@ class SocialSignInViewModel(
                     googleSocialStatus.value = 500
                 }
                 is ResultWrapper.GenericError -> {
+                    googleData.code?.let {
+                        if (it / 100 == 5) {
+                            setServerErrorFlag(true)
+                        }
+                    }
                     Timber.d("googleLogin 사용자 에러")
                     googleSocialStatus.value = googleData.code ?: 0
                 }

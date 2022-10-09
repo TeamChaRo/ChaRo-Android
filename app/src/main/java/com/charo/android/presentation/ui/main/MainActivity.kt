@@ -17,10 +17,7 @@ import com.charo.android.presentation.ui.mypage.MyPageFragment
 import com.charo.android.presentation.ui.mypage.viewmodel.MyPageViewModel
 import com.charo.android.presentation.ui.write.WriteFragment
 import com.charo.android.presentation.ui.write.WriteShareActivity
-import com.charo.android.presentation.util.LoginUtil
-import com.charo.android.presentation.util.SharedInformation
-import com.charo.android.presentation.util.changeFragment
-import com.charo.android.presentation.util.replaceFragment
+import com.charo.android.presentation.util.*
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
@@ -90,8 +87,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                     val postId = it.getIntExtra("postId", -1)
                     Timber.d("moreResultLauncher updateLike $updateLike postId $postId")
 
-                    if(updateLike != -1 && postId != -1){
-                        when(updateLike){
+                    if (updateLike != -1 && postId != -1) {
+                        when (updateLike) {
                             0 -> {
                                 moreViewModel.setLike(postId, false)
                             }
@@ -141,7 +138,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
         initNavView()
         lookFor()
-
+        observeData()
     }
 
     override fun onResume() {
@@ -306,6 +303,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 ActivityCompat.requestPermissions(this, permissions, 1)
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
+            }
+        }
+    }
+
+    private fun observeData() {
+        sharedViewModel.serverErrorOccurred.observe(this) {
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
             }
         }
     }

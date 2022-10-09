@@ -16,6 +16,7 @@ import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.SocialSignInViewModel
 import com.charo.android.presentation.ui.signup.SignUpActivity
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -62,6 +63,7 @@ class SocialSignInActivity() :
         goEmailLogin()
         goEmailSignUp()
         goKaKaoMain()
+        observeData()
     }
 
     //자동 로그인
@@ -340,6 +342,8 @@ class SocialSignInActivity() :
             } else if (it == 500) {
                 Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_LONG)
                     .show()
+            } else if (it / 100 != 2) {
+                Toast.makeText(this, "구글 로그인 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -369,4 +373,11 @@ class SocialSignInActivity() :
         }
     }
 
+    private fun observeData() {
+        socialSignInViewModel.serverErrorOccurred.observe(this) {
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
+            }
+        }
+    }
 }

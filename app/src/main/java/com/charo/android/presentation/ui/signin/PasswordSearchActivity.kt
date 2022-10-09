@@ -10,6 +10,7 @@ import com.charo.android.R
 import com.charo.android.databinding.ActivityPasswordSearchBinding
 import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.signin.viewmodel.PasswordSearchViewModel
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.KeyboardVisibilityUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,6 +28,7 @@ class PasswordSearchActivity :
         changeBtnText()
         clickNextBtn()
         checkSuccess()
+        observeData()
     }
 
     private fun initToolbar() {
@@ -140,6 +142,14 @@ class PasswordSearchActivity :
         }
 
 
+    }
+
+    private fun observeData() {
+        passwordSearchViewModel.serverErrorOccurred.observe(this) {
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
+            }
+        }
     }
 
     override fun onPause() {

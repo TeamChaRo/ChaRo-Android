@@ -11,6 +11,7 @@ import com.charo.android.data.model.request.signin.RequestSignInData
 import com.charo.android.databinding.ActivitySignInBinding
 import com.charo.android.presentation.ui.main.MainActivity
 import com.charo.android.presentation.ui.signin.viewmodel.EmailSignInViewModel
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -31,6 +32,7 @@ class SignInActivity : AppCompatActivity() {
         binding.imgSigninPwClear.setOnClickListener { clearPassword() }
         setContentView(binding.root)
         clickBack()
+        observeData()
     }
 
     //로그인
@@ -70,8 +72,9 @@ class SignInActivity : AppCompatActivity() {
     private fun clearPassword() {
         binding.etSigninPw.text.clear()
     }
+
     //뒤로가기
-    private fun clickBack(){
+    private fun clickBack() {
         binding.imgSignInBack.setOnClickListener {
             finish()
         }
@@ -80,7 +83,10 @@ class SignInActivity : AppCompatActivity() {
     //로그인 토스트 메세지
     private fun emailSignToast() {
         emailSignInViewModel.emailSignInStatus.observe(this) {
-            if (it == 404) {
+            if (it == 500) {
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT)
+                    .show()
+            } else if (it != 200) {
                 val errorMsg: String =
                     if (!TextUtils.isEmpty(emailSignInViewModel.emailSignInErrorMsg.value)) {
                         emailSignInViewModel.emailSignInErrorMsg.value!!
@@ -88,9 +94,6 @@ class SignInActivity : AppCompatActivity() {
                         "ID/PW를 확인해주세요."
                     }
                 Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
-            } else if (it == 500) {
-                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT)
-                    .show()
             }
         }
     }
@@ -116,6 +119,14 @@ class SignInActivity : AppCompatActivity() {
         binding.tvSigninPassword.setOnClickListener {
             val intent = Intent(this, PasswordSearchActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun observeData() {
+        emailSignInViewModel.serverErrorOccurred.observe(this) {
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
+            }
         }
     }
 }
