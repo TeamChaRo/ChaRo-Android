@@ -6,6 +6,7 @@ import com.charo.android.R
 import com.charo.android.databinding.ActivitySignUpBinding
 import com.charo.android.presentation.base.BaseActivity
 import com.charo.android.presentation.ui.signup.viewmodel.SignUpEmailViewModel
+import com.charo.android.presentation.util.CustomDialog
 import com.charo.android.presentation.util.SharedInformation
 import com.charo.android.presentation.util.changeFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,9 +23,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
 
         initSignUpEmailFragment()
         changeGoogleSignUpFragment()
+        observeData()
     }
 
-    private fun initToolbar(){
+    private fun initToolbar() {
         val toolbar = binding.toolbarSignUp
         setSupportActionBar(toolbar)
 
@@ -34,7 +36,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
                 return true
@@ -44,15 +46,15 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     }
 
     fun initSignUpEmailFragment() {
-        if(SharedInformation.getSignUp(this) == 0){
+        if (SharedInformation.getSignUp(this) == 0) {
             changeFragment(R.id.fragment_container_email, SignUpEmailFragment())
         }
     }
 
     //구글 회원가입시에
-    fun changeGoogleSignUpFragment(){
+    fun changeGoogleSignUpFragment() {
 
-        if(SharedInformation.getSignUp(this) == 1){
+        if (SharedInformation.getSignUp(this) == 1) {
             signUpViewModel.userEmail.value = intent.getStringExtra("googleSignUpEmail")
             signUpViewModel.googleProfileImage.value = intent.getStringExtra("googleProfileImage")
             changeFragment(R.id.fragment_container_email, SignUpTermFragment())
@@ -60,9 +62,17 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
         }
 
         //카카오 회원가입시에
-        if(SharedInformation.getSignUp(this) == 2){
+        if (SharedInformation.getSignUp(this) == 2) {
             signUpViewModel.userEmail.value = intent.getStringExtra("kakaoSignUpEmail")
             changeFragment(R.id.fragment_container_email, SignUpProfileFragment())
+        }
+    }
+
+    private fun observeData() {
+        signUpViewModel.serverErrorOccurred.observe(this) {
+            if (it) {
+                CustomDialog(this).showServerErrorDialog(this).show()
+            }
         }
     }
 }
