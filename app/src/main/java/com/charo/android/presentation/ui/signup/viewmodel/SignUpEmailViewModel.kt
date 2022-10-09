@@ -134,6 +134,7 @@ class SignUpEmailViewModel(
                     Timber.d("nickname 서버 통신 성공!")
                     Timber.d("nickname $it")
                 }.onFailure {
+                    _nickNameCheck.value = false
                     setServerErrorFlag(it.isServerError())
                     it.printStackTrace()
                     Timber.d("nickname 서버 통신 실패!")
