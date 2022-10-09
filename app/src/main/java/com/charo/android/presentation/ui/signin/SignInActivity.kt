@@ -80,7 +80,10 @@ class SignInActivity : AppCompatActivity() {
     //로그인 토스트 메세지
     private fun emailSignToast() {
         emailSignInViewModel.emailSignInStatus.observe(this) {
-            if (it == 404) {
+            if (it == 500) {
+                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT)
+                    .show()
+            } else if (it != 200) {
                 val errorMsg: String =
                     if (!TextUtils.isEmpty(emailSignInViewModel.emailSignInErrorMsg.value)) {
                         emailSignInViewModel.emailSignInErrorMsg.value!!
@@ -88,9 +91,6 @@ class SignInActivity : AppCompatActivity() {
                         "ID/PW를 확인해주세요."
                     }
                 Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
-            } else if (it == 500) {
-                Toast.makeText(this, getString(R.string.server_error_general), Toast.LENGTH_SHORT)
-                    .show()
             }
         }
     }
