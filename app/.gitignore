@@ -1,2 +1,3 @@
 /build
 /src/main/java/com/example/charo_android/hidden/Hidden.kt
+app/src/main/res/xml/network_security_config.xml
